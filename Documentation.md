@@ -509,13 +509,14 @@ See below to discover used fields and see [reading section](#responses-read) to 
 
 **Filters**
 
-| Filter | Description | Use |
+| Filter | Description | Values | Use |
 | --- | --- | --- |
-| group_id | Group identifier | ?filters[group_id]=123 |
-| website_id | Website identifier | ?filters[website_id]=123 |
-| skill_id | Skill identifier | ?filters[skill_id]=123 |
-| name | Operator name | ?filters[name]=genius |
-| external_id | External identifier | ?filters[external_id]=MyExternalId |
+| group_id | Group identifier | | ?filters[group_id]=123 |
+| website_id | Website identifier | | ?filters[website_id]=123 |
+| skill_id | Skill identifier | | ?filters[skill_id]=123 |
+| name | Operator name | | ?filters[name]=genius |
+| external_id | External identifier | | ?filters[external_id]=MyExternalId |
+| connected | Operator online status | 0(offline) or 1(online) | ?filters[connected]=1 |
 
 ##### Get an operator details
 
