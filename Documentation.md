@@ -13,8 +13,6 @@ iAdvize platform got 2 different interfaces:
 
 ##What is the Developer Platform?
 
-
-
 The iAdvize Developer Platform let developers Build Apps or use our public APIs. You'll be provided with a documentation and a private testing environment.
 
 There are three main reasons for building an app
@@ -22,8 +20,6 @@ There are three main reasons for building an app
 * Build apps and publish it to our customers community. (We've got more than 500 cust to amaze!)
 * Build app in a private mode, and make it available for (a) specific customer(s) only
 * Get rewarded based on the usage of your app (TBC) 
-
-
 
 ## Why to build apps to iAdvize?
 The iAdvize Developer Platform let developers Build Apps or use our public APIs. You'll be provided with a documentation and a private testing environment.
@@ -34,11 +30,10 @@ There are three main reasons for building an app
 * Build app in a private mode, and make it available for (a) specific customer(s) only
 * Get rewarded based on the usage of your app (TBC) 
 
-
 # Getting Started
 ## Get a Developer Account
 ## Overview
-	
+  
 # Build apps
 ## My apps
 ## App information
@@ -132,10 +127,10 @@ The API key must be attached to each request. You can use it in one of the follo
 #### Authentication failed
 
 <pre class="prettyprint lang-js">{
-	meta: {
-		status: "error",
-		message: "Forbidden"
-	}
+  meta: {
+    status: "error",
+    message: "Forbidden"
+  }
 }
 </pre>
 
@@ -144,24 +139,24 @@ The API key must be attached to each request. You can use it in one of the follo
 **POST /my_resource my_field=my_value**
 
 <pre class="prettyprint lang-js">{
-	meta: {
-		status: "success"
-	},
-	data: {
-		id: 123,
-		my_field: "my_value",
-		_link: "/my_resource/123"
-	}
+  meta: {
+    status: "success"
+  },
+  data: {
+    id: 123,
+    my_field: "my_value",
+    _link: "/my_resource/123"
+  }
 }
 </pre>
 
 **POST /my_resource my_field=my_value (with error)**
 
 <pre class="prettyprint lang-js">{
-	meta: {
-		status: "fail",
-		message: "Field 'my_field_2' is missing.",
-	}
+  meta: {
+    status: "fail",
+    message: "Field 'my_field_2' is missing.",
+  }
 }
 </pre>
 
@@ -170,29 +165,29 @@ The API key must be attached to each request. You can use it in one of the follo
 **GET /my_resource**
 
 <pre class="prettyprint lang-js">{
-	meta: {
-		status: "success"
-	},
-	data: [
-		{
-			id: 789,
-			_link: "/my_resource/789"
-		},
-		{
-			id: 456,
-			_link: "/my_resource/456"
-		},
-		{
-			id: 123,
-			_link: "/my_resource/123"
-		}
-	],
-	pagination: {
-		page: 1,
-		pages: 1,
-		limit: 20,
-		count: 3
-	}
+  meta: {
+    status: "success"
+  },
+  data: [
+    {
+      id: 789,
+      _link: "/my_resource/789"
+    },
+    {
+      id: 456,
+      _link: "/my_resource/456"
+    },
+    {
+      id: 123,
+      _link: "/my_resource/123"
+    }
+  ],
+  pagination: {
+    page: 1,
+    pages: 1,
+    limit: 20,
+    count: 3
+  }
 }
 </pre>
 
@@ -209,24 +204,24 @@ Use the `*` character to broaden the scope of your search. E.g.: `filters[name]=
 **GET /my_resource/123**
 
 <pre class="prettyprint lang-js">{
-	meta: {
-		status: "success"
-	},
-	data: {
-		id: 123,
-		my_field: "my_value",
-		_link: "/my_resource/123"
-	}
+  meta: {
+    status: "success"
+  },
+  data: {
+    id: 123,
+    my_field: "my_value",
+    _link: "/my_resource/123"
+  }
 }
 </pre>
 
 **GET /my_resource/456 (with error)**
 
 <pre class="prettyprint lang-js">{
-	meta: {
-		status: "fail",
-		message: "Unknown 'my_resource' with 'id' 456."
-	}
+  meta: {
+    status: "fail",
+    message: "Unknown 'my_resource' with 'id' 456."
+  }
 }
 </pre>
 
@@ -235,24 +230,24 @@ Use the `*` character to broaden the scope of your search. E.g.: `filters[name]=
 **PUT /my_resource/123 my_field=my_new_value**
 
 <pre class="prettyprint lang-js">{
-	meta: {
-		status: "success"
-	},
-	data: {
-		id: 123,
-		my_field: "my_new_value",
-		_link: "/my_resource/123"
-	}
+  meta: {
+    status: "success"
+  },
+  data: {
+    id: 123,
+    my_field: "my_new_value",
+    _link: "/my_resource/123"
+  }
 }
 </pre>
 
 **PUT /my_resource/123 my_field=my_value (with error)**
 
 <pre class="prettyprint lang-js">{
-	meta: {
-		status: "fail",
-		message: "Value of field 'my_field' is not valid."
-	}
+  meta: {
+    status: "fail",
+    message: "Value of field 'my_field' is not valid."
+  }
 }
 </pre>
 
@@ -261,18 +256,18 @@ Use the `*` character to broaden the scope of your search. E.g.: `filters[name]=
 **DELETE /my_resource/123**
 
 <pre class="prettyprint lang-js">{
-	meta: {
-		status: "success"
-	}
+  meta: {
+    status: "success"
+  }
 }</pre>
 
 **DELETE /my_resource/456 (with error)**
 
 <pre class="prettyprint lang-js">{
-	meta: {
-		status: "fail"
-		message: "Unknown 'my_resource' with 'id' 456"
-	}
+  meta: {
+    status: "fail"
+    message: "Unknown 'my_resource' with 'id' 456"
+  }
 }
 </pre>
 
@@ -403,61 +398,61 @@ See [deleting section](#responses-delete) to discover some output examples.
 `GET /operator/live`
 
 <pre class="prettyprint lang-js">{
-	meta: {
-		status: "success"
-	},
-	data: [
-		{
-			id: 456,
-			connected: true,
-			chat: {
-				enabled: true,
-				slot_number: 2,
-				slot_max_number: 4,
-				busy: false,
-				available: true
-			},
-			call: {
-				enabled: false,
-				slot_number: 0,
-				slot_max_number: 1,
-				busy: false,
-				available: false
-			},
-			video: {
-				enabled: false,
-				slot_number: 0,
-				slot_max_number: 1,
-				busy: false,
-				available: false
-			}
-		},
-		{
-			id: 123,
-			connected: false,
-			chat: {
-				enabled: false,
-				slot_number: 1,
-				slot_max_number: 2,
-				busy: false,
-				available: false
-			},
-			call: {
-				enabled: true,
-				slot_number: 1,
-				slot_max_number: 1,
-				busy: true,
-				available: false
-			},
-			video: {
-				enabled: false,
-				slot_number: 0,
-				slot_max_number: 1,
-				busy: false,
-				available: false
-			}
-		}
-	]
+  meta: {
+    status: "success"
+  },
+  data: [
+    {
+      id: 456,
+      connected: true,
+      chat: {
+        enabled: true,
+        slot_number: 2,
+        slot_max_number: 4,
+        busy: false,
+        available: true
+      },
+      call: {
+        enabled: false,
+        slot_number: 0,
+        slot_max_number: 1,
+        busy: false,
+        available: false
+      },
+      video: {
+        enabled: false,
+        slot_number: 0,
+        slot_max_number: 1,
+        busy: false,
+        available: false
+      }
+    },
+    {
+      id: 123,
+      connected: false,
+      chat: {
+        enabled: false,
+        slot_number: 1,
+        slot_max_number: 2,
+        busy: false,
+        available: false
+      },
+      call: {
+        enabled: true,
+        slot_number: 1,
+        slot_max_number: 1,
+        busy: true,
+        available: false
+      },
+      video: {
+        enabled: false,
+        slot_number: 0,
+        slot_max_number: 1,
+        busy: false,
+        available: false
+      }
+    }
+  ]
 }
 </pre>
 
@@ -468,34 +463,34 @@ You can use previous filters.
 `GET /operator/123/live`
 
 <pre class="prettyprint lang-js">{
-	meta: {
-		status: "success"
-	},
-	data: {
-		id: 123,
-		connected: false,
-		chat: {
-			enabled: false,
-			slot_number: 1,
-			slot_max_number: 2,
-			busy: false,
-			available: false
-		},
-		call: {
-			enabled: true,
-			slot_number: 1,
-			slot_max_number: 1,
-			busy: true,
-			available: false
-		},
-		video: {
-			enabled: false,
-			slot_number: 0,
-			slot_max_number: 1,
-			busy: false,
-			available: false
-		}
-	}
+  meta: {
+    status: "success"
+  },
+  data: {
+    id: 123,
+    connected: false,
+    chat: {
+      enabled: false,
+      slot_number: 1,
+      slot_max_number: 2,
+      busy: false,
+      available: false
+    },
+    call: {
+      enabled: true,
+      slot_number: 1,
+      slot_max_number: 1,
+      busy: true,
+      available: false
+    },
+    video: {
+      enabled: false,
+      slot_number: 0,
+      slot_max_number: 1,
+      busy: false,
+      available: false
+    }
+  }
 }
 </pre>
 
@@ -515,10 +510,10 @@ You can use previous filters.
 **Response**
 
 <pre class="prettyprint lang-js">{
-	meta: {
-		status: "success",
-		message: "Operator is now available|unavailable for chat channel."
-	}
+  meta: {
+    status: "success",
+    message: "Operator is now available|unavailable for chat channel."
+  }
 }
 </pre>
 
@@ -540,15 +535,15 @@ See [reading section](#responses-read) to discover some output examples.
 **Response**
 
 <pre class="prettyprint lang-js">{
-	meta: {
-		status: "success"
-	},
-	data: {
-		id: 123,
-		conversation_number: 589,
-		satisfaction_global_rate: 0.86,
-		experience: 5630
-	}
+  meta: {
+    status: "success"
+  },
+  data: {
+    id: 123,
+    conversation_number: 589,
+    satisfaction_global_rate: 0.86,
+    experience: 5630
+  }
 }
 </pre>
 
@@ -573,18 +568,18 @@ See [reading section](#responses-read) to discover some output examples.
 **Response**
 
 <pre class="prettyprint lang-js">{
-	meta: {
-		status: "success"
-	},
-	data: {
-		user_id: 123,
-		status: "Je suis disponible pour vous aider",
-		description: "Passionné par la menuiserie depuis plusieurs années, j'aime vous apporter des conseils.",
-		facebook: "john.doe",
-		twitter: "johndoe45",
-		city: "Nantes",
-		country: "France"
-	}
+  meta: {
+    status: "success"
+  },
+  data: {
+    user_id: 123,
+    status: "Je suis disponible pour vous aider",
+    description: "Passionné par la menuiserie depuis plusieurs années, j'aime vous apporter des conseils.",
+    facebook: "john.doe",
+    twitter: "johndoe45",
+    city: "Nantes",
+    country: "France"
+  }
 }
 </pre>
 
@@ -1067,10 +1062,10 @@ See below to discover used fields and see [reading section](#responses-read) to 
 **Response**
 
 <pre class="prettyprint lang-js">{
-	meta: {
-		status: "success"
-	},
-	data: []
+  meta: {
+    status: "success"
+  },
+  data: []
 }
 </pre>
 
@@ -1089,14 +1084,14 @@ When an operator connects to the desk.
 **Returned data**
 
 <pre class="prettyprint lang-js">{
-	name: "operator.login",
-	datetime: {
-		created: "2014-01-01 00:00:00",
-		sent: "2014-01-01 00:00:01"
-	},
-	parameters: {
-		operator_id: 1
-	}
+  name: "operator.login",
+  datetime: {
+    created: "2014-01-01 00:00:00",
+    sent: "2014-01-01 00:00:01"
+  },
+  parameters: {
+    operator_id: 1
+  }
 }
 </pre>
 
@@ -1107,14 +1102,14 @@ When an operator disconnects from the desk.
 **Returned data**
 
 <pre class="prettyprint lang-js">{
-	name: "operator.logout",
-	datetime: {
-		created: "2014-01-01 00:00:00",
-		sent: "2014-01-01 00:00:01"
-	},
-	parameters: {
-		operator_id: 1
-	}
+  name: "operator.logout",
+  datetime: {
+    created: "2014-01-01 00:00:00",
+    sent: "2014-01-01 00:00:01"
+  },
+  parameters: {
+    operator_id: 1
+  }
 }
 </pre>
 
@@ -1125,21 +1120,21 @@ When a conversation is started.
 **Returned data**
 
 <pre class="prettyprint lang-js">{
-	name: "conversation.start",
-	datetime: {
-		created: "2014-01-01 00:00:00",
-		sent: "2014-01-01 00:00:01"
-	},
-	parameters: {
-		conversation_id: 1,
-		type:            "chat|call|video",
-		operator_id:     1,
-		website_id:      1,
-		group_id:        1,
-		custom_data:     {
-			example:     "value"
-		}
-	}
+  name: "conversation.start",
+  datetime: {
+    created: "2014-01-01 00:00:00",
+    sent: "2014-01-01 00:00:01"
+  },
+  parameters: {
+    conversation_id: 1,
+    type:            "chat|call|video",
+    operator_id:     1,
+    website_id:      1,
+    group_id:        1,
+    custom_data:     {
+      example:     "value"
+    }
+  }
 }
 </pre>
 
@@ -1150,18 +1145,18 @@ When a conversation is ended by the operator.
 **Returned data**
 
 <pre class="prettyprint lang-js">{
-	name: "conversation.end",
-	datetime: {
-		created: "2014-01-01 00:00:00",
-		sent: "2014-01-01 00:00:01"
-	},
-	parameters: {
-		conversation_id: 1,
-		type:            "chat|call|video",
-		operator_id:     1,
-		website_id:      1,
-		group_id:        1
-	}
+  name: "conversation.end",
+  datetime: {
+    created: "2014-01-01 00:00:00",
+    sent: "2014-01-01 00:00:01"
+  },
+  parameters: {
+    conversation_id: 1,
+    type:            "chat|call|video",
+    operator_id:     1,
+    website_id:      1,
+    group_id:        1
+  }
 }
 </pre>
 
