@@ -18,7 +18,7 @@ iAdvize platform has 2 interfaces:
 * Administration: from where Administrators and Managers of the solution can configure the platform's settings and monitor the agent's activity.
 * Agent's Console Panel: which give your agents superpowers. That's where professional agents or experts can respond intuitively to all messages.
 
-![Administration interface](./assets/images/consolepanel.png)
+![Administration interface](./assets/images/administration.png)
 
 ![Console panel](./assets/images/consolepanel.png)
 
@@ -108,7 +108,7 @@ We'll call this url and your connector can sent back if authentication parameter
 
 The User will have to fill in the fields first thing during the installation process on iAdvize Marketplace.
 
-![Authentication admin](./assets/images/developer_authentication.png)
+![Authentication admin](./assets/images/marketplace_ConfigureApp.png)
 
 ## Settings
 This part is still under development. This is where you will be able to add some specific configuration steps such as mapping.
