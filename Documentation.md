@@ -1640,9 +1640,9 @@ As soon as a chat starts, the callback is triggered and the Virtual Agent is abl
 
 Our API documentation is not available online yet, but you can still [download it](./assets/docs/iAdvize-API_Doc_v1-7.pdf).
 
-#SDK
+# SDK
 
-##Android - alpha
+## Android - alpha
 iAdvize mobile livechat SDK for Android is available in alpha version.
 
 We will provide you the documentation with a simple integration scenario as well as pointers on available functions upon request.
