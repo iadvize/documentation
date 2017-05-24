@@ -20,8 +20,6 @@ iAdvize platform has 2 interfaces:
 
 ![Administration interface](./assets/images/administration.png)
 
-![Console panel](./assets/images/consolepanel.png)
-
 ## What is the Developer Platform?
 
 The iAdvize Developer Platform let developers Build Apps or use our public APIs. 
@@ -1375,9 +1373,31 @@ To find the parameter `url` that interest you, look the URL address of the page 
 With this example, the SSO URL address will be:
 `http://www.iadvize.com/auto-auth.php?auth={SSO_KEY}&url=**go=offers**`
 
+# Virtual Agent Integration
+
+iAdvize can communicate with your Virtual Agents (VA) thanks to specific callbacks and functions use. This documentation describe the 2 major use cases that are actually achievable.
+
+## VA transmits the conversation history to iAdvize
+
+The purpose is to show to the Agent the conversation that the Visitor had with the Virtual Agent, before the live chat starts. To do so, the Virtual Agent have to push its own conversation ID to iAdvize by setting the `iAdvize.vaSCI` variable before the chat begins.
+
+Today, iAdvize is already interfaced with [Nina Web (Nuance)](http://www.virtuoz.com) Virtual Agent on some specific customers' website, and can potentially receive any other Virtual Agents history.
+
+However, any additional VA > iAdvize integration requires prior discussion with our [Technical team](mailto:support@iadvize.com).
+
+![Console - VA integration example](./assets/images/exp-console-virtual-agent.png)
+
+## iAdvize provides conversation ID and history to VA
+
+In order to retrieve the iAdvize conversation ID, your Virtual Agent have to use the [onChatStarted](/doc/?p=callbacks#onChatStarted) callback first, in order to retrieve the iAdvize conversation ID.
+As soon as a chat starts, the callback is triggered and the Virtual Agent is able to retrieve iAdvize conversation history by performing an API call with `getHistoryByID()` function.
+
+Our API documentation is not available online yet, but you can still [download it](./assets/docs/iAdvize-API_Doc_v1-7.pdf).
 
 # SDK
-##Android - alpha
+
+## Android - alpha
+
 iAdvize mobile livechat SDK for Android is available in alpha version.
 
 We will provide you the documentation with a simple integration scenario as well as pointers on available functions upon request.
