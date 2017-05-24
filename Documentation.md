@@ -11,7 +11,7 @@ iAdvize platform got 2 different interfaces:
 * the Administration: from where Administrators and Managers of the solution can configure the solution and monitor the agent's activity.
 * the Agent's Console Panel: which give your agents superpowers. That's where professional agents or experts can respond intuitively to all messages.
 
-##What is the Developer Platform?
+## What is the Developer Platform?
 
 The iAdvize Developer Platform let developers Build Apps or use our public APIs. You'll be provided with a documentation and a private testing environment.
 
