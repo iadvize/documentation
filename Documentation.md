@@ -1,44 +1,116 @@
 # General informations
+Welcome to iAdvize Developer Platform documentation.
+You want to create an integration for your own use or for the world? That's the right place.
+
+iAdvize provides you with a Developer platform to easily publish your apps on our marketplace so our users can install them directly from their administration interface.
+
+Whether you are developer, integrator, customer or simply curious, you will find an overview of how to Get started, our Developer Guidelines, and the documentation to build and publish  your future integrations. 
+
 ## What is iAdvize?
-iAdvize is a SaaS conversational commerce platform. It enables businesses to engage their customers and prospects whether they’re on the website or on social media from one messaging solution (chat, voice, video). 
+[iAdvize](http://iadvize.com) is a SaaS conversational commerce platform. It enables businesses to engage their customers and prospects whether they’re on the website or on social media from one messaging solution (chat, voice, video). 
 
 Visitors can get real-time advice from customer service but also from advocates, members of the brand community.
 
 Implementing iAdvize is child's play. You just have to insert a tag on each page of your website. Once the solution is deployed, your customer service and marketing teams are completely independent and can set up the solution as they wish.
 
-iAdvize platform got 2 different interfaces:
+iAdvize platform has 2 interfaces:
 
-* the Administration: from where Administrators and Managers of the solution can configure the solution and monitor the agent's activity.
-* the Agent's Console Panel: which give your agents superpowers. That's where professional agents or experts can respond intuitively to all messages.
+* Administration: from where Administrators and Managers of the solution can configure the platform's settings and monitor the agent's activity.
+* Agent's Console Panel: which give your agents superpowers. That's where professional agents or experts can respond intuitively to all messages.
+
+![Administration interface](./assets/images/administration.png)
 
 ## What is the Developer Platform?
 
-The iAdvize Developer Platform let developers Build Apps or use our public APIs. You'll be provided with a documentation and a private testing environment.
-
-There are three main reasons for building an app
-
-* Build apps and publish it to our customers community. (We've got more than 500 cust to amaze!)
-* Build app in a private mode, and make it available for (a) specific customer(s) only
-* Get rewarded based on the usage of your app (TBC) 
+The iAdvize Developer Platform let developers Build Apps or use our public APIs. 
+Want to develop an app? You'll be provided with a documentation and a private testing environment.
 
 ## Why to build apps to iAdvize?
-The iAdvize Developer Platform let developers Build Apps or use our public APIs. You'll be provided with a documentation and a private testing environment.
 
 There are three main reasons for building an app
 
 * Build apps and publish it to our customers community. (We've got more than 500 cust to amaze!)
 * Build app in a private mode, and make it available for (a) specific customer(s) only
-* Get rewarded based on the usage of your app (TBC) 
+* Get rewarded based on the usage of your apps
+
+Here is an example of potential protocol between iAdvize and a CRM thanks to a connector:
+![CRM protocol](./assets/images/CRM-webhook.jpg)
 
 # Getting Started
+Wanna join our developers community as an alpha tester 🤘🏽 ? Follow these steps to be part of the adventure.
+
 ## Get a Developer Account
-## Overview
+To build apps that iAdvize customers can use, you first need a Developer Account.  
+
+* Apply and Sign-Up by sending a request to developers@iadvize.com,
+* iAdvize team will get in touch within 2 hours on workdays,
+* We provide you with credentials and testing environment.
+
+## Features Overview
+iAdvize provides you with some easy-to-use tools so you can:
+
+* Set the Privacy mode of your App as Public or Private
+* Set Authentication process of your Apps
+* Define custom Settings such as object mapping (in-progress)
+* Create interactions to enhance some iAdvize's predefined features
+* Use Outgoing Webhooks to receive updates in real time
+
+Once your app ready, you will be able to submit your connector for review.
+iAdvize team will review your app to make sure it fits the Developer policy, and will get back to you within 48 hours (on workdays). 
+And then hurrah... Publish it to iAdvize Marketplace!
   
 # Build apps
+Once logged in your Developer Account, you will be ready to build. 
+So let's go through the available content...
+
 ## My apps
+This is where we list your apps and related status:
+* Published: your App is ready to be installed on iAdvize Marketplace
+* Under review: you have submitted your app for review
+* Draft: you are editing your app
+
 ## App information
+On this section you will find the general information of your app such as the name and the description of its features.
+You can also set the privacy mode as public or Private.
+* Public mode: your app will be viewable and installable by all of our customers
+* Private: your app will be available for the customers you choose
+
+** How does the Private mode work? **
+Our team is still working on the accessibility mode under the Private mode. 
+In alpha version, we will make it available manually for the specific customers you have selected.
+
 ## Authentication
+The Authentication section let you set what your App will need to retrieve data from iAdvize and the app you want to connect to. The user will have to follow those authentication steps to install your app.
+
+** Define authentication fields **
+You are able to add fields and define the type of entry you are waiting for (text, numeric…).
+
+* Label: name the field, this is what the user will see.
+* Type: define the type of entry (text, numeric, alphanumeric).
+* Id: name the field's id according to your code.
+
+You can add as much as fields you need to. 
+This is the first thing the user will see once he clicked on "install" from the iAdvize Marketplace.
+They will appear to the user according to the creation order (1st entry, 1st displayed on page).
+
+*i.e.: if your first set is about getting "Username", it will be the first information asked to the user.*
+
+* Set the verification url
+This is the url on which your App will be checked if credentials are valid. 
+We'll call this url and your connector can sent back if authentication parameters are correct in order to go to the next step of installation.
+
+*i.e.: the user might be required to authenticate with an email and a Password. You will have to create two respective fields for email and password.*
+
+![Authentication](./assets/images/developer_authentication.png)
+
+
+The User will have to fill in the fields first thing during the installation process on iAdvize Marketplace.
+
+![Authentication admin](./assets/images/marketplace_ConfigureApp.png)
+
 ## Settings
+This part is still under development. This is where you will be able to add some specific configuration steps such as mapping.
+
 ## Interactions
 Add interactions to enhance iAdvize interface by adding or editing predefined features.
 
@@ -48,37 +120,50 @@ Available features are:
 * Visitor Profile (Console Panel)
 
 ### Product list feature
-The Product List integration enables Users to browse a product catalog from the iAdvize discussion panel. Agents can search for a product and send it in one single click within the conversation. 
+The Product List integration enables Users to browse a product catalog from the iAdvize Console panel. 
+Agents can search for a product during a conversation, and send it in one single click within the chat. 
 
-The product links are displayed to the visitor in the conversation in the form of a card with an image, the product title and the price.
-In just a click, visitors are redirected to the product page on your eCommerce website using a link called “view product”. 
+The product are displayed to the visitor in the conversation as a card with the image, the title, the availability and the price.
+In just a click on "view product", visitors are redirected to the product page on the related eCommerce website.
 
-**Add an set a Product list connector**
+![Product list](./assets/images/interactions_product_list_feature.png)
 
-Fake text The Product List integration enables Users to browse a product catalog from the iAdvize discussion panel. Agents can search for a product and send it in one single click within the conversation. Fake text.
+**Add and set a Product list connector**
+In order to set the right connector's parameters, all you have to do is to declare:
+* the product list url - this is the catalog url
+* the categories url - this is where your connector will get the list of products categories
 
-**User configuration**
+### Closing conversation feature (in-progress)
+This type of interaction is not available yet.
 
-Fake text The Product List integration enables Users to browse a product catalog from the iAdvize discussion panel. Agents can search for a product and send it in one single click within the conversation. Fake text.
+### Submit your apps
 
-### Visitor profile
-The Product List integration enables Users to browse a product catalog from the iAdvize discussion panel. Agents can search for a product and send it in one single click within the conversation. 
-
-The product links are displayed to the visitor in the conversation in the form of a card with an image, the product title and the price.
-In just a click, visitors are redirected to the product page on your eCommerce website using a link called “view product”. 
-
-**Add an set a Product list connector**
-
-Fake text The Product List integration enables Users to browse a product catalog from the iAdvize discussion panel. Agents can search for a product and send it in one single click within the conversation. Fake text.
-
-**User configuration**
-
-Fake text The Product List integration enables Users to browse a product catalog from the iAdvize discussion panel. Agents can search for a product and send it in one single click within the conversation. Fake text.
+Apps must be submitted to iAdvize for review.
+The versioning declaration must be done by the developer during the submission process.
+iAdvize will approve or refuse the app based on specific criteria.
+iAdvize will get in touch within 48 hours to the developers.
 
 ## Webhooks
 Webhook system allows external applications to be able to subscribe to events (via callback urls) to receive updates in real time. 
+When you build your app, you can subscribe to a list of events. 
+When client install your app, it will automatically create webhooks for this client as well as events based on your app configuration. 
+
 This subscription is based on the events of the different domains.
 When an event occurs, an HTTP POST call is issued on the callback urls.
+
+**Conversations domain:**
+Chat conversations only, conversations.chat.closed
+Call conversations only, conversations.call.closed
+Social media conversations only, conversations.social.closed
+All conversations, conversations.*.closed
+
+**Visitors domain:**
+Visitor information updated, visitors.updated
+
+**Connectors domain:**
+connector.installed
+connector.uninstalled
+
 
 ### Create a webhook
 You are able to create as much as outgoing webhooks you need to.
@@ -86,7 +171,6 @@ A webhook can cover several events.
 An event may be linked to a customer (example customers.website.created)
 or a site (example customers.website.created)
 
-### Fields to fill in 
 * Name of the webhook: Optional label to be given to the webhook
 * URL of the webhook: the URL of the server that will receive the webhook
 * Security Token: Token provided by iAdvize (this field is not editable)
@@ -94,10 +178,99 @@ or a site (example customers.website.created)
 * Events: select the events from the list. You have the ability to subscribe to all 
 * iAdvize events, all events of a specific domain, or only one event.
 
-# Published apps
-## Submission process
+When an event occurs, an HTTP POST call is issued on the callback urls you set up with the event data. Data is sent with “application/json” header content-type, and “json” format as payload. .Callback urls must be defined with HTTPS protocol and should be available with POST and GET http verbs:
+POST verb to send data payload,
+and GET verb, will be used by iAdvize, to check availability of the callback (more informations in security section) 
+iAdvize expect to have à 20x http status in callback result.
 
-# API v2
+**Retry management**
+iAdvize will retry to send callback in failure X times if http status code isn’t part of 50x code. 
+ 
+**Delivery headers**
+iAdvize will send payload with two additionals headers:
+X-iAdvize-Delivery: UUID, unique identifier to describe a webhook
+X-iAdvize-CorrelationId: UUID, unique identifier used in retry webhooks to track same callback calls.
+
+**Security**
+(documentation in-progress)
+
+### Events description
+Each outgoing payloads will be delivered under json format.
+
+Conversations domain:
+conversations.chat.started
+
+<pre class="prettyprint lang-js">{
+  meta: {
+   "event": "conversations.chat.started",
+    "conversationId": 1,
+    "operatorId": 1
+  }
+}
+</pre>
+
+##### conversations.chat.closed
+<pre class="prettyprint lang-js">{
+  meta: {
+{
+    "event": "conversations.chat.closed",
+  	   "conversationId": 1,
+ 	   "operatorId": 1,
+    "satisfactionId": 1,
+    "welcome”: 3,
+    "delay": 3,
+    "resolution”: 2
+}
+</pre>
+
+##### conversations.chat.satisfaction
+<pre class="prettyprint lang-js">{
+  meta: {
+    "event": "conversations.chat.satisfaction",
+    "conversationId": 1,
+    "operatorId": 1,
+    "satisfaction": 3
+}
+</pre>
+
+##### visitor.updated
+<pre class="prettyprint lang-js">{
+  meta: {
+    "event": "visitor.updated",
+    "visitorId": "10f98a9",
+    }
+</pre>
+
+
+**HTTP stack trace example for “conversations.chat.closed” event**
+
+POST /webhook HTTP/1.1
+
+<pre class="prettyprint lang-js">{
+  meta: {
+Host: localhost
+X-iAdvize-CorrelationId: 332e8400-e34b-11d4-a716-446655444444
+X-iAdvize-Delivery: 110e8400-e29b-11d4-a716-446655440000
+Content-Type: application/json
+Content-Length: 3442
+
+{
+  "event": "conversation.chat.closed",
+  "conversationId": 1,
+  "operatorId": 1
+}
+
+</pre>
+
+
+
+## Developer Policy (in-progress)
+The developer will host the code on his own host service.
+The developer will be responsible of the maintenance of the connector.
+The developer is able to set the price (monthly fee, or conversation based).
+If the app is not free, the developer must be a moral person.
+
+# API
 ## REST API
 **Current version:** 2.0
 
@@ -1070,11 +1243,10 @@ See below to discover used fields and see [reading section](#responses-read) to 
 }
 </pre>
 
-## PUSH API
-**Current version:** 2.0
+## GraphQL API
+**In-progress** 
 
-The new Push API allows data to be pushed to URI callbacks when an event is fired.
-The Push API uses JSON exclusively. XML is not supported. Push requests are sent with a POST method.
+The new API is under development and documentation.
 
 ### Events
 
@@ -1161,424 +1333,6 @@ When a conversation is ended by the operator.
 }
 </pre>
 
-## Callbacks
-
-iAdvize provides some Javascript callback functions that can be used to perform actions during specific iAdvize events (ie: track a Google Analytics event when an iAdvize chat is started).
-
-### How to use callbacks
-
-To execute some custom code during an iAdvize callback function, you have to define a `var iAdvizeCallbacks;` variable that will contain callbacks you want to use. **You must declare that variable before iAdvize tracking code**.
-
-Each callback function has a `obj` variable passed as a parameter that could contain some extra informations about iAdvize elements.
-
-In the example above, we want to track Google Analytics events when a chat or a call starts / ends :
-
-<pre class="prettyprint lang-js">var iAdvizeCallbacks = {
-  //iAdvize callback functions are listed here
-  onChatStarted: function(obj){
-    // Chat session starts
-    _gaq.push(['_trackEvent', 'iAdvize', 'Chat Start', obj.startedBy]);
-  },
-  onChatEnded: function(obj){
-    // Chat session ends
-    _gaq.push(['_trackEvent', 'iAdvize', 'Chat End', obj.startedBy]);
-  },
-  onCallStarted: function(obj){
-    // Call session starts
-    _gaq.push(['_trackEvent', 'iAdvize', 'Call Start']);
-  },
-  onCallEnded: function(obj){
-    // Call session ends
-    _gaq.push(['_trackEvent', 'iAdvize', 'Call End']);
-  }
-};
-//Put you iAdvize tracking code below...
-</pre>
-
-### onChatDisplayed
-
-*   **Called when :** A chat popin is displayed on the visitor screen.
-*   **Parameter(s) :** `obj` is null
-
-<pre class="prettyprint lang-js">var iAdvizeCallbacks = {
-  onChatDisplayed: function(obj){
-    // Chat window is displayed
-    ...
-  }
-};
-</pre>
-
-### onStatusChanged
-
-*   **Called when :** The global availability changed on the Click to Chat channel.
-*   **Parameter(s) :** `obj` contain 2 values:  
-    `obj.offline` -> 0 or 1 if agents are offline  
-    `obj.busy` -> 0 or 1 if all agents are busy
-
-<pre class="prettyprint lang-js">var iAdvizeCallbacks = {
-  onStatusChanged: function(obj){
-    // Click to Chat agents status changed
-    ...
-  }
-};
-</pre>
-
-### onChatButtonDisplayed
-
-*   **Called when :** A Click to Chat button is displayed on the visitor screen.
-*   **Parameter(s) :** `obj` is null
-
-<pre class="prettyprint lang-js">var iAdvizeCallbacks = {
-  onChatButtonDisplayed: function(obj){
-    // Chat button is displayed
-    ...
-  }
-};
-</pre>
-
-### onChatStarted
-
-*   **Called when :** A chat discussion is started
-*   **Parameter(s) :** `obj` contain 2 values:  
-    `obj.id` -> Chat identifier  
-    `obj.startedBy` -> Who started the chat (can be one of 'operator', 'visitor' or 'proactif')
-
-<pre class="prettyprint lang-js">var iAdvizeCallbacks = {
-  onChatStarted: function(obj){
-    // Chat is started
-    console.log('chat #' +obj.id + ' was started by ' + obj.startedBy);
-  }
-};
-</pre>
-
-### onChatEnded
-
-*   **Called when :** A chat discussion is ended
-*   **Parameter(s) :** `obj` contain 2 values:  
-    `obj.id` -> Chat identifier  
-    `obj.endedBy` -> Who ended the chat ('operator' or 'visitor')
-
-<pre class="prettyprint lang-js">var iAdvizeCallbacks = {
-  onChatEnded: function(obj){
-    // Chat discussion is ended
-    ...
-  }
-};
-</pre>
-
-### onInvitationDisplayed
-
-*   **Called when :** An invitation is displayed on the visitor screen
-*   **Parameter(s) :** `obj` contain 1 value:  
-    `obj.id` -> Invitation identifier  
-
-<pre class="prettyprint lang-js">var iAdvizeCallbacks = {
-  onInvitationDisplayed: function(obj){
-    // Invitation has been displayed
-    ...
-  }
-};
-</pre>
-
-### onCallButtonDisplayed
-
-*   **Called when :** A Click to Call button is displayed on the visitor screen.
-*   **Parameter(s) :** `obj` is null
-
-<pre class="prettyprint lang-js">var iAdvizeCallbacks = {
-  onCallButtonDisplayed: function(obj){
-    // Call button is displayed
-    ...
-  }
-};
-</pre>
-
-### onCallStatusChanged
-
-*   **Called when :** The global availability changed on the Click to Call channel.
-*   **Parameter(s) :** `obj` contain 1 value:  
-    `obj.offline` -> 0 or 1 if agents are offline  
-
-<pre class="prettyprint lang-js">var iAdvizeCallbacks = {
-  onCallStatusChanged: function(obj){
-    // Click to Call agents status changed
-    ...
-  }
-};
-</pre>
-
-### onCallStarted
-
-*   **Called when :** A call discussion is started.
-*   **Parameter(s) :** `obj` is null
-
-<pre class="prettyprint lang-js">var iAdvizeCallbacks = {
-  onCallStarted: function(obj){
-    // Call discussion is started
-    ...
-  }
-};
-</pre>
-
-### onCallEnded
-
-*   **Called when :** A call discussion is ended.
-*   **Parameter(s) :** `obj` is null
-
-<pre class="prettyprint lang-js">var iAdvizeCallbacks = {
-  onCallEnded: function(obj){
-    // Call discussion is ended
-    ...
-  }
-};
-</pre>
-
-### onVideoButtonDisplayed
-
-*   **Called when :** A Click to Video button is displayed on the visitor screen.
-*   **Parameter(s) :** `obj` is null
-
-<pre class="prettyprint lang-js">var iAdvizeCallbacks = {
-  onVideoButtonDisplayed: function(obj){
-    // Click to Video button is displayed
-    ...
-  }
-};
-</pre>
-
-### onRuleStarted
-
-*   **Called when :** A targeting rule is triggered, and a chat element (button, invitation, message) is displayed. An agent is available for the targeting rule conditions.
-*   **Parameter(s) :** `obj` contain 2 values:  
-    `obj.id` -> Id of the rule being executed  
-    `obj.label` -> name of the rule
-
-<pre class="prettyprint lang-js">var iAdvizeCallbacks = {
-  onRuleStarted: function(obj){
-    // Targeting rule is triggered
-    ...
-  }
-};
-</pre>
-
-### onMessageReceived
-
-*   **Called when :** An operator message is received.
-*   **Parameter(s) :** `obj` contain 2 values:  
-    `obj.time` -> local time of the message (visitor time)  
-    `obj.msg` -> the message itself
-
-<pre class="prettyprint lang-js">var iAdvizeCallbacks = {
-  onMessageReceived: function(obj){
-    // operator message received
-    console.log('[' + obj.time + '] operator message: ' +obj.msg);
-  }
-};
-</pre>
-
-### onMessageSent
-
-*   **Called when :** A visitor send a message
-*   **Parameter(s) :** `obj` contain 2 values:  
-    `obj.time` -> local time of the message (visitor time)  
-    `obj.msg` -> the message itself
-
-<pre class="prettyprint lang-js">var iAdvizeCallbacks = {
-  onMessageSent: function(obj){
-    // operator message received
-    console.log('[' + obj.time + '] visitor message: ' +obj.msg);
-  }
-};
-</pre>
-
-### onAlertReceived
-
-*   **Called when :** An alert message is received.
-*   **Parameter(s) :** `obj` contain 2 values:  
-    `obj.time` -> local time of the alert (visitor time)  
-    `obj.msg` -> the alert itself
-
-<pre class="prettyprint lang-js">var iAdvizeCallbacks = {
-  onAlertReceived: function(obj){
-    // operator message received
-    console.log('[' + obj.time + '] alert: ' +obj.msg);
-  }
-};
-</pre>
-
-### onOperatorWriting
-
-*   **Called when :** agent start composing a message.
-*   **Parameter(s) :** `obj` is null
-
-<pre class="prettyprint lang-js">var iAdvizeCallbacks = {
-  onOperatorWriting: function(obj){
-    // operator message received
-    console.log('operator start composing');
-  }
-};
-</pre>
-
-### onOperatorStopWriting
-
-*   **Called when :** agent stop composing.
-*   **Parameter(s) :** `obj` is null
-
-<pre class="prettyprint lang-js">var iAdvizeCallbacks = {
-  onOperatorStopWriting: function(obj){
-    // operator message received
-    console.log('operator stopped composing');
-  }
-};
-</pre>
-
-### onVisitorWriting
-
-*   **Called when :** the visitor start composing a message.
-*   **Parameter(s) :** `obj` is null
-
-<pre class="prettyprint lang-js">var iAdvizeCallbacks = {
-  onVisitorWriting: function(obj){
-    // operator message received
-    console.log('visitor start composing');
-  }
-};
-</pre>
-
-### onVisitorStopWriting
-
-*   **Called when :** the visitor stop composing.
-*   **Parameter(s) :** `obj` is null
-
-<pre class="prettyprint lang-js">var iAdvizeCallbacks = {
-  onVisitorStopWriting: function(obj){
-    // operator message received
-    console.log('visitor stopped composing');
-  }
-};
-</pre>
-
-### onOfferReceived
-
-*   **Called when :** An offer is received.
-*   **Parameter(s) :** `obj` contain 2 values:  
-    `obj.name` -> the name of the offer  
-    `obj.url` -> the url for this offer
-
-<pre class="prettyprint lang-js">var iAdvizeCallbacks = {
-  onOfferReceived: function(obj){
-    console.log( 'offer received : ' +obj.name);
-  }
-};
-</pre>
-
-### onLinkReceived
-
-*   **Called when :** A link is received.
-*   **Parameter(s) :** `obj` contain 3 values:  
-    `obj.name` -> label of the link  
-    `obj.url` -> the url for this link  
-    `obj.push` -> true if the link was pushed to the visitor / false if the link was just sent to the visitor
-
-<pre class="prettyprint lang-js">var iAdvizeCallbacks = {
-  onLinkReceived: function(obj){
-    console.log('link ' + obj.name + ' received: ' +obj.url);
-  }
-};
-</pre>
-
-### onVisitorTransferred
-
-*   **Called when :** the visitor is transfered to another agent.
-*   **Parameter(s) :** `obj` contain 2 values:  
-    `obj.operatorId` -> id of the new agent  
-    `obj.historyId` -> id of the chat transcript
-
-<pre class="prettyprint lang-js">var iAdvizeCallbacks = {
-  onVisitorTransferred: function(obj){
-    // operator message received
-    console.log('visitor transferred to agent id: ' + obj.operatorId);
-  }
-};
-</pre>
-
-### onCobrowsingRequested
-
-*   **Called when :** visitor receive a cobrowsing request.
-*   **Parameter(s) :** none
-
-<pre class="prettyprint lang-js">var iAdvizeCallbacks = {
-  onCobrowsingRequested: function(){
-    // operator message received
-    console.log('cobrowsing request received');
-  }
-};
-</pre>
-
-### onCobrowsingAccepted
-
-*   **Called when :** the visitor accept a cobrowsing request.
-*   **Parameter(s) :** none
-
-<pre class="prettyprint lang-js">var iAdvizeCallbacks = {
-  onCobrowsingAccepted: function(){
-    // operator message received
-    console.log('visitor accepted cobrowsing');
-  }
-};
-</pre>
-
-### onCobrowsingRefused
-
-*   **Called when :** the visitor refuse a cobrowsing request.
-*   **Parameter(s) :** none
-
-<pre class="prettyprint lang-js">var iAdvizeCallbacks = {
-  onCobrowsingRefused: function(){
-    // operator message received
-    console.log('visitor refused cobrowsing');
-  }
-};
-</pre>
-
-### onCobrowsingStopped
-
-*   **Called when :** the agent stop cobrowsing.
-*   **Parameter(s) :** none
-
-<pre class="prettyprint lang-js">var iAdvizeCallbacks = {
-  onCobrowsingStopped: function(){
-    // operator message received
-    console.log('agent stoped the cobrowsing session');
-  }
-};
-</pre>
-
-### onSatisfactionDisplayed
-
-*   **Called when :** the satisfaction survey is displayed.
-*   **Parameter(s) :** none
-
-<pre class="prettyprint lang-js">var iAdvizeCallbacks = {
-  onSatisfactionDisplayed: function(){
-    // operator message received
-    console.log('satisfaction survey displayed');
-  }
-};
-</pre>
-
-### onSatisfactionAnswered
-
-*   **Called when :** the visitor answer the satisfaction survey.
-*   **Parameter(s) :** `obj` is null
-
-<pre class="prettyprint lang-js">var iAdvizeCallbacks = {
-  onSatisfactionAnswered: function(obj){
-    // operator message received
-    console.log('visitor answered satisfaction survey');
-  }
-};
-</pre>
 
 # Single Sign On
 
@@ -1643,6 +1397,7 @@ Our API documentation is not available online yet, but you can still [download i
 # SDK
 
 ## Android - alpha
+
 iAdvize mobile livechat SDK for Android is available in alpha version.
 
 We will provide you the documentation with a simple integration scenario as well as pointers on available functions upon request.
