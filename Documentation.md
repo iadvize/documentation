@@ -20,6 +20,8 @@ iAdvize platform has 2 interfaces:
 
 ![Administration interface](./assets/images/administration.png)
 
+![Console panel interface](./assets/images/consolepanel.png)
+
 ## What is the Developer Platform?
 
 The iAdvize Developer Platform let developers Build Apps or use our public APIs. 
@@ -212,14 +214,14 @@ conversations.chat.started
 ##### conversations.chat.closed
 <pre class="prettyprint lang-js">{
   meta: {
-{
     "event": "conversations.chat.closed",
-  	   "conversationId": 1,
- 	   "operatorId": 1,
+  	"conversationId": 1,
+ 	  "operatorId": 1,
     "satisfactionId": 1,
     "welcome”: 3,
     "delay": 3,
     "resolution”: 2
+  }
 }
 </pre>
 
@@ -230,6 +232,7 @@ conversations.chat.started
     "conversationId": 1,
     "operatorId": 1,
     "satisfaction": 3
+  }
 }
 </pre>
 
@@ -238,7 +241,8 @@ conversations.chat.started
   meta: {
     "event": "visitor.updated",
     "visitorId": "10f98a9",
-    }
+  }
+}
 </pre>
 
 
@@ -246,8 +250,7 @@ conversations.chat.started
 
 POST /webhook HTTP/1.1
 
-<pre class="prettyprint lang-js">{
-  meta: {
+<pre class="prettyprint lang-js">
 Host: localhost
 X-iAdvize-CorrelationId: 332e8400-e34b-11d4-a716-446655444444
 X-iAdvize-Delivery: 110e8400-e29b-11d4-a716-446655440000
@@ -261,8 +264,6 @@ Content-Length: 3442
 }
 
 </pre>
-
-
 
 ## Developer Policy (in-progress)
 The developer will host the code on his own host service.
@@ -1248,92 +1249,6 @@ See below to discover used fields and see [reading section](#responses-read) to 
 
 The new API is under development and documentation.
 
-### Events
-
-#### operator.login
-
-When an operator connects to the desk.
-
-**Returned data**
-
-<pre class="prettyprint lang-js">{
-  name: "operator.login",
-  datetime: {
-    created: "2014-01-01 00:00:00",
-    sent: "2014-01-01 00:00:01"
-  },
-  parameters: {
-    operator_id: 1
-  }
-}
-</pre>
-
-#### operator.logout
-
-When an operator disconnects from the desk.
-
-**Returned data**
-
-<pre class="prettyprint lang-js">{
-  name: "operator.logout",
-  datetime: {
-    created: "2014-01-01 00:00:00",
-    sent: "2014-01-01 00:00:01"
-  },
-  parameters: {
-    operator_id: 1
-  }
-}
-</pre>
-
-#### conversation.start
-
-When a conversation is started.
-
-**Returned data**
-
-<pre class="prettyprint lang-js">{
-  name: "conversation.start",
-  datetime: {
-    created: "2014-01-01 00:00:00",
-    sent: "2014-01-01 00:00:01"
-  },
-  parameters: {
-    conversation_id: 1,
-    type:            "chat|call|video",
-    operator_id:     1,
-    website_id:      1,
-    group_id:        1,
-    custom_data:     {
-      example:     "value"
-    }
-  }
-}
-</pre>
-
-#### conversation.end
-
-When a conversation is ended by the operator.
-
-**Returned data**
-
-<pre class="prettyprint lang-js">{
-  name: "conversation.end",
-  datetime: {
-    created: "2014-01-01 00:00:00",
-    sent: "2014-01-01 00:00:01"
-  },
-  parameters: {
-    conversation_id: 1,
-    type:            "chat|call|video",
-    operator_id:     1,
-    website_id:      1,
-    group_id:        1
-  }
-}
-</pre>
-
-
 # Single Sign On
 
 iAdvize offers a [Single Sign On](http://en.wikipedia.org/wiki/Single_sign-on) method that allows you to provide a unique authentification system to your operators who are already logged to your app.
@@ -1372,27 +1287,6 @@ To find the parameter `url` that interest you, look the URL address of the page 
 
 With this example, the SSO URL address will be:
 `http://www.iadvize.com/auto-auth.php?auth={SSO_KEY}&url=**go=offers**`
-
-# Virtual Agent Integration
-
-iAdvize can communicate with your Virtual Agents (VA) thanks to specific callbacks and functions use. This documentation describe the 2 major use cases that are actually achievable.
-
-## VA transmits the conversation history to iAdvize
-
-The purpose is to show to the Agent the conversation that the Visitor had with the Virtual Agent, before the live chat starts. To do so, the Virtual Agent have to push its own conversation ID to iAdvize by setting the `iAdvize.vaSCI` variable before the chat begins.
-
-Today, iAdvize is already interfaced with [Nina Web (Nuance)](http://www.virtuoz.com) Virtual Agent on some specific customers' website, and can potentially receive any other Virtual Agents history.
-
-However, any additional VA > iAdvize integration requires prior discussion with our [Technical team](mailto:support@iadvize.com).
-
-![Console - VA integration example](./assets/images/exp-console-virtual-agent.png)
-
-## iAdvize provides conversation ID and history to VA
-
-In order to retrieve the iAdvize conversation ID, your Virtual Agent have to use the [onChatStarted](/doc/?p=callbacks#onChatStarted) callback first, in order to retrieve the iAdvize conversation ID.
-As soon as a chat starts, the callback is triggered and the Virtual Agent is able to retrieve iAdvize conversation history by performing an API call with `getHistoryByID()` function.
-
-Our API documentation is not available online yet, but you can still [download it](./assets/docs/iAdvize-API_Doc_v1-7.pdf).
 
 # SDK
 
