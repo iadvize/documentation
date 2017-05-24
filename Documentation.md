@@ -18,11 +18,14 @@ iAdvize platform has 2 interfaces:
 * Administration: from where Administrators and Managers of the solution can configure the platform's settings and monitor the agent's activity.
 * Agent's Console Panel: which give your agents superpowers. That's where professional agents or experts can respond intuitively to all messages.
 
+![Administration interface](.assets/images/consolepanel.png)
+
+![Console panel](.assets/images/consolepanel.png)
+
 ## What is the Developer Platform?
 
 The iAdvize Developer Platform let developers Build Apps or use our public APIs. 
 Want to develop an app? You'll be provided with a documentation and a private testing environment.
-
 
 ## Why to build apps to iAdvize?
 
@@ -31,6 +34,9 @@ There are three main reasons for building an app
 * Build apps and publish it to our customers community. (We've got more than 500 cust to amaze!)
 * Build app in a private mode, and make it available for (a) specific customer(s) only
 * Get rewarded based on the usage of your apps
+
+Here is an example of potential protocol between iAdvize and a CRM thanks to a connector:
+![CRM protocol](.assets/images/CRM-webhook.jpg)
 
 # Getting Started
 Wanna join our developers community as an alpha tester 🤘🏽 ? Follow these steps to be part of the adventure.
@@ -42,7 +48,7 @@ To build apps that iAdvize customers can use, you first need a Developer Account
 * iAdvize team will get in touch within 2 hours on workdays,
 * We provide you with credentials and testing environment.
 
-## Overview
+## Features Overview
 iAdvize provides you with some easy-to-use tools so you can:
 
 * Set the Privacy mode of your App as Public or Private
@@ -53,7 +59,7 @@ iAdvize provides you with some easy-to-use tools so you can:
 
 Once your app ready, you will be able to submit your connector for review.
 iAdvize team will review your app to make sure it fits the Developer policy, and will get back to you within 48 hours (on workdays). 
-And then hurrah... Publish it in iAdvize Marketplace!
+And then hurrah... Publish it to iAdvize Marketplace!
   
 # Build apps
 Once logged in your Developer Account, you will be ready to build. 
@@ -97,6 +103,12 @@ We'll call this url and your connector can sent back if authentication parameter
 
 *i.e.: the user might be required to authenticate with an email and a Password. You will have to create two respective fields for email and password.*
 
+![Authentication](.assets/images/developer_authentication.png)
+
+
+The User will have to fill in the fields first thing during the installation process on iAdvize Marketplace.
+
+![Authentication admin](.assets/images/developer_authentication.png)
 
 ## Settings
 This part is still under development. This is where you will be able to add some specific configuration steps such as mapping.
@@ -116,12 +128,22 @@ Agents can search for a product during a conversation, and send it in one single
 The product are displayed to the visitor in the conversation as a card with the image, the title, the availability and the price.
 In just a click on "view product", visitors are redirected to the product page on the related eCommerce website.
 
+![Product list](.assets/images/interactions_product_list_feature.png)
+
 **Add and set a Product list connector**
 In order to set the right connector's parameters, all you have to do is to declare:
 * the product list url - this is the catalog url
 * the categories url - this is where your connector will get the list of products categories
 
 ### Closing conversation feature (in-progress)
+This type of interaction is not available yet.
+
+### Submit your apps
+
+Apps must be submitted to iAdvize for review.
+The versioning declaration must be done by the developer during the submission process.
+iAdvize will approve or refuse the app based on specific criteria.
+iAdvize will get in touch within 48 hours to the developers.
 
 ## Webhooks
 Webhook system allows external applications to be able to subscribe to events (via callback urls) to receive updates in real time. 
@@ -163,18 +185,18 @@ POST verb to send data payload,
 and GET verb, will be used by iAdvize, to check availability of the callback (more informations in security section) 
 iAdvize expect to have à 20x http status in callback result.
 
-#### Retry management 
+**Retry management**
 iAdvize will retry to send callback in failure X times if http status code isn’t part of 50x code. 
  
-#### Delivery headers
+**Delivery headers**
 iAdvize will send payload with two additionals headers:
 X-iAdvize-Delivery: UUID, unique identifier to describe a webhook
 X-iAdvize-CorrelationId: UUID, unique identifier used in retry webhooks to track same callback calls.
 
-#### Security
+**Security**
 (documentation in-progress)
 
-#### Events description
+### Events description
 Each outgoing payloads will be delivered under json format.
 
 Conversations domain:
@@ -243,13 +265,6 @@ Content-Length: 3442
 </pre>
 
 
-
-## Submission process
-
-Apps must be submitted to iAdvize for review.
-The versioning declaration must be done by the developer during the submit process.
-iAdvize will approve or refuse the app based on specific criteria.
-iAdvize will get in touch within 48 hours to the developers.
 
 ## Developer Policy (in-progress)
 The developer will host the code on his own host service.
@@ -1361,7 +1376,6 @@ With this example, the SSO URL address will be:
 
 
 # SDK
-
 ##Android - alpha
 iAdvize mobile livechat SDK for Android is available in alpha version.
 
