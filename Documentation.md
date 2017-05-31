@@ -1,4 +1,4 @@
-# General informations
+# General information
 Welcome to iAdvize Developer Platform documentation.
 You want to create an integration for your own use or for the world? That's the right place.
 
@@ -182,7 +182,7 @@ or a site (example customers.website.created)
 
 When an event occurs, an HTTP POST call is issued on the callback urls you set up with the event data. Data is sent with “application/json” header content-type, and “json” format as payload. .Callback urls must be defined with HTTPS protocol and should be available with POST and GET http verbs:
 POST verb to send data payload,
-and GET verb, will be used by iAdvize, to check availability of the callback (more informations in security section) 
+and GET verb, will be used by iAdvize, to check availability of the callback (more information in security section) 
 iAdvize expect to have à 20x http status in callback result.
 
 **Retry management**
