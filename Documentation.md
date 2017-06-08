@@ -18,9 +18,7 @@ iAdvize platform has 2 interfaces:
 * Administration: from where Administrators and Managers of the solution can configure the platform's settings and monitor the agent's activity.
 * Agent's Console Panel: which give your agents superpowers. That's where professional agents or experts can respond intuitively to all messages.
 
-![Administration interface](./assets/images/administration.png)
-
-![Console panel interface](./assets/images/consolepanel.png)
+![iAdvize](./assets/images/what-is-iadvize.png)
 
 ## What is the Developer Platform?
 
@@ -36,7 +34,7 @@ There are three main reasons for building an app
 * Get rewarded based on the usage of your apps
 
 Here is an example of potential protocol between iAdvize and a CRM thanks to a connector:
-![CRM protocol](./assets/images/CRM-webhook.jpg)
+![CRM Webhook](./assets/images/CRM-webhook.png)
 
 # Getting Started
 Wanna join our developers community as an alpha tester 🤘🏽 ? Follow these steps to be part of the adventure.
@@ -103,12 +101,12 @@ We'll call this url and your connector can sent back if authentication parameter
 
 *i.e.: the user might be required to authenticate with an email and a Password. You will have to create two respective fields for email and password.*
 
-![Authentication](./assets/images/developer_authentication.png)
+![Authentication](./assets/images/developer-authentication.png)
 
 
 The User will have to fill in the fields first thing during the installation process on iAdvize Marketplace.
 
-![Authentication admin](./assets/images/marketplace_ConfigureApp.png)
+![Authentication admin](./assets/images/marketplace-configure.png)
 
 ## Settings
 This part is still under development. This is where you will be able to add some specific configuration steps such as mapping.
@@ -128,7 +126,7 @@ Agents can search for a product during a conversation, and send it in one single
 The product are displayed to the visitor in the conversation as a card with the image, the title, the availability and the price.
 In just a click on "view product", visitors are redirected to the product page on the related eCommerce website.
 
-![Product list](./assets/images/interactions_product_list_feature.png)
+![Product list](./assets/images/interactions-product-list-feature.png)
 
 **Add and set a Product list connector**
 In order to set the right connector's parameters, all you have to do is to declare:
