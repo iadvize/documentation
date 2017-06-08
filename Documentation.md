@@ -75,14 +75,14 @@ You can also set the privacy mode as public or Private.
 * Public mode: your app will be viewable and installable by all of our customers
 * Private: your app will be available for the customers you choose
 
-** How does the Private mode work? **
+**How does the Private mode work?**
 Our team is still working on the accessibility mode under the Private mode. 
 In alpha version, we will make it available manually for the specific customers you have selected.
 
 ## Authentication
 The Authentication section let you set what your App will need to retrieve data from iAdvize and the app you want to connect to. The user will have to follow those authentication steps to install your app.
 
-** Define authentication fields **
+**Define authentication fields**
 You are able to add fields and define the type of entry you are waiting for (text, numeric…).
 
 * Label: name the field, this is what the user will see.
