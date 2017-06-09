@@ -4,10 +4,10 @@ You want to create an integration for your own use or for the world? That's the 
 
 iAdvize provides you with a Developer platform to easily publish your apps on our marketplace so our users can install them directly from their administration interface.
 
-Whether you are developer, integrator, customer or simply curious, you will find an overview of how to Get started, our Developer Guidelines, and the documentation to build and publish  your future integrations. 
+Whether you are developer, integrator, customer or simply curious, you will find an overview of how to Get started, our Developer Guidelines, and the documentation to build and publish  your future integrations.
 
 ## What is iAdvize?
-[iAdvize](http://iadvize.com) is a SaaS conversational commerce platform. It enables businesses to engage their customers and prospects whether they’re on the website or on social media from one messaging solution (chat, voice, video). 
+[iAdvize](http://iadvize.com) is a SaaS conversational commerce platform. It enables businesses to engage their customers and prospects whether they’re on the website or on social media from one messaging solution (chat, voice, video).
 
 Visitors can get real-time advice from customer service but also from advocates, members of the brand community.
 
@@ -18,13 +18,11 @@ iAdvize platform has 2 interfaces:
 * Administration: from where Administrators and Managers of the solution can configure the platform's settings and monitor the agent's activity.
 * Agent's Console Panel: which give your agents superpowers. That's where professional agents or experts can respond intuitively to all messages.
 
-![Administration interface](./assets/images/administration.png)
-
-![Console panel interface](./assets/images/consolepanel.png)
+![iAdvize](./assets/images/what-is-iadvize.png)
 
 ## What is the Developer Platform?
 
-The iAdvize Developer Platform let developers Build Apps or use our public APIs. 
+The iAdvize Developer Platform let developers Build Apps or use our public APIs.
 Want to develop an app? You'll be provided with a documentation and a private testing environment.
 
 ## Why to build apps to iAdvize?
@@ -36,7 +34,7 @@ There are three main reasons for building an app
 * Get rewarded based on the usage of your apps
 
 Here is an example of potential protocol between iAdvize and a CRM thanks to a connector:
-![CRM protocol](./assets/images/CRM-webhook.jpg)
+![CRM Webhook](./assets/images/CRM-webhook.png)
 
 # Getting Started
 Wanna join our developers community as an alpha tester 🤘🏽 ? Follow these steps to be part of the adventure.
@@ -58,11 +56,11 @@ iAdvize provides you with some easy-to-use tools so you can:
 * Use Outgoing Webhooks to receive updates in real time
 
 Once your app ready, you will be able to submit your connector for review.
-iAdvize team will review your app to make sure it fits the Developer policy, and will get back to you within 48 hours (on workdays). 
+iAdvize team will review your app to make sure it fits the Developer policy, and will get back to you within 48 hours (on workdays).
 And then hurrah... Publish it to iAdvize Marketplace!
-  
+
 # Build apps
-Once logged in your Developer Account, you will be ready to build. 
+Once logged in your Developer Account, you will be ready to build.
 So let's go through the available content...
 
 ## My apps
@@ -77,38 +75,38 @@ You can also set the privacy mode as public or Private.
 * Public mode: your app will be viewable and installable by all of our customers
 * Private: your app will be available for the customers you choose
 
-** How does the Private mode work? **
-Our team is still working on the accessibility mode under the Private mode. 
+**How does the Private mode work?**
+Our team is still working on the accessibility mode under the Private mode.
 In alpha version, we will make it available manually for the specific customers you have selected.
 
 ## Authentication
 The Authentication section let you set what your App will need to retrieve data from iAdvize and the app you want to connect to. The user will have to follow those authentication steps to install your app.
 
-** Define authentication fields **
+**Define authentication fields**
 You are able to add fields and define the type of entry you are waiting for (text, numeric…).
 
 * Label: name the field, this is what the user will see.
 * Type: define the type of entry (text, numeric, alphanumeric).
 * Id: name the field's id according to your code.
 
-You can add as much as fields you need to. 
+You can add as much as fields you need to.
 This is the first thing the user will see once he clicked on "install" from the iAdvize Marketplace.
 They will appear to the user according to the creation order (1st entry, 1st displayed on page).
 
 *i.e.: if your first set is about getting "Username", it will be the first information asked to the user.*
 
 * Set the verification url
-This is the url on which your App will be checked if credentials are valid. 
+This is the url on which your App will be checked if credentials are valid.
 We'll call this url and your connector can sent back if authentication parameters are correct in order to go to the next step of installation.
 
 *i.e.: the user might be required to authenticate with an email and a Password. You will have to create two respective fields for email and password.*
 
-![Authentication](./assets/images/developer_authentication.png)
+![Authentication](./assets/images/developer-authentication.png)
 
 
 The User will have to fill in the fields first thing during the installation process on iAdvize Marketplace.
 
-![Authentication admin](./assets/images/marketplace_ConfigureApp.png)
+![Authentication admin](./assets/images/marketplace-configure.png)
 
 ## Settings
 This part is still under development. This is where you will be able to add some specific configuration steps such as mapping.
@@ -122,13 +120,13 @@ Available features are:
 * Visitor Profile (Console Panel)
 
 ### Product list feature
-The Product List integration enables Users to browse a product catalog from the iAdvize Console panel. 
-Agents can search for a product during a conversation, and send it in one single click within the chat. 
+The Product List integration enables Users to browse a product catalog from the iAdvize Console panel.
+Agents can search for a product during a conversation, and send it in one single click within the chat.
 
 The product are displayed to the visitor in the conversation as a card with the image, the title, the availability and the price.
 In just a click on "view product", visitors are redirected to the product page on the related eCommerce website.
 
-![Product list](./assets/images/interactions_product_list_feature.png)
+![Product list](./assets/images/interactions-product-list-feature.png)
 
 **Add and set a Product list connector**
 In order to set the right connector's parameters, all you have to do is to declare:
@@ -146,9 +144,9 @@ iAdvize will approve or refuse the app based on specific criteria.
 iAdvize will get in touch within 48 hours to the developers.
 
 ## Webhooks
-Webhook system allows external applications to be able to subscribe to events (via callback urls) to receive updates in real time. 
-When you build your app, you can subscribe to a list of events. 
-When client install your app, it will automatically create webhooks for this client as well as events based on your app configuration. 
+Webhook system allows external applications to be able to subscribe to events (via callback urls) to receive updates in real time.
+When you build your app, you can subscribe to a list of events.
+When client install your app, it will automatically create webhooks for this client as well as events based on your app configuration.
 
 This subscription is based on the events of the different domains.
 When an event occurs, an HTTP POST call is issued on the callback urls.
@@ -169,7 +167,7 @@ connector.uninstalled
 
 ### Create a webhook
 You are able to create as much as outgoing webhooks you need to.
-A webhook can cover several events. 
+A webhook can cover several events.
 An event may be linked to a customer (example customers.website.created)
 or a site (example customers.website.created)
 
@@ -177,17 +175,17 @@ or a site (example customers.website.created)
 * URL of the webhook: the URL of the server that will receive the webhook
 * Security Token: Token provided by iAdvize (this field is not editable)
 * Content-type: Application / json ; Application / x-www-form-urlencoded
-* Events: select the events from the list. You have the ability to subscribe to all 
+* Events: select the events from the list. You have the ability to subscribe to all
 * iAdvize events, all events of a specific domain, or only one event.
 
 When an event occurs, an HTTP POST call is issued on the callback urls you set up with the event data. Data is sent with “application/json” header content-type, and “json” format as payload. .Callback urls must be defined with HTTPS protocol and should be available with POST and GET http verbs:
 POST verb to send data payload,
-and GET verb, will be used by iAdvize, to check availability of the callback (more information in security section) 
+and GET verb, will be used by iAdvize, to check availability of the callback (more information in security section)
 iAdvize expect to have à 20x http status in callback result.
 
 **Retry management**
-iAdvize will retry to send callback in failure X times if http status code isn’t part of 50x code. 
- 
+iAdvize will retry to send callback in failure X times if http status code isn’t part of 50x code.
+
 **Delivery headers**
 iAdvize will send payload with two additionals headers:
 X-iAdvize-Delivery: UUID, unique identifier to describe a webhook
@@ -899,7 +897,7 @@ See [reading section](#responses-read) to discover some output examples.
 | id | Conversation identifier | Integer |
 | channel | Conversation channel | `chat`, `call` or `video` |
 | visitor_uid | Visitor unique identifier | String |
-| history | Conversation history | String `[5,"2016-02-16 11:24:21","http://test.com/"],` `[2,"2016-02-16 11:24:23","Hello",1455618264049],` `[3,"2016-02-16 11:24:31","The chat rule has been activated."],` `[1,"2016-02-16 11:24:43","Hello, how can I help you?",1455618283869],`  `[2,"2016-02-16 11:25:26","I would like to know if my order: xxx has been sent",1455618327321],` `[1,"2016-02-16 11:25:45","I check it, thank you for your patience",1455618346030],` `[1,"2016-02-16 11:26:02","Your order has been shipped",1455618363054],` `[2,"2016-02-16 11:26:09","Thanks, goodbye",1455618370072],` `[1,"2016-02-16 11:26:17","Goodbye",1455618377364],` `[3,"2016-02-16 11:26:43","OPERATOR_CHAT_CLOSE"]` |
+| history | Conversation history | String `[5,"2016-02-16 11:24:21","http://test.com/"],``[2,"2016-02-16 11:24:23","Hello",1455618264049],``[3,"2016-02-16 11:24:31","The chat rule has been activated."],``[1,"2016-02-16 11:24:43","Hello, how can I help you?",1455618283869],``[2,"2016-02-16 11:25:26","I would like to know if my order: xxx has been sent",1455618327321],``[1,"2016-02-16 11:25:45","I check it, thank you for your patience",1455618346030],``[1,"2016-02-16 11:26:02","Your order has been shipped",1455618363054],``[2,"2016-02-16 11:26:09","Thanks, goodbye",1455618370072],``[1,"2016-02-16 11:26:17","Goodbye",1455618377364],``[3,"2016-02-16 11:26:43","OPERATOR_CHAT_CLOSE"]` |
 | operator_answer | Conversation answered by operator | Boolean |
 | operator_closed | Conversation closed by operator | Boolean |
 | waitinglist | Waiting list status | Boolean |
@@ -958,13 +956,11 @@ See below to discover used fields and see [reading section](#responses-read) to 
 
 | Filter | Description | Values | Use |
 | --- | --- | --- | --- |
-| website_id | Website identifier | ?filters[website_id]=123 |
-| operator_id | Operator identifier | ?filters[operator_id]=123 |
-| conversation_id | Conversation identifier | Conversation identifier. You can also use `!null` & `null` to filter all transactions associated or not to a conversation. | ?filters[conversation_id]=123
-?filters[conversation_id]=null
-?filters[conversation_id]=!null |
-| from | Date from | `YYYY-MM-DD` or `YYYY-MM-DD HH:MM:SS` | ?filters[from]=YYYY-MM-DD HH:MM:SS |
-| to | Date to | `YYYY-MM-DD` or `YYYY-MM-DD HH:MM:SS` | ?filters[to]=YYYY-MM-DD HH:MM:SS |
+| website_id | Website identifier | | `?filters[website_id]=123` |
+| operator_id | Operator identifier | | `?filters[operator_id]=123` |
+| conversation_id | Conversation identifier | Conversation identifier. You can also use `!null` & `null` to filter all transactions associated or not to a conversation. | `?filters[conversation_id]=123` `?filters[conversation_id]=null` `?filters[conversation_id]=!null` |
+| from | Date from | `YYYY-MM-DD` or `YYYY-MM-DD HH:MM:SS` | `?filters[from]=YYYY-MM-DD HH:MM:SS` |
+| to | Date to | `YYYY-MM-DD` or `YYYY-MM-DD HH:MM:SS` | `?filters[to]=YYYY-MM-DD HH:MM:SS` |
 
 ##### Get a transaction details
 
@@ -1245,7 +1241,7 @@ See below to discover used fields and see [reading section](#responses-read) to 
 </pre>
 
 ## GraphQL API
-**In-progress** 
+**In-progress**
 
 The new API is under development and documentation.
 
