@@ -909,6 +909,7 @@ See [reading section](#responses-read) to discover some output examples.
 | skill_id | Skill indentifier | Integer |
 | tag_list | List of tag identifiers | List of integers |
 | rule_id | Rule indentifier | Integer |
+| xmpp_id | XMPP related identifier | UUID |
 
 #### Tag
 
