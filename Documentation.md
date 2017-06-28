@@ -1,10 +1,10 @@
 # General information
-Welcome to iAdvize Developer Platform documentation.
-You want to create an integration for your own use or for the world? That's the right place.
+Welcome to iAdvize documentation for developers.
+You want to use our API, to create integrations for your own use or for the world? That's the right place.
 
 iAdvize provides you with a Developer platform to easily publish your apps on our marketplace so our users can install them directly from their administration interface.
 
-Whether you are developer, integrator, customer or simply curious, you will find an overview of how to Get started, our Developer Guidelines, and the documentation to build and publish  your future integrations.
+Whether you are developer, integrator, customer or simply curious, you will find an overview of how to Get started, our Developer Guidelines, our API with output examples, and a guide to build and publish your future integrations.
 
 ## What is iAdvize?
 [iAdvize](http://iadvize.com) is a SaaS conversational commerce platform. It enables businesses to engage their customers and prospects whether they’re on the website or on social media from one messaging solution (chat, voice, video).
@@ -16,6 +16,7 @@ Implementing iAdvize is child's play. You just have to insert a tag on each page
 iAdvize platform has 2 interfaces:
 
 * Administration: from where Administrators and Managers of the solution can configure the platform's settings and monitor the agent's activity.
+
 * Agent's Console Panel: which give your agents superpowers. That's where professional agents or experts can respond intuitively to all messages.
 
 ![iAdvize](./assets/images/what-is-iadvize.png)
@@ -37,13 +38,13 @@ Here is an example of potential protocol between iAdvize and a CRM thanks to a c
 ![CRM Webhook](./assets/images/CRM-webhook.png)
 
 # Getting Started
-Wanna join our developers community as an alpha tester 🤘🏽 ? Follow these steps to be part of the adventure.
+Wanna join our developers community as a beta tester 🤘🏽 ? Follow these steps to be part of the adventure.
 
 ## Get a Developer Account
 To build apps that iAdvize customers can use, you first need a Developer Account.  
 
 * Apply and Sign-Up by sending a request to developers@iadvize.com,
-* iAdvize team will get in touch within 2 hours on workdays,
+* iAdvize team will get in touch within 48 hours,
 * We provide you with credentials and testing environment.
 
 ## Features Overview
@@ -61,16 +62,16 @@ And then hurrah... Publish it to iAdvize Marketplace!
 
 # Build apps
 Once logged in your Developer Account, you will be ready to build.
-So let's go through the available content...
+So let's go through the different sections of the Developer Platform.
 
 ## My apps
 This is where we list your apps and related status:
-* Published: your App is ready to be installed on iAdvize Marketplace
-* Under review: you have submitted your app for review
-* Draft: you are editing your app
+* Published: App ready to be installed on the iAdvize Marketplace
+* Under review: App submitted for review
+* Sandbox: App being edited
 
 ## App information
-On this section you will find the general information of your app such as the name and the description of its features.
+In this section you will input the general information of your app such as the name, the logo and the features description.
 You can also set the privacy mode as public or Private.
 * Public mode: your app will be viewable and installable by all of our customers
 * Private: your app will be available for the customers you choose
@@ -146,26 +147,11 @@ iAdvize will get in touch within 48 hours to the developers.
 ## Webhooks
 Webhook system allows external applications to be able to subscribe to events (via callback urls) to receive updates in real time.
 When you build your app, you can subscribe to a list of events.
-When client install your app, it will automatically create webhooks for this client as well as events based on your app configuration.
+When client install your app, it automatically creates webhooks for this client as well as events based on your app's configuration.
 
-This subscription is based on the events of the different domains.
-When an event occurs, an HTTP POST call is issued on the callback urls.
+This subscription is based on the events of the different domains. See the list of available events in the [Webhook API documentation](#webhook).
 
-**Conversations domain:**
-Chat conversations only, conversations.chat.closed
-Call conversations only, conversations.call.closed
-Social media conversations only, conversations.social.closed
-All conversations, conversations.*.closed
-
-**Visitors domain:**
-Visitor information updated, visitors.updated
-
-**Connectors domain:**
-connector.installed
-connector.uninstalled
-
-
-### Create a webhook
+### Create a webhook for your connector
 You are able to create as much as outgoing webhooks you need to.
 A webhook can cover several events.
 An event may be linked to a customer (example customers.website.created)
@@ -178,90 +164,6 @@ or a site (example customers.website.created)
 * Events: select the events from the list. You have the ability to subscribe to all
 * iAdvize events, all events of a specific domain, or only one event.
 
-When an event occurs, an HTTP POST call is issued on the callback urls you set up with the event data. Data is sent with “application/json” header content-type, and “json” format as payload. .Callback urls must be defined with HTTPS protocol and should be available with POST and GET http verbs:
-POST verb to send data payload,
-and GET verb, will be used by iAdvize, to check availability of the callback (more information in security section)
-iAdvize expect to have à 20x http status in callback result.
-
-**Retry management**
-iAdvize will retry to send callback in failure X times if http status code isn’t part of 50x code.
-
-**Delivery headers**
-iAdvize will send payload with two additionals headers:
-X-iAdvize-Delivery: UUID, unique identifier to describe a webhook
-X-iAdvize-CorrelationId: UUID, unique identifier used in retry webhooks to track same callback calls.
-
-**Security**
-(documentation in-progress)
-
-### Events description
-Each outgoing payloads will be delivered under json format.
-
-Conversations domain:
-conversations.chat.started
-
-<pre class="prettyprint lang-js">{
-  meta: {
-   "event": "conversations.chat.started",
-    "conversationId": 1,
-    "operatorId": 1
-  }
-}
-</pre>
-
-##### conversations.chat.closed
-<pre class="prettyprint lang-js">{
-  meta: {
-    "event": "conversations.chat.closed",
-  	"conversationId": 1,
- 	  "operatorId": 1,
-    "satisfactionId": 1,
-    "welcome”: 3,
-    "delay": 3,
-    "resolution”: 2
-  }
-}
-</pre>
-
-##### conversations.chat.satisfaction
-<pre class="prettyprint lang-js">{
-  meta: {
-    "event": "conversations.chat.satisfaction",
-    "conversationId": 1,
-    "operatorId": 1,
-    "satisfaction": 3
-  }
-}
-</pre>
-
-##### visitor.updated
-<pre class="prettyprint lang-js">{
-  meta: {
-    "event": "visitor.updated",
-    "visitorId": "10f98a9",
-  }
-}
-</pre>
-
-
-**HTTP stack trace example for “conversations.chat.closed” event**
-
-POST /webhook HTTP/1.1
-
-<pre class="prettyprint lang-js">
-Host: localhost
-X-iAdvize-CorrelationId: 332e8400-e34b-11d4-a716-446655444444
-X-iAdvize-Delivery: 110e8400-e29b-11d4-a716-446655440000
-Content-Type: application/json
-Content-Length: 3442
-
-{
-  "event": "conversation.chat.closed",
-  "conversationId": 1,
-  "operatorId": 1
-}
-
-</pre>
 
 ## Developer Policy (in-progress)
 The developer will host the code on his own host service.
@@ -308,7 +210,7 @@ The API key must be attached to each request. You can use it in one of the follo
 
 #### Create
 
-**POST /my_resource my_field=my_value**
+##### `POST /my_resource my_field=my_value`
 
 <pre class="prettyprint lang-js">{
   meta: {
@@ -322,7 +224,7 @@ The API key must be attached to each request. You can use it in one of the follo
 }
 </pre>
 
-**POST /my_resource my_field=my_value (with error)**
+##### `POST /my_resource my_field=my_value (with error)`
 
 <pre class="prettyprint lang-js">{
   meta: {
@@ -332,9 +234,9 @@ The API key must be attached to each request. You can use it in one of the follo
 }
 </pre>
 
-#### Read (GET)
+#### Read
 
-**GET /my_resource**
+##### `GET /my_resource`
 
 <pre class="prettyprint lang-js">{
   meta: {
@@ -373,7 +275,7 @@ The API key must be attached to each request. You can use it in one of the follo
 
 Use the `*` character to broaden the scope of your search. E.g.: `filters[name]=*uli*`
 
-**GET /my_resource/123**
+##### `GET /my_resource/123`
 
 <pre class="prettyprint lang-js">{
   meta: {
@@ -387,7 +289,7 @@ Use the `*` character to broaden the scope of your search. E.g.: `filters[name]=
 }
 </pre>
 
-**GET /my_resource/456 (with error)**
+##### `GET /my_resource/456` (with error)
 
 <pre class="prettyprint lang-js">{
   meta: {
@@ -399,7 +301,7 @@ Use the `*` character to broaden the scope of your search. E.g.: `filters[name]=
 
 #### Update
 
-**PUT /my_resource/123 my_field=my_new_value**
+##### `PUT /my_resource/123 my_field=my_new_value`
 
 <pre class="prettyprint lang-js">{
   meta: {
@@ -413,7 +315,7 @@ Use the `*` character to broaden the scope of your search. E.g.: `filters[name]=
 }
 </pre>
 
-**PUT /my_resource/123 my_field=my_value (with error)**
+##### `PUT /my_resource/123 my_field=my_value` (with error)
 
 <pre class="prettyprint lang-js">{
   meta: {
@@ -425,7 +327,7 @@ Use the `*` character to broaden the scope of your search. E.g.: `filters[name]=
 
 #### Delete
 
-**DELETE /my_resource/123**
+##### `DELETE /my_resource/123`
 
 <pre class="prettyprint lang-js">{
   meta: {
@@ -451,7 +353,7 @@ Use the `*` character to broaden the scope of your search. E.g.: `filters[name]=
 
 `GET /client`
 
-See below to discover used fields and see [reading section](#responses-read) to discover some output examples.
+See below to discover used fields and see [reading section](#read) to discover some output examples.
 
 This list is displayed depending on the rights of your API key.
 
@@ -459,7 +361,7 @@ This list is displayed depending on the rights of your API key.
 
 `GET /client/1`
 
-See [reading section](#responses-read) to discover some output examples.
+See [reading section](#read) to discover some output examples.
 
 **Fields**
 
@@ -474,13 +376,13 @@ See [reading section](#responses-read) to discover some output examples.
 
 `GET /website`
 
-See below to discover used fields and see [reading section](#responses-read) to discover some output examples.
+See below to discover used fields and see [reading section](#read) to discover some output examples.
 
 ##### Get a website details
 
 `GET /website/1`
 
-See [reading section](#responses-read) to discover some output examples.
+See [reading section](#read) to discover some output examples.
 
 **Fields**
 
@@ -494,7 +396,7 @@ See [reading section](#responses-read) to discover some output examples.
 
 `PUT /website/1`
 
-See [updating section](#responses-update) to discover some output examples.
+See [updating section](#update) to discover some output examples.
 
 #### Operator
 
@@ -502,7 +404,7 @@ See [updating section](#responses-update) to discover some output examples.
 
 `GET /operator`
 
-See below to discover used fields and see [reading section](#responses-read) to discover some output examples.
+See below to discover used fields and see [reading section](#read) to discover some output examples.
 
 **Filters**
 
@@ -519,7 +421,7 @@ See below to discover used fields and see [reading section](#responses-read) to 
 
 `GET /operator/1`
 
-See [reading section](#responses-read) to discover some output examples.
+See [reading section](#read) to discover some output examples.
 
 **Fields**
 
@@ -552,13 +454,13 @@ See [reading section](#responses-read) to discover some output examples.
 
 `POST /operator`
 
-See [creating section](#responses-create) to discover some output examples.
+See [creating section](#create) to discover some output examples.
 
 ##### Update an operator
 
 `PUT /operator/1`
 
-See [updating section](#responses-update) to discover some output examples.
+See [updating section](#update) to discover some output examples.
 
 ##### Delete an operator
 
@@ -694,7 +596,7 @@ You can use previous filters.
 
 `GET /operator/123/statistic`
 
-See [reading section](#responses-read) to discover some output examples.
+See [reading section](#read) to discover some output examples.
 
 **Fields**
 
@@ -724,7 +626,7 @@ See [reading section](#responses-read) to discover some output examples.
 
 `GET /operator/123/profile`
 
-See [reading section](#responses-read) to discover some output examples.
+See [reading section](#read) to discover some output examples.
 
 **Fields**
 
@@ -762,7 +664,7 @@ See [reading section](#responses-read) to discover some output examples.
 
 `GET /group`
 
-See below to discover used fields and see [reading section](#responses-read) to discover some output examples.
+See below to discover used fields and see [reading section](#read) to discover some output examples.
 
 **Filters**
 
@@ -774,7 +676,7 @@ See below to discover used fields and see [reading section](#responses-read) to 
 
 `GET /group/1984`
 
-See [reading section](#responses-read) to discover some output examples.
+See [reading section](#read) to discover some output examples.
 
 **Fields**
 
@@ -790,13 +692,13 @@ See [reading section](#responses-read) to discover some output examples.
 
 `POST /group`
 
-See [creating section](#responses-create) to discover some output examples.
+See [creating section](#create) to discover some output examples.
 
 ##### Update a group
 
 `PUT /group/1`
 
-See [updating section](#responses-update) to discover some output examples.
+See [updating section](#update) to discover some output examples.
 
 ##### Delete a group
 
@@ -810,7 +712,7 @@ See [deleting section](#responses-delete) to discover some output examples.
 
 `GET /skill`
 
-See below to discover used fields and see [reading section](#responses-read) to discover some output examples.
+See below to discover used fields and see [reading section](#read) to discover some output examples.
 
 **Filters**
 
@@ -823,7 +725,7 @@ See below to discover used fields and see [reading section](#responses-read) to 
 
 `GET /skill/1984`
 
-See [reading section](#responses-read) to discover some output examples.
+See [reading section](#read) to discover some output examples.
 
 **Fields**
 
@@ -840,13 +742,13 @@ See [reading section](#responses-read) to discover some output examples.
 
 `POST /skill`
 
-See [creating section](#responses-create) to discover some output examples.
+See [creating section](#create) to discover some output examples.
 
 ##### Update a skill
 
 `PUT /skill/1`
 
-See [updating section](#responses-update) to discover some output examples.
+See [updating section](#update) to discover some output examples.
 
 ##### Delete a skill
 
@@ -860,7 +762,7 @@ See [deleting section](#responses-delete) to discover some output examples.
 
 `GET /conversation`
 
-See below to discover used fields and see [reading section](#responses-read) to discover some output examples.
+See below to discover used fields and see [reading section](#read) to discover some output examples.
 
 **Filters**
 
@@ -888,7 +790,7 @@ The following rules apply :
 
 `GET /conversation/666`
 
-See [reading section](#responses-read) to discover some output examples.
+See [reading section](#read) to discover some output examples.
 
 **Fields**
 
@@ -916,7 +818,7 @@ See [reading section](#responses-read) to discover some output examples.
 
 `GET /tag`
 
-See below to discover used fields and see [reading section](#responses-read) to discover some output examples.
+See below to discover used fields and see [reading section](#read) to discover some output examples.
 
 **Filters**
 
@@ -928,7 +830,7 @@ See below to discover used fields and see [reading section](#responses-read) to 
 
 `GET /tag/123`
 
-See [reading section](#responses-read) to discover some output examples.
+See [reading section](#read) to discover some output examples.
 
 **Fields**
 
@@ -942,7 +844,7 @@ See [reading section](#responses-read) to discover some output examples.
 
 `POST /tag`
 
-See [creating section](#responses-create) to discover some output examples.
+See [creating section](#create) to discover some output examples.
 
 #### Transaction
 
@@ -950,7 +852,7 @@ See [creating section](#responses-create) to discover some output examples.
 
 `GET /transaction`
 
-See below to discover used fields and see [reading section](#responses-read) to discover some output examples.
+See below to discover used fields and see [reading section](#read) to discover some output examples.
 
 **Filters**
 
@@ -966,7 +868,7 @@ See below to discover used fields and see [reading section](#responses-read) to 
 
 `GET /transaction/123`
 
-See [reading section](#responses-read) to discover some output examples.
+See [reading section](#read) to discover some output examples.
 
 **Fields**
 
@@ -988,7 +890,7 @@ See [reading section](#responses-read) to discover some output examples.
 
 `GET /satisfaction`
 
-See below to discover used fields and see [reading section](#responses-read) to discover some output examples.
+See below to discover used fields and see [reading section](#read) to discover some output examples.
 
 **Filters**
 
@@ -1004,7 +906,7 @@ See below to discover used fields and see [reading section](#responses-read) to 
 
 `GET /satisfaction/123`
 
-See [reading section](#responses-read) to discover some output examples.
+See [reading section](#read) to discover some output examples.
 
 **Fields**
 
@@ -1025,7 +927,7 @@ See [reading section](#responses-read) to discover some output examples.
 
 `GET /statistic`
 
-See below to discover used fields and see [reading section](#responses-read) to discover some output examples.
+See below to discover used fields and see [reading section](#read) to discover some output examples.
 
 **Filters**
 
@@ -1109,7 +1011,7 @@ See below to discover used fields and see [reading section](#responses-read) to 
 
 `GET /visitor`
 
-See below to discover used fields and see [reading section](#responses-read) to discover some output examples.
+See below to discover used fields and see [reading section](#read) to discover some output examples.
 
 **Filters**
 
@@ -1123,7 +1025,7 @@ See below to discover used fields and see [reading section](#responses-read) to 
 
 `GET /visitor/560`
 
-See [reading section](#responses-read) to discover some output examples.
+See [reading section](#read) to discover some output examples.
 
 **Fields**
 
@@ -1148,13 +1050,13 @@ See [reading section](#responses-read) to discover some output examples.
 
 `POST /visitor`
 
-See [creating section](#responses-create) to discover some output examples.
+See [creating section](#create) to discover some output examples.
 
 ##### Update a visitor
 
 `PUT /visitor/560`
 
-See [updating section](#responses-update) to discover some output examples.
+See [updating section](#update) to discover some output examples.
 
 ##### Delete a visitor
 
@@ -1168,7 +1070,7 @@ See [deleting section](#responses-delete) to discover some output examples.
 
 `GET /callmeeting`
 
-See below to discover used fields and see [reading section](#responses-read) to discover some output examples.
+See below to discover used fields and see [reading section](#read) to discover some output examples.
 
 **Filters**
 
@@ -1195,7 +1097,9 @@ See below to discover used fields and see [reading section](#responses-read) to 
 
 ##### Pick up callback
 
-`POST /odigocallback/pickup`**Parameters** (sent as application/x-www-form-urlencoded)
+`POST /odigocallback/pickup`
+
+**Parameters** (sent as application/x-www-form-urlencoded)
 
 | Parameter | Description | Values | Mandatory |
 | --- | --- | --- | --- |
@@ -1222,7 +1126,8 @@ See below to discover used fields and see [reading section](#responses-read) to 
 
 ##### Hang up callback
 
-`POST /odigocallback/hangup`**Parameters** (sent as application/x-www-form-urlencoded)
+`POST /odigocallback/hangup`
+**Parameters** (sent as application/x-www-form-urlencoded)
 
 | Parameter | Description | Values | Mandatory |
 | --- | --- | --- | --- |
@@ -1244,6 +1149,110 @@ See below to discover used fields and see [reading section](#responses-read) to 
 **In-progress**
 
 The new API is under development and documentation.
+
+## Webhook
+
+### Events description
+
+| Domain | Name | Description |
+| --- | --- | --- |
+| conversations.domain | `conversations.chat.closed` | Chat conversations only |
+| conversations.domain | `conversations.call.closed` | Call conversations only |
+| conversations.domain | `conversations.social.closed` | Social conversations only |
+| conversations.domain | `conversations.*.closed` | All conversations |
+| visitors.domain | `visitors.updated` | Visitor information updated |
+| connectors.domain | `connector.installed ` |
+| conversations.domain | `connector.uninstalled` |
+
+
+### Payloads
+When an event occurs, an HTTP POST call is issued on the callback urls you set up with the event data. 
+Data is sent with “application/json” header content-type, and “json” format as payload. 
+Callback urls must be defined with HTTPS protocol and should be available with POST and GET http verbs:
+- POST verb to send data payload,
+- GET verb, to let iAdvize check the availability of the callback (more information in security section below).
+iAdvize expect to have à 20x http status in callback result.
+
+**Output examples of Conversations domain:**
+##### conversations.chat.started
+
+<pre class="prettyprint lang-js">{
+  meta: {
+   "event": "conversations.chat.started",
+    "conversationId": 1,
+    "operatorId": 1
+  }
+}
+</pre>
+
+##### conversations.chat.closed
+<pre class="prettyprint lang-js">{
+  meta: {
+    "event": "conversations.chat.closed",
+  	"conversationId": 1,
+ 	  "operatorId": 1,
+    "satisfactionId": 1,
+    "welcome”: 3,
+    "delay": 3,
+    "resolution”: 2
+  }
+}
+</pre>
+
+##### conversations.chat.satisfaction
+<pre class="prettyprint lang-js">{
+  meta: {
+    "event": "conversations.chat.satisfaction",
+    "conversationId": 1,
+    "operatorId": 1,
+    "satisfaction": 3
+  }
+}
+</pre>
+
+##### visitor.updated
+<pre class="prettyprint lang-js">{
+  meta: {
+    "event": "visitor.updated",
+    "visitorId": "10f98a9",
+  }
+}
+</pre>
+
+<b>
+HTTP stack trace example for “conversations.chat.closed” event
+
+`POST /webhook HTTP/1.1`
+
+<pre class="prettyprint lang-js">
+Host: localhost
+X-iAdvize-CorrelationId: 332e8400-e34b-11d4-a716-446655444444
+X-iAdvize-Delivery: 110e8400-e29b-11d4-a716-446655440000
+Content-Type: application/json
+Content-Length: 3442
+
+{
+  "event": "conversation.chat.closed",
+  "conversationId": 1,
+  "operatorId": 1
+}
+
+</pre>
+<p>
+<p>
+
+
+**Retry management**
+iAdvize will retry to send callback in failure X times if http status code isn’t part of 50x code.
+
+### Delivery headers
+iAdvize will send payload with two additionals headers:
+X-iAdvize-Delivery: UUID, unique identifier to describe a webhook
+X-iAdvize-CorrelationId: UUID, unique identifier used in retry webhooks to track same callback calls.
+
+**Security**
+(documentation in-progress)
+
 
 # Single Sign On
 
