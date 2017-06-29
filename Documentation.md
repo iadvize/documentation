@@ -1250,7 +1250,7 @@ iAdvize will send payload with two additionals headers:
 X-iAdvize-Delivery: UUID, unique identifier to describe a webhook
 X-iAdvize-CorrelationId: UUID, unique identifier used in retry webhooks to track same callback calls.
 
-**Security**
+### Security
 (documentation in-progress)
 
 
