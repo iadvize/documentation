@@ -1220,7 +1220,6 @@ iAdvize expect to have à 20x http status in callback result.
 }
 </pre>
 
-<b>
 HTTP stack trace example for “conversations.chat.closed” event
 
 `POST /webhook HTTP/1.1`
@@ -1237,11 +1236,7 @@ Content-Length: 3442
   "conversationId": 1,
   "operatorId": 1
 }
-
 </pre>
-<p>
-<p>
-
 
 **Retry management**
 iAdvize will retry to send callback in failure X times if http status code isn’t part of 50x code.
