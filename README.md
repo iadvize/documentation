@@ -1,6 +1,6 @@
 # :memo: Documentation
 
-This documentation is the technical documentation for iAdvize APIs and the Developer platform. This repository is used to store the source of [iAdvize Documentation](developers.iadvize.com/documentation). The iAdvize Documentation is generating from the Documenatation.md of this repository.
+This documentation is the technical documentation for iAdvize APIs and the Developer platform. This repository is used to store the source of [iAdvize Documentation](https://developers.iadvize.com/documentation). The iAdvize Documentation is generating from the Documenatation.md of this repository.
 
 If you have a question about this documentation you can send a email to developers@iadvize.com.
 
@@ -8,7 +8,7 @@ If you have a question about this documentation you can send a email to develope
 
 You have to create a branch and open a pull request, after that we will review it.
 
-Ther is two way to do this, directly on github with the preview system on markdown files or in your computer with tools like [MacDown](https://macdown.uranusjr.com/) if you know how to use a git. After that We will review your pull request and decide when to publish it if it's needed.
+There is two way to do this, directly on github with the preview system on markdown files or in your computer with tools like [MacDown](https://macdown.uranusjr.com/) if you know how to use a git. After that We will review your pull request and decide when to publish it if it's needed.
 
 You have to edit the file Documentation.md in a markdown format, if you don't know how to do this you can use [Mastering Markdown (https://guides.github.com/features/mastering-markdown/) to help you writing markdown.
   
