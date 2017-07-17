@@ -1308,6 +1308,21 @@ iAdvize expect to have à 20x http status in callback result.
 }
 </pre>
 
+##### satisfaction.filled
+<pre class="prettyprint lang-js">{
+    "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
+    "eventType": "satisfaction.filled",
+    "platform": "SD",
+    "websiteId": 1,
+    "conversationId": 1,
+    "operatorId": 2,
+    "visitorId": "593de0891b628a50b09835dc6c0e92565329c74baa90e",
+    "score": 3,
+    "createdAt": "2017-04-22T11:01:00+02:00",
+    "sentAt": "2017-04-22T11:01:00+02:00"
+}
+</pre>
+
 ##### connector.installed
 <pre class="prettyprint lang-js">{
     "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
@@ -1334,8 +1349,7 @@ iAdvize expect to have à 20x http status in callback result.
 }
 </pre>
 
-**HTTP stack trace example for “conversation.chat.closed” event**
-
+#####HTTP stack trace example for “conversation.chat.closed” event
 `POST /webhook HTTP/1.1`
 
 <pre class="prettyprint lang-js">
