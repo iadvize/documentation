@@ -134,6 +134,37 @@ In order to set the right connector's parameters, all you have to do is to decla
 * the product list url - this is the catalog url
 * the categories url - this is where your connector will get the list of products categories
 
+#### Example of category data return by a connector
+<pre class="prettyprint lang-js">
+[
+    {
+        "id": "123",
+        "label": "category",
+        "idParent": null,
+        "productsCount": 3
+     }
+ ]
+</pre>
+
+#### Example of product data return by a connector
+<pre class="prettyprint lang-js">
+[
+    {
+        "id": "123",
+        "title": "Product's title",
+        "productUrl": "http://www.e-commerce.com/url-product",
+        "brand": null,
+        "description": "product's description",
+        "shortDescription": null,
+        "available": true,
+        "imageUrl": "http://www.e-commerce.com/url-product-image.jpg",
+        "reference": null,
+        "priceCatalog": "99.9 €",
+        "pricePromotion": null
+    } 
+]
+</pre>
+
 ### Closing conversation feature (in-progress)
 This type of interaction is not available yet.
 
