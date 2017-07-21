@@ -134,7 +134,7 @@ In order to set the right connector's parameters, all you have to do is to decla
 * the product list url - this is the catalog url
 * the categories url - this is where your connector will get the list of products categories
 
-#### Example of category data return by a connector
+#### Example of categories data a connector must return
 <pre class="prettyprint lang-js">
 [
     {
@@ -146,7 +146,7 @@ In order to set the right connector's parameters, all you have to do is to decla
  ]
 </pre>
 
-#### Example of product data return by a connector
+#### Example of products data a connector must return
 <pre class="prettyprint lang-js">
 [
     {
