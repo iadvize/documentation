@@ -1207,13 +1207,21 @@ The new API is under development and documentation.
 
 | Domain | Name | Description |
 | --- | --- | --- |
-| conversations.domain | `conversations.chat.closed` | Chat conversations only |
-| conversations.domain | `conversations.call.closed` | Call conversations only |
-| conversations.domain | `conversations.social.closed` | Social conversations only |
-| conversations.domain | `conversations.*.closed` | All conversations |
-| visitors.domain | `visitors.updated` | Visitor information updated |
+| conversations.domain | `conversation.chat.started` | Chat conversations only |
+| conversations.domain | `conversation.chat.closed` | Chat conversations only |
+| conversations.domain | `conversation.call.started` | Call conversations only |
+| conversations.domain | `conversation.call.closed` | Call conversations only |
+| conversations.domain | `conversation.video.started` | Video conversations only |
+| conversations.domain | `conversation.video.closed` | Video conversations only |
+| conversations.domain | `conversation.social.started` | Social conversations only |
+| conversations.domain | `conversation.social.closed` | Social conversations only |
+| conversations.domain | `conversation.*.closed` | All conversations |
+| users.domain | `user.created` | User created |
+| users.domain | `user.updated` | User information updated |
+| users.domain | `visitor.updated` | Visitor information updated |
+| users.domain | `satisfaction.filled` |
 | connectors.domain | `connector.installed ` |
-| conversations.domain | `connector.uninstalled` |
+| connectors.domain | `connector.uninstalled` |
 
 
 ### Payloads
@@ -1225,53 +1233,173 @@ Callback urls must be defined with HTTPS protocol and should be available with P
 iAdvize expect to have à 20x http status in callback result.
 
 **Output examples of Conversations domain:**
-##### conversations.chat.started
+##### conversation.chat.started
 
 <pre class="prettyprint lang-js">{
-  meta: {
-   "event": "conversations.chat.started",
-    "conversationId": 1,
-    "operatorId": 1
-  }
-}
-</pre>
-
-##### conversations.chat.closed
-<pre class="prettyprint lang-js">{
-  meta: {
-    "event": "conversations.chat.closed",
-  	"conversationId": 1,
- 	  "operatorId": 1,
-    "satisfactionId": 1,
-    "welcome”: 3,
-    "delay": 3,
-    "resolution”: 2
-  }
-}
-</pre>
-
-##### conversations.chat.satisfaction
-<pre class="prettyprint lang-js">{
-  meta: {
-    "event": "conversations.chat.satisfaction",
+    "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
+    "eventType": "conversation.started",
+    "platform": "SD",
+    "websiteId": 1,
     "conversationId": 1,
     "operatorId": 1,
-    "satisfaction": 3
-  }
+    "channel": "chat",
+    "visitorId": "593de0891b628a50b09835dc6c0e92565329c74baa90e",
+    "createdAt": "2017-04-22T11:01:00+02:00",
+    "sentAt": "2017-04-22T11:01:00+02:00"
+}
+</pre>
+
+##### conversation.chat.closed
+<pre class="prettyprint lang-js">{
+    "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
+    "eventType": "conversation.closed",
+    "platform": "SD",
+    "websiteId": 1,
+    "conversationId": 1,
+    "operatorId": 1,
+    "channel": "chat",
+    "visitorId": "593de0891b628a50b09835dc6c0e92565329c74baa90e",
+    "createdAt": "2017-04-22T11:01:00+02:00",
+    "sentAt": "2017-04-22T11:01:00+02:00"
+}
+</pre>
+
+##### conversation.call.started
+<pre class="prettyprint lang-js">{
+    "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
+    "eventType": "conversation.started",
+    "platform": "SD",
+    "websiteId": 1,
+    "conversationId": 1,
+    "operatorId": 1,
+    "channel": "call",
+    "visitorId": "593de0891b628a50b09835dc6c0e92565329c74baa90e",
+    "createdAt": "2017-04-22T11:01:00+02:00",
+    "sentAt": "2017-04-22T11:01:00+02:00"
+}
+</pre>
+
+##### conversation.call.closed
+<pre class="prettyprint lang-js">{
+    "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
+    "eventType": "conversation.closed",
+    "platform": "SD",
+    "websiteId": 1,
+    "conversationId": 1,
+    "operatorId": 1,
+    "channel": "call",
+    "visitorId": "593de0891b628a50b09835dc6c0e92565329c74baa90e",
+    "createdAt": "2017-04-22T11:01:00+02:00",
+    "sentAt": "2017-04-22T11:01:00+02:00"
+}
+</pre>
+
+##### conversation.video.started
+<pre class="prettyprint lang-js">{
+    "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
+    "eventType": "conversation.started",
+    "platform": "SD",
+    "websiteId": 1,
+    "conversationId": 1,
+    "operatorId": 2,
+    "channel": "video",
+    "visitorId": "593de0891b628a50b09835dc6c0e92565329c74baa90e",
+    "createdAt": "2017-04-22T11:01:00+02:00",
+    "sentAt": "2017-04-22T11:01:00+02:00"
+}
+</pre>
+
+##### conversation.video.closed
+<pre class="prettyprint lang-js">{
+    "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
+    "eventType": "conversation.closed",
+    "platform": "SD",
+    "websiteId": 1,
+    "conversationId": 1,
+    "operatorId": 2,
+    "channel": "video",
+    "visitorId": "593de0891b628a50b09835dc6c0e92565329c74baa90e",
+    "createdAt": "2017-04-22T11:01:00+02:00",
+    "sentAt": "2017-04-22T11:01:00+02:00"
+}
+</pre>
+
+##### user.created
+<pre class="prettyprint lang-js">{
+    "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
+    "eventType": "user.created",
+    "platform": "SD",
+    "userId": 1,
+    "createdAt": "2017-04-22T11:01:00+02:00",
+    "sentAt": "2017-04-22T11:01:00+02:00"
+}
+</pre>
+
+##### user.updated
+<pre class="prettyprint lang-js">{
+    "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
+    "eventType": "user.updated",
+    "platform": "SD",
+    "userId": 1,
+    "createdAt": "2017-04-22T11:01:00+02:00",
+    "sentAt": "2017-04-22T11:01:00+02:00"
 }
 </pre>
 
 ##### visitor.updated
 <pre class="prettyprint lang-js">{
-  meta: {
-    "event": "visitor.updated",
-    "visitorId": "10f98a9",
-  }
+    "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
+    "eventType": "visitor.updated",
+    "platform": "SD",
+    "operatorId": 1,
+    "visitorId": "593de0891b628a50b09835dc6c0e92565329c74baa90e",
+    "createdAt": "2017-04-22T11:01:00+02:00",
+    "sentAt": "2017-04-22T11:01:00+02:00"
 }
 </pre>
 
-HTTP stack trace example for “conversations.chat.closed” event
+##### satisfaction.filled
+<pre class="prettyprint lang-js">{
+    "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
+    "eventType": "satisfaction.filled",
+    "platform": "SD",
+    "websiteId": 1,
+    "conversationId": 1,
+    "operatorId": 2,
+    "visitorId": "593de0891b628a50b09835dc6c0e92565329c74baa90e",
+    "score": 3,
+    "createdAt": "2017-04-22T11:01:00+02:00",
+    "sentAt": "2017-04-22T11:01:00+02:00"
+}
+</pre>
 
+##### connector.installed
+<pre class="prettyprint lang-js">{
+    "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
+    "eventType": "connector.installed",
+    "platform": "SD",
+    "websiteId": 1,
+    "connectorId": "3f0e6840-48fe-4e87-8f3b-6ef3f75f18d8",
+    "connectorVersionId": "3f0e6840-48fe-4e87-8f3b-6ef3f75f18d8",
+    "createdAt": "2017-04-22T11:01:00+02:00",
+    "sentAt": "2017-04-22T11:01:00+02:00"
+}
+</pre>
+
+##### connector.uninstalled
+<pre class="prettyprint lang-js">{
+    "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
+    "eventType": "connector.uninstalled",
+    "platform": "SD",
+    "websiteId": 1,
+    "connectorId": "3f0e6840-48fe-4e87-8f3b-6ef3f75f18d8",
+    "connectorVersionId": "3f0e6840-48fe-4e87-8f3b-6ef3f75f18d8",
+    "createdAt": "2017-04-22T11:01:00+02:00",
+    "sentAt": "2017-04-22T11:01:00+02:00"
+}
+</pre>
+
+#####HTTP stack trace example for “conversation.chat.closed” event
 `POST /webhook HTTP/1.1`
 
 <pre class="prettyprint lang-js">
@@ -1282,9 +1410,16 @@ Content-Type: application/json
 Content-Length: 3442
 
 {
-  "event": "conversation.chat.closed",
-  "conversationId": 1,
-  "operatorId": 1
+    "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
+    "eventType": "conversation.closed",
+    "platform": "SD",
+    "websiteId": 1,
+    "conversationId": 1,
+    "operatorId": 1,
+    "channel": "chat",
+    "visitorId": "593de0891b628a50b09835dc6c0e92565329c74baa90e",
+    "createdAt": "2017-04-22T11:01:00+02:00",
+    "sentAt": "2017-04-22T11:01:00+02:00"
 }
 </pre>
 
