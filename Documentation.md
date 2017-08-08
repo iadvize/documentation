@@ -1237,7 +1237,7 @@ iAdvize expect to have à 20x http status in callback result.
 
 <pre class="prettyprint lang-js">{
     "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
-    "eventType": "conversation.started",
+    "eventType": "conversation.chat.started",
     "platform": "SD",
     "websiteId": 1,
     "conversationId": 1,
@@ -1252,7 +1252,7 @@ iAdvize expect to have à 20x http status in callback result.
 ##### conversation.chat.closed
 <pre class="prettyprint lang-js">{
     "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
-    "eventType": "conversation.closed",
+    "eventType": "conversation.chat.closed",
     "platform": "SD",
     "websiteId": 1,
     "conversationId": 1,
@@ -1267,7 +1267,7 @@ iAdvize expect to have à 20x http status in callback result.
 ##### conversation.call.started
 <pre class="prettyprint lang-js">{
     "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
-    "eventType": "conversation.started",
+    "eventType": "conversation.call.started",
     "platform": "SD",
     "websiteId": 1,
     "conversationId": 1,
@@ -1282,7 +1282,7 @@ iAdvize expect to have à 20x http status in callback result.
 ##### conversation.call.closed
 <pre class="prettyprint lang-js">{
     "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
-    "eventType": "conversation.closed",
+    "eventType": "conversation.call.closed",
     "platform": "SD",
     "websiteId": 1,
     "conversationId": 1,
@@ -1297,7 +1297,7 @@ iAdvize expect to have à 20x http status in callback result.
 ##### conversation.video.started
 <pre class="prettyprint lang-js">{
     "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
-    "eventType": "conversation.started",
+    "eventType": "conversation.video.started",
     "platform": "SD",
     "websiteId": 1,
     "conversationId": 1,
@@ -1312,7 +1312,7 @@ iAdvize expect to have à 20x http status in callback result.
 ##### conversation.video.closed
 <pre class="prettyprint lang-js">{
     "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
-    "eventType": "conversation.closed",
+    "eventType": "conversation.video.closed",
     "platform": "SD",
     "websiteId": 1,
     "conversationId": 1,
