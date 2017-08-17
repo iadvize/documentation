@@ -1,138 +1,137 @@
 # General information
-Welcome to iAdvize documentation for developers.
-You want to use our API, to create integrations for your own use or for the world? That's the right place.
+Welcome to iAdvize’s developer documentation!
+If you want to use our API, create integrations for your own personal use or to share with the rest of the world, you are in the right place.
 
-iAdvize provides you with a Developer platform to easily publish your apps on our marketplace so our users can install them directly from their administration interface.
+iAdvize provides you with a Developer platform for you to easily publish your apps on our marketplace so that our users can install them directly from their administration interface.
 
-Whether you are developer, integrator, customer or simply curious, you will find an overview of how to Get started, our Developer Guidelines, our API with output examples, and a guide to build and publish your future integrations.
+Whether you are a developer, an integrator, a customer or just curious, here, you will find an overview of how to get started, our Developer Guidelines, our API with practical examples and a guide to build and publish your future integrations.
 
 ## What is iAdvize?
-[iAdvize](http://iadvize.com) is a SaaS conversational commerce platform. It enables businesses to engage their customers and prospects whether they’re on the website or on social media from one messaging solution (chat, voice, video).
+[iAdvize](http://iadvize.com) is a SaaS conversational commerce platform that enables businesses to engage their customers and prospects whether they’re on the website or on social media from one messaging solution (chat, voice, video).
 
 Visitors can get real-time advice from customer service but also from advocates, members of the brand community.
 
 Implementing iAdvize is child's play. You just have to insert a tag on each page of your website. Once the solution is deployed, your customer service and marketing teams are completely independent and can set up the solution as they wish.
 
-iAdvize platform has 2 interfaces:
+The iAdvize platform has 2 interfaces:
 
-* Administration: from where Administrators and Managers of the solution can configure the platform's settings and monitor the agent's activity.
+* The administration: administrators and managers of the solution can configure the platform's settings and monitor the agent's activity.
 
-* Agent's Console Panel: which give your agents superpowers. That's where professional agents or experts can respond intuitively to all messages.
+* The agent's console panel: it gives superpowers to your agents. That's the place where professional agents or experts can respond intuitively to all the messages they receive.
 
 ![iAdvize](./assets/images/what-is-iadvize.png)
 
 ## What is the Developer Platform?
 
-The iAdvize Developer Platform let developers Build Apps or use our public APIs.
-Want to develop an app? You'll be provided with a documentation and a private testing environment.
+The iAdvize Developer Platform allows developers to build apps and use our public APIs.
+Do you want to develop an app? We are providing you with documentation and a private testing environment.
 
 ## Why to build apps to iAdvize?
 
-There are three main reasons for building an app
+There are three main reasons for building an app with the iAdvize Developer Platform: 
 
-* Build apps and publish it to our customers community. (We've got more than 500 cust to amaze!)
-* Build app in a private mode, and make it available for (a) specific customer(s) only
-* Get rewarded based on the usage of your apps
+* You build apps and publish them for our customer community. (We've got more than 500 customers to amaze!)
+* You build apps in private mode and make them available only for one or more specific customers
+* You get rewarded based on how frequently your apps are used
 
-Here is an example of potential protocol between iAdvize and a CRM thanks to a connector:
+Here is the example of a potential protocol between iAdvize and a CRM software thanks to a connector:
 ![CRM Webhook](./assets/images/CRM-webhook.png)
 
 # Getting Started
-Wanna join our developers community as a beta tester 🤘🏽 ? Follow these steps to be part of the adventure.
+Do you want to join our developer community as a beta tester 🤘🏽? Follow these steps to be part of the adventure:
+
 
 ## Get a Developer Account
-To build apps that iAdvize customers can use, you first need a Developer Account.  
+To build apps that iAdvize’s customers can use, first, you need to get a developer account:   
 
-* Apply and Sign-Up by sending a request to developers@iadvize.com,
-* iAdvize team will get in touch within 48 hours,
-* We provide you with credentials and testing environment.
+* Apply and sign up by sending a request to developers@iadvize.com,
+* The iAdvize team will contact you within 48 hours,
+* We provide you with credentials and a testing environment.
 
 ## Features Overview
 iAdvize provides you with some easy-to-use tools so you can:
 
-* Set the Privacy mode of your App as Public or Private
-* Set Authentication process of your Apps
-* Define custom Settings such as object mapping (in-progress)
-* Create interactions to enhance some iAdvize's predefined features
-* Use Outgoing Webhooks to receive updates in real time
+* Manager the privacy mode of your app for it to be public or private
+* Set up the authentication process for your app
+* Define custom settings such as object mapping (in progress)
+* Create interactions to enhance some of iAdvize's predefined features
+* Use outgoing webhooks to receive updates in real-time
 
-Once your app ready, you will be able to submit your connector for review.
-iAdvize team will review your app to make sure it fits the Developer policy, and will get back to you within 48 hours (on workdays).
-And then hurrah... Publish it to iAdvize Marketplace!
+Once your app is ready, you will be able to submit your connector for review.
+Then, the iAdvize team will review your app to make sure it fits the Developer Platform policies, and will get back to you within 48 hours (on working days).
+And then hurrah... You can publish your app on iAdvize’s marketplace!
 
 # Build apps
-Once logged in your Developer Account, you will be ready to build.
-So let's go through the different sections of the Developer Platform.
+Once you are logged in your developer account, you are ready to build apps.
+So let's go through the different sections of the Developer Platform:
 
 ## My apps
-This is where we list your apps and related status:
-* Published: App ready to be installed on the iAdvize Marketplace
-* Under review: App submitted for review
-* Sandbox: App being edited
+This is the place where you can see the list of all the apps you have built on iAdvize. You can also see their current status:
+* Published: your app is ready to be installed on the iAdvize Marketplace
+* Under review: your app has been submitted for review
+* Sandbox: you can edit your app
 
 ## App information
-In this section you will input the general information of your app such as the name, the logo and the features description.
-You can also set the privacy mode as public or Private.
-* Public mode: your app will be viewable and installable by all of our customers
-* Private: your app will be available for the customers you choose
+Our team is still working on the accessibility mode of your app when it is private.
+In alpha version, the accessibility mode will be available for you to change manually for the customers you have selected. 
 
 **How does the Private mode work?**
 Our team is still working on the accessibility mode under the Private mode.
 In alpha version, we will make it available manually for the specific customers you have selected.
 
 ## Authentication
-The Authentication section let you set what your App will need to retrieve data from iAdvize and the app you want to connect to. The user will have to follow those authentication steps to install your app.
+The authentication section is where you set your app’s needs to retrieve data from iAdvize and the app you want it to be connected to. Users will need to follow these authentication steps to install your app.
 
 **Define authentication fields**
-You are able to add fields and define the type of entry you are waiting for (text, numeric…).
+You can add fields and define the type of entry you need (text, numeric, etc.).
 
-* Label: name the field, this is what the user will see.
-* Type: define the type of entry (text, numeric, alphanumeric).
-* Id: name the field's id according to your code.
+* Label: it’s the name of your field, this is what users will see.
+* Type: it defines the type of entry (text, numeric, alphanumeric).
+* ID: you should choose the name of your field ID according to your code.
 
-You can add as much as fields you need to.
-This is the first thing the user will see once he clicked on "install" from the iAdvize Marketplace.
-They will appear to the user according to the creation order (1st entry, 1st displayed on page).
+You can add as much fields as you need.
+This is the first thing users will see once they click on the "install" button on the iAdvize Marketplace.
+Fields appear to users according to their order of creation (the 1st entry created is the 1st on displayed on the page).
 
-*i.e.: if your first set is about getting "Username", it will be the first information asked to the user.*
+*i.e. if your primary goal is to know your users’ usernames, it is the first information you should ask them for.*
 
-* Set the verification url
-This is the url on which your App will be checked if credentials are valid.
-We'll call this url and your connector can sent back if authentication parameters are correct in order to go to the next step of installation.
+* Configure your verification URL
+This is the URL on which we will check your app. It also helps us check if your credentials are valid. We'll call this URL and your connector will be sent back if the authentication parameters have been correctly set up to go to the next installation step.
 
-*i.e.: the user might be required to authenticate with an email and a Password. You will have to create two respective fields for email and password.*
+*i.e. users might be required to authenticate with an email and a password. In this case, you need to create two different fields, one for the email and one for the password.*
 
 ![Authentication](./assets/images/developer-authentication.png)
 
 
-The User will have to fill in the fields first thing during the installation process on iAdvize Marketplace.
+Users have to fill in the fields during the installation process first, on the iAdvize Marketplace.
 
 ![Authentication admin](./assets/images/marketplace-configure.png)
 
 ## Settings
-This part is still under development. This is where you will be able to add some specific configuration steps such as mapping.
+This part is still under development. This is where you will be able to add specific configuration steps such as mapping.
 
 ## Interactions
-Add interactions to enhance iAdvize interface by adding or editing predefined features.
+Add interactions to enhance the iAdvize interface by adding or editing predefined features.
 
-Available features are:
+The features that are already available are: 
 
-* Product List (Console Panel)
-* Visitor Profile (Console Panel)
+* The product List (on the discussion panel)
+* The visitor profile (on the discussion panel)
+* The end of conversation (on the discussion panel)
 
-### Product list feature
-The Product List integration enables Users to browse a product catalog from the iAdvize Console panel.
-Agents can search for a product during a conversation, and send it in one single click within the chat.
+### The Product List
+The integration of the product list enables users to browse a product catalog from the iAdvize discussion panel.
+Agents can look for a product while they are chatting and send it in just a click within their conversation.
 
-The product are displayed to the visitor in the conversation as a card with the image, the title, the availability and the price.
-In just a click on "view product", visitors are redirected to the product page on the related eCommerce website.
+Products are displayed in the form of a card within conversations: visitors can see their image, title, availability and price.
+In just a click on the "view product" button, visitors are redirected to the product page on your website.
 
 ![Product list](./assets/images/interactions-product-list-feature.png)
 
-**Add and set a Product list connector**
-In order to set the right connector's parameters, all you have to do is to declare:
-* the product list url - this is the catalog url
-* the categories url - this is where your connector will get the list of products categories
+**Add a Product List Connector and Configure it**
+In order to set the right connector parameters, all you have to do is declare:
+* The product list URL - this is your catalog’s URL
+* The categories url - this is where your connector will get the list of your product categories
 
 #### Example of categories data a connector must return
 <pre class="prettyprint lang-js">
@@ -184,6 +183,9 @@ In order to set the right connector's parameters, all you have to do is to decla
 ]
 </pre>
 
+### The Visitor profile (in progress)
+This type of interaction is not available yet.
+
 ### Closing conversation feature (in-progress)
 This type of interaction is not available yet.
 
@@ -194,32 +196,39 @@ The versioning declaration must be done by the developer during the submission p
 iAdvize will approve or refuse the app based on specific criteria.
 iAdvize will get in touch within 48 hours to the developers.
 
-## Webhooks
-Webhook system allows external applications to be able to subscribe to events (via callback urls) to receive updates in real time.
-When you build your app, you can subscribe to a list of events.
-When client install your app, it automatically creates webhooks for this client as well as events based on your app's configuration.
+### Submit your apps
 
-This subscription is based on the events of the different domains. See the list of available events in the [Webhook API documentation](#webhook).
+Apps must be submitted to iAdvize for review.
+Developers have to make their versioning declaration during the submission process.
+iAdvize will approve or refuse the app based on specific criteria.
+iAdvize will get back to you within 48 hours.
+
+## Webhooks
+The webhook system allows external applications to subscribe to events (via callback URLs) to receive updates in real-time.
+When you build your app, you can subscribe to a list of events.
+When customers install your app, it automatically creates webhooks for these customers as well as for events based on your app's configuration.
+
+This subscription is based on the events happening on different domains. See the list of events available in the [Webhook API documentation](#webhook).
 
 ### Create a webhook for your connector
-You are able to create as much as outgoing webhooks you need to.
+You can create as much outgoing webhooks as you need.
 A webhook can cover several events.
-An event may be linked to a customer (example customers.website.created)
-or a site (example customers.website.created)
+An event can be linked to a customer (example customers.website.created)
+or linked to a website (example customers.website.created)
 
-* Name of the webhook: Optional label to be given to the webhook
-* URL of the webhook: the URL of the server that will receive the webhook
-* Security Token: Token provided by iAdvize (this field is not editable)
+* Name of the webhook: an optional label you can give to the webhook
+* webhook URL: the server URL that will receive the webhook
+* Security token: Token provided by iAdvize (this field cannot be edited)
 * Content-type: Application / json ; Application / x-www-form-urlencoded
-* Events: select the events from the list. You have the ability to subscribe to all
-* iAdvize events, all events of a specific domain, or only one event.
+* Events: you can select the events in the list. You can subscribe to all
+iAdvize events, all events of a specific domain, or only one event.
 
 
-## Developer Policy (in-progress)
-The developer will host the code on his own host service.
-The developer will be responsible of the maintenance of the connector.
-The developer is able to set the price (monthly fee, or conversation based).
-If the app is not free, the developer must be a moral person.
+## Developer Policy (in progress)
+Developers host their code on their own host service.
+Developers are responsible for the connector maintenance.
+Developers can set their app’s price (monthly fee or based on the number of conversations).
+If it’s not a free app, developers must be a legal person.
 
 # API
 ## REST API
