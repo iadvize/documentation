@@ -1521,7 +1521,7 @@ When a conversation is ended by the operator.
 **Returned data**
     
     
-   <pre class="prettyprint lang-js" {
+   <pre class="prettyprint lang-js"> {
     	"name": "conversation.end",
     	"datetime": {
     		"created": "2014-01-01 00:00:00",
