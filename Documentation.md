@@ -1457,18 +1457,17 @@ When an operator connects to the desk.
 
 **Returned data**
     
-    
-   <pre class="prettyprint lang-js"> {
-    	"name": "operator.login",
-    	"datetime": {
-    		"created": "2014-01-01 00:00:00",
-    		"sent": "2014-01-01 00:00:01"
-    	},
-    	"parameters": {
-    		"operator_id": 1
-    	}
+<pre class="prettyprint lang-js">{
+    "name": "operator.login",
+    "datetime": {
+        "created": "2014-01-01 00:00:00",
+        "sent": "2014-01-01 00:00:01"
+    },
+    "parameters": {
+        "operator_id": 1
     }
-    </pre> 
+}
+</pre>
 
 #### operator.logout
 
@@ -1476,66 +1475,64 @@ When an operator disconnects from the desk.
 
 **Returned data**
     
-   <pre class="prettyprint lang-js"> {
-    	"name": "operator.logout",
-    	"datetime": {
-    		"created": "2014-01-01 00:00:00",
-    		"sent": "2014-01-01 00:00:01"
-    	},
-    	"parameters": {
-    		"operator_id": 1
-    	}
+<pre class="prettyprint lang-js">{
+    "name": "operator.logout",
+    "datetime": {
+        "created": "2014-01-01 00:00:00",
+        "sent": "2014-01-01 00:00:01"
+    },
+    "parameters": {
+        "operator_id": 1
     }
-     </pre> 
+}
+</pre>
 
 #### conversation.start
 
 When a conversation is started.
 
 **Returned data**
-        
-   <pre class="prettyprint lang-js"> {
-    	"name": "conversation.start",
-    	"datetime": {
-    		"created": "2014-01-01 00:00:00",
-    		"sent": "2014-01-01 00:00:01"
-    	},
-    	"parameters": {
-    		"conversation_id": 1,
-    		"type":            "chat|call|video",
-    		"operator_id":     1,
-    		"website_id":      1,
-    		"group_id":        1,
-    		"custom_data":     {
-    			"example":     "value"
-    		}
-    	}
+
+<pre class="prettyprint lang-js">{
+    "name": "conversation.start",
+    "datetime": {
+        "created": "2014-01-01 00:00:00",
+        "sent": "2014-01-01 00:00:01"
+    },
+    "parameters": {
+        "conversation_id": 1,
+        "type":            "chat|call|video",
+        "operator_id":     1,
+        "website_id":      1,
+        "group_id":        1,
+        "custom_data":     {
+            "example":     "value"
+        }
     }
-    </pre> 
-    
+}
+</pre>
 
 #### conversation.end
 
 When a conversation is ended by the operator.
 
 **Returned data**
-    
-    
-   <pre class="prettyprint lang-js"> {
-    	"name": "conversation.end",
-    	"datetime": {
-    		"created": "2014-01-01 00:00:00",
-    		"sent": "2014-01-01 00:00:01"
-    	},
-    	"parameters": {
-    		"conversation_id": 1,
-    		"type":            "chat|call|video",
-    		"operator_id":     1,
-    		"website_id":      1,
-    		"group_id":        1
-    	}
+
+<pre class="prettyprint lang-js"> {
+    "name": "conversation.end",
+    "datetime": {
+        "created": "2014-01-01 00:00:00",
+        "sent": "2014-01-01 00:00:01"
+    },
+    "parameters": {
+        "conversation_id": 1,
+        "type":            "chat|call|video",
+        "operator_id":     1,
+        "website_id":      1,
+        "group_id":        1
     }
-    </pre> 
+}
+</pre>
 
 # Single Sign On
 
