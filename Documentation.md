@@ -1469,6 +1469,71 @@ When an operator connects to the desk.
 }
 </pre>
 
+#### operator.logout
+
+When an operator disconnects from the desk.
+
+**Returned data**
+    
+<pre class="prettyprint lang-js">{
+    "name": "operator.logout",
+    "datetime": {
+        "created": "2014-01-01 00:00:00",
+        "sent": "2014-01-01 00:00:01"
+    },
+    "parameters": {
+        "operator_id": 1
+    }
+}
+</pre>
+
+#### conversation.start
+
+When a conversation is started.
+
+**Returned data**
+
+<pre class="prettyprint lang-js">{
+    "name": "conversation.start",
+    "datetime": {
+        "created": "2014-01-01 00:00:00",
+        "sent": "2014-01-01 00:00:01"
+    },
+    "parameters": {
+        "conversation_id": 1,
+        "type":            "chat|call|video",
+        "operator_id":     1,
+        "website_id":      1,
+        "group_id":        1,
+        "custom_data":     {
+            "example":     "value"
+        }
+    }
+}
+</pre>
+
+#### conversation.end
+
+When a conversation is ended by the operator.
+
+**Returned data**
+
+<pre class="prettyprint lang-js"> {
+    "name": "conversation.end",
+    "datetime": {
+        "created": "2014-01-01 00:00:00",
+        "sent": "2014-01-01 00:00:01"
+    },
+    "parameters": {
+        "conversation_id": 1,
+        "type":            "chat|call|video",
+        "operator_id":     1,
+        "website_id":      1,
+        "group_id":        1
+    }
+}
+</pre>
+
 # Single Sign On
 
 iAdvize offers a [Single Sign On](http://en.wikipedia.org/wiki/Single_sign-on) method that allows you to provide a unique authentification system to your operators who are already logged to your app.
