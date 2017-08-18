@@ -1449,6 +1449,26 @@ The iAdvize Push API will be deprecated on january 30th, 2018. From now, prefer 
 The Push API allows data to be pushed to URI callbacks when an event is fired.  
 The Push API uses JSON exclusively. XML is not supported. Push requests are sent with a POST method. 
 
+### Events
+
+#### operator.login
+
+When an operator connects to the desk.
+
+**Returned data**
+    
+<pre class="prettyprint lang-js">{
+    "name": "operator.login",
+    "datetime": {
+        "created": "2014-01-01 00:00:00",
+        "sent": "2014-01-01 00:00:01"
+    },
+    "parameters": {
+        "operator_id": 1
+    }
+}
+</pre>
+
 # Single Sign On
 
 iAdvize offers a [Single Sign On](http://en.wikipedia.org/wiki/Single_sign-on) method that allows you to provide a unique authentification system to your operators who are already logged to your app.
