@@ -24,7 +24,8 @@ The iAdvize platform has 2 interfaces:
 ## What is the Developer Platform?
 
 The iAdvize Developer Platform allows developers to build apps and use our public APIs.
-Do you want to develop an app? We are providing you with documentation and a private testing environment.
+The beta version of the Developer Platform will be available soon.
+As a beta tester, we will provide you with documentation and a private testing environment.
 
 ## Why to build apps to iAdvize?
 
@@ -39,7 +40,6 @@ Here is the example of a potential protocol between iAdvize and a CRM software t
 
 # Getting Started
 Do you want to join our developer community as a beta tester 🤘🏽? Follow these steps to be part of the adventure:
-
 
 ## Get a Developer Account
 To build apps that iAdvize’s customers can use, first, you need to get a developer account:   
