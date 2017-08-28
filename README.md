@@ -1,8 +1,8 @@
 # :memo: Documentation
 
-This documentation is the technical documentation for iAdvize APIs and the Developer platform. This repository is used to store the source of [iAdvize Documentation](https://developers.iadvize.com/documentation). The iAdvize Documentation is generating from the Documenatation.md of this repository.
+This documentation is the technical documentation for iAdvize API and the Developer platform. This repository is used to store the source of [iAdvize Documentation](https://developers.iadvize.com/documentation). The iAdvize's Documentation is generated from the Documentation.md of this repository.
 
-If you have a question about this documentation you can send a email to developers@iadvize.com.
+If you have questions about this documentation you can send an email to developers@iadvize.com.
 
 ## How to contribute
 
@@ -14,10 +14,10 @@ You have to edit the file Documentation.md in a markdown format, if you don't kn
   
 ## How to test
 
-You can test your branch with the route https://developers.iadvize.com/documentation/test/branchName. This route use the Documentation.md file of your branch directly without any cache system.
+You can test your branch with the route https://developers.iadvize.com/documentation/test/branchName. This route uses the Documentation.md file of your branch directly without any cache system.
 
 You can check if the rendering is right and if the global documentation with the generating menu is not broken. We will do the same check before publishing it.
 
 ## Production
 
-Your changes will be automatically avaible when we merged it into the master branch.
+Your changes will be automatically avaible once we've merged it into the master branch.
