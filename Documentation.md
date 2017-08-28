@@ -2,7 +2,7 @@
 Welcome to iAdvize’s developer documentation!
 If you want to use our API, create integrations for your own personal use or to share with the rest of the world, you are in the right place.
 
-iAdvize provides you with a Developer platform for you to easily publish your apps on our marketplace so that our users can install them directly from their administration interface.
+Early November 2017, iAdvize will provide you with a Developer platform for you to easily publish your apps on our marketplace so that our users can install them directly from their administration interface.
 
 Whether you are a developer, an integrator, a customer or just curious, here, you will find an overview of how to get started, our Developer Guidelines, our API with practical examples and a guide to build and publish your future integrations.
 
@@ -227,7 +227,7 @@ iAdvize events, all events of a specific domain, or only one event.
 ## Developer Policy (in progress)
 Developers host their code on their own host service.
 Developers are responsible for the connector maintenance.
-Developers can set their app’s price (monthly fee or based on the number of conversations).
+Developers can set their app’s price (monthly fee per user).
 If it’s not a free app, developers must be a legal person.
 
 # API
