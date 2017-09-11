@@ -2,7 +2,7 @@
 Welcome to iAdvize’s developer documentation!
 If you want to use our API, create integrations for your own personal use or to share with the rest of the world, you are in the right place.
 
-iAdvize provides you with a Developer platform for you to easily publish your apps on our marketplace so that our users can install them directly from their administration interface.
+Early November 2017, iAdvize will provide you with a Developer platform for you to easily publish your apps on our marketplace so that our users can install them directly from their administration interface.
 
 Whether you are a developer, an integrator, a customer or just curious, here, you will find an overview of how to get started, our Developer Guidelines, our API with practical examples and a guide to build and publish your future integrations.
 
@@ -22,7 +22,8 @@ The iAdvize platform has 2 interfaces:
 ## What is the Developer Platform?
 
 The iAdvize Developer Platform allows developers to build apps and use our public APIs.
-Do you want to develop an app? We are providing you with documentation and a private testing environment.
+The beta version of the Developer Platform will be available soon.
+As a beta tester, we will provide you with documentation and a private testing environment.
 
 ## Why to build apps to iAdvize?
 
@@ -37,7 +38,6 @@ Here is the example of a potential protocol between iAdvize and a CRM software t
 
 # Getting Started
 Do you want to join our developer community as a beta tester 🤘🏽? Follow these steps to be part of the adventure:
-
 
 ## Get a Developer Account
 To build apps that iAdvize’s customers can use, first, you need to get a developer account.
@@ -1212,21 +1212,14 @@ See below to discover used fields and see [reading section](#read) to discover s
 
 | Domain | Name | Description |
 | --- | --- | --- |
-| conversations.domain | `conversation.chat.started` | Chat conversations only |
-| conversations.domain | `conversation.chat.closed` | Chat conversations only |
-| conversations.domain | `conversation.call.started` | Call conversations only |
-| conversations.domain | `conversation.call.closed` | Call conversations only |
-| conversations.domain | `conversation.video.started` | Video conversations only |
-| conversations.domain | `conversation.video.closed` | Video conversations only |
-| conversations.domain | `conversation.social.started` | Social conversations only |
-| conversations.domain | `conversation.social.closed` | Social conversations only |
-| conversations.domain | `conversation.*.closed` | All conversations |
-| users.domain | `user.created` | User created |
-| users.domain | `user.updated` | User information updated |
-| users.domain | `visitor.updated` | Visitor information updated |
-| users.domain | `satisfaction.filled` |
-| connectors.domain | `connector.installed ` |
-| connectors.domain | `connector.uninstalled` |
+| conversations.domain | `conversation.started` (in-progress) | All conversations |
+| conversations.domain | `conversation.closed` | All conversations |
+| conversations.domain | `visitor.updated` | Visitor information updated | |
+| users.domain | `user.created` | User created | |
+| users.domain | `user.updated` | User information updated | |
+| users.domain | `satisfaction.filled` | |
+| users.domain | `user.connected` (in-progress) | |
+| users.domain | `user.disconnected` (in-progress) | |
 
 
 ## Payloads
@@ -1238,13 +1231,15 @@ Callback urls must be defined with HTTPS protocol and should be available with P
 iAdvize expect to have à 20x http status in callback result.
 
 **Output examples of Conversations domain:**
-### conversation.chat.started
+
+#### conversation.started
 
 <pre class="prettyprint lang-js">{
     "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
-    "eventType": "conversation.chat.started",
-    "platform": "SD",
+    "eventType": "conversation.started",
+    "platform": "sd",
     "websiteId": 1,
+    "clientId": 1,
     "conversationId": 1,
     "operatorId": 1,
     "channel": "chat",
@@ -1254,75 +1249,17 @@ iAdvize expect to have à 20x http status in callback result.
 }
 </pre>
 
-#### conversation.chat.closed
+#### conversation.closed
+
 <pre class="prettyprint lang-js">{
     "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
-    "eventType": "conversation.chat.closed",
-    "platform": "SD",
+    "eventType": "conversation.closed",
+    "platform": "sd",
     "websiteId": 1,
+    "clientId": 1,
     "conversationId": 1,
     "operatorId": 1,
     "channel": "chat",
-    "visitorId": "593de0891b628a50b09835dc6c0e92565329c74baa90e",
-    "createdAt": "2017-04-22T11:01:00+02:00",
-    "sentAt": "2017-04-22T11:01:00+02:00"
-}
-</pre>
-
-#### conversation.call.started
-<pre class="prettyprint lang-js">{
-    "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
-    "eventType": "conversation.call.started",
-    "platform": "SD",
-    "websiteId": 1,
-    "conversationId": 1,
-    "operatorId": 1,
-    "channel": "call",
-    "visitorId": "593de0891b628a50b09835dc6c0e92565329c74baa90e",
-    "createdAt": "2017-04-22T11:01:00+02:00",
-    "sentAt": "2017-04-22T11:01:00+02:00"
-}
-</pre>
-
-#### conversation.call.closed
-<pre class="prettyprint lang-js">{
-    "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
-    "eventType": "conversation.call.closed",
-    "platform": "SD",
-    "websiteId": 1,
-    "conversationId": 1,
-    "operatorId": 1,
-    "channel": "call",
-    "visitorId": "593de0891b628a50b09835dc6c0e92565329c74baa90e",
-    "createdAt": "2017-04-22T11:01:00+02:00",
-    "sentAt": "2017-04-22T11:01:00+02:00"
-}
-</pre>
-
-#### conversation.video.started
-<pre class="prettyprint lang-js">{
-    "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
-    "eventType": "conversation.video.started",
-    "platform": "SD",
-    "websiteId": 1,
-    "conversationId": 1,
-    "operatorId": 2,
-    "channel": "video",
-    "visitorId": "593de0891b628a50b09835dc6c0e92565329c74baa90e",
-    "createdAt": "2017-04-22T11:01:00+02:00",
-    "sentAt": "2017-04-22T11:01:00+02:00"
-}
-</pre>
-
-#### conversation.video.closed
-<pre class="prettyprint lang-js">{
-    "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
-    "eventType": "conversation.video.closed",
-    "platform": "SD",
-    "websiteId": 1,
-    "conversationId": 1,
-    "operatorId": 2,
-    "channel": "video",
     "visitorId": "593de0891b628a50b09835dc6c0e92565329c74baa90e",
     "createdAt": "2017-04-22T11:01:00+02:00",
     "sentAt": "2017-04-22T11:01:00+02:00"
@@ -1333,7 +1270,8 @@ iAdvize expect to have à 20x http status in callback result.
 <pre class="prettyprint lang-js">{
     "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
     "eventType": "user.created",
-    "platform": "SD",
+    "platform": "sd",
+    "clientId": 1,
     "userId": 1,
     "createdAt": "2017-04-22T11:01:00+02:00",
     "sentAt": "2017-04-22T11:01:00+02:00"
@@ -1344,7 +1282,8 @@ iAdvize expect to have à 20x http status in callback result.
 <pre class="prettyprint lang-js">{
     "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
     "eventType": "user.updated",
-    "platform": "SD",
+    "platform": "sd",
+    "clientId": 1,
     "userId": 1,
     "createdAt": "2017-04-22T11:01:00+02:00",
     "sentAt": "2017-04-22T11:01:00+02:00"
@@ -1355,7 +1294,8 @@ iAdvize expect to have à 20x http status in callback result.
 <pre class="prettyprint lang-js">{
     "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
     "eventType": "visitor.updated",
-    "platform": "SD",
+    "platform": "sd",
+    "clientId": 1,
     "operatorId": 1,
     "visitorId": "593de0891b628a50b09835dc6c0e92565329c74baa90e",
     "createdAt": "2017-04-22T11:01:00+02:00",
@@ -1367,8 +1307,9 @@ iAdvize expect to have à 20x http status in callback result.
 <pre class="prettyprint lang-js">{
     "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
     "eventType": "satisfaction.filled",
-    "platform": "SD",
+    "platform": "sd",
     "websiteId": 1,
+    "clientId": 1,
     "conversationId": 1,
     "operatorId": 2,
     "visitorId": "593de0891b628a50b09835dc6c0e92565329c74baa90e",
@@ -1404,7 +1345,8 @@ iAdvize expect to have à 20x http status in callback result.
 }
 </pre>
 
-####HTTP stack trace example for “conversation.chat.closed” event
+##### HTTP stack trace example for “conversation.closed” event
+
 `POST /webhook HTTP/1.1`
 
 <pre class="prettyprint lang-js">
@@ -1417,8 +1359,9 @@ Content-Length: 3442
 {
     "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
     "eventType": "conversation.closed",
-    "platform": "SD",
+    "platform": "sd",
     "websiteId": 1,
+    "clientId": 1,
     "conversationId": 1,
     "operatorId": 1,
     "channel": "chat",
