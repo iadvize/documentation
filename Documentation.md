@@ -7,9 +7,7 @@ Early November 2017, iAdvize will provide you with a Developer platform for you 
 Whether you are a developer, an integrator, a customer or just curious, here, you will find an overview of how to get started, our Developer Guidelines, our API with practical examples and a guide to build and publish your future integrations.
 
 ## What is iAdvize?
-[iAdvize](http://iadvize.com) is a SaaS conversational commerce platform that enables businesses to engage their customers and prospects whether they’re on the website or on social media from one messaging solution (chat, voice, video).
-
-Visitors can get real-time advice from customer service but also from advocates, members of the brand community.
+[iAdvize](http://iadvize.com) is a conversational marketing platform that enables businesses to engage their customers and prospects whether they’re on the website or on social media from one single messaging solution (chat, voice, video). Visitors can get real-time advice from customer service but also from advocates, members of the brand community via [ibbü] (https://www.ibbu.com/en/) - our on-demand pool of experts.
 
 Implementing iAdvize is child's play. You just have to insert a tag on each page of your website. Once the solution is deployed, your customer service and marketing teams are completely independent and can set up the solution as they wish.
 
@@ -42,18 +40,18 @@ Here is the example of a potential protocol between iAdvize and a CRM software t
 Do you want to join our developer community as a beta tester 🤘🏽? Follow these steps to be part of the adventure:
 
 ## Get a Developer Account
-To build apps that iAdvize’s customers can use, first, you need to get a developer account:   
+To build apps that iAdvize’s customers can use, first, you need to get a developer account.
+The Developer Platform will be available in private beta version from November, 17. We invite you to apply to the early access program thanks to our [online form] (https://docs.google.com/forms/d/e/1FAIpQLSfKbBBwHtXU60D0bw6dPejF1_h2VBiPAf60LpQWtJ7h6dvXeg/viewform?usp=sf_link).
 
-* Apply and sign up by sending a request to developers@iadvize.com,
-* The iAdvize team will contact you within 48 hours,
-* We provide you with credentials and a testing environment.
+* Apply and share your integration project with our team,
+* The iAdvize team will contact you within 48 hours.
 
 ## Features Overview
-iAdvize provides you with some easy-to-use tools so you can:
+iAdvize's Developer Platform will provide you with some easy-to-use tools so you can:
 
 * Manager the privacy mode of your app for it to be public or private
 * Set up the authentication process for your app
-* Define custom settings such as object mapping (in progress)
+* Define custom settings such as object mapping (In progress)
 * Create interactions to enhance some of iAdvize's predefined features
 * Use outgoing webhooks to receive updates in real-time
 
@@ -72,17 +70,17 @@ This is the place where you can see the list of all the apps you have built on i
 * Sandbox: you can edit your app
 
 ## App information
-Our team is still working on the accessibility mode of your app when it is private.
-In alpha version, the accessibility mode will be available for you to change manually for the customers you have selected. 
+This is where you will be able to define your app's profile. Also, this is where you can set the Privacy mode of your application: public or private.
 
 **How does the Private mode work?**
+Your App can be available for all iAdvize's customers or for selected customers.
 Our team is still working on the accessibility mode under the Private mode.
 In alpha version, we will make it available manually for the specific customers you have selected.
 
-## Authentication
+## App Authentication
 The authentication section is where you set your app’s needs to retrieve data from iAdvize and the app you want it to be connected to. Users will need to follow these authentication steps to install your app.
 
-**Define authentication fields**
+**Define app's authentication fields**
 You can add fields and define the type of entry you need (text, numeric, etc.).
 
 * Label: it’s the name of your field, this is what users will see.
@@ -107,10 +105,10 @@ Users have to fill in the fields during the installation process first, on the i
 
 ![Authentication admin](./assets/images/marketplace-configure.png)
 
-## Settings
+## App Settings
 This part is still under development. This is where you will be able to add specific configuration steps such as mapping.
 
-## Interactions
+## App Interactions
 Add interactions to enhance the iAdvize interface by adding or editing predefined features.
 
 The features that are already available are: 
@@ -120,7 +118,7 @@ The features that are already available are:
 * The end of conversation (on the discussion panel)
 
 ### The Product List
-The integration of the product list enables users to browse a product catalog from the iAdvize discussion panel.
+The integration of the product list enables iAdvize's Console panel users to browse a product catalog from the iAdvize discussion panel.
 Agents can look for a product while they are chatting and send it in just a click within their conversation.
 
 Products are displayed in the form of a card within conversations: visitors can see their image, title, availability and price.
@@ -133,7 +131,7 @@ In order to set the right connector parameters, all you have to do is declare:
 * The product list URL - this is your catalog’s URL
 * The categories url - this is where your connector will get the list of your product categories
 
-#### Example of categories data a connector must return
+##### Example of categories data a connector must return
 <pre class="prettyprint lang-js">
 [
     {
@@ -151,7 +149,7 @@ In order to set the right connector parameters, all you have to do is declare:
  ]
 </pre>
 
-#### Example of products data a connector must return
+##### Example of products data a connector must return
 <pre class="prettyprint lang-js">
 [
     {
@@ -183,10 +181,17 @@ In order to set the right connector parameters, all you have to do is declare:
 ]
 </pre>
 
-### The Visitor profile (in progress)
-This type of interaction is not available yet.
+### The Visitor Profile (In progress)
+This type of interaction will be available soon.
 
-### Closing conversation feature (in-progress)
+The Visitor profile interaction enables iAdvize's Console panel users to access to the visitor's CRM profile in a single click. 
+Agents can overview the visitor's CRM profile in a new window while they are chatting. Operators can then edit it or simply look for information.
+
+To be able to retrieve the CRM profile, iAdvize must be able to identify the visitor thanks to an email and/or an external ID.
+
+![VisitorProfile](./assets/images/visitorprofilefeature@2x.png)
+
+### The End of Conversation (In progress)
 This type of interaction is not available yet.
 
 ### Submit your apps
@@ -196,19 +201,12 @@ The versioning declaration must be done by the developer during the submission p
 iAdvize will approve or refuse the app based on specific criteria.
 iAdvize will get in touch within 48 hours to the developers.
 
-### Submit your apps
-
-Apps must be submitted to iAdvize for review.
-Developers have to make their versioning declaration during the submission process.
-iAdvize will approve or refuse the app based on specific criteria.
-iAdvize will get back to you within 48 hours.
-
-## Webhooks
+## Webhooks (In progress)
 The webhook system allows external applications to subscribe to events (via callback URLs) to receive updates in real-time.
 When you build your app, you can subscribe to a list of events.
 When customers install your app, it automatically creates webhooks for these customers as well as for events based on your app's configuration.
 
-This subscription is based on the events happening on different domains. See the list of events available in the [Webhook API documentation](#webhook).
+This subscription is based on the events happening on different domains. See the list of events available in the [Webhook API documentation](#webhook-api).
 
 ### Create a webhook for your connector
 You can create as much outgoing webhooks as you need.
@@ -224,20 +222,19 @@ or linked to a website (example customers.website.created)
 iAdvize events, all events of a specific domain, or only one event.
 
 
-## Developer Policy (in progress)
+## Developer Policy
 Developers host their code on their own host service.
-Developers are responsible for the connector maintenance.
+Developers are responsible for their connector's maintenance.
 Developers can set their app’s price (monthly fee per user).
 If it’s not a free app, developers must be a legal person.
 
-# API
-## REST API
+# REST API
 **Current version:** 2.0
 
 This API provides access and basic CRUD operations (create, read, update, delete) for the resources described in the documentation.
 The REST API uses JSON exclusively. XML is not supported.
 
-### Base URL
+## Base URL
 
 All URLs referenced in the documentation have the following base:
 
@@ -247,7 +244,7 @@ All URLs referenced in the documentation have the following base:
 
 The iAdvize REST API is served over HTTPS and HTTP.
 
-### Authentication
+## Authentication
 
 The API key must be attached to each request. You can use it in one of the following ways:
 
@@ -255,9 +252,9 @@ The API key must be attached to each request. You can use it in one of the follo
 *   Passed in as a `key` GET parameter
 *   Passed in as the username <small>(with an arbitrary password)</small> via `HTTP Basic authentication`
 
-### Calls, errors & responses
+## Calls, errors & responses
 
-#### Authentication failed
+### Authentication failed
 
 <pre class="prettyprint lang-js">{
   meta: {
@@ -267,7 +264,7 @@ The API key must be attached to each request. You can use it in one of the follo
 }
 </pre>
 
-#### Create
+### Create
 
 ##### `POST /my_resource my_field=my_value`
 
@@ -293,7 +290,7 @@ The API key must be attached to each request. You can use it in one of the follo
 }
 </pre>
 
-#### Read
+### Read
 
 ##### `GET /my_resource`
 
@@ -358,7 +355,7 @@ Use the `*` character to broaden the scope of your search. E.g.: `filters[name]=
 }
 </pre>
 
-#### Update
+### Update
 
 ##### `PUT /my_resource/123 my_field=my_new_value`
 
@@ -384,7 +381,7 @@ Use the `*` character to broaden the scope of your search. E.g.: `filters[name]=
 }
 </pre>
 
-#### Delete
+### Delete
 
 ##### `DELETE /my_resource/123`
 
@@ -404,11 +401,11 @@ Use the `*` character to broaden the scope of your search. E.g.: `filters[name]=
 }
 </pre>
 
-### Resources
+## Resources
 
-#### Client
+### Client
 
-##### List all clients
+#### List all clients
 
 `GET /client`
 
@@ -416,7 +413,7 @@ See below to discover used fields and see [reading section](#read) to discover s
 
 This list is displayed depending on the rights of your API key.
 
-##### Showing client
+#### Showing client
 
 `GET /client/1`
 
@@ -429,15 +426,15 @@ See [reading section](#read) to discover some output examples.
 | id | Identifier | Integer |
 | lang | Language | String (2 chars) |
 
-#### Website
+### Website
 
-##### List all your websites
+#### List all your websites
 
 `GET /website`
 
 See below to discover used fields and see [reading section](#read) to discover some output examples.
 
-##### Get a website details
+#### Get a website details
 
 `GET /website/1`
 
@@ -451,15 +448,15 @@ See [reading section](#read) to discover some output examples.
 | url | URL | String |
 | label | Label | String |
 
-##### Update a website
+#### Update a website
 
 `PUT /website/1`
 
 See [updating section](#update) to discover some output examples.
 
-#### Operator
+### Operator
 
-##### List your operators
+#### List your operators
 
 `GET /operator`
 
@@ -476,7 +473,7 @@ See below to discover used fields and see [reading section](#read) to discover s
 | external_id | External identifier | | ?filters[external_id]=MyExternalId |
 | connected | Operator online status | 0 (offline) or 1 (online) | ?filters[connected]=1 |
 
-##### Get an operator details
+#### Get operator's details
 
 `GET /operator/1`
 
@@ -509,25 +506,26 @@ See [reading section](#read) to discover some output examples.
 | skill_list | Skill list identifiers | List of integer |
 | sso_key | [SSO token](/?p=sso) | String |
 
-##### Create an operator
+#### Create an operator
 
 `POST /operator`
 
 See [creating section](#create) to discover some output examples.
 
-##### Update an operator
+#### Update an operator
 
 `PUT /operator/1`
 
 See [updating section](#update) to discover some output examples.
 
-##### Delete an operator
+#### Delete an operator
 
 `DELETE /operator/1`
 
 See [deleting section](#responses-delete) to discover some output examples.
 
-##### Get the live availability of your operators
+#### Get operators live availability
+Get the live availability of all of your operators.
 
 `GET /operator/live`
 
@@ -592,7 +590,8 @@ See [deleting section](#responses-delete) to discover some output examples.
 
 You can use previous filters.
 
-##### Get the live availability of an operator
+#### Get operator's live availability
+Get the live availability of an operator.
 
 `GET /operator/123/live`
 
@@ -628,7 +627,8 @@ You can use previous filters.
 }
 </pre>
 
-##### Set availability of an operator
+#### Set operator's availability
+Set the availability of an operator.
 
 `PUT /operator/123/live`
 
@@ -651,7 +651,7 @@ You can use previous filters.
 }
 </pre>
 
-##### Get operator statistics
+#### Get operators statistics
 
 `GET /operator/123/statistic`
 
@@ -681,7 +681,7 @@ See [reading section](#read) to discover some output examples.
 }
 </pre>
 
-##### Get operator statistics
+#### Get operator's profile
 
 `GET /operator/123/profile`
 
@@ -717,9 +717,9 @@ See [reading section](#read) to discover some output examples.
 }
 </pre>
 
-#### Group
+### Group
 
-##### List your groups
+#### List your groups
 
 `GET /group`
 
@@ -731,7 +731,7 @@ See below to discover used fields and see [reading section](#read) to discover s
 | --- | --- | --- |
 | parent_id | Parent group identifier | ?filters[parent_id]=1987 |
 
-##### Get a group details
+#### Get a group details
 
 `GET /group/1984`
 
@@ -747,27 +747,27 @@ See [reading section](#read) to discover some output examples.
 | parent_id | Parent identifier | Integer |
 | operator_list | List of operators identifiers | List of integers |
 
-##### Create a group
+#### Create a group
 
 `POST /group`
 
 See [creating section](#create) to discover some output examples.
 
-##### Update a group
+#### Update a group
 
 `PUT /group/1`
 
 See [updating section](#update) to discover some output examples.
 
-##### Delete a group
+#### Delete a group
 
 `DELETE /group/1`
 
 See [deleting section](#responses-delete) to discover some output examples.
 
-#### Skill
+### Skill
 
-##### List your skills
+#### List your skills
 
 `GET /skill`
 
@@ -780,7 +780,7 @@ See below to discover used fields and see [reading section](#read) to discover s
 | operator_id | Operator identifier | ?filters[operator_id]=123 |
 | parent_id | Parent skill identifier | ?filters[parent_id]=123 |
 
-##### Get a skill details
+#### Get a skill details
 
 `GET /skill/1984`
 
@@ -797,27 +797,27 @@ See [reading section](#read) to discover some output examples.
 | parent_id | Parent skill identifier | Integer |
 | operator_list`deprecated, use the Operator resource with the skill_id filter instead` | List of operator identifiers | List of integers |
 
-##### Create a skill
+#### Create a skill
 
 `POST /skill`
 
 See [creating section](#create) to discover some output examples.
 
-##### Update a skill
+#### Update a skill
 
 `PUT /skill/1`
 
 See [updating section](#update) to discover some output examples.
 
-##### Delete a skill
+#### Delete a skill
 
 `DELETE /skill/1`
 
 See [deleting section](#responses-delete) to discover some output examples.
 
-#### Conversation
+### Conversation
 
-##### List your conversations
+#### List your conversations
 
 `GET /conversation`
 
@@ -845,7 +845,7 @@ The following rules apply :
 *   If `to` is specified but not `from`, the 3 months before `to` are fetched
 *   If `from` and `to` are specified but with an interval over 3 months, an error is returned in the `meta` attribute of the response
 
-##### Get a conversation details
+#### Get a conversation details
 
 `GET /conversation/666`
 
@@ -872,9 +872,9 @@ See [reading section](#read) to discover some output examples.
 | rule_id | Rule indentifier | Integer |
 | xmpp_id | XMPP related identifier | UUID |
 
-#### Tag
+### Tag
 
-##### List your tags
+#### List your tags
 
 `GET /tag`
 
@@ -886,7 +886,7 @@ See below to discover used fields and see [reading section](#read) to discover s
 | --- | --- | --- |
 | website_id | Website identifier | ?filters[website_id]=123 |
 
-##### Get a tag details
+#### Get a tag details
 
 `GET /tag/123`
 
@@ -900,15 +900,15 @@ See [reading section](#read) to discover some output examples.
 | name | Name | String |
 | website_id | List of website identifiers | List of integers |
 
-##### Create a tag
+#### Create a tag
 
 `POST /tag`
 
 See [creating section](#create) to discover some output examples.
 
-#### Transaction
+### Transaction
 
-##### List your transactions
+#### List your transactions
 
 `GET /transaction`
 
@@ -924,7 +924,7 @@ See below to discover used fields and see [reading section](#read) to discover s
 | from | Date from | `YYYY-MM-DD` or `YYYY-MM-DD HH:MM:SS` | `?filters[from]=YYYY-MM-DD HH:MM:SS` |
 | to | Date to | `YYYY-MM-DD` or `YYYY-MM-DD HH:MM:SS` | `?filters[to]=YYYY-MM-DD HH:MM:SS` |
 
-##### Get a transaction details
+#### Get a transaction details
 
 `GET /transaction/123`
 
@@ -944,9 +944,9 @@ See [reading section](#read) to discover some output examples.
 | operator_id | Operator identifier | Integer |
 | conversation_id | Conversation identifier | Integer |
 
-#### Satisfaction
+### Satisfaction
 
-##### List your satisfactions
+#### List your satisfactions
 
 `GET /satisfaction`
 
@@ -962,7 +962,7 @@ See below to discover used fields and see [reading section](#read) to discover s
 | from | Date from | `YYYY-MM-DD` or `YYYY-MM-DD HH:MM:SS` | ?filters[from]=YYYY-MM-DD HH:MM:SS |
 | to | Date to | `YYYY-MM-DD` or `YYYY-MM-DD HH:MM:SS` | ?filters[to]=YYYY-MM-DD HH:MM:SS |
 
-##### Get a satisfaction details
+#### Get a satisfaction details
 
 `GET /satisfaction/123`
 
@@ -981,9 +981,9 @@ See [reading section](#read) to discover some output examples.
 | operator_id | Operator identifier | Integer |
 | conversation_id | Conversation identifier | Integer |
 
-#### Statistic
+### Statistic
 
-##### Get statistics
+#### Get statistics
 
 `GET /statistic`
 
@@ -1065,9 +1065,9 @@ See below to discover used fields and see [reading section](#read) to discover s
 | transaction_amount_per_conversation | Website transactions amount per conversation | Average turnover generated for each conversation done |
 | transaction_after_conversation_amount_per_hour | Website transactions amount per hour | Average turnover generated by an agent after a contact on an hourly basis |
 
-#### Visitor
+### Visitor
 
-##### Get visitors
+#### Get visitors
 
 `GET /visitor`
 
@@ -1081,7 +1081,7 @@ See below to discover used fields and see [reading section](#read) to discover s
 | external_id | External identifier | `?filters[external_id]=123` |
 | website_id | Website identifier | `?filters[website_id]=123` |
 
-##### Get a visitor details
+#### Get a visitor details
 
 `GET /visitor/560`
 
@@ -1106,27 +1106,27 @@ See [reading section](#read) to discover some output examples.
 | website_id | List of website identifiers | List of integers |
 | created_at | Visitor creation date | Date `YYYY-MM-DD HH:MM:SS` |
 
-##### Create a visitor
+#### Create a visitor
 
 `POST /visitor`
 
 See [creating section](#create) to discover some output examples.
 
-##### Update a visitor
+#### Update a visitor
 
 `PUT /visitor/560`
 
 See [updating section](#update) to discover some output examples.
 
-##### Delete a visitor
+#### Delete a visitor
 
 `DELETE /visitor/560`
 
 See [deleting section](#responses-delete) to discover some output examples.
 
-#### Call meeting
+### Call meeting
 
-##### Get call meetings
+#### Get call meetings
 
 `GET /callmeeting`
 
@@ -1153,9 +1153,9 @@ See below to discover used fields and see [reading section](#read) to discover s
 | targeting_rule_id | Targeting rule identifier associated to call meeting | String |
 | skill_id | Skill identifier associated to call meeting | String |
 
-#### Callback Odigo
+### Callback Odigo
 
-##### Pick up callback
+#### Pick up callback
 
 `POST /odigocallback/pickup`
 
@@ -1184,7 +1184,7 @@ See below to discover used fields and see [reading section](#read) to discover s
 }
 </pre>
 
-##### Hang up callback
+#### Hang up callback
 
 `POST /odigocallback/hangup`
 **Parameters** (sent as application/x-www-form-urlencoded)
@@ -1205,14 +1205,10 @@ See below to discover used fields and see [reading section](#read) to discover s
 }
 </pre>
 
-## GraphQL API
-**In-progress**
 
-The new API is under development and documentation.
+# Webhook API
 
-## Webhook API
-
-### Events description
+## Events description
 
 | Domain | Name | Description |
 | --- | --- | --- |
@@ -1226,7 +1222,7 @@ The new API is under development and documentation.
 | users.domain | `user.disconnected` (in-progress) | |
 
 
-### Payloads
+## Payloads
 When an event occurs, an HTTP POST call is issued on the callback urls you set up with the event data. 
 Data is sent with “application/json” header content-type, and “json” format as payload. 
 Callback urls must be defined with HTTPS protocol and should be available with POST and GET http verbs:
@@ -1235,7 +1231,8 @@ Callback urls must be defined with HTTPS protocol and should be available with P
 iAdvize expect to have à 20x http status in callback result.
 
 **Output examples of Conversations domain:**
-##### conversation.started
+
+#### conversation.started
 
 <pre class="prettyprint lang-js">{
     "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
@@ -1252,7 +1249,8 @@ iAdvize expect to have à 20x http status in callback result.
 }
 </pre>
 
-##### conversation.closed
+#### conversation.closed
+
 <pre class="prettyprint lang-js">{
     "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
     "eventType": "conversation.closed",
@@ -1268,7 +1266,7 @@ iAdvize expect to have à 20x http status in callback result.
 }
 </pre>
 
-##### user.created
+#### user.created
 <pre class="prettyprint lang-js">{
     "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
     "eventType": "user.created",
@@ -1280,7 +1278,7 @@ iAdvize expect to have à 20x http status in callback result.
 }
 </pre>
 
-##### user.updated
+#### user.updated
 <pre class="prettyprint lang-js">{
     "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
     "eventType": "user.updated",
@@ -1292,7 +1290,7 @@ iAdvize expect to have à 20x http status in callback result.
 }
 </pre>
 
-##### visitor.updated
+#### visitor.updated
 <pre class="prettyprint lang-js">{
     "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
     "eventType": "visitor.updated",
@@ -1305,7 +1303,7 @@ iAdvize expect to have à 20x http status in callback result.
 }
 </pre>
 
-##### satisfaction.filled
+#### satisfaction.filled
 <pre class="prettyprint lang-js">{
     "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
     "eventType": "satisfaction.filled",
@@ -1321,7 +1319,34 @@ iAdvize expect to have à 20x http status in callback result.
 }
 </pre>
 
-#####HTTP stack trace example for “conversation.closed” event
+#### connector.installed
+<pre class="prettyprint lang-js">{
+    "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
+    "eventType": "connector.installed",
+    "platform": "SD",
+    "websiteId": 1,
+    "connectorId": "3f0e6840-48fe-4e87-8f3b-6ef3f75f18d8",
+    "connectorVersionId": "3f0e6840-48fe-4e87-8f3b-6ef3f75f18d8",
+    "createdAt": "2017-04-22T11:01:00+02:00",
+    "sentAt": "2017-04-22T11:01:00+02:00"
+}
+</pre>
+
+#### connector.uninstalled
+<pre class="prettyprint lang-js">{
+    "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
+    "eventType": "connector.uninstalled",
+    "platform": "SD",
+    "websiteId": 1,
+    "connectorId": "3f0e6840-48fe-4e87-8f3b-6ef3f75f18d8",
+    "connectorVersionId": "3f0e6840-48fe-4e87-8f3b-6ef3f75f18d8",
+    "createdAt": "2017-04-22T11:01:00+02:00",
+    "sentAt": "2017-04-22T11:01:00+02:00"
+}
+</pre>
+
+##### HTTP stack trace example for “conversation.closed” event
+
 `POST /webhook HTTP/1.1`
 
 <pre class="prettyprint lang-js">
@@ -1349,23 +1374,23 @@ Content-Length: 3442
 **Retry management**
 iAdvize will retry to send callback in failure X times if http status code isn’t part of 50x code.
 
-### Delivery headers
+## Delivery headers
 iAdvize will send payload with two additionals headers:
 X-iAdvize-Delivery: UUID, unique identifier to describe a webhook
 X-iAdvize-CorrelationId: UUID, unique identifier used in retry webhooks to track same callback calls.
 
-### Security
+## Security
 (documentation in-progress)
 
-## Push API
+# Push API (deprecated)
 
-The iAdvize Push API will be deprecated on january 30th, 2018. From now, prefer to use our webhook API.
+The iAdvize Push API will be deprecated starting september, 2017. The Push API will be cut on january 30th, 2018. From now, prefer to use our webhook API (In progress).
 The Push API allows data to be pushed to URI callbacks when an event is fired.  
 The Push API uses JSON exclusively. XML is not supported. Push requests are sent with a POST method. 
 
-### Events
+## Events
 
-#### operator.login
+### operator.login
 
 When an operator connects to the desk.
 
@@ -1383,7 +1408,7 @@ When an operator connects to the desk.
 }
 </pre>
 
-#### operator.logout
+### operator.logout
 
 When an operator disconnects from the desk.
 
@@ -1401,7 +1426,7 @@ When an operator disconnects from the desk.
 }
 </pre>
 
-#### conversation.start
+### conversation.start
 
 When a conversation is started.
 
@@ -1426,7 +1451,7 @@ When a conversation is started.
 }
 </pre>
 
-#### conversation.end
+### conversation.end
 
 When a conversation is ended by the operator.
 
