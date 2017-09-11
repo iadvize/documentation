@@ -1443,7 +1443,7 @@ X-iAdvize-CorrelationId: UUID, unique identifier used in retry webhooks to track
 ### Security
 (documentation in-progress)
 
-## Push API
+## Push API <sup style="color: red;">deprecated</sup>
 
 The iAdvize Push API will be deprecated on january 30th, 2018. From now, prefer to use our webhook API.
 The Push API allows data to be pushed to URI callbacks when an event is fired.  
