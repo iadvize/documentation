@@ -1489,28 +1489,28 @@ If your users have to switch between several apps (including iAdvize) during the
 
 To connect an operator to its iAdvize console :
 
-*   Get his sso_key in the [operator resource of the REST API](/?p=api2-rest#resource-operator). The sso_key only changes when the operator's email is changed
-*   Use it in the following URL : `http://www.iadvize.com/auto-auth.php?auth={SSO_KEY}`
+*   Get his sso_key in the [operator resource of the REST API](#operator).
+*   Use it in the following URL : `http://www.iadvize.com/admin/login?key={SSO_KEY}`
 
 That's all! When a user visit the URL, he will be automatically logged to its iAdvize account and no login / password will be asked to him.
 
 ## Use specific links
 
-It's possible to use a specific link with a parameter called `url` to go to a specific page.
+It's possible to use a specific link with a parameter called `backto` to go to a specific page.
 
 Examples below:
 
 | Page | URL |
 | --- | --- |
-| Discussion panel | `http://www.iadvize.com/auto-auth.php?auth={SSO_KEY}&url=**/pupitre**` |
-| Users | `http://www.iadvize.com/auto-auth.php?auth={SSO_KEY}&url=**/users**` |
+| Discussion panel | `http://www.iadvize.com/admin/login?key={SSO_KEY}&backto=**/pupitre**` |
+| Users | `http://www.iadvize.com/admin/login?key={SSO_KEY}&backto=**/users**` |
 
-To find the parameter `url` that interest you, look the URL address of the page in your favorite web browser.
+To find the parameter `backto` that interest you, look the URL address of the page in your favorite web browser.
 
 ![URL example](./assets/images/sso-url.png)
 
 With this example, the SSO URL address will be:
-`http://www.iadvize.com/auto-auth.php?auth={SSO_KEY}&url=**go=offers**`
+`http://www.iadvize.com/admin/login?key={SSO_KEY}&backto=users/`
 
 # SDK
 
