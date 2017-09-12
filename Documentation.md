@@ -41,7 +41,7 @@ Do you want to join our developer community as a beta tester 🤘🏽? Follow th
 
 ## Get a Developer Account
 To build apps that iAdvize’s customers can use, first, you need to get a developer account.
-The Developer Platform will be available in private beta version from November, 17. We invite you to apply to the early access program thanks to our [online form] (https://docs.google.com/forms/d/e/1FAIpQLSfKbBBwHtXU60D0bw6dPejF1_h2VBiPAf60LpQWtJ7h6dvXeg/viewform?usp=sf_link).
+The Developer Platform will be available in private beta version from November, 17. We invite you to apply to the early access program thanks to our [online form](https://docs.google.com/forms/d/e/1FAIpQLSfKbBBwHtXU60D0bw6dPejF1_h2VBiPAf60LpQWtJ7h6dvXeg/viewform?usp=sf_link).
 
 * Apply and share your integration project with our team,
 * The iAdvize team will contact you within 48 hours.
