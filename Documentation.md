@@ -275,9 +275,10 @@ In order to set the right connector parameters, all you have to do is to declare
 | Filter | Description | Values |
 | --- | --- | --- |
 | emailVisitor | Visitor email | ?emailVisitor=123  |
-| idWebsite | Unique identifier of the associated website (assigned to you by iAdvize) | ?idWebsite=123  |
-| idVisitorUnique | Visitor unique id | ?idVisitorUnique=123  |
+| idConnectorVersion | Connector version id | ?idConnectorVersion=123 |
 | idVisitorExternal | Visitor external id | ?idVisitorExternal=123  |
+| idVisitorUnique | Visitor unique id | ?idVisitorUnique=123  |
+| idWebsite | Unique identifier of the associated website (assigned to you by iAdvize) | ?idWebsite=123  |
 | operatorLocale | Operator locale | ?operatorLocale=en  |
 
 ** Fields **
