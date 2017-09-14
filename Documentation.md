@@ -121,49 +121,77 @@ The features that are already available are:
 The integration of the product list enables iAdvize's Console panel users to browse a product catalog from the iAdvize discussion panel.
 Agents can look for a product while they are chatting and send it in just a click within their conversation.
 
-Products are displayed in the form of a card within conversations: visitors can see their image, title, availability and price.
-In just a click on the "view product" button, visitors are redirected to the product page on your website.
+Products are displayed in a popup window just over the conversations view: When shared, visitors can see their image, title, availability and price.
+By clicking on the "view product" button, visitors are redirected to the product page on your website.
 
 ![Product list](./assets/images/interactions-product-list-feature.png)
 
 **Add a Product List Connector and Configure it**
-In order to set the right connector parameters, all you have to do is declare:
+In order to set the right connector parameters, all you have to do is to declare:
 * The product list URL - this is your catalog’s URL
 * The categories url - this is where your connector will get the list of your product categories
 
-##### Example of categories data a connector must return
+#### Categories data
+
 <pre class="prettyprint lang-js">
 [
     {
         "id": "123",
+        "idParent": "123",
         "label": "category",
-        "idParent": null,
+        "products": [
+            "123",
+            "456"
+        ],
         "productsCount": 3
      },
      {
          "id": "456",
-         "label": "category",
          "idParent": null,
+         "label": "category",
+         "products": null,
          "productsCount": 7
       }
  ]
 </pre>
 
-##### Example of products data a connector must return
+** Filters **
+
+| Filter | Description | Values |
+| --- | --- | --- |
+| idConnectorVersion | Connector version id | ?idConnectorVersion=123 |
+| idParent | Unique identifier of the parent category | ?idParent=123  |
+| idWebsite | Unique identifier of the associated website (assigned to you by iAdvize) | ?idWebsite=123  |
+| limit | Maximum number of resources per page | ?limit=10 |
+| offset | Number of resources skipped before beginning to return resources | ?offset=10 |
+
+** Fields **
+
+| Field | Description | Values | Required |
+| --- | --- | --- | --- |
+| id | Unique identifier | Integer | ✓ |
+| idParent | Unique identifier of the parent category  | Integer |  |
+| label | Label | String | ✓ |
+| products | products | Array of strings |  |
+| productsCount | Number of products | Integer | ✓ |
+
+#### Products data
+
 <pre class="prettyprint lang-js">
 [
     {
         "id": "123",
         "title": "Product's title",
         "productUrl": "http://www.e-commerce.com/url-product",
-        "brand": null,
+        "brand": "brand",
         "description": "product's description",
-        "shortDescription": null,
+        "shortDescription": "shrot description",
         "available": true,
         "imageUrl": "http://www.e-commerce.com/url-product-image.jpg",
-        "reference": null,
+        "reference": "reference",
         "priceCatalog": "99.9 €",
-        "pricePromotion": null
+        "pricePromotion": "90 €",
+        "priceSpecial": "80 €"
     },
     {
         "id": "456",
@@ -176,13 +204,41 @@ In order to set the right connector parameters, all you have to do is declare:
         "imageUrl": "http://www.e-commerce.com/url-product-image.jpg",
         "reference": null,
         "priceCatalog": "9.9 €",
-        "pricePromotion": null
+        "pricePromotion": null,
+        "priceSpecial": null
     }
 ]
 </pre>
 
-### The Visitor Profile (In progress)
-This type of interaction will be available soon.
+** Filters **
+
+| Filter | Description | Values |
+| --- | --- | --- |
+| idConnectorVersion | Connector version id | ?idConnectorVersion=123 |
+| idCategory | Category id | ?idCategory=123  |
+| idWebsite | Unique identifier of the associated website (assigned to you by iAdvize) | ?idWebsite]=123  |
+| limit | Maximum number of resources per page | ?limit=10 |
+| offset | Number of resources skipped before beginning to return resources | ?offset=10 |
+| search | Product search query | ?search[default][contains]=query |
+
+** Fields **
+
+| Field | Description | Values | Required |
+| --- | --- | --- | --- |
+| id | Unique identifier | Integer | ✓ |
+| title | Title | String | ✓ |
+| productUrl | Product's url | String | ✓ |
+| brand | Brand | String |  |
+| description | Description | String | ✓ |
+| shortDescription | Short description | String |  |
+| available | Availability | Boolean |  |
+| imageUrl | Image's url | String | ✓ |
+| reference | Reference | String | ✓ |
+| priceCatalog | Price catalog | String | ✓ |
+| pricePromotion | Price promotion | String |  |
+| priceSpecial | Price special | String |  |
+
+### The Visitor Profile
 
 The Visitor profile interaction enables iAdvize's Console panel users to access to the visitor's CRM profile in a single click. 
 Agents can overview the visitor's CRM profile in a new window while they are chatting. Operators can then edit it or simply look for information.
@@ -191,7 +247,50 @@ To be able to retrieve the CRM profile, iAdvize must be able to identify the vis
 
 ![VisitorProfile](./assets/images/visitorprofilefeature@2x.png)
 
-### The End of Conversation (In progress)
+**Add a Visitor Profile Connector and Configure it**
+In order to set the right connector parameters, all you have to do is to declare:
+* The connector URL - this is your visitor's profile URL
+
+#### Visitor profile data
+
+<pre class="prettyprint lang-js">
+ [
+    {
+        "id":"1",
+        "label": "CRM profile",
+        "value": "https://www.crm.fr/visitor-profile",
+        "fieldtype":"URL"
+    },
+    {
+        "id":"2",
+        "label": "CRM tag",
+        "value": "tag",
+        "fieldtype": "TEXT"
+    }
+ ]
+</pre>
+
+** Filters **
+
+| Filter | Description | Values |
+| --- | --- | --- |
+| emailVisitor | Visitor email | ?emailVisitor=123  |
+| idConnectorVersion | Connector version id | ?idConnectorVersion=123 |
+| idVisitorExternal | Visitor external id | ?idVisitorExternal=123  |
+| idVisitorUnique | Visitor unique id | ?idVisitorUnique=123  |
+| idWebsite | Unique identifier of the associated website (assigned to you by iAdvize) | ?idWebsite=123  |
+| operatorLocale | Operator locale | ?operatorLocale=en  |
+
+** Fields **
+
+| Field | Description | Values | Required |
+| --- | --- | --- | --- |
+| id | Unique identifier | Integer | ✓ |
+| label | Label | String | ✓ |
+| value | Value | String | ✓ |
+| fieldtype | Field type | `URL` or `TEXT` | ✓ |
+
+### The Conversation Closing Option (In progress)
 This type of interaction is not available yet.
 
 ### Submit your apps
