@@ -1470,8 +1470,6 @@ Content-Length: 3442
 }
 </pre>
 
-**Retry management**
-iAdvize will retry to send callback in failure X times if http status code isn’t part of 50x code.
 
 ## Delivery headers
 iAdvize will send payload with two additionals headers:
