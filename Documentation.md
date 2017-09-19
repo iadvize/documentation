@@ -294,6 +294,8 @@ In order to set the right connector parameters, all you have to do is to declare
 
 ![CloseConversation](./assets/images/close_conversation@2x.png)
 
+#### Conversation Closing Option data
+
 <pre class="prettyprint lang-js">
  [
     {
