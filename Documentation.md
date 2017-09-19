@@ -290,8 +290,52 @@ In order to set the right connector parameters, all you have to do is to declare
 | value | Value | String | ✓ |
 | fieldType | Field type | `URL` or `TEXT` | ✓ |
 
-### The Conversation Closing Option (In progress)
-This type of interaction is not available yet.
+### The Conversation Closing Option
+
+![CloseConversation](./assets/images/close_conversation@2x.png)
+
+<pre class="prettyprint lang-js">
+ [
+    {
+        "id":"1",
+        "idParent": null,
+        "label": "create a salesforce ticket",
+        "fieldtype": "CHECKBOX",
+        "required": true
+    },
+    {
+        "id":"2",
+        "idParent": "1",
+        "label": "Brand name",
+        "fieldtype": "TEXT",
+        "required": true
+    {
+        "id":"3",
+        "idParent": "1",
+        "label": "Color",
+        "fieldtype": "TEXT",
+        "required": true
+    }
+    }
+ ]
+</pre>
+
+** Filters **
+
+| Filter | Description | Values |
+| --- | --- | --- |
+| idConnectorVersion | Connector version id | ?idConnectorVersion=123 |
+| idWebsite | Unique identifier of the associated website (assigned to you by iAdvize) | ?idWebsite=123  |
+
+** Fields **
+
+| Field | Description | Values | Required |
+| --- | --- | --- | --- |
+| id | Unique identifier | Integer | ✓ |
+| idParent | Parent identifier, if the field depends on it| Integer | |
+| label | Label | String | ✓ |
+| fieldtype | Field type | `TEXT` or `CHECKBOX` | ✓ |
+| required | Required | Boolean | ✓ |
 
 ### Submit your apps
 
