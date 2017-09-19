@@ -259,13 +259,13 @@ In order to set the right connector parameters, all you have to do is to declare
         "id":"1",
         "label": "CRM profile",
         "value": "https://www.crm.fr/visitor-profile",
-        "fieldtype":"URL"
+        "fieldType":"URL"
     },
     {
         "id":"2",
         "label": "CRM tag",
         "value": "tag",
-        "fieldtype": "TEXT"
+        "fieldType": "TEXT"
     }
  ]
 </pre>
@@ -288,7 +288,7 @@ In order to set the right connector parameters, all you have to do is to declare
 | id | Unique identifier | Integer | ✓ |
 | label | Label | String | ✓ |
 | value | Value | String | ✓ |
-| fieldtype | Field type | `URL` or `TEXT` | ✓ |
+| fieldType | Field type | `URL` or `TEXT` | ✓ |
 
 ### The Conversation Closing Option (In progress)
 This type of interaction is not available yet.
