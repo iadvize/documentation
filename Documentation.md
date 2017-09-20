@@ -791,8 +791,8 @@ See [reading section](#read) to discover some output examples.
 | Field | Description | Values |
 | --- | --- | --- |
 | user_id | Operator identifier | Integer |
-| status | Short text satus written by operator | String |
-| description | Operator profile escription | String |
+| status | Short text status written by operator | String |
+| description | Operator profile description | String |
 | facebook | Facebook identifier | String |
 | twitter | Twitter identifier | String |
 | city | City | String |
@@ -966,9 +966,9 @@ See [reading section](#read) to discover some output examples.
 | closed_at | Conversation end time | Date `YYYY-MM-DD HH:MM:SS` |
 | website_id | Website identifier | Integer |
 | operator_id | Operator identifier | Integer |
-| skill_id | Skill indentifier | Integer |
+| skill_id | Skill identifier | Integer |
 | tag_list | List of tag identifiers | List of integers |
-| rule_id | Rule indentifier | Integer |
+| rule_id | Rule identifier | Integer |
 | xmpp_id | XMPP related identifier | UUID |
 
 ### Tag
@@ -1109,7 +1109,7 @@ See below to discover used fields and see [reading section](#read) to discover s
 | cart_after_contact_amount | Average order value after contact | Average order value following a contact. |
 | cart_global_amount | Average order value on the website | Average Order Value, all visitor categories. |
 | contact_answered_after_first_message_duration | Response time after first message | Average response time between a customer's first question and the agent's answer. |
-| contact_answered_duration | Response time | Average reponse time between a customer's request and the agent's response. |
+| contact_answered_duration | Response time | Average response time between a customer's request and the agent's response. |
 | contact_closed_after_last_message_duration | Length of time between last message and closing of chat | Average amount of time between the visitor's last message and the closing of the chat discussion on the panel. |
 | contact_duration | Average processing time | Average length of all contacts, the length of a contact being defined as the difference between the end time (closure) and start time. |
 | contact_missed_number | Missed contact opportunities | Estimated number of missed contact opportunities because the agents were totally busy, offline or not in production. |
@@ -1193,8 +1193,8 @@ See [reading section](#read) to discover some output examples.
 | id | Visitor identifier | Integer |
 | unique_id | Visitor unique identifier | String |
 | external_id | Your id if provided | String |
-| lastname | Lastname | String |
-| firstname | Firstname | String |
+| lastname | Last name | String |
+| firstname | First name | String |
 | address | Address | String |
 | city | City | String |
 | zip | Zip code | String |
@@ -1324,9 +1324,7 @@ See below to discover used fields and see [reading section](#read) to discover s
 ## Payloads
 When an event occurs, an HTTP POST call is issued on the callback urls you set up with the event data. 
 Data is sent with “application/json” header content-type, and “json” format as payload. 
-Callback urls must be defined with HTTPS protocol and should be available with POST and GET http verbs:
-- POST verb to send data payload,
-- GET verb, to let iAdvize check the availability of the callback (more information in security section below).
+Callback urls must be defined with HTTPS protocol and should be available with POST verb to send data payload.
 iAdvize expect to have à 20x http status in callback result.
 
 **Output examples of Conversations domain:**
@@ -1450,6 +1448,7 @@ iAdvize expect to have à 20x http status in callback result.
 
 <pre class="prettyprint lang-js">
 Host: localhost
+X-iAdvize-Signature: 110e8400-e29b-11d4-a716-446655440000
 X-iAdvize-CorrelationId: 332e8400-e34b-11d4-a716-446655444444
 X-iAdvize-Delivery: 110e8400-e29b-11d4-a716-446655440000
 Content-Type: application/json
@@ -1472,12 +1471,57 @@ Content-Length: 3442
 
 
 ## Delivery headers
-iAdvize will send payload with two additionals headers:
-X-iAdvize-Delivery: UUID, unique identifier to describe a webhook
-X-iAdvize-CorrelationId: UUID, unique identifier used in retry webhooks to track same callback calls.
+iAdvize will send payload with three additional headers:
+
+* X-iAdvize-Delivery: UUID, unique identifier to describe this webhook delivery
+* X-iAdvize-CorrelationId: UUID, unique identifier used in retry webhooks to track same callback calls.
+* X-iAdvize-Signature: Hash signature, cf. Security section
 
 ## Security
-(documentation in-progress)
+
+iAdvize provide you a means to check that the payload coming into your server has not been modified on the way and come from us. 
+
+Once you have developed your callback reception system on your server, you can validation payload with this system.
+
+### Get your secret webhook token
+
+First, you'll need a secret token for each webhook. You'll find it in webhook section, near webhook url field.
+
+### Validating payloads from iAdvize
+
+For each webhook send, iAdvize will create a hash signature and put it in X-iAdvize-Signature headers. 
+Hash signature starts with algorithm name `sha256=` and is computed by hashing body payload with HMAC hexdigest algorithm and your secret token as salt. 
+
+<pre class="prettyprint lang-js">
+X-iAdvize-Signature: 110e8400-e29b-11d4-a716-446655440000
+</pre>
+
+
+Finally, you just have to computed new hash from body paylaod and string compare with `X-iAdvize-Signature`. For example, this is a PHP implementation:
+
+<pre class="prettyprint lang-php">
+$secretToken       = 'yourSecretToken';
+$headers           = getallheaders();
+$iAdvizeSignature  = $headers['X-iAdvize-Signature'];
+
+// Get alogrithm and hash
+list($algorithm, $iAdvizeHash) = explode('=', $iAdvizeSignature, 2);
+ 
+// Get body payload from webhook
+$bodyPayload = file_get_contents('php://input');
+ 
+// Computed hash with body payload
+$bodyPayloadHash = hash_hmac($algorithm, $bodyPayload, $secretToken);
+ 
+// Final check
+if (! hash_equals($iAdvizeHash, $bodyPayloadHash)) {
+    exit('Validation hash failed');
+}
+</pre>
+
+
+We strongly recommends you, to use **constant time** string comparison method (`hash_equals` vs `===`  in our example), 
+to be less vulnerable to timing attacks.
 
 # Push API (deprecated)
 
@@ -1572,7 +1616,7 @@ When a conversation is ended by the operator.
 
 # Single Sign On
 
-iAdvize offers a [Single Sign On](http://en.wikipedia.org/wiki/Single_sign-on) method that allows you to provide a unique authentification system to your operators who are already logged to your app.
+iAdvize offers a [Single Sign On](http://en.wikipedia.org/wiki/Single_sign-on) method that allows you to provide a unique authentication system to your operators who are already logged to your app.
 
 ## Benefits
 
