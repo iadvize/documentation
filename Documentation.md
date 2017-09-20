@@ -302,21 +302,21 @@ In order to set the right connector parameters, all you have to do is to declare
         "id":"1",
         "idParent": null,
         "label": "create a salesforce ticket",
-        "fieldtype": "CHECKBOX",
+        "fieldType": "CHECKBOX",
         "required": true
     },
     {
         "id":"2",
         "idParent": "1",
         "label": "Brand name",
-        "fieldtype": "TEXT",
+        "fieldType": "TEXT",
         "required": true
     },
     {
         "id":"3",
         "idParent": "1",
         "label": "Color",
-        "fieldtype": "TEXT",
+        "fieldType": "TEXT",
         "required": true
     }
  ]
