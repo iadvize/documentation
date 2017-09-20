@@ -311,13 +311,13 @@ In order to set the right connector parameters, all you have to do is to declare
         "label": "Brand name",
         "fieldtype": "TEXT",
         "required": true
+    },
     {
         "id":"3",
         "idParent": "1",
         "label": "Color",
         "fieldtype": "TEXT",
         "required": true
-    }
     }
  ]
 </pre>
@@ -328,6 +328,7 @@ In order to set the right connector parameters, all you have to do is to declare
 | --- | --- | --- |
 | idConnectorVersion | Connector version id | ?idConnectorVersion=123 |
 | idWebsite | Unique identifier of the associated website (assigned to you by iAdvize) | ?idWebsite=123  |
+| operatorLocale | Operator locale | ?operatorLocale=en  |
 
 ** Fields **
 
