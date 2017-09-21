@@ -340,11 +340,11 @@ In order to set the right connector parameters, all you have to do is to declare
 | --- | --- | --- | --- |
 | label | section's label | string | ✓ |
 | fields | Fields | array | ✓ |
-| fields.id | Unique identifier | Integer | ✓ |
-| fields.idParent | Parent identifier, if the field depends on it| Integer | |
-| fields.label | Label | String | ✓ |
-| fields.fieldType | Field type | `TEXT` or `CHECKBOX` | ✓ |
-| fields.isRequired | Required | Boolean | ✓ |
+| id (fields) | Unique identifier | Integer | ✓ |
+| idParent (fields) | Parent identifier, if the field depends on it| Integer | |
+| label (fields) | Label | String | ✓ |
+| fieldType (fields) | Field type | `TEXT` or `CHECKBOX` | ✓ |
+| isRequired (fields) | Required | Boolean | ✓ |
 
 ### Submit your apps
 
