@@ -7,7 +7,7 @@ Early November 2017, iAdvize will provide you with a Developer platform for you 
 Whether you are a developer, an integrator, a customer or just curious, here, you will find an overview of how to get started, our Developer Guidelines, our API with practical examples and a guide to build and publish your future integrations.
 
 ## What is iAdvize?
-[iAdvize](http://iadvize.com) is a conversational marketing platform that enables businesses to engage their customers and prospects whether they’re on the website or on social media from one single messaging solution (chat, voice, video). Visitors can get real-time advice from customer service but also from advocates, members of the brand community via [ibbü] (https://www.ibbu.com/en/) - our on-demand pool of experts.
+[iAdvize](http://iadvize.com) is a conversational marketing platform that enables businesses to engage their customers and prospects whether they’re on the website or on social media from one single messaging solution (chat, voice, video). Visitors can get real-time advice from customer service but also from advocates, members of the brand community via [ibbü](https://www.ibbu.com/en/) - our on-demand pool of experts.
 
 Implementing iAdvize is child's play. You just have to insert a tag on each page of your website. Once the solution is deployed, your customer service and marketing teams are completely independent and can set up the solution as they wish.
 
@@ -41,7 +41,7 @@ Do you want to join our developer community as a beta tester 🤘🏽? Follow th
 
 ## Get a Developer Account
 To build apps that iAdvize’s customers can use, first, you need to get a developer account.
-The Developer Platform will be available in private beta version from November, 17. We invite you to apply to the early access program thanks to our [online form] (https://docs.google.com/forms/d/e/1FAIpQLSfKbBBwHtXU60D0bw6dPejF1_h2VBiPAf60LpQWtJ7h6dvXeg/viewform?usp=sf_link).
+The Developer Platform will be available in private beta version from November, 17. We invite you to apply to the early access program thanks to our [online form](https://docs.google.com/forms/d/e/1FAIpQLSfKbBBwHtXU60D0bw6dPejF1_h2VBiPAf60LpQWtJ7h6dvXeg/viewform?usp=sf_link).
 
 * Apply and share your integration project with our team,
 * The iAdvize team will contact you within 48 hours.
