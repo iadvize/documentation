@@ -117,7 +117,7 @@ The features that are already available are:
 * The visitor profile (on the discussion panel)
 * The end of conversation (on the discussion panel)
 
-### The Product List
+### The product list
 The integration of the product list enables iAdvize's Console panel users to browse a product catalog from the iAdvize discussion panel.
 Agents can look for a product while they are chatting and send it in just a click within their conversation.
 
@@ -126,7 +126,7 @@ By clicking on the "view product" button, visitors are redirected to the product
 
 ![Product list](./assets/images/interactions-product-list-feature.png)
 
-**Add a Product List Connector and Configure it**
+**Add a product list connector and configure it**
 In order to set the right connector parameters, all you have to do is to declare:
 * The product list URL - this is your catalog’s URL
 * The categories url - this is where your connector will get the list of your product categories
@@ -238,16 +238,16 @@ In order to set the right connector parameters, all you have to do is to declare
 | pricePromotion | Price promotion | String |  |
 | priceSpecial | Price special | String |  |
 
-### The Visitor Profile
+### The visitor profile
 
-The Visitor profile interaction enables iAdvize's Console panel users to access to the visitor's CRM profile in a single click. 
+The visitor profile interaction enables iAdvize's Console panel users to access to the visitor's CRM profile in a single click. 
 Agents can overview the visitor's CRM profile in a new window while they are chatting. Operators can then edit it or simply look for information.
 
 To be able to retrieve the CRM profile, iAdvize must be able to identify the visitor thanks to an email and/or an external ID.
 
 ![VisitorProfile](./assets/images/visitorprofilefeature@2x.png)
 
-**Add a Visitor Profile Connector and Configure it**
+**Add a visitor profile connector and configure it**
 In order to set the right connector parameters, all you have to do is to declare:
 * The connector URL - this is your visitor's profile URL
 
