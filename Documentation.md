@@ -308,7 +308,6 @@ In order to set the right connector parameters, all you have to do is to declare
         "label": "CRM salesforce",
         "fields": [{
                 "id": "1",
-                "idParent": null,
                 "label": "create a salesforce ticket",
                 "fieldType": "CHECKBOX",
                 "isRequired": true
@@ -317,7 +316,7 @@ In order to set the right connector parameters, all you have to do is to declare
                 "id": "2",
                 "idParent": "1",
                 "label": "Brand name",
-                "fieldtType": "TEXT",
+                "fieldType": "TEXT",
                 "isRequired": true
             },
             {
@@ -346,8 +345,8 @@ In order to set the right connector parameters, all you have to do is to declare
 | --- | --- | --- | --- |
 | label | section's label | string | ✓ |
 | fields | Fields | array | ✓ |
-| id (fields) | Unique identifier | Integer | ✓ |
-| idParent (fields) | Parent identifier, if the field depends on it| Integer | |
+| id (fields) | Unique identifier | string | ✓ |
+| idParent (fields) | Parent identifier, if the field depends on it| string | |
 | label (fields) | Label | String | ✓ |
 | fieldType (fields) | Field type | `TEXT` or `CHECKBOX` | ✓ |
 | isRequired (fields) | Required | Boolean | ✓ |
