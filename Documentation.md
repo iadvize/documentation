@@ -290,9 +290,15 @@ In order to set the right connector parameters, all you have to do is to declare
 | value | Value | String | ✓ |
 | fieldType | Field type | `URL` or `TEXT` | ✓ |
 
-### The Conversation Closing Option
+### The conversation closing option
+
+The conversation closing option interaction enables iAdvize's Console panel users to provide additional information manually at the end of conversation. 
 
 ![CloseConversation](./assets/images/close_conversation@2x.png)
+
+**Add a conversation closing option connector and Configure it**
+In order to set the right connector parameters, all you have to do is to declare:
+* The connector URL - this is your form's url
 
 #### Conversation Closing Option data
 
