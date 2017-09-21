@@ -1,13 +1,13 @@
 # General information
 Welcome to iAdvize’s developer documentation!
-If you want to use our API, create integrations for your own personal use or to share with the rest of the world, you are in the right place.
+If you want to use our API, create integrations for your own personal use or share with the rest of the world, you are in the right place.
 
-Early November 2017, iAdvize will provide you with a Developer platform for you to easily publish your apps on our marketplace so that our users can install them directly from their administration interface.
+Early November 2017, iAdvize will provide you with a Developer platform to easily publish your apps on our marketplace so that our users can install them directly from their administration interface.
 
-Whether you are a developer, an integrator, a customer or just curious, here, you will find an overview of how to get started, our Developer Guidelines, our API with practical examples and a guide to build and publish your future integrations.
+Whether you are a developer, an integrator, a customer or just curious, you will find here an overview on how to get started, our Developer Guidelines, our API documentation with practical examples and a guide on how to build and publish your future integrations.
 
 ## What is iAdvize?
-[iAdvize](http://iadvize.com) is a conversational marketing platform that enables businesses to engage their customers and prospects whether they’re on the website or on social media from one single messaging solution (chat, voice, video). Visitors can get real-time advice from customer service but also from advocates, members of the brand community via [ibbü] (https://www.ibbu.com/en/) - our on-demand pool of experts.
+[iAdvize](http://iadvize.com) is a conversational marketing platform that enables businesses to engage their customers and prospects whether they’re on the website or social media from one single messaging solution (chat, voice, video). Visitors can get real-time advices from customer services but also from advocates, members of the brand community via [ibbü] (https://www.ibbu.com/en/) - our on-demand pool of experts.
 
 Implementing iAdvize is child's play. You just have to insert a tag on each page of your website. Once the solution is deployed, your customer service and marketing teams are completely independent and can set up the solution as they wish.
 
@@ -21,19 +21,19 @@ The iAdvize platform has 2 interfaces:
 
 ## What is the Developer Platform?
 
-The iAdvize Developer Platform allows developers to build apps and use our public APIs.
+The iAdvize Developer Platform allows developers to build apps and use our public API.
 The beta version of the Developer Platform will be available soon.
 As a beta tester, we will provide you with documentation and a private testing environment.
 
 ## Why to build apps to iAdvize?
 
-There are three main reasons for building an app with the iAdvize Developer Platform: 
+There are three main reasons to build an app with the iAdvize Developer Platform: 
 
 * You build apps and publish them for our customer community. (We've got more than 500 customers to amaze!)
-* You build apps in private mode and make them available only for one or more specific customers
-* You get rewarded based on how frequently your apps are used
+* You build apps in private mode and make them available only for one or more specific customers.
+* You get rewarded based on how frequently your apps are used.
 
-Here is the example of a potential protocol between iAdvize and a CRM software thanks to a connector:
+Here is an example of a potential protocol between iAdvize and a CRM software thanks to a connector:
 ![CRM Webhook](./assets/images/CRM-webhook.png)
 
 # Getting Started
@@ -41,30 +41,30 @@ Do you want to join our developer community as a beta tester 🤘🏽? Follow th
 
 ## Get a Developer Account
 To build apps that iAdvize’s customers can use, first, you need to get a developer account.
-The Developer Platform will be available in private beta version from November, 17. We invite you to apply to the early access program thanks to our [online form] (https://docs.google.com/forms/d/e/1FAIpQLSfKbBBwHtXU60D0bw6dPejF1_h2VBiPAf60LpQWtJ7h6dvXeg/viewform?usp=sf_link).
+As stated above, the Developer Platform will be available in private beta version from November, 17. We invite you to apply to the early access program thanks to our [online form] (https://docs.google.com/forms/d/e/1FAIpQLSfKbBBwHtXU60D0bw6dPejF1_h2VBiPAf60LpQWtJ7h6dvXeg/viewform?usp=sf_link).
 
 * Apply and share your integration project with our team,
 * The iAdvize team will contact you within 48 hours.
 
 ## Features Overview
-iAdvize's Developer Platform will provide you with some easy-to-use tools so you can:
+iAdvize's Developer Platform will provide you with some easy-to-use tools allowing you to:
 
-* Manager the privacy mode of your app for it to be public or private
-* Set up the authentication process for your app
+* Manage the privacy mode of your app for it to be public or private
+* Set up the app authentication process
 * Define custom settings such as object mapping (In progress)
 * Create interactions to enhance some of iAdvize's predefined features
 * Use outgoing webhooks to receive updates in real-time
 
 Once your app is ready, you will be able to submit your connector for review.
-Then, the iAdvize team will review your app to make sure it fits the Developer Platform policies, and will get back to you within 48 hours (on working days).
+Then, the iAdvize team will review your submission to make sure it fits the Developer Platform policies, and will get back to you within 48 hours (on working days).
 And then hurrah... You can publish your app on iAdvize’s marketplace!
 
 # Build apps
-Once you are logged in your developer account, you are ready to build apps.
+Once you are logged into your developer account, you are ready to build apps.
 So let's go through the different sections of the Developer Platform:
 
 ## My apps
-This is the place where you can see the list of all the apps you have built on iAdvize. You can also see their current status:
+This is the place where you can see the list of all apps you have built on iAdvize. You can also see their current status:
 * Published: your app is ready to be installed on the iAdvize Marketplace
 * Under review: your app has been submitted for review
 * Sandbox: you can edit your app
@@ -73,6 +73,7 @@ This is the place where you can see the list of all the apps you have built on i
 This is where you will be able to define your app's profile. Also, this is where you can set the Privacy mode of your application: public or private.
 
 **How does the Private mode work?**
+
 Your App can be available for all iAdvize's customers or for selected customers.
 Our team is still working on the accessibility mode under the Private mode.
 In alpha version, we will make it available manually for the specific customers you have selected.
@@ -81,6 +82,7 @@ In alpha version, we will make it available manually for the specific customers 
 The authentication section is where you set your app’s needs to retrieve data from iAdvize and the app you want it to be connected to. Users will need to follow these authentication steps to install your app.
 
 **Define app's authentication fields**
+
 You can add fields and define the type of entry you need (text, numeric, etc.).
 
 * Label: it’s the name of your field, this is what users will see.
@@ -92,6 +94,7 @@ This is the first thing users will see once they click on the "install" button o
 Fields appear to users according to their order of creation (the 1st entry created is the 1st on displayed on the page).
 
 *i.e. if your primary goal is to know your users’ usernames, it is the first information you should ask them for.*
+
 
 * Configure your verification URL
 This is the URL on which we will check your app. It also helps us check if your credentials are valid. We'll call this URL and your connector will be sent back if the authentication parameters have been correctly set up to go to the next installation step.
