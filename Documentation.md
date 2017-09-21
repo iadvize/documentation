@@ -297,29 +297,33 @@ In order to set the right connector parameters, all you have to do is to declare
 #### Conversation Closing Option data
 
 <pre class="prettyprint lang-js">
- [
+[
     {
-        "id":"1",
-        "idParent": null,
-        "label": "create a salesforce ticket",
-        "fieldType": "CHECKBOX",
-        "required": true
-    },
-    {
-        "id":"2",
-        "idParent": "1",
-        "label": "Brand name",
-        "fieldType": "TEXT",
-        "required": true
-    },
-    {
-        "id":"3",
-        "idParent": "1",
-        "label": "Color",
-        "fieldType": "TEXT",
-        "required": true
+        "label": "CRM salesforce",
+        "fields": [{
+                "id": "1",
+                "idParent": null,
+                "label": "create a salesforce ticket",
+                "fieldType": "CHECKBOX",
+                "isRequired": true
+            },
+            {
+                "id": "2",
+                "idParent": "1",
+                "label": "Brand name",
+                "fieldtType": "TEXT",
+                "isRequired": true
+            },
+            {
+                "id": "3",
+                "idParent": "1",
+                "label": "Color",
+                "fieldType": "TEXT",
+                "isRequired": true
+            }
+        ]
     }
- ]
+]
 </pre>
 
 ** Filters **
@@ -334,11 +338,13 @@ In order to set the right connector parameters, all you have to do is to declare
 
 | Field | Description | Values | Required |
 | --- | --- | --- | --- |
-| id | Unique identifier | Integer | ✓ |
-| idParent | Parent identifier, if the field depends on it| Integer | |
-| label | Label | String | ✓ |
-| fieldtype | Field type | `TEXT` or `CHECKBOX` | ✓ |
-| required | Required | Boolean | ✓ |
+| label | section's label | string | ✓ |
+| fields | Fields | array | ✓ |
+| fields.id | Unique identifier | Integer | ✓ |
+| fields.idParent | Parent identifier, if the field depends on it| Integer | |
+| fields.label | Label | String | ✓ |
+| fields.fieldType | Field type | `TEXT` or `CHECKBOX` | ✓ |
+| fields.isRequired | Required | Boolean | ✓ |
 
 ### Submit your apps
 
