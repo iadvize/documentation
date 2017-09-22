@@ -7,7 +7,7 @@ Early November 2017, iAdvize will provide you with a Developer platform for you 
 Whether you are a developer, an integrator, a customer or just curious, here, you will find an overview of how to get started, our Developer Guidelines, our API with practical examples and a guide to build and publish your future integrations.
 
 ## What is iAdvize?
-[iAdvize](http://iadvize.com) is a conversational marketing platform that enables businesses to engage their customers and prospects whether they’re on the website or on social media from one single messaging solution (chat, voice, video). Visitors can get real-time advice from customer service but also from advocates, members of the brand community via [ibbü] (https://www.ibbu.com/en/) - our on-demand pool of experts.
+[iAdvize](http://iadvize.com) is a conversational marketing platform that enables businesses to engage their customers and prospects whether they’re on the website or on social media from one single messaging solution (chat, voice, video). Visitors can get real-time advice from customer service but also from advocates, members of the brand community via [ibbü](https://www.ibbu.com/en/) - our on-demand pool of experts.
 
 Implementing iAdvize is child's play. You just have to insert a tag on each page of your website. Once the solution is deployed, your customer service and marketing teams are completely independent and can set up the solution as they wish.
 
@@ -41,7 +41,7 @@ Do you want to join our developer community as a beta tester 🤘🏽? Follow th
 
 ## Get a Developer Account
 To build apps that iAdvize’s customers can use, first, you need to get a developer account.
-The Developer Platform will be available in private beta version from November, 17. We invite you to apply to the early access program thanks to our [online form] (https://docs.google.com/forms/d/e/1FAIpQLSfKbBBwHtXU60D0bw6dPejF1_h2VBiPAf60LpQWtJ7h6dvXeg/viewform?usp=sf_link).
+The Developer Platform will be available in private beta version from November, 17. We invite you to apply to the early access program thanks to our [online form](https://docs.google.com/forms/d/e/1FAIpQLSfKbBBwHtXU60D0bw6dPejF1_h2VBiPAf60LpQWtJ7h6dvXeg/viewform?usp=sf_link).
 
 * Apply and share your integration project with our team,
 * The iAdvize team will contact you within 48 hours.
@@ -117,7 +117,7 @@ The features that are already available are:
 * The visitor profile (on the discussion panel)
 * The end of conversation (on the discussion panel)
 
-### The Product List
+### The product list
 The integration of the product list enables iAdvize's Console panel users to browse a product catalog from the iAdvize discussion panel.
 Agents can look for a product while they are chatting and send it in just a click within their conversation.
 
@@ -126,7 +126,7 @@ By clicking on the "view product" button, visitors are redirected to the product
 
 ![Product list](./assets/images/interactions-product-list-feature.png)
 
-**Add a Product List Connector and Configure it**
+**Add a product list connector and configure it**
 In order to set the right connector parameters, all you have to do is to declare:
 * The product list URL - this is your catalog’s URL
 * The categories url - this is where your connector will get the list of your product categories
@@ -238,16 +238,16 @@ In order to set the right connector parameters, all you have to do is to declare
 | pricePromotion | Price promotion | String |  |
 | priceSpecial | Price special | String |  |
 
-### The Visitor Profile
+### The visitor profile
 
-The Visitor profile interaction enables iAdvize's Console panel users to access to the visitor's CRM profile in a single click. 
+The visitor profile interaction enables iAdvize's Console panel users to access to the visitor's CRM profile in a single click. 
 Agents can overview the visitor's CRM profile in a new window while they are chatting. Operators can then edit it or simply look for information.
 
 To be able to retrieve the CRM profile, iAdvize must be able to identify the visitor thanks to an email and/or an external ID.
 
 ![VisitorProfile](./assets/images/visitorprofilefeature@2x.png)
 
-**Add a Visitor Profile Connector and Configure it**
+**Add a visitor profile connector and configure it**
 In order to set the right connector parameters, all you have to do is to declare:
 * The connector URL - this is your visitor's profile URL
 
@@ -290,8 +290,60 @@ In order to set the right connector parameters, all you have to do is to declare
 | value | Value | String | ✓ |
 | fieldType | Field type | `URL` or `TEXT` | ✓ |
 
-### The Conversation Closing Option (In progress)
-This type of interaction is not available yet.
+### The conversation closing option
+
+The conversation closing option interaction enables iAdvize's Console panel users to provide additional information manually at the end of conversation. 
+
+![CloseConversation](./assets/images/close_conversation@2x.png)
+
+**Add a conversation closing option connector and Configure it**
+In order to set the right connector parameters, all you have to do is to declare:
+* The connector URL - this is your form's url
+
+#### Conversation Closing Option data
+
+<pre class="prettyprint lang-js">
+ [
+    {
+        "id": "1",
+        "label": "create a salesforce ticket",
+        "fieldType": "CHECKBOX",
+        "isRequired": true
+    },
+    {
+        "id": "2",
+        "idParent": "1",
+        "label": "Brand name",
+        "fieldType": "TEXT",
+        "isRequired": true
+    },
+    {
+        "id": "3",
+        "idParent": "1",
+        "label": "Color",
+        "fieldType": "TEXT",
+        "isRequired": true
+    }
+]
+</pre>
+
+** Filters **
+
+| Filter | Description | Values |
+| --- | --- | --- |
+| idConnectorVersion | Connector version id | ?idConnectorVersion=123 |
+| idWebsite | Unique identifier of the associated website (assigned to you by iAdvize) | ?idWebsite=123  |
+| operatorLocale | Operator locale | ?operatorLocale=en  |
+
+** Fields **
+
+| Field | Description | Values | Required |
+| --- | --- | --- | --- |
+| id | Unique identifier | string | ✓ |
+| idParent | Parent identifier, if the field depends on it| string | |
+| label | Label | String | ✓ |
+| fieldType | Field type | `TEXT` or `CHECKBOX` | ✓ |
+| isRequired | Required | Boolean | ✓ |
 
 ### Submit your apps
 
