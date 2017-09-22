@@ -303,30 +303,26 @@ In order to set the right connector parameters, all you have to do is to declare
 #### Conversation Closing Option data
 
 <pre class="prettyprint lang-js">
-[
+ [
     {
-        "label": "CRM salesforce",
-        "fields": [{
-                "id": "1",
-                "label": "create a salesforce ticket",
-                "fieldType": "CHECKBOX",
-                "isRequired": true
-            },
-            {
-                "id": "2",
-                "idParent": "1",
-                "label": "Brand name",
-                "fieldType": "TEXT",
-                "isRequired": true
-            },
-            {
-                "id": "3",
-                "idParent": "1",
-                "label": "Color",
-                "fieldType": "TEXT",
-                "isRequired": true
-            }
-        ]
+        "id": "1",
+        "label": "create a salesforce ticket",
+        "fieldType": "CHECKBOX",
+        "isRequired": true
+    },
+    {
+        "id": "2",
+        "idParent": "1",
+        "label": "Brand name",
+        "fieldType": "TEXT",
+        "isRequired": true
+    },
+    {
+        "id": "3",
+        "idParent": "1",
+        "label": "Color",
+        "fieldType": "TEXT",
+        "isRequired": true
     }
 ]
 </pre>
@@ -343,13 +339,11 @@ In order to set the right connector parameters, all you have to do is to declare
 
 | Field | Description | Values | Required |
 | --- | --- | --- | --- |
-| label | section's label | string | ✓ |
-| fields | Fields | array | ✓ |
-| id (fields) | Unique identifier | string | ✓ |
-| idParent (fields) | Parent identifier, if the field depends on it| string | |
-| label (fields) | Label | String | ✓ |
-| fieldType (fields) | Field type | `TEXT` or `CHECKBOX` | ✓ |
-| isRequired (fields) | Required | Boolean | ✓ |
+| id | Unique identifier | string | ✓ |
+| idParent | Parent identifier, if the field depends on it| string | |
+| label | Label | String | ✓ |
+| fieldType | Field type | `TEXT` or `CHECKBOX` | ✓ |
+| isRequired | Required | Boolean | ✓ |
 
 ### Submit your apps
 
