@@ -1496,7 +1496,7 @@ To retrieve the token(s) you must contact us at developers@iadvize.com and we wi
 ### Validating payloads from iAdvize
 
 Once the secret token set, iAdvize will create a hash signature. 
-This hash signature is passed along with each request in the headers as `X-Hub-Signature`. 
+This hash signature is passed along with each request in the headers as `X-iAdvize-Signature`. 
 Hash signature starts with algorithm name `sha256=` and is computed by hashing body payload with HMAC hexdigest algorithm and your secret token as salt. 
 
 <pre class="prettyprint lang-js">
