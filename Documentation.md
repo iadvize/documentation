@@ -1477,19 +1477,26 @@ iAdvize will send payload with three additional headers:
 * X-iAdvize-CorrelationId: UUID, unique identifier used in retry webhooks to track same callback calls.
 * X-iAdvize-Signature: Hash signature, cf. Security section
 
-## Security
+## Securing your webhooks
 
-iAdvize provide you a means to check that the payload coming into your server has not been modified on the way and come from us. 
+For security reasons iAdvize provides you with a method to verify and secure your Webhooks notifications. You will be able to make sure that the payloads have not been subjected to modifications, and to verify its source in order for example to limit the requests to those coming from iAdvize.
 
-Once you have developed your callback reception system on your server, you can validation payload with this system.
+Once your server is configured to receive payloads, you can set up a secret token and verify the information.
 
-### Get your secret webhook token
+### Set you secret token
 
-First, you'll need a secret token for each webhook. You'll find it in webhook section, near webhook url field.
+First, you need to get one or several secret token depending on your project.
+
+If you build a connector thanks to our Developer Platform, you will have to use one token per connector (no matters the number of webhook you set within your connector).
+You can retrieve this token in the 'App information' section.
+
+If you want to use the webhook system without building a connector, you will have to use one token per webhook.
+To retrieve the token(s) you must contact us at developers@iadvize.com and we will generate the token for you.
 
 ### Validating payloads from iAdvize
 
-For each webhook send, iAdvize will create a hash signature and put it in X-iAdvize-Signature headers. 
+Once the secret token set, iAdvize will create a hash signature. 
+This hash signature is passed along with each request in the headers as `X-Hub-Signature`. 
 Hash signature starts with algorithm name `sha256=` and is computed by hashing body payload with HMAC hexdigest algorithm and your secret token as salt. 
 
 <pre class="prettyprint lang-js">
@@ -1497,7 +1504,8 @@ X-iAdvize-Signature: 110e8400-e29b-11d4-a716-446655440000
 </pre>
 
 
-Finally, you just have to computed new hash from body paylaod and string compare with `X-iAdvize-Signature`. For example, this is a PHP implementation:
+You have to compute a new hash using your secret token, and to compare it with `X-iAdvize-Signature` and make sure it matches.
+Here is an example of a PHP implementation:
 
 <pre class="prettyprint lang-php">
 $secretToken       = 'yourSecretToken';
@@ -1520,7 +1528,7 @@ if (! hash_equals($iAdvizeHash, $bodyPayloadHash)) {
 </pre>
 
 
-We strongly recommends you, to use **constant time** string comparison method (`hash_equals` vs `===`  in our example), 
+We strongly recommend you, to use the **constant time** string comparison method (`hash_equals` vs `===`  in our example), 
 to be less vulnerable to timing attacks.
 
 # Push API (deprecated)
