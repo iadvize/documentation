@@ -716,7 +716,7 @@ Get the live availability of all of your operators.
 
 You can use previous filters.
 *   In order to have more accurate results, only available operators are displayed in the default view. 
-*   If you want to display offline operators, we invite you to use the `connected` filter.
+*   If you want to display offline operators, we invite you to use the `connected` filter. Please note that you will only see agents that logged in to the iAdvize platform at least once.
 *   If your operators have `skills` or `groups`, you need to specify it in your request.
 
 #### Get operator's live availability
