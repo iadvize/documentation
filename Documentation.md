@@ -93,7 +93,7 @@ Fields appear to users according to their order of creation (the 1st entry creat
 
 *i.e. if your primary goal is to know your users’ usernames, it is the first information you should ask them for.*
 
-**Configure your verification url**
+**Configure your verification url** 
 This is the URL on which we will check your app. It also helps us check if your credentials are valid.
 Please read the [verification Url](#verification-url) section right below.
 
@@ -126,7 +126,7 @@ For instance it could be: Username
 These configuration steps will take place immediately after authentication (if any).
 The order of appearance of the steps depends on their order of creation. The first created field will appear first and the last created field will appear last to the user.
 
-**Configure your verification url**
+**Configure your verification url** 
 This is the URL on which we will check your app.
 Please read the [verification Url](#verification-url) section right below.
 
