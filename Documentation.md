@@ -106,7 +106,7 @@ Users have to fill in the fields during the installation process first, on the i
 ![Authentication admin](./assets/images/marketplace-configure.png)
 
 ## App Settings (in progress)
-As the authentication section, you can configure setting parameters that users will need to follow.
+As the authentication section, you can configure setting parameters that users will need to configure.
 
 **Define app's setting fields**
 You can add fields and define the type of entry you need.
@@ -129,7 +129,7 @@ Users have to fill in the fields during the installation process second, on the 
 ## Verification url
 
 In [app authentication](#app-authentication) and [app-settings](#app-settings), you can configure verification url.
-This is the URL on which we will check the authentication and setting parameters of your new users during theirs connector's installation.
+This is the URL on which we will check the authentication and setting parameters of your new users during their connector's installation.
 We'll call this URL and your connector will be sent back if the authentication or setting parameters have been correctly set up to go to the next installation step.
 
 ### Request payload
