@@ -106,15 +106,35 @@ Users have to fill in the fields during the installation process first, on the i
 ![Authentication admin](./assets/images/marketplace-configure.png)
 
 ## App Settings (in progress)
+As the authentication section, you can configure setting parameters that users will need to follow.
 
+**Define app's setting fields**
+You can add fields and define the type of entry you need.
+
+* Label: it’s the name of your field, this is what users will see.
+* Type: it defines the type of entry.
+* ID: you should choose the name of your field ID according to your code.
+
+You can add as much fields as you need.
+This is the second steps of users installation on the iAdvize Marketplace.
+Fields appear to users according to their order of creation (the 1st entry created is the 1st on displayed on the page).
+
+* Configure your [verification Url](#verification-url)
+This is the URL on which we will check your app. We'll call this URL and your connector will be sent back if the setting parameters have been correctly set up to go to the next installation step.
+![Setting](./assets/images/developer-authentication.png)
+
+
+Users have to fill in the fields during the installation process second, on the iAdvize Marketplace.
+
+![Setting admin](./assets/images/marketplace-configure.png)
 
 ## Verification url
 
-In [app authentication](#app-authentication) and [app settings](#app-settings), you can configure verification url.
+In [app authentication](#app-authentication) and [app-settings](#app-settings), you can configure verification url.
 This is the URL on which we will check the authentication and setting parameters of your new users during theirs connector's installation.
 We'll call this URL and your connector will be sent back if the authentication or setting parameters have been correctly set up to go to the next installation step.
 
-### Input
+### Request payload
 
 This is the data passed to your verification url by payload body of a POST Request.
 
@@ -140,7 +160,7 @@ This is the data passed to your verification url by payload body of a POST Reque
 | fieldType | field's type | `TEXT`  |
 
 
-### Ouput 
+### Response payload 
 
 To validate the authentication or setting installation step, we wait a response from your verification url, with the following format:
 
