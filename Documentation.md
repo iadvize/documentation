@@ -93,7 +93,7 @@ Fields appear to users according to their order of creation (the 1st entry creat
 
 *i.e. if your primary goal is to know your users’ usernames, it is the first information you should ask them for.*
 
-* Configure your [verification Url](#url-verification)
+* Configure your [verification Url](#verification-url)
 This is the URL on which we will check your app. It also helps us check if your credentials are valid. We'll call this URL and your connector will be sent back if the authentication parameters have been correctly set up to go to the next installation step.
 
 *i.e. users might be required to authenticate with an email and a password. In this case, you need to create two different fields, one for the email and one for the password.*
@@ -105,10 +105,10 @@ Users have to fill in the fields during the installation process first, on the i
 
 ![Authentication admin](./assets/images/marketplace-configure.png)
 
-## App Settings
-This part is still under development. This is where you will be able to add specific configuration steps such as mapping.
+## App Settings (in progress)
 
-## Url verification
+
+## Verification url
 
 ### Input
 
@@ -129,9 +129,9 @@ This part is still under development. This is where you will be able to add spec
 
 | Field | Description | Values |
 | --- | --- | --- |
-| id |  | String |
-| value |  | String  |
-| fieldType |  | `TEXT`  |
+| id | Field's id | String |
+| value | Field's value | String  |
+| fieldType | field's type | `TEXT`  |
 
 
 ### Ouput 
@@ -151,11 +151,11 @@ This part is still under development. This is where you will be able to add spec
 
 | Field | Description | Values | Required |
 | --- | --- | --- | --- |
-| isValid |  | Boolean | ✓ |
-| message |   | String |  |
-| fields |  | Array |  |
-| id |  | String |  |
-| message |  | String |  |
+| isValid | validation status | Boolean | ✓ |
+| message |  validation message | String |  |
+| fields | field's array | Array |  |
+| fields - id | fields's id | String |  |
+| fields - message | field's message | String |  |
 
 ## App Interactions
 Add interactions to enhance the iAdvize interface by adding or editing predefined features.
