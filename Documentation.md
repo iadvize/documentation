@@ -110,7 +110,7 @@ This part is still under development. This is where you will be able to add spec
 
 ## Url verification
 
-### Filters
+### Input
 
 <pre class="prettyprint lang-js">
 [
@@ -127,15 +127,14 @@ This part is still under development. This is where you will be able to add spec
 ]
 </pre>
 
-| Filter | Description | Values |
+| Field | Description | Values |
 | --- | --- | --- |
-| idConnectorVersion | Connector version id | ?idConnectorVersion=123 |
-| idParent | Unique identifier of the parent category | ?idParent=123  |
-| idWebsite | Unique identifier of the associated website (assigned to you by iAdvize) | ?idWebsite=123  |
-| limit | Maximum number of resources per page | ?limit=10 |
-| offset | Number of resources skipped before beginning to return resources | ?offset=10 |
+| id |  | String |
+| value |  | String  |
+| fieldType |  | `TEXT`  |
 
-### Fields 
+
+### Ouput 
 
 <pre class="prettyprint lang-js">
 {
@@ -152,11 +151,11 @@ This part is still under development. This is where you will be able to add spec
 
 | Field | Description | Values | Required |
 | --- | --- | --- | --- |
-| id | Unique identifier | Integer | ✓ |
-| idParent | Unique identifier of the parent category  | Integer |  |
-| label | Label | String | ✓ |
-| products | products | Array of strings |  |
-| productsCount | Number of products | Integer | ✓ |
+| isValid |  | Boolean | ✓ |
+| message |   | String |  |
+| fields |  | Array |  |
+| id |  | String |  |
+| message |  | String |  |
 
 ## App Interactions
 Add interactions to enhance the iAdvize interface by adding or editing predefined features.
