@@ -84,7 +84,7 @@ The authentication section is where you set your app’s needs to retrieve data 
 You can add fields and define the type of entry you need (text, numeric, etc.).
 
 * Label: it’s the name of your field, this is what users will see.
-* Type: it defines the type of entry (text, numeric, alphanumeric).
+* Type: it defines the type of entry. (For instance: alphanumeric)
 * ID: you should choose the name of your field ID according to your code.
 
 You can add as much fields as you need.
@@ -93,8 +93,10 @@ Fields appear to users according to their order of creation (the 1st entry creat
 
 *i.e. if your primary goal is to know your users’ usernames, it is the first information you should ask them for.*
 
-* Configure your [verification Url](#verification-url)
-This is the URL on which we will check your app. It also helps us check if your credentials are valid. We'll call this URL and your connector will be sent back if the authentication parameters have been correctly set up to go to the next installation step.
+**Configure your verification url** 
+This is the URL on which we will check your app. It also helps us check if your credentials are valid.
+Please read the [verification Url](#verification-url) section right below.
+
 
 *i.e. users might be required to authenticate with an email and a password. In this case, you need to create two different fields, one for the email and one for the password.*
 
@@ -105,36 +107,40 @@ Users have to fill in the fields during the installation process first, on the i
 
 ![Authentication admin](./assets/images/marketplace-configure.png)
 
-## App Settings (in progress)
-As the authentication section, you can configure setting parameters that users will need to configure.
 
-**Define app's setting fields**
-You can add fields and define the type of entry you need.
+##App Settings
 
-* Label: it’s the name of your field, this is what users will see.
-* Type: it defines the type of entry.
-* ID: you should choose the name of your field ID according to your code.
+Just as in the section dedicated to your app's authentication, you are able to set the parameters that users will need to install your connector.
+These are the fields that the iAdvize administrator will fill in to install and configure your connector from the iAdvize Marketplace.
 
-You can add as much fields as you need.
-This is the second steps of users installation on the iAdvize Marketplace.
-Fields appear to users according to their order of creation (the 1st entry created is the 1st on displayed on the page).
+Define your app's settings fields
 
-* Configure your [verification Url](#verification-url)
-This is the URL on which we will check your app. We'll call this URL and your connector will be sent back if the setting parameters have been correctly set up to go to the next installation step.
+You can add as many fields as the installation and configuration of your application requires.
+For each of these fields you will have to specify the type of input required.
 
+*Label: it is the name of your field. (This is what the users will see).
+For instance it could be: Username
+*Type: it defines the type of entry. (For instance: alphanumeric)
+*ID: this is based on your own code to easily retrieve the different fields.
 
-Users have to fill in the fields during the installation process second, on the iAdvize Marketplace.
+These configuration steps will take place immediately after authentication (if any).
+The order of appearance of the steps depends on their order of creation. The first created field will appear first and the last created field will appear last to the user.
 
+**Configure your verification url** 
+This is the URL on which we will check your app.
+Please read the [verification Url](#verification-url) section right below.
+
+![Setting](./assets/images/developer-settings.jpg)
 
 ## Verification url
 
-In [app authentication](#app-authentication) and [app-settings](#app-settings), you can configure verification url.
-This is the URL on which we will check the authentication and setting parameters of your new users during their connector's installation.
-We'll call this URL and your connector will be sent back if the authentication or setting parameters have been correctly set up to go to the next installation step.
+In the [app authentication](#app-authentication) and [app settings](#app-settings) sections of the iAdvize Developer Platform, you can set a "Verification url".
+We will call this URL each time the application requires a confirmation from your connector to approve the configuration settings.
+It means that your connector must answer to this call by a confirmation or an error message to determine whether the setting parameters have been correctly set up. If the first step is confirmed by your connector, it goes to the next step of configuration.
 
 ### Request payload
 
-This is the data passed to your verification url by payload body of a POST Request.
+Here is the information sent to your verification url as a payload body of a POST Request.
 
 <pre class="prettyprint lang-js">
 [
@@ -160,7 +166,7 @@ This is the data passed to your verification url by payload body of a POST Reque
 
 ### Response payload 
 
-To validate the authentication or setting installation step, we wait a response from your verification url, with the following format:
+In order to validate the information filled by the iAdvize administrator during the installation of the connector, we await the answer of your connector in this format:
 
 <pre class="prettyprint lang-js">
 {
