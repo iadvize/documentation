@@ -93,7 +93,7 @@ Fields appear to users according to their order of creation (the 1st entry creat
 
 *i.e. if your primary goal is to know your users’ usernames, it is the first information you should ask them for.*
 
-* Configure your verification URL
+* Configure your [verification URL](## Url verification)
 This is the URL on which we will check your app. It also helps us check if your credentials are valid. We'll call this URL and your connector will be sent back if the authentication parameters have been correctly set up to go to the next installation step.
 
 *i.e. users might be required to authenticate with an email and a password. In this case, you need to create two different fields, one for the email and one for the password.*
@@ -109,6 +109,9 @@ Users have to fill in the fields during the installation process first, on the i
 This part is still under development. This is where you will be able to add specific configuration steps such as mapping.
 
 ## Url verification
+
+### Filters
+
 <pre class="prettyprint lang-js">
 [
     {
@@ -124,6 +127,16 @@ This part is still under development. This is where you will be able to add spec
 ]
 </pre>
 
+| Filter | Description | Values |
+| --- | --- | --- |
+| idConnectorVersion | Connector version id | ?idConnectorVersion=123 |
+| idParent | Unique identifier of the parent category | ?idParent=123  |
+| idWebsite | Unique identifier of the associated website (assigned to you by iAdvize) | ?idWebsite=123  |
+| limit | Maximum number of resources per page | ?limit=10 |
+| offset | Number of resources skipped before beginning to return resources | ?offset=10 |
+
+### Fields 
+
 <pre class="prettyprint lang-js">
 {
 	"isValid": false,
@@ -136,6 +149,14 @@ This part is still under development. This is where you will be able to add spec
 	]
 }
 </pre>
+
+| Field | Description | Values | Required |
+| --- | --- | --- | --- |
+| id | Unique identifier | Integer | ✓ |
+| idParent | Unique identifier of the parent category  | Integer |  |
+| label | Label | String | ✓ |
+| products | products | Array of strings |  |
+| productsCount | Number of products | Integer | ✓ |
 
 ## App Interactions
 Add interactions to enhance the iAdvize interface by adding or editing predefined features.
