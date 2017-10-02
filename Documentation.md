@@ -93,7 +93,7 @@ Fields appear to users according to their order of creation (the 1st entry creat
 
 *i.e. if your primary goal is to know your users’ usernames, it is the first information you should ask them for.*
 
-* Configure your [verification URL](## Url verification)
+* Configure your [verification Url](#url verification)
 This is the URL on which we will check your app. It also helps us check if your credentials are valid. We'll call this URL and your connector will be sent back if the authentication parameters have been correctly set up to go to the next installation step.
 
 *i.e. users might be required to authenticate with an email and a password. In this case, you need to create two different fields, one for the email and one for the password.*
