@@ -84,7 +84,7 @@ The authentication section is where you set your app’s needs to retrieve data 
 You can add fields and define the type of entry you need (text, numeric, etc.).
 
 * Label: it’s the name of your field, this is what users will see.
-* Type: it defines the type of entry (text, numeric, alphanumeric).
+* Type: it defines the type of entry. (For instance: alphanumeric)
 * ID: you should choose the name of your field ID according to your code.
 
 You can add as much fields as you need.
@@ -93,7 +93,7 @@ Fields appear to users according to their order of creation (the 1st entry creat
 
 *i.e. if your primary goal is to know your users’ usernames, it is the first information you should ask them for.*
 
-*Configure your verification url
+* Configure your verification url
 This is the URL on which we will check your app. It also helps us check if your credentials are valid.
 Please read the [verification Url](#verification-url) section right below.
 
@@ -120,14 +120,13 @@ For each of these fields you will have to specify the type of input required.
 
 *Label: it is the name of your field. (This is what the users will see).
 For instance it could be: Username
-*Type: it defines the type of entry.
-For instance: alphanumeric
+*Type: it defines the type of entry. (For instance: alphanumeric)
 *ID: this is based on your own code to easily retrieve the different fields.
 
 These configuration steps will take place immediately after authentication (if any).
 The order of appearance of the steps depends on their order of creation. The first created field will appear first and the last created field will appear last to the user.
 
-*Configure your verification url
+* Configure your verification url
 This is the URL on which we will check your app.
 Please read the [verification Url](#verification-url) section right below.
 
@@ -135,7 +134,7 @@ Please read the [verification Url](#verification-url) section right below.
 
 ## Verification url
 
-In the [app authentication](#app-authentication) and [app-settings](#app-settings) sections of the iAdvize Developer Platform, you can set a "Verification url".
+In the [app authentication](#app-authentication) and [app settings](#app-settings) sections of the iAdvize Developer Platform, you can set a "Verification url".
 We will call this URL each time the application requires a confirmation from your connector to approve the configuration settings.
 It means that your connector must answer to this call by a confirmation or an error message to determine whether the setting parameters have been correctly set up. If the first step is confirmed by your connector, it goes to the next step of configuration.
 
