@@ -110,7 +110,13 @@ Users have to fill in the fields during the installation process first, on the i
 
 ## Verification url
 
+In [app authentication](#app-authentication) and [app settings](#app-settings), you can configure verification url.
+This is the URL on which we will check the authentication and setting parameters of your new users during theirs connector's installation.
+We'll call this URL and your connector will be sent back if the authentication or setting parameters have been correctly set up to go to the next installation step.
+
 ### Input
+
+This is the data passed to your verification url by payload body of a POST Request.
 
 <pre class="prettyprint lang-js">
 [
@@ -135,6 +141,8 @@ Users have to fill in the fields during the installation process first, on the i
 
 
 ### Ouput 
+
+To validate the authentication or setting installation step, we wait a response from your verification url, with the following format:
 
 <pre class="prettyprint lang-js">
 {
