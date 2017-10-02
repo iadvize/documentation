@@ -121,12 +121,10 @@ Fields appear to users according to their order of creation (the 1st entry creat
 
 * Configure your [verification Url](#verification-url)
 This is the URL on which we will check your app. We'll call this URL and your connector will be sent back if the setting parameters have been correctly set up to go to the next installation step.
-![Setting](./assets/images/developer-authentication.png)
 
 
 Users have to fill in the fields during the installation process second, on the iAdvize Marketplace.
 
-![Setting admin](./assets/images/marketplace-configure.png)
 
 ## Verification url
 
