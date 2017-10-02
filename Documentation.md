@@ -93,7 +93,7 @@ Fields appear to users according to their order of creation (the 1st entry creat
 
 *i.e. if your primary goal is to know your users’ usernames, it is the first information you should ask them for.*
 
-* Configure your verification URL
+* Configure your [verification Url](#verification-url)
 This is the URL on which we will check your app. It also helps us check if your credentials are valid. We'll call this URL and your connector will be sent back if the authentication parameters have been correctly set up to go to the next installation step.
 
 *i.e. users might be required to authenticate with an email and a password. In this case, you need to create two different fields, one for the email and one for the password.*
@@ -105,8 +105,83 @@ Users have to fill in the fields during the installation process first, on the i
 
 ![Authentication admin](./assets/images/marketplace-configure.png)
 
-## App Settings
-This part is still under development. This is where you will be able to add specific configuration steps such as mapping.
+## App Settings (in progress)
+As the authentication section, you can configure setting parameters that users will need to configure.
+
+**Define app's setting fields**
+You can add fields and define the type of entry you need.
+
+* Label: it’s the name of your field, this is what users will see.
+* Type: it defines the type of entry.
+* ID: you should choose the name of your field ID according to your code.
+
+You can add as much fields as you need.
+This is the second steps of users installation on the iAdvize Marketplace.
+Fields appear to users according to their order of creation (the 1st entry created is the 1st on displayed on the page).
+
+* Configure your [verification Url](#verification-url)
+This is the URL on which we will check your app. We'll call this URL and your connector will be sent back if the setting parameters have been correctly set up to go to the next installation step.
+
+
+Users have to fill in the fields during the installation process second, on the iAdvize Marketplace.
+
+
+## Verification url
+
+In [app authentication](#app-authentication) and [app-settings](#app-settings), you can configure verification url.
+This is the URL on which we will check the authentication and setting parameters of your new users during their connector's installation.
+We'll call this URL and your connector will be sent back if the authentication or setting parameters have been correctly set up to go to the next installation step.
+
+### Request payload
+
+This is the data passed to your verification url by payload body of a POST Request.
+
+<pre class="prettyprint lang-js">
+[
+    {
+		"id": "field_login",
+		"value": "login",
+		"fieldType": "TEXT"
+	},
+	{
+		"id": "field_password",
+		"value": "p4ssw0rd",
+		"fieldType": "TEXT"
+	}
+]
+</pre>
+
+| Field | Description | Values |
+| --- | --- | --- |
+| id | Field's id | String |
+| value | Field's value | String  |
+| fieldType | field's type | `TEXT`  |
+
+
+### Response payload 
+
+To validate the authentication or setting installation step, we wait a response from your verification url, with the following format:
+
+<pre class="prettyprint lang-js">
+{
+	"isValid": false,
+	"message": "",
+	"fields": [
+	    {
+            "id": "field_password",
+            "message": "password is not valid"
+        }
+	]
+}
+</pre>
+
+| Field | Description | Values | Required |
+| --- | --- | --- | --- |
+| isValid | validation status | Boolean | ✓ |
+| message |  validation message | String |  |
+| fields | field's array | Array |  |
+| fields - id | fields's id | String |  |
+| fields - message | field's message | String |  |
 
 ## App Interactions
 Add interactions to enhance the iAdvize interface by adding or editing predefined features.
