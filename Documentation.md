@@ -108,6 +108,35 @@ Users have to fill in the fields during the installation process first, on the i
 ## App Settings
 This part is still under development. This is where you will be able to add specific configuration steps such as mapping.
 
+## Url verification
+<pre class="prettyprint lang-js">
+[
+    {
+		"id": "field_login",
+		"value": "login",
+		"fieldType": "TEXT"
+	},
+	{
+		"id": "field_password",
+		"value": "p4ssw0rd",
+		"fieldType": "TEXT"
+	}
+]
+</pre>
+
+<pre class="prettyprint lang-js">
+{
+	"isValid": false,
+	"message": "",
+	"fields": [
+	    {
+            "id": "field_password",
+            "message": "password is not valid"
+        }
+	]
+}
+</pre>
+
 ## App Interactions
 Add interactions to enhance the iAdvize interface by adding or editing predefined features.
 
