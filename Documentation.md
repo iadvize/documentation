@@ -1249,6 +1249,8 @@ See below to discover used fields and see [reading section](#read) to discover s
 | contact_missed_with_busy_operators_number | Missed contact opportunities (agents busy) | Estimated number of missed contact opportunities due to agents being totally busy. |
 | contact_missed_with_no_operators_number | Missed contact opportunities (agents absent) | Estimated number of contacts missed because the agents were either not connected or not in production. |
 | contact_number | Initiated contacts | Number of contacts initiated during the selected period. |
+| contact_sent_message_number | Sent messages | Total number of messages within a conversation sent by the agents. |
+| contact_received_message_number | Received messages | Total number of messages within a conversation received by the agents. |
 | contact_per_hour_average_number | Contacts / hr of the website | Average number of contacts processed by all agents for an hour of production. |
 | contact_per_hour_number | Contacts per hour | Average number of contacts processed by an agent for an hour of production. |
 | contact_simultaneous_number | Simultaneous contacts | Average number of contacts processed simultaneously by an agent during his online presence. |
