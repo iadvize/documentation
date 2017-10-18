@@ -1289,7 +1289,15 @@ Estimated number of contacts missed because the agents were either not connected
 **contact_number**   
 *Initiated contacts*   
 Number of contacts initiated during the selected period.  
-  
+
+**contact_sent_message_number**
+*Sent messages*
+Total number of messages within a conversation sent by the agents.
+
+**contact_received_message_number**
+*Received messages*
+Total number of messages within a conversation received by the agents. 
+
 **contact_per_hour_average_number**   
 *Contacts / hr of the website*   
 Average number of contacts processed by all agents for an hour of production.  
