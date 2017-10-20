@@ -207,8 +207,8 @@ By clicking on the "view product" button, visitors are redirected to the product
 
 ![Product list](./assets/images/interactions-product-list-feature.png)
 
-**Add a product list connector and configure it**
-In order to set the right connector parameters, all you have to do is to declare:
+**Add the product list interaction and configure it**
+To make sure your connector uses the Product list interaction correctly, all you have to do is to declare:
 * The product list URL - this is your catalog’s URL
 * The categories url - this is where your connector will get the list of your product categories
 
@@ -1240,7 +1240,7 @@ See below to discover used fields and see [reading section](#read) to discover s
 | to | Date to | `YYYY-MM-DD` or `YYYY-MM-DD HH:MM:SS` | `?filters[to]=YYYY-MM-DD` |
 | granularity | Get data per hour, per day or per month (only when 1 indicator is requested) | `hour`, `day`, `month` | `?filters[indicators]=indicator1&filters[granularity]=day` |
 
-**Indicators**
+##### Indicators
 
 **Indicator**
 *Label*
@@ -1250,13 +1250,9 @@ Description
 *Label*
 Description
 
-**cart_after_contact_amount**
-*Average order value after contact*
-Average order value following a contact.
 
-**cart_global_amount**
-*Average order value on the website*
-Average Order Value, all visitor categories.
+###### Contact indicators
+**available on Chat, Call, Video, Facebook, Twitter FacebookBusinessOnMessenger, Instagram, SMS, Whatsapp**
 
 **contact_answered_after_first_message_duration**
 *Response time after first message*
@@ -1274,18 +1270,6 @@ Average amount of time between the visitor's last message and the closing of the
 *Average processing time*   
 Average length of all contacts, the length of a contact being defined as the difference between the end time (closure) and start time.
 
-**contact_missed_number**   
-*Missed contact opportunities*
-Estimated number of missed contact opportunities because the agents were totally busy, offline or not in production.  
-
-**contact_missed_with_busy_operators_number**   
-*Missed contact opportunities (agents busy)*   
-Estimated number of missed contact opportunities due to agents being totally busy.  
-  
-**contact_missed_with_no_operators_number**   
-*Missed contact opportunities (agents absent)*   
-Estimated number of contacts missed because the agents were either not connected or not in production.  
-  
 **contact_number**   
 *Initiated contacts*   
 Number of contacts initiated during the selected period.  
@@ -1298,22 +1282,32 @@ Total number of messages within a conversation sent by the agents.
 *Received messages*
 Total number of messages within a conversation received by the agents. 
 
-**contact_per_hour_average_number**   
-*Contacts / hr of the website*   
-Average number of contacts processed by all agents for an hour of production.  
- 
-**contact_per_hour_number**   
-*Contacts per hour*   
-Average number of contacts processed by an agent for an hour of production.  
+**contact_unanswered_number**   
+*Contacts initiated with no response*
+Number of contacts initiated by a visitor with no response from an agent.  
+
+
+**available on Chat**
+
+**contact_missed_number**   
+*Missed contact opportunities*
+Estimated number of missed contact opportunities because the agents were totally busy, offline or not in production.  
+
+**contact_missed_with_busy_operators_number**   
+*Missed contact opportunities (agents busy)*   
+Estimated number of missed contact opportunities due to agents being totally busy.  
+  
+**contact_missed_with_no_operators_number**   
+*Missed contact opportunities (agents absent)*   
+Estimated number of contacts missed because the agents were either not connected or not in production.  
 
 **contact_simultaneous_number**   
 *Simultaneous contacts* 
 Average number of contacts processed simultaneously by an agent during his online presence.  
  
-**contact_unanswered_number**   
-*Contacts initiated with no response*
-Number of contacts initiated by a visitor with no response from an agent.  
- 
+
+**available on Chat, and Video**
+
 **contact_waiting_abort_number**
 *Abandoned contacts*
 Number of contacts initiated in the queue who left before being processed.  
@@ -1333,10 +1327,32 @@ Average waiting time of visitors in the queue.
 **contact_waiting_number**
 *Initiated contacts*
 Average waiting time of visitors in the queue.  
-  
-**conversion_rate**
-*Conversion rate*
-Proportion of conversations which led to transactions.  
+
+
+**available on Chat, Call, Video**
+
+**contact_per_hour_average_number**   
+*Contacts / hr of the website*   
+Average number of contacts processed by all agents for an hour of production.  
+ 
+**contact_per_hour_number**   
+*Contacts per hour*   
+Average number of contacts processed by an agent for an hour of production.  
+ 
+**rule_contact_rate**   
+*Response rate*   
+Proportion of displays having generated a contact.  
+ 
+**rule_display_number**   
+*Displays*   
+Number of chat/call displays generated on the website during the period.  
+ 
+**targeting_rule_triggered**   
+*Triggers*   Number of times a targeting rule has been triggered, as a consequence of visitors meeting the right criteria.
+
+
+###### Presence indicators
+**available on Chat, Call and Video**
 
 **max_and_partial_occupation_duration**   
 *Global occupation*   
@@ -1378,14 +1394,6 @@ Period during which an agent is connected to the panel, unavailable and yet not 
 *Partial occupation rate*   
 Part of production time during which an agent is connected to the panel and is partially busy.  
  
-**presence_duration**   
-*Total period of presence*   
-Total period during which the agents were connected to the desk.  
- 
-**presence_smoothed_duration** 
-*Smoothed period of presence*   
-Period during which operators were connected. Length of the time slot covered with at least one agent present.  
- 
 **presentation_duration** 
 *Smoothed period of button presentation* 
 Period during which buttons are displayable. Length of the time slot covered with at least one agent available.  
@@ -1397,17 +1405,21 @@ Period during which an agent is connected to the panel and is available or busy.
 **production_smoothed_duration**   
 *Smoothed period of production*   
 Period during which operators were in production. Length of the time slot covered with at least one agent in production.  
+
+
+**available on Chat, Call, Video, Facebook, Twitter FacebookBusinessOnMessenger, Instagram, SMS, Whatsapp**
+
+**presence_duration**   
+*Total period of presence*   
+Total period during which the agents were connected to the desk.  
  
-**rule_contact_rate**   
-*Response rate*   
-Proportion of displays having generated a contact.  
- 
-**rule_display_number**   
-*Displays*   
-Number of chat/call displays generated on the website during the period.  
- 
-**targeting_rule_triggered**   
-*Triggers*   Number of times a targeting rule has been triggered, as a consequence of visitors meeting the right criteria.  
+**presence_smoothed_duration** 
+*Smoothed period of presence*   
+Period during which operators were connected. Length of the time slot covered with at least one agent present.    
+
+
+###### Satisfaction indicators
+**available on Chat, Call and Video**
  
 **satisfaction_delay_rate**   
 *Waiting time*   
@@ -1432,6 +1444,22 @@ Proportion of conversations after which visitors completed the satisfaction surv
 **satisfaction_welcome_rate**   
 *Quality of welcome*   
 Visitor satisfaction rate with the welcome.  
+
+
+###### Transactions indicators 
+**available on Chat, Call and Video**
+
+**cart_after_contact_amount**
+*Average order value after contact*
+Average order value following a contact.
+
+**cart_global_amount**
+*Average order value on the website*
+Average Order Value, all visitor categories.
+
+**conversion_rate**
+*Conversion rate*
+Proportion of conversations which led to transactions.  
 
 **transaction_after_contact_amount**   
 *T/O after contact*   
