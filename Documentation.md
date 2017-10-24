@@ -1444,14 +1444,14 @@ See below to discover used fields and see [reading section](#read) to discover s
 
 | Domain | Name | Description |
 | --- | --- | --- |
-| conversations.domain | `conversation.started` (in-progress) | All conversations |
-| conversations.domain | `conversation.closed` | All conversations |
-| conversations.domain | `visitor.updated` | Visitor information updated | |
-| users.domain | `user.created` | User created | |
-| users.domain | `user.updated` | User information updated | |
+| conversations.domain | `conversation.started` | Chat or call conversation |
+| conversations.domain | `conversation.closed` | Chat or call conversation |
+| conversations.domain | `visitor.updated` | Visitor information updated from desk or admin view |
+| users.domain | `user.created` | User created |
+| users.domain | `user.updated` | User information updated |
 | users.domain | `satisfaction.filled` | |
-| users.domain | `user.connected` (in-progress) | |
-| users.domain | `user.disconnected` (in-progress) | |
+| users.domain | `user.connected` | |
+| users.domain | `user.disconnected` | |
 
 
 ## Payloads
