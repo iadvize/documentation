@@ -78,7 +78,8 @@ Our team is still working on the accessibility mode under the Private mode.
 In alpha version, we will make it available manually for the specific customers you have selected.
 
 ## App Authentication
-The authentication section is where you set your app’s needs to retrieve data from iAdvize and the app you want it to be connected to. Users will need to follow these authentication steps to install your app.
+The App Authentication section is where you can set the authentication information that the final user will have to enter in order to install your connector. Once the user authenticated, the connector will be able to access the right data from iAdvize and from the third-party app. For example, you can ask the user for his/her third app's email and password.
+Users will need to follow these authentication steps to install your app.
 
 **Define app's authentication fields**
 You can add fields and define the type of entry you need (text, numeric, etc.).
@@ -1233,7 +1234,7 @@ See below to discover used fields and see [reading section](#read) to discover s
 | --- | --- | --- | --- |
 | website_id `deprecated, use website_list property instead` | Website identifier | `?filters[website_id]=123` |
 | website_list | Website identifiers | `?filters[website_list]=123,24,32` |
-| channel | Channel | `chat`, `call` or `video` | `?filters[channel]=chat` |
+| channel | Channel | `chat`, `call`, `facebook`, `twitter`, `facebookBusinessOnMessenger`, `instagram`, `sms`, `whatsapp` or `video` | `?filters[channel]=chat` |
 | resource | Resource to group the data by | `operator`, `group`, `skill`, `rule`, `contact_type` or `page_type` | `?filters[resource]=operator` |
 | resource_id | Resource ID to get only the data of this resource | `?filters[resource_id]=32` |
 | indicators | Indicators to filter | See list below | `?filters[indicators]=indicator1,indicator2` |
@@ -1253,7 +1254,7 @@ Description
 
 
 ###### Contact indicators
-**available on Chat, Call, Video, Facebook, Twitter FacebookBusinessOnMessenger, Instagram, SMS, Whatsapp**
+**available on `chat`, `call`, `video`, `facebook`, `twitter`, `facebookBusinessOnMessenger`, `instagram`, `sms`, `whatsapp`**
 
 **contact_answered_after_first_message_duration**
 *Response time after first message*
@@ -1288,7 +1289,7 @@ Total number of messages within a conversation received by the agents.
 Number of contacts initiated by a visitor with no response from an agent.  
 
 
-**available on Chat**
+**available on `chat`**
 
 **contact_missed_number**   
 *Missed contact opportunities*
@@ -1307,7 +1308,7 @@ Estimated number of contacts missed because the agents were either not connected
 Average number of contacts processed simultaneously by an agent during his online presence.  
  
 
-**available on Chat, and Video**
+**available on `chat`, and `video`**
 
 **contact_waiting_abort_number**
 *Abandoned contacts*
@@ -1330,7 +1331,7 @@ Average waiting time of visitors in the queue.
 Average waiting time of visitors in the queue.  
 
 
-**available on Chat, Call, Video**
+**available on `chat`, `call`, `video`**
 
 **contact_per_hour_average_number**   
 *Contacts / hr of the website*   
@@ -1353,7 +1354,7 @@ Number of chat/call displays generated on the website during the period.
 
 
 ###### Presence indicators
-**available on Chat, Call and Video**
+**available on `chat`, `call` and `video`**
 
 **max_and_partial_occupation_duration**   
 *Global occupation*   
@@ -1408,7 +1409,7 @@ Period during which an agent is connected to the panel and is available or busy.
 Period during which operators were in production. Length of the time slot covered with at least one agent in production.  
 
 
-**available on Chat, Call, Video, Facebook, Twitter FacebookBusinessOnMessenger, Instagram, SMS, Whatsapp**
+**available on `chat`, `call`, `video`, `facebook`, `twitter` `facebookBusinessOnMessenger`, `instagram`, `sms`, `whatsapp`**
 
 **presence_duration**   
 *Total period of presence*   
@@ -1420,7 +1421,7 @@ Period during which operators were connected. Length of the time slot covered wi
 
 
 ###### Satisfaction indicators
-**available on Chat, Call and Video**
+**available on `chat`, `call` and `video`**
  
 **satisfaction_delay_rate**   
 *Waiting time*   
@@ -1448,7 +1449,7 @@ Visitor satisfaction rate with the welcome.
 
 
 ###### Transactions indicators 
-**available on Chat, Call and Video**
+**available on `chat`, `call` and `video`**
 
 **cart_after_contact_amount**
 *Average order value after contact*
