@@ -7,7 +7,7 @@ Early November 2017, iAdvize will provide you with a Developer platform for you 
 Whether you are a developer, an integrator, a customer or just curious, here, you will find an overview of how to get started, our Developer Guidelines, our API with practical examples and a guide to build and publish your future integrations.
 
 ## What is iAdvize?
-[iAdvize](http://iadvize.com) is a conversational marketing platform that enables businesses to engage their customers and prospects whether they’re on the website or on social media from one single messaging solution (chat, voice, video). Visitors can get real-time advice from customer service but also from advocates, members of the brand community via [ibbü](https://www.ibbu.com/en/) - our on-demand pool of experts.
+[iAdvize](https://iadvize.com) is a conversational marketing platform that enables businesses to engage their customers and prospects whether they’re on the website or on social media from one single messaging solution (chat, voice, video). Visitors can get real-time advice from customer service but also from advocates, members of the brand community via [ibbü](https://www.ibbu.com/en/) - our on-demand pool of experts.
 
 Implementing iAdvize is child's play. You just have to insert a tag on each page of your website. Once the solution is deployed, your customer service and marketing teams are completely independent and can set up the solution as they wish.
 
@@ -1989,7 +1989,7 @@ If your users have to switch between several apps (including iAdvize) during the
 To connect an operator to its iAdvize console :
 
 *   Get his sso_key in the [operator resource of the REST API](#operator).
-*   Use it in the following URL : `http://www.iadvize.com/admin/login?key={SSO_KEY}`
+*   Use it in the following URL : `https://www.iadvize.com/admin/login?key={SSO_KEY}`
 
 That's all! When a user visit the URL, he will be automatically logged to its iAdvize account and no login / password will be asked to him.
 
@@ -2001,15 +2001,15 @@ Examples below:
 
 | Page | URL |
 | --- | --- |
-| Discussion panel | `http://www.iadvize.com/admin/login?key={SSO_KEY}&backto=**/pupitre**` |
-| Users | `http://www.iadvize.com/admin/login?key={SSO_KEY}&backto=**/users**` |
+| Discussion panel | `https://www.iadvize.com/admin/login?key={SSO_KEY}&backto=**/pupitre**` |
+| Users | `https://www.iadvize.com/admin/login?key={SSO_KEY}&backto=**/users**` |
 
 To find the parameter `backto` that interest you, look the URL address of the page in your favorite web browser.
 
 ![URL example](./assets/images/sso-url.png)
 
 With this example, the SSO URL address will be:
-`http://www.iadvize.com/admin/login?key={SSO_KEY}&backto=users/`
+`https://www.iadvize.com/admin/login?key={SSO_KEY}&backto=users/`
 
 # SDK
 
