@@ -1105,8 +1105,20 @@ See [reading section](#read) to discover some output examples.
 | rule_id | Rule identifier | Integer |
 | xmpp_id | XMPP related identifier | UUID |
 
-<pre class="prettyprint lang-js"> Conversation history types
-  `[5,"2016-02-16 11:24:21","http://test.com/"],``[2,"2016-02-16 11:24:23","Hello",1455618264049],``[3,"2016-02-16 11:24:31","The chat rule has been activated."],``[1,"2016-02-16 11:24:43","Hello, how can I help you?",1455618283869],``[2,"2016-02-16 11:25:26","I would like to know if my order: xxx has been sent",1455618327321],``[1,"2016-02-16 11:25:45","I check it, thank you for your patience",1455618346030],``[1,"2016-02-16 11:26:02","Your order has been shipped",1455618363054],``[2,"2016-02-16 11:26:09","Thanks, goodbye",1455618370072],``[1,"2016-02-16 11:26:17","Goodbye",1455618377364],``[3,"2016-02-16 11:26:43","OPERATOR_CHAT_CLOSE"]`
+
+Conversation history types example
+<pre class="prettyprint lang-js">
+{
+  [5,"2016-02-16 11:24:21","http://test.com/"],
+  [2,"2016-02-16 11:24:23","Hello",1455618264049],
+  [3,"2016-02-16 11:24:31","The chat rule has been activated."],
+  [1,"2016-02-16 11:24:43","Hello, how can I help you?",1455618283869],
+  [2,"2016-02-16 11:25:26","I would like to know if my order: xxx has been sent",1455618327321],
+  [1,"2016-02-16 11:25:45","I check it, thank you for your patience",1455618346030],
+  [1,"2016-02-16 11:26:02","Your order has been shipped",1455618363054],
+  [2,"2016-02-16 11:26:09","Thanks, goodbye",1455618370072],
+  [1,"2016-02-16 11:26:17","Goodbye",1455618377364],
+  [3,"2016-02-16 11:26:43","OPERATOR_CHAT_CLOSE"]`
 }
 </pre>
 
@@ -1194,9 +1206,9 @@ See below to discover used fields and see [reading section](#read) to discover s
 
 | Filter | Description | Values | Use |
 | --- | --- | --- | --- |
-| website_id | Website identifier | ?filters[website_id]=123 |
-| operator_id | Operator identifier | ?filters[operator_id]=123 |
-| conversation_id | Conversation identifier | ?filters[conversation_id]=123 |
+| website_id | Website identifier | ?filters[website_id]=123 | |
+| operator_id | Operator identifier | ?filters[operator_id]=123 | |
+| conversation_id | Conversation identifier | ?filters[conversation_id]=123 | |
 | from | Date from | `YYYY-MM-DD` or `YYYY-MM-DD HH:MM:SS` | ?filters[from]=YYYY-MM-DD HH:MM:SS |
 | to | Date to | `YYYY-MM-DD` or `YYYY-MM-DD HH:MM:SS` | ?filters[to]=YYYY-MM-DD HH:MM:SS |
 
@@ -1231,8 +1243,8 @@ See below to discover used fields and see [reading section](#read) to discover s
 
 | Filter | Description | Values | Use |
 | --- | --- | --- | --- |
-| website_id `deprecated, use website_list property instead` | Website identifier | `?filters[website_id]=123` |
-| website_list | Website identifiers | `?filters[website_list]=123,24,32` |
+| website_id `deprecated, use website_list property instead` | Website identifier | `?filters[website_id]=123` | |
+| website_list | Website identifiers | `?filters[website_list]=123,24,32` | |
 | channel | Channel | `chat`, `call` or `video` | `?filters[channel]=chat` |
 | resource | Resource to group the data by | `operator`, `group`, `skill`, `rule`, `contact_type` or `page_type` | `?filters[resource]=operator` |
 | resource_id | Resource ID to get only the data of this resource | `?filters[resource_id]=32` |
