@@ -790,37 +790,15 @@ Get the live availability of all of your operators.
         busy: false,
         available: false
       }
-    },
-    {
-      id: 123,
-      connected: false,
-      chat: {
-        enabled: false,
-        slot_number: 1,
-        slot_max_number: 2,
-        busy: false,
-        available: false
-      },
-      call: {
-        enabled: true,
-        slot_number: 1,
-        slot_max_number: 1,
-        busy: true,
-        available: false
-      },
-      video: {
-        enabled: false,
-        slot_number: 0,
-        slot_max_number: 1,
-        busy: false,
-        available: false
-      }
     }
   ]
 }
 </pre>
 
 You can use previous filters.
+*   In order to have more accurate results, only available operators are displayed in the default view. 
+*   If you want to display offline operators, we invite you to use the `connected` filter. Please note that you will only see agents that logged in to the iAdvize platform at least once.
+*   If your operators have `skills` or `groups`, you need to specify it in your request.
 
 #### Get operator's live availability
 Get the live availability of an operator.
