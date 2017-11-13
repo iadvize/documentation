@@ -1985,27 +1985,18 @@ That's all! When a user visit the URL, he will be automatically logged to its iA
 
 ## Use specific links
 
-It's possible to use a specific link with a parameter called `backto` to go to a specific page.
+It's possible to use a specific link with a parameter called `dest` to go to a specific page.
 
 Examples below:
 
 | Page | URL |
 | --- | --- |
-| Discussion panel | `https://www.iadvize.com/admin/login?key={SSO_KEY}&backto=**/pupitre**` |
-| Users | `https://www.iadvize.com/admin/login?key={SSO_KEY}&backto=**/users**` |
+| Discussion panel | `https://www.iadvize.com/admin/login?key={SSO_KEY}&dest=/pupitre` |
+| Users | `https://www.iadvize.com/admin/login?key={SSO_KEY}&dest=/admin/users` |
 
-To find the parameter `backto` that interest you, look the URL address of the page in your favorite web browser.
+To find the parameter `dest` that interest you, look the URL address of the page in your favorite web browser.
 
 ![URL example](./assets/images/sso-url.png)
 
 With this example, the SSO URL address will be:
-`https://www.iadvize.com/admin/login?key={SSO_KEY}&backto=users/`
-
-# SDK
-
-## Android - alpha
-
-iAdvize mobile livechat SDK for Android is available in alpha version.
-
-We will provide you the documentation with a simple integration scenario as well as pointers on available functions upon request.
-Please send us an email at developers@iadvize.com or contact your Customer Success Manager.
+`https://www.iadvize.com/admin/login?key={SSO_KEY}&dest=/admin/users/`
