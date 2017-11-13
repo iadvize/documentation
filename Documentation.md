@@ -2013,8 +2013,8 @@ Examples below:
 
 | Page | URL |
 | --- | --- |
-| Discussion panel | `https://www.iadvize.com/admin/login?key={SSO_KEY}&dest=**/pupitre**` |
-| Users | `https://www.iadvize.com/admin/login?key={SSO_KEY}&dest=**/admin/users**` |
+| Discussion panel | `https://www.iadvize.com/admin/login?key={SSO_KEY}&dest=/pupitre` |
+| Users | `https://www.iadvize.com/admin/login?key={SSO_KEY}&dest=/admin/users` |
 
 To find the parameter `dest` that interest you, look the URL address of the page in your favorite web browser.
 
