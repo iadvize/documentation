@@ -1128,11 +1128,39 @@ See [reading section](#read) to discover some output examples.
 | name | Name | String |
 | website_id | List of website identifiers | List of integers |
 
-#### Create a tag
+#### Create tag(s)
 
 `POST /tag`
 
-See [creating section](#create) to discover some output examples.
+**Parameters** (send an array of object as application/json)
+
+| Field | Description | Values | Mandatory |
+| --- | --- | --- | --- |
+| name | Name | String | Yes |
+| website_id | website identifier | Integer | Yes |
+
+**Response**
+
+<pre class="prettyprint lang-js">{
+    meta: {
+        status: "success"
+    },
+    data: [
+        {
+            id: 123,
+            name: "my_value",
+            website_id: 1,
+            _link: "/tag/123"
+        },
+        {
+            id: 124,
+            name: "my_value_2",
+            website_id: 1,
+            _link: "/tag/124"
+        }
+    ]
+}
+</pre>
 
 ### Transaction
 
