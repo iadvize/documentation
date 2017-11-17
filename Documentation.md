@@ -476,7 +476,7 @@ if (! hash_equals($iAdvizeHash, $bodyPayloadHash)) {
 
 
 We strongly recommend you, to use the **constant time** string comparison method (`hash_equals` vs `===`  in our example), 
-to be less vulnerable to [timing attacks] (https://en.wikipedia.org/wiki/Timing_attack).
+to be less vulnerable to [timing attacks](https://en.wikipedia.org/wiki/Timing_attack).
 
 ## Webhooks (In progress)
 The webhook system allows external applications to subscribe to events (via callback URLs) to receive updates in real-time.
