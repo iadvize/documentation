@@ -433,7 +433,7 @@ The versioning declaration must be done by the developer during the submission p
 iAdvize will approve or refuse the app based on specific criteria.
 iAdvize will get in touch within 48 hours to the developers.
 
-## App Security
+## App security
 
 For security reasons iAdvize provides you with a method to verify and secure your apps. You will be able to make sure that the payloads have not been subjected to modifications, and to verify its source in order for example to limit the requests to those coming from iAdvize.
 
@@ -1651,7 +1651,7 @@ iAdvize will send payload with three additional headers:
 * X-iAdvize-CorrelationId: UUID, unique identifier used in retry webhooks to track same callback calls.
 * X-iAdvize-Signature: Hash signature, cf. Security section
 
-## Webhook Security
+## Webhook security
 
 For security reasons iAdvize provides you with a method to verify and secure your Webhooks notifications. You will be able to make sure that the payloads have not been subjected to modifications, and to verify its source in order for example to limit the requests to those coming from iAdvize.
 
