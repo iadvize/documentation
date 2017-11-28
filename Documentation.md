@@ -17,7 +17,8 @@ The iAdvize platform has 2 interfaces:
 
 * The agent's console panel: it gives superpowers to your agents. That's the place where professional agents or experts can respond intuitively to all the messages they receive.
 
-![iAdvize](./assets/images/what-is-iadvize.png)
+![iAdvize](./assets/images/%402XChatbox%20.jpg)
+![iAdvize](./assets/images/%402XReports.jpg)
 
 ## What is the Developer Platform?
 
