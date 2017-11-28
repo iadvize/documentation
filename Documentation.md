@@ -190,7 +190,7 @@ In order to validate the information filled by the iAdvize administrator during 
 | fields - message | field's message | String |  |
 
 ## App Interactions
-Add interactions to enhance the iAdvize interface by adding or editing predefined features.
+Use interactions to enhance the iAdvize interface by adding or editing predefined features. Interactions are basically HTTP endpoints whose json responses fit the interaction format.
 
 The features that are already available are: 
 
