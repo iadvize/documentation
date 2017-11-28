@@ -1114,7 +1114,8 @@ See [reading section](#read) to discover some output examples.
 | id | Conversation identifier | Integer |
 | channel | Conversation channel | `chat`, `call` or `video` |
 | visitor_uid | Visitor unique identifier | String |
-| history | Conversation history | String |
+
+| history | Conversation history | String (see the different types of messages in the table below ‘Conversation history details‘) |
 | operator_answer | Conversation answered by operator | Boolean |
 | operator_closed | Conversation closed by operator | Boolean |
 | waitinglist | Waiting list status | Boolean |
@@ -1128,6 +1129,18 @@ See [reading section](#read) to discover some output examples.
 | rule_id | Rule identifier | Integer |
 | xmpp_id | XMPP related identifier | UUID |
 
+
+**Conversation history details**
+You can retrieve different types of messages into the conversation.
+
+| Field | Description | Values |
+| :--- | :--- | :--- |
+| history | Text message sent by Operator | [1,"2016-02-16 11:24:43","Hello, how can I help you?",1455618283869], |
+| history | Text message sent by Visitor | [2,"2016-02-16 11:25:26","I would like to know if my order: xxx has been sent",1455618327321], |
+| history | Software notifications | [3,"2016-02-16 11:24:31","The chat rule has been activated."], [3,"2016-02-16 11:26:43","OPERATOR_CHAT_CLOSE"] |
+| history | URL - Link | [5,"2016-02-16 11:24:21","http://iadvize.com/"] |
+| history | Rich content sent by Operator | [6,"2016-02-16 11:24:21","http://img.png/"] |
+| history | Rich content sent by Visitor | [7,"2016-02-16 11:24:21","http://img.png/"] |
 
 Conversation history types example
 <pre class="prettyprint lang-js">
