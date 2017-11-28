@@ -239,6 +239,7 @@ To make sure your connector uses the Product list interaction correctly, all you
  ]
 </pre>
 
+
 ** Request - GET method **
 
 | Query parameter | Description | Values |
@@ -293,6 +294,7 @@ To make sure your connector uses the Product list interaction correctly, all you
     }
 ]
 </pre>
+
 
 ** Request - GET method **
 
@@ -354,6 +356,7 @@ In order to set the right connector parameters, all you have to do is to declare
  ]
 </pre>
 
+
 ** Request - GET method **
 
 | Query parameter | Description | Values |
@@ -410,6 +413,7 @@ In order to set the right connector parameters, all you have to do is to declare
     }
 ]
 </pre>
+
 
 ** Request - GET method **
 
