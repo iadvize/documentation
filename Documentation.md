@@ -196,7 +196,7 @@ The features that are already available are:
 
 * The product List (on the discussion panel)
 * The visitor profile (on the discussion panel)
-* The end of conversation (on the discussion panel)
+* The conversation closing form (on the discussion panel)
 
 ### The product list
 The integration of the product list enables iAdvize's Console panel users to browse a product catalog from the iAdvize discussion panel.
@@ -371,17 +371,17 @@ In order to set the right connector parameters, all you have to do is to declare
 | value | Value | String | ✓ |
 | fieldType | Field type | `URL` or `TEXT` | ✓ |
 
-### The conversation closing option
+### The conversation closing form
 
-The conversation closing option interaction enables iAdvize's Console panel users to provide additional information manually at the end of conversation. 
+The conversation closing form interaction enables iAdvize's Console panel users to provide additional information manually at the end of conversation. 
 
 ![CloseConversation](./assets/images/close_conversation@2x.png)
 
-**Add a conversation closing option connector and Configure it**
+**Add a conversation closing form connector and Configure it**
 In order to set the right connector parameters, all you have to do is to declare:
 * The connector URL - this is your form's url
 
-#### Conversation Closing Option data
+#### Conversation Closing Form data
 
 <pre class="prettyprint lang-js">
  [
@@ -407,6 +407,9 @@ In order to set the right connector parameters, all you have to do is to declare
     }
 ]
 </pre>
+
+Available field types are :
+* TEXT
 
 ** Filters **
 
