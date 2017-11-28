@@ -7,7 +7,7 @@ Early November 2017, iAdvize will provide you with a Developer platform for you 
 Whether you are a developer, an integrator, a customer or just curious, here, you will find an overview of how to get started, our Developer Guidelines, our API with practical examples and a guide to build and publish your future integrations.
 
 ## What is iAdvize?
-[iAdvize](http://iadvize.com) is a conversational marketing platform that enables businesses to engage their customers and prospects whether they’re on the website or on social media from one single messaging solution (chat, voice, video). Visitors can get real-time advice from customer service but also from advocates, members of the brand community via [ibbü](https://www.ibbu.com/en/) - our on-demand pool of experts.
+[iAdvize](https://iadvize.com) is a conversational marketing platform that enables businesses to engage their customers and prospects whether they’re on the website or on social media from one single messaging solution (chat, voice, video). Visitors can get real-time advice from customer service but also from advocates, members of the brand community via [ibbü](https://www.ibbu.com/en/) - our on-demand pool of experts.
 
 Implementing iAdvize is child's play. You just have to insert a tag on each page of your website. Once the solution is deployed, your customer service and marketing teams are completely independent and can set up the solution as they wish.
 
@@ -17,7 +17,8 @@ The iAdvize platform has 2 interfaces:
 
 * The agent's console panel: it gives superpowers to your agents. That's the place where professional agents or experts can respond intuitively to all the messages they receive.
 
-![iAdvize](./assets/images/what-is-iadvize.png)
+![iAdvize](./assets/images/%402XChatbox%20.jpg)
+![iAdvize](./assets/images/%402XReports.jpg)
 
 ## What is the Developer Platform?
 
@@ -427,12 +428,57 @@ In order to set the right connector parameters, all you have to do is to declare
 | fieldType | Field type | `TEXT` or `CHECKBOX` | ✓ |
 | isRequired | Required | Boolean | ✓ |
 
-### Submit your apps
+## Submit your apps
 
 Apps must be submitted to iAdvize for review.
 The versioning declaration must be done by the developer during the submission process.
 iAdvize will approve or refuse the app based on specific criteria.
 iAdvize will get in touch within 48 hours to the developers.
+
+## App security
+
+For security reasons iAdvize provides you with a method to verify and secure your apps. You will be able to make sure that the payloads have not been subjected to modifications, and to verify its source in order for example to limit the requests to those coming from iAdvize.
+
+Once your server is configured to receive payloads, you can set up a secret token and verify the information.
+
+### Set you secret token
+
+First, you need to get one secret token depending on your connector.
+You can retrieve this token in the 'App information' section on our developer platform.
+
+### Validating payloads from iAdvize
+
+Once the secret token set, iAdvize will create a hash signature. 
+This hash signature is passed along with each request in the headers as `X-iAdvize-Signature`. 
+Hash signature starts with algorithm name `sha256=` and is computed by hashing query string with HMAC hexdigest algorithm and your secret token as salt. 
+
+<pre class="prettyprint lang-js">
+X-iAdvize-Signature: 110e8400-e29b-11d4-a716-446655440000
+</pre>
+
+
+You have to compute a new hash using your secret token, and to compare it with `X-iAdvize-Signature` and make sure it matches.
+
+<pre class="prettyprint lang-php">
+$secretToken       = 'yourSecretToken';
+$queryString       = $request->getUri()->getQuery();
+$iAdvizeSignature  = $headers['X-iAdvize-Signature'];
+
+// Get alogrithm and hash
+list($algorithm, $iAdvizeHash) = explode('=', $iAdvizeSignature, 2);
+ 
+// Computed hash with query parameters
+$bodyPayloadHash = hash_hmac($algorithm, $queryString, $secretToken);
+ 
+// Final check
+if (! hash_equals($iAdvizeHash, $bodyPayloadHash)) {
+    exit('Validation hash failed');
+}
+</pre>
+
+
+We strongly recommend you, to use the **constant time** string comparison method (`hash_equals` vs `===`  in our example), 
+to be less vulnerable to [timing attacks](https://en.wikipedia.org/wiki/Timing_attack).
 
 ## Webhooks (In progress)
 The webhook system allows external applications to subscribe to events (via callback URLs) to receive updates in real-time.
@@ -791,37 +837,15 @@ Get the live availability of all of your operators.
         busy: false,
         available: false
       }
-    },
-    {
-      id: 123,
-      connected: false,
-      chat: {
-        enabled: false,
-        slot_number: 1,
-        slot_max_number: 2,
-        busy: false,
-        available: false
-      },
-      call: {
-        enabled: true,
-        slot_number: 1,
-        slot_max_number: 1,
-        busy: true,
-        available: false
-      },
-      video: {
-        enabled: false,
-        slot_number: 0,
-        slot_max_number: 1,
-        busy: false,
-        available: false
-      }
     }
   ]
 }
 </pre>
 
 You can use previous filters.
+*   In order to have more accurate results, only available operators are displayed in the default view. 
+*   If you want to display offline operators, we invite you to use the `connected` filter. Please note that you will only see agents that logged in to the iAdvize platform at least once.
+*   If your operators have `skills` or `groups`, you need to specify it in your request.
 
 #### Get operator's live availability
 Get the live availability of an operator.
@@ -1092,7 +1116,8 @@ See [reading section](#read) to discover some output examples.
 | id | Conversation identifier | Integer |
 | channel | Conversation channel | `chat`, `call` or `video` |
 | visitor_uid | Visitor unique identifier | String |
-| history | Conversation history | String |
+
+| history | Conversation history | String (see the different types of messages in the table below ‘Conversation history details‘) |
 | operator_answer | Conversation answered by operator | Boolean |
 | operator_closed | Conversation closed by operator | Boolean |
 | waitinglist | Waiting list status | Boolean |
@@ -1106,8 +1131,32 @@ See [reading section](#read) to discover some output examples.
 | rule_id | Rule identifier | Integer |
 | xmpp_id | XMPP related identifier | UUID |
 
-<pre class="prettyprint lang-js"> Conversation history types
-  `[5,"2016-02-16 11:24:21","http://test.com/"],``[2,"2016-02-16 11:24:23","Hello",1455618264049],``[3,"2016-02-16 11:24:31","The chat rule has been activated."],``[1,"2016-02-16 11:24:43","Hello, how can I help you?",1455618283869],``[2,"2016-02-16 11:25:26","I would like to know if my order: xxx has been sent",1455618327321],``[1,"2016-02-16 11:25:45","I check it, thank you for your patience",1455618346030],``[1,"2016-02-16 11:26:02","Your order has been shipped",1455618363054],``[2,"2016-02-16 11:26:09","Thanks, goodbye",1455618370072],``[1,"2016-02-16 11:26:17","Goodbye",1455618377364],``[3,"2016-02-16 11:26:43","OPERATOR_CHAT_CLOSE"]`
+
+**Conversation history details**
+You can retrieve different types of messages into the conversation.
+
+| Field | Description | Values |
+| :--- | :--- | :--- |
+| history | Text message sent by Operator | [1,"2016-02-16 11:24:43","Hello, how can I help you?",1455618283869], |
+| history | Text message sent by Visitor | [2,"2016-02-16 11:25:26","I would like to know if my order: xxx has been sent",1455618327321], |
+| history | Software notifications | [3,"2016-02-16 11:24:31","The chat rule has been activated."], [3,"2016-02-16 11:26:43","OPERATOR_CHAT_CLOSE"] |
+| history | URL - Link | [5,"2016-02-16 11:24:21","http://iadvize.com/"] |
+| history | Rich content sent by Operator | [6,"2016-02-16 11:24:21","http://img.png/"] |
+| history | Rich content sent by Visitor | [7,"2016-02-16 11:24:21","http://img.png/"] |
+
+Conversation history types example
+<pre class="prettyprint lang-js">
+{
+  [5,"2016-02-16 11:24:21","http://test.com/"],
+  [2,"2016-02-16 11:24:23","Hello",1455618264049],
+  [3,"2016-02-16 11:24:31","The chat rule has been activated."],
+  [1,"2016-02-16 11:24:43","Hello, how can I help you?",1455618283869],
+  [2,"2016-02-16 11:25:26","I would like to know if my order: xxx has been sent",1455618327321],
+  [1,"2016-02-16 11:25:45","I check it, thank you for your patience",1455618346030],
+  [1,"2016-02-16 11:26:02","Your order has been shipped",1455618363054],
+  [2,"2016-02-16 11:26:09","Thanks, goodbye",1455618370072],
+  [1,"2016-02-16 11:26:17","Goodbye",1455618377364],
+  [3,"2016-02-16 11:26:43","OPERATOR_CHAT_CLOSE"]`
 }
 </pre>
 
@@ -1139,11 +1188,39 @@ See [reading section](#read) to discover some output examples.
 | name | Name | String |
 | website_id | List of website identifiers | List of integers |
 
-#### Create a tag
+#### Create tag(s)
 
 `POST /tag`
 
-See [creating section](#create) to discover some output examples.
+**Parameters** (send an array of object as application/json)
+
+| Field | Description | Values | Mandatory |
+| --- | --- | --- | --- |
+| name | Name | String | Yes |
+| website_id | website identifier | Integer | Yes |
+
+**Response**
+
+<pre class="prettyprint lang-js">{
+    meta: {
+        status: "success"
+    },
+    data: [
+        {
+            id: 123,
+            name: "my_value",
+            website_id: 1,
+            _link: "/tag/123"
+        },
+        {
+            id: 124,
+            name: "my_value_2",
+            website_id: 1,
+            _link: "/tag/124"
+        }
+    ]
+}
+</pre>
 
 ### Transaction
 
@@ -1195,9 +1272,9 @@ See below to discover used fields and see [reading section](#read) to discover s
 
 | Filter | Description | Values | Use |
 | --- | --- | --- | --- |
-| website_id | Website identifier | ?filters[website_id]=123 |
-| operator_id | Operator identifier | ?filters[operator_id]=123 |
-| conversation_id | Conversation identifier | ?filters[conversation_id]=123 |
+| website_id | Website identifier | ?filters[website_id]=123 | |
+| operator_id | Operator identifier | ?filters[operator_id]=123 | |
+| conversation_id | Conversation identifier | ?filters[conversation_id]=123 | |
 | from | Date from | `YYYY-MM-DD` or `YYYY-MM-DD HH:MM:SS` | ?filters[from]=YYYY-MM-DD HH:MM:SS |
 | to | Date to | `YYYY-MM-DD` or `YYYY-MM-DD HH:MM:SS` | ?filters[to]=YYYY-MM-DD HH:MM:SS |
 
@@ -1243,15 +1320,6 @@ See below to discover used fields and see [reading section](#read) to discover s
 | granularity | Get data per hour, per day or per month (only when 1 indicator is requested) | `hour`, `day`, `month` | `?filters[indicators]=indicator1&filters[granularity]=day` |
 
 ##### Indicators
-
-**Indicator**
-*Label*
-Description
-
-**Indicator**
-*Label*
-Description
-
 
 ###### Contact indicators
 **available on `chat`, `call`, `video`, `facebook`, `twitter`, `facebookBusinessOnMessenger`, `instagram`, `sms`, `whatsapp`**
@@ -1459,62 +1527,6 @@ Average order value following a contact.
 *Average order value on the website*
 Average Order Value, all visitor categories.
 
-**conversion_rate**
-*Conversion rate*
-Proportion of conversations which led to transactions.  
-
-**transaction_after_contact_amount**   
-*T/O after contact*   
-Total turnover from visitors who dialogued and completed a transaction after a contact.  
- 
-**transaction_after_contact_duration**   
-*Transformation time after contact*   
-Average time between the first exchange and the transaction.  
- 
-**transaction_after_contact_number**   
-*Transactions after contact*
-Total number of transactions from visitors who have dialogued and then completed a transaction following a contact.  
- 
-**transaction_date**   
-*Transaction date*   
-Date on which the transaction was made.  
-
-**transaction_in_session**   
-*In-session transaction*   
-Whether the transaction has been completed during a conversation.  
-
-**transaction_missed_with_busy_operators_amount**   
-*T/O missed (agents totally busy)*   
-Estimated lost turnover due to agents being totally busy.  
-
-**transaction_missed_with_busy_operators_number**   
-*Missed transaction opportunities (agents totally busy)*   
-Estimated number of missed transaction opportunities because the agents were totally busy.  
-
-**transaction_missed_with_no_operators_amount**   
-*Missed T/O opportunity (no agents available)*   
-Estimated turnover missed because the agents were not connected or not in production.  
-
-**transaction_missed_with_no_operators_number**   
-*Missed transaction opportunities (no agents available)*   
-Estimated number of missed transaction opportunities because the agents were not connected or not in production.  
-
-**transaction_total_amount**   
-*Website T/O*   
-Total turnover, all visitor categories.  
-
-**transaction_total_number**   
-*Website transactions*   
-Total number of transactions (all categories).  
-
-**transaction_amount_per_conversation**   
-*Website transactions amount per conversation*  
-Average turnover generated for each conversation done  
-
-**transaction_after_conversation_amount_per_hour**  
-*Website transactions amount per hour*   
-Average turnover generated by an agent after a contact on an hourly basis  
-
 ### Visitor
 
 #### Get visitors
@@ -1662,14 +1674,14 @@ See below to discover used fields and see [reading section](#read) to discover s
 
 | Domain | Name | Description |
 | --- | --- | --- |
-| conversations.domain | `conversation.started` (in-progress) | All conversations |
-| conversations.domain | `conversation.closed` | All conversations |
-| conversations.domain | `visitor.updated` | Visitor information updated | |
-| users.domain | `user.created` | User created | |
-| users.domain | `user.updated` | User information updated | |
+| conversations.domain | `conversation.started` | Chat or call conversation |
+| conversations.domain | `conversation.closed` | Chat or call conversation |
+| conversations.domain | `visitor.updated` | Visitor information updated from desk or admin view |
+| users.domain | `user.created` | User created |
+| users.domain | `user.updated` | User information updated |
 | users.domain | `satisfaction.filled` | |
-| users.domain | `user.connected` (in-progress) | |
-| users.domain | `user.disconnected` (in-progress) | |
+| users.domain | `user.connected` | |
+| users.domain | `user.disconnected` | |
 
 
 ## Payloads
@@ -1828,7 +1840,7 @@ iAdvize will send payload with three additional headers:
 * X-iAdvize-CorrelationId: UUID, unique identifier used in retry webhooks to track same callback calls.
 * X-iAdvize-Signature: Hash signature, cf. Security section
 
-## Securing your webhooks
+## Webhook security
 
 For security reasons iAdvize provides you with a method to verify and secure your Webhooks notifications. You will be able to make sure that the payloads have not been subjected to modifications, and to verify its source in order for example to limit the requests to those coming from iAdvize.
 
@@ -1990,33 +2002,24 @@ If your users have to switch between several apps (including iAdvize) during the
 To connect an operator to its iAdvize console :
 
 *   Get his sso_key in the [operator resource of the REST API](#operator).
-*   Use it in the following URL : `http://www.iadvize.com/admin/login?key={SSO_KEY}`
+*   Use it in the following URL : `https://www.iadvize.com/admin/login?key={SSO_KEY}`
 
 That's all! When a user visit the URL, he will be automatically logged to its iAdvize account and no login / password will be asked to him.
 
 ## Use specific links
 
-It's possible to use a specific link with a parameter called `backto` to go to a specific page.
+It's possible to use a specific link with a parameter called `dest` to go to a specific page.
 
 Examples below:
 
 | Page | URL |
 | --- | --- |
-| Discussion panel | `http://www.iadvize.com/admin/login?key={SSO_KEY}&backto=**/pupitre**` |
-| Users | `http://www.iadvize.com/admin/login?key={SSO_KEY}&backto=**/users**` |
+| Discussion panel | `https://www.iadvize.com/admin/login?key={SSO_KEY}&dest=/pupitre` |
+| Users | `https://www.iadvize.com/admin/login?key={SSO_KEY}&dest=/admin/users` |
 
-To find the parameter `backto` that interest you, look the URL address of the page in your favorite web browser.
+To find the parameter `dest` that interest you, look the URL address of the page in your favorite web browser.
 
 ![URL example](./assets/images/sso-url.png)
 
 With this example, the SSO URL address will be:
-`http://www.iadvize.com/admin/login?key={SSO_KEY}&backto=users/`
-
-# SDK
-
-## Android - alpha
-
-iAdvize mobile livechat SDK for Android is available in alpha version.
-
-We will provide you the documentation with a simple integration scenario as well as pointers on available functions upon request.
-Please send us an email at developers@iadvize.com or contact your Customer Success Manager.
+`https://www.iadvize.com/admin/login?key={SSO_KEY}&dest=/admin/users/`
