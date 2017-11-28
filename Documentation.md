@@ -408,9 +408,6 @@ In order to set the right connector parameters, all you have to do is to declare
 ]
 </pre>
 
-Available field types are :
-* TEXT
-
 ** Filters **
 
 | Filter | Description | Values |
