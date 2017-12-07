@@ -1676,6 +1676,7 @@ See below to discover used fields and see [reading section](#read) to discover s
 | --- | --- | --- |
 | conversations.domain | `conversation.started` | Chat or call conversation |
 | conversations.domain | `conversation.closed` | Chat or call conversation |
+| conversations.domain | `conversation.transferred` | Chat conversation |
 | conversations.domain | `visitor.updated` | Visitor information updated from desk or admin view |
 | users.domain | `user.created` | User created |
 | users.domain | `user.updated` | User information updated |
@@ -1718,6 +1719,24 @@ iAdvize expect to have à 20x http status in callback result.
     "websiteId": 1,
     "clientId": 1,
     "conversationId": 1,
+    "operatorId": 1,
+    "channel": "chat",
+    "visitorId": "593de0891b628a50b09835dc6c0e92565329c74baa90e",
+    "createdAt": "2017-04-22T11:01:00+02:00",
+    "sentAt": "2017-04-22T11:01:00+02:00"
+}
+</pre>
+
+#### conversation.transferred
+
+<pre class="prettyprint lang-js">{
+    "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
+    "eventType": "conversation.transferred",
+    "platform": "sd",
+    "websiteId": 1,
+    "clientId": 1,
+    "conversationId": 2,
+    "transferredConversationId": 1,
     "operatorId": 1,
     "channel": "chat",
     "visitorId": "593de0891b628a50b09835dc6c0e92565329c74baa90e",
