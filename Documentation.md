@@ -1109,14 +1109,13 @@ The following rules apply :
 
 See [reading section](#read) to discover some output examples.
 
-##### Fields**
+**Fields**
 
 | Field | Description | Values |
 | --- | --- | --- |
 | id | Conversation identifier | Integer |
 | channel | Conversation channel | `chat`, `call` or `video` |
 | visitor_uid | Visitor unique identifier | String |
-
 | history | Conversation history | String (see the different types of messages in the table below ‘Conversation history details‘) |
 | operator_answer | Conversation answered by operator | Boolean |
 | operator_closed | Conversation closed by operator | Boolean |
