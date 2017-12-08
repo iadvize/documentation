@@ -192,13 +192,15 @@ In order to validate the information filled by the iAdvize administrator during 
 | fields - message | field's message | String |  |
 
 ## App Interactions
-Add interactions to enhance the iAdvize interface by adding or editing predefined features.
+Use interactions to enhance the iAdvize interface by adding or editing predefined features. 
+
+Interactions are basically HTTP endpoints whose json responses fit the interaction json-schema. For each interaction one or more endpoint have to be defined. When interaction is used on user interface, we will make a GET http call to endpoint with documented query parameters. Your http response have to comply with interaction json-schema.
 
 The features that are already available are: 
 
 * The product List (on the discussion panel)
 * The visitor profile (on the discussion panel)
-* The end of conversation (on the discussion panel)
+* The conversation closing form (on the discussion panel)
 
 ### The product list
 The integration of the product list enables iAdvize's Console panel users to browse a product catalog from the iAdvize discussion panel.
@@ -210,6 +212,7 @@ By clicking on the "view product" button, visitors are redirected to the product
 ![Product list](./assets/images/interactions-product-list-feature.png)
 
 **Add the product list interaction and configure it**
+
 To make sure your connector uses the Product list interaction correctly, all you have to do is to declare:
 * The product list URL - this is your catalog’s URL
 * The categories url - this is where your connector will get the list of your product categories
@@ -238,9 +241,10 @@ To make sure your connector uses the Product list interaction correctly, all you
  ]
 </pre>
 
-** Filters **
 
-| Filter | Description | Values |
+** Request - GET method **
+
+| Query parameter | Description | Values |
 | --- | --- | --- |
 | idConnectorVersion | Connector version id | ?idConnectorVersion=123 |
 | idParent | Unique identifier of the parent category | ?idParent=123  |
@@ -248,7 +252,7 @@ To make sure your connector uses the Product list interaction correctly, all you
 | limit | Maximum number of resources per page | ?limit=10 |
 | offset | Number of resources skipped before beginning to return resources | ?offset=10 |
 
-** Fields **
+** Response - Array of categories **
 
 | Field | Description | Values | Required |
 | --- | --- | --- | --- |
@@ -293,18 +297,19 @@ To make sure your connector uses the Product list interaction correctly, all you
 ]
 </pre>
 
-** Filters **
 
-| Filter | Description | Values |
+** Request - GET method **
+
+| Query parameter | Description | Values |
 | --- | --- | --- |
 | idConnectorVersion | Connector version id | ?idConnectorVersion=123 |
 | idCategory | Category id | ?idCategory=123  |
-| idWebsite | Unique identifier of the associated website (assigned to you by iAdvize) | ?idWebsite]=123  |
+| idWebsite | Unique identifier of the associated website (assigned to you by iAdvize) | ?idWebsite=123  |
 | limit | Maximum number of resources per page | ?limit=10 |
 | offset | Number of resources skipped before beginning to return resources | ?offset=10 |
 | search | Product search query | ?search[default][contains]=query |
 
-** Fields **
+** Response - Array of products **
 
 | Field | Description | Values | Required |
 | --- | --- | --- | --- |
@@ -353,9 +358,10 @@ In order to set the right connector parameters, all you have to do is to declare
  ]
 </pre>
 
-** Filters **
 
-| Filter | Description | Values |
+** Request - GET method **
+
+| Query parameter | Description | Values |
 | --- | --- | --- |
 | emailVisitor | Visitor email | ?emailVisitor=123  |
 | idConnectorVersion | Connector version id | ?idConnectorVersion=123 |
@@ -364,7 +370,7 @@ In order to set the right connector parameters, all you have to do is to declare
 | idWebsite | Unique identifier of the associated website (assigned to you by iAdvize) | ?idWebsite=123  |
 | operatorLocale | Operator locale | ?operatorLocale=en  |
 
-** Fields **
+** Response - Array of fields **
 
 | Field | Description | Values | Required |
 | --- | --- | --- | --- |
@@ -373,17 +379,17 @@ In order to set the right connector parameters, all you have to do is to declare
 | value | Value | String | ✓ |
 | fieldType | Field type | `URL` or `TEXT` | ✓ |
 
-### The conversation closing option
+### The conversation closing form
 
-The conversation closing option interaction enables iAdvize's Console panel users to provide additional information manually at the end of conversation. 
+The conversation closing form interaction enables iAdvize's Console panel users to provide additional information manually at the end of conversation. 
 
 ![CloseConversation](./assets/images/close_conversation@2x.png)
 
-**Add a conversation closing option connector and Configure it**
+**Add a conversation closing form connector and Configure it**
 In order to set the right connector parameters, all you have to do is to declare:
 * The connector URL - this is your form's url
 
-#### Conversation Closing Option data
+#### Conversation Closing Form data
 
 <pre class="prettyprint lang-js">
  [
@@ -410,15 +416,16 @@ In order to set the right connector parameters, all you have to do is to declare
 ]
 </pre>
 
-** Filters **
 
-| Filter | Description | Values |
+** Request - GET method **
+
+| Query parameter | Description | Values |
 | --- | --- | --- |
 | idConnectorVersion | Connector version id | ?idConnectorVersion=123 |
 | idWebsite | Unique identifier of the associated website (assigned to you by iAdvize) | ?idWebsite=123  |
 | operatorLocale | Operator locale | ?operatorLocale=en  |
 
-** Fields **
+** Response - Array of inputs **
 
 | Field | Description | Values | Required |
 | --- | --- | --- | --- |
