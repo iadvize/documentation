@@ -475,10 +475,10 @@ $iAdvizeSignature  = $headers['X-iAdvize-Signature'];
 list($algorithm, $iAdvizeHash) = explode('=', $iAdvizeSignature, 2);
  
 // Computed hash with query parameters
-$bodyPayloadHash = hash_hmac($algorithm, $queryString, $secretToken);
+$queryParametersHash = hash_hmac($algorithm, $queryString, $secretToken);
  
 // Final check
-if (! hash_equals($iAdvizeHash, $bodyPayloadHash)) {
+if (! hash_equals($iAdvizeHash, $queryParametersHash)) {
     exit('Validation hash failed');
 }
 </pre>
