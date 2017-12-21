@@ -300,7 +300,7 @@ To make sure your connector uses the Product list interaction correctly, all you
 | idWebsite | Unique identifier of the associated website (assigned to you by iAdvize) | ?idWebsite]=123  |
 | limit | Maximum number of resources per page | ?limit=10 |
 | offset | Number of resources skipped before beginning to return resources | ?offset=10 |
-| search | Product search query | ?search[default][contains]=query |
+| searchQuery | Product search query | ?searchQuery=query |
 
 ** Fields **
 
