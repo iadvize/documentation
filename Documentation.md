@@ -1489,6 +1489,7 @@ Part of production time during which an agent is connected to the panel and is o
 *In production*  
 Period during which an agent is connected to the panel and is available or busy.  
 
+
 ###### Satisfaction indicators
 **available on `chat`, `call` and `video`**
  
