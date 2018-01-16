@@ -1433,11 +1433,7 @@ Number of chat/call displays generated on the website during the period.
 **max_and_partial_occupation_duration**   
 *Global occupation*   
 Period during which an agent is connected to the panel and is occupied partially or to the maximum.  
-  
-**max_and_partial_occupation_rate**   
-*Global occupation rate*   
-Part of production time during which an agent is connected to the panel and is occupied partially or to the maximum.  
-
+   
 **max_occupation_duration**   
 *Maximum occupation*   
 Period during which an agent is connected to the panel and is occupied to maximum capacity.  
@@ -1445,15 +1441,7 @@ Period during which an agent is connected to the panel and is occupied to maximu
 **max_occupation_rate**   
 *Maximum occupation rate*   
 Part of production time during which an agent is connected to the panel and is occupied to a maximum.  
-
-**non_occupation_duration**   
-*Inocc.*   
-Period of time during which an agent is connected to the panel and is simultaneously available and not busy.  
   
-**non_occupation_rate**   
-*Rate of non-occupation*   
-Part of production time during which an agent is connected to the panel and is simultaneously available and not busy.  
- 
 **non_production_duration**   
 *Not in production*   
 Period during which an agent is connected to the panel, unavailable and yet not busy.  
@@ -1462,21 +1450,9 @@ Period during which an agent is connected to the panel, unavailable and yet not 
 *Not in production rate*   
 Proportion of connection time during which an agent is connected to the panel, unavailable and yet not busy.  
  
-**occupation_duration**   
-*Partial occupation*   
-Period during which an agent is connected to the panel, unavailable and yet not busy.  
- 
-**occupation_rate**   
-*Partial occupation rate*   
-Part of production time during which an agent is connected to the panel and is partially busy.  
- 
 **presentation_duration** 
 *Smoothed period of button presentation* 
 Period during which buttons are displayable. Length of the time slot covered with at least one agent available.  
- 
-**production_duration**   
-*In production*  
-Period during which an agent is connected to the panel and is available or busy.  
  
 **production_smoothed_duration**   
 *Smoothed period of production*   
@@ -1492,7 +1468,26 @@ Total period during which the agents were connected to the desk.
 **presence_smoothed_duration** 
 *Smoothed period of presence*   
 Period during which operators were connected. Length of the time slot covered with at least one agent present.    
+  
+**occupation_rate**   
+*Partial occupation rate*   
+Part of production time during which an agent is connected to the panel and is partially busy.  
 
+**non_occupation_duration**   
+*Inocc.*   
+Period of time during which an agent is connected to the panel and is simultaneously available and not busy.  
+  
+**non_occupation_rate**   
+*Rate of non-occupation*   
+Part of production time during which an agent is connected to the panel and is simultaneously available and not busy. 
+
+**max_and_partial_occupation_rate**   
+*Global occupation rate*   
+Part of production time during which an agent is connected to the panel and is occupied partially or to the maximum. 
+
+**production_duration**   
+*In production*  
+Period during which an agent is connected to the panel and is available or busy.  
 
 ###### Satisfaction indicators
 **available on `chat`, `call` and `video`**
@@ -1521,6 +1516,9 @@ Proportion of conversations after which visitors completed the satisfaction surv
 *Quality of welcome*   
 Visitor satisfaction rate with the welcome.  
 
+**occupation_duration**   
+*Partial occupation*   
+Period during which an agent is connected to the panel, unavailable and yet not busy. 
 
 ###### Transactions indicators 
 **available on `chat`, `call` and `video`**
