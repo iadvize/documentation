@@ -460,7 +460,7 @@ This hash signature is passed along with each request in the headers as `X-iAdvi
 Hash signature starts with algorithm name `sha256=` and is computed by hashing query string with HMAC hexdigest algorithm and your secret token as salt. 
 
 <pre class="prettyprint lang-js">
-X-iAdvize-Signature: 110e8400-e29b-11d4-a716-446655440000
+X-iAdvize-Signature: sha256=110e8400-e29b-11d4-a716-446655440000
 </pre>
 
 
@@ -1835,7 +1835,7 @@ iAdvize expect to have à 20x http status in callback result.
 
 <pre class="prettyprint lang-js">
 Host: localhost
-X-iAdvize-Signature: 110e8400-e29b-11d4-a716-446655440000
+X-iAdvize-Signature: sha256=110e8400-e29b-11d4-a716-446655440000
 X-iAdvize-CorrelationId: 332e8400-e34b-11d4-a716-446655444444
 X-iAdvize-Delivery: 110e8400-e29b-11d4-a716-446655440000
 Content-Type: application/json
@@ -1887,7 +1887,7 @@ This hash signature is passed along with each request in the headers as `X-iAdvi
 Hash signature starts with algorithm name `sha256=` and is computed by hashing body payload with HMAC hexdigest algorithm and your secret token as salt. 
 
 <pre class="prettyprint lang-js">
-X-iAdvize-Signature: 110e8400-e29b-11d4-a716-446655440000
+X-iAdvize-Signature: sha256=110e8400-e29b-11d4-a716-446655440000
 </pre>
 
 
