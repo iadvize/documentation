@@ -1315,11 +1315,11 @@ See below to discover used fields and see [reading section](#read) to discover s
 
 | Filter | Description | Values | Use |
 | --- | --- | --- | --- |
-| website_id `deprecated, use website_list property instead` | Website identifier | `?filters[website_id]=123` |
-| website_list | Website identifiers | `?filters[website_list]=123,24,32` |
+| website_id `deprecated, use website_list property instead` | Website identifier | `?filters[website_id]=123` | |
+| website_list | Website identifiers | `?filters[website_list]=123,24,32` | |
 | channel | Channel | `chat`, `call`, `facebook`, `twitter`, `facebookBusinessOnMessenger`, `instagram`, `sms`, `whatsapp` or `video` | `?filters[channel]=chat` |
 | resource | Resource to group the data by | `operator`, `group`, `skill`, `rule`, `contact_type` or `page_type` | `?filters[resource]=operator` |
-| resource_id | Resource ID to get only the data of this resource | `?filters[resource_id]=32` |
+| resource_id | Resource ID to get only the data of this resource | `?filters[resource_id]=32` | |
 | indicators | Indicators to filter | See list below | `?filters[indicators]=indicator1,indicator2` |
 | from | Date from | `YYYY-MM-DD` or `YYYY-MM-DD HH:MM:SS` | `?filters[from]=YYYY-MM-DD` |
 | to | Date to | `YYYY-MM-DD` or `YYYY-MM-DD HH:MM:SS` | `?filters[to]=YYYY-MM-DD` |
