@@ -110,7 +110,7 @@ Users have to fill in the fields during the installation process first, on the i
 ![Authentication admin](./assets/images/marketplace-configure.png)
 
 
-##App Settings
+## App Settings
 
 Just as in the section dedicated to your app's authentication, you are able to set the parameters that users will need to install your connector.
 These are the fields that the iAdvize administrator will fill in to install and configure your connector from the iAdvize Marketplace.
@@ -1861,8 +1861,16 @@ Content-Length: 3442
 iAdvize will send payload with three additional headers:
 
 * X-iAdvize-Delivery: UUID, unique identifier to describe this webhook delivery
-* X-iAdvize-CorrelationId: UUID, unique identifier used in retry webhooks to track same callback calls.
+* X-iAdvize-CorrelationId: UUID, event id identifier used in retry webhooks to track same callback calls.
 * X-iAdvize-Signature: Hash signature, cf. Security section
+
+## Webhook retry management
+
+If errors occurs during webhook query (40x, 50x http status codes), we will retry to post message two times. 
+* First time after delay of 10 seconds, 
+* and second time after 20 seconds (so, 30 seconds after first call). 
+
+To track events in error, you can follow "X-iAdvize-CorrelationId" in headers, or "eventId" in payload.
 
 ## Webhook security
 
