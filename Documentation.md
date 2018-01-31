@@ -1866,11 +1866,12 @@ iAdvize will send payload with three additional headers:
 
 ## Webhook retry management
 
-If errors occurs during webhook query (40x, 50x http status codes), we will retry to post message two times. 
+If errors occur during webhook query (40x, 50x http status codes), we will retry two times. 
+We will try to send you the following requests:
 * First time after delay of 10 seconds, 
 * and second time after 20 seconds (so, 30 seconds after first call). 
 
-To track events in error, you can follow "X-iAdvize-CorrelationId" in headers, or "eventId" in payload.
+In case of failure, you may need to track events in error, by following "X-iAdvize-CorrelationId" in headers, or "eventId" in payload.
 
 ## Webhook security
 
