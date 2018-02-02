@@ -1861,7 +1861,7 @@ Content-Length: 3442
 iAdvize will send payload with three additional headers:
 
 * X-iAdvize-Delivery: UUID, unique identifier to describe this webhook delivery
-* X-iAdvize-CorrelationId: UUID, event id identifier used in retry webhooks to track same callback calls.
+* X-iAdvize-CorrelationId: UUID, event identifier used in retry webhooks to track same callback calls.
 * X-iAdvize-Signature: Hash signature, cf. Security section
 
 ## Webhook retry management
