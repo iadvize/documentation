@@ -82,52 +82,50 @@ In alpha version, we will make it available manually for the specific customers 
 The App Authentication section is where you can set the authentication information that the final user will have to enter in order to install your connector. Once the user authenticated, the connector will be able to access the right data from iAdvize and from the third-party app. For example, you can ask the user for his/her third app's email and password.
 Users will need to follow these authentication steps to install your app.
 
-**Define app's authentication fields**
-You can add fields and define the type of entry you need (text, numeric, etc.).
+**Define app's authentication parameters**
+You can add parameters and define the type of entry you need (text, numeric, etc.).
 
-* Label: it’s the name of your field, this is what users will see.
-* Type: it defines the type of entry. (For instance: alphanumeric)
-* ID: you should choose the name of your field ID according to your code.
+* Key: the key of your parameter according to your code.
+* Label: it’s the name of your parameter, this is what users will see.
+* Type: it defines the type of entry. (For instance: alphanumeric).
 
-You can add as much fields as you need.
+You can add as much parameters as you need.
 This is the first thing users will see once they click on the "install" button on the iAdvize Marketplace.
-Fields appear to users according to their order of creation (the 1st entry created is the 1st on displayed on the page).
+Parameters appear to users according to their order of creation (the 1st entry created is the 1st on displayed on the page).
 
 *i.e. if your primary goal is to know your users’ usernames, it is the first information you should ask them for.*
 
 **Configure your verification url** 
-On our side we will pre validate requirements of the fields you have defined (mandatory, list values...).
+On our side we will pre validate requirements of the parameters you have defined (mandatory, list values...).
 Verification URL lets you implement your own installation validation logic.
 For example you can check if API keys or username/password are valid on different systems. We will automatically call this URL if you fill in this 
 Please find technical details in the [verification Url](#verification-url) section right below.
 
-*i.e. users might be required to authenticate with an email and a password. In this case, you need to create two different fields, one for the email and one for the password.*
+*i.e. users might be required to authenticate with an email and a password. In this case, you need to create two different parameters, one for the email and one for the password.*
 
 ![Authentication](./assets/images/developer-authentication.png)
 
-
-Users have to fill in the fields during the installation process first, on the iAdvize Marketplace.
+Users have to fill in the parameters during the installation process first, on the iAdvize Marketplace.
 
 ![Authentication admin](./assets/images/marketplace-configure.png)
-
 
 ##App Settings
 
 Just as in the section dedicated to your app's authentication, you are able to set the parameters that users will need to install your connector.
-These are the fields that the iAdvize administrator will fill in to install and configure your connector from the iAdvize Marketplace.
+These are the parameters that the iAdvize administrator will fill in to install and configure your connector from the iAdvize Marketplace.
 
-Define your app's settings fields
+Define your app's settings parameters
 
-You can add as many fields as the installation and configuration of your application requires.
-For each of these fields you will have to specify the type of input required.
+You can add as many parameters as the installation and configuration of your application requires.
+For each of these parameters you will have to specify the type of input required.
 
-*Label: it is the name of your field. (This is what the users will see).
+*Label: it is the name of your parameter. (This is what the users will see).
 For instance it could be: Username
 *Type: it defines the type of entry. (For instance: alphanumeric)
-*ID: this is based on your own code to easily retrieve the different fields.
+*ID: the identifier (key) of your parameter according to your code.
 
 These configuration steps will take place immediately after authentication (if any).
-The order of appearance of the steps depends on their order of creation. The first created field will appear first and the last created field will appear last to the user.
+The order of appearance of the steps depends on their order of creation. The first created parameter will appear first and the last created parameter will appear last to the user.
 
 **Configure your verification url**
 Like App authentication, you can define a verification URL tom implement your own logic on settings step.
@@ -176,7 +174,7 @@ In order to validate the information filled by the iAdvize administrator during 
 	"isStepValid": false,
 	"errors": [
 	    {
-            "code": "field_password",
+            "code": "password",
             "description": "password is not valid",
             "parameterKey": "login"
         }
