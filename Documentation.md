@@ -96,9 +96,10 @@ Fields appear to users according to their order of creation (the 1st entry creat
 *i.e. if your primary goal is to know your users’ usernames, it is the first information you should ask them for.*
 
 **Configure your verification url** 
-This is the URL on which we will check your app. It also helps us check if your credentials are valid.
-Please read the [verification Url](#verification-url) section right below.
-
+On our side we will pre validate requirements of the fields you have defined (mandatory, list values...).
+Verification URL lets you implement your own installation validation logic.
+For example you can check if API keys or username/password are valid on different systems. We will automatically call this URL if you fill in this 
+Please find technical details in the [verification Url](#verification-url) section right below.
 
 *i.e. users might be required to authenticate with an email and a password. In this case, you need to create two different fields, one for the email and one for the password.*
 
@@ -128,17 +129,20 @@ For instance it could be: Username
 These configuration steps will take place immediately after authentication (if any).
 The order of appearance of the steps depends on their order of creation. The first created field will appear first and the last created field will appear last to the user.
 
-**Configure your verification url** 
-This is the URL on which we will check your app.
-Please read the [verification Url](#verification-url) section right below.
+**Configure your verification url**
+Like App authentication, you can define a verification URL tom implement your own logic on settings step.
+For example you can check if some installation option compatibility with a custom logic of your connector.
+Please find technical details in the [verification Url](#verification-url) section right below.
 
 ![Setting](./assets/images/developer-settings.jpg)
 
 ## Verification url
 
 In the [app authentication](#app-authentication) and [app settings](#app-settings) sections of the iAdvize Developer Platform, you can set a "Verification url".
-We will call this URL each time the application requires a confirmation from your connector to approve the configuration settings.
-It means that your connector must answer to this call by a confirmation or an error message to determine whether the setting parameters have been correctly set up. If the first step is confirmed by your connector, it goes to the next step of configuration.
+We will call this URL each time a client validate a step during an installation of your connector on a website.
+the application requires a confirmation from your connector to approve the configuration settings.
+It means that your connector must answer to this call by a confirmation or error messages to determine whether the step have been correctly set up. 
+If the step is validated by your connector, parameters are saved on our side.
 
 ### Request payload
 
@@ -147,23 +151,20 @@ Here is the information sent to your verification url as a payload body of a POS
 <pre class="prettyprint lang-js">
 [
     {
-		"id": "field_login",
-		"value": "login",
-		"fieldType": "TEXT"
+		"key": "login",
+		"value": "login"
 	},
 	{
-		"id": "field_password",
-		"value": "p4ssw0rd",
-		"fieldType": "TEXT"
+		"key": "password",
+		"value": "p4ssw0rd"
 	}
 ]
 </pre>
 
 | Field | Description | Values |
 | --- | --- | --- |
-| id | Field's id | String |
-| value | Field's value | String  |
-| fieldType | field's type | `TEXT`  |
+| key | Parameter key, defined by you in developer platform | String |
+| value | Parameter value, filled by the client during connector's installation | String|Boolean  |
 
 
 ### Response payload 
@@ -172,12 +173,12 @@ In order to validate the information filled by the iAdvize administrator during 
 
 <pre class="prettyprint lang-js">
 {
-	"isValid": false,
-	"message": "",
-	"fields": [
+	"isStepValid": false,
+	"errors": [
 	    {
-            "id": "field_password",
-            "message": "password is not valid"
+            "code": "field_password",
+            "description": "password is not valid",
+            "parameterKey": "login"
         }
 	]
 }
@@ -186,10 +187,10 @@ In order to validate the information filled by the iAdvize administrator during 
 | Field | Description | Values | Required |
 | --- | --- | --- | --- |
 | isValid | validation status | Boolean | ✓ |
-| message |  validation message | String |  |
-| fields | field's array | Array |  |
-| fields - id | fields's id | String |  |
-| fields - message | field's message | String |  |
+| errors | Errors list, can be empty | Array | ✓ |
+| errors - code| Error code, used to identify error on connector side | String | ✓ |
+| errors - message | Error message that will be displayed on our installation process | String | ✓ |
+| errors - parameterKey | If mentioned, error concerns this parameter key | String | ✓ |
 
 ## App Interactions
 Use interactions to enhance the iAdvize interface by adding or editing predefined features. 
