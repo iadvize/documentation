@@ -1521,8 +1521,9 @@ Visitor satisfaction rate with the welcome.
 *Partial occupation*   
 Period during which an agent is connected to the panel, unavailable and yet not busy. 
 
-###### Transactions indicators 
-**available on `chat`, `call` and `video`**
+
+###### Transactions indicators
+**available on `chat`, `call`, `video`, `facebook`, `twitter`, `facebookBusinessOnMessenger`, `instagram`, `sms`, `whatsapp`**
 
 **cart_after_contact_amount**
 *Average order value after contact*
@@ -1531,6 +1532,14 @@ Average order value following a contact.
 **cart_global_amount**
 *Average order value on the website*
 Average Order Value, all visitor categories.
+
+**transaction_after_contact_amount**
+*T/O after contact*
+Total turnover from visitors who dialogued and completed a transaction after a contact.
+
+**transaction_after_contact_number**
+*Transactions after contact*
+Total number of transactions from visitors who dialogued and then completed a transaction following the contact.
 
 ### Visitor
 
