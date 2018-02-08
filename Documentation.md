@@ -1929,7 +1929,7 @@ to be less vulnerable to timing attacks.
 
 # Push API (deprecated)
 
-The iAdvize Push API will be deprecated starting september, 2017. The Push API will be cut on january 30th, 2018. From now, prefer to use our webhook API (In progress).
+The iAdvize Push API will be deprecated starting september, 2017. The Push API will stop working from january 30th, 2018. From now, we recommend to use our webhook API (In progress).
 The Push API allows data to be pushed to URI callbacks when an event is fired.  
 The Push API uses JSON exclusively. XML is not supported. Push requests are sent with a POST method. 
 
