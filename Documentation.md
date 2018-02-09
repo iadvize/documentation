@@ -82,63 +82,65 @@ In alpha version, we will make it available manually for the specific customers 
 The App Authentication section is where you can set the authentication information that the final user will have to enter in order to install your connector. Once the user authenticated, the connector will be able to access the right data from iAdvize and from the third-party app. For example, you can ask the user for his/her third app's email and password.
 Users will need to follow these authentication steps to install your app.
 
-**Define app's authentication fields**
-You can add fields and define the type of entry you need (text, numeric, etc.).
+**Define app's authentication parameters**
+You can add parameters and define the type of entry you need (text, numeric, etc.).
 
-* Label: it’s the name of your field, this is what users will see.
-* Type: it defines the type of entry. (For instance: alphanumeric)
-* ID: you should choose the name of your field ID according to your code.
+* Key: the key of your parameter according to your code.
+* Label: it’s the name of your parameter, this is what users will see.
+* Type: it defines the type of entry. (For instance: alphanumeric).
 
-You can add as much fields as you need.
+You can add as much parameters as you need.
 This is the first thing users will see once they click on the "install" button on the iAdvize Marketplace.
-Fields appear to users according to their order of creation (the 1st entry created is the 1st on displayed on the page).
+Parameters appear to users according to their order of creation (the 1st entry created is the 1st on displayed on the page).
 
 *i.e. if your primary goal is to know your users’ usernames, it is the first information you should ask them for.*
 
 **Configure your verification url** 
-This is the URL on which we will check your app. It also helps us check if your credentials are valid.
-Please read the [verification Url](#verification-url) section right below.
+On our side we will pre validate requirements of the parameters you have defined (mandatory, list values...).
+Verification URL lets you implement your own installation validation logic.
+For example you can check if API keys or username/password are valid on different systems. We will automatically call this URL if you fill in this 
+Please find technical details in the [verification Url](#verification-url) section right below.
 
-
-*i.e. users might be required to authenticate with an email and a password. In this case, you need to create two different fields, one for the email and one for the password.*
+*i.e. users might be required to authenticate with an email and a password. In this case, you need to create two different parameters, one for the email and one for the password.*
 
 ![Authentication](./assets/images/developer-authentication.png)
 
-
-Users have to fill in the fields during the installation process first, on the iAdvize Marketplace.
+Users have to fill in the parameters during the installation process first, on the iAdvize Marketplace.
 
 ![Authentication admin](./assets/images/marketplace-configure.png)
-
 
 ## App Settings
 
 Just as in the section dedicated to your app's authentication, you are able to set the parameters that users will need to install your connector.
-These are the fields that the iAdvize administrator will fill in to install and configure your connector from the iAdvize Marketplace.
+These are the parameters that the iAdvize administrator will fill in to install and configure your connector from the iAdvize Marketplace.
 
-Define your app's settings fields
+Define your app's settings parameters
 
-You can add as many fields as the installation and configuration of your application requires.
-For each of these fields you will have to specify the type of input required.
+You can add as many parameters as the installation and configuration of your application requires.
+For each of these parameters you will have to specify the type of input required.
 
-*Label: it is the name of your field. (This is what the users will see).
+*Label: it is the name of your parameter. (This is what the users will see).
 For instance it could be: Username
 *Type: it defines the type of entry. (For instance: alphanumeric)
-*ID: this is based on your own code to easily retrieve the different fields.
+*ID: the identifier (key) of your parameter according to your code.
 
 These configuration steps will take place immediately after authentication (if any).
-The order of appearance of the steps depends on their order of creation. The first created field will appear first and the last created field will appear last to the user.
+The order of appearance of the steps depends on their order of creation. The first created parameter will appear first and the last created parameter will appear last to the user.
 
-**Configure your verification url** 
-This is the URL on which we will check your app.
-Please read the [verification Url](#verification-url) section right below.
+**Configure your verification url**
+Like App authentication, you can define a verification URL tom implement your own logic on settings step.
+For example you can check if some installation option compatibility with a custom logic of your connector.
+Please find technical details in the [verification Url](#verification-url) section right below.
 
 ![Setting](./assets/images/developer-settings.jpg)
 
 ## Verification url
 
 In the [app authentication](#app-authentication) and [app settings](#app-settings) sections of the iAdvize Developer Platform, you can set a "Verification url".
-We will call this URL each time the application requires a confirmation from your connector to approve the configuration settings.
-It means that your connector must answer to this call by a confirmation or an error message to determine whether the setting parameters have been correctly set up. If the first step is confirmed by your connector, it goes to the next step of configuration.
+We will call this URL each time a client validate a step during an installation of your connector on a website.
+the application requires a confirmation from your connector to approve the configuration settings.
+It means that your connector must answer to this call by a confirmation or error messages to determine whether the step have been correctly set up. 
+If the step is validated by your connector, parameters are saved on our side.
 
 ### Request payload
 
@@ -147,23 +149,20 @@ Here is the information sent to your verification url as a payload body of a POS
 <pre class="prettyprint lang-js">
 [
     {
-		"id": "field_login",
-		"value": "login",
-		"fieldType": "TEXT"
+		"key": "login",
+		"value": "login"
 	},
 	{
-		"id": "field_password",
-		"value": "p4ssw0rd",
-		"fieldType": "TEXT"
+		"key": "password",
+		"value": "p4ssw0rd"
 	}
 ]
 </pre>
 
 | Field | Description | Values |
 | --- | --- | --- |
-| id | Field's id | String |
-| value | Field's value | String  |
-| fieldType | field's type | `TEXT`  |
+| key | Parameter key, defined by you in developer platform | String |
+| value | Parameter value, filled by the client during connector's installation | String|Boolean  |
 
 
 ### Response payload 
@@ -172,12 +171,12 @@ In order to validate the information filled by the iAdvize administrator during 
 
 <pre class="prettyprint lang-js">
 {
-	"isValid": false,
-	"message": "",
-	"fields": [
+	"isStepValid": false,
+	"errors": [
 	    {
-            "id": "field_password",
-            "message": "password is not valid"
+            "code": "password",
+            "description": "password is not valid",
+            "parameterKey": "login"
         }
 	]
 }
@@ -186,10 +185,10 @@ In order to validate the information filled by the iAdvize administrator during 
 | Field | Description | Values | Required |
 | --- | --- | --- | --- |
 | isValid | validation status | Boolean | ✓ |
-| message |  validation message | String |  |
-| fields | field's array | Array |  |
-| fields - id | fields's id | String |  |
-| fields - message | field's message | String |  |
+| errors | Errors list, can be empty | Array | ✓ |
+| errors - code| Error code, used to identify error on connector side | String | ✓ |
+| errors - message | Error message that will be displayed on our installation process | String | ✓ |
+| errors - parameterKey | If mentioned, error concerns this parameter key | String | ✓ |
 
 ## App Interactions
 Use interactions to enhance the iAdvize interface by adding or editing predefined features. 
