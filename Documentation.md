@@ -1417,7 +1417,7 @@ See below to discover used fields and see [reading section](#read) to discover s
 
 ##### available on `chat`, `call`, `video`, `facebook`, `twitter`, `facebookBusinessOnMessenger`, `sms`, `whatsapp`
 
-| Indicator | Label | Description |
+| Indicator | Label | Description | Value |
 | --- | --- | --- | --- |
 | conversion_rate | Conversion rate | Proportion of conversations which led to transactions. | Rate |
 | cart_after_contact_amount | Average order value after contact | Average order value following a contact. | Number |
