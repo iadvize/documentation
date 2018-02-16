@@ -1328,67 +1328,67 @@ See below to discover used fields and see [reading section](#read) to discover s
 
 #### Contact indicators
 
-##### available on `chat`, `call`, `video`, `facebook`, `twitter`, `facebookBusinessOnMessenger`, `instagram`, `sms`, `whatsapp`
+##### available on `chat`, `call`, `video`, `facebook`, `twitter`, `facebookBusinessOnMessenger`, `sms`, `whatsapp`
 
-| Indicator | Label | Description |
-| --- | --- | --- |
-| contact_answered_after_first_message_duration | Response time after first message | Average response time between a customer's first question and the agent's answer. |
-| contact_answered_duration | Response time | Average response time between a customer's request and the agent's response. |
-| contact_closed_after_last_message_duration | Length of time between last message and closing of chat | Average amount of time between the visitor's last message and the closing of the chat discussion on the panel. |
-| contact_duration | Average processing time | Average length of all contacts, the length of a contact being defined as the difference between the end time (closure) and start time. |
-| contact_number | Initiated contacts | Number of contacts initiated during the selected period. |
-| contact_sent_message_number | Sent messages | Total number of messages within a conversation sent by the agents. |
-| contact_received_message_number | Received messages | Total number of messages within a conversation received by the agents. |
-| contact_unanswered_number | Contacts initiated with no response | Number of contacts initiated by a visitor with no response from an agent. |
+| Indicator | Label | Description | Value |
+| --- | --- | --- | --- |
+| contact_answered_after_first_message_duration | Response time after first message | Average response time between a customer's first question and the agent's answer. | Second |
+| contact_answered_duration | Response time | Average response time between a customer's request and the agent's response. | Second |
+| contact_closed_after_last_message_duration | Length of time between last message and closing of chat | Average amount of time between the visitor's last message and the closing of the chat discussion on the panel. | Second |
+| contact_duration | Average processing time | Average length of all contacts, the length of a contact being defined as the difference between the end time (closure) and start time. | Second |
+| contact_number | Initiated contacts | Number of contacts initiated during the selected period. | Number |
+| contact_sent_message_number | Sent messages | Total number of messages within a conversation sent by the agents. | Number |
+| contact_received_message_number | Received messages | Total number of messages within a conversation received by the agents. | Number |
+| contact_unanswered_number | Contacts initiated with no response | Number of contacts initiated by a visitor with no response from an agent. | Number |
 
 ##### available on `chat`
 
-| Indicator | Label | Description |
-| --- | --- | --- |
-| contact_missed_number | Missed contact opportunities | Estimated number of missed contact opportunities because the agents were totally busy, offline or not in production. |
-| contact_missed_with_busy_operators_number | Missed contact opportunities (agents busy) | Estimated number of missed contact opportunities due to agents being totally busy. |
-| contact_missed_with_no_operators_number | Missed contact opportunities (agents absent) | Estimated number of contacts missed because the agents were either not connected or not in production. |
-| contact_simultaneous_number | Simultaneous contacts | Average number of contacts processed simultaneously by an agent during his online presence. |
+| Indicator | Label | Description | Value |
+| --- | --- | --- | --- |
+| contact_missed_number | Missed contact opportunities | Estimated number of missed contact opportunities because the agents were totally busy, offline or not in production. | Number |
+| contact_missed_with_busy_operators_number | Missed contact opportunities (agents busy) | Estimated number of missed contact opportunities due to agents being totally busy. | Number |
+| contact_missed_with_no_operators_number | Missed contact opportunities (agents absent) | Estimated number of contacts missed because the agents were either not connected or not in production. | Number |
+| contact_simultaneous_number | Simultaneous contacts | Average number of contacts processed simultaneously by an agent during his online presence. | Number |
 
 ##### available on `chat`, and `video`
 
-| Indicator | Label | Description |
-| --- | --- | --- |
-| contact_waiting_abort_number | Abandoned contacts | Number of contacts initiated in the queue who left before being processed. |
-| contact_waiting_answered_number | Processed contacts | Number of processed contacts coming from the queue.  |
-| contact_waiting_before_quit_duration | Waiting time before abandonment | Average time before a visitor abandons the queue.  |
-| contact_waiting_duration | Waiting time before contact | Average waiting time of visitors in the queue.  |
-| contact_waiting_number | Initiated contacts | Average waiting time of visitors in the queue. |
+| Indicator | Label | Description | Value |
+| --- | --- | --- | --- |
+| contact_waiting_abort_number | Abandoned contacts | Number of contacts initiated in the queue who left before being processed. | Number |
+| contact_waiting_answered_number | Processed contacts | Number of processed contacts coming from the queue.  | Number |
+| contact_waiting_before_quit_duration | Waiting time before abandonment | Average time before a visitor abandons the queue. | Second |
+| contact_waiting_duration | Waiting time before contact | Average waiting time of visitors in the queue. | Second |
+| contact_waiting_number | Initiated contacts | Average waiting time of visitors in the queue. | Number |
 
 ##### available on `chat`, `call`, `video`
 
-| Indicator | Label | Description |
-| --- | --- | --- |
-| contact_per_hour_average_number | Contacts / hr of the website | Average number of contacts processed by all agents for an hour of production. |
-| contact_per_hour_number | Contacts per hour | Average number of contacts processed by an agent for an hour of production. |
-| rule_contact_rate | Response rate | Proportion of displays having generated a contact. |
-| rule_display_number | Displays | Number of chat/call displays generated on the website during the period. |
-| targeting_rule_triggered | Triggers | Number of times a targeting rule has been triggered, as a consequence of visitors meeting the right criteria. |
+| Indicator | Label | Description | Value |
+| --- | --- | --- | --- |
+| contact_per_hour_average_number | Contacts / hr of the website | Average number of contacts processed by all agents for an hour of production. | Number |
+| contact_per_hour_number | Contacts per hour | Average number of contacts processed by an agent for an hour of production. | Number |
+| rule_contact_rate | Response rate | Proportion of displays having generated a contact. | Rate |
+| rule_display_number | Displays | Number of chat/call displays generated on the website during the period. | Number |
+| targeting_rule_triggered | Triggers | Number of times a targeting rule has been triggered, as a consequence of visitors meeting the right criteria. | Number |
 
 
 #### Presence indicators
 
 ##### available on `chat`, `call` and `video`
 
-| Indicator | Label | Description |
-| --- | --- | --- |
-| max_and_partial_occupation_duration | Global occupation | Period during which an agent is connected to the panel and is occupied partially or to the maximum. |
-| max_occupation_duration | Maximum occupation | Period during which an agent is connected to the panel and is occupied to maximum capacity. |
-| max_occupation_rate | Maximum occupation rate | Part of production time during which an agent is connected to the panel and is occupied to a maximum. |
-| non_production_duration | Not in production | Period during which an agent is connected to the panel, unavailable and yet not busy. |
-| non_production_rate | Not in production rate | Proportion of connection time during which an agent is connected to the panel, unavailable and yet not busy. |
-| presentation_duration | Smoothed period of button presentation | Period during which buttons are displayable. Length of the time slot covered with at least one agent available. |
-| production_smoothed_duration | Smoothed period of production | Period during which operators were in production. Length of the time slot covered with at least one agent in production. |
+| Indicator | Label | Description | Number |
+| --- | --- | --- | --- |
+| max_and_partial_occupation_duration | Global occupation | Period during which an agent is connected to the panel and is occupied partially or to the maximum. | Second |
+| max_occupation_duration | Maximum occupation | Period during which an agent is connected to the panel and is occupied to maximum capacity. | Second |
+| max_occupation_rate | Maximum occupation rate | Part of production time during which an agent is connected to the panel and is occupied to a maximum. | Rate |
+| non_production_duration | Not in production | Period during which an agent is connected to the panel, unavailable and yet not busy. | Second |
+| non_production_rate | Not in production rate | Proportion of connection time during which an agent is connected to the panel, unavailable and yet not busy. | Rate |
+| presentation_duration | Smoothed period of button presentation | Period during which buttons are displayable. Length of the time slot covered with at least one agent available. | Second |
+| production_smoothed_duration | Smoothed period of production | Period during which operators were in production. Length of the time slot covered with at least one agent in production. | Second |
 
-##### available on `chat`, `call`, `video`, `facebook`, `twitter` `facebookBusinessOnMessenger`, `instagram`, `sms`, `whatsapp`
+##### available on `chat`, `call`, `video`, `facebook`, `twitter` `facebookBusinessOnMessenger`, `sms`, `whatsapp`
 
-| Indicator | Label | Description |
-| --- | --- | --- |
+| Indicator | Label | Description | Value |
+| --- | --- | --- | --- |
 | presence_duration | Total period of presence | Total period during which the agents were connected to the desk. |
 | presence_smoothed_duration | Smoothed period of presence | Period during which operators were connected. Length of the time slot covered with at least one agent present. |
 | occupation_rate | Partial occupation rate | Part of production time during which an agent is connected to the panel and is partially busy. |
@@ -1402,38 +1402,38 @@ See below to discover used fields and see [reading section](#read) to discover s
 
 ##### available on `chat`, `call` and `video`
 
-| Indicator | Label | Description |
-| --- | --- | --- |
-| satisfaction_delay_rate | Waiting time | Visitor satisfaction rate with the waiting time before receiving an answer. |
-| satisfaction_global_rate | Overall satisfaction | Overall satisfaction rate of visitors. |
-| satisfaction_resolution_rate | Quality of response | Visitors' satisfaction rate with the response given by the agent. |
-| satisfaction_respondent_number | Number of respondents | Number of visitors who replied to a satisfaction survey following a discussion. |
-| satisfaction_respondent_rate | Response rate | Proportion of conversations after which visitors completed the satisfaction survey. |
-| satisfaction_welcome_rate | Quality of welcome | Visitor satisfaction rate with the welcome. |
-| occupation_duration | Partial occupation | Period during which an agent is connected to the panel, unavailable and yet not busy. |
+| Indicator | Label | Description | Value |
+| --- | --- | --- | --- |
+| satisfaction_delay_rate | Waiting time | Visitor satisfaction rate with the waiting time before receiving an answer. | Rate |
+| satisfaction_global_rate | Overall satisfaction | Overall satisfaction rate of visitors. | Rate |
+| satisfaction_resolution_rate | Quality of response | Visitors' satisfaction rate with the response given by the agent. | Rate |
+| satisfaction_respondent_number | Number of respondents | Number of visitors who replied to a satisfaction survey following a discussion. | Number |
+| satisfaction_respondent_rate | Response rate | Proportion of conversations after which visitors completed the satisfaction survey. | Rate |
+| satisfaction_welcome_rate | Quality of welcome | Visitor satisfaction rate with the welcome. | Rate |
+| occupation_duration | Partial occupation | Period during which an agent is connected to the panel, unavailable and yet not busy. | Second |
  
 
 #### Transactions indicators
 
-##### available on `chat`, `call`, `video`, `facebook`, `twitter`, `facebookBusinessOnMessenger`, `instagram`, `sms`, `whatsapp`
+##### available on `chat`, `call`, `video`, `facebook`, `twitter`, `facebookBusinessOnMessenger`, `sms`, `whatsapp`
 
 | Indicator | Label | Description |
-| --- | --- | --- |
-| conversion_rate | Conversion rate | Proportion of conversations which led to transactions. |
-| cart_after_contact_amount | Average order value after contact | Average order value following a contact. |
-| cart_global_amount | Average order value on the website | Average Order Value, all visitor categories. |
-| transaction_after_contact_amount | T/O after contact | Total turnover from visitors who dialogued and completed a transaction after a contact. |
-| transaction_after_contact_number | Transactions after contact |  Total number of transactions from visitors who dialogued and then completed a transaction following the contact. |
-| transaction_total_amount | Website T/O | Total turnover, all visitor categories. |
-| transaction_total_number | Website transactions | Total number of transactions (all categories). |
+| --- | --- | --- | --- |
+| conversion_rate | Conversion rate | Proportion of conversations which led to transactions. | Rate |
+| cart_after_contact_amount | Average order value after contact | Average order value following a contact. | Number |
+| cart_global_amount | Average order value on the website | Average Order Value, all visitor categories. | Amount |
+| transaction_after_contact_amount | T/O after contact | Total turnover from visitors who dialogued and completed a transaction after a contact. | Amount |
+| transaction_after_contact_number | Transactions after contact |  Total number of transactions from visitors who dialogued and then completed a transaction following the contact. | Number |
+| transaction_total_amount | Website T/O | Total turnover, all visitor categories. | Amount |
+| transaction_total_number | Website transactions | Total number of transactions (all categories). | Number |
 | transaction_after_contact_duration | Transformation time after contact | Average time between the first exchange and the transaction. |
-transaction following a contact. |
-| transaction_after_conversation_amount_per_hour | Website transactions amount per hour | Average turnover generated by an agent after a contact on an hourly basis |
-| transaction_missed_with_busy_operators_amount | T/O missed (agents totally busy) | Estimated lost turnover due to agents being totally busy. |
-| transaction_missed_with_busy_operators_number | Missed transaction opportunities (agents totally busy) | Estimated number of missed transaction opportunities because the agents were totally busy. |
-| transaction_missed_with_no_operators_amount | Missed T/O opportunity (agents absent) | Estimated turnover missed because the agents were not connected or not in production. |
-| transaction_missed_with_no_operators_number | Missed transaction opportunities (agents absent) | Estimated number of missed transaction opportunities because the agents were not connected or not in production. |
-| transaction_amount_per_conversation | Website transactions amount per conversation | Average turnover generated for each conversation done |
+transaction following a contact. | Second |
+| transaction_after_conversation_amount_per_hour | Website transactions amount per hour | Average turnover generated by an agent after a contact on an hourly basis | Amount |
+| transaction_missed_with_busy_operators_amount | T/O missed (agents totally busy) | Estimated lost turnover due to agents being totally busy. | Amount |
+| transaction_missed_with_busy_operators_number | Missed transaction opportunities (agents totally busy) | Estimated number of missed transaction opportunities because the agents were totally busy. | Number |
+| transaction_missed_with_no_operators_amount | Missed T/O opportunity (agents absent) | Estimated turnover missed because the agents were not connected or not in production. | Amount |
+| transaction_missed_with_no_operators_number | Missed transaction opportunities (agents absent) | Estimated number of missed transaction opportunities because the agents were not connected or not in production. | Number |
+| transaction_amount_per_conversation | Website transactions amount per conversation | Average turnover generated for each conversation done | Amount |
 
 
 ### Visitor
