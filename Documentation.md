@@ -751,6 +751,7 @@ See below to discover used fields and see [reading section](#read) to discover s
 
 | Filter | Description | Values | Use |
 | --- | --- | --- |
+| id | Operator identifier | | ?filters[id]=123 |
 | group_id | Group identifier | | ?filters[group_id]=123 |
 | website_id | Website identifier | | ?filters[website_id]=123 |
 | skill_id | Skill identifier | | ?filters[skill_id]=123 |
