@@ -1603,6 +1603,7 @@ iAdvize expect to have à 20x http status in callback result.
 **Output examples of Conversations domain:**
 
 Please note : 
+
 | Attribut | Description |
 | --- | --- |
 | clientID | As a client of iAdvize you have a specific ID, it is was this one represents |
