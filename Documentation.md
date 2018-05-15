@@ -544,8 +544,7 @@ URL of the graphQL endpoint : api.iadvize.com/graphql
 | idInstallation | ID of the installation  | String |  |
 | access_token | Access token | String | ✓ |
 
-<pre class="prettyprint lang-js">
-{
+<pre class="prettyprint lang-js">{
     "query" : "query InstallationsValues ($idConnectorVersion : UUID, $websiteId : [String!], $idInstallation : String, $access_token : String!) {installationsValues(idConnectorVersion : $idConnectorVersion, websiteId : $websiteId, idInstallation : $idInstallation, access_token : $access_token) {id,, value, idInstallation, idConnectorVersionParameter}}",
     "variables" : {
     	"idConnectorVersion" : "c4f7773d-eece-4233-85d6-1a2ee6ff24f8",
@@ -563,8 +562,7 @@ URL of the graphQL endpoint : api.iadvize.com/graphql
  | idInstallation | ID of the installation  | UUID | ✓ |
  | idConnectorVersionParameter | ID of the connector version parameter | UUID | ✓ |
 
-<pre class="prettyprint lang-js">
-{
+<pre class="prettyprint lang-js">{
     "data": {
         "installationsValues": [
             {
@@ -590,8 +588,7 @@ URL of the graphQL endpoint : api.iadvize.com/graphql
 | idConnectorVersion | Connector version Id | UUID |  |
 | access_token | Access token | String | ✓ |
 
-<pre class="prettyprint lang-js">
-{
+<pre class="prettyprint lang-js">{
     "query" : "query Parameters ($id : [UUID!], $idConnectorVersion: UUID, $access_token: String!) {parameters(id : $id, idConnectorVersion: $idConnectorVersion, access_token : $access_token) {id, name, type, mandatory, idConnectorVersion, key, valueType, createdAt} }",
     "variables" : {
     	"idConnectorVersion" : "c4f7773d-eece-4233-85d6-1a2ee6ff24f8",
@@ -613,8 +610,7 @@ URL of the graphQL endpoint : api.iadvize.com/graphql
  | valueType | Type of the field name | String | ✓ |
  | createdAt | Date of creation of the parameter | DateTime | ✓ |
 
-<pre class="prettyprint lang-js">
-{
+<pre class="prettyprint lang-js">{
     "data": {
         "parameters": [
             {
@@ -644,8 +640,7 @@ URL of the graphQL endpoint : api.iadvize.com/graphql
  | idConnectorVersion | Connector version Id | UUID | ✓ |
  | access_token | Access token | String | ✓ |
  
- <pre class="prettyprint lang-js">
-{
+ <pre class="prettyprint lang-js">{
     "query" : "query ConversationClosingFormValue ($idConversation : String!, $idConnectorVersion : UUID!, $access_token : String!) {conversationClosingFormValue(idConversation : $idConversation, idConnectorVersion: $idConnectorVersion, access_token : $access_token) {id, idConnectorVersion, idConversation, idField, value, updatedAt} }",
     "variables" : {
     	"idConversation" : "ha-56986", 
@@ -666,8 +661,7 @@ URL of the graphQL endpoint : api.iadvize.com/graphql
  | value | Value of the field | String | ✓ |
  | updatedAt | Date if last update of the value | String | ✓ |
 
-<pre class="prettyprint lang-js">
-{
+<pre class="prettyprint lang-js">{
     "data": {
         "conversationClosingFormValue": [
             {
