@@ -559,7 +559,7 @@ URL of the graphQL endpoint : api.iadvize.com/graphql
  }
 </pre>
 
-**Response -- Available fields in response**
+##### Response -- Available fields in response
  
  | Field | Description | Values | Required |
  | --- | --- | --- | --- |
@@ -572,7 +572,7 @@ URL of the graphQL endpoint : api.iadvize.com/graphql
 
 ##### `POST /connectors/parameters`
 
-**Parameters -- Fields to specify in post body**
+##### Parameters -- Fields to specify in post body
 
 | Field | Description | Values | Required |
 | --- | --- | --- | --- |
@@ -580,7 +580,7 @@ URL of the graphQL endpoint : api.iadvize.com/graphql
 | idConnectorVersion | Connector version Id | UUID |  |
 | access_token | Access token | String | ✓ |
 
-**Response -- Available fields in response**
+##### Response -- Available fields in response
 
  | Field | Description | Values | Required |
  | --- | --- | --- | --- |
@@ -598,7 +598,7 @@ URL of the graphQL endpoint : api.iadvize.com/graphql
 
 ##### `POST /conversations/closing-form-values`
  
- **Parameters -- Fields to specify in post body**
+##### Parameters -- Fields to specify in post body
  
  | Field | Description | Values | Required |
  | --- | --- | --- | --- |
@@ -607,7 +607,7 @@ URL of the graphQL endpoint : api.iadvize.com/graphql
  | access_token | Access token | String | ✓ |
  
 
-**Response -- Available fields in response**
+##### Response -- Available fields in response
 
  | Field | Description | Values | Required |
  | --- | --- | --- | --- |
