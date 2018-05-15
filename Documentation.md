@@ -640,7 +640,7 @@ URL of the graphQL endpoint : api.iadvize.com/graphql
  | idConnectorVersion | Connector version Id | UUID | ✓ |
  | access_token | Access token | String | ✓ |
  
- <pre class="prettyprint lang-js">{
+<pre class="prettyprint lang-js">{
     "query" : "query ConversationClosingFormValue ($idConversation : String!, $idConnectorVersion : UUID!, $access_token : String!) {conversationClosingFormValue(idConversation : $idConversation, idConnectorVersion: $idConnectorVersion, access_token : $access_token) {id, idConnectorVersion, idConversation, idField, value, updatedAt} }",
     "variables" : {
     	"idConversation" : "ha-56986", 
@@ -648,7 +648,7 @@ URL of the graphQL endpoint : api.iadvize.com/graphql
     	"access_token" : "AccessTokenTest"
     }
  }
- </pre>
+</pre>
 
 **Response -- Available fields in response**
 
