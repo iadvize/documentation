@@ -578,7 +578,7 @@ URL of the graphQL endpoint : api.iadvize.com/graphql
 
 ### Parameters
 
- ##### `POST /connectors/parameters`
+##### `POST /connectors/parameters`
 
 **Parameters -- Fields to specify in post body**
 
@@ -630,7 +630,7 @@ URL of the graphQL endpoint : api.iadvize.com/graphql
 
 ### Conversation Closing Form Values 
 
- ##### `POST /conversations/closing-form-values`
+##### `POST /conversations/closing-form-values`
  
  **Parameters -- Fields to specify in post body**
  
