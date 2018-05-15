@@ -599,7 +599,11 @@ URL of the graphQL endpoint : api.iadvize.com/graphql
 #### Example of request
 
 <pre class="prettyprint lang-js">{
-    "query" : "query Parameters ($id : [UUID!], $idConnectorVersion: UUID, $access_token: String!) {parameters(id : $id, idConnectorVersion: $idConnectorVersion, access_token : $access_token) {id, name, type, mandatory, idConnectorVersion, key, valueType, createdAt} }",
+    "query" : "query Parameters ($id : [UUID!], $idConnectorVersion: UUID, $access_token: String!) {
+        parameters(id : $id, idConnectorVersion: $idConnectorVersion, access_token : $access_token) {
+            id, name, type, mandatory, idConnectorVersion, key, valueType, createdAt
+        } 
+    }",
     "variables" : {
     	"idConnectorVersion" : "c4f7773d-eece-4233-85d6-1a2ee6ff24f8",
     	"access_token" : "AccessTokenTest"
@@ -655,7 +659,11 @@ URL of the graphQL endpoint : api.iadvize.com/graphql
 #### Example of request
 
 <pre class="prettyprint lang-js">{
-    "query" : "query ConversationClosingFormValue ($idConversation : String!, $idConnectorVersion : UUID!, $access_token : String!) {conversationClosingFormValue(idConversation : $idConversation, idConnectorVersion: $idConnectorVersion, access_token : $access_token) {id, idConnectorVersion, idConversation, idField, value, updatedAt} }",
+    "query" : "query ConversationClosingFormValue ($idConversation : String!, $idConnectorVersion : UUID!, $access_token : String!) {
+        conversationClosingFormValue(idConversation : $idConversation, idConnectorVersion: $idConnectorVersion, access_token : $access_token) {
+            id, idConnectorVersion, idConversation, idField, value, updatedAt
+        } 
+    }",
     "variables" : {
     	"idConversation" : "ha-56986", 
     	"idConnectorVersion" : "c4f7773d-eece-4233-85d6-1a2ee6ff24f8",
