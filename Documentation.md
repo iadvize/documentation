@@ -544,7 +544,7 @@ URL of the graphQL endpoint : api.iadvize.com/graphql
 | idInstallation | ID of the installation  | String |  |
 | access_token | Access token | String | ✓ |
 
-Test 
+**Test** 
 
 <pre class="prettyprint lang-js">{
     "query" : "query InstallationsValues ($idConnectorVersion : UUID, $websiteId : [String!], $idInstallation : String, $access_token : String!) {installationsValues(idConnectorVersion : $idConnectorVersion, websiteId : $websiteId, idInstallation : $idInstallation, access_token : $access_token) {id,, value, idInstallation, idConnectorVersionParameter}}",
