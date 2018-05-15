@@ -535,7 +535,7 @@ URL of the graphQL endpoint : api.iadvize.com/graphql
 
 ##### `POST /connectors/installations/values`
 
-**Parameters -- Fields to specify in post body**
+##### Parameters -- Fields to specify in post body
 
 | Field | Description | Values | Required |
 | --- | --- | --- | --- |
@@ -544,7 +544,7 @@ URL of the graphQL endpoint : api.iadvize.com/graphql
 | idInstallation | ID of the installation  | String |  |
 | access_token | Access token | String | ✓ |
 
-**Example of request** 
+#### Example of request
 
 <pre class="prettyprint lang-js">{
     "query" : "query InstallationsValues ($idConnectorVersion : UUID, $websiteId : [String!], $idInstallation : String, $access_token : String!)  {
