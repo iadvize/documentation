@@ -544,8 +544,6 @@ URL of the graphQL endpoint : api.iadvize.com/graphql
 | idInstallation | ID of the installation  | String |  |
 | access_token | Access token | String | ✓ |
 
-**Test** 
-
 <pre class="prettyprint lang-js">{
     "query" : "query InstallationsValues ($idConnectorVersion : UUID, $websiteId : [String!], $idInstallation : String, $access_token : String!) {installationsValues(idConnectorVersion : $idConnectorVersion, websiteId : $websiteId, idInstallation : $idInstallation, access_token : $access_token) {id,, value, idInstallation, idConnectorVersionParameter}}",
     "variables" : {
@@ -564,20 +562,6 @@ URL of the graphQL endpoint : api.iadvize.com/graphql
  | idInstallation | ID of the installation  | UUID | ✓ |
  | idConnectorVersionParameter | ID of the connector version parameter | UUID | ✓ |
 
-<pre class="prettyprint lang-js">{
-    "data": {
-        "installationsValues": [
-            {
-                "id": "bb2eecf4-5752-11e8-9c2d-fa7ae01bbebc",
-                "value": "hello@iadvize.com",
-                "idInstallation": "be5455be-5751-11e8-9c2d-fa7ae01bbebc",
-                "idConnectorVersionParameter": "28693902-5c5a-462d-ac1b-6ac9112ce075"
-            }
-        ]
-    }
-}
-</pre>
-
 ### Parameters
 
 ##### `POST /connectors/parameters`
@@ -589,15 +573,6 @@ URL of the graphQL endpoint : api.iadvize.com/graphql
 | id | Array of connector version parameter ids | Array[UUID] |  |
 | idConnectorVersion | Connector version Id | UUID |  |
 | access_token | Access token | String | ✓ |
-
-<pre class="prettyprint lang-js">{
-    "query" : "query Parameters ($id : [UUID!], $idConnectorVersion: UUID, $access_token: String!) {parameters(id : $id, idConnectorVersion: $idConnectorVersion, access_token : $access_token) {id, name, type, mandatory, idConnectorVersion, key, valueType, createdAt} }",
-    "variables" : {
-    	"idConnectorVersion" : "c4f7773d-eece-4233-85d6-1a2ee6ff24f8",
-    	"access_token" : "AccessTokenTest"
-    }
- }
-</pre>
 
 **Response -- Available fields in response**
 
@@ -612,23 +587,6 @@ URL of the graphQL endpoint : api.iadvize.com/graphql
  | valueType | Type of the field name | String | ✓ |
  | createdAt | Date of creation of the parameter | DateTime | ✓ |
 
-<pre class="prettyprint lang-js">{
-    "data": {
-        "parameters": [
-            {
-                "id": "28693902-5c5a-462d-ac1b-6ac9112ce075",
-                "name": "Settings",
-                "type": "setting",
-                "mandatory": false,
-                "idConnectorVersion": "c4f7773d-eece-4233-85d6-1a2ee6ff24f8",
-                "key": "settings",
-                "valueType": "TEXT",
-                "createdAt": "2018-05-14T08:12:44Z"
-            }
-        ]
-    }
-}
-</pre>
 
 ### Conversation Closing Form Values 
 
@@ -642,15 +600,6 @@ URL of the graphQL endpoint : api.iadvize.com/graphql
  | idConnectorVersion | Connector version Id | UUID | ✓ |
  | access_token | Access token | String | ✓ |
  
-<pre class="prettyprint lang-js">{
-    "query" : "query ConversationClosingFormValue ($idConversation : String!, $idConnectorVersion : UUID!, $access_token : String!) {conversationClosingFormValue(idConversation : $idConversation, idConnectorVersion: $idConnectorVersion, access_token : $access_token) {id, idConnectorVersion, idConversation, idField, value, updatedAt} }",
-    "variables" : {
-    	"idConversation" : "ha-56986", 
-    	"idConnectorVersion" : "c4f7773d-eece-4233-85d6-1a2ee6ff24f8",
-    	"access_token" : "AccessTokenTest"
-    }
- }
-</pre>
 
 **Response -- Available fields in response**
 
@@ -662,22 +611,6 @@ URL of the graphQL endpoint : api.iadvize.com/graphql
  | idField | ID of the field | String | ✓ |
  | value | Value of the field | String | ✓ |
  | updatedAt | Date if last update of the value | String | ✓ |
-
-<pre class="prettyprint lang-js">{
-    "data": {
-        "conversationClosingFormValue": [
-            {
-                "id": "7458f713-2aa1-4cd0-82ca-af9cef34ba44",
-                "idConnectorVersion": "c4f7773d-eece-4233-85d6-1a2ee6ff24f8",
-                "idConversation": "ha-56986",
-                "idField": "200",
-                "value": "Email",
-                "updatedAt": "2018-05-14T11:53:51+00:00"
-            }
-        ]
-    }
-}
-</pre>
 
 
 # REST API
