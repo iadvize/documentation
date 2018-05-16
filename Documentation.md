@@ -637,14 +637,14 @@ URL of the graphQL endpoint : api.iadvize.com/graphql
  
 ##### Parameters -- Fields to specify in post body
  
- <pre class="prettyprint lang-js">{
+<pre class="prettyprint lang-js">{
      "query" : "query ConversationClosingFormValue{
          conversationClosingFormValue(idConversation : \"ha-56986\", idConnectorVersion: \"c4f7773d-eece-4233-85d6-1a2ee6ff24f8\", access_token : \"tokenToTest\") {
              id, idConnectorVersion, idConversation, idField, value, updatedAt
          } 
      }"
 }
- </pre>
+</pre>
  
  | Field | Description | Values | Required |
  | --- | --- | --- | --- |
