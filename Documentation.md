@@ -537,27 +537,21 @@ URL of the graphQL endpoint : api.iadvize.com/graphql
 
 ##### Parameters -- Fields to specify in post body
 
+<pre class="prettyprint lang-js">{
+    "query" : "query InstallationsValues {
+        installationsValues(idConnectorVersion : \"c4f7773d-eece-4233-85d6-1a2ee6ff24f8\", access_token : \"tokenToTest\") {
+            id, value, idInstallation, idConnectorVersionParameter
+        } 
+    }"
+ }
+</pre>
+
 | Field | Description | Values | Required |
 | --- | --- | --- | --- |
 | idConnectorVersion | ID of the connector version | UUID |  |
 | websiteId | Array of website IDs | Array[String] |  |
 | idInstallation | ID of the installation  | String |  |
 | access_token | Access token | String | ✓ |
-
-#### Example of request
-
-<pre class="prettyprint lang-js">{
-    "query" : "query InstallationsValues ($idConnectorVersion : UUID, $websiteId : [String!], $idInstallation : String, $access_token : String!)  {
-        installationsValues(idConnectorVersion : $idConnectorVersion, websiteId : $websiteId, idInstallation : $idInstallation, access_token : $access_token)  {    
-            id,, value, idInstallation, idConnectorVersionParameter
-        }
-    }",
-    "variables" : {
-    	"idConnectorVersion" : "c4f7773d-eece-4233-85d6-1a2ee6ff24f8",
-    	 "access_token" : "AccessTokenTest"
-    }
- }
-</pre>
 
 ##### Response -- Available fields in response
  
@@ -599,16 +593,11 @@ URL of the graphQL endpoint : api.iadvize.com/graphql
 #### Example of request
 
 <pre class="prettyprint lang-js">{
-    "query" : "query Parameters ($id : [UUID!], $idConnectorVersion: UUID, $access_token: String!) {
-        parameters(id : $id, idConnectorVersion: $idConnectorVersion, access_token : $access_token) {
-            id, name, type, mandatory, idConnectorVersion, key, valueType, createdAt
-        } 
-    }",
-    "variables" : {
-    	"idConnectorVersion" : "c4f7773d-eece-4233-85d6-1a2ee6ff24f8",
-    	"access_token" : "AccessTokenTest"
-    }
- }
+     "query" : "query Parameters {
+        parameters(idConnectorVersion: \"c4f7773d-eece-4233-85d6-1a2ee6ff24f8\", access_token : \"tokenToTest\") {
+            id, name, type, mandatory, idConnectorVersion, key, valueType, createdAt} 
+        }"
+}
 </pre>
 
 ##### Response -- Available fields in response
@@ -659,17 +648,12 @@ URL of the graphQL endpoint : api.iadvize.com/graphql
 #### Example of request
 
 <pre class="prettyprint lang-js">{
-    "query" : "query ConversationClosingFormValue ($idConversation : String!, $idConnectorVersion : UUID!, $access_token : String!) {
-        conversationClosingFormValue(idConversation : $idConversation, idConnectorVersion: $idConnectorVersion, access_token : $access_token) {
+    "query" : "query ConversationClosingFormValue{
+        conversationClosingFormValue(idConversation : \"ha-56986\", idConnectorVersion: \"c4f7773d-eece-4233-85d6-1a2ee6ff24f8\", access_token : \"tokenToTest\") {
             id, idConnectorVersion, idConversation, idField, value, updatedAt
         } 
-    }",
-    "variables" : {
-    	"idConversation" : "ha-56986", 
-    	"idConnectorVersion" : "c4f7773d-eece-4233-85d6-1a2ee6ff24f8",
-    	"access_token" : "AccessTokenTest"
-    }
- }
+    }"
+  }
 </pre>
 
 ##### Response -- Available fields in response
