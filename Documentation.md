@@ -643,7 +643,7 @@ URL of the graphQL endpoint : api.iadvize.com/graphql
              id, idConnectorVersion, idConversation, idField, value, updatedAt
          } 
      }"
-   }
+}
  </pre>
  
  | Field | Description | Values | Required |
