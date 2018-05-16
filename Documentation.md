@@ -584,14 +584,6 @@ URL of the graphQL endpoint : api.iadvize.com/graphql
 
 ##### Parameters -- Fields to specify in post body
 
-| Field | Description | Values | Required |
-| --- | --- | --- | --- |
-| id | Array of connector version parameter ids | Array[UUID] |  |
-| idConnectorVersion | Connector version Id | UUID |  |
-| access_token | Access token | String | ✓ |
-
-#### Example of request
-
 <pre class="prettyprint lang-js">{
      "query" : "query Parameters {
         parameters(idConnectorVersion: \"c4f7773d-eece-4233-85d6-1a2ee6ff24f8\", access_token : \"tokenToTest\") {
@@ -599,6 +591,12 @@ URL of the graphQL endpoint : api.iadvize.com/graphql
         }"
 }
 </pre>
+
+| Field | Description | Values | Required |
+| --- | --- | --- | --- |
+| id | Array of connector version parameter ids | Array[UUID] |  |
+| idConnectorVersion | Connector version Id | UUID |  |
+| access_token | Access token | String | ✓ |
 
 ##### Response -- Available fields in response
 
@@ -639,23 +637,21 @@ URL of the graphQL endpoint : api.iadvize.com/graphql
  
 ##### Parameters -- Fields to specify in post body
  
+ <pre class="prettyprint lang-js">{
+     "query" : "query ConversationClosingFormValue{
+         conversationClosingFormValue(idConversation : \"ha-56986\", idConnectorVersion: \"c4f7773d-eece-4233-85d6-1a2ee6ff24f8\", access_token : \"tokenToTest\") {
+             id, idConnectorVersion, idConversation, idField, value, updatedAt
+         } 
+     }"
+   }
+ </pre>
+ 
  | Field | Description | Values | Required |
  | --- | --- | --- | --- |
  | idConversation | The conversation ID | String | ✓ |
  | idConnectorVersion | Connector version Id | UUID | ✓ |
  | access_token | Access token | String | ✓ |
  
-#### Example of request
-
-<pre class="prettyprint lang-js">{
-    "query" : "query ConversationClosingFormValue{
-        conversationClosingFormValue(idConversation : \"ha-56986\", idConnectorVersion: \"c4f7773d-eece-4233-85d6-1a2ee6ff24f8\", access_token : \"tokenToTest\") {
-            id, idConnectorVersion, idConversation, idField, value, updatedAt
-        } 
-    }"
-  }
-</pre>
-
 ##### Response -- Available fields in response
 
  | Field | Description | Values | Required |
