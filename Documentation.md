@@ -1602,6 +1602,13 @@ iAdvize expect to have à 20x http status in callback result.
 
 **Output examples of Conversations domain:**
 
+Please note : 
+
+| Attribut | Description |
+| --- | --- |
+| clientId | As a client of iAdvize you have a specific ID, it is what this one represents |
+| visitorId | Each visitor has a unique ID. iAdvize calls it visitor unique ID |
+
 #### conversation.started
 
 <pre class="prettyprint lang-js">{
