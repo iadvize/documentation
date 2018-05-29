@@ -248,6 +248,7 @@ To make sure your connector uses the Product list interaction correctly, all you
 | idConnectorVersion | Connector version id | ?idConnectorVersion=123 |
 | idParent | Unique identifier of the parent category | ?idParent=123  |
 | idWebsite | Unique identifier of the associated website (assigned to you by iAdvize) | ?idWebsite=123  |
+| idOperator | Unique identifier of the operator loading the categories | ?idOperator=9999  |
 | limit | Maximum number of resources per page | ?limit=10 |
 | offset | Number of resources skipped before beginning to return resources | ?offset=10 |
 
@@ -304,6 +305,7 @@ To make sure your connector uses the Product list interaction correctly, all you
 | idConnectorVersion | Connector version id | ?idConnectorVersion=123 |
 | idCategory | Category id | ?idCategory=123  |
 | idWebsite | Unique identifier of the associated website (assigned to you by iAdvize) | ?idWebsite=123  |
+| idOperator | Unique identifier of the operator loading the products | ?idOperator=9999  |
 | limit | Maximum number of resources per page | ?limit=10 |
 | offset | Number of resources skipped before beginning to return resources | ?offset=10 |
 | searchQuery | Product search query | ?searchQuery=query |
@@ -368,6 +370,7 @@ In order to set the right connector parameters, all you have to do is to declare
 | idVisitorUnique | Visitor unique id | ?idVisitorUnique=123  |
 | idWebsite | Unique identifier of the associated website (assigned to you by iAdvize) | ?idWebsite=123  |
 | operatorLocale | Operator locale | ?operatorLocale=en  |
+| idOperator | Unique identifier of the operator loading the visitor profile | ?idOperator=9999  |
 
 ** Response - Array of fields **
 
@@ -423,6 +426,7 @@ In order to set the right connector parameters, all you have to do is to declare
 | idConnectorVersion | Connector version id | ?idConnectorVersion=123 |
 | idWebsite | Unique identifier of the associated website (assigned to you by iAdvize) | ?idWebsite=123  |
 | operatorLocale | Operator locale | ?operatorLocale=en  |
+| idOperator | Unique identifier of the operator loading the form | ?idOperator=9999  |
 
 ** Response - Array of inputs **
 
