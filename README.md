@@ -11,6 +11,8 @@ You have to create a branch and open a pull request, after that we will review i
 There is two way to do this, directly on github with the preview system on markdown files or in your computer with tools like [MacDown](https://macdown.uranusjr.com/) if you know how to use a git. After that We will review your pull request and decide when to publish it if it's needed.
 
 You have to edit the file Documentation.md in a markdown format, if you don't know how to do this you can use [Mastering Markdown](https://guides.github.com/features/mastering-markdown/) to help you writing markdown.
+
+For GraphQL API, you have to generate static documentation in connectors-app, see [README](https://github.com/iadvize/connectors-app#graphql-doc)
   
 ## How to test
 
