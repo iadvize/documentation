@@ -490,12 +490,12 @@ if (! hash_equals($iAdvizeHash, $queryParametersHash)) {
 We strongly recommend you, to use the **constant time** string comparison method (`hash_equals` vs `===`  in our example), 
 to be less vulnerable to [timing attacks](https://en.wikipedia.org/wiki/Timing_attack).
 
-## Webhooks (In progress)
+## Webhooks
 The webhook system allows external applications to subscribe to events (via callback URLs) to receive updates in real-time.
 When you build your app, you can subscribe to a list of events.
 When customers install your app, it automatically creates webhooks for these customers as well as for events based on your app's configuration.
 
-This subscription is based on the events happening on different domains. See the list of events available in the [Webhook API documentation](#webhook-api).
+This subscription is based on the events happening on different domains. See the list of events available in the [Webhooks documentation](#webhook-api).
 
 ### Create a webhook for your connector
 You can create as much outgoing webhooks as you need.
@@ -1581,7 +1581,11 @@ See below to discover used fields and see [reading section](#read) to discover s
 </pre>
 
 
-# Webhook API
+# GraphQL API
+
+[Documentation GraphQL](/bundles/devplatformapp/graphqldoc/index.html)
+
+# Webhooks
 
 ## Events description
 
@@ -1844,7 +1848,7 @@ to be less vulnerable to timing attacks.
 
 # Push API (deprecated)
 
-The iAdvize Push API will be deprecated starting september, 2017. The Push API will stop working from january 30th, 2018. From now, we recommend to use our webhook API.
+The iAdvize Push API will be deprecated starting september, 2017. The Push API will stop working from january 30th, 2018. From now, we recommend to use our webhooks system.
 The Push API allows data to be pushed to URI callbacks when an event is fired.  
 The Push API uses JSON exclusively. XML is not supported. Push requests are sent with a POST method. 
 
