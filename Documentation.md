@@ -490,7 +490,7 @@ if (! hash_equals($iAdvizeHash, $queryParametersHash)) {
 We strongly recommend you, to use the **constant time** string comparison method (`hash_equals` vs `===`  in our example), 
 to be less vulnerable to [timing attacks](https://en.wikipedia.org/wiki/Timing_attack).
 
-## Create a webhook for your connector
+## Add webhooks
 The webhook system allows external applications to subscribe to events (via callback URLs) to receive updates in real-time.
 When you build your app, you can subscribe to a list of events.
 When customers install your app, it automatically creates webhooks for these customers as well as for events based on your app's configuration.
