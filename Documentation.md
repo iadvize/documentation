@@ -735,6 +735,8 @@ See [reading section](#read) to discover some output examples.
 | id | Identifier | Integer |
 | url | URL | String |
 | label | Label | String |
+| client_id | Client identifier | Integer |
+
 
 #### Update a website
 
