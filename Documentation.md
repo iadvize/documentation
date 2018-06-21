@@ -516,6 +516,175 @@ Developers are responsible for their connector's maintenance.
 Developers can set their app’s price (monthly fee per user).
 If it’s not a free app, developers must be a legal person.
 
+
+
+## GraphQL Endpoint 
+Through the graphQL endpoint, developers can access to some data concerning the connectors.
+Actually, they can get : 
+* The parameters of the connectors 
+* The values in the conversation closing form
+* The values of the fields in the installation section 
+
+To use this different endpoints, developers have to launch HTTP requests (POST method) with a JSON body.  
+
+For each of the endpoint, we provide an example of body and an array with the available parameters. 
+
+We also provide the available fields for the response. GraphQL let you to choose the fields you want to get, you just have to specify them in your request. 
+
+URL of the graphQL endpoint : api.iadvize.com/graphql
+
+
+### Installation values 
+
+##### `POST /connectors/installations/values`
+
+##### Parameters -- Fields to specify in post body
+
+<pre class="prettyprint lang-js">{
+    "query" : "query InstallationsValues {
+        installationsValues(idConnectorVersion : \"c4f7773d-eece-4233-85d6-1a2ee6ff24f8\", access_token : \"tokenToTest\") {
+            id, value, idInstallation, idConnectorVersionParameter
+        } 
+    }"
+ }
+</pre>
+
+| Field | Description | Values | Required |
+| --- | --- | --- | --- |
+| idConnectorVersion | ID of the connector version | UUID |  |
+| websiteId | Array of website IDs | Array[String] |  |
+| idInstallation | ID of the installation  | String |  |
+| access_token | Access token | String | ✓ |
+
+##### Response -- Available fields in response
+ 
+ | Field | Description | Values | Required |
+ | --- | --- | --- | --- |
+ | id | ID of the installation value | UUID | ✓ |
+ | value | Value of the installation field| String | ✓ |
+ | idInstallation | ID of the installation  | UUID | ✓ |
+ | idConnectorVersionParameter | ID of the connector version parameter | UUID | ✓ |
+
+#### Example of response
+
+<pre class="prettyprint lang-js">{
+    "data": {
+        "installationsValues": [
+            {
+                "id": "bb2eecf4-5752-11e8-9c2d-fa7ae01bbebc",
+                "value": "hello@iadvize.com",
+                "idInstallation": "be5455be-5751-11e8-9c2d-fa7ae01bbebc",
+                "idConnectorVersionParameter": "28693902-5c5a-462d-ac1b-6ac9112ce075"
+            }
+        ]
+    }
+}
+</pre>
+
+### Parameters
+
+##### `POST /connectors/parameters`
+
+##### Parameters -- Fields to specify in post body
+
+<pre class="prettyprint lang-js">{
+     "query" : "query Parameters {
+        parameters(idConnectorVersion: \"c4f7773d-eece-4233-85d6-1a2ee6ff24f8\", access_token : \"tokenToTest\") {
+            id, name, type, mandatory, idConnectorVersion, key, valueType, createdAt} 
+        }"
+}
+</pre>
+
+| Field | Description | Values | Required |
+| --- | --- | --- | --- |
+| id | Array of connector version parameter ids | Array[UUID] |  |
+| idConnectorVersion | Connector version Id | UUID |  |
+| access_token | Access token | String | ✓ |
+
+##### Response -- Available fields in response
+
+ | Field | Description | Values | Required |
+ | --- | --- | --- | --- |
+ | id | ID of the connector version parameter | UUID | ✓ |
+ | name | Name of the parameter| String | ✓ |
+ | type | Type of the parameter | String | ✓ |
+ | mandatory | Required (or not) field | UUID | ✓ |
+ | idConnectorVersion | ID of the connector version of the parameter | UUID | ✓ |
+ | key | The key of your parameter according to your code | String | ✓ |
+ | valueType | Type of the field name | String | ✓ |
+ | createdAt | Date of creation of the parameter | DateTime | ✓ |
+
+#### Example of response
+
+<pre class="prettyprint lang-js">{
+    "data": {
+        "parameters": [
+            {
+                "id": "28693902-5c5a-462d-ac1b-6ac9112ce075",
+                "name": "Settings",
+                "type": "setting",
+                "mandatory": false,
+                "idConnectorVersion": "c4f7773d-eece-4233-85d6-1a2ee6ff24f8",
+                "key": "settings",
+                "valueType": "TEXT",
+                "createdAt": "2018-05-14T08:12:44Z"
+            }
+        ]
+    }
+}
+</pre>
+
+### Conversation Closing Form Values 
+
+##### `POST /conversations/closing-form-values`
+ 
+##### Parameters -- Fields to specify in post body
+ 
+<pre class="prettyprint lang-js">{
+     "query" : "query ConversationClosingFormValue{
+         conversationClosingFormValue(idConversation : \"ha-56986\", idConnectorVersion: \"c4f7773d-eece-4233-85d6-1a2ee6ff24f8\", access_token : \"tokenToTest\") {
+             id, idConnectorVersion, idConversation, idField, value, updatedAt
+         } 
+     }"
+}
+</pre>
+ 
+ | Field | Description | Values | Required |
+ | --- | --- | --- | --- |
+ | idConversation | The conversation ID | String | ✓ |
+ | idConnectorVersion | Connector version Id | UUID | ✓ |
+ | access_token | Access token | String | ✓ |
+ 
+##### Response -- Available fields in response
+
+ | Field | Description | Values | Required |
+ | --- | --- | --- | --- |
+ | id | ID of the Conversation closing form value | UUID | ✓ |
+ | idConnectorVersion | ID of the connector version| UUID | ✓ |
+ | idConversation | ID of the conversation  | String | ✓ |
+ | idField | ID of the field | String | ✓ |
+ | value | Value of the field | String | ✓ |
+ | updatedAt | Date if last update of the value | String | ✓ |
+
+#### Example of response
+
+<pre class="prettyprint lang-js">{
+    "data": {
+        "conversationClosingFormValue": [
+            {
+                "id": "7458f713-2aa1-4cd0-82ca-af9cef34ba44",
+                "idConnectorVersion": "c4f7773d-eece-4233-85d6-1a2ee6ff24f8",
+                "idConversation": "ha-56986",
+                "idField": "200",
+                "value": "Email",
+                "updatedAt": "2018-05-14T11:53:51+00:00"
+            }
+        ]
+    }
+}
+</pre>
+
+
 # REST API
 **Current version:** 2.0
 
