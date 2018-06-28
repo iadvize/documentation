@@ -1586,7 +1586,8 @@ See below to discover used fields and see [reading section](#read) to discover s
 
 ## Authentication
 
-In order to authenticate
+Authentication uses temporary & revocable access tokens.
+You can generate an access token by calling the url below with a user email & password.
 
 `POST /oauth2/token`
 **Parameters** (sent as application/x-www-form-urlencoded)
@@ -1595,7 +1596,7 @@ In order to authenticate
 | --- | --- | --- | --- |
 | username | User email | String | Yes |
 | password | User password | String | Yes |
-| grant_type | Oauth2 grant type (only password is suported) | String | Yes |
+| grant_type | Oauth2 grant type (only password is supported) | String | Yes |
 
 **Response**
 
@@ -1608,6 +1609,16 @@ In order to authenticate
 }
 </pre>
 
+<pre class="prettyprint lang-bash">
+    curl -XPOST https://api.iadvize.com/oauth2/token -d "username={EMAIL}&password={PASSWORD}&grant_type=password"
+</pre>
+
+To authenticate an API call just pass the access token in a bearer header.
+You can verify token validity with the authenticated route below.
+
+<pre class="prettyprint lang-bash">
+    curl -H "Authorization: Bearer {ACCESS_TOKEN}" https://api.iadvize.com/_authenticated
+</pre>
 
 ## Resources
 
