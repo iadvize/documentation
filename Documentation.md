@@ -1586,8 +1586,8 @@ See below to discover used fields and see [reading section](#read) to discover s
 
 ## Getting started on GraphQL
 
-GraphQL is our new API. All new resource will only be exposed in this new API.
-We are currently migrating old resource from Rest API to GraphQL.
+GraphQL is our new API All new resources will only be exposed in this new API.
+We are currently migrating old resources from Rest API to GraphQL.
 Please note that we are in alpha version, resources are pretty stable but
 authentication method will change in the next months.
 
@@ -1604,8 +1604,6 @@ You can generate an access token by calling the url below with a user email & pa
 | username | User email | String | Yes |
 | password | User password | String | Yes |
 | grant_type | Oauth2 grant type (only password is supported) | String | Yes |
-
-**Response**
 
 <pre class="prettyprint lang-js">
 {
