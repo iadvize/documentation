@@ -1584,7 +1584,14 @@ See below to discover used fields and see [reading section](#read) to discover s
 
 # GraphQL API <span class="tag">alpha</span>
 
-## Authentication
+## Getting started on GraphQL
+
+GraphQL is our new API. All new resource will only be exposed in this new API.
+We are currently migrating old resource from Rest API to GraphQL.
+Please note that we are in alpha version, resources are pretty stable but
+authentication method will change in the next months.
+
+## Authentication <span hidden>on GraphQL</span>
 
 Authentication uses temporary & revocable access tokens.
 You can generate an access token by calling the url below with a user email & password.
@@ -1605,7 +1612,7 @@ You can generate an access token by calling the url below with a user email & pa
     "refresh_token": "***************************",
     "token_type": "bearer",
     "expires_in": 86400,
-    "access_token": "*****************************"
+    "access_token": "***************************"
 }
 </pre>
 
@@ -1620,7 +1627,7 @@ You can verify token validity with the authenticated route below.
     curl -H "Authorization: Bearer {ACCESS_TOKEN}" https://api.iadvize.com/_authenticated
 </pre>
 
-## Resources
+## Resources <span hidden>GraphQL</span>
 
 [Documentation GraphQL](/bundles/devplatformapp/graphqldoc/index.html)
 
