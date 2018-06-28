@@ -1582,7 +1582,34 @@ See below to discover used fields and see [reading section](#read) to discover s
 </pre>
 
 
-# GraphQL API
+# GraphQL API <span class="tag">alpha</span>
+
+## Authentication
+
+In order to authenticate
+
+`POST /oauth2/token`
+**Parameters** (sent as application/x-www-form-urlencoded)
+
+| Parameter | Description | Values | Mandatory |
+| --- | --- | --- | --- |
+| username | User email | String | Yes |
+| password | User password | String | Yes |
+| grant_type | Oauth2 grant type (only password is suported) | String | Yes |
+
+**Response**
+
+<pre class="prettyprint lang-js">
+{
+    "refresh_token": "***************************",
+    "token_type": "bearer",
+    "expires_in": 86400,
+    "access_token": "*****************************"
+}
+</pre>
+
+
+## Resources
 
 [Documentation GraphQL](/bundles/devplatformapp/graphqldoc/index.html)
 
