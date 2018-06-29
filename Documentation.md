@@ -1591,6 +1591,9 @@ We are currently migrating old resources from Rest API to GraphQL.
 Please note that we are in alpha version, resources are pretty stable but
 authentication method will change in the next months.
 
+One of the power o f GraphQL API is to allow you retrieve many resources in one HTTP call.
+You can request only fields you need too. If you wan to learn on GraphQL [Learn GraphQL](https://graphql.org/learn/)
+
 ## Authentication <span hidden>on GraphQL</span>
 
 Authentication uses temporary & revocable access tokens.
