@@ -1592,7 +1592,7 @@ Please note that we are in alpha version, resources are pretty stable but
 authentication method will change in the next months.
 
 One of the power of GraphQL API is to allow you retrieve many resources in one HTTP call.
-You can request only fields you need too. If you wan to learn on GraphQL [Learn GraphQL](https://graphql.org/learn/)
+You can request only fields you need. If you wan to learn more about GraphQL, please check [Learn GraphQL](https://graphql.org/learn/)
 
 ## Authentication <span hidden>on GraphQL</span>
 
