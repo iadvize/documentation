@@ -1632,6 +1632,38 @@ You can verify token validity with the authenticated route below.
 
 [Documentation GraphQL](/bundles/devplatformapp/graphqldoc/index.html)
 
+## Example
+
+To use the GraphQL API, call the URL below with the Authorization header containing your access token.
+
+`POST /graphql`
+**Parameters** (sent as application/json)
+
+| Parameter | Description | Values | Mandatory |
+| --- | --- | --- | --- |
+| query | GraphQL query | String | Yes |
+| variables | Variables to be used in the GraphQL query | String | No |
+| operationName | Operation to perform if the GraphQL query contains several operations | String | No |
+
+###For example:
+<pre class="prettyprint lang-js">{
+  "query": "query GetConnector($connectorId: UUID!) { connector(id: $connectorId) { name } }",
+  "variables": {
+    "connectorId": "41c64064-4729-4d83-a939-8d46ac06d207"
+  }
+}
+</pre>
+
+###Result:
+<pre class="prettyprint lang-js">{
+  "data": {
+    "connector": {
+      "name": "..."
+    }
+  }
+}
+</pre>
+
 # Webhooks
 
 ## Events description
