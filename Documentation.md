@@ -436,25 +436,6 @@ In order to set the right interaction parameters, all you have to do is to decla
 
 ##### /external-bots
 
-** Request - GET method **
-
-| Query parameter | Description | Values |
-| --- | --- | --- |
-| idConnectorVersion | Connector version id | ?idConnectorVersion=123 |
-| idWebsite | Unique identifier of the associated website (assigned to you by iAdvize) | ?idWebsite=123  |
-| operatorLocale | Operator locale | ?operatorLocale=en  |
-| idOperator | Unique identifier of the operator loading the form | ?idOperator=9999  |
-
-** Response - Array of inputs **
-
-| Field | Description | Values | Required |
-| --- | --- | --- | --- |
-| id | Unique identifier | string | ✓ |
-| idParent | Parent identifier, if the field depends on it| string | |
-| label | Label | String | ✓ |
-| fieldType | Field type | `TEXT` or `CHECKBOX` | ✓ |
-| isRequired | Required | Boolean | ✓ |
-
 ##### /bots
 
 ##### /availability-strategies
