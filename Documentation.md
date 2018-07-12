@@ -336,8 +336,8 @@ To be able to retrieve the CRM profile, iAdvize must be able to identify the vis
 
 ![VisitorProfile](./assets/images/visitorprofilefeature@2x.png)
 
-**Add a visitor profile connector and configure it**
-In order to set the right connector parameters, all you have to do is to declare:
+**Add a visitor profile interaction and configure it**
+In order to set the right interaction parameters, all you have to do is to declare:
 * The connector URL - this is your visitor's profile URL
 
 #### Visitor profile data
@@ -387,8 +387,8 @@ The conversation closing form interaction enables iAdvize's Console panel users 
 
 ![CloseConversation](./assets/images/close_conversation@2x.png)
 
-**Add a conversation closing form connector and Configure it**
-In order to set the right connector parameters, all you have to do is to declare:
+**Add a conversation closing form interaction and Configure it**
+In order to set the right interaction parameters, all you have to do is to declare:
 * The connector URL - this is your form's url
 
 #### Conversation Closing Form data
@@ -418,6 +418,23 @@ In order to set the right connector parameters, all you have to do is to declare
 ]
 </pre>
 
+### The bot
+
+The integration of a bot enables Admins and Managers to create users with the role “bot” inside iAdvize’s administration.
+The scenario and availability of the bot is managed by your app, allowing your bot to interact with visitors inside iAdvize’s chatbox.
+
+**Add a bot interaction and Configure it**
+In order to set the right interaction parameters, all you have to do is to declare:
+* The connector URL - this is your root url. And you have to implement this routes in your connector :
+    * /external-bots
+    * /bots
+    * /availability-strategies
+    * /conversations
+    * /conversations/:conversationId:/messages
+
+#### bot data
+
+##### /external-bots
 
 ** Request - GET method **
 
@@ -437,6 +454,34 @@ In order to set the right connector parameters, all you have to do is to declare
 | label | Label | String | ✓ |
 | fieldType | Field type | `TEXT` or `CHECKBOX` | ✓ |
 | isRequired | Required | Boolean | ✓ |
+
+##### /bots
+
+##### /availability-strategies
+
+##### /conversations
+
+##### /conversations/:conversationId:/messages
+
+## Add webhooks
+
+The webhook system allows external applications to subscribe to events (via callback URLs) to receive updates in real-time.
+When you build your app, you can subscribe to a list of events.
+When customers install your app, it automatically creates webhooks for these customers as well as for events based on your app's configuration.
+
+This subscription is based on the events happening on different domains. See the list of events available in the [Webhooks documentation](#webhooks).
+
+You can create as much outgoing webhooks as you need.
+A webhook can cover several events.
+An event can be linked to a customer (example customers.website.created)
+or linked to a website (example customers.website.created)
+
+* Name of the webhook: an optional label you can give to the webhook
+* webhook URL: the server URL that will receive the webhook
+* Security token: Token provided by iAdvize (this field cannot be edited)
+* Content-type: Application / json ; Application / x-www-form-urlencoded
+* Events: you can select the events in the list. You can subscribe to all
+iAdvize events, all events of a specific domain, or only one event.
 
 ## Submit your apps
 
@@ -489,26 +534,6 @@ if (! hash_equals($iAdvizeHash, $queryParametersHash)) {
 
 We strongly recommend you, to use the **constant time** string comparison method (`hash_equals` vs `===`  in our example), 
 to be less vulnerable to [timing attacks](https://en.wikipedia.org/wiki/Timing_attack).
-
-## Add webhooks
-The webhook system allows external applications to subscribe to events (via callback URLs) to receive updates in real-time.
-When you build your app, you can subscribe to a list of events.
-When customers install your app, it automatically creates webhooks for these customers as well as for events based on your app's configuration.
-
-This subscription is based on the events happening on different domains. See the list of events available in the [Webhooks documentation](#webhooks).
-
-You can create as much outgoing webhooks as you need.
-A webhook can cover several events.
-An event can be linked to a customer (example customers.website.created)
-or linked to a website (example customers.website.created)
-
-* Name of the webhook: an optional label you can give to the webhook
-* webhook URL: the server URL that will receive the webhook
-* Security token: Token provided by iAdvize (this field cannot be edited)
-* Content-type: Application / json ; Application / x-www-form-urlencoded
-* Events: you can select the events in the list. You can subscribe to all
-iAdvize events, all events of a specific domain, or only one event.
-
 
 ## Developer Policy
 Developers host their code on their own host service.
