@@ -184,7 +184,6 @@ To make sure your connector uses the Product list interaction correctly, all you
  ]
 </pre>
 
-
 ** Request - GET method **
 
 | Query parameter | Description | Values |
@@ -494,11 +493,11 @@ These endpoints are used
 
 ** Request - GET /bots/:idOperator: **
 
-| Parameters | In | Description | Values |
+| Parameters | In | Description | Values | Required |
 | --- | --- | --- | --- |
-| idConnectorVersion | Query | Connector version id | ?idConnectorVersion=123 |
-| idWebsite | Query | Unique identifier of the website on which your connector is installed | ?idWebsite=123  |
-| idOperator | Path | iAdvize bot operator identifier that we associate to your bot scenario | /bots/456678  |
+| idConnectorVersion | Query | Connector version id | ?idConnectorVersion=123 | ✓ |
+| idWebsite | Query | Unique identifier of the website on which your connector is installed | ?idWebsite=123  | ✓ |
+| idOperator | Path | iAdvize bot operator identifier that we associate to your bot scenario | /bots/456678  | ✓ |
 
 ** Response **
 
@@ -535,7 +534,49 @@ These endpoints are used
 | createdAt | Creation date of you bot | String |  | ISO 8601 |
 | updatedAt | Last modification date of your bot| String |  | ISO 8601 |
 
-##### Get/availability-strategies
+##### Get operator availability strategies
+
+Bot is ready and should be made available accordingly to this strategy and distributions rules.
+
+** Request - GET /availability-strategies **
+
+| Parameters | In | Description | Values | Required |
+| --- | --- | --- | --- | --- |
+| idConnectorVersion | Query | Connector version id | ?idConnectorVersion=123 | ✓ |
+| idWebsite | Query | Unique identifier of the website on which your connector is installed | ?idWebsite=123  | ✓ |
+| idOperator | Query | iAdvize bot operator identifier that we associate to your bot scenario | ?idOperator=456678  | ✓ |
+
+** Response **
+
+<pre class="prettyprint lang-js">
+{
+    "data":[
+        {
+            "strategy": "atLeastOne",
+            "distributionRulesToCheck": [
+                "ef4670c3-d715-4a21-8226-ed17f354fc44"
+            ]
+        }
+    ]
+}
+</pre>
+
+<pre class="prettyprint lang-js">
+{
+    "data": [
+        {
+            "strategy": "customAvailability",
+            "availability": true
+        }
+    ]
+}
+</pre>
+
+| Field | Description | Values | Required | Constraints |
+| --- | --- | --- | --- | --- |
+| strategy | How we should aggregate the availability if several distribution rules are provided | `atLeastOne` or `all` or `notAvailable` or `customAvailability` | ✓ | |
+| distributionRulesToCheck | All distribution rules we should check for availability. This is subset of DistributionRules returned by the Get bot endpoint. | Array of String | | Required if strategy is equal to `atLeastOne` or `all` |
+| availability | Allow the connector to handle the availability of the bot | Boolean | | Required if strategy is equal to `customAvailability` |
 
 ##### /conversations
 
