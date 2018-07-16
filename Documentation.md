@@ -383,7 +383,16 @@ To make sure your connector uses the Bot interaction correctly, all you have to 
 These endpoints are used 
 #### User form flow data
 
-##### List external bots GET /external-bots
+##### List external bots
+
+** Request - GET /external-bots **
+
+| Query parameter | Description | Values |
+| --- | --- | --- |
+| idConnectorVersion | Connector version id | ?idConnectorVersion=123 |
+| idWebsite | Unique identifier of the website on which your connector is installed | ?idWebsite=123  |
+
+** Response **
 
 <pre class="prettyprint lang-js">
 [
@@ -402,16 +411,6 @@ These endpoints are used
 ]
 </pre>
 
-
-** Request - GET method **
-
-| Query parameter | Description | Values |
-| --- | --- | --- |
-| idConnectorVersion | Connector version id | ?idConnectorVersion=123 |
-| idWebsite | Unique identifier of the website on which your connector is installed | ?idWebsite=123  |
-
-** Response - Array of bots **
-
 | Field | Description | Values | Required |
 | --- | --- | --- | --- |
 | idBot | Unique identifier of the bot | String | ✓ |
@@ -419,9 +418,9 @@ These endpoints are used
 | description | Description of the bot | String |  |
 | editorUrl | Url used to redirect user to your bot editor| A valid URL |  |
 
-##### Modify bot PUT /bots/:idOperator:
+##### Modify bot information
 
-** Request - PUT method **
+** Request - PUT /bots/:idOperator: **
 
 | Parameters | In | Description | Values |
 | --- | --- | --- | --- |
@@ -491,9 +490,9 @@ These endpoints are used
 | createdAt | Creation date of you bot | String |  | ISO 8601 |
 | updatedAt | Last modification date of your bot| String |  | ISO 8601 |
 
-##### Get bot information /bots/:idOperator:
+##### Get bot information
 
-** Request - GET method **
+** Request - GET /bots/:idOperator: **
 
 | Parameters | In | Description | Values |
 | --- | --- | --- | --- |
@@ -536,7 +535,7 @@ These endpoints are used
 | createdAt | Creation date of you bot | String |  | ISO 8601 |
 | updatedAt | Last modification date of your bot| String |  | ISO 8601 |
 
-##### /availability-strategies
+##### Get/availability-strategies
 
 ##### /conversations
 
