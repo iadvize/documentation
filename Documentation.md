@@ -134,62 +134,6 @@ Please find technical details in the [verification Url](#verification-url) secti
 
 ![Setting](./assets/images/developer-settings.jpg)
 
-## Verification url
-
-In the [app authentication](#app-authentication) and [app settings](#app-settings) sections of the iAdvize Developer Platform, you can set a "Verification url".
-We will call this URL each time a client validate a step during an installation of your connector on a website.
-the application requires a confirmation from your connector to approve the configuration settings.
-It means that your connector must answer to this call by a confirmation or error messages to determine whether the step have been correctly set up. 
-If the step is validated by your connector, parameters are saved on our side.
-
-### Request payload
-
-Here is the information sent to your verification url as a payload body of a POST Request.
-
-<pre class="prettyprint lang-js">
-[
-    {
-		"key": "login",
-		"value": "login"
-	},
-	{
-		"key": "password",
-		"value": "p4ssw0rd"
-	}
-]
-</pre>
-
-| Field | Description | Values |
-| --- | --- | --- |
-| key | Parameter key, defined by you in developer platform | String |
-| value | Parameter value, filled by the client during connector's installation | String|Boolean  |
-
-
-### Response payload 
-
-In order to validate the information filled by the iAdvize administrator during the installation of the connector, we await the answer of your connector in this format:
-
-<pre class="prettyprint lang-js">
-{
-	"isStepValid": false,
-	"errors": [
-	    {
-            "code": "password",
-            "description": "password is not valid",
-            "parameterKey": "login"
-        }
-	]
-}
-</pre>
-
-| Field | Description | Values | Required |
-| --- | --- | --- | --- |
-| isValid | validation status | Boolean | ✓ |
-| errors | Errors list, can be empty | Array | ✓ |
-| errors - code| Error code, used to identify error on connector side | String | ✓ |
-| errors - message | Error message that will be displayed on our installation process | String | ✓ |
-| errors - parameterKey | If mentioned, error concerns this parameter key | String | ✓ |
-
 ## App Interactions
 Use interactions to enhance the iAdvize interface by adding or editing predefined features. 
 
@@ -229,14 +173,14 @@ To make sure your connector uses the Product list interaction correctly, all you
             "456"
         ],
         "productsCount": 3
-     },
-     {
-         "id": "456",
-         "idParent": null,
-         "label": "category",
-         "products": null,
-         "productsCount": 7
-      }
+    },
+    {
+        "id": "456",
+        "idParent": null,
+        "label": "category",
+        "products": null,
+        "productsCount": 7
+    }
  ]
 </pre>
 
@@ -247,7 +191,7 @@ To make sure your connector uses the Product list interaction correctly, all you
 | --- | --- | --- |
 | idConnectorVersion | Connector version id | ?idConnectorVersion=123 |
 | idParent | Unique identifier of the parent category | ?idParent=123  |
-| idWebsite | Unique identifier of the associated website (assigned to you by iAdvize) | ?idWebsite=123  |
+| idWebsite | Unique identifier of the website on which your connector is installed | ?idWebsite=123  |
 | idOperator | Unique identifier of the operator loading the categories | ?idOperator=9999  |
 | limit | Maximum number of resources per page | ?limit=10 |
 | offset | Number of resources skipped before beginning to return resources | ?offset=10 |
@@ -304,7 +248,7 @@ To make sure your connector uses the Product list interaction correctly, all you
 | --- | --- | --- |
 | idConnectorVersion | Connector version id | ?idConnectorVersion=123 |
 | idCategory | Category id | ?idCategory=123  |
-| idWebsite | Unique identifier of the associated website (assigned to you by iAdvize) | ?idWebsite=123  |
+| idWebsite | Unique identifier of the website on which your connector is installed | ?idWebsite=123  |
 | idOperator | Unique identifier of the operator loading the products | ?idOperator=9999  |
 | limit | Maximum number of resources per page | ?limit=10 |
 | offset | Number of resources skipped before beginning to return resources | ?offset=10 |
@@ -334,7 +278,7 @@ Agents can overview the visitor's CRM profile in a new window while they are cha
 
 To be able to retrieve the CRM profile, iAdvize must be able to identify the visitor thanks to an email and/or an external ID.
 
-![VisitorProfile](./assets/images/visitorprofilefeature@2x.png)
+![Visitor profile](./assets/images/visitorprofilefeature@2x.png)
 
 **Add a visitor profile interaction and configure it**
 In order to set the right interaction parameters, all you have to do is to declare:
@@ -343,20 +287,20 @@ In order to set the right interaction parameters, all you have to do is to decla
 #### Visitor profile data
 
 <pre class="prettyprint lang-js">
- [
+[
     {
-        "id":"1",
+        "id":"crm_profile_link",
         "label": "CRM profile",
         "value": "https://www.crm.fr/visitor-profile",
         "fieldType":"URL"
     },
     {
-        "id":"2",
+        "id":"crm_visitor_tag",
         "label": "CRM tag",
         "value": "tag",
         "fieldType": "TEXT"
     }
- ]
+]
 </pre>
 
 
@@ -368,7 +312,7 @@ In order to set the right interaction parameters, all you have to do is to decla
 | idConnectorVersion | Connector version id | ?idConnectorVersion=123 |
 | idVisitorExternal | Visitor external id | ?idVisitorExternal=123  |
 | idVisitorUnique | Visitor unique id | ?idVisitorUnique=123  |
-| idWebsite | Unique identifier of the associated website (assigned to you by iAdvize) | ?idWebsite=123  |
+| idWebsite | Unique identifier of the website on which your connector is installed | ?idWebsite=123  |
 | operatorLocale | Operator locale | ?operatorLocale=en  |
 | idOperator | Unique identifier of the operator loading the visitor profile | ?idOperator=9999  |
 
@@ -385,7 +329,7 @@ In order to set the right interaction parameters, all you have to do is to decla
 
 The conversation closing form interaction enables iAdvize's Console panel users to provide additional information manually at the end of conversation. 
 
-![CloseConversation](./assets/images/close_conversation@2x.png)
+![Conversation closing form interaction](./assets/images/close_conversation@2x.png)
 
 **Add a conversation closing form interaction and Configure it**
 In order to set the right interaction parameters, all you have to do is to declare:
@@ -394,22 +338,22 @@ In order to set the right interaction parameters, all you have to do is to decla
 #### Conversation Closing Form data
 
 <pre class="prettyprint lang-js">
- [
+[
     {
-        "id": "1",
-        "label": "create a salesforce ticket",
+        "id": "create_crm_ticket",
+        "label": "Create a CRM ticket",
         "fieldType": "CHECKBOX",
         "isRequired": true
     },
     {
-        "id": "2",
+        "id": "brand_name",
         "idParent": "1",
         "label": "Brand name",
         "fieldType": "TEXT",
         "isRequired": true
     },
     {
-        "id": "3",
+        "id": "color",
         "idParent": "1",
         "label": "Color",
         "fieldType": "TEXT",
@@ -423,20 +367,129 @@ In order to set the right interaction parameters, all you have to do is to decla
 The integration of a bot enables Admins and Managers to create users with the role “bot” inside iAdvize’s administration.
 The scenario and availability of the bot is managed by your app, allowing your bot to interact with visitors inside iAdvize’s chatbox.
 
+Allow bots providers to create their connector with the Developper Platform. 
+Allow customers to connect their iAdvize account to a bot provider and connect bots seamlessly. These bots should use iAdvize like a human agent.
+
+The user flow
+1. The user activate your connector on the market place.
+2. When creating a new bot user, the admin will have the possibility to select an external bot type and one scenario. 
+3. At the end of the creation form, the admin will have to choose which of the activated connector will be backing the bot interaction, s.he wants to use for this specify bot.
+4. After the creation process, the admin will be redirected to your bot edition page.
+
+![Bot interaction](./assets/images/interactions-bot-feature.png)
+
 **Add a bot interaction and Configure it**
-In order to set the right interaction parameters, all you have to do is to declare:
-* The connector URL - this is your root url. And you have to implement this routes in your connector :
-    * /external-bots
-    * /bots
-    * /availability-strategies
-    * /conversations
-    * /conversations/:conversationId:/messages
+To make sure your connector uses the Bot interaction correctly, all you have to do is to declare the base url that will by postfixed by seven endpoints described below.
+These endpoints are used 
+#### User form flow data
 
-#### bot data
+##### List external bots GET /external-bots
 
-##### /external-bots
+<pre class="prettyprint lang-js">
+[
+    {
+        "idBot": "Hal12343",
+        "name": "Hal",
+        "description": "Hal is good, bro",
+        "editorUrl": "http://your-saas/Hal12343/editor"
+    },
+    {
+        "idBot": "brt123569",
+        "name": "Bart Simpson",
+        "description": "Bart will make you crazy",
+        "editorUrl": "http://your-saas/brt123569/editor"
+    },
+]
+</pre>
 
-##### /bots
+
+** Request - GET method **
+
+| Query parameter | Description | Values |
+| --- | --- | --- |
+| idConnectorVersion | Connector version id | ?idConnectorVersion=123 |
+| idWebsite | Unique identifier of the website on which your connector is installed | ?idWebsite=123  |
+
+** Response - Array of bots **
+
+| Field | Description | Values | Required |
+| --- | --- | --- | --- |
+| idBot | Unique identifier of the bot | String | ✓ |
+| name | Name of the bot | String | ✓ |
+| description | Description of the bot | String |  |
+| editorUrl | Url used to redirect user to your bot editor| A valid URL |  |
+
+##### Modify bot PUT /bots/:idOperator:
+
+** Request - PUT method **
+
+| Parameters | In | Description | Values |
+| --- | --- | --- | --- |
+| idConnectorVersion | Query | Connector version id | ?idConnectorVersion=123 |
+| idWebsite | Query | Unique identifier of the website on which your connector is installed | ?idWebsite=123  |
+| idOperator | Path | iAdvize bot operator identifier that we associate to your bot scenario | /bots/456678  |
+
+<pre class="prettyprint lang-js">
+{
+    "name": "Hal",
+    "pseudo": "Hal is good, bro",
+    "language": "fr",
+    "distributionRules": [
+        {
+            "id": "ef4670c3-d715-4a21-8226-ed17f354fc44",
+            "label": "Human SAV guys"
+        }
+    ],
+    "external": {
+        "idBot": "Hal12343"
+    }
+}
+</pre>
+
+| Field | Description | Values | Required | Constraints |
+| --- | --- | --- | --- | --- |
+| name | Bot name on your platform | String |  |
+| pseudo | Bot pseudo used during the conversation | String |  |
+| language | Language spoken by the bot | String | ISO 3166-1 alpha-2 |
+| distributionRules | distribution rule that can be used inside transfer replies | Array |  |
+| distributionRules.id | Distribution rule identifier | String | UUID |
+| distributionRules.label | Distribution rule label | String |  |
+| external.idBot | Existing bot unique identifier for this connector| String |  |
+
+** Response **
+
+<pre class="prettyprint lang-js">
+{
+    "idOperator": "23232",
+    "external": {
+      "idBot":"R3R3ZFDKOEZ",
+      "name": "Hal",
+      "description": "Hal is good, bro",
+      "editorUrl": "http://your-saas/R3R3ZFDKOEZ/editor"
+    },
+    "distributionRules": [
+      { 
+        "id": "ef4670c3-d715-4a21-8226-ed17f354fc44",
+        "label": "Human SAV guys"
+      }
+    ],
+    "createdAt": "2017-11-22T12:04:00Z",
+    "updatedAt": "2017-11-22T12:04:00Z"
+  }
+</pre>
+
+| Field | Description | Values | Required | Constraints |
+| --- | --- | --- | --- | --- |
+| idOperator | iAdvize bot operator identifier | String |  | |
+| external.idBot | Bot identifier on your platform | String |  | |
+| external.name | Bot name on your platform | String |  | |
+| external.description | Bot description on your plateform | String |  | |
+| external.editorUrl | Bot edition url on your platform | String |  | URL |
+| distributionRules | distribution rule that can be used inside transfer replies | Array |  |
+| distributionRules.id | Distribution rule identifier | String | | UUID |
+| distributionRules.label | Distribution rule label | String |  |
+| createdAt | Creation date of you bot | String |  | ISO 8601 |
+| updatedAt | Last modification date of your bot| String |  | ISO 8601 |
 
 ##### /availability-strategies
 
@@ -536,7 +589,7 @@ All URLs referenced in the documentation have the following base:
 | --- | --- |
 | `https://www.iadvize.com/api/2` | `https://ha.iadvize.com/api/2` |
 
-The iAdvize REST API is served over HTTPS and HTTP.
+The iAdvize REST API is served over HTTPS.
 
 ## Authentication
 
