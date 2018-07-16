@@ -491,6 +491,51 @@ These endpoints are used
 | createdAt | Creation date of you bot | String |  | ISO 8601 |
 | updatedAt | Last modification date of your bot| String |  | ISO 8601 |
 
+##### Get bot information /bots/:idOperator:
+
+** Request - GET method **
+
+| Parameters | In | Description | Values |
+| --- | --- | --- | --- |
+| idConnectorVersion | Query | Connector version id | ?idConnectorVersion=123 |
+| idWebsite | Query | Unique identifier of the website on which your connector is installed | ?idWebsite=123  |
+| idOperator | Path | iAdvize bot operator identifier that we associate to your bot scenario | /bots/456678  |
+
+** Response **
+
+<pre class="prettyprint lang-js">
+{
+    "idOperator": "23232",
+    "external": {
+      "idBot":"R3R3ZFDKOEZ",
+      "name": "Hal",
+      "description": "Hal is good, bro",
+      "editorUrl": "http://your-saas/R3R3ZFDKOEZ/editor"
+    },
+    "distributionRules": [
+      { 
+        "id": "ef4670c3-d715-4a21-8226-ed17f354fc44",
+        "label": "Human SAV guys"
+      }
+    ],
+    "createdAt": "2017-11-22T12:04:00Z",
+    "updatedAt": "2017-11-22T12:04:00Z"
+  }
+</pre>
+
+| Field | Description | Values | Required | Constraints |
+| --- | --- | --- | --- | --- |
+| idOperator | iAdvize bot operator identifier | String |  | |
+| external.idBot | Bot identifier on your platform | String |  | |
+| external.name | Bot name on your platform | String |  | |
+| external.description | Bot description on your plateform | String |  | |
+| external.editorUrl | Bot edition url on your platform | String |  | URL |
+| distributionRules | distribution rule that can be used inside transfer replies | Array |  |
+| distributionRules.id | Distribution rule identifier | String | | UUID |
+| distributionRules.label | Distribution rule label | String |  |
+| createdAt | Creation date of you bot | String |  | ISO 8601 |
+| updatedAt | Last modification date of your bot| String |  | ISO 8601 |
+
 ##### /availability-strategies
 
 ##### /conversations
