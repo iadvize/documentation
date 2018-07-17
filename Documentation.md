@@ -647,14 +647,10 @@ Bot is ready and should be made available accordingly to this strategy and distr
         },
         {
             "type": "transfer",
-            "content": {
-                "contentType": "text",
-                "value": "Do you want to talk to an agent ?"
-            },
-            "distributionRules": [
-                "ef4670c3-d715-4a21-8226-ed17f354fc44",
-                "a0c65ae0-4e04-4909-a5cc-80dd0f05de96"
-            ]
+            "distributionRule": "ef4670c3-d715-4a21-8226-ed17f354fc44"
+        },
+        {
+            "type": "close"
         }
     ],
     "variables": [
@@ -672,7 +668,7 @@ Bot is ready and should be made available accordingly to this strategy and distr
 | --- | --- | --- | --- | --- |
 | idConversation | Conversation unique identifier | String | ✓ | UUID |
 | idOperator | iAdvize bot operator identifier that we associate to your bot scenario | String | ✓ |  | 
-| replies | Array of replies | Array | ✓ | UUID |
+| replies | Array of replies | Array | ✓ |  |
 | replies.type | Reply/action type | `await` or `message` or `transfer` or `close` | ✓ |  |
 | replies.duration.unit | Awaiting unit of time | `millis` or `seconds` or `minutes` |  | replies.type == `await` |
 | replies.duration.value | Awaiting value of time | Long |  | replies.type == `await` |
@@ -690,8 +686,105 @@ Bot is ready and should be made available accordingly to this strategy and distr
 | updateAt | Date of the last message received | DateTime |  | ISO-8601 |
 
 
-##### /conversations/:conversationId:/messages
+##### POST /conversations/:conversationId:/messages
 
+** Request - POST /conversations **
+
+| Parameters | In | Description | Values | Required |
+| --- | --- | --- | --- | --- |
+| idConnectorVersion | Query | Connector version id | ?idConnectorVersion=123 | ✓ |
+| idWebsite | Query | Unique identifier of the website on which your connector is installed | ?idWebsite=123  | ✓ |
+
+<pre class="prettyprint lang-js">
+{
+    "idOperator": "23232",
+    "message":   {
+        "idMessage": "ba4e1f71-7012-4b1a-86c3-d2fce8883dc7",
+        "author": {
+            "role": "visitor"
+        },
+        "payload": {
+            "contentType": "text",
+            "value": "Hi, are you there ? Shall we begin ?"
+        },
+        "createdAt": "2017-11-22T12:04:00Z"
+    }
+}
+</pre>
+
+| Field | Description | Values | Constraints |
+| --- | --- | --- | --- |
+| idOperator | iAdvize bot operator identifier that we associate to your bot scenario | String |  |
+| message.idMessage | The unique identifier for this message |  | UUID |
+| message.author.role | The author of the message | `visitor` or `operator` |  |
+| message.payload | Typed payload of the message | Object |  |
+| message.payload.contentType | Type of the message’s content | `text` |  |
+| message.payload.value | Textual content of the message | String |  |
+| message.createdAt | Date the message was sent | DateTime | ISO-8601 |
+
+** Response **
+
+<pre class="prettyprint lang-js">
+{
+    "idConversation": "ce41ba2c-c25a-4351-b946-09527d8b940b",
+    "idOperator": "423232",
+    "replies": [
+        {
+            "type": "await",
+            "duration": {
+                "unit": "millis",
+                "value": 10
+            }
+        },
+        {
+            "type": "message",
+            "payload": {
+                "contentType": "text",
+                "value": "How are you ?"
+            },
+            "quickReplies": [
+                {
+                    "contentType": "text/quick-reply",
+                    "value": "Fine",
+                    "idQuickReply": "1ef5145b-a9b6-4e86-8743-b6e3b4026b2c"
+                },
+                {
+                    "contentType": "text",
+                    "value": "Bad",
+                    "idQuickReply": "13594c9b-dcff-4add-81fc-5e1093e443a7"
+                }
+            ]
+        }
+    ],
+    "variables": [],
+    "createdAt": "2017-11-22T12:04:00Z",
+    "updatedAt": "2017-11-22T13:04:00Z"
+}
+</pre>
+
+| Field | Description | Values | Required | Constraints |
+| --- | --- | --- | --- | --- |
+| idConversation | Conversation unique identifier | String | ✓ | UUID |
+| idOperator | iAdvize bot operator identifier that we associate to your bot scenario | String | ✓ |  | 
+| replies | Array of replies | Array | ✓ |  |
+| replies.type | Reply/action type | `await` or `message` or `transfer` or `close` | ✓ |  |
+| replies.duration.unit | Awaiting unit of time | `millis` or `seconds` or `minutes` |  | replies.type == `await` |
+| replies.duration.value | Awaiting value of time | Long |  | replies.type == `await` |
+| replies.content | Typed payload of the message | Object | ✓ | replies.type == `message` |
+| replies.content.contentType | Type of the message’s content | `text` or `text/quick-reply`  | ✓ | replies.type == `message` |
+| replies.content.value | Textual content of the message | String | ✓ | replies.type == `message` |
+| replies.quickReplies | Quick replies proposed to the visitor | Array |  | replies.type == `message` |
+| replies.quickReplies.value | Textual content of the quick reply | String | ✓ | replies.type == `message` |
+| replies.quickReplies.idQuickReply | Identifier of the quick reply | String | ✓ | replies.type == `message` |
+| replies.distributionRule | Distribution rules to transfer to | Array of String |  | replies.type == `transfer` |
+| variables | Collected variables | Array |  | UUID |
+| variables.key | Key of the variable collected | String | ✓ |  |
+| variables.value | Value of the variable collected | String | ✓ |  |
+| createdAt | Creation date of the conversation | DateTime |  | ISO-8601 |
+| updateAt | Date of the last message received | DateTime |  | ISO-8601 |
+
+
+##### GET /conversations/:conversationId:
 
 
 ## Add webhooks
