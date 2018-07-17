@@ -53,7 +53,7 @@ iAdvize's Developer Platform will provide you with some easy-to-use tools so you
 * Manager the privacy mode of your app for it to be public or private
 * Set up the authentication process for your app
 * Define custom settings such as object mapping (In progress)
-* Create interactions to enhance some of iAdvize's predefined features
+* Create plugins to enhance some of iAdvize's predefined features
 * Use outgoing webhooks to receive updates in real-time
 
 Once your app is ready, you will be able to submit your connector for review.
@@ -134,18 +134,19 @@ Please find technical details in the [verification Url](#verification-url) secti
 
 ![Setting](./assets/images/developer-settings.jpg)
 
-## App Interactions
+## App Plugins
 Use interactions to enhance the iAdvize interface by adding or editing predefined features. 
 
-Interactions are basically HTTP endpoints whose json responses fit the interaction json-schema. For each interaction one or more endpoint have to be defined. When interaction is used on user interface, we will make a GET http call to endpoint with documented query parameters. Your http response have to comply with interaction json-schema.
+Plugins are basically HTTP endpoints whose json responses fit the interaction json-schema. For each plugin one or more endpoint have to be defined. When a plugin is used on user interface, we will make a GET http call to endpoint with documented query parameters. Your http response have to comply with plugin json-schema.
 
-The features that are already available are: 
+The plugins already available are: 
 
 * The product List (on the discussion panel)
 * The visitor profile (on the discussion panel)
 * The conversation closing form (on the discussion panel)
+* The bot (add an external bot within iadvize chatbox)
 
-### The product list
+### Product list
 The integration of the product list enables iAdvize's Console panel users to browse a product catalog from the iAdvize discussion panel.
 Agents can look for a product while they are chatting and send it in just a click within their conversation.
 
@@ -154,7 +155,7 @@ By clicking on the "view product" button, visitors are redirected to the product
 
 ![Product list](./assets/images/interactions-product-list-feature.png)
 
-**Add the product list interaction and configure it**
+**Add the Product list plugin**
 
 To make sure your connector uses the Product list interaction correctly, all you have to do is to declare:
 * The product list URL - this is your catalog’s URL
@@ -270,16 +271,16 @@ To make sure your connector uses the Product list interaction correctly, all you
 | pricePromotion | Price promotion | String |  |
 | priceSpecial | Price special | String |  |
 
-### The visitor profile
+### Visitor profile
 
-The visitor profile interaction enables iAdvize's Console panel users to access to the visitor's CRM profile in a single click. 
+The visitor profile plugin enables iAdvize's Console panel users to access to the visitor's CRM profile in a single click. 
 Agents can overview the visitor's CRM profile in a new window while they are chatting. Operators can then edit it or simply look for information.
 
 To be able to retrieve the CRM profile, iAdvize must be able to identify the visitor thanks to an email and/or an external ID.
 
 ![Visitor profile](./assets/images/visitorprofilefeature@2x.png)
 
-**Add a visitor profile interaction and configure it**
+**Add the visitor profile plugin**
 In order to set the right interaction parameters, all you have to do is to declare:
 * The connector URL - this is your visitor's profile URL
 
@@ -323,13 +324,13 @@ In order to set the right interaction parameters, all you have to do is to decla
 | value | Value | String | ✓ |
 | fieldType | Field type | `URL` or `TEXT` | ✓ |
 
-### The conversation closing form
+### Conversation closing form
 
 The conversation closing form interaction enables iAdvize's Console panel users to provide additional information manually at the end of conversation. 
 
 ![Conversation closing form interaction](./assets/images/close_conversation@2x.png)
 
-**Add a conversation closing form interaction and Configure it**
+**Add the conversation closing form plugin**
 In order to set the right interaction parameters, all you have to do is to declare:
 * The connector URL - this is your form's url
 
@@ -360,28 +361,32 @@ In order to set the right interaction parameters, all you have to do is to decla
 ]
 </pre>
 
-### The bot
+### External bot
+Let your bot interact with online visitors directly within iAdvize’s chatbox.
+The External bot plugin enables iAdvize's Admins and Managers to create users with the role “bot” from iAdvize’s administration. The scenario and availability of the bot are managed by your app. 
 
-The integration of a bot enables Admins and Managers to create users with the role “bot” inside iAdvize’s administration.
-The scenario and availability of the bot is managed by your app, allowing your bot to interact with visitors inside iAdvize’s chatbox.
+Tu put it in a nutshell, the External bot plugin:
+* Allows bots providers to create their connector thanks to the Developper Platform,
+* Allows customers to connect their iAdvize account to a bot provider and connect bots seamlessly. These bots interact with iAdvize like a human agent.
 
-Allow bots providers to create their connector with the Developper Platform. 
-Allow customers to connect their iAdvize account to a bot provider and connect bots seamlessly. These bots should use iAdvize like a human agent.
+#### The External bot user flow
 
-The user flow
-1. The user activate your connector on the market place.
-2. When creating a new bot user, the admin will have the possibility to select an external bot type and one scenario. 
-3. At the end of the creation form, the admin will have to choose which of the activated connector will be backing the bot interaction, s.he wants to use for this specify bot.
-4. After the creation process, the admin will be redirected to your bot edition page.
+The iAdvize Administrator/Manager:
+
+1. Activates your connector from the iAdvize marketplace,
+2. Creates a new user with the role "bot" from the "People" section of iAdvize,
+3. Select an external bot and a scenario,
+4. is redirected to your bot edition page.
 
 ![Bot interaction](./assets/images/interactions-bot-feature.png)
 
-**Add a bot interaction and Configure it**
-To make sure your connector uses the Bot interaction correctly, all you have to do is to declare the base url that will by postfixed by seven endpoints described below.
-These endpoints are used 
-#### User form flow data
+**Add the External bot plugin**
+To make sure your connector uses the External Bot plugin correctly, all you have to do is to declare the base url that will be postfixed by seven endpoints described below.
 
-##### List external bots
+#### Operator form flow endpoints
+There are 4 endpoints related to Operator form flow. This is related to the creation of an Operator with a Bot role, within iAdvize in order to link it to the External bot.
+
+##### List external bots (endpoint)
 
 ** Request - GET /external-bots **
 
@@ -416,7 +421,7 @@ These endpoints are used
 | description | Description of the bot | String |  |
 | editorUrl | Url used to redirect user to your bot editor| A valid URL |  |
 
-##### Modify bot information
+##### Modify bot information (endpoint)
 
 ** Request - PUT /bots/:idOperator: **
 
@@ -488,7 +493,7 @@ These endpoints are used
 | createdAt | Creation date of you bot | String |  | ISO 8601 |
 | updatedAt | Last modification date of your bot| String |  | ISO 8601 |
 
-##### Get bot information
+##### Get bot information (endpoint)
 
 ** Request - GET /bots/:idOperator: **
 
@@ -533,9 +538,9 @@ These endpoints are used
 | createdAt | Creation date of you bot | String |  | ISO 8601 |
 | updatedAt | Last modification date of your bot| String |  | ISO 8601 |
 
-##### Get operator availability strategies
+##### Get bot availability strategies (endpoint)
 
-Bot is ready and should be made available accordingly to this strategy and distributions rules.
+Bot is ready and should be available accordingly to the availability strategy and distributions rules.
 
 ** Request - GET /availability-strategies **
 
@@ -573,7 +578,10 @@ Bot is ready and should be made available accordingly to this strategy and distr
 | distributionRulesToCheck | All distribution rules we should check for availability. This is subset of DistributionRules returned by the Get bot endpoint. | Array of String | | Required if strategy is equal to `atLeastOne` or all` |
 | availability | Allow the connector to handle the availability of the bot | Boolean | | Required if strategy is equal to `customAvailability` |
 
-##### Conversation initialisation
+#### Conversation flow endpoints
+There are 3 Conversation flow endpoints. 
+
+##### Conversation initialisation (endpoint)
 
 ** Request - POST /conversations **
 
@@ -686,7 +694,7 @@ Bot is ready and should be made available accordingly to this strategy and distr
 | updateAt | Date of the last message received | DateTime |  | ISO-8601 |
 
 
-##### New message reception
+##### New message reception (endpoint)
 
 ** Request - POST /conversations/:conversationId:/messages **
 
@@ -784,7 +792,7 @@ Bot is ready and should be made available accordingly to this strategy and distr
 | updateAt | Date of the last message received | DateTime |  | ISO-8601 |
 
 
-##### Get the conversation content
+##### Get the conversation content (endpoint)
 
 ** Request - GET /conversations/:conversationId: **
 
