@@ -135,9 +135,9 @@ Please find technical details in the [verification Url](#verification-url) secti
 ![Setting](./assets/images/developer-settings.jpg)
 
 ## App Plugins
-Use interactions to enhance the iAdvize interface by adding or editing predefined features. 
+Use plugins to enhance the iAdvize interface by adding or editing predefined features. 
 
-Plugins are basically HTTP endpoints whose json responses fit the interaction json-schema. For each plugin one or more endpoint have to be defined. When a plugin is used on user interface, we will make a GET http call to endpoint with documented query parameters. Your http response have to comply with plugin json-schema.
+Plugins are basically HTTP endpoints whose json responses fit the plugin json-schema. For each plugin one or more endpoint have to be defined. When a plugin is used on user interface, we will make a GET http call to endpoint with documented query parameters. Your http response have to comply with plugin json-schema.
 
 The plugins already available are: 
 
@@ -157,7 +157,7 @@ By clicking on the "view product" button, visitors are redirected to the product
 
 **Add the Product list plugin**
 
-To make sure your connector uses the Product list interaction correctly, all you have to do is to declare:
+To make sure your connector uses the Product list plugin correctly, all you have to do is to declare:
 * The product list URL - this is your catalog’s URL
 * The categories url - this is where your connector will get the list of your product categories
 
@@ -281,7 +281,7 @@ To be able to retrieve the CRM profile, iAdvize must be able to identify the vis
 ![Visitor profile](./assets/images/visitorprofilefeature@2x.png)
 
 **Add the visitor profile plugin**
-In order to set the right interaction parameters, all you have to do is to declare:
+In order to set the right plugin parameters, all you have to do is to declare:
 * The connector URL - this is your visitor's profile URL
 
 #### Visitor profile data
@@ -326,12 +326,12 @@ In order to set the right interaction parameters, all you have to do is to decla
 
 ### Conversation closing form
 
-The conversation closing form interaction enables iAdvize's Console panel users to provide additional information manually at the end of conversation. 
+The conversation closing form plugin enables iAdvize's Console panel users to provide additional information manually at the end of conversation. 
 
-![Conversation closing form interaction](./assets/images/close_conversation@2x.png)
+![Conversation closing form plugin](./assets/images/close_conversation@2x.png)
 
 **Add the conversation closing form plugin**
-In order to set the right interaction parameters, all you have to do is to declare:
+In order to set the right plugin parameters, all you have to do is to declare:
 * The connector URL - this is your form's url
 
 #### Conversation Closing Form data
@@ -378,7 +378,7 @@ The iAdvize Administrator/Manager:
 3. Select an external bot and a scenario,
 4. is redirected to your bot edition page.
 
-![Bot interaction](./assets/images/interactions-bot-feature.png)
+![Bot plugin](./assets/images/interactions-bot-feature.png)
 
 **Add the External bot plugin**
 To make sure your connector uses the External Bot plugin correctly, all you have to do is to declare the base url that will be postfixed by seven endpoints described below.
@@ -575,7 +575,7 @@ Bot is ready and should be available accordingly to the availability strategy an
 | Field | Description | Values | Required | Constraints |
 | --- | --- | --- | --- | --- |
 | strategy | How we should aggregate the availability if several distribution rules are provided | `atLeastOne` or `all` or `notAvailable` or `customAvailability` | ✓ | |
-| distributionRulesToCheck | All distribution rules we should check for availability. This is subset of DistributionRules returned by the Get bot endpoint. | Array of String | | Required if strategy is equal to `atLeastOne` or all` |
+| distributionRulesToCheck | All distribution rules we should check for availability. This is subset of DistributionRules returned by the Get bot endpoint. | Array of String | | Required if strategy is equal to `atLeastOne` or `all` |
 | availability | Allow the connector to handle the availability of the bot | Boolean | | Required if strategy is equal to `customAvailability` |
 
 #### Conversation flow endpoints
