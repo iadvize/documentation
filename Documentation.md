@@ -573,7 +573,7 @@ Bot is ready and should be made available accordingly to this strategy and distr
 | distributionRulesToCheck | All distribution rules we should check for availability. This is subset of DistributionRules returned by the Get bot endpoint. | Array of String | | Required if strategy is equal to `atLeastOne` or all` |
 | availability | Allow the connector to handle the availability of the bot | Boolean | | Required if strategy is equal to `customAvailability` |
 
-##### Get the conversation initialisation
+##### Conversation initialisation
 
 ** Request - POST /conversations **
 
@@ -686,9 +686,9 @@ Bot is ready and should be made available accordingly to this strategy and distr
 | updateAt | Date of the last message received | DateTime |  | ISO-8601 |
 
 
-##### POST /conversations/:conversationId:/messages
+##### New message reception
 
-** Request - POST /conversations **
+** Request - POST /conversations/:conversationId:/messages **
 
 | Parameters | In | Description | Values | Required |
 | --- | --- | --- | --- | --- |
@@ -784,8 +784,77 @@ Bot is ready and should be made available accordingly to this strategy and distr
 | updateAt | Date of the last message received | DateTime |  | ISO-8601 |
 
 
-##### GET /conversations/:conversationId:
+##### Get the conversation content
 
+** Request - GET /conversations/:conversationId: **
+
+| Parameters | In | Description | Values | Required |
+| --- | --- | --- | --- | --- |
+| idConnectorVersion | Query | Connector version id | ?idConnectorVersion=123 | ✓ |
+| idWebsite | Query | Unique identifier of the website on which your connector is installed | ?idWebsite=123  | ✓ |
+| idOperator | Query | iAdvize bot operator identifier that we associate to your bot scenario | ?idOperator=456678  | ✓ |
+
+** Response **
+
+<pre class="prettyprint lang-js">
+{
+    "idConversation": "ce41ba2c-c25a-4351-b946-09527d8b940b",
+    "idOperator": "232323",
+    "replies": [
+        {
+            "type": "await",
+            "duration": {
+                "unit": "millis",
+                "value": 10
+            }
+        },
+        {
+            "type": "message", #Enum that can take message|await|close|transfer
+            "payload": {
+                "contentType": "text",
+                "value": "All Right, my job is done here."
+             },
+            "quickReplies": []
+        },
+        {
+            "type": "transfer",
+            "distributionRule": "ef4670c3-d715-4a21-8226-ed17f354fc44"
+        },
+        {
+            "type": "close"
+        }
+    ],
+    "variables": [
+        {
+            "key": "visitor_state_of_mind",
+            "value": "Ok"
+        }
+    ],
+    "createdAt": "2017-11-22T12:04:00Z",
+    "updatedAt": "2017-11-22T12:23:00Z"
+}
+</pre>
+
+| Field | Description | Values | Required | Constraints |
+| --- | --- | --- | --- | --- |
+| idConversation | Conversation unique identifier | String | ✓ | UUID |
+| idOperator | iAdvize bot operator identifier that we associate to your bot scenario | String | ✓ |  | 
+| replies | Array of replies | Array | ✓ |  |
+| replies.type | Reply/action type | `await` or `message` or `transfer` or `close` | ✓ |  |
+| replies.duration.unit | Awaiting unit of time | `millis` or `seconds` or `minutes` |  | replies.type == `await` |
+| replies.duration.value | Awaiting value of time | Long |  | replies.type == `await` |
+| replies.content | Typed payload of the message | Object | ✓ | replies.type == `message` |
+| replies.content.contentType | Type of the message’s content | `text` or `text/quick-reply`  | ✓ | replies.type == `message` |
+| replies.content.value | Textual content of the message | String | ✓ | replies.type == `message` |
+| replies.quickReplies | Quick replies proposed to the visitor | Array |  | replies.type == `message` |
+| replies.quickReplies.value | Textual content of the quick reply | String | ✓ | replies.type == `message` |
+| replies.quickReplies.idQuickReply | Identifier of the quick reply | String | ✓ | replies.type == `message` |
+| replies.distributionRule | Distribution rules to transfer to | Array of String |  | replies.type == `transfer` |
+| variables | Collected variables | Array |  | UUID |
+| variables.key | Key of the variable collected | String | ✓ |  |
+| variables.value | Value of the variable collected | String | ✓ |  |
+| createdAt | Creation date of the conversation | DateTime |  | ISO-8601 |
+| updateAt | Date of the last message received | DateTime |  | ISO-8601 |
 
 ## Add webhooks
 
