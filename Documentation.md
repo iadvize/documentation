@@ -302,7 +302,6 @@ In order to set the right interaction parameters, all you have to do is to decla
 ]
 </pre>
 
-
 ** Request - GET method **
 
 | Query parameter | Description | Values |
@@ -493,11 +492,11 @@ These endpoints are used
 
 ** Request - GET /bots/:idOperator: **
 
-| Parameters | In | Description | Values | Required |
+| Parameters | In | Description | Values |
 | --- | --- | --- | --- |
-| idConnectorVersion | Query | Connector version id | ?idConnectorVersion=123 | ✓ |
-| idWebsite | Query | Unique identifier of the website on which your connector is installed | ?idWebsite=123  | ✓ |
-| idOperator | Path | iAdvize bot operator identifier that we associate to your bot scenario | /bots/456678  | ✓ |
+| idConnectorVersion | Query | Connector version id | ?idConnectorVersion=123 |
+| idWebsite | Query | Unique identifier of the website on which your connector is installed | ?idWebsite=123  |
+| idOperator | Path | iAdvize bot operator identifier that we associate to your bot scenario | /bots/456678  |
 
 ** Response **
 
@@ -505,20 +504,20 @@ These endpoints are used
 {
     "idOperator": "23232",
     "external": {
-      "idBot":"R3R3ZFDKOEZ",
-      "name": "Hal",
-      "description": "Hal is good, bro",
-      "editorUrl": "http://your-saas/R3R3ZFDKOEZ/editor"
+        "idBot":"R3R3ZFDKOEZ",
+        "name": "Hal",
+        "description": "Hal is good, bro",
+        "editorUrl": "http://your-saas/R3R3ZFDKOEZ/editor"
     },
     "distributionRules": [
-      { 
-        "id": "ef4670c3-d715-4a21-8226-ed17f354fc44",
-        "label": "Human SAV guys"
-      }
+        { 
+            "id": "ef4670c3-d715-4a21-8226-ed17f354fc44",
+            "label": "Human SAV guys"
+        }
     ],
     "createdAt": "2017-11-22T12:04:00Z",
     "updatedAt": "2017-11-22T12:04:00Z"
-  }
+}
 </pre>
 
 | Field | Description | Values | Required | Constraints |
@@ -549,38 +548,151 @@ Bot is ready and should be made available accordingly to this strategy and distr
 ** Response **
 
 <pre class="prettyprint lang-js">
-{
-    "data":[
-        {
-            "strategy": "atLeastOne",
-            "distributionRulesToCheck": [
-                "ef4670c3-d715-4a21-8226-ed17f354fc44"
-            ]
-        }
-    ]
-}
+[
+    {
+        "strategy": "atLeastOne",
+        "distributionRulesToCheck": [
+            "ef4670c3-d715-4a21-8226-ed17f354fc44"
+        ]
+    }
+]
 </pre>
 
 <pre class="prettyprint lang-js">
-{
-    "data": [
-        {
-            "strategy": "customAvailability",
-            "availability": true
-        }
-    ]
-}
+[
+    {
+        "strategy": "customAvailability",
+        "availability": true
+    }
+]
 </pre>
 
 | Field | Description | Values | Required | Constraints |
 | --- | --- | --- | --- | --- |
 | strategy | How we should aggregate the availability if several distribution rules are provided | `atLeastOne` or `all` or `notAvailable` or `customAvailability` | ✓ | |
-| distributionRulesToCheck | All distribution rules we should check for availability. This is subset of DistributionRules returned by the Get bot endpoint. | Array of String | | Required if strategy is equal to `atLeastOne` or `all` |
+| distributionRulesToCheck | All distribution rules we should check for availability. This is subset of DistributionRules returned by the Get bot endpoint. | Array of String | | Required if strategy is equal to `atLeastOne` or all` |
 | availability | Allow the connector to handle the availability of the bot | Boolean | | Required if strategy is equal to `customAvailability` |
 
-##### /conversations
+##### Get the conversation initialisation
+
+** Request - POST /conversations **
+
+| Parameters | In | Description | Values | Required |
+| --- | --- | --- | --- | --- |
+| idConnectorVersion | Query | Connector version id | ?idConnectorVersion=123 | ✓ |
+| idWebsite | Query | Unique identifier of the website on which your connector is installed | ?idWebsite=123  | ✓ |
+
+<pre class="prettyprint lang-js">
+{
+    "idOperator": "local-22",
+    "idConversation": "f1c64107-25b0-4865-ad20-88419275eb64",
+    "history": [
+        {
+            "idMessage": "42e3de6f-84f2-4883-b5d1-6710bc5dc488",
+            "author": {
+                "role": "operator"
+            },
+            "payload": {
+                "contentType": "text",
+                "value": "Please answer the following questions."
+            },
+            "createdAt": "2017-11-22T12:04:00Z"
+        }
+    ]
+}
+</pre>
+
+| Field | Description | Values | Constraints |
+| --- | --- | --- | --- |
+| idOperator | iAdvize bot operator identifier that we associate to your bot scenario | String |  |
+| idConversation | Conversation unique identifier, you can use it or return your own internal id in the response body. We will make the join for you. | String | UUID |
+| history | First messages of the conversations | Array |  |
+| history.idMessage | Unique identifier of this message | String | UUID |
+| history.author.role | author of the message | `operator` or `visitor` |  |  |
+| history.payload | Typed payload of the message | Object | |
+| history.payload.contentType | Type of the message’s content | String | `text` |
+| history.payload.value | Message content | String |  |
+| history.createdAt | Date the message was sent | String | ISO-8601 |
+
+** Response **
+
+<pre class="prettyprint lang-js">
+{
+    "idConversation": "a0c65ae0-4e04-4909-a5cc-80dd0f05de96",
+    "idOperator": "local-22",
+    "replies": [
+        {
+            "type": "await",
+            "duration": {
+                "value": 2,
+                "unit": "seconds"
+            }
+        },
+        {
+            "type": "message",
+            "content": {
+                "contentType": "text",
+                "value": "Do you want to talk to an agent ?"
+            },
+            "quickReplies": [
+                {
+                    "value": "No",
+                    "idQuickReply": "No"
+                },
+                {
+                    "value": "Yes",
+                    "idQuickReply": "Yes"
+                }
+            ]
+        },
+        {
+            "type": "transfer",
+            "content": {
+                "contentType": "text",
+                "value": "Do you want to talk to an agent ?"
+            },
+            "distributionRules": [
+                "ef4670c3-d715-4a21-8226-ed17f354fc44",
+                "a0c65ae0-4e04-4909-a5cc-80dd0f05de96"
+            ]
+        }
+    ],
+    "variables": [
+        {
+            "key": "number",
+            "value": "I don't know..."
+        }
+    ],
+    "createdAt": "2018-07-16T13:53:57.961Z",
+    "updatedAt": "2018-07-16T13:53:57.961Z"
+}
+</pre>
+
+| Field | Description | Values | Required | Constraints |
+| --- | --- | --- | --- | --- |
+| idConversation | Conversation unique identifier | String | ✓ | UUID |
+| idOperator | iAdvize bot operator identifier that we associate to your bot scenario | String | ✓ |  | 
+| replies | Array of replies | Array | ✓ | UUID |
+| replies.type | Reply/action type | `await` or `message` or `transfer` or `close` | ✓ |  |
+| replies.duration.unit | Awaiting unit of time | `millis` or `seconds` or `minutes` |  | replies.type == `await` |
+| replies.duration.value | Awaiting value of time | Long |  | replies.type == `await` |
+| replies.content | Typed payload of the message | Object | ✓ | replies.type == `message` |
+| replies.content.contentType | Type of the message’s content | `text` or `text/quick-reply`  | ✓ | replies.type == `message` |
+| replies.content.value | Textual content of the message | String | ✓ | replies.type == `message` |
+| replies.quickReplies | Quick replies proposed to the visitor | Array |  | replies.type == `message` |
+| replies.quickReplies.value | Textual content of the quick reply | String | ✓ | replies.type == `message` |
+| replies.quickReplies.idQuickReply | Identifier of the quick reply | String | ✓ | replies.type == `message` |
+| replies.distributionRule | Distribution rules to transfer to | Array of String |  | replies.type == `transfer` |
+| variables | Collected variables | Array |  | UUID |
+| variables.key | Key of the variable collected | String | ✓ |  |
+| variables.value | Value of the variable collected | String | ✓ |  |
+| createdAt | Creation date of the conversation | DateTime |  | ISO-8601 |
+| updateAt | Date of the last message received | DateTime |  | ISO-8601 |
+
 
 ##### /conversations/:conversationId:/messages
+
+
 
 ## Add webhooks
 
