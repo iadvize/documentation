@@ -331,6 +331,7 @@ The conversation closing form plugin enables iAdvize's Console panel users to pr
 ![Conversation closing form plugin](./assets/images/close_conversation@2x.png)
 
 **Add the conversation closing form plugin**
+
 In order to set the right plugin parameters, all you have to do is to declare:
 * The connector URL - this is your form's url
 
@@ -366,8 +367,8 @@ In order to set the right plugin parameters, all you have to do is to declare:
 Let your bot interact with online visitors directly within iAdvize’s chatbox.
 The External bot plugin enables iAdvize's Admins and Managers to create users with the role “bot” from iAdvize’s administration. The scenario and availability of the bot are managed by your app. 
 
-Tu put it in a nutshell, the External bot plugin:
-* Allows bots providers to create their connector thanks to the Developper Platform,
+To put it in a nutshell, the External bot plugin:
+* Allows bots providers to create their connector thanks to the Developper Platform
 * Allows customers to connect their iAdvize account to a bot provider and connect bots seamlessly. These bots interact with iAdvize like a human agent.
 
 ![Bot plugin](./assets/images/plugins/external-bots-main.gif)
