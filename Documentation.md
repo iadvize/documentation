@@ -369,6 +369,8 @@ Tu put it in a nutshell, the External bot plugin:
 * Allows bots providers to create their connector thanks to the Developper Platform,
 * Allows customers to connect their iAdvize account to a bot provider and connect bots seamlessly. These bots interact with iAdvize like a human agent.
 
+![Bot plugin](./assets/images/plugins/external-bots-main.gif)
+
 #### The External bot user flow
 
 The iAdvize Administrator/Manager:
@@ -378,7 +380,7 @@ The iAdvize Administrator/Manager:
 3. Select an external bot and a scenario,
 4. is redirected to your bot edition page.
 
-![Bot plugin](./assets/images/interactions-bot-feature.png)
+![Bot plugin](./assets/images/plugins/external-bots-user-flow.jpg)
 
 **Add the External bot plugin**
 To make sure your connector uses the External Bot plugin correctly, all you have to do is to declare the base url that will be postfixed by seven endpoints described below.
