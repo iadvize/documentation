@@ -454,11 +454,11 @@ There are 4 endpoints related to Operator form flow. This is related to the crea
 }
 </pre>
 
-| Field | Description | Values | Required | Constraints |
+| Field | Description | Values | Constraints |
 | --- | --- | --- | --- | --- |
-| name | Bot name on your platform | String |  |
+| name | Bot name on your platform | String |  |  |
 | pseudo | Bot pseudo used during the conversation | String |  |
-| language | Language spoken by the bot | String | ISO 3166-1 alpha-2 |
+| language | Language spoken by the bot | String |  | ISO 3166-1 alpha-2 |
 | distributionRules | distribution rule that can be used inside transfer replies | Array |  |
 | distributionRules.id | Distribution rule identifier | String | UUID |
 | distributionRules.label | Distribution rule label | String |  |
@@ -488,16 +488,16 @@ There are 4 endpoints related to Operator form flow. This is related to the crea
 
 | Field | Description | Values | Required | Constraints |
 | --- | --- | --- | --- | --- |
-| idOperator | iAdvize bot operator identifier | String |  | |
-| external.idBot | Bot identifier on your platform | String |  | |
-| external.name | Bot name on your platform | String |  | |
-| external.description | Bot description on your plateform | String |  | |
+| idOperator | iAdvize bot operator identifier | String | ✓ |  |
+| external.idBot | Bot identifier on your platform | String | ✓ |  |
+| external.name | Bot name on your platform | String | ✓ |  |
+| external.description | Bot description on your plateform | String | ✓ |  |
 | external.editorUrl | Bot edition url on your platform | String |  | URL |
-| distributionRules | distribution rule that can be used inside transfer replies | Array |  |
-| distributionRules.id | Distribution rule identifier | String | | UUID |
-| distributionRules.label | Distribution rule label | String |  |
-| createdAt | Creation date of you bot | String |  | ISO 8601 |
-| updatedAt | Last modification date of your bot| String |  | ISO 8601 |
+| distributionRules | distribution rule that can be used inside transfer replies | Array |  |  |
+| distributionRules.id | Distribution rule identifier | String | ✓ | UUID |
+| distributionRules.label | Distribution rule label | String | ✓ |
+| createdAt | Creation date of you bot | String | ✓ | ISO 8601 |
+| updatedAt | Last modification date of your bot| String | ✓ | ISO 8601 |
 
 ##### Get bot information (endpoint)
 
@@ -533,16 +533,16 @@ There are 4 endpoints related to Operator form flow. This is related to the crea
 
 | Field | Description | Values | Required | Constraints |
 | --- | --- | --- | --- | --- |
-| idOperator | iAdvize bot operator identifier | String |  | |
-| external.idBot | Bot identifier on your platform | String |  | |
-| external.name | Bot name on your platform | String |  | |
-| external.description | Bot description on your plateform | String |  | |
+| idOperator | iAdvize bot operator identifier | String | ✓ |  |
+| external.idBot | Bot identifier on your platform | String | ✓ |  |
+| external.name | Bot name on your platform | String | ✓ |  |
+| external.description | Bot description on your plateform | String | ✓ |  |
 | external.editorUrl | Bot edition url on your platform | String |  | URL |
 | distributionRules | distribution rule that can be used inside transfer replies | Array |  |
-| distributionRules.id | Distribution rule identifier | String | | UUID |
-| distributionRules.label | Distribution rule label | String |  |
-| createdAt | Creation date of you bot | String |  | ISO 8601 |
-| updatedAt | Last modification date of your bot| String |  | ISO 8601 |
+| distributionRules.id | Distribution rule identifier | String | ✓ | UUID |
+| distributionRules.label | Distribution rule label | String | ✓ |  |
+| createdAt | Creation date of you bot | String | ✓ | ISO 8601 |
+| updatedAt | Last modification date of your bot| String | ✓ | ISO 8601 |
 
 ##### Get bot availability strategies (endpoint)
 
