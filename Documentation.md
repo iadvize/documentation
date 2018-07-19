@@ -362,6 +362,7 @@ In order to set the right plugin parameters, all you have to do is to declare:
 </pre>
 
 ### External bot
+
 Let your bot interact with online visitors directly within iAdvize’s chatbox.
 The External bot plugin enables iAdvize's Admins and Managers to create users with the role “bot” from iAdvize’s administration. The scenario and availability of the bot are managed by your app. 
 
@@ -373,19 +374,22 @@ Tu put it in a nutshell, the External bot plugin:
 
 #### The External bot user flow
 
+
 The iAdvize Administrator/Manager:
 
-1. Activates your connector from the iAdvize marketplace,
-2. Creates a new user with the role "bot" from the "People" section of iAdvize,
-3. Select an external bot and a scenario,
-4. is redirected to your bot edition page.
+* Activates your connector from the iAdvize marketplace,
+* Creates a new user with the role "bot" from the "People" section of iAdvize,
+* Select an external bot and a scenario,
+* Is redirected to your bot edition page.
 
 ![Bot plugin](./assets/images/plugins/external-bots-user-flow.jpg)
 
-**Add the External bot plugin**
+
+** Add the External bot plugin **
 To make sure your connector uses the External Bot plugin correctly, all you have to do is to declare the base url that will be postfixed by seven endpoints described below.
 
 #### Operator form flow endpoints
+
 There are 4 endpoints related to Operator form flow. This is related to the creation of an Operator with a Bot role, within iAdvize in order to link it to the External bot.
 
 ##### List external bots (endpoint)
