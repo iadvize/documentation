@@ -456,10 +456,10 @@ There are 4 endpoints related to Operator form flow. This is related to the crea
 </pre>
 
 | Field | Description | Values | Constraints |
-| --- | --- | --- | --- | --- |
-| name | Bot name on your platform | String |  |  |
+| --- | --- | --- | --- |
+| name | Bot name on your platform | String |  |
 | pseudo | Bot pseudo used during the conversation | String |  |
-| language | Language spoken by the bot | String |  | ISO 3166-1 alpha-2 |
+| language | Language spoken by the bot | String | ISO 3166-1 alpha-2 |
 | distributionRules | distribution rule that can be used inside transfer replies | Array |  |
 | distributionRules.id | Distribution rule identifier | String | UUID |
 | distributionRules.label | Distribution rule label | String |  |
