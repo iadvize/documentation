@@ -381,7 +381,6 @@ The iAdvize Administrator/Manager:
 * Activates your connector from the iAdvize marketplace,
 * Creates a new user with the role "bot" from the "People" section of iAdvize,
 * Select an external bot and a scenario,
-* Is redirected to your bot edition page.
 
 ![Bot plugin](./assets/images/plugins/external-bots-user-flow.jpg)
 
