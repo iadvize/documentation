@@ -381,6 +381,7 @@ The iAdvize Administrator/Manager:
 * Activates your connector from the iAdvize marketplace,
 * Creates a new user with the role "bot" from the "People" section of iAdvize,
 * Select an external bot and a scenario,
+* Is redirected to your bot edition page.
 
 ![Bot plugin](./assets/images/plugins/external-bots-user-flow.jpg)
 
@@ -409,11 +410,13 @@ There are 4 endpoints related to Operator form flow. This is related to the crea
         "idBot": "Hal12343",
         "name": "Hal",
         "description": "Hal is good, bro",
+        "editorUrl": "http://your-saas/Hal12343/editor"
     },
     {
         "idBot": "brt123569",
         "name": "Bart Simpson",
         "description": "Bart will make you crazy",
+        "editorUrl": "http://your-saas/brt123569/editor"
     },
 ]
 </pre>
@@ -423,6 +426,7 @@ There are 4 endpoints related to Operator form flow. This is related to the crea
 | idBot | Unique identifier of the bot | String | ✓ |
 | name | Name of the bot | String | ✓ |
 | description | Description of the bot | String |  |
+| editorUrl | Url used to redirect user to your bot editor| A valid URL |  |
 
 ##### Modify bot information (endpoint)
 
@@ -452,10 +456,10 @@ There are 4 endpoints related to Operator form flow. This is related to the crea
 </pre>
 
 | Field | Description | Values | Constraints |
-| --- | --- | --- | --- |
-| name | Bot name on your platform | String |  |
+| --- | --- | --- | --- | --- |
+| name | Bot name on your platform | String |  |  |
 | pseudo | Bot pseudo used during the conversation | String |  |
-| language | Language spoken by the bot | String | ISO 3166-1 alpha-2 |
+| language | Language spoken by the bot | String |  | ISO 3166-1 alpha-2 |
 | distributionRules | distribution rule that can be used inside transfer replies | Array |  |
 | distributionRules.id | Distribution rule identifier | String | UUID |
 | distributionRules.label | Distribution rule label | String |  |
@@ -470,6 +474,7 @@ There are 4 endpoints related to Operator form flow. This is related to the crea
       "idBot":"R3R3ZFDKOEZ",
       "name": "Hal",
       "description": "Hal is good, bro",
+      "editorUrl": "http://your-saas/R3R3ZFDKOEZ/editor"
     },
     "distributionRules": [
       { 
@@ -488,6 +493,7 @@ There are 4 endpoints related to Operator form flow. This is related to the crea
 | external.idBot | Bot identifier on your platform | String | ✓ |  |
 | external.name | Bot name on your platform | String | ✓ |  |
 | external.description | Bot description on your plateform | String | ✓ |  |
+| external.editorUrl | Bot edition url on your platform | String |  | URL |
 | distributionRules | distribution rule that can be used inside transfer replies | Array |  |  |
 | distributionRules.id | Distribution rule identifier | String | ✓ | UUID |
 | distributionRules.label | Distribution rule label | String | ✓ |
@@ -513,6 +519,7 @@ There are 4 endpoints related to Operator form flow. This is related to the crea
         "idBot":"R3R3ZFDKOEZ",
         "name": "Hal",
         "description": "Hal is good, bro",
+        "editorUrl": "http://your-saas/R3R3ZFDKOEZ/editor"
     },
     "distributionRules": [
         { 
@@ -531,7 +538,8 @@ There are 4 endpoints related to Operator form flow. This is related to the crea
 | external.idBot | Bot identifier on your platform | String | ✓ |  |
 | external.name | Bot name on your platform | String | ✓ |  |
 | external.description | Bot description on your plateform | String | ✓ |  |
-| distributionRules | distribution rule that can be used inside transfer replies | Array |  |  |
+| external.editorUrl | Bot edition url on your platform | String |  | URL |
+| distributionRules | distribution rule that can be used inside transfer replies | Array |  |
 | distributionRules.id | Distribution rule identifier | String | ✓ | UUID |
 | distributionRules.label | Distribution rule label | String | ✓ |  |
 | createdAt | Creation date of you bot | String | ✓ | ISO 8601 |
