@@ -53,7 +53,7 @@ iAdvize's Developer Platform will provide you with some easy-to-use tools so you
 * Manager the privacy mode of your app for it to be public or private
 * Set up the authentication process for your app
 * Define custom settings such as object mapping (In progress)
-* Create interactions to enhance some of iAdvize's predefined features
+* Create plugins to enhance some of iAdvize's predefined features
 * Use outgoing webhooks to receive updates in real-time
 
 Once your app is ready, you will be able to submit your connector for review.
@@ -134,74 +134,19 @@ Please find technical details in the [verification Url](#verification-url) secti
 
 ![Setting](./assets/images/developer-settings.jpg)
 
-## Verification url
+## App Plugins
+Use plugins to enhance the iAdvize interface by adding or editing predefined features. 
 
-In the [app authentication](#app-authentication) and [app settings](#app-settings) sections of the iAdvize Developer Platform, you can set a "Verification url".
-We will call this URL each time a client validate a step during an installation of your connector on a website.
-the application requires a confirmation from your connector to approve the configuration settings.
-It means that your connector must answer to this call by a confirmation or error messages to determine whether the step have been correctly set up. 
-If the step is validated by your connector, parameters are saved on our side.
+Plugins are basically HTTP endpoints whose json responses fit the plugin json-schema. For each plugin one or more endpoint have to be defined. When a plugin is used on user interface, we will make a GET http call to endpoint with documented query parameters. Your http response have to comply with plugin json-schema.
 
-### Request payload
-
-Here is the information sent to your verification url as a payload body of a POST Request.
-
-<pre class="prettyprint lang-js">
-[
-    {
-		"key": "login",
-		"value": "login"
-	},
-	{
-		"key": "password",
-		"value": "p4ssw0rd"
-	}
-]
-</pre>
-
-| Field | Description | Values |
-| --- | --- | --- |
-| key | Parameter key, defined by you in developer platform | String |
-| value | Parameter value, filled by the client during connector's installation | String|Boolean  |
-
-
-### Response payload 
-
-In order to validate the information filled by the iAdvize administrator during the installation of the connector, we await the answer of your connector in this format:
-
-<pre class="prettyprint lang-js">
-{
-	"isStepValid": false,
-	"errors": [
-	    {
-            "code": "password",
-            "description": "password is not valid",
-            "parameterKey": "login"
-        }
-	]
-}
-</pre>
-
-| Field | Description | Values | Required |
-| --- | --- | --- | --- |
-| isValid | validation status | Boolean | ✓ |
-| errors | Errors list, can be empty | Array | ✓ |
-| errors - code| Error code, used to identify error on connector side | String | ✓ |
-| errors - message | Error message that will be displayed on our installation process | String | ✓ |
-| errors - parameterKey | If mentioned, error concerns this parameter key | String | ✓ |
-
-## App Interactions
-Use interactions to enhance the iAdvize interface by adding or editing predefined features. 
-
-Interactions are basically HTTP endpoints whose json responses fit the interaction json-schema. For each interaction one or more endpoint have to be defined. When interaction is used on user interface, we will make a GET http call to endpoint with documented query parameters. Your http response have to comply with interaction json-schema.
-
-The features that are already available are: 
+The plugins already available are: 
 
 * The product List (on the discussion panel)
 * The visitor profile (on the discussion panel)
 * The conversation closing form (on the discussion panel)
+* The bot (add an external bot within iadvize chatbox)
 
-### The product list
+### Product list
 The integration of the product list enables iAdvize's Console panel users to browse a product catalog from the iAdvize discussion panel.
 Agents can look for a product while they are chatting and send it in just a click within their conversation.
 
@@ -210,9 +155,9 @@ By clicking on the "view product" button, visitors are redirected to the product
 
 ![Product list](./assets/images/interactions-product-list-feature.png)
 
-**Add the product list interaction and configure it**
+**Add the Product list plugin**
 
-To make sure your connector uses the Product list interaction correctly, all you have to do is to declare:
+To make sure your connector uses the Product list plugin correctly, all you have to do is to declare:
 * The product list URL - this is your catalog’s URL
 * The categories url - this is where your connector will get the list of your product categories
 
@@ -229,17 +174,16 @@ To make sure your connector uses the Product list interaction correctly, all you
             "456"
         ],
         "productsCount": 3
-     },
-     {
-         "id": "456",
-         "idParent": null,
-         "label": "category",
-         "products": null,
-         "productsCount": 7
-      }
+    },
+    {
+        "id": "456",
+        "idParent": null,
+        "label": "category",
+        "products": null,
+        "productsCount": 7
+    }
  ]
 </pre>
-
 
 ** Request - GET method **
 
@@ -247,7 +191,7 @@ To make sure your connector uses the Product list interaction correctly, all you
 | --- | --- | --- |
 | idConnectorVersion | Connector version id | ?idConnectorVersion=123 |
 | idParent | Unique identifier of the parent category | ?idParent=123  |
-| idWebsite | Unique identifier of the associated website (assigned to you by iAdvize) | ?idWebsite=123  |
+| idWebsite | Unique identifier of the website on which your connector is installed | ?idWebsite=123  |
 | idOperator | Unique identifier of the operator loading the categories | ?idOperator=9999  |
 | limit | Maximum number of resources per page | ?limit=10 |
 | offset | Number of resources skipped before beginning to return resources | ?offset=10 |
@@ -304,7 +248,7 @@ To make sure your connector uses the Product list interaction correctly, all you
 | --- | --- | --- |
 | idConnectorVersion | Connector version id | ?idConnectorVersion=123 |
 | idCategory | Category id | ?idCategory=123  |
-| idWebsite | Unique identifier of the associated website (assigned to you by iAdvize) | ?idWebsite=123  |
+| idWebsite | Unique identifier of the website on which your connector is installed | ?idWebsite=123  |
 | idOperator | Unique identifier of the operator loading the products | ?idOperator=9999  |
 | limit | Maximum number of resources per page | ?limit=10 |
 | offset | Number of resources skipped before beginning to return resources | ?offset=10 |
@@ -327,38 +271,37 @@ To make sure your connector uses the Product list interaction correctly, all you
 | pricePromotion | Price promotion | String |  |
 | priceSpecial | Price special | String |  |
 
-### The visitor profile
+### Visitor profile
 
-The visitor profile interaction enables iAdvize's Console panel users to access to the visitor's CRM profile in a single click. 
+The visitor profile plugin enables iAdvize's Console panel users to access to the visitor's CRM profile in a single click. 
 Agents can overview the visitor's CRM profile in a new window while they are chatting. Operators can then edit it or simply look for information.
 
 To be able to retrieve the CRM profile, iAdvize must be able to identify the visitor thanks to an email and/or an external ID.
 
-![VisitorProfile](./assets/images/visitorprofilefeature@2x.png)
+![Visitor profile](./assets/images/visitorprofilefeature@2x.png)
 
-**Add a visitor profile connector and configure it**
-In order to set the right connector parameters, all you have to do is to declare:
+**Add the visitor profile plugin**
+In order to set the right plugin parameters, all you have to do is to declare:
 * The connector URL - this is your visitor's profile URL
 
 #### Visitor profile data
 
 <pre class="prettyprint lang-js">
- [
+[
     {
-        "id":"1",
+        "id":"crm_profile_link",
         "label": "CRM profile",
         "value": "https://www.crm.fr/visitor-profile",
         "fieldType":"URL"
     },
     {
-        "id":"2",
+        "id":"crm_visitor_tag",
         "label": "CRM tag",
         "value": "tag",
         "fieldType": "TEXT"
     }
- ]
+]
 </pre>
-
 
 ** Request - GET method **
 
@@ -368,7 +311,7 @@ In order to set the right connector parameters, all you have to do is to declare
 | idConnectorVersion | Connector version id | ?idConnectorVersion=123 |
 | idVisitorExternal | Visitor external id | ?idVisitorExternal=123  |
 | idVisitorUnique | Visitor unique id | ?idVisitorUnique=123  |
-| idWebsite | Unique identifier of the associated website (assigned to you by iAdvize) | ?idWebsite=123  |
+| idWebsite | Unique identifier of the website on which your connector is installed | ?idWebsite=123  |
 | operatorLocale | Operator locale | ?operatorLocale=en  |
 | idOperator | Unique identifier of the operator loading the visitor profile | ?idOperator=9999  |
 
@@ -381,35 +324,36 @@ In order to set the right connector parameters, all you have to do is to declare
 | value | Value | String | ✓ |
 | fieldType | Field type | `URL` or `TEXT` | ✓ |
 
-### The conversation closing form
+### Conversation closing form
 
-The conversation closing form interaction enables iAdvize's Console panel users to provide additional information manually at the end of conversation. 
+The conversation closing form plugin enables iAdvize's Console panel users to provide additional information manually at the end of conversation. 
 
-![CloseConversation](./assets/images/close_conversation@2x.png)
+![Conversation closing form plugin](./assets/images/close_conversation@2x.png)
 
-**Add a conversation closing form connector and Configure it**
-In order to set the right connector parameters, all you have to do is to declare:
+**Add the conversation closing form plugin**
+
+In order to set the right plugin parameters, all you have to do is to declare:
 * The connector URL - this is your form's url
 
 #### Conversation Closing Form data
 
 <pre class="prettyprint lang-js">
- [
+[
     {
-        "id": "1",
-        "label": "create a salesforce ticket",
+        "id": "create_crm_ticket",
+        "label": "Create a CRM ticket",
         "fieldType": "CHECKBOX",
         "isRequired": true
     },
     {
-        "id": "2",
+        "id": "brand_name",
         "idParent": "1",
         "label": "Brand name",
         "fieldType": "TEXT",
         "isRequired": true
     },
     {
-        "id": "3",
+        "id": "color",
         "idParent": "1",
         "label": "Color",
         "fieldType": "TEXT",
@@ -418,25 +362,538 @@ In order to set the right connector parameters, all you have to do is to declare
 ]
 </pre>
 
+### External bot
 
-** Request - GET method **
+Let your bot interact with online visitors directly within iAdvize’s chatbox.
+The External bot plugin enables iAdvize's Admins and Managers to create users with the role “bot” from iAdvize’s administration. The scenario and availability of the bot are managed by your app. 
+
+To put it in a nutshell, the External bot plugin:
+* Allows bots providers to create their connector thanks to the Developper Platform
+* Allows customers to connect their iAdvize account to a bot provider and connect bots seamlessly. These bots interact with iAdvize like a human agent.
+
+![Bot plugin](./assets/images/plugins/external-bots-main.gif)
+
+#### The External bot user flow
+
+
+The iAdvize Administrator/Manager:
+
+* Activates your connector from the iAdvize marketplace,
+* Creates a new user with the role "bot" from the "People" section of iAdvize,
+* Select an external bot and a scenario,
+
+![Bot plugin](./assets/images/plugins/external-bots-user-flow.jpg)
+
+
+** Add the External bot plugin **
+To make sure your connector uses the External Bot plugin correctly, all you have to do is to declare the base url that will be postfixed by seven endpoints described below.
+
+#### Operator form flow endpoints
+
+There are 4 endpoints related to Operator form flow. This is related to the creation of an Operator with a Bot role, within iAdvize in order to link it to the External bot.
+
+![Bot plugin](./assets/images/plugins/bot-scenarios-operator-flow.jpg)
+
+##### List external bots (endpoint)
+
+** Request - GET /external-bots **
 
 | Query parameter | Description | Values |
 | --- | --- | --- |
 | idConnectorVersion | Connector version id | ?idConnectorVersion=123 |
-| idWebsite | Unique identifier of the associated website (assigned to you by iAdvize) | ?idWebsite=123  |
-| operatorLocale | Operator locale | ?operatorLocale=en  |
-| idOperator | Unique identifier of the operator loading the form | ?idOperator=9999  |
+| idWebsite | Unique identifier of the website on which your connector is installed | ?idWebsite=123  |
 
-** Response - Array of inputs **
+** Response **
+
+<pre class="prettyprint lang-js">
+[
+    {
+        "idBot": "Hal12343",
+        "name": "Hal",
+        "description": "Hal is good, bro",
+        "editorUrl": "http://your-saas/Hal12343/editor"
+    },
+    {
+        "idBot": "brt123569",
+        "name": "Bart Simpson",
+        "description": "Bart will make you crazy",
+        "editorUrl": "http://your-saas/brt123569/editor"
+    },
+]
+</pre>
 
 | Field | Description | Values | Required |
 | --- | --- | --- | --- |
-| id | Unique identifier | string | ✓ |
-| idParent | Parent identifier, if the field depends on it| string | |
-| label | Label | String | ✓ |
-| fieldType | Field type | `TEXT` or `CHECKBOX` | ✓ |
-| isRequired | Required | Boolean | ✓ |
+| idBot | Unique identifier of the bot | String | ✓ |
+| name | Name of the bot | String | ✓ |
+| description | Description of the bot | String |  |
+| editorUrl | Url used to redirect user to your bot editor| A valid URL |  |
+
+##### Modify bot information (endpoint)
+
+** Request - PUT /bots/:idOperator: **
+
+| Parameters | In | Description | Values |
+| --- | --- | --- | --- |
+| idConnectorVersion | Query | Connector version id | ?idConnectorVersion=123 |
+| idWebsite | Query | Unique identifier of the website on which your connector is installed | ?idWebsite=123  |
+| idOperator | Path | iAdvize bot operator identifier that we associate to your bot scenario | /bots/456678  |
+
+<pre class="prettyprint lang-js">
+{
+    "name": "Hal",
+    "pseudo": "Hal is good, bro",
+    "language": "fr",
+    "distributionRules": [
+        {
+            "id": "ef4670c3-d715-4a21-8226-ed17f354fc44",
+            "label": "Human SAV guys"
+        }
+    ],
+    "external": {
+        "idBot": "Hal12343"
+    }
+}
+</pre>
+
+| Field | Description | Values | Constraints |
+| --- | --- | --- | --- |
+| name | Bot name on your platform | String |  |
+| pseudo | Bot pseudo used during the conversation | String |  |
+| language | Language spoken by the bot | String | ISO 3166-1 alpha-2 |
+| distributionRules | distribution rule that can be used inside transfer replies | Array |  |
+| distributionRules.id | Distribution rule identifier | String | UUID |
+| distributionRules.label | Distribution rule label | String |  |
+| external.idBot | Existing bot unique identifier for this connector| String |  |
+
+** Response **
+
+<pre class="prettyprint lang-js">
+{
+    "idOperator": "23232",
+    "external": {
+      "idBot":"R3R3ZFDKOEZ",
+      "name": "Hal",
+      "description": "Hal is good, bro",
+      "editorUrl": "http://your-saas/R3R3ZFDKOEZ/editor"
+    },
+    "distributionRules": [
+      { 
+        "id": "ef4670c3-d715-4a21-8226-ed17f354fc44",
+        "label": "Human SAV guys"
+      }
+    ],
+    "createdAt": "2017-11-22T12:04:00Z",
+    "updatedAt": "2017-11-22T12:04:00Z"
+  }
+</pre>
+
+| Field | Description | Values | Required | Constraints |
+| --- | --- | --- | --- | --- |
+| idOperator | iAdvize bot operator identifier | String | ✓ |  |
+| external.idBot | Bot identifier on your platform | String | ✓ |  |
+| external.name | Bot name on your platform | String | ✓ |  |
+| external.description | Bot description on your plateform | String | ✓ |  |
+| external.editorUrl | Bot edition url on your platform | String |  | URL |
+| distributionRules | distribution rule that can be used inside transfer replies | Array |  |  |
+| distributionRules.id | Distribution rule identifier | String | ✓ | UUID |
+| distributionRules.label | Distribution rule label | String | ✓ |
+| createdAt | Creation date of you bot | String | ✓ | ISO 8601 |
+| updatedAt | Last modification date of your bot| String | ✓ | ISO 8601 |
+
+##### Get bot information (endpoint)
+
+** Request - GET /bots/:idOperator: **
+
+| Parameters | In | Description | Values |
+| --- | --- | --- | --- |
+| idConnectorVersion | Query | Connector version id | ?idConnectorVersion=123 |
+| idWebsite | Query | Unique identifier of the website on which your connector is installed | ?idWebsite=123  |
+| idOperator | Path | iAdvize bot operator identifier that we associate to your bot scenario | /bots/456678  |
+
+** Response **
+
+<pre class="prettyprint lang-js">
+{
+    "idOperator": "23232",
+    "external": {
+        "idBot":"R3R3ZFDKOEZ",
+        "name": "Hal",
+        "description": "Hal is good, bro",
+        "editorUrl": "http://your-saas/R3R3ZFDKOEZ/editor"
+    },
+    "distributionRules": [
+        { 
+            "id": "ef4670c3-d715-4a21-8226-ed17f354fc44",
+            "label": "Human SAV guys"
+        }
+    ],
+    "createdAt": "2017-11-22T12:04:00Z",
+    "updatedAt": "2017-11-22T12:04:00Z"
+}
+</pre>
+
+| Field | Description | Values | Required | Constraints |
+| --- | --- | --- | --- | --- |
+| idOperator | iAdvize bot operator identifier | String | ✓ |  |
+| external.idBot | Bot identifier on your platform | String | ✓ |  |
+| external.name | Bot name on your platform | String | ✓ |  |
+| external.description | Bot description on your plateform | String | ✓ |  |
+| external.editorUrl | Bot edition url on your platform | String |  | URL |
+| distributionRules | distribution rule that can be used inside transfer replies | Array |  |
+| distributionRules.id | Distribution rule identifier | String | ✓ | UUID |
+| distributionRules.label | Distribution rule label | String | ✓ |  |
+| createdAt | Creation date of you bot | String | ✓ | ISO 8601 |
+| updatedAt | Last modification date of your bot| String | ✓ | ISO 8601 |
+
+##### Get bot availability strategies (endpoint)
+
+Bot is ready and should be available accordingly to the availability strategy and distributions rules.
+
+** Request - GET /availability-strategies **
+
+| Parameters | In | Description | Values | Required |
+| --- | --- | --- | --- | --- |
+| idConnectorVersion | Query | Connector version id | ?idConnectorVersion=123 | ✓ |
+| idWebsite | Query | Unique identifier of the website on which your connector is installed | ?idWebsite=123  | ✓ |
+| idOperator | Query | iAdvize bot operator identifier that we associate to your bot scenario | ?idOperator=456678  | ✓ |
+
+** Response **
+
+<pre class="prettyprint lang-js">
+[
+    {
+        "strategy": "atLeastOne",
+        "distributionRulesToCheck": [
+            "ef4670c3-d715-4a21-8226-ed17f354fc44"
+        ]
+    }
+]
+</pre>
+
+<pre class="prettyprint lang-js">
+[
+    {
+        "strategy": "customAvailability",
+        "availability": true
+    }
+]
+</pre>
+
+| Field | Description | Values | Required | Constraints |
+| --- | --- | --- | --- | --- |
+| strategy | How we should aggregate the availability if several distribution rules are provided | `atLeastOne` or `all` or `notAvailable` or `customAvailability` | ✓ | |
+| distributionRulesToCheck | All distribution rules we should check for availability. This is subset of DistributionRules returned by the Get bot endpoint. | Array of String | | Required if strategy is equal to `atLeastOne` or `all` |
+| availability | Allow the connector to handle the availability of the bot | Boolean | | Required if strategy is equal to `customAvailability` |
+
+#### Conversation flow endpoints
+There are 3 Conversation flow endpoints. 
+
+![Bot plugin](./assets/images/plugins/bot-scenarios-conversation-flow.jpg)
+
+
+##### Conversation initialisation (endpoint)
+
+** Request - POST /conversations **
+
+| Parameters | In | Description | Values | Required |
+| --- | --- | --- | --- | --- |
+| idConnectorVersion | Query | Connector version id | ?idConnectorVersion=123 | ✓ |
+| idWebsite | Query | Unique identifier of the website on which your connector is installed | ?idWebsite=123  | ✓ |
+
+<pre class="prettyprint lang-js">
+{
+    "idOperator": "local-22",
+    "idConversation": "f1c64107-25b0-4865-ad20-88419275eb64",
+    "history": [
+        {
+            "idMessage": "42e3de6f-84f2-4883-b5d1-6710bc5dc488",
+            "author": {
+                "role": "operator"
+            },
+            "payload": {
+                "contentType": "text",
+                "value": "Please answer the following questions."
+            },
+            "createdAt": "2017-11-22T12:04:00Z"
+        }
+    ]
+}
+</pre>
+
+| Field | Description | Values | Constraints |
+| --- | --- | --- | --- |
+| idOperator | iAdvize bot operator identifier that we associate to your bot scenario | String |  |
+| idConversation | Conversation unique identifier, you can use it or return your own internal id in the response body. We will make the join for you. | String | UUID |
+| history | First messages of the conversations | Array |  |
+| history.idMessage | Unique identifier of this message | String | UUID |
+| history.author.role | author of the message | `operator` or `visitor` |  |  |
+| history.payload | Typed payload of the message | Object | |
+| history.payload.contentType | Type of the message’s content | String | `text` |
+| history.payload.value | Message content | String |  |
+| history.createdAt | Date the message was sent | String | ISO-8601 |
+
+** Response **
+
+<pre class="prettyprint lang-js">
+{
+    "idConversation": "a0c65ae0-4e04-4909-a5cc-80dd0f05de96",
+    "idOperator": "local-22",
+    "replies": [
+        {
+            "type": "await",
+            "duration": {
+                "value": 2,
+                "unit": "seconds"
+            }
+        },
+        {
+            "type": "message",
+            "content": {
+                "contentType": "text",
+                "value": "Do you want to talk to an agent ?"
+            },
+            "quickReplies": [
+                {
+                    "value": "No",
+                    "idQuickReply": "No"
+                },
+                {
+                    "value": "Yes",
+                    "idQuickReply": "Yes"
+                }
+            ]
+        },
+        {
+            "type": "transfer",
+            "distributionRule": "ef4670c3-d715-4a21-8226-ed17f354fc44"
+        },
+        {
+            "type": "close"
+        }
+    ],
+    "variables": [
+        {
+            "key": "number",
+            "value": "I don't know..."
+        }
+    ],
+    "createdAt": "2018-07-16T13:53:57.961Z",
+    "updatedAt": "2018-07-16T13:53:57.961Z"
+}
+</pre>
+
+| Field | Description | Values | Required | Constraints |
+| --- | --- | --- | --- | --- |
+| idConversation | Conversation unique identifier | String | ✓ | UUID |
+| idOperator | iAdvize bot operator identifier that we associate to your bot scenario | String | ✓ |  | 
+| replies | Array of replies | Array | ✓ |  |
+| replies.type | Reply/action type | `await` or `message` or `transfer` or `close` | ✓ |  |
+| replies.duration.unit | Awaiting unit of time | `millis` or `seconds` or `minutes` |  | replies.type == `await` |
+| replies.duration.value | Awaiting value of time | Long |  | replies.type == `await` |
+| replies.content | Typed payload of the message | Object | ✓ | replies.type == `message` |
+| replies.content.contentType | Type of the message’s content | `text` or `text/quick-reply`  | ✓ | replies.type == `message` |
+| replies.content.value | Textual content of the message | String | ✓ | replies.type == `message` |
+| replies.quickReplies | Quick replies proposed to the visitor | Array |  | replies.type == `message` |
+| replies.quickReplies.value | Textual content of the quick reply | String | ✓ | replies.type == `message` |
+| replies.quickReplies.idQuickReply | Identifier of the quick reply | String | ✓ | replies.type == `message` |
+| replies.distributionRule | Distribution rules to transfer to | Array of String |  | replies.type == `transfer` |
+| variables | Collected variables | Array |  | UUID |
+| variables.key | Key of the variable collected | String | ✓ |  |
+| variables.value | Value of the variable collected | String | ✓ |  |
+| createdAt | Creation date of the conversation | DateTime |  | ISO-8601 |
+| updateAt | Date of the last message received | DateTime |  | ISO-8601 |
+
+
+##### New message reception (endpoint)
+
+** Request - POST /conversations/:conversationId:/messages **
+
+| Parameters | In | Description | Values | Required |
+| --- | --- | --- | --- | --- |
+| idConnectorVersion | Query | Connector version id | ?idConnectorVersion=123 | ✓ |
+| idWebsite | Query | Unique identifier of the website on which your connector is installed | ?idWebsite=123  | ✓ |
+
+<pre class="prettyprint lang-js">
+{
+    "idOperator": "23232",
+    "message":   {
+        "idMessage": "ba4e1f71-7012-4b1a-86c3-d2fce8883dc7",
+        "author": {
+            "role": "visitor"
+        },
+        "payload": {
+            "contentType": "text",
+            "value": "Hi, are you there ? Shall we begin ?"
+        },
+        "createdAt": "2017-11-22T12:04:00Z"
+    }
+}
+</pre>
+
+| Field | Description | Values | Constraints |
+| --- | --- | --- | --- |
+| idOperator | iAdvize bot operator identifier that we associate to your bot scenario | String |  |
+| message.idMessage | The unique identifier for this message |  | UUID |
+| message.author.role | The author of the message | `visitor` or `operator` |  |
+| message.payload | Typed payload of the message | Object |  |
+| message.payload.contentType | Type of the message’s content | `text` |  |
+| message.payload.value | Textual content of the message | String |  |
+| message.createdAt | Date the message was sent | DateTime | ISO-8601 |
+
+** Response **
+
+<pre class="prettyprint lang-js">
+{
+    "idConversation": "ce41ba2c-c25a-4351-b946-09527d8b940b",
+    "idOperator": "423232",
+    "replies": [
+        {
+            "type": "await",
+            "duration": {
+                "unit": "millis",
+                "value": 10
+            }
+        },
+        {
+            "type": "message",
+            "payload": {
+                "contentType": "text",
+                "value": "How are you ?"
+            },
+            "quickReplies": [
+                {
+                    "contentType": "text/quick-reply",
+                    "value": "Fine",
+                    "idQuickReply": "1ef5145b-a9b6-4e86-8743-b6e3b4026b2c"
+                },
+                {
+                    "contentType": "text",
+                    "value": "Bad",
+                    "idQuickReply": "13594c9b-dcff-4add-81fc-5e1093e443a7"
+                }
+            ]
+        }
+    ],
+    "variables": [],
+    "createdAt": "2017-11-22T12:04:00Z",
+    "updatedAt": "2017-11-22T13:04:00Z"
+}
+</pre>
+
+| Field | Description | Values | Required | Constraints |
+| --- | --- | --- | --- | --- |
+| idConversation | Conversation unique identifier | String | ✓ | UUID |
+| idOperator | iAdvize bot operator identifier that we associate to your bot scenario | String | ✓ |  | 
+| replies | Array of replies | Array | ✓ |  |
+| replies.type | Reply/action type | `await` or `message` or `transfer` or `close` | ✓ |  |
+| replies.duration.unit | Awaiting unit of time | `millis` or `seconds` or `minutes` |  | replies.type == `await` |
+| replies.duration.value | Awaiting value of time | Long |  | replies.type == `await` |
+| replies.content | Typed payload of the message | Object | ✓ | replies.type == `message` |
+| replies.content.contentType | Type of the message’s content | `text` or `text/quick-reply`  | ✓ | replies.type == `message` |
+| replies.content.value | Textual content of the message | String | ✓ | replies.type == `message` |
+| replies.quickReplies | Quick replies proposed to the visitor | Array |  | replies.type == `message` |
+| replies.quickReplies.value | Textual content of the quick reply | String | ✓ | replies.type == `message` |
+| replies.quickReplies.idQuickReply | Identifier of the quick reply | String | ✓ | replies.type == `message` |
+| replies.distributionRule | Distribution rules to transfer to | Array of String |  | replies.type == `transfer` |
+| variables | Collected variables | Array |  | UUID |
+| variables.key | Key of the variable collected | String | ✓ |  |
+| variables.value | Value of the variable collected | String | ✓ |  |
+| createdAt | Creation date of the conversation | DateTime |  | ISO-8601 |
+| updateAt | Date of the last message received | DateTime |  | ISO-8601 |
+
+
+##### Get the conversation content (endpoint)
+
+** Request - GET /conversations/:conversationId: **
+
+| Parameters | In | Description | Values | Required |
+| --- | --- | --- | --- | --- |
+| idConnectorVersion | Query | Connector version id | ?idConnectorVersion=123 | ✓ |
+| idWebsite | Query | Unique identifier of the website on which your connector is installed | ?idWebsite=123  | ✓ |
+| idOperator | Query | iAdvize bot operator identifier that we associate to your bot scenario | ?idOperator=456678  | ✓ |
+
+** Response **
+
+<pre class="prettyprint lang-js">
+{
+    "idConversation": "ce41ba2c-c25a-4351-b946-09527d8b940b",
+    "idOperator": "232323",
+    "replies": [
+        {
+            "type": "await",
+            "duration": {
+                "unit": "millis",
+                "value": 10
+            }
+        },
+        {
+            "type": "message", #Enum that can take message|await|close|transfer
+            "payload": {
+                "contentType": "text",
+                "value": "All Right, my job is done here."
+             },
+            "quickReplies": []
+        },
+        {
+            "type": "transfer",
+            "distributionRule": "ef4670c3-d715-4a21-8226-ed17f354fc44"
+        },
+        {
+            "type": "close"
+        }
+    ],
+    "variables": [
+        {
+            "key": "visitor_state_of_mind",
+            "value": "Ok"
+        }
+    ],
+    "createdAt": "2017-11-22T12:04:00Z",
+    "updatedAt": "2017-11-22T12:23:00Z"
+}
+</pre>
+
+| Field | Description | Values | Required | Constraints |
+| --- | --- | --- | --- | --- |
+| idConversation | Conversation unique identifier | String | ✓ | UUID |
+| idOperator | iAdvize bot operator identifier that we associate to your bot scenario | String | ✓ |  | 
+| replies | Array of replies | Array | ✓ |  |
+| replies.type | Reply/action type | `await` or `message` or `transfer` or `close` | ✓ |  |
+| replies.duration.unit | Awaiting unit of time | `millis` or `seconds` or `minutes` |  | replies.type == `await` |
+| replies.duration.value | Awaiting value of time | Long |  | replies.type == `await` |
+| replies.content | Typed payload of the message | Object | ✓ | replies.type == `message` |
+| replies.content.contentType | Type of the message’s content | `text` or `text/quick-reply`  | ✓ | replies.type == `message` |
+| replies.content.value | Textual content of the message | String | ✓ | replies.type == `message` |
+| replies.quickReplies | Quick replies proposed to the visitor | Array |  | replies.type == `message` |
+| replies.quickReplies.value | Textual content of the quick reply | String | ✓ | replies.type == `message` |
+| replies.quickReplies.idQuickReply | Identifier of the quick reply | String | ✓ | replies.type == `message` |
+| replies.distributionRule | Distribution rules to transfer to | Array of String |  | replies.type == `transfer` |
+| variables | Collected variables | Array |  | UUID |
+| variables.key | Key of the variable collected | String | ✓ |  |
+| variables.value | Value of the variable collected | String | ✓ |  |
+| createdAt | Creation date of the conversation | DateTime |  | ISO-8601 |
+| updateAt | Date of the last message received | DateTime |  | ISO-8601 |
+
+## Add webhooks
+
+The webhook system allows external applications to subscribe to events (via callback URLs) to receive updates in real-time.
+When you build your app, you can subscribe to a list of events.
+When customers install your app, it automatically creates webhooks for these customers as well as for events based on your app's configuration.
+
+This subscription is based on the events happening on different domains. See the list of events available in the [Webhooks documentation](#webhooks).
+
+You can create as much outgoing webhooks as you need.
+A webhook can cover several events.
+An event can be linked to a customer (example customers.website.created)
+or linked to a website (example customers.website.created)
+
+* Name of the webhook: an optional label you can give to the webhook
+* webhook URL: the server URL that will receive the webhook
+* Security token: Token provided by iAdvize (this field cannot be edited)
+* Content-type: Application / json ; Application / x-www-form-urlencoded
+* Events: you can select the events in the list. You can subscribe to all
+iAdvize events, all events of a specific domain, or only one event.
 
 ## Submit your apps
 
@@ -490,26 +947,6 @@ if (! hash_equals($iAdvizeHash, $queryParametersHash)) {
 We strongly recommend you, to use the **constant time** string comparison method (`hash_equals` vs `===`  in our example), 
 to be less vulnerable to [timing attacks](https://en.wikipedia.org/wiki/Timing_attack).
 
-## Add webhooks
-The webhook system allows external applications to subscribe to events (via callback URLs) to receive updates in real-time.
-When you build your app, you can subscribe to a list of events.
-When customers install your app, it automatically creates webhooks for these customers as well as for events based on your app's configuration.
-
-This subscription is based on the events happening on different domains. See the list of events available in the [Webhooks documentation](#webhooks).
-
-You can create as much outgoing webhooks as you need.
-A webhook can cover several events.
-An event can be linked to a customer (example customers.website.created)
-or linked to a website (example customers.website.created)
-
-* Name of the webhook: an optional label you can give to the webhook
-* webhook URL: the server URL that will receive the webhook
-* Security token: Token provided by iAdvize (this field cannot be edited)
-* Content-type: Application / json ; Application / x-www-form-urlencoded
-* Events: you can select the events in the list. You can subscribe to all
-iAdvize events, all events of a specific domain, or only one event.
-
-
 ## Developer Policy
 Developers host their code on their own host service.
 Developers are responsible for their connector's maintenance.
@@ -530,7 +967,7 @@ All URLs referenced in the documentation have the following base:
 | --- | --- |
 | `https://www.iadvize.com/api/2` | `https://ha.iadvize.com/api/2` |
 
-The iAdvize REST API is served over HTTPS and HTTP.
+The iAdvize REST API is served over HTTPS.
 
 ## Authentication
 
