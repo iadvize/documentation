@@ -392,6 +392,8 @@ To make sure your connector uses the External Bot plugin correctly, all you have
 
 There are 4 endpoints related to Operator form flow. This is related to the creation of an Operator with a Bot role, within iAdvize in order to link it to the External bot.
 
+![Bot plugin](./assets/images/plugins/bot-scenarios-operator-flow.jpg)
+
 ##### List external bots (endpoint)
 
 ** Request - GET /external-bots **
@@ -586,6 +588,9 @@ Bot is ready and should be available accordingly to the availability strategy an
 
 #### Conversation flow endpoints
 There are 3 Conversation flow endpoints. 
+
+![Bot plugin](./assets/images/plugins/bot-scenarios-conversation-flow.jpg)
+
 
 ##### Conversation initialisation (endpoint)
 
