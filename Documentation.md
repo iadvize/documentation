@@ -649,7 +649,7 @@ There are 3 Conversation flow endpoints.
         },
         {
             "type": "message",
-            "content": {
+            "payload": {
                 "contentType": "text",
                 "value": "Do you want to talk to an agent ?"
             },
@@ -691,9 +691,9 @@ There are 3 Conversation flow endpoints.
 | replies.type | Reply/action type | `await` or `message` or `transfer` or `close` | ✓ |  |
 | replies.duration.unit | Awaiting unit of time | `millis` or `seconds` or `minutes` |  | replies.type == `await` |
 | replies.duration.value | Awaiting value of time | Long |  | replies.type == `await` |
-| replies.content | Typed payload of the message | Object | ✓ | replies.type == `message` |
-| replies.content.contentType | Type of the message’s content | `text` or `text/quick-reply`  | ✓ | replies.type == `message` |
-| replies.content.value | Textual content of the message | String | ✓ | replies.type == `message` |
+| replies.payload | Typed payload of the message | Object | ✓ | replies.type == `message` |
+| replies.payload.contentType | Type of the message’s content | `text` or `text/quick-reply`  | ✓ | replies.type == `message` |
+| replies.payload.value | Textual content of the message | String | ✓ | replies.type == `message` |
 | replies.quickReplies | Quick replies proposed to the visitor | Array |  | replies.type == `message` |
 | replies.quickReplies.value | Textual content of the quick reply | String | ✓ | replies.type == `message` |
 | replies.quickReplies.idQuickReply | Identifier of the quick reply | String | ✓ | replies.type == `message` |
