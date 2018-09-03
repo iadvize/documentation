@@ -1526,9 +1526,11 @@ See [deleting section](#responses-delete) to discover some output examples.
 
 #### List your conversations
 
-`GET /conversation`
+`GET /conversation.json-unicode?formatHistory=0`
 
 See below to discover used fields and see [reading section](#read) to discover some output examples.
+Don't forget to use json-unicode path parameter & formatHistory query parameter to retrieve a well
+formatted conversation history.
 
 **Filters**
 
@@ -1554,9 +1556,11 @@ The following rules apply :
 
 #### Get a conversation details
 
-`GET /conversation/666`
+`GET /conversation.json-unicode/666?formatHistory=0`
 
 See [reading section](#read) to discover some output examples.
+Don't forget to use json-unicode path parameter & formatHistory query parameter to retrieve a well
+formatted conversation history.
 
 **Fields**
 
