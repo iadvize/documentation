@@ -430,7 +430,7 @@ There are 4 endpoints related to Operator form flow. This is related to the crea
 
 ##### Modify bot information (endpoint)
 
-###### Request - PUT /bots/:idOperator: ######
+###### Request - PUT /bots/:idOperator:
 
 | Parameters | In | Description | Values |
 | --- | --- | --- | --- |
@@ -465,7 +465,7 @@ There are 4 endpoints related to Operator form flow. This is related to the crea
 | distributionRules.label | Distribution rule label | String |  |
 | external.idBot | Existing bot unique identifier for this connector| String |  |
 
-###### Response ######
+###### Response
 
 <pre class="prettyprint lang-js">
 {
