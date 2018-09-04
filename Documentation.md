@@ -416,7 +416,6 @@ There are 4 endpoints related to Operator form flow. This is related to the crea
     {
         "idBot": "brt123569",
         "name": "Bart Simpson",
-        "description": "Bart will make you crazy",
         "editorUrl": "http://your-saas/brt123569/editor"
     },
 ]
@@ -427,7 +426,7 @@ There are 4 endpoints related to Operator form flow. This is related to the crea
 | idBot | Unique identifier of the bot | String | ✓ |
 | name | Name of the bot | String | ✓ |
 | description | Description of the bot | String |  |
-| editorUrl | Url used to redirect user to your bot editor| A valid URL |  |
+| editorUrl | Url used to redirect user to your bot editor| A valid URL | ✓ |
 
 ##### Modify bot information (endpoint)
 
