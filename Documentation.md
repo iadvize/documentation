@@ -351,9 +351,12 @@ In order to set the right plugin parameters, all you have to do is to declare:
 | --- | --- | --- | --- |
 | id | Unique identifier | string | ✓ |
 | idParent | Parent identifier, if the field depends on it| string | |
-| label | Label | String | ✓ |
-| fieldType | Field type | `TEXT` or `CHECKBOX` | ✓ |
+| label | Label | string | ✓ |
+| fieldType | Field type | `TEXT`, `CHECKBOX` or `SELECT` | ✓ |
 | isRequired | Required | Boolean | ✓ |
+| options | List of options object for `SELECT` type | array |  |
+| options.label | Label displayed for this option | string | ✓ |
+| options.value | Value saved when option is selected | string | ✓ |
 
 <pre class="prettyprint lang-js">
 [
