@@ -492,7 +492,7 @@ There are 4 endpoints related to Operator form flow. This is related to the crea
 | external.idBot | Bot identifier on your platform | String | ✓ |  |
 | external.name | Bot name on your platform | String |  |  |
 | external.description | Bot description on your plateform | String |  |  |
-| external.editorUrl | Bot edition url on your platform | String |  | URL |
+| external.editorUrl | Bot edition url on your platform | String | ✓ | URL |
 | distributionRules | distribution rule that can be used inside transfer replies | Array |  |  |
 | distributionRules.id | Distribution rule identifier | String |  | UUID |
 | distributionRules.label | Distribution rule label | String |  | |
@@ -537,7 +537,7 @@ There are 4 endpoints related to Operator form flow. This is related to the crea
 | external.idBot | Bot identifier on your platform | String | ✓ |  |
 | external.name | Bot name on your platform | String |  |  |
 | external.description | Bot description on your plateform | String |  |  |
-| external.editorUrl | Bot edition url on your platform | String |  | URL |
+| external.editorUrl | Bot edition url on your platform | String | ✓ | URL |
 | distributionRules | distribution rule that can be used inside transfer replies | Array |  | |
 | distributionRules.id | Distribution rule identifier | String | | UUID |
 | distributionRules.label | Distribution rule label | String | | |
