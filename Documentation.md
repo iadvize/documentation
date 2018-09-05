@@ -163,6 +163,19 @@ To make sure your connector uses the Product list plugin correctly, all you have
 
 #### Categories data
 
+###### Request - GET method
+
+| Query parameter | Description | Values |
+| --- | --- | --- |
+| idConnectorVersion | Connector version id | ?idConnectorVersion=123 |
+| idParent | Unique identifier of the parent category | ?idParent=123  |
+| idWebsite | Unique identifier of the website on which your connector is installed | ?idWebsite=123  |
+| idOperator | Unique identifier of the operator loading the categories | ?idOperator=9999  |
+| limit | Maximum number of resources per page | ?limit=10 |
+| offset | Number of resources skipped before beginning to return resources | ?offset=10 |
+
+###### Response - Array of categories
+
 <pre class="prettyprint lang-js">
 [
     {
@@ -185,19 +198,6 @@ To make sure your connector uses the Product list plugin correctly, all you have
  ]
 </pre>
 
-** Request - GET method **
-
-| Query parameter | Description | Values |
-| --- | --- | --- |
-| idConnectorVersion | Connector version id | ?idConnectorVersion=123 |
-| idParent | Unique identifier of the parent category | ?idParent=123  |
-| idWebsite | Unique identifier of the website on which your connector is installed | ?idWebsite=123  |
-| idOperator | Unique identifier of the operator loading the categories | ?idOperator=9999  |
-| limit | Maximum number of resources per page | ?limit=10 |
-| offset | Number of resources skipped before beginning to return resources | ?offset=10 |
-
-** Response - Array of categories **
-
 | Field | Description | Values | Required |
 | --- | --- | --- | --- |
 | id | Unique identifier | Integer | ✓ |
@@ -207,6 +207,20 @@ To make sure your connector uses the Product list plugin correctly, all you have
 | productsCount | Number of products | Integer | ✓ |
 
 #### Products data
+
+###### Request - GET method
+
+| Query parameter | Description | Values |
+| --- | --- | --- |
+| idConnectorVersion | Connector version id | ?idConnectorVersion=123 |
+| idCategory | Category id | ?idCategory=123  |
+| idWebsite | Unique identifier of the website on which your connector is installed | ?idWebsite=123  |
+| idOperator | Unique identifier of the operator loading the products | ?idOperator=9999  |
+| limit | Maximum number of resources per page | ?limit=10 |
+| offset | Number of resources skipped before beginning to return resources | ?offset=10 |
+| searchQuery | Product search query | ?searchQuery=query |
+
+###### Response - Array of products
 
 <pre class="prettyprint lang-js">
 [
@@ -241,21 +255,6 @@ To make sure your connector uses the Product list plugin correctly, all you have
 ]
 </pre>
 
-
-** Request - GET method **
-
-| Query parameter | Description | Values |
-| --- | --- | --- |
-| idConnectorVersion | Connector version id | ?idConnectorVersion=123 |
-| idCategory | Category id | ?idCategory=123  |
-| idWebsite | Unique identifier of the website on which your connector is installed | ?idWebsite=123  |
-| idOperator | Unique identifier of the operator loading the products | ?idOperator=9999  |
-| limit | Maximum number of resources per page | ?limit=10 |
-| offset | Number of resources skipped before beginning to return resources | ?offset=10 |
-| searchQuery | Product search query | ?searchQuery=query |
-
-** Response - Array of products **
-
 | Field | Description | Values | Required |
 | --- | --- | --- | --- |
 | id | Unique identifier | Integer | ✓ |
@@ -286,6 +285,20 @@ In order to set the right plugin parameters, all you have to do is to declare:
 
 #### Visitor profile data
 
+###### Request - GET method
+
+| Query parameter | Description | Values |
+| --- | --- | --- |
+| emailVisitor | Visitor email | ?emailVisitor=123  |
+| idConnectorVersion | Connector version id | ?idConnectorVersion=123 |
+| idVisitorExternal | Visitor external id | ?idVisitorExternal=123  |
+| idVisitorUnique | Visitor unique id | ?idVisitorUnique=123  |
+| idWebsite | Unique identifier of the website on which your connector is installed | ?idWebsite=123  |
+| operatorLocale | Operator locale | ?operatorLocale=en  |
+| idOperator | Unique identifier of the operator loading the visitor profile | ?idOperator=9999  |
+
+###### Response - Array of fields
+
 <pre class="prettyprint lang-js">
 [
     {
@@ -302,20 +315,6 @@ In order to set the right plugin parameters, all you have to do is to declare:
     }
 ]
 </pre>
-
-** Request - GET method **
-
-| Query parameter | Description | Values |
-| --- | --- | --- |
-| emailVisitor | Visitor email | ?emailVisitor=123  |
-| idConnectorVersion | Connector version id | ?idConnectorVersion=123 |
-| idVisitorExternal | Visitor external id | ?idVisitorExternal=123  |
-| idVisitorUnique | Visitor unique id | ?idVisitorUnique=123  |
-| idWebsite | Unique identifier of the website on which your connector is installed | ?idWebsite=123  |
-| operatorLocale | Operator locale | ?operatorLocale=en  |
-| idOperator | Unique identifier of the operator loading the visitor profile | ?idOperator=9999  |
-
-** Response - Array of fields **
 
 | Field | Description | Values | Required |
 | --- | --- | --- | --- |
@@ -396,14 +395,14 @@ There are 4 endpoints related to Operator form flow. This is related to the crea
 
 ##### List external bots (endpoint)
 
-** Request - GET /external-bots **
+###### Request - GET /external-bots
 
 | Query parameter | Description | Values |
 | --- | --- | --- |
 | idConnectorVersion | Connector version id | ?idConnectorVersion=123 |
 | idWebsite | Unique identifier of the website on which your connector is installed | ?idWebsite=123  |
 
-** Response **
+###### Response
 
 <pre class="prettyprint lang-js">
 [
@@ -416,7 +415,6 @@ There are 4 endpoints related to Operator form flow. This is related to the crea
     {
         "idBot": "brt123569",
         "name": "Bart Simpson",
-        "description": "Bart will make you crazy",
         "editorUrl": "http://your-saas/brt123569/editor"
     },
 ]
@@ -427,17 +425,11 @@ There are 4 endpoints related to Operator form flow. This is related to the crea
 | idBot | Unique identifier of the bot | String | ✓ |
 | name | Name of the bot | String | ✓ |
 | description | Description of the bot | String |  |
-| editorUrl | Url used to redirect user to your bot editor| A valid URL |  |
+| editorUrl | Url used to redirect user to your bot editor| A valid URL | ✓ |
 
 ##### Modify bot information (endpoint)
 
-** Request - PUT /bots/:idOperator: **
-
-| Parameters | In | Description | Values |
-| --- | --- | --- | --- |
-| idConnectorVersion | Query | Connector version id | ?idConnectorVersion=123 |
-| idWebsite | Query | Unique identifier of the website on which your connector is installed | ?idWebsite=123  |
-| idOperator | Path | iAdvize bot operator identifier that we associate to your bot scenario | /bots/456678  |
+###### Request - PUT /bots/:idOperator:
 
 <pre class="prettyprint lang-js">
 {
@@ -456,6 +448,12 @@ There are 4 endpoints related to Operator form flow. This is related to the crea
 }
 </pre>
 
+| Parameters | In | Description | Values |
+| --- | --- | --- | --- |
+| idConnectorVersion | Query | Connector version id | ?idConnectorVersion=123 |
+| idWebsite | Query | Unique identifier of the website on which your connector is installed | ?idWebsite=123  |
+| idOperator | Path | iAdvize bot operator identifier that we associate to your bot scenario | /bots/456678  |
+
 | Field | Description | Values | Constraints |
 | --- | --- | --- | --- |
 | name | Bot name on your platform | String |  |
@@ -466,7 +464,7 @@ There are 4 endpoints related to Operator form flow. This is related to the crea
 | distributionRules.label | Distribution rule label | String |  |
 | external.idBot | Existing bot unique identifier for this connector| String |  |
 
-** Response **
+###### Response
 
 <pre class="prettyprint lang-js">
 {
@@ -492,18 +490,18 @@ There are 4 endpoints related to Operator form flow. This is related to the crea
 | --- | --- | --- | --- | --- |
 | idOperator | iAdvize bot operator identifier | String | ✓ |  |
 | external.idBot | Bot identifier on your platform | String | ✓ |  |
-| external.name | Bot name on your platform | String | ✓ |  |
-| external.description | Bot description on your plateform | String | ✓ |  |
-| external.editorUrl | Bot edition url on your platform | String |  | URL |
+| external.name | Bot name on your platform | String |  |  |
+| external.description | Bot description on your plateform | String |  |  |
+| external.editorUrl | Bot edition url on your platform | String | ✓ | URL |
 | distributionRules | distribution rule that can be used inside transfer replies | Array |  |  |
 | distributionRules.id | Distribution rule identifier | String | ✓ | UUID |
-| distributionRules.label | Distribution rule label | String | ✓ |
+| distributionRules.label | Distribution rule label | String | ✓ | |
 | createdAt | Creation date of you bot | String | ✓ | ISO 8601 |
 | updatedAt | Last modification date of your bot| String | ✓ | ISO 8601 |
 
 ##### Get bot information (endpoint)
 
-** Request - GET /bots/:idOperator: **
+###### Request - GET /bots/:idOperator:
 
 | Parameters | In | Description | Values |
 | --- | --- | --- | --- |
@@ -511,7 +509,7 @@ There are 4 endpoints related to Operator form flow. This is related to the crea
 | idWebsite | Query | Unique identifier of the website on which your connector is installed | ?idWebsite=123  |
 | idOperator | Path | iAdvize bot operator identifier that we associate to your bot scenario | /bots/456678  |
 
-** Response **
+###### Response
 
 <pre class="prettyprint lang-js">
 {
@@ -537,12 +535,12 @@ There are 4 endpoints related to Operator form flow. This is related to the crea
 | --- | --- | --- | --- | --- |
 | idOperator | iAdvize bot operator identifier | String | ✓ |  |
 | external.idBot | Bot identifier on your platform | String | ✓ |  |
-| external.name | Bot name on your platform | String | ✓ |  |
-| external.description | Bot description on your plateform | String | ✓ |  |
-| external.editorUrl | Bot edition url on your platform | String |  | URL |
-| distributionRules | distribution rule that can be used inside transfer replies | Array |  |
+| external.name | Bot name on your platform | String |  |  |
+| external.description | Bot description on your plateform | String |  |  |
+| external.editorUrl | Bot edition url on your platform | String | ✓ | URL |
+| distributionRules | distribution rule that can be used inside transfer replies | Array |  | |
 | distributionRules.id | Distribution rule identifier | String | ✓ | UUID |
-| distributionRules.label | Distribution rule label | String | ✓ |  |
+| distributionRules.label | Distribution rule label | String | ✓ | |
 | createdAt | Creation date of you bot | String | ✓ | ISO 8601 |
 | updatedAt | Last modification date of your bot| String | ✓ | ISO 8601 |
 
@@ -550,7 +548,7 @@ There are 4 endpoints related to Operator form flow. This is related to the crea
 
 Bot is ready and should be available accordingly to the availability strategy and distributions rules.
 
-** Request - GET /availability-strategies **
+###### Request - GET /availability-strategies
 
 | Parameters | In | Description | Values | Required |
 | --- | --- | --- | --- | --- |
@@ -558,7 +556,7 @@ Bot is ready and should be available accordingly to the availability strategy an
 | idWebsite | Query | Unique identifier of the website on which your connector is installed | ?idWebsite=123  | ✓ |
 | idOperator | Query | iAdvize bot operator identifier that we associate to your bot scenario | ?idOperator=456678  | ✓ |
 
-** Response **
+###### Response
 
 <pre class="prettyprint lang-js">
 [
@@ -594,12 +592,7 @@ There are 3 Conversation flow endpoints.
 
 ##### Conversation initialisation (endpoint)
 
-** Request - POST /conversations **
-
-| Parameters | In | Description | Values | Required |
-| --- | --- | --- | --- | --- |
-| idConnectorVersion | Query | Connector version id | ?idConnectorVersion=123 | ✓ |
-| idWebsite | Query | Unique identifier of the website on which your connector is installed | ?idWebsite=123  | ✓ |
+###### Request - POST /conversations
 
 <pre class="prettyprint lang-js">
 {
@@ -621,6 +614,11 @@ There are 3 Conversation flow endpoints.
 }
 </pre>
 
+| Parameters | In | Description | Values | Required |
+| --- | --- | --- | --- | --- |
+| idConnectorVersion | Query | Connector version id | ?idConnectorVersion=123 | ✓ |
+| idWebsite | Query | Unique identifier of the website on which your connector is installed | ?idWebsite=123  | ✓ |
+
 | Field | Description | Values | Constraints |
 | --- | --- | --- | --- |
 | idOperator | iAdvize bot operator identifier that we associate to your bot scenario | String |  |
@@ -633,7 +631,7 @@ There are 3 Conversation flow endpoints.
 | history.payload.value | Message content | String |  |
 | history.createdAt | Date the message was sent | String | ISO-8601 |
 
-** Response **
+###### Response
 
 <pre class="prettyprint lang-js">
 {
@@ -707,7 +705,7 @@ There are 3 Conversation flow endpoints.
 
 ##### New message reception (endpoint)
 
-** Request - POST /conversations/:conversationId:/messages **
+###### Request - POST /conversations/:conversationId:/messages
 
 | Parameters | In | Description | Values | Required |
 | --- | --- | --- | --- | --- |
@@ -741,7 +739,7 @@ There are 3 Conversation flow endpoints.
 | message.payload.value | Textual content of the message | String |  |
 | message.createdAt | Date the message was sent | DateTime | ISO-8601 |
 
-** Response **
+###### Response
 
 <pre class="prettyprint lang-js">
 {
@@ -805,7 +803,7 @@ There are 3 Conversation flow endpoints.
 
 ##### Get the conversation content (endpoint)
 
-** Request - GET /conversations/:conversationId: **
+###### Request - GET /conversations/:conversationId:
 
 | Parameters | In | Description | Values | Required |
 | --- | --- | --- | --- | --- |
@@ -813,7 +811,7 @@ There are 3 Conversation flow endpoints.
 | idWebsite | Query | Unique identifier of the website on which your connector is installed | ?idWebsite=123  | ✓ |
 | idOperator | Query | iAdvize bot operator identifier that we associate to your bot scenario | ?idOperator=456678  | ✓ |
 
-** Response **
+###### Response
 
 <pre class="prettyprint lang-js">
 {
