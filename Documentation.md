@@ -336,7 +336,7 @@ In order to set the right plugin parameters, all you have to do is to declare:
 
 #### Conversation Closing Form data
 
-** Request - GET method **
+###### Request - GET method
 
 | Query parameter | Description | Values |
 | --- | --- | --- |
@@ -345,7 +345,7 @@ In order to set the right plugin parameters, all you have to do is to declare:
 | operatorLocale | Operator locale | ?operatorLocale=en  |
 | idOperator | Unique identifier of the operator loading the form | ?idOperator=9999  |
 
- ** Response - Array of inputs **
+###### Response - Array of inputs
  
 | Field | Description | Values | Required |
 | --- | --- | --- | --- |
