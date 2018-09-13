@@ -624,8 +624,8 @@ Bot is ready and should be available accordingly to the availability strategy an
 There are 3 Conversation flow endpoints.
 
 1. Each time a conversation is created, we call the _conversation initialisation endpoint_. In the current setup, the visitor is always the first to talk, so you should response with an empty array of replies. 
-2. This initialisation call will be immediatly followed by a call to the _new message & reply reception endpoint_, this second call will contains the first message of the visitor. You should response with this call with some reply (usually a welcoming reply).
-3. Be careful, from this point the calls to _new message & reply reception endpoint_ can contains the visitor's messages or **your own replies**.
+2. This initialisation call will be immediatly followed by a call to the _new message & reply reception endpoint_, this second call will contain the first message of the visitor. You should response to this call with some reply (usually a welcoming message reply).
+3. Be careful, from this point the calls to _new message & reply reception endpoint_ can contains the visitor's messages or **your own replies**. See the example below.
 
 ![Bot plugin](./assets/images/plugins/bot-scenarios-conversation-flow.jpg)
 
@@ -713,8 +713,8 @@ There are 3 Conversation flow endpoints.
 ##### New message & reply reception (endpoint)
 
 Here is a full conversation example : 
-1. 00:00 - The visitor sends _"Hi, are you there ? Shall we begin ?"_ in the conversation, the bot schedules a reply in 1 second with an _"How are you ?"_ message with two quick replies (_"Fine"_ or _"Bad"_).
-2. 00:01 - The operator/bot sends _"How are you ?"_, the bot schedules a reply in 3 minutes with an _"Are you there ?"_ message.
+1. 00:00 - The visitor sends _"Hi, are you there ? Shall we begin ?"_ in the conversation. We call the new message reception endpoint with the message in the request. The bot schedules a reply in 1 second with an _"How are you ?"_ message with two quick replies (_"Fine"_ or _"Bad"_).
+2. 00:01 - The operator/bot sends _"How are you ?"_ in the conversation. We call the new message reception endpoint with the message in the request. The bot schedules a reply in 3 minutes with an _"Are you there ?"_ message.
 3. 03:01 - The operator/bot sends _"Are you there ?"_, the bot schedules nothing.
 4. 03:12 - The visitor sends _"Yes I'm here, sorry"_, the bot schedules a reply in 1 second with an _"How are you ?"_ message with two quick replies (_"Fine"_ or _"Bad"_).
 5. 03:13 - The operator/bot sends _"How are you ?"_, the bot schedules a reply in 3 minutes with an _"Are you there ?"_ message.
