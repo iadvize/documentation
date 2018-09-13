@@ -621,10 +621,13 @@ Bot is ready and should be available accordingly to the availability strategy an
 | availability | Allow the connector to handle the availability of the bot | Boolean | | Required if strategy is equal to `customAvailability` |
 
 #### Conversation flow endpoints
-There are 3 Conversation flow endpoints. 
+There are 3 Conversation flow endpoints.
+
+1. Each time a conversation is created, we call the _conversation initialisation endpoint_. In the current setup, the visitor is always the first to talk, so you should response with an empty array of replies. 
+2. This initialisation call will be immediatly followed by a call to the _new message & reply reception endpoint_, this second call will contains the first message of the visitor. You should response with this call with some reply (usually a welcoming reply).
+3. Be careful, from this point the calls to _new message & reply reception endpoint_ can contains the visitor's messages or **your own replies**.
 
 ![Bot plugin](./assets/images/plugins/bot-scenarios-conversation-flow.jpg)
-
 
 ##### Conversation initialisation (endpoint)
 
@@ -673,39 +676,7 @@ There are 3 Conversation flow endpoints.
 {
     "idConversation": "a0c65ae0-4e04-4909-a5cc-80dd0f05de96",
     "idOperator": "local-22",
-    "replies": [
-        {
-            "type": "await",
-            "duration": {
-                "value": 2,
-                "unit": "seconds"
-            }
-        },
-        {
-            "type": "message",
-            "payload": {
-                "contentType": "text",
-                "value": "Do you want to talk to an agent ?"
-            },
-            "quickReplies": [
-                {
-                    "value": "No",
-                    "idQuickReply": "No"
-                },
-                {
-                    "value": "Yes",
-                    "idQuickReply": "Yes"
-                }
-            ]
-        },
-        {
-            "type": "transfer",
-            "distributionRule": "ef4670c3-d715-4a21-8226-ed17f354fc44"
-        },
-        {
-            "type": "close"
-        }
-    ],
+    "replies": [],
     "variables": [
         {
             "key": "number",
@@ -739,7 +710,16 @@ There are 3 Conversation flow endpoints.
 | updateAt | Date of the last message received | DateTime |  | ISO-8601 |
 
 
-##### New message reception (endpoint)
+##### New message & reply reception (endpoint)
+
+Here is a full conversation example : 
+1. 00:00 - The visitor sends _"Hi, are you there ? Shall we begin ?"_ in the conversation, the bot schedules a reply in 1 second with an _"How are you ?"_ message with two quick replies (_"Fine"_ or _"Bad"_).
+2. 00:01 - The operator/bot sends _"How are you ?"_, the bot schedules a reply in 3 minutes with an _"Are you there ?"_ message.
+3. 03:01 - The operator/bot sends _"Are you there ?"_, the bot schedules nothing.
+4. 03:12 - The visitor sends _"Yes I'm here, sorry"_, the bot schedules a reply in 1 second with an _"How are you ?"_ message with two quick replies (_"Fine"_ or _"Bad"_).
+5. 03:13 - The operator/bot sends _"How are you ?"_, the bot schedules a reply in 3 minutes with an _"Are you there ?"_ message.
+6. 03:42 - The visitor sends _"BAD"_, the bot schedules a reply in 1 second with an _"Ok, i'm transfering you to a human"_ message followed by a transfer.
+7. 03:43 - The operator/bot sends _"Ok, i'm transfering you to a human"_, the bot schedules an immediat transfer.
 
 ###### Request - POST /conversations/:conversationId:/messages
 
@@ -764,6 +744,22 @@ There are 3 Conversation flow endpoints.
     }
 }
 </pre>
+<pre class="prettyprint lang-js">
+{
+    "idOperator": "423232",
+    "message":   {
+        "idMessage": "cffa219b-633f-40e3-acb6-e14e4bf1a1ec",
+        "author": {
+            "role": "operator"
+        },
+        "payload": {
+            "contentType": "text",
+            "value": "How are you ?"
+        },
+        "createdAt": "2017-11-22T12:05:00Z"
+    }
+}
+</pre>
 
 | Field | Description | Values | Constraints |
 | --- | --- | --- | --- |
@@ -785,8 +781,8 @@ There are 3 Conversation flow endpoints.
         {
             "type": "await",
             "duration": {
-                "unit": "millis",
-                "value": 10
+                "unit": "seconds",
+                "value": 1
             }
         },
         {
@@ -807,6 +803,32 @@ There are 3 Conversation flow endpoints.
                     "idQuickReply": "13594c9b-dcff-4add-81fc-5e1093e443a7"
                 }
             ]
+        }
+    ],
+    "variables": [],
+    "createdAt": "2017-11-22T12:04:00Z",
+    "updatedAt": "2017-11-22T13:04:00Z"
+}
+</pre>
+<pre class="prettyprint lang-js">
+{
+    "idConversation": "ce41ba2c-c25a-4351-b946-09527d8b940b",
+    "idOperator": "423232",
+    "replies": [
+        {
+            "type": "await",
+            "duration": {
+                "unit": "minutes",
+                "value": 3
+            }
+        },
+        {
+            "type": "message",
+            "payload": {
+                "contentType": "text",
+                "value": "Are you there ?"
+            },
+            "quickReplies": []
         }
     ],
     "variables": [],
