@@ -621,9 +621,23 @@ Bot is ready and should be available accordingly to the availability strategy an
 | availability | Allow the connector to handle the availability of the bot | Boolean | | Required if strategy is equal to `customAvailability` |
 
 #### Conversation flow endpoints
-There are 3 Conversation flow endpoints. 
+
+There are 3 Conversation flow endpoints :
+
+* Each time a conversation is created, we call the _conversation initialisation endpoint_. In the current setup, the visitor is always the first to talk, so you should response with an empty array of replies. 
+* This initialisation call will be immediatly followed by a call to the _new message & reply reception endpoint_, this second call will contain the first message of the visitor. You should response to this call with some reply (usually a welcoming message reply).
+* **Be careful**, from this point the calls to _new message & reply reception endpoint_ can contains the visitor's messages or **your own replies**. See the example below.
 
 ![Bot plugin](./assets/images/plugins/bot-scenarios-conversation-flow.jpg)
+
+Here is a full conversation example : 
+* 00:00 - The visitor sends _"Hi, are you there ? Shall we begin ?"_ in the conversation. We call the new message reception endpoint with the message in the request. Your plugin response with an await 1 second and send an _"How are you ?"_ message with two quick replies (_"Fine"_ or _"Bad"_).
+* 00:01 - Our operator/bot sends _"How are you ?"_ in the conversation. We call the new message reception endpoint with this message in the request. Your plugin response with an await 3 minutes and send _"Are you there ?"_ message.
+* 03:01 - Our operator/bot sends _"Are you there ?"_, your plugin response with an empty array of replies.
+* 03:12 - The visitor sends _"Yes I'm here, sorry"_, your plugin response with an await 1 second and send _"How are you ?"_ message with two quick replies (_"Fine"_ or _"Bad"_).
+* 03:13 - Our operator/bot sends _"How are you ?"_, your plugin response with an await 3 minutes and send _"Are you there ?"_ message.
+* 03:42 - The visitor sends _"BAD"_, the bot schedules a reply in 1 second with an _"Ok, i'm transferring you to a human"_ message followed by a transfer.
+* 03:43 - Our operator/bot sends _"Ok, i'm transferring you to a human"_, your plugin response with an immediate transfer.
 
 
 ##### Conversation initialisation (endpoint)
@@ -673,39 +687,7 @@ There are 3 Conversation flow endpoints.
 {
     "idConversation": "a0c65ae0-4e04-4909-a5cc-80dd0f05de96",
     "idOperator": "local-22",
-    "replies": [
-        {
-            "type": "await",
-            "duration": {
-                "value": 2,
-                "unit": "seconds"
-            }
-        },
-        {
-            "type": "message",
-            "payload": {
-                "contentType": "text",
-                "value": "Do you want to talk to an agent ?"
-            },
-            "quickReplies": [
-                {
-                    "value": "No",
-                    "idQuickReply": "No"
-                },
-                {
-                    "value": "Yes",
-                    "idQuickReply": "Yes"
-                }
-            ]
-        },
-        {
-            "type": "transfer",
-            "distributionRule": "ef4670c3-d715-4a21-8226-ed17f354fc44"
-        },
-        {
-            "type": "close"
-        }
-    ],
+    "replies": [],
     "variables": [
         {
             "key": "number",
@@ -739,7 +721,7 @@ There are 3 Conversation flow endpoints.
 | updateAt | Date of the last message received | DateTime |  | ISO-8601 |
 
 
-##### New message reception (endpoint)
+##### New message & reply reception (endpoint)
 
 ###### Request - POST /conversations/:conversationId:/messages
 
@@ -785,8 +767,8 @@ There are 3 Conversation flow endpoints.
         {
             "type": "await",
             "duration": {
-                "unit": "millis",
-                "value": 10
+                "unit": "seconds",
+                "value": 1
             }
         },
         {
