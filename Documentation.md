@@ -621,13 +621,24 @@ Bot is ready and should be available accordingly to the availability strategy an
 | availability | Allow the connector to handle the availability of the bot | Boolean | | Required if strategy is equal to `customAvailability` |
 
 #### Conversation flow endpoints
-There are 3 Conversation flow endpoints.
 
-1. Each time a conversation is created, we call the _conversation initialisation endpoint_. In the current setup, the visitor is always the first to talk, so you should response with an empty array of replies. 
-2. This initialisation call will be immediatly followed by a call to the _new message & reply reception endpoint_, this second call will contain the first message of the visitor. You should response to this call with some reply (usually a welcoming message reply).
-3. Be careful, from this point the calls to _new message & reply reception endpoint_ can contains the visitor's messages or **your own replies**. See the example below.
+There are 3 Conversation flow endpoints :
+
+* Each time a conversation is created, we call the _conversation initialisation endpoint_. In the current setup, the visitor is always the first to talk, so you should response with an empty array of replies. 
+* This initialisation call will be immediatly followed by a call to the _new message & reply reception endpoint_, this second call will contain the first message of the visitor. You should response to this call with some reply (usually a welcoming message reply).
+* **Be careful**, from this point the calls to _new message & reply reception endpoint_ can contains the visitor's messages or **your own replies**. See the example below.
 
 ![Bot plugin](./assets/images/plugins/bot-scenarios-conversation-flow.jpg)
+
+Here is a full conversation example : 
+* 00:00 - The visitor sends _"Hi, are you there ? Shall we begin ?"_ in the conversation. We call the new message reception endpoint with the message in the request. Your plugin response with an await 1 second and send an _"How are you ?"_ message with two quick replies (_"Fine"_ or _"Bad"_).
+* 00:01 - Our operator/bot sends _"How are you ?"_ in the conversation. We call the new message reception endpoint with this message in the request. Your plugin response with an await 3 minutes and send _"Are you there ?"_ message.
+* 03:01 - Our operator/bot sends _"Are you there ?"_, your plugin response with an empty array of replies.
+* 03:12 - The visitor sends _"Yes I'm here, sorry"_, your plugin response with an await 1 second and send _"How are you ?"_ message with two quick replies (_"Fine"_ or _"Bad"_).
+* 03:13 - Our operator/bot sends _"How are you ?"_, your plugin response with an await 3 minutes and send _"Are you there ?"_ message.
+* 03:42 - The visitor sends _"BAD"_, the bot schedules a reply in 1 second with an _"Ok, i'm transferring you to a human"_ message followed by a transfer.
+* 03:43 - Our operator/bot sends _"Ok, i'm transferring you to a human"_, your plugin response with an immediate transfer.
+
 
 ##### Conversation initialisation (endpoint)
 
@@ -712,15 +723,6 @@ There are 3 Conversation flow endpoints.
 
 ##### New message & reply reception (endpoint)
 
-Here is a full conversation example : 
-1. 00:00 - The visitor sends _"Hi, are you there ? Shall we begin ?"_ in the conversation. We call the new message reception endpoint with the message in the request. Your plugin response with an await 1 second and send an _"How are you ?"_ message with two quick replies (_"Fine"_ or _"Bad"_).
-2. 00:01 - Our operator/bot sends _"How are you ?"_ in the conversation. We call the new message reception endpoint with this message in the request. Your plugin response with an await 3 minutes and send _"Are you there ?"_ message.
-3. 03:01 - Our operator/bot sends _"Are you there ?"_, your plugin response with an empty array of replies.
-4. 03:12 - The visitor sends _"Yes I'm here, sorry"_, your plugin respones with an await 1 second and send _"How are you ?"_ message with two quick replies (_"Fine"_ or _"Bad"_).
-5. 03:13 - Our operator/bot sends _"How are you ?"_, your plugin respones with an await 3 minutes and send _"Are you there ?"_ message.
-6. 03:42 - The visitor sends _"BAD"_, the bot schedules a reply in 1 second with an _"Ok, i'm transfering you to a human"_ message followed by a transfer.
-7. 03:43 - Our operator/bot sends _"Ok, i'm transfering you to a human"_, your plugin response with an immediat transfer.
-
 ###### Request - POST /conversations/:conversationId:/messages
 
 | Parameters | In | Description | Values | Required |
@@ -741,22 +743,6 @@ Here is a full conversation example :
             "value": "Hi, are you there ? Shall we begin ?"
         },
         "createdAt": "2017-11-22T12:04:00Z"
-    }
-}
-</pre>
-<pre class="prettyprint lang-js">
-{
-    "idOperator": "423232",
-    "message":   {
-        "idMessage": "cffa219b-633f-40e3-acb6-e14e4bf1a1ec",
-        "author": {
-            "role": "operator"
-        },
-        "payload": {
-            "contentType": "text",
-            "value": "How are you ?"
-        },
-        "createdAt": "2017-11-22T12:05:00Z"
     }
 }
 </pre>
@@ -803,32 +789,6 @@ Here is a full conversation example :
                     "idQuickReply": "13594c9b-dcff-4add-81fc-5e1093e443a7"
                 }
             ]
-        }
-    ],
-    "variables": [],
-    "createdAt": "2017-11-22T12:04:00Z",
-    "updatedAt": "2017-11-22T13:04:00Z"
-}
-</pre>
-<pre class="prettyprint lang-js">
-{
-    "idConversation": "ce41ba2c-c25a-4351-b946-09527d8b940b",
-    "idOperator": "423232",
-    "replies": [
-        {
-            "type": "await",
-            "duration": {
-                "unit": "minutes",
-                "value": 3
-            }
-        },
-        {
-            "type": "message",
-            "payload": {
-                "contentType": "text",
-                "value": "Are you there ?"
-            },
-            "quickReplies": []
         }
     ],
     "variables": [],
