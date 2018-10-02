@@ -717,8 +717,8 @@ Here is a full conversation example :
 | variables | Collected variables | Array |  | UUID |
 | variables.key | Key of the variable collected | String | ✓ |  |
 | variables.value | Value of the variable collected | String | ✓ |  |
-| createdAt | Creation date of the conversation | DateTime |  | ISO-8601 |
-| updateAt | Date of the last message received | DateTime |  | ISO-8601 |
+| createdAt | Creation date of the conversation | DateTime |  ✓ | ISO-8601 |
+| updateAt | Date of the last message received | DateTime |  ✓ | ISO-8601 |
 
 
 ##### New message & reply reception (endpoint)
@@ -815,8 +815,8 @@ Here is a full conversation example :
 | variables | Collected variables | Array |  | UUID |
 | variables.key | Key of the variable collected | String | ✓ |  |
 | variables.value | Value of the variable collected | String | ✓ |  |
-| createdAt | Creation date of the conversation | DateTime |  | ISO-8601 |
-| updateAt | Date of the last message received | DateTime |  | ISO-8601 |
+| createdAt | Creation date of the conversation | DateTime | ✓ | ISO-8601 |
+| updateAt | Date of the last message received | DateTime | ✓ | ISO-8601 |
 
 
 ##### Get the conversation content (endpoint)
@@ -888,8 +888,8 @@ Here is a full conversation example :
 | variables | Collected variables | Array |  | UUID |
 | variables.key | Key of the variable collected | String | ✓ |  |
 | variables.value | Value of the variable collected | String | ✓ |  |
-| createdAt | Creation date of the conversation | DateTime |  | ISO-8601 |
-| updateAt | Date of the last message received | DateTime |  | ISO-8601 |
+| createdAt | Creation date of the conversation | DateTime | ✓ | ISO-8601 |
+| updateAt | Date of the last message received | DateTime | ✓ | ISO-8601 |
 
 ## Add webhooks
 
