@@ -2258,32 +2258,6 @@ Please note :
 }
 </pre>
 
-#### connector.installed
-<pre class="prettyprint lang-js">{
-    "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
-    "eventType": "connector.installed",
-    "platform": "SD",
-    "websiteId": 1,
-    "connectorId": "3f0e6840-48fe-4e87-8f3b-6ef3f75f18d8",
-    "connectorVersionId": "3f0e6840-48fe-4e87-8f3b-6ef3f75f18d8",
-    "createdAt": "2017-04-22T11:01:00+02:00",
-    "sentAt": "2017-04-22T11:01:00+02:00"
-}
-</pre>
-
-#### connector.uninstalled
-<pre class="prettyprint lang-js">{
-    "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
-    "eventType": "connector.uninstalled",
-    "platform": "SD",
-    "websiteId": 1,
-    "connectorId": "3f0e6840-48fe-4e87-8f3b-6ef3f75f18d8",
-    "connectorVersionId": "3f0e6840-48fe-4e87-8f3b-6ef3f75f18d8",
-    "createdAt": "2017-04-22T11:01:00+02:00",
-    "sentAt": "2017-04-22T11:01:00+02:00"
-}
-</pre>
-
 ##### HTTP stack trace example for “conversation.closed” event
 
 `POST /webhook HTTP/1.1`
