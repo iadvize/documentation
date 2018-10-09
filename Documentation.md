@@ -504,7 +504,7 @@ There are 4 endpoints related to Operator form flow. This is related to the crea
 
 <pre class="prettyprint lang-js">
 {
-    "idOperator": "23232",
+    "idOperator": "local-23232",
     "external": {
       "idBot":"R3R3ZFDKOEZ",
       "name": "Hal",
@@ -549,7 +549,7 @@ There are 4 endpoints related to Operator form flow. This is related to the crea
 
 <pre class="prettyprint lang-js">
 {
-    "idOperator": "23232",
+    "idOperator": "local-23232",
     "external": {
         "idBot":"R3R3ZFDKOEZ",
         "name": "Hal",
@@ -690,8 +690,8 @@ Here is a full conversation example :
     "replies": [],
     "variables": [
         {
-            "key": "number",
-            "value": "I don't know..."
+            "key": "visitor_state_of_mind",
+            "value": "Ok"
         }
     ],
     "createdAt": "2018-07-16T13:53:57.961Z",
@@ -732,7 +732,7 @@ Here is a full conversation example :
 
 <pre class="prettyprint lang-js">
 {
-    "idOperator": "23232",
+    "idOperator": "local-23232",
     "message":   {
         "idMessage": "ba4e1f71-7012-4b1a-86c3-d2fce8883dc7",
         "author": {
@@ -762,7 +762,7 @@ Here is a full conversation example :
 <pre class="prettyprint lang-js">
 {
     "idConversation": "ce41ba2c-c25a-4351-b946-09527d8b940b",
-    "idOperator": "423232",
+    "idOperator": "local-423232",
     "replies": [
         {
             "type": "await",
@@ -834,7 +834,7 @@ Here is a full conversation example :
 <pre class="prettyprint lang-js">
 {
     "idConversation": "ce41ba2c-c25a-4351-b946-09527d8b940b",
-    "idOperator": "232323",
+    "idOperator": "local-232323",
     "replies": [
         {
             "type": "await",
