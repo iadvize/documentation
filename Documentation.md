@@ -318,7 +318,7 @@ In order to set the right plugin parameters, all you have to do is to declare:
 
 | Field | Description | Values | Required |
 | --- | --- | --- | --- |
-| id | Unique identifier | Integer | ✓ |
+| id | Unique identifier | String | ✓ |
 | label | Label | String | ✓ |
 | value | Value | String | ✓ |
 | fieldType | Field type | `URL` or `TEXT` | ✓ |
