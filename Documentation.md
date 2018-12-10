@@ -95,12 +95,6 @@ Parameters appear to users according to their order of creation (the 1st entry c
 
 *i.e. if your primary goal is to know your users’ usernames, it is the first information you should ask them for.*
 
-**Configure your verification url** 
-On our side we will pre validate requirements of the parameters you have defined (mandatory, list values...).
-Verification URL lets you implement your own installation validation logic.
-For example you can check if API keys or username/password are valid on different systems. We will automatically call this URL if you fill in this 
-Please find technical details in the [verification Url](#verification-url) section right below.
-
 *i.e. users might be required to authenticate with an email and a password. In this case, you need to create two different parameters, one for the email and one for the password.*
 
 ![Authentication](./assets/images/developer-authentication.png)
@@ -126,11 +120,6 @@ For instance it could be: Username
 
 These configuration steps will take place immediately after authentication (if any).
 The order of appearance of the steps depends on their order of creation. The first created parameter will appear first and the last created parameter will appear last to the user.
-
-**Configure your verification url**
-Like App authentication, you can define a verification URL tom implement your own logic on settings step.
-For example you can check if some installation option compatibility with a custom logic of your connector.
-Please find technical details in the [verification Url](#verification-url) section right below.
 
 ![Setting](./assets/images/developer-settings.jpg)
 
