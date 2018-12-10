@@ -94,13 +94,6 @@ This is the first thing users will see once they click on the "install" button o
 Parameters appear to users according to their order of creation (the 1st entry created is the 1st on displayed on the page).
 
 *i.e. if your primary goal is to know your users’ usernames, it is the first information you should ask them for.*
-
-**Configure your verification url** 
-On our side we will pre validate requirements of the parameters you have defined (mandatory, list values...).
-Verification URL lets you implement your own installation validation logic.
-For example you can check if API keys or username/password are valid on different systems. We will automatically call this URL if you fill in this 
-Please find technical details in the [verification Url](#verification-url) section right below.
-
 *i.e. users might be required to authenticate with an email and a password. In this case, you need to create two different parameters, one for the email and one for the password.*
 
 ![Authentication](./assets/images/developer-authentication.png)
