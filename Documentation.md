@@ -1178,7 +1178,9 @@ See [reading section](#read) to discover some output examples.
 | url | URL | String |
 | label | Label | String |
 | client_id | Client identifier | Integer |
-
+| currency | Currency | String |
+| language_admin | Admin language | `en`, `de`, `es`, `it`, `pt`, `nl`, `se`, `tw`, `ja`, `ko` or `fr` |
+| timezone | Timezone | String |
 
 #### Update a website
 
