@@ -270,21 +270,22 @@ To be able to retrieve the customer CRM information, iAdvize must be able to ide
 
 **Add the customer information plugin**
 In order to set the right plugin parameters, all you have to do is to declare:
-* The connector URL - this is your customer information URL
+* The customer information URL - this is your customer information URL (mandatory).
+* The customer information action URL - This URL will be triggered, if agent click on ACTION type field. This field is not mandatory.
 
 #### Customer information data
 
 ###### Request - GET method
 
-| Query parameter | Description | Values |
-| --- | --- | --- |
-| emailVisitor | Visitor email | ?emailVisitor=123  |
-| idConnectorVersion | Connector version id | ?idConnectorVersion=123 |
-| idVisitorExternal | Visitor external id | ?idVisitorExternal=123  |
-| idVisitorUnique | Visitor unique id | ?idVisitorUnique=123  |
-| idWebsite | Unique identifier of the website on which your connector is installed | ?idWebsite=123  |
-| operatorLocale | Operator locale | ?operatorLocale=en  |
-| idOperator | Unique identifier of the operator loading the customer information | ?idOperator=9999  |
+| Query parameter | Description | Type | Example |
+| --- | --- | --- | --- |
+| emailVisitor | Visitor email | String | email@iadvize.com  |
+| idConnectorVersion | Connector version id | Uuid | c008849d-7cb1-40ca-9503-d6df2c5cddd8 |
+| idVisitorExternal | Visitor external id | String | 123  |
+| idVisitorUnique | Visitor unique id | String | a7b94266db827c5b8f04586e8e543abd4b7e976e9a723  |
+| idWebsite | Unique identifier of the website on which your connector is installed | String | ha-123  |
+| operatorLocale | Operator locale | String | en  |
+| idOperator | Unique identifier of the operator loading the customer information | Integer | 123 |
 
 ###### Response - Array of fields
 
@@ -301,6 +302,12 @@ In order to set the right plugin parameters, all you have to do is to declare:
         "label": "CRM tag",
         "value": "tag",
         "fieldType": "TEXT"
+    },
+    {
+        "id":"crm_create_case_action",
+        "label": "Create a case",
+        "value": "OPEN_CASE",
+        "fieldType": "ACTION"
     }
 ]
 </pre>
@@ -310,7 +317,32 @@ In order to set the right plugin parameters, all you have to do is to declare:
 | id | Unique identifier | String | ✓ |
 | label | Label | String | ✓ |
 | value | Value | String | ✓ |
-| fieldType | Field type | `URL` or `TEXT` | ✓ |
+| fieldType | Field type | `ACTION`, `TEXT` or `URL` | ✓ |
+
+#### Customer information action URL
+
+###### Request - POST method
+
+| Body parameters | Description | Type | Example |
+| --- | --- | --- | --- |
+| action | Action to execute on the connector | String | OPEN_CASE |
+| idConnectorVersion | Connector version id | Uuid | c008849d-7cb1-40ca-9503-d6df2c5cddd8 |
+| idVisitorUnique | Visitor unique id | String | a7b94266db827c5b8f04586e8e543abd4b7e976e9a723  |
+| idWebsite | Unique identifier of the website on which your connector is installed | String | ha-123  |
+| idConversation | Identifier of the current conversation | String | ha-123  |
+
+###### Response - Array of fields
+
+<pre class="prettyprint lang-js">
+{
+    "success": true
+}
+</pre>
+
+| Field | Description | Values | Required |
+| --- | --- | --- | --- |
+| success | Result of the action | Boolean | ✓ |
+
 
 ### Conversation closing form
 
