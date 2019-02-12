@@ -335,13 +335,15 @@ In order to set the right plugin parameters, all you have to do is to declare:
 
 <pre class="prettyprint lang-js">
 {
-    "success": true
+    "success": true,
+    "message": "Can't create the case"
 }
 </pre>
 
 | Field | Description | Values | Required |
 | --- | --- | --- | --- |
 | success | Result of the action | Boolean | ✓ |
+| message | Result message of the action | String |  |
 
 
 ### Conversation closing form
