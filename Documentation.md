@@ -261,10 +261,10 @@ To make sure your connector uses the Product list plugin correctly, all you have
 
 ### Customer information
 
-The customer information plugin enables iAdvize's Console panel users to access to customer CRM information in a single click. 
-Agents can overview the customer CRM information in a new window while they are chatting. Operators can then edit it or simply look for information.
+The customer information plugin enables iAdvize's Console panel users to access to customer information in a single click. 
+Agents can overview the customer information in a new window while they are chatting. Operators can then edit it or simply look for information.
 
-To be able to retrieve the customer CRM information, iAdvize must be able to identify the visitor thanks to an email and/or an external ID.
+To be able to retrieve the customer information, iAdvize must be able to identify the visitor thanks to an email and/or an external ID.
 
 ![Customer information](./assets/images/visitorprofilefeature@2x.png)
 
@@ -277,15 +277,15 @@ In order to set the right plugin parameters, all you have to do is to declare:
 
 ###### Request - GET method
 
-| Query parameter | Description | Type | Example |
-| --- | --- | --- | --- |
-| emailVisitor | Visitor email | String | email@iadvize.com  |
-| idConnectorVersion | Connector version id | Uuid | c008849d-7cb1-40ca-9503-d6df2c5cddd8 |
-| idVisitorExternal | Visitor external id | String | 123  |
-| idVisitorUnique | Visitor unique id | String | a7b94266db827c5b8f04586e8e543abd4b7e976e9a723  |
-| idWebsite | Unique identifier of the website on which your connector is installed | String | ha-123  |
-| operatorLocale | Operator locale | String | en  |
-| idOperator | Unique identifier of the operator loading the customer information | Integer | 123 |
+| Query parameter | Description | Values |
+| --- | --- | --- |
+| emailVisitor | Visitor email | ?emailVisitor=email@iadvize.com  |
+| idConnectorVersion | Connector version id | ?idConnectorVersion=c008849d-7cb1-40ca-9503-d6df2c5cddd8 |
+| idVisitorExternal | Visitor external id | ?idVisitorExternal=123  |
+| idVisitorUnique | Visitor unique id | ?idVisitorUnique=a7b94266db827c5b8f04586e8e543abd4b7e976e9a723  |
+| idWebsite | Unique identifier of the website on which your connector is installed | ?idWebsite=ha-123  |
+| operatorLocale | Operator locale | ?operatorLocale=en  |
+| idOperator | Unique identifier of the operator loading the visitor profile | ?idOperator=9999  |
 
 ###### Response - Array of fields
 
@@ -323,13 +323,13 @@ In order to set the right plugin parameters, all you have to do is to declare:
 
 ###### Request - POST method
 
-| Body parameters | Description | Type | Example |
-| --- | --- | --- | --- |
-| action | Action to execute on the connector | String | OPEN_CASE |
-| idConnectorVersion | Connector version id | Uuid | c008849d-7cb1-40ca-9503-d6df2c5cddd8 |
-| idVisitorUnique | Visitor unique id | String | a7b94266db827c5b8f04586e8e543abd4b7e976e9a723  |
-| idWebsite | Unique identifier of the website on which your connector is installed | String | ha-123  |
-| idConversation | Identifier of the current conversation | String | ha-123  |
+| Body parameters | Description | Value |
+| --- | --- | --- | 
+| action | Action to execute on the connector |  OPEN_CASE |
+| idConnectorVersion | Connector version id | c008849d-7cb1-40ca-9503-d6df2c5cddd8 |
+| idVisitorUnique | Visitor unique id | a7b94266db827c5b8f04586e8e543abd4b7e976e9a723  |
+| idWebsite | Unique identifier of the website on which your connector is installed | ha-123  |
+| idConversation | Identifier of the current conversation | ha-123  |
 
 ###### Response - Array of fields
 
