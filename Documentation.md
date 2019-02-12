@@ -131,7 +131,7 @@ Plugins are basically HTTP endpoints whose json responses fit the plugin json-sc
 The plugins already available are: 
 
 * The product List (on the discussion panel)
-* The visitor profile (on the discussion panel)
+* The customer information (on the discussion panel)
 * The conversation closing form (on the discussion panel)
 * The bot (add an external bot within iadvize chatbox)
 
@@ -259,20 +259,20 @@ To make sure your connector uses the Product list plugin correctly, all you have
 | pricePromotion | Price promotion | String |  |
 | priceSpecial | Price special | String |  |
 
-### Visitor profile
+### Customer information
 
-The visitor profile plugin enables iAdvize's Console panel users to access to the visitor's CRM profile in a single click. 
-Agents can overview the visitor's CRM profile in a new window while they are chatting. Operators can then edit it or simply look for information.
+The customer information plugin enables iAdvize's Console panel users to access to customer CRM information in a single click. 
+Agents can overview the customer CRM information in a new window while they are chatting. Operators can then edit it or simply look for information.
 
-To be able to retrieve the CRM profile, iAdvize must be able to identify the visitor thanks to an email and/or an external ID.
+To be able to retrieve the customer CRM information, iAdvize must be able to identify the visitor thanks to an email and/or an external ID.
 
-![Visitor profile](./assets/images/visitorprofilefeature@2x.png)
+![Customer information](./assets/images/visitorprofilefeature@2x.png)
 
-**Add the visitor profile plugin**
+**Add the customer information plugin**
 In order to set the right plugin parameters, all you have to do is to declare:
-* The connector URL - this is your visitor's profile URL
+* The connector URL - this is your customer information URL
 
-#### Visitor profile data
+#### Customer information data
 
 ###### Request - GET method
 
@@ -284,7 +284,7 @@ In order to set the right plugin parameters, all you have to do is to declare:
 | idVisitorUnique | Visitor unique id | ?idVisitorUnique=123  |
 | idWebsite | Unique identifier of the website on which your connector is installed | ?idWebsite=123  |
 | operatorLocale | Operator locale | ?operatorLocale=en  |
-| idOperator | Unique identifier of the operator loading the visitor profile | ?idOperator=9999  |
+| idOperator | Unique identifier of the operator loading the customer information | ?idOperator=9999  |
 
 ###### Response - Array of fields
 
@@ -293,7 +293,7 @@ In order to set the right plugin parameters, all you have to do is to declare:
     {
         "id":"crm_profile_link",
         "label": "CRM profile",
-        "value": "https://www.crm.fr/visitor-profile",
+        "value": "https://www.crm.fr/customer-information",
         "fieldType":"URL"
     },
     {
