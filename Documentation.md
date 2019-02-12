@@ -336,7 +336,7 @@ In order to set the right plugin parameters, all you have to do is to declare:
 <pre class="prettyprint lang-js">
 {
     "success": true,
-    "message": "Can't create the case"
+    "message": "Case created with success"
 }
 </pre>
 
