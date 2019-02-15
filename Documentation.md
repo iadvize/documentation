@@ -131,7 +131,7 @@ Plugins are basically HTTP endpoints whose json responses fit the plugin json-sc
 The plugins already available are: 
 
 * The product List (on the discussion panel)
-* The visitor profile (on the discussion panel)
+* The customer information (on the discussion panel)
 * The conversation closing form (on the discussion panel)
 * The bot (add an external bot within iadvize chatbox)
 
@@ -259,30 +259,31 @@ To make sure your connector uses the Product list plugin correctly, all you have
 | pricePromotion | Price promotion | String |  |
 | priceSpecial | Price special | String |  |
 
-### Visitor profile
+### Customer information
 
-The visitor profile plugin enables iAdvize's Console panel users to access to the visitor's CRM profile in a single click. 
-Agents can overview the visitor's CRM profile in a new window while they are chatting. Operators can then edit it or simply look for information.
+The customer information plugin enables iAdvize's Console panel users to access to customer information in a single click.
+Agents can overview the customer information in a new window while they are chatting. Operators can then edit it or simply look for information.
 
-To be able to retrieve the CRM profile, iAdvize must be able to identify the visitor thanks to an email and/or an external ID.
+To be able to retrieve the customer information, iAdvize must be able to identify the visitor thanks to an email and/or an external ID.
 
-![Visitor profile](./assets/images/visitorprofilefeature@2x.png)
+![Customer information](./assets/images/visitorprofilefeature@2x.png)
 
-**Add the visitor profile plugin**
+**Add the customer information plugin**
 In order to set the right plugin parameters, all you have to do is to declare:
-* The connector URL - this is your visitor's profile URL
+* The customer information URL - this is your customer information URL (mandatory).
+* The customer information action URL - This URL will be triggered, if agent click on ACTION type field. This field is not mandatory.
 
-#### Visitor profile data
+#### Customer information data
 
 ###### Request - GET method
 
 | Query parameter | Description | Values |
 | --- | --- | --- |
-| emailVisitor | Visitor email | ?emailVisitor=123  |
-| idConnectorVersion | Connector version id | ?idConnectorVersion=123 |
+| emailVisitor | Visitor email | ?emailVisitor=email@iadvize.com  |
+| idConnectorVersion | Connector version id | ?idConnectorVersion=c008849d-7cb1-40ca-9503-d6df2c5cddd8 |
 | idVisitorExternal | Visitor external id | ?idVisitorExternal=123  |
-| idVisitorUnique | Visitor unique id | ?idVisitorUnique=123  |
-| idWebsite | Unique identifier of the website on which your connector is installed | ?idWebsite=123  |
+| idVisitorUnique | Visitor unique id | ?idVisitorUnique=a7b94266db827c5b8f04586e8e543abd4b7e976e9a723  |
+| idWebsite | Unique identifier of the website on which your connector is installed | ?idWebsite=ha-123  |
 | operatorLocale | Operator locale | ?operatorLocale=en  |
 | idOperator | Unique identifier of the operator loading the visitor profile | ?idOperator=9999  |
 
@@ -293,7 +294,7 @@ In order to set the right plugin parameters, all you have to do is to declare:
     {
         "id":"crm_profile_link",
         "label": "CRM profile",
-        "value": "https://www.crm.fr/visitor-profile",
+        "value": "https://www.crm.fr/customer-information",
         "fieldType":"URL"
     },
     {
@@ -301,6 +302,12 @@ In order to set the right plugin parameters, all you have to do is to declare:
         "label": "CRM tag",
         "value": "tag",
         "fieldType": "TEXT"
+    },
+    {
+        "id":"crm_create_case_action",
+        "label": "Create a case",
+        "value": "OPEN_CASE",
+        "fieldType": "ACTION"
     }
 ]
 </pre>
@@ -310,7 +317,34 @@ In order to set the right plugin parameters, all you have to do is to declare:
 | id | Unique identifier | String | ✓ |
 | label | Label | String | ✓ |
 | value | Value | String | ✓ |
-| fieldType | Field type | `URL` or `TEXT` | ✓ |
+| fieldType | Field type | `ACTION`, `TEXT` or `URL` | ✓ |
+
+#### Customer information action URL
+
+###### Request - POST method
+
+| Body parameters | Description | Values |
+| --- | --- | --- |
+| action | Action to execute on the connector |  OPEN_CASE |
+| idConnectorVersion | Connector version id | c008849d-7cb1-40ca-9503-d6df2c5cddd8 |
+| idVisitorUnique | Visitor unique id | a7b94266db827c5b8f04586e8e543abd4b7e976e9a723  |
+| idWebsite | Unique identifier of the website on which your connector is installed | ha-123  |
+| idConversation | Identifier of the current conversation | ha-123  |
+
+###### Response - Array of fields
+
+<pre class="prettyprint lang-js">
+{
+    "success": true,
+    "message": "Case created with success"
+}
+</pre>
+
+| Field | Description | Values | Required |
+| --- | --- | --- | --- |
+| success | Result of the action | Boolean | ✓ |
+| message | Result message of the action | String |  |
+
 
 ### Conversation closing form
 
