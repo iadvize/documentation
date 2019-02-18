@@ -156,9 +156,9 @@ To make sure your connector uses the Product list plugin correctly, all you have
 
 | Query parameter | Description | Values |
 | --- | --- | --- |
-| idConnectorVersion | Connector version id | ?idConnectorVersion=123 |
+| idConnectorVersion | Connector version id | ?idConnectorVersion=c008849d-7cb1-40ca-9503-d6df2c5cddd8 |
 | idParent | Unique identifier of the parent category | ?idParent=123  |
-| idWebsite | Unique identifier of the website on which your connector is installed | ?idWebsite=123  |
+| idWebsite | Unique identifier of the website on which your connector is installed | ?idWebsite=ha-123  |
 | idOperator | Unique identifier of the operator loading the categories | ?idOperator=9999  |
 | limit | Maximum number of resources per page | ?limit=10 |
 | offset | Number of resources skipped before beginning to return resources | ?offset=10 |
@@ -201,9 +201,9 @@ To make sure your connector uses the Product list plugin correctly, all you have
 
 | Query parameter | Description | Values |
 | --- | --- | --- |
-| idConnectorVersion | Connector version id | ?idConnectorVersion=123 |
+| idConnectorVersion | Connector version id | ?idConnectorVersion=c008849d-7cb1-40ca-9503-d6df2c5cddd8 |
 | idCategory | Category id | ?idCategory=123  |
-| idWebsite | Unique identifier of the website on which your connector is installed | ?idWebsite=123  |
+| idWebsite | Unique identifier of the website on which your connector is installed | ?idWebsite=ha-123  |
 | idOperator | Unique identifier of the operator loading the products | ?idOperator=9999  |
 | limit | Maximum number of resources per page | ?limit=10 |
 | offset | Number of resources skipped before beginning to return resources | ?offset=10 |
@@ -363,8 +363,8 @@ In order to set the right plugin parameters, all you have to do is to declare:
 
 | Query parameter | Description | Values |
 | --- | --- | --- |
-| idConnectorVersion | Connector version id | ?idConnectorVersion=123 |
-| idWebsite | Unique identifier of the associated website (assigned to you by iAdvize) | ?idWebsite=123  |
+| idConnectorVersion | Connector version id | ?idConnectorVersion=c008849d-7cb1-40ca-9503-d6df2c5cddd8 |
+| idWebsite | Unique identifier of the associated website (assigned to you by iAdvize) | ?idWebsite=ha-123  |
 | operatorLocale | Operator locale | ?operatorLocale=en  |
 | idOperator | Unique identifier of the operator loading the form | ?idOperator=9999  |
 
@@ -458,8 +458,8 @@ There are 4 endpoints related to Operator form flow. This is related to the crea
 
 | Query parameter | Description | Values |
 | --- | --- | --- |
-| idConnectorVersion | Connector version id | ?idConnectorVersion=123 |
-| idWebsite | Unique identifier of the website on which your connector is installed | ?idWebsite=123  |
+| idConnectorVersion | Connector version id | ?idConnectorVersion=c008849d-7cb1-40ca-9503-d6df2c5cddd8 |
+| idWebsite | Unique identifier of the website on which your connector is installed | ?idWebsite=ha-123  |
 
 ###### Response
 
@@ -509,8 +509,8 @@ There are 4 endpoints related to Operator form flow. This is related to the crea
 
 | Parameters | In | Description | Values |
 | --- | --- | --- | --- |
-| idConnectorVersion | Query | Connector version id | ?idConnectorVersion=123 |
-| idWebsite | Query | Unique identifier of the website on which your connector is installed | ?idWebsite=123  |
+| idConnectorVersion | Query | Connector version id | ?idConnectorVersion=c008849d-7cb1-40ca-9503-d6df2c5cddd8 |
+| idWebsite | Query | Unique identifier of the website on which your connector is installed | ?idWebsite=ha-123  |
 | idOperator | Path | iAdvize bot operator identifier that we associate to your bot scenario | /bots/456678  |
 
 | Field | Description | Values | Constraints |
@@ -564,8 +564,8 @@ There are 4 endpoints related to Operator form flow. This is related to the crea
 
 | Parameters | In | Description | Values |
 | --- | --- | --- | --- |
-| idConnectorVersion | Query | Connector version id | ?idConnectorVersion=123 |
-| idWebsite | Query | Unique identifier of the website on which your connector is installed | ?idWebsite=123  |
+| idConnectorVersion | Query | Connector version id | ?idConnectorVersion=c008849d-7cb1-40ca-9503-d6df2c5cddd8 |
+| idWebsite | Query | Unique identifier of the website on which your connector is installed | ?idWebsite=ha-123  |
 | idOperator | Path | iAdvize bot operator identifier that we associate to your bot scenario | /bots/456678  |
 
 ###### Response
@@ -611,8 +611,8 @@ Bot is ready and should be available accordingly to the availability strategy an
 
 | Parameters | In | Description | Values | Required |
 | --- | --- | --- | --- | --- |
-| idConnectorVersion | Query | Connector version id | ?idConnectorVersion=123 | ✓ |
-| idWebsite | Query | Unique identifier of the website on which your connector is installed | ?idWebsite=123  | ✓ |
+| idConnectorVersion | Query | Connector version id | ?idConnectorVersion=c008849d-7cb1-40ca-9503-d6df2c5cddd8 | ✓ |
+| idWebsite | Query | Unique identifier of the website on which your connector is installed | ?idWebsite=ha-123  | ✓ |
 | idOperator | Query | iAdvize bot operator identifier that we associate to your bot scenario | ?idOperator=456678  | ✓ |
 
 ###### Response
@@ -689,8 +689,8 @@ Here is a full conversation example :
 
 | Parameters | In | Description | Values | Required |
 | --- | --- | --- | --- | --- |
-| idConnectorVersion | Query | Connector version id | ?idConnectorVersion=123 | ✓ |
-| idWebsite | Query | Unique identifier of the website on which your connector is installed | ?idWebsite=123  | ✓ |
+| idConnectorVersion | Query | Connector version id | ?idConnectorVersion=c008849d-7cb1-40ca-9503-d6df2c5cddd8 | ✓ |
+| idWebsite | Query | Unique identifier of the website on which your connector is installed | ?idWebsite=ha-123  | ✓ |
 
 | Field | Description | Values | Constraints |
 | --- | --- | --- | --- |
@@ -750,8 +750,8 @@ Here is a full conversation example :
 
 | Parameters | In | Description | Values | Required |
 | --- | --- | --- | --- | --- |
-| idConnectorVersion | Query | Connector version id | ?idConnectorVersion=123 | ✓ |
-| idWebsite | Query | Unique identifier of the website on which your connector is installed | ?idWebsite=123  | ✓ |
+| idConnectorVersion | Query | Connector version id | ?idConnectorVersion=c008849d-7cb1-40ca-9503-d6df2c5cddd8 | ✓ |
+| idWebsite | Query | Unique identifier of the website on which your connector is installed | ?idWebsite=ha-123  | ✓ |
 
 <pre class="prettyprint lang-js">
 {
@@ -848,8 +848,8 @@ Here is a full conversation example :
 
 | Parameters | In | Description | Values | Required |
 | --- | --- | --- | --- | --- |
-| idConnectorVersion | Query | Connector version id | ?idConnectorVersion=123 | ✓ |
-| idWebsite | Query | Unique identifier of the website on which your connector is installed | ?idWebsite=123  | ✓ |
+| idConnectorVersion | Query | Connector version id | ?idConnectorVersion=c008849d-7cb1-40ca-9503-d6df2c5cddd8 | ✓ |
+| idWebsite | Query | Unique identifier of the website on which your connector is installed | ?idWebsite=ha-123  | ✓ |
 | idOperator | Query | iAdvize bot operator identifier that we associate to your bot scenario | ?idOperator=456678  | ✓ |
 
 ###### Response
