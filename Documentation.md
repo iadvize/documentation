@@ -330,6 +330,7 @@ In order to set the right plugin parameters, all you have to do is to declare:
 | idVisitorUnique | Visitor unique id | a7b94266db827c5b8f04586e8e543abd4b7e976e9a723  |
 | idWebsite | Unique identifier of the website on which your connector is installed | ha-123  |
 | idConversation | Identifier of the current conversation | ha-123  |
+| idOperator | Operator identifier who has clicked on the action | ha-12345  |
 
 ###### Response - Array of fields
 
