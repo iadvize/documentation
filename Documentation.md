@@ -28,7 +28,7 @@ Do you want to develop an app? We are providing you with documentation and a pri
 
 ## Why to build apps to iAdvize?
 
-There are three main reasons for building an app with the iAdvize Developer Platform: 
+There are three main reasons for building an app with the iAdvize Developer Platform:
 
 * You build apps and publish them for our customer community. (We've got more than 500 customers to amaze!)
 * You build apps in private mode and make them available only for one or more specific customers
@@ -124,11 +124,11 @@ The order of appearance of the steps depends on their order of creation. The fir
 ![Setting](./assets/images/developer-settings.jpg)
 
 ## App Plugins
-Use plugins to enhance the iAdvize interface by adding or editing predefined features. 
+Use plugins to enhance the iAdvize interface by adding or editing predefined features.
 
 Plugins are basically HTTP endpoints whose json responses fit the plugin json-schema. For each plugin one or more endpoint have to be defined. When a plugin is used on user interface, we will make a GET http call to endpoint with documented query parameters. Your http response have to comply with plugin json-schema.
 
-The plugins already available are: 
+The plugins already available are:
 
 * The product List (on the discussion panel)
 * The customer information (on the discussion panel)
@@ -349,7 +349,7 @@ In order to set the right plugin parameters, all you have to do is to declare:
 
 ### Conversation closing form
 
-The conversation closing form plugin enables iAdvize's Console panel users to provide additional information manually at the end of conversation. 
+The conversation closing form plugin enables iAdvize's Console panel users to provide additional information manually at the end of conversation.
 
 ![Conversation closing form plugin](./assets/images/close_conversation@2x.png)
 
@@ -370,7 +370,7 @@ In order to set the right plugin parameters, all you have to do is to declare:
 | idOperator | Unique identifier of the operator loading the form | ?idOperator=9999  |
 
 ###### Response - Array of inputs
- 
+
 | Field | Description | Values | Required |
 | --- | --- | --- | --- |
 | id | Unique identifier | string | ✓ |
@@ -424,7 +424,7 @@ In order to set the right plugin parameters, all you have to do is to declare:
 ### External bot
 
 Let your bot interact with online visitors directly within iAdvize’s chatbox.
-The External bot plugin enables iAdvize's Admins and Managers to create users with the role “bot” from iAdvize’s administration. The scenario and availability of the bot are managed by your app. 
+The External bot plugin enables iAdvize's Admins and Managers to create users with the role “bot” from iAdvize’s administration. The scenario and availability of the bot are managed by your app.
 
 To put it in a nutshell, the External bot plugin:
 * Allows bots providers to create their connector thanks to the Developper Platform
@@ -536,7 +536,7 @@ There are 4 endpoints related to Operator form flow. This is related to the crea
       "editorUrl": "http://your-saas/R3R3ZFDKOEZ/editor"
     },
     "distributionRules": [
-      { 
+      {
         "id": "ef4670c3-d715-4a21-8226-ed17f354fc44",
         "label": "Human SAV guys"
       }
@@ -581,7 +581,7 @@ There are 4 endpoints related to Operator form flow. This is related to the crea
         "editorUrl": "http://your-saas/R3R3ZFDKOEZ/editor"
     },
     "distributionRules": [
-        { 
+        {
             "id": "ef4670c3-d715-4a21-8226-ed17f354fc44",
             "label": "Human SAV guys"
         }
@@ -648,13 +648,13 @@ Bot is ready and should be available accordingly to the availability strategy an
 
 There are 3 Conversation flow endpoints :
 
-* Each time a conversation is created, we call the _conversation initialisation endpoint_. In the current setup, the visitor is always the first to talk, so you should response with an empty array of replies. 
+* Each time a conversation is created, we call the _conversation initialisation endpoint_. In the current setup, the visitor is always the first to talk, so you should response with an empty array of replies.
 * This initialisation call will be immediatly followed by a call to the _new message & reply reception endpoint_, this second call will contain the first message of the visitor. You should response to this call with some reply (usually a welcoming message reply).
 * **Be careful**, from this point the calls to _new message & reply reception endpoint_ can contains the visitor's messages or **your own replies**. See the example below.
 
 ![Bot plugin](./assets/images/plugins/bot-scenarios-conversation-flow.jpg)
 
-Here is a full conversation example : 
+Here is a full conversation example :
 * 00:00 - The visitor sends _"Hi, are you there ? Shall we begin ?"_ in the conversation. We call the new message reception endpoint with the message in the request. Your plugin response with an await 1 second and send an _"How are you ?"_ message with two quick replies (_"Fine"_ or _"Bad"_).
 * 00:01 - Our operator/bot sends _"How are you ?"_ in the conversation. We call the new message reception endpoint with this message in the request. Your plugin response with an await 3 minutes and send _"Are you there ?"_ message.
 * 03:01 - Our operator/bot sends _"Are you there ?"_, your plugin response with an empty array of replies.
@@ -726,7 +726,7 @@ Here is a full conversation example :
 | Field | Description | Values | Required | Constraints |
 | --- | --- | --- | --- | --- |
 | idConversation | Conversation unique identifier | String | ✓ | UUID |
-| idOperator | iAdvize bot operator identifier that we associate to your bot scenario | String | ✓ |  | 
+| idOperator | iAdvize bot operator identifier that we associate to your bot scenario | String | ✓ |  |
 | replies | Array of replies | Array | ✓ |  |
 | replies.type | Reply/action type | `await` or `message` or `transfer` or `close` | ✓ |  |
 | replies.duration.unit | Awaiting unit of time | `millis` or `seconds` or `minutes` |  | replies.type == `await` |
@@ -824,7 +824,7 @@ Here is a full conversation example :
 | Field | Description | Values | Required | Constraints |
 | --- | --- | --- | --- | --- |
 | idConversation | Conversation unique identifier | String | ✓ | UUID |
-| idOperator | iAdvize bot operator identifier that we associate to your bot scenario | String | ✓ |  | 
+| idOperator | iAdvize bot operator identifier that we associate to your bot scenario | String | ✓ |  |
 | replies | Array of replies | Array | ✓ |  |
 | replies.type | Reply/action type | `await` or `message` or `transfer` or `close` | ✓ |  |
 | replies.duration.unit | Awaiting unit of time | `millis` or `seconds` or `minutes` |  | replies.type == `await` |
@@ -897,7 +897,7 @@ Here is a full conversation example :
 | Field | Description | Values | Required | Constraints |
 | --- | --- | --- | --- | --- |
 | idConversation | Conversation unique identifier | String | ✓ | UUID |
-| idOperator | iAdvize bot operator identifier that we associate to your bot scenario | String | ✓ |  | 
+| idOperator | iAdvize bot operator identifier that we associate to your bot scenario | String | ✓ |  |
 | replies | Array of replies | Array | ✓ |  |
 | replies.type | Reply/action type | `await` or `message` or `transfer` or `close` | ✓ |  |
 | replies.duration.unit | Awaiting unit of time | `millis` or `seconds` or `minutes` |  | replies.type == `await` |
@@ -955,9 +955,9 @@ You can retrieve this token in the 'App information' section on our developer pl
 
 ### Validating payloads from iAdvize
 
-Once the secret token set, iAdvize will create a hash signature. 
-This hash signature is passed along with each request in the headers as `X-iAdvize-Signature`. 
-Hash signature starts with algorithm name `sha256=` and is computed by hashing query string with HMAC hexdigest algorithm and your secret token as salt. 
+Once the secret token set, iAdvize will create a hash signature.
+This hash signature is passed along with each request in the headers as `X-iAdvize-Signature`.
+Hash signature starts with algorithm name `sha256=` and is computed by hashing query string with HMAC hexdigest algorithm and your secret token as salt.
 
 <pre class="prettyprint lang-js">
 X-iAdvize-Signature: sha256=110e8400-e29b-11d4-a716-446655440000
@@ -973,10 +973,10 @@ $iAdvizeSignature  = $headers['X-iAdvize-Signature'];
 
 // Get alogrithm and hash
 list($algorithm, $iAdvizeHash) = explode('=', $iAdvizeSignature, 2);
- 
+
 // Computed hash with query parameters
 $queryParametersHash = hash_hmac($algorithm, $queryString, $secretToken);
- 
+
 // Final check
 if (! hash_equals($iAdvizeHash, $queryParametersHash)) {
     exit('Validation hash failed');
@@ -984,7 +984,7 @@ if (! hash_equals($iAdvizeHash, $queryParametersHash)) {
 </pre>
 
 
-We strongly recommend you, to use the **constant time** string comparison method (`hash_equals` vs `===`  in our example), 
+We strongly recommend you, to use the **constant time** string comparison method (`hash_equals` vs `===`  in our example),
 to be less vulnerable to [timing attacks](https://en.wikipedia.org/wiki/Timing_attack).
 
 ## Developer Policy
@@ -1334,7 +1334,7 @@ Get the live availability of all of your operators.
 </pre>
 
 You can use previous filters.
-*   In order to have more accurate results, only available operators are displayed in the default view. 
+*   In order to have more accurate results, only available operators are displayed in the default view.
 *   If you want to display offline operators, we invite you to use the `connected` filter. Please note that you will only see agents that logged in to the iAdvize platform at least once.
 *   If your operators have `skills` or `groups`, you need to specify it in your request.
 
@@ -1900,7 +1900,7 @@ See below to discover used fields and see [reading section](#read) to discover s
 | satisfaction_respondent_rate | Response rate | Proportion of conversations after which visitors completed the satisfaction survey. | Rate |
 | satisfaction_welcome_rate | Quality of welcome | Visitor satisfaction rate with the welcome. | Rate |
 | occupation_duration | Partial occupation | Period during which an agent is connected to the panel, unavailable and yet not busy. | Second |
- 
+
 
 #### Transactions indicators
 
@@ -2165,14 +2165,14 @@ To use the GraphQL API, call the URL below with the Authorization header contain
 
 
 ## Payloads
-When an event occurs, an HTTP POST call is issued on the callback urls you set up with the event data. 
-Data is sent with “application/json” header content-type, and “json” format as payload. 
+When an event occurs, an HTTP POST call is issued on the callback urls you set up with the event data.
+Data is sent with “application/json” header content-type, and “json” format as payload.
 Callback urls must be defined with HTTPS protocol and should be available with POST verb to send data payload.
 iAdvize expect to have à 20x http status in callback result.
 
 **Output examples of Conversations domain:**
 
-Please note : 
+Please note :
 
 | Attribut | Description |
 | --- | --- |
@@ -2321,10 +2321,10 @@ iAdvize will send payload with three additional headers:
 
 ## Webhook retry management
 
-If errors occur during webhook query (40x, 50x http status codes), we will retry two times. 
+If errors occur during webhook query (40x, 50x http status codes), we will retry two times.
 We will try to send you the following requests:
-* First time after delay of 10 seconds, 
-* and second time after 20 seconds (so, 30 seconds after first call). 
+* First time after delay of 10 seconds,
+* and second time after 20 seconds (so, 30 seconds after first call).
 
 In case of failure, you may need to track events in error, by following "X-iAdvize-CorrelationId" in headers, or "eventId" in payload.
 
@@ -2346,9 +2346,9 @@ To retrieve the token(s) you must contact us at developers@iadvize.com and we wi
 
 ### Validating payloads from iAdvize
 
-Once the secret token set, iAdvize will create a hash signature. 
-This hash signature is passed along with each request in the headers as `X-iAdvize-Signature`. 
-Hash signature starts with algorithm name `sha256=` and is computed by hashing body payload with HMAC hexdigest algorithm and your secret token as salt. 
+Once the secret token set, iAdvize will create a hash signature.
+This hash signature is passed along with each request in the headers as `X-iAdvize-Signature`.
+Hash signature starts with algorithm name `sha256=` and is computed by hashing body payload with HMAC hexdigest algorithm and your secret token as salt.
 
 <pre class="prettyprint lang-js">
 X-iAdvize-Signature: sha256=110e8400-e29b-11d4-a716-446655440000
@@ -2365,13 +2365,13 @@ $iAdvizeSignature  = $headers['X-iAdvize-Signature'];
 
 // Get alogrithm and hash
 list($algorithm, $iAdvizeHash) = explode('=', $iAdvizeSignature, 2);
- 
+
 // Get body payload from webhook
 $bodyPayload = file_get_contents('php://input');
- 
+
 // Computed hash with body payload
 $bodyPayloadHash = hash_hmac($algorithm, $bodyPayload, $secretToken);
- 
+
 // Final check
 if (! hash_equals($iAdvizeHash, $bodyPayloadHash)) {
     exit('Validation hash failed');
@@ -2379,14 +2379,178 @@ if (! hash_equals($iAdvizeHash, $bodyPayloadHash)) {
 </pre>
 
 
-We strongly recommend you, to use the **constant time** string comparison method (`hash_equals` vs `===`  in our example), 
+We strongly recommend you, to use the **constant time** string comparison method (`hash_equals` vs `===`  in our example),
 to be less vulnerable to timing attacks.
+
+# Javascript Callbacks
+
+iAdvize provides Javascript callbacks functions that can be used to perform actions on specific events.
+
+*Please be advised that on Q4 of 2019 iAdvize will deliver a new Javascript SDK containing much more features. Current callbacks will be depreciated but we will insure a smooth transition for existing integrations.*
+
+## How to use callbacks
+
+To execute custom code during an iAdvize callback function you have to define a `var iAdvizeCallbacks;` variable that will contain the callbacks you want to use. **You must declare that variable before iAdvize tracking code.**
+
+Each callback function has a `obj` variable passed as a parameter that could contain some extra informations about iAdvize elements.
+
+In the example we want to track Google Analytics events when a chat or a call starts / ends :
+```javascript
+var iAdvizeCallbacks = {
+  //iAdvize callback functions are listed here
+  onChatStarted: function(obj){
+    // Chat session starts
+    _gaq.push(['_trackEvent', 'iAdvize', 'Chat Start', obj.startedBy]);
+  },
+  onChatEnded: function(obj){
+    // Chat session ends
+    _gaq.push(['_trackEvent', 'iAdvize', 'Chat End', obj.startedBy]);
+  },
+  onCallStarted: function(obj){
+    // Call session starts
+    _gaq.push(['_trackEvent', 'iAdvize', 'Call Start']);
+  },
+  onCallEnded: function(obj){
+    // Call session ends
+    _gaq.push(['_trackEvent', 'iAdvize', 'Call End']);
+  }
+};
+//Put you iAdvize tracking code below...
+```
+## Callbacks Index
+
+### onChatDisplayed
+
+- Called when : a chat popin is displayed on the visitor screen.
+- Parameter(s) : `obj` is null
+```javascript
+    var iAdvizeCallbacks = {
+      onChatDisplayed: function(obj){
+        // Chat window is displayed
+        ...
+      }
+    };
+```
+### onChatButtonDisplayed
+
+- Called when : a click to chat button is displayed on the visitor screen.
+- Parameter(s) : `obj` is null
+```javascript
+    var iAdvizeCallbacks = {
+      onChatButtonDisplayed: function(obj){
+        // Chat button is displayed
+        ...
+      }
+    };
+```
+
+### onChatStarted
+
+- Called when : a chat discussion has started.
+- Parameter(s) : `obj` contain 2 values:
+-- `obj.id` -> Chat identifier
+-- `obj.startedBy` -> Who started the chat (can be one of 'operator', 'visitor' or 'proactif')
+```javascript
+    var iAdvizeCallbacks = {
+      onChatStarted: function(obj){
+        // Chat is started
+        console.log('chat #' +obj.id + ' was started by ' + obj.startedBy);
+      }
+    };
+```
+### onChatEnded
+
+- Called when : a chat discussion has ended.
+- Parameter(s) : `obj` contain 2 values:
+-- `obj.id` -> Chat identifier
+-- `obj.endedBy` -> Who ended the chat ('operator' or 'visitor')
+```javascript
+    var iAdvizeCallbacks = {
+      onChatEnded: function(obj){
+        // Chat discussion is ended
+        ...
+      }
+    };
+```
+
+### onCallButtonDisplayed
+
+- Called when : a click to call button is displayed on the visitor screen.
+- Parameter(s) : `obj` is null
+```javascript
+    var iAdvizeCallbacks = {
+      onCallButtonDisplayed: function(obj){
+        // Call button is displayed
+        ...
+      }
+    };
+```
+
+### onMessageReceived
+
+- Called when : an operator message is received by the visitor.
+- Parameter(s) : `obj` contain 2 values:
+-- `obj.time` -> local time of the message (visitor time)
+-- `obj.msg` -> the message itself
+```javascript
+    var iAdvizeCallbacks = {
+      onMessageReceived: function(obj){
+        // operator message received
+        console.log('[' + obj.time + '] operator message: ' +obj.msg);
+      }
+    };
+```
+
+### onMessageSent
+
+- Called when : the visitor sends a message.
+- Parameter(s) : `obj` contain 2 values:
+-- `obj.time` -> local time of the message (visitor time)
+-- `obj.msg` -> the message itself
+
+```javascript
+    var iAdvizeCallbacks = {
+      onMessageSent: function(obj){
+        // operator message received
+        console.log('[' + obj.time + '] visitor message: ' +obj.msg);
+      }
+    };
+```
+
+
+### onSatisfactionDisplayed
+
+- Called when : the satisfaction survey is displayed to the visitor.
+- Parameter(s) : none
+```javascript
+    var iAdvizeCallbacks = {
+      onSatisfactionDisplayed: function(){
+        // operator message received
+        console.log('satisfaction survey displayed');
+      }
+    };
+```
+
+### onSatisfactionAnswered
+
+- Called when : the visitor answers the satisfaction survey.
+- Parameter(s) : `obj` is null
+```javascript
+    var iAdvizeCallbacks = {
+      onSatisfactionAnswered: function(obj){
+        // operator message received
+        console.log('visitor answered satisfaction survey');
+      }
+    };
+```
+
+
 
 # Push API (deprecated)
 
 The iAdvize Push API will be deprecated starting september, 2017. The Push API will stop working from january 30th, 2018. From now, we recommend to use our webhooks system.
 The Push API allows data to be pushed to URI callbacks when an event is fired.  
-The Push API uses JSON exclusively. XML is not supported. Push requests are sent with a POST method. 
+The Push API uses JSON exclusively. XML is not supported. Push requests are sent with a POST method.
 
 ## Events
 
@@ -2395,7 +2559,7 @@ The Push API uses JSON exclusively. XML is not supported. Push requests are sent
 When an operator connects to the desk.
 
 **Returned data**
-    
+
 <pre class="prettyprint lang-js">{
     "name": "operator.login",
     "datetime": {
@@ -2413,7 +2577,7 @@ When an operator connects to the desk.
 When an operator disconnects from the desk.
 
 **Returned data**
-    
+
 <pre class="prettyprint lang-js">{
     "name": "operator.logout",
     "datetime": {
