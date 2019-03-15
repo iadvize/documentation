@@ -2395,7 +2395,7 @@ To execute custom code during an iAdvize callback function you have to define a 
 Each callback function has a `obj` variable passed as a parameter that could contain some extra informations about iAdvize elements.
 
 In the example we want to track Google Analytics events when a chat or a call starts / ends :
-```javascript
+<pre class="prettyprint lang-php">
 var iAdvizeCallbacks = {
   //iAdvize callback functions are listed here
   onChatStarted: function(obj){
@@ -2416,33 +2416,35 @@ var iAdvizeCallbacks = {
   }
 };
 //Put you iAdvize tracking code below...
-```
+</pre>
+
 ## Callbacks Index
 
 ### onChatDisplayed
 
 - Called when : a chat popin is displayed on the visitor screen.
 - Parameter(s) : `obj` is null
-```javascript
+<pre class="prettyprint lang-php">
     var iAdvizeCallbacks = {
       onChatDisplayed: function(obj){
         // Chat window is displayed
         ...
       }
     };
-```
+</pre>
+
 ### onChatButtonDisplayed
 
 - Called when : a click to chat button is displayed on the visitor screen.
 - Parameter(s) : `obj` is null
-```javascript
+<pre class="prettyprint lang-php">
     var iAdvizeCallbacks = {
       onChatButtonDisplayed: function(obj){
         // Chat button is displayed
         ...
       }
     };
-```
+</pre>
 
 ### onChatStarted
 
@@ -2450,41 +2452,42 @@ var iAdvizeCallbacks = {
 - Parameter(s) : `obj` contain 2 values:
 -- `obj.id` -> Chat identifier
 -- `obj.startedBy` -> Who started the chat (can be one of 'operator', 'visitor' or 'proactif')
-```javascript
+<pre class="prettyprint lang-php">
     var iAdvizeCallbacks = {
       onChatStarted: function(obj){
         // Chat is started
         console.log('chat #' +obj.id + ' was started by ' + obj.startedBy);
       }
     };
-```
+</pre>
+
 ### onChatEnded
 
 - Called when : a chat discussion has ended.
 - Parameter(s) : `obj` contain 2 values:
 -- `obj.id` -> Chat identifier
 -- `obj.endedBy` -> Who ended the chat ('operator' or 'visitor')
-```javascript
+<pre class="prettyprint lang-php">
     var iAdvizeCallbacks = {
       onChatEnded: function(obj){
         // Chat discussion is ended
         ...
       }
     };
-```
+</pre>
 
 ### onCallButtonDisplayed
 
 - Called when : a click to call button is displayed on the visitor screen.
 - Parameter(s) : `obj` is null
-```javascript
+<pre class="prettyprint lang-php">
     var iAdvizeCallbacks = {
       onCallButtonDisplayed: function(obj){
         // Call button is displayed
         ...
       }
     };
-```
+</pre>
 
 ### onMessageReceived
 
@@ -2492,14 +2495,14 @@ var iAdvizeCallbacks = {
 - Parameter(s) : `obj` contain 2 values:
 -- `obj.time` -> local time of the message (visitor time)
 -- `obj.msg` -> the message itself
-```javascript
+<pre class="prettyprint lang-php">
     var iAdvizeCallbacks = {
       onMessageReceived: function(obj){
         // operator message received
         console.log('[' + obj.time + '] operator message: ' +obj.msg);
       }
     };
-```
+</pre>
 
 ### onMessageSent
 
@@ -2508,41 +2511,41 @@ var iAdvizeCallbacks = {
 -- `obj.time` -> local time of the message (visitor time)
 -- `obj.msg` -> the message itself
 
-```javascript
+<pre class="prettyprint lang-php">
     var iAdvizeCallbacks = {
       onMessageSent: function(obj){
         // operator message received
         console.log('[' + obj.time + '] visitor message: ' +obj.msg);
       }
     };
-```
+</pre>
 
 
 ### onSatisfactionDisplayed
 
 - Called when : the satisfaction survey is displayed to the visitor.
 - Parameter(s) : none
-```javascript
+<pre class="prettyprint lang-php">
     var iAdvizeCallbacks = {
       onSatisfactionDisplayed: function(){
         // operator message received
         console.log('satisfaction survey displayed');
       }
     };
-```
+</pre>
 
 ### onSatisfactionAnswered
 
 - Called when : the visitor answers the satisfaction survey.
 - Parameter(s) : `obj` is null
-```javascript
+<pre class="prettyprint lang-php">
     var iAdvizeCallbacks = {
       onSatisfactionAnswered: function(obj){
         // operator message received
         console.log('visitor answered satisfaction survey');
       }
     };
-```
+</pre>
 
 
 
