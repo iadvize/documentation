@@ -663,94 +663,9 @@ Here is a full conversation example :
 * 03:42 - The visitor sends _"BAD"_, the bot schedules a reply in 1 second with an _"Ok, i'm transferring you to a human"_ message followed by a transfer.
 * 03:43 - Our operator/bot sends _"Ok, i'm transferring you to a human"_, your plugin response with an immediate transfer.
 
-
 ##### Conversation initialisation (endpoint)
-
-###### Description of message payloads 
-There is several types of payloads that can be used as a message content
-
-- Text payload : used for sending a simple message 
-
-<pre class="prettyprint lang-js">
-{
-    "contentType": "text",
-    "value": "example"
-}
-</pre>
-
-| Field | Description | Values | Constraints |
-| --- | --- | --- | --- |
-| contentType | Type of the message’s content | String | `text` |
-| value | Textual content of the message | String | |
-
-- Quick reply text payload : used as choices in a multiple choice question
-
-<pre class="prettyprint lang-js">
-{
-    "contentType": "text/quick-reply",
-    "value": "example"
-}
-</pre>
-
-| Field | Description | Values | Constraints |
-| --- | --- | --- | --- |
-| contentType | Type of the message’s content | String | `text/quick-reply` |
-| value | Textual content of the quick-reply | String | |
-
-- Generic Card : used for sending rich-content
-
-<pre class="prettyprint lang-js">
-{
-    "contentType": "card/content",
-    "image": {
-      "url": "http://image.net/image.jpg",
-      "description": "picture of an image"
-    },
-    "title": "Generic Card",
-    "text": "This is a generic card",
-    "actions": Action[]
-}
-</pre>
-
-| Field | Description | Values | Required | Constraints |
-| --- | --- | --- | --- | --- |
-| contentType | Type of the message’s content | String | ✓ | `card/content` |
-| image | Json describing attached picture | Image Json | | See image desc. |
-| title | Title of the card | String | | |
-| text | Textual content of the message | String | | |
-| action | List of actions to be sent with the card | Array of Action | | See Action desc. |
-
-###### Json types used
-- Image 
-<pre class="prettyprint lang-js">
-{
-    "url": "http://image.net/image.jpg",
-    "description": "picture of an image"
-}
-</pre>
-
-| Field | Description | Values | Required | Constraints |
-| --- | --- | --- | --- | --- |
-| url | Url pointing at a picture | String/URL | ✓ | Any picture supported by navigators |
-| description | Textual description of the picture (alt field) | String | ✓ | |
-
-- Action 
-<pre class="prettyprint lang-js">
-{
-    "type": "LINK",
-    "name": "My link"
-    "url": "http://mylink"
-}
-</pre>
-| Field | Description | Values | Required | Constraints |
-| --- | --- | --- | --- | --- |
-| type | Type of the action | String | ✓ | `LINK` |
-| name | name to display link | String | ✓ |  |
-| url | Link to be used in action | String/URL | ✓ |  |
-
-As of today, actions can only be links. 
  
-###### Request - POST /conversations
+###### Request - POST /conversations?idConnectorVersion&idWebsite
 
 <pre class="prettyprint lang-js">
 {
@@ -772,10 +687,10 @@ As of today, actions can only be links.
 }
 </pre>
 
-| Parameters | In | Description | Values | Required |
-| --- | --- | --- | --- | --- |
-| idConnectorVersion | Query | Connector version id | ?idConnectorVersion=c008849d-7cb1-40ca-9503-d6df2c5cddd8 | ✓ |
-| idWebsite | Query | Unique identifier of the website on which your connector is installed | ?idWebsite=ha-123  | ✓ |
+| Parameters | Description | Values | Required |
+| --- | --- | --- | --- |
+| idConnectorVersion | Connector version id | ?idConnectorVersion=c008849d-7cb1-40ca-9503-d6df2c5cddd8 | ✓ |
+| idWebsite  | Unique identifier of the website on which your connector is installed | ?idWebsite=ha-123  | ✓ |
 
 | Field | Description | Values | Constraints |
 | --- | --- | --- | --- |
@@ -784,9 +699,7 @@ As of today, actions can only be links.
 | history | First messages of the conversations | Array |  |
 | history.idMessage | Unique identifier of this message | String | UUID |
 | history.author.role | author of the message | `operator` or `visitor` |  |  |
-| history.payload | Typed payload of the message | Object | |
-| history.payload.contentType | Type of the message’s content | String | `text` |
-| history.payload.value | Message content | String |  |
+| history.payload | Typed payload of the message | Object | `text` or `card/content` |
 | history.createdAt | Date the message was sent | String | ISO-8601 |
 
 ###### Response
@@ -815,12 +728,8 @@ As of today, actions can only be links.
 | replies.type | Reply/action type | `await` or `message` or `transfer` or `close` | ✓ |  |
 | replies.duration.unit | Awaiting unit of time | `millis` or `seconds` or `minutes` |  | replies.type == `await` |
 | replies.duration.value | Awaiting value of time | Long |  | replies.type == `await` |
-| replies.payload | Typed payload of the message | Object | ✓ | replies.type == `message` |
-| replies.payload.contentType | Type of the message’s content | `text` or `text/quick-reply`| ✓ | replies.type == `message` |
-| replies.payload.value | Textual content of the message | String | ✓ | replies.type == `message` |
-| replies.quickReplies | Quick replies proposed to the visitor | Array |  | replies.type == `message` |
-| replies.quickReplies.value | Textual content of the quick reply | String | ✓ | replies.type == `message` |
-| replies.quickReplies.idQuickReply | Identifier of the quick reply | String | ✓ | replies.type == `message` |
+| replies.payload | Typed payload of the message | [Payload](#message-payloads) | ✓ | replies.type == `message`, [payload](#message-payloads) can be `text` or `card/content` |
+| replies.quickReplies | Quick replies proposed to the visitor | Array of [Quick replies](#quick-reply-:-choices-in-a-multiple-choice-question) |  | replies.type == `message` |
 | replies.distributionRule | Distribution rules to transfer to | String |  | replies.type == `transfer` |
 | variables | Collected variables | Array |  | UUID |
 | variables.key | Key of the variable collected | String | ✓ |  |
@@ -830,12 +739,12 @@ As of today, actions can only be links.
 
 ##### New message & reply reception (endpoint)
 
-###### Request - POST /conversations/:conversationId:/messages
+###### Request - POST /conversations/:conversationId:/messages?idConnectorVersion&idWebsite
 
-| Parameters | In | Description | Values | Required |
-| --- | --- | --- | --- | --- |
-| idConnectorVersion | Query | Connector version id | ?idConnectorVersion=c008849d-7cb1-40ca-9503-d6df2c5cddd8 | ✓ |
-| idWebsite | Query | Unique identifier of the website on which your connector is installed | ?idWebsite=ha-123  | ✓ |
+| Parameters | Description | Values | Required |
+| --- | --- | --- | --- |
+| idConnectorVersion | Connector version id | ?idConnectorVersion=c008849d-7cb1-40ca-9503-d6df2c5cddd8 | ✓ |
+| idWebsite | Unique identifier of the website on which your connector is installed | ?idWebsite=ha-123  | ✓ |
 
 <pre class="prettyprint lang-js">
 {
@@ -859,9 +768,7 @@ As of today, actions can only be links.
 | idOperator | iAdvize bot operator identifier that we associate to your bot scenario | String |  |
 | message.idMessage | The unique identifier for this message |  | UUID |
 | message.author.role | The author of the message | `visitor` or `operator` |  |
-| message.payload | Typed payload of the message | Object |  |
-| message.payload.contentType | Type of the message’s content | `text` |  |
-| message.payload.value | Textual content of the message | String |  |
+| message.payload | Typed payload of the message | Object | can be of `text` or `card/content` type |
 | message.createdAt | Date the message was sent | DateTime | ISO-8601 |
 
 ###### Response
@@ -912,12 +819,8 @@ As of today, actions can only be links.
 | replies.type | Reply/action type | `await` or `message` or `transfer` or `close` | ✓ |  |
 | replies.duration.unit | Awaiting unit of time | `millis` or `seconds` or `minutes` |  | replies.type == `await` |
 | replies.duration.value | Awaiting value of time | Long |  | replies.type == `await` |
-| replies.content | Typed payload of the message | Object | ✓ | replies.type == `message` |
-| replies.content.contentType | Type of the message’s content | `text` or `text/quick-reply`  | ✓ | replies.type == `message` |
-| replies.content.value | Textual content of the message | String | ✓ | replies.type == `message` |
-| replies.quickReplies | Quick replies proposed to the visitor | Array |  | replies.type == `message` |
-| replies.quickReplies.value | Textual content of the quick reply | String | ✓ | replies.type == `message` |
-| replies.quickReplies.idQuickReply | Identifier of the quick reply | String | ✓ | replies.type == `message` |
+| replies.payload | Typed payload of the message | [Payload](#message-payloads) | ✓ | replies.type == `message`, [payload](#message-payloads) can be `text` or `card/content` |
+| replies.quickReplies | Quick replies proposed to the visitor | Array of [Quick replies](#quick-reply-:-choices-in-a-multiple-choice-question) |  | replies.type == `message`|
 | replies.distributionRule | Distribution rules to transfer to | String |  | replies.type == `transfer` |
 | variables | Collected variables | Array |  | UUID |
 | variables.key | Key of the variable collected | String | ✓ |  |
@@ -928,13 +831,13 @@ As of today, actions can only be links.
 
 ##### Get the conversation content (endpoint)
 
-###### Request - GET /conversations/:conversationId:
+###### Request - GET /conversations/:conversationId:?idConnectorVersion&idWebsite&idOperator
 
-| Parameters | In | Description | Values | Required |
-| --- | --- | --- | --- | --- |
-| idConnectorVersion | Query | Connector version id | ?idConnectorVersion=c008849d-7cb1-40ca-9503-d6df2c5cddd8 | ✓ |
-| idWebsite | Query | Unique identifier of the website on which your connector is installed | ?idWebsite=ha-123  | ✓ |
-| idOperator | Query | iAdvize bot operator identifier that we associate to your bot scenario | ?idOperator=456678  | ✓ |
+| Parameters | Description | Values | Required |
+| --- | --- | --- | --- |
+| idConnectorVersion | Connector version id | ?idConnectorVersion=c008849d-7cb1-40ca-9503-d6df2c5cddd8 | ✓ |
+| idWebsite | Unique identifier of the website on which your connector is installed | ?idWebsite=ha-123  | ✓ |
+| idOperator | iAdvize bot operator identifier that we associate to your bot scenario | ?idOperator=456678  | ✓ |
 
 ###### Response
 
@@ -985,18 +888,122 @@ As of today, actions can only be links.
 | replies.type | Reply/action type | `await` or `message` or `transfer` or `close` | ✓ |  |
 | replies.duration.unit | Awaiting unit of time | `millis` or `seconds` or `minutes` |  | replies.type == `await` |
 | replies.duration.value | Awaiting value of time | Long |  | replies.type == `await` |
-| replies.content | Typed payload of the message | Object | ✓ | replies.type == `message` |
-| replies.content.contentType | Type of the message’s content | `text` or `text/quick-reply`  | ✓ | replies.type == `message` |
-| replies.content.value | Textual content of the message | String | ✓ | replies.type == `message` |
-| replies.quickReplies | Quick replies proposed to the visitor | Array |  | replies.type == `message` |
-| replies.quickReplies.value | Textual content of the quick reply | String | ✓ | replies.type == `message` |
-| replies.quickReplies.idQuickReply | Identifier of the quick reply | String | ✓ | replies.type == `message` |
+| replies.payload | Typed payload of the message | [Payload](#message-payloads) | ✓ | replies.type == `message`, [payload](#message-payloads) can be `text` or `card/content` |
+| replies.quickReplies | Quick replies proposed to the visitor | Array of [Quick replies](#quick-reply-:-choices-in-a-multiple-choice-question) |  | replies.type == `message` |
 | replies.distributionRule | Distribution rules to transfer to | String |  | replies.type == `transfer` |
 | variables | Collected variables | Array |  | UUID |
 | variables.key | Key of the variable collected | String | ✓ |  |
 | variables.value | Value of the variable collected | String | ✓ |  |
 | createdAt | Creation date of the conversation | DateTime | ✓ | ISO-8601 |
 | updateAt | Date of the last message received | DateTime | ✓ | ISO-8601 |
+
+#### Conversation objects
+
+##### Message payloads
+
+###### Text payload : simple message 
+
+<pre class="prettyprint lang-js">
+{
+    "contentType": "text",
+    "value": "example"
+}
+</pre>
+
+| Field | Description | Values | Constraints |
+| --- | --- | --- | --- |
+| contentType | Type of the message’s content | String | `text` |
+| value | Textual content of the message | String | |
+
+###### Quick reply : choices in a multiple choice question
+
+<pre class="prettyprint lang-js">
+{
+    "contentType": "text/quick-reply",
+    "value": "example",
+    "idQuickReply": "1ef5145b-a9b6-4e86-8743-b6e3b4026b2c"
+}
+</pre>
+
+| Field | Description | Values | Constraints |
+| --- | --- | --- | --- |
+| contentType | Type of the message’s content | String | `text/quick-reply` |
+| value | Textual content of the quick-reply | String | |
+| idQuickReply | id of the quick reply | String | UUID |
+
+###### Generic Card : Sending rich-content
+
+<pre class="prettyprint lang-js">
+{
+    "contentType": "card/content",
+    "image": {
+      "url": "http://image.net/image.jpg",
+      "description": "picture of an image"
+    },
+    "title": "Generic Card",
+    "text": "This is a generic card",
+    "actions": [{
+                    "type": "LINK",
+                    "name": "My link"
+                    "url": "http://mylink"
+    }]
+}
+</pre>
+
+| Field | Description | Values | Required | Constraints |
+| --- | --- | --- | --- | --- |
+| contentType | Type of the message’s content | String | ✓ | `card/content` |
+| image | Json describing attached picture | Image | | [See image desc.](#image) |
+| title | Title of the card | String | | |
+| text | Textual content of the message | String | | |
+| action | List of actions to be sent with the card | Array of Action | ✓ | [See Action desc.](#action) |
+
+Here two examples of how the generic card can be used : 
+
+<img src="./assets/images/example-generic-card-with-title-text-and-picture.png" alt="Example of a generic card with title, text and picture set" width="300" height="260" style="margin: auto;">
+
+- With a title, text, image and one link
+
+<img src="./assets/images/example-generic-card-with-several-links.png" alt="Example of a generic card with several links" width="300" height="260" style="margin: auto;">
+
+- With several links
+
+Constraint : action must include at least one link.
+
+##### Generic JSON types used
+
+###### Image
+
+<pre class="prettyprint lang-js">
+{
+    "url": "http://image.net/image.jpg",
+    "description": "picture of an image"
+}
+</pre>
+
+| Field | Description | Values | Required | Constraints |
+| --- | --- | --- | --- | --- |
+| url | Url pointing at a picture | String/URL | ✓ | Any picture supported by navigators |
+| description | Textual description of the picture (alt field) | String | ✓ | |
+
+###### Action
+
+<pre class="prettyprint lang-js">
+{
+    "type": "LINK",
+    "name": "My link"
+    "url": "http://mylink"
+}
+</pre>
+
+
+| Field | Description | Values | Required | Constraints |
+| --- | --- | --- | --- | --- |
+| type | Type of the action | String | ✓ | `LINK` |
+| name | name to display link | String | ✓ |  |
+| url | Link to be used in action | String/URL | ✓ |  |
+
+As of today, actions can only be links. 
 
 ## Add webhooks
 
