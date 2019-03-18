@@ -2426,11 +2426,11 @@ In the example we want to track Google Analytics events when a chat or a call st
 - Parameter(s) : `obj` is null
 
 <pre class="prettyprint lang-js">var iAdvizeCallbacks = {
-      onChatDisplayed: function(obj){
+    onChatDisplayed: function(obj){
         // Chat window is displayed
         ...
-      }
-    };
+    }
+};
 </pre>
 
 ### onChatButtonDisplayed
@@ -2439,11 +2439,11 @@ In the example we want to track Google Analytics events when a chat or a call st
 - Parameter(s) : `obj` is null
 
 <pre class="prettyprint lang-js">var iAdvizeCallbacks = {
-      onChatButtonDisplayed: function(obj){
+    onChatButtonDisplayed: function(obj){
         // Chat button is displayed
         ...
-      }
-    };
+    }
+};
 </pre>
 
 ### onChatStarted
@@ -2454,11 +2454,11 @@ In the example we want to track Google Analytics events when a chat or a call st
 -- `obj.startedBy` -> Who started the chat (can be one of 'operator', 'visitor' or 'proactif')
 
 <pre class="prettyprint lang-js">var iAdvizeCallbacks = {
-      onChatStarted: function(obj){
+    onChatStarted: function(obj){
         // Chat is started
         console.log('chat #' +obj.id + ' was started by ' + obj.startedBy);
-      }
-    };
+    }
+};
 </pre>
 
 ### onChatEnded
@@ -2469,11 +2469,11 @@ In the example we want to track Google Analytics events when a chat or a call st
 -- `obj.endedBy` -> Who ended the chat ('operator' or 'visitor')
 
 <pre class="prettyprint lang-js">var iAdvizeCallbacks = {
-      onChatEnded: function(obj){
+    onChatEnded: function(obj){
         // Chat discussion is ended
         ...
-      }
-    };
+    }
+};
 </pre>
 
 ### onCallButtonDisplayed
@@ -2482,11 +2482,11 @@ In the example we want to track Google Analytics events when a chat or a call st
 - Parameter(s) : `obj` is null
 
 <pre class="prettyprint lang-js">var iAdvizeCallbacks = {
-      onCallButtonDisplayed: function(obj){
+    onCallButtonDisplayed: function(obj){
         // Call button is displayed
         ...
-      }
-    };
+    }
+};
 </pre>
 
 ### onMessageReceived
@@ -2497,11 +2497,11 @@ In the example we want to track Google Analytics events when a chat or a call st
 -- `obj.msg` -> the message itself
 
 <pre class="prettyprint lang-js">var iAdvizeCallbacks = {
-      onMessageReceived: function(obj){
+    onMessageReceived: function(obj){
         // operator message received
         console.log('[' + obj.time + '] operator message: ' +obj.msg);
-      }
-    };
+    }
+};
 </pre>
 
 ### onMessageSent
@@ -2512,11 +2512,11 @@ In the example we want to track Google Analytics events when a chat or a call st
 -- `obj.msg` -> the message itself
 
 <pre class="prettyprint lang-js">var iAdvizeCallbacks = {
-      onMessageSent: function(obj){
+    onMessageSent: function(obj){
         // operator message received
         console.log('[' + obj.time + '] visitor message: ' +obj.msg);
-      }
-    };
+    }
+};
 </pre>
 
 
@@ -2526,11 +2526,11 @@ In the example we want to track Google Analytics events when a chat or a call st
 - Parameter(s) : none
 
 <pre class="prettyprint lang-js">var iAdvizeCallbacks = {
-      onSatisfactionDisplayed: function(){
+    onSatisfactionDisplayed: function(){
         // operator message received
         console.log('satisfaction survey displayed');
-      }
-    };
+    }
+};
 </pre>
 
 ### onSatisfactionAnswered
@@ -2539,11 +2539,11 @@ In the example we want to track Google Analytics events when a chat or a call st
 - Parameter(s) : `obj` is null
 
 <pre class="prettyprint lang-js">var iAdvizeCallbacks = {
-      onSatisfactionAnswered: function(obj){
+    onSatisfactionAnswered: function(obj){
         // operator message received
         console.log('visitor answered satisfaction survey');
-      }
-    };
+    }
+};
 </pre>
 
 
