@@ -663,6 +663,120 @@ Here is a full conversation example :
 * 03:42 - The visitor sends _"BAD"_, the bot schedules a reply in 1 second with an _"Ok, i'm transferring you to a human"_ message followed by a transfer.
 * 03:43 - Our operator/bot sends _"Ok, i'm transferring you to a human"_, your plugin response with an immediate transfer.
 
+##### Message payloads
+
+###### Text payload : simple message 
+
+<pre class="prettyprint lang-js">
+{
+    "contentType": "text",
+    "value": "example"
+}
+</pre>
+
+| Field | Description | Values | Constraints |
+| --- | --- | --- | --- |
+| contentType | Type of the message’s content | String | `text` |
+| value | Textual content of the message | String | |
+
+###### Quick reply text payload : choices in a multiple choice question
+
+<pre class="prettyprint lang-js">
+{
+    "contentType": "text/quick-reply",
+    "value": "example",
+    "idQuickReply": "1ef5145b-a9b6-4e86-8743-b6e3b4026b2c"
+}
+</pre>
+
+| Field | Description | Values | Constraints |
+| --- | --- | --- | --- |
+| contentType | Type of the message’s content | String | `text/quick-reply` |
+| value | Textual content of the quick-reply | String | |
+| idQuickReply | id of the quick reply | String | UUID |
+
+###### Generic Card : Sending 
+
+<pre class="prettyprint lang-js">
+{
+    "contentType": "card/content",
+    "image": {
+      "url": "http://image.net/image.jpg",
+      "description": "picture of an image"
+    },
+    "title": "Generic Card",
+    "text": "This is a generic card",
+    "actions": [{
+        "type": "LINK",
+        "name": "My link"
+        "url": "http://mylink"
+    }]
+}
+</pre>
+
+
+| Field | Description | Values | Required | Constraints |
+| --- | --- | --- | --- | --- |
+| contentType | Type of the message’s content | String | ✓ | `card/content` |
+| image | Json describing attached picture | Image Json | | See image desc. |
+| title | Title of the card | String | | |
+| text | Textual content of the message | String | | |
+| action | List of actions to be sent with the card | Array of Action | ✓ | See Action desc. |
+
+Constraint : at least one link action must be included with another field : image, title or text.
+
+###### Product offer : Send a product offer
+
+<pre class="prettyprint lang-js">
+
+{
+    "contentType": "product-offer",
+    "image": {
+        "url": "http://image.net/image.jpg",
+        "description": "picture of a product"
+    },
+    "name": "phone",
+    "price": "123€",
+    "offerPrice": "99€",
+    "availability": {
+        "status": "AVAILABLE"
+    },
+    "actions": [{
+        "type": "LINK",
+        "name": "My link"
+        "url": "http://mylink"
+    }]
+}
+</pre>
+
+| Field | Description | Values | Required | Constraints |
+| --- | --- | --- | --- | --- |
+| contentType | Type of the message’s content | String | ✓ | `product-offer` |
+| image | Json describing attached picture | Image Json | | See image desc. |
+| name | Name of the product | String | ✓ | |
+| price | price of the product without offer | String | ✓ | |
+| offerPrice | price of the product with offer | String | | |
+| availability.status | Status of availability | String | | `AVAILABLE` or `UNAVAILABLE`|
+| action | List of actions to be sent with the card | Array of Action | ✓ | See Action desc. |
+
+###### Attachment : Sending file
+
+<pre class="prettyprint lang-js">
+{
+    "contentType": "attachment",
+    "filename": "animation",
+    "mimeType": "image/gif",
+    "url": "http://my-website/my-animation.gif"
+}
+</pre>
+
+| Field | Description | Values | Required | Constraints |
+| --- | --- | --- | --- | --- |
+| contentType | Type of the message’s content | String | ✓ | `attachment` |
+| filename | Name of the file to be displayed | String | ✓ | |
+| mimeType | Mime type of the file | String | ✓ | Mime type available on desk (including gif) |
+| url | Textual content of the message | String | ✓ | URL of the file |
+
 ##### Generic JSON types used
 
 ###### Image
@@ -696,67 +810,6 @@ Here is a full conversation example :
 | url | Link to be used in action | String/URL | ✓ |  |
 
 As of today, actions can only be links. 
-
-##### Message payloads
-
-###### Text payload : simple message 
-
-<pre class="prettyprint lang-js">
-{
-    "contentType": "text",
-    "value": "example"
-}
-</pre>
-
-| Field | Description | Values | Constraints |
-| --- | --- | --- | --- |
-| contentType | Type of the message’s content | String | `text` |
-| value | Textual content of the message | String | |
-
-###### Quick reply text payload : choices in a multiple choice question
-
-<pre class="prettyprint lang-js">
-{
-    "contentType": "text/quick-reply",
-    "value": "example",
-    "idQuickReply": "1ef5145b-a9b6-4e86-8743-b6e3b4026b2c"
-}
-</pre>
-
-| Field | Description | Values | Constraints |
-| --- | --- | --- | --- |
-| contentType | Type of the message’s content | String | `text/quick-reply` |
-| value | Textual content of the quick-reply | String | |
-| idQuickReply | id of the quick reply | String | UUID |
-
-###### Generic Card : Sending rich-content
-
-<pre class="prettyprint lang-js">
-{
-    "contentType": "card/content",
-    "image": {
-      "url": "http://image.net/image.jpg",
-      "description": "picture of an image"
-    },
-    "title": "Generic Card",
-    "text": "This is a generic card",
-    "actions": [{
-                    "type": "LINK",
-                    "name": "My link"
-                    "url": "http://mylink"
-    }]
-}
-</pre>
-
-| Field | Description | Values | Required | Constraints |
-| --- | --- | --- | --- | --- |
-| contentType | Type of the message’s content | String | ✓ | `card/content` |
-| image | Json describing attached picture | Image Json | | See image desc. |
-| title | Title of the card | String | | |
-| text | Textual content of the message | String | | |
-| action | List of actions to be sent with the card | Array of Action | ✓ | See Action desc. |
-
-Constraint : at least one link action must be included with another field : image, title or text.
 
 ##### Conversation initialisation (endpoint)
  
