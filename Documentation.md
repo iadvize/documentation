@@ -666,6 +666,90 @@ Here is a full conversation example :
 
 ##### Conversation initialisation (endpoint)
 
+###### Description of message payloads 
+There is several types of payloads that can be used as a message content
+
+- Text payload : used for sending a simple message 
+
+<pre class="prettyprint lang-js">
+{
+    "contentType": "text",
+    "value": "example"
+}
+</pre>
+
+| Field | Description | Values | Constraints |
+| --- | --- | --- | --- |
+| contentType | Type of the message’s content | String | `text` |
+| value | Textual content of the message | String | |
+
+- Quick reply text payload : used as choices in a multiple choice question
+
+<pre class="prettyprint lang-js">
+{
+    "contentType": "text/quick-reply",
+    "value": "example"
+}
+</pre>
+
+| Field | Description | Values | Constraints |
+| --- | --- | --- | --- |
+| contentType | Type of the message’s content | String | `text/quick-reply` |
+| value | Textual content of the quick-reply | String | |
+
+- Generic Card : used for sending rich-content
+
+<pre class="prettyprint lang-js">
+{
+    "contentType": "card/content",
+    "image": {
+      "url": "http://image.net/image.jpg",
+      "description": "picture of an image"
+    },
+    "title": "Generic Card",
+    "text": "This is a generic card",
+    "actions": Action[]
+}
+</pre>
+
+| Field | Description | Values | Required | Constraints |
+| --- | --- | --- | --- | --- |
+| contentType | Type of the message’s content | String | ✓ | `card/content` |
+| image | Json describing attached picture | Image Json | | See image desc. |
+| title | Title of the card | String | | |
+| text | Textual content of the message | String | | |
+| action | List of actions to be sent with the card | Array of Action | | See Action desc. |
+
+###### Json types used
+- Image 
+<pre class="prettyprint lang-js">
+{
+    "url": "http://image.net/image.jpg",
+    "description": "picture of an image"
+}
+</pre>
+
+| Field | Description | Values | Required | Constraints |
+| --- | --- | --- | --- | --- |
+| url | Url pointing at a picture | String/URL | ✓ | Any picture supported by navigators |
+| description | Textual description of the picture (alt field) | String | ✓ | |
+
+- Action 
+<pre class="prettyprint lang-js">
+{
+    "type": "LINK",
+    "name": "My link"
+    "url": "http://mylink"
+}
+</pre>
+| Field | Description | Values | Required | Constraints |
+| --- | --- | --- | --- | --- |
+| type | Type of the action | String | ✓ | `LINK` |
+| name | name to display link | String | ✓ |  |
+| url | Link to be used in action | String/URL | ✓ |  |
+
+As of today, actions can only be links. 
+ 
 ###### Request - POST /conversations
 
 <pre class="prettyprint lang-js">
@@ -732,7 +816,7 @@ Here is a full conversation example :
 | replies.duration.unit | Awaiting unit of time | `millis` or `seconds` or `minutes` |  | replies.type == `await` |
 | replies.duration.value | Awaiting value of time | Long |  | replies.type == `await` |
 | replies.payload | Typed payload of the message | Object | ✓ | replies.type == `message` |
-| replies.payload.contentType | Type of the message’s content | `text` or `text/quick-reply`  | ✓ | replies.type == `message` |
+| replies.payload.contentType | Type of the message’s content | `text` or `text/quick-reply`| ✓ | replies.type == `message` |
 | replies.payload.value | Textual content of the message | String | ✓ | replies.type == `message` |
 | replies.quickReplies | Quick replies proposed to the visitor | Array |  | replies.type == `message` |
 | replies.quickReplies.value | Textual content of the quick reply | String | ✓ | replies.type == `message` |
@@ -743,7 +827,6 @@ Here is a full conversation example :
 | variables.value | Value of the variable collected | String | ✓ |  |
 | createdAt | Creation date of the conversation | DateTime |  ✓ | ISO-8601 |
 | updateAt | Date of the last message received | DateTime |  ✓ | ISO-8601 |
-
 
 ##### New message & reply reception (endpoint)
 
