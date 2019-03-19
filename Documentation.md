@@ -665,7 +665,7 @@ Here is a full conversation example :
 
 ##### Conversation initialisation (endpoint)
  
-###### Request - POST /conversations?idConnectorVersion&idWebsite
+###### Request - POST /conversations
 
 <pre class="prettyprint lang-js">
 {
@@ -739,7 +739,7 @@ Here is a full conversation example :
 
 ##### New message & reply reception (endpoint)
 
-###### Request - POST /conversations/:conversationId:/messages?idConnectorVersion&idWebsite
+###### Request - POST /conversations/:conversationId:/messages
 
 | Parameters | Description | Values | Required |
 | --- | --- | --- | --- |
@@ -831,7 +831,7 @@ Here is a full conversation example :
 
 ##### Get the conversation content (endpoint)
 
-###### Request - GET /conversations/:conversationId:?idConnectorVersion&idWebsite&idOperator
+###### Request - GET /conversations/:conversationId:
 
 | Parameters | Description | Values | Required |
 | --- | --- | --- | --- |
@@ -937,15 +937,15 @@ Here is a full conversation example :
 {
     "contentType": "card/content",
     "image": {
-      "url": "http://image.net/image.jpg",
-      "description": "picture of an image"
+        "url": "http://image.net/delivery.jpg",
+        "description": "delivery picture"
     },
-    "title": "Generic Card",
-    "text": "This is a generic card",
+    "title": "Delivery & Pickup",
+    "text": "Learn more about dispatch and delivery times, methods and costs.",
     "actions": [{
-                    "type": "LINK",
-                    "name": "My link"
-                    "url": "http://mylink"
+        "type": "LINK",
+        "name": "See more"
+        "url": "http://mylink/delivery"
     }]
 }
 </pre>
@@ -962,13 +962,32 @@ Here two examples of how the generic card can be used :
 
 <img src="./assets/images/example-generic-card-with-title-text-and-picture.png" alt="Example of a generic card with title, text and picture set" width="300" height="260" style="margin: auto;">
 
-- With a title, text, image and one link
+<p align="center"><em>With a title, text, image and one link</em></p>
+
+<pre class="prettyprint lang-js">
+{
+    "contentType": "card/content",
+    "actions": [{
+        "type": "LINK",
+        "name": "How to print on an A4 page"
+        "url": "http://mylink/a4page"
+    },{
+          "type": "LINK",
+          "name": "I could not print my stamps"
+          "url": "http://mylink/stamps"
+    },{
+        "type": "LINK",
+        "name": "What are the different support and formats for etiquette?"
+        "url": "http://mylink/etiquette"
+    }]
+}
+</pre>
 
 <img src="./assets/images/example-generic-card-with-several-links.png" alt="Example of a generic card with several links" width="300" height="260" style="margin: auto;">
 
-- With several links
+<p align="center"><em>With several links</em></p>
 
-Constraint : action must include at least one link.
+**Constraint : action must include at least one link.**
 
 ##### Generic JSON types used
 
@@ -985,6 +1004,8 @@ Constraint : action must include at least one link.
 | --- | --- | --- | --- | --- |
 | url | Url pointing at a picture | String/URL | ✓ | Any picture supported by navigators |
 | description | Textual description of the picture (alt field) | String | ✓ | |
+
+**Images must be of dimension 240x120(px) and in a format supported by navigator**
 
 ###### Action
 
