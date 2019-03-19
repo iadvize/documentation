@@ -953,10 +953,10 @@ Here is a full conversation example :
 | Field | Description | Values | Required | Constraints |
 | --- | --- | --- | --- | --- |
 | contentType | Type of the message’s content | String | ✓ | `card/content` |
-| image | Json describing attached picture | Image | | [See image desc.](#image) |
+| image | Json describing attached picture | [Image](#image) | | |
 | title | Title of the card | String | | |
 | text | Textual content of the message | String | | |
-| action | List of actions to be sent with the card | Array of Action | ✓ | [See Action desc.](#action) |
+| action | List of actions to be sent with the card | Array of [Action](#action) | ✓ | |
 
 Here two examples of how the generic card can be used : 
 
@@ -988,6 +988,71 @@ Here two examples of how the generic card can be used :
 <p align="center"><em>With several links</em></p>
 
 **Constraint : action must include at least one link.**
+
+###### Product offer : Sending a product offer
+
+<pre class="prettyprint lang-js">
+
+{
+    "contentType": "product-offer",
+    "image": {
+        "url": "http://image.net/image.jpg",
+        "description": "picture of a product"
+    },
+    "name": "phone",
+    "price": "123€",
+    "offerPrice": "99€",
+    "availability": {
+        "status": "AVAILABLE"
+    },
+    "actions": [{
+        "type": "LINK",
+        "name": "My link"
+        "url": "http://mylink"
+    }]
+}
+</pre>
+
+| Field | Description | Values | Required | Constraints |
+| --- | --- | --- | --- | --- |
+| contentType | Type of the message’s content | String | ✓ | `product-offer` |
+| image | Json describing attached picture | [Image](#image) | | |
+| name | Name of the product | String | ✓ | |
+| price | Price of the product without offer | String | ✓ | |
+| offerPrice | Price of the product with offer | String | | |
+| availability.status | Status of availability | String | | `AVAILABLE` or `UNAVAILABLE`|
+| action | List of actions to be sent with the card | Array of [Action](#action) | ✓ | |
+
+<img src="./assets/images/example-product-offer-payload.png" alt="Example of a product offer with offer" width="300" height="260" style="margin: auto;">
+
+<p align="center"><em>Example of a message with a product offer payload</em></p>
+
+###### Attachment : Sending a file
+
+<pre class="prettyprint lang-js">
+{
+    "contentType": "attachment",
+    "filename": "animation",
+    "mimeType": "image/gif",
+    "url": "http://my-website/my-animation.gif"
+}
+</pre>
+
+| Field | Description | Values | Required | Constraints |
+| --- | --- | --- | --- | --- |
+| contentType | Type of the message’s content | String | ✓ | `attachment` |
+| filename | Name of the file to be displayed | String | ✓ | |
+| mimeType | Mime type of the file | String | ✓ | Mime types available on desk (including `image/gif`) |
+| url | Textual content of the message | String | ✓ | URL |
+
+<img src="./assets/images/example-attachment-payload.png" alt="Example of a document payload" width="300" height="260" style="margin: auto;">
+
+<p align="center"><em>Example of a message with a file attachment payload</em></p>
+
+<img src="./assets/images/example-attachment-pic-payload.png" alt="Example of a picture payload" width="300" height="260" style="margin: auto;">
+
+<p align="center"><em>Example of a message with a picture attachment payload</em></p>
+
 
 ##### Generic JSON types used
 
@@ -1021,8 +1086,8 @@ Here two examples of how the generic card can be used :
 | Field | Description | Values | Required | Constraints |
 | --- | --- | --- | --- | --- |
 | type | Type of the action | String | ✓ | `LINK` |
-| name | name to display link | String | ✓ |  |
-| url | Link to be used in action | String/URL | ✓ |  |
+| name | name to display link | String | ✓ | |
+| url | Link to be used in action | String/URL | ✓ | |
 
 As of today, actions can only be links. 
 
