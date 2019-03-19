@@ -996,19 +996,19 @@ Here two examples of how the generic card can be used :
 {
     "contentType": "product-offer",
     "image": {
-        "url": "http://image.net/image.jpg",
-        "description": "picture of a product"
+        "url": "http://image.net/tvsamsumg.jpg",
+        "description": "picture of a TV"
     },
-    "name": "phone",
-    "price": "123€",
-    "offerPrice": "99€",
+    "name": "Samsung Frame 4K UHD TC",
+    "price": "€1,499.99",
+    "offerPrice": "€1,299.99",
     "availability": {
         "status": "AVAILABLE"
     },
     "actions": [{
         "type": "LINK",
-        "name": "My link"
-        "url": "http://mylink"
+        "name": "See more"
+        "url": "http://mylink/TvSamsung"
     }]
 }
 </pre>
@@ -1032,9 +1032,9 @@ Here two examples of how the generic card can be used :
 <pre class="prettyprint lang-js">
 {
     "contentType": "attachment",
-    "filename": "animation",
-    "mimeType": "image/gif",
-    "url": "http://my-website/my-animation.gif"
+    "filename": "Can I add more information about my order?",
+    "mimeType": "application/pdf",
+    "url": "http://my-website/order.pdf"
 }
 </pre>
 
