@@ -931,7 +931,7 @@ Here is a full conversation example :
 | value | Textual content of the quick-reply | String | |
 | idQuickReply | id of the quick reply | String | UUID |
 
-###### Generic Card : Sending rich-content
+###### Generic card : Sending rich-content
 
 <pre class="prettyprint lang-js">
 {
@@ -953,10 +953,10 @@ Here is a full conversation example :
 | Field | Description | Values | Required | Constraints |
 | --- | --- | --- | --- | --- |
 | contentType | Type of the message’s content | String | ✓ | `card/content` |
-| image | Json describing attached picture | Image | | [See image desc.](#image) |
+| image | Json describing attached picture | [Image](#image) | | |
 | title | Title of the card | String | | |
 | text | Textual content of the message | String | | |
-| action | List of actions to be sent with the card | Array of Action | ✓ | [See Action desc.](#action) |
+| action | List of actions to be sent with the card | Array of [Action](#action) | ✓ | |
 
 Here two examples of how the generic card can be used : 
 
@@ -988,6 +988,145 @@ Here two examples of how the generic card can be used :
 <p align="center"><em>With several links</em></p>
 
 **Constraint : action must include at least one link.**
+
+###### Generic card bundle : Sending multiple card at once
+
+<pre class="prettyprint lang-js">
+{
+    "contentType": "bundle/card",
+    "cards": [
+        { ... },
+        {
+            "contentType": "card/content",
+            "image": {
+                "url": "http://image.net/delivery.jpg",
+                "description": "delivery picture"
+            },
+            "title": "Delivery & Pickup",
+            "text": "Learn more about our policies",
+            "actions": [{
+                "type": "LINK",
+                "name": "See more"
+                "url": "http://mylink/delivery"
+            }]
+        },
+        { ... }
+    ]
+}
+</pre>
+
+| Field | Description | Values | Required | Constraints |
+| --- | --- | --- | --- | --- |
+| contentType | Type of the message’s content | String | ✓ | `bundle/card` |
+| cards | List of cards to send | Array of [Generic Card](#generic-card-:-sending-rich-content) | ✓ | |
+
+<img src="./assets/images/example-generic-card-bundle.png" alt="Example of a generic card with title, text and picture set" width="300" height="260" style="margin: auto;">
+
+<p align="center"><em>Bundle with several cards</em></p>
+
+###### Product offer : Sending a product offer
+
+<pre class="prettyprint lang-js">
+{
+    "contentType": "product-offer",
+    "image": {
+        "url": "http://image.net/tvsamsumg.jpg",
+        "description": "picture of a TV"
+    },
+    "name": "Samsung Frame 4K UHD TC",
+    "price": "€1,499.99",
+    "offerPrice": "€1,299.99",
+    "availability": {
+        "status": "AVAILABLE"
+    },
+    "actions": [{
+        "type": "LINK",
+        "name": "See more"
+        "url": "http://mylink/TvSamsung"
+    }]
+}
+</pre>
+
+| Field | Description | Values | Required | Constraints |
+| --- | --- | --- | --- | --- |
+| contentType | Type of the message’s content | String | ✓ | `product-offer` |
+| image | Json describing attached picture | [Image](#image) | | |
+| name | Name of the product | String | ✓ | |
+| price | Price of the product without offer | String | ✓ | |
+| offerPrice | Price of the product with offer | String | | |
+| description | Description of the product | String | | |
+| availability.status | Status of availability | String | | `AVAILABLE` or `UNAVAILABLE`|
+| action | List of actions to be sent with the card | Array of [Action](#action) | ✓ | |
+
+<img src="./assets/images/example-product-offer-payload.png" alt="Example of a product offer with offer" width="300" height="260" style="margin: auto;">
+
+<p align="center"><em>Example of a message with a product offer payload</em></p>
+
+###### Product offer bundle : Sending multiple product offers at once
+
+<pre class="prettyprint lang-js">
+{
+    "contentType": "bundle/product-offer",
+    "productOffers": [
+        { ... },
+        {
+            "contentType": "product-offer",
+            "image": {
+                "url": "http://image.net/tvpanasonic.jpg",
+                "description": "picture of a TV"
+            },
+            "name": "Panasonic Smart TV 4K",
+            "price": "€1,499.99",
+            "offerPrice": "€1,299.99",
+            "description": "Enhance your everyday space with The Frame TV that reflects your style and fits your space"
+            "availability": {
+                "status": "AVAILABLE"
+            },
+            "actions": [{
+                "type": "LINK",
+                "name": "See more"
+                "url": "http://mylink/TvPanasonic"
+            }]
+        },
+        { ... }
+    ]
+}
+</pre>
+
+| Field | Description | Values | Required | Constraints |
+| --- | --- | --- | --- | --- |
+| contentType | Type of the message’s content | String | ✓ | `bundle/product-offers` |
+| productOffers | List of product offers to display | Array of [Product Offer](#product-offer-:-sending-a-product-offer) | ✓ | |
+
+<img src="./assets/images/example-product-offer-bundle.png" alt="Example of a generic card with title, text and picture set" width="300" height="260" style="margin: auto;">
+
+<p align="center"><em>Bundle with several product offers</em></p>
+
+###### Attachment : Sending a file
+
+<pre class="prettyprint lang-js">
+{
+    "contentType": "attachment",
+    "filename": "Can I add more information about my order?",
+    "mimeType": "application/pdf",
+    "url": "http://my-website/order.pdf"
+}
+</pre>
+
+| Field | Description | Values | Required | Constraints |
+| --- | --- | --- | --- | --- |
+| contentType | Type of the message’s content | String | ✓ | `attachment` |
+| filename | Name of the file to be displayed | String | ✓ | |
+| mimeType | Mime type of the file | String | ✓ | Mime types available on desk (including `image/gif`) |
+| url | Textual content of the message | String | ✓ | URL |
+
+<img src="./assets/images/example-attachment-payload.png" alt="Example of a document payload" width="300" height="260" style="margin: auto;">
+
+<p align="center"><em>Example of a message with a file attachment payload</em></p>
+
+<img src="./assets/images/example-attachment-pic-payload.png" alt="Example of a picture payload" width="300" height="260" style="margin: auto;">
+
+<p align="center"><em>Example of a message with a picture attachment payload</em></p>
 
 ##### Generic JSON types used
 
@@ -1021,8 +1160,8 @@ Here two examples of how the generic card can be used :
 | Field | Description | Values | Required | Constraints |
 | --- | --- | --- | --- | --- |
 | type | Type of the action | String | ✓ | `LINK` |
-| name | name to display link | String | ✓ |  |
-| url | Link to be used in action | String/URL | ✓ |  |
+| name | name to display link | String | ✓ | |
+| url | Link to be used in action | String/URL | ✓ | |
 
 As of today, actions can only be links. 
 
