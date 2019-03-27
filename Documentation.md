@@ -899,9 +899,17 @@ Here is a full conversation example :
 
 #### Conversation objects
 
+<br />
+
 ##### Message payloads
 
+Several kind of payload can be use within sent replies.
+
+<br />
+
 ###### Text payload : simple message 
+
+A text payload is a simple text message.
 
 <pre class="prettyprint lang-js">
 {
@@ -915,7 +923,11 @@ Here is a full conversation example :
 | contentType | Type of the message’s content | String | `text` |
 | value | Textual content of the message | String | |
 
+<br />
+
 ###### Quick reply : choices in a multiple choice question
+
+A quick reply is a special item that is used for offering several choices to a visitor.
 
 <pre class="prettyprint lang-js">
 {
@@ -931,7 +943,21 @@ Here is a full conversation example :
 | value | Textual content of the quick-reply | String | |
 | idQuickReply | id of the quick reply | String | UUID |
 
+<br />
+
 ###### Generic card : Sending rich-content
+
+A generic card is a payload that can be use to send a more structured message. It always contains at least one link and can be used to help one visitor to navigate on one website.
+
+Here two examples of how the generic card can be used : 
+
+<img src="./assets/images/example-generic-card-with-title-text-and-picture.png" alt="Example of a generic card with title, text and picture set" width="300" height="260" style="margin: auto;">
+
+<p align="center"><em>With a title, text, image and one link</em></p>
+
+<img src="./assets/images/example-generic-card-with-several-links.png" alt="Example of a generic card with several links" width="300" height="260" style="margin: auto;">
+
+<p align="center"><em>With several links</em></p>
 
 <pre class="prettyprint lang-js">
 {
@@ -949,20 +975,6 @@ Here is a full conversation example :
     }]
 }
 </pre>
-
-| Field | Description | Values | Required | Constraints |
-| --- | --- | --- | --- | --- |
-| contentType | Type of the message’s content | String | ✓ | `card/content` |
-| image | Json describing attached picture | [Image](#image) | | |
-| title | Title of the card | String | | |
-| text | Textual content of the message | String | | |
-| action | List of actions to be sent with the card | Array of [Action](#action) | ✓ | |
-
-Here two examples of how the generic card can be used : 
-
-<img src="./assets/images/example-generic-card-with-title-text-and-picture.png" alt="Example of a generic card with title, text and picture set" width="300" height="260" style="margin: auto;">
-
-<p align="center"><em>With a title, text, image and one link</em></p>
 
 <pre class="prettyprint lang-js">
 {
@@ -983,13 +995,25 @@ Here two examples of how the generic card can be used :
 }
 </pre>
 
-<img src="./assets/images/example-generic-card-with-several-links.png" alt="Example of a generic card with several links" width="300" height="260" style="margin: auto;">
+| Field | Description | Values | Required | Constraints |
+| --- | --- | --- | --- | --- |
+| contentType | Type of the message’s content | String | ✓ | `card/content` |
+| image | Json describing attached picture | [Image](#image) | | |
+| title | Title of the card | String | | |
+| text | Textual content of the message | String | | |
+| action | List of actions to be sent with the card | Array of [Action](#action) | ✓ | length > 0 |
 
-<p align="center"><em>With several links</em></p>
+*Constraint* : action must include at least one link.
 
-**Constraint : action must include at least one link.**
+<br />
 
-###### Generic card bundle : Sending multiple card at once
+###### Generic card bundle (Carousel) : Sending multiple card at once
+
+A card bundle enables you to send multiple generic cards at once. This lets one visitor look at different options on one website. 
+
+<img src="./assets/images/example-generic-card-bundle.png" alt="Example of a generic card with title, text and picture set" width="300" height="260" style="margin: auto;">
+
+<p align="center"><em>Bundle with several cards</em></p>
 
 <pre class="prettyprint lang-js">
 {
@@ -1020,11 +1044,15 @@ Here two examples of how the generic card can be used :
 | contentType | Type of the message’s content | String | ✓ | `bundle/card` |
 | cards | List of cards to send | Array of [Generic Card](#generic-card-:-sending-rich-content) | ✓ | |
 
-<img src="./assets/images/example-generic-card-bundle.png" alt="Example of a generic card with title, text and picture set" width="300" height="260" style="margin: auto;">
-
-<p align="center"><em>Bundle with several cards</em></p>
+<br />
 
 ###### Product offer : Sending a product offer
+
+A product offer payload lets you send a product offer to one visitor. You can per example specify if there is a discount or if the product is available. Here is one example : 
+
+<img src="./assets/images/example-product-offer-payload.png" alt="Example of a product offer with offer" width="300" height="260" style="margin: auto;">
+
+<p align="center"><em>Example of a message with a product offer payload</em></p>
 
 <pre class="prettyprint lang-js">
 {
@@ -1058,11 +1086,15 @@ Here two examples of how the generic card can be used :
 | availability.status | Status of availability | String | | `AVAILABLE` or `UNAVAILABLE`|
 | action | List of actions to be sent with the card | Array of [Action](#action) | ✓ | |
 
-<img src="./assets/images/example-product-offer-payload.png" alt="Example of a product offer with offer" width="300" height="260" style="margin: auto;">
+<br />
 
-<p align="center"><em>Example of a message with a product offer payload</em></p>
+###### Product offer bundle (Carousel) : Sending multiple product offers at once
 
-###### Product offer bundle : Sending multiple product offers at once
+A product offer bundle lets you suggest several products at once. The visitor can navigate among the sent offers.
+
+<img src="./assets/images/example-product-offer-bundle.png" alt="Example of a generic card with title, text and picture set" width="300" height="260" style="margin: auto;">
+
+<p align="center"><em>Bundle with several product offers</em></p>
 
 <pre class="prettyprint lang-js">
 {
@@ -1098,11 +1130,19 @@ Here two examples of how the generic card can be used :
 | contentType | Type of the message’s content | String | ✓ | `bundle/product-offers` |
 | productOffers | List of product offers to display | Array of [Product Offer](#product-offer-:-sending-a-product-offer) | ✓ | |
 
-<img src="./assets/images/example-product-offer-bundle.png" alt="Example of a generic card with title, text and picture set" width="300" height="260" style="margin: auto;">
-
-<p align="center"><em>Bundle with several product offers</em></p>
+<br />
 
 ###### Attachment : Sending a file
+
+An attachment lets you send a link (to a file) in the chatbox. If the link points at a picture, It will be shown as such. For a non-picture file, it will let one user download it. Pictures will be considered as such if they can be displayed in a browser. 
+
+<img src="./assets/images/example-attachment-payload.png" alt="Example of a document payload" width="300" height="260" style="margin: auto;">
+
+<p align="center"><em>Example of a message with a file attachment payload</em></p>
+
+<img src="./assets/images/example-attachment-pic-payload.png" alt="Example of a picture payload" width="300" height="260" style="margin: auto;">
+
+<p align="center"><em>Example of a message with a picture attachment payload</em></p>
 
 <pre class="prettyprint lang-js">
 {
@@ -1120,17 +1160,15 @@ Here two examples of how the generic card can be used :
 | mimeType | Mime type of the file | String | ✓ | Mime types available on desk (including `image/gif`) |
 | url | Textual content of the message | String | ✓ | URL |
 
-<img src="./assets/images/example-attachment-payload.png" alt="Example of a document payload" width="300" height="260" style="margin: auto;">
-
-<p align="center"><em>Example of a message with a file attachment payload</em></p>
-
-<img src="./assets/images/example-attachment-pic-payload.png" alt="Example of a picture payload" width="300" height="260" style="margin: auto;">
-
-<p align="center"><em>Example of a message with a picture attachment payload</em></p>
+<br />
 
 ##### Generic JSON types used
 
+<br />
+
 ###### Image
+
+An Image object can be used to display one image. **The picture linked need to be of dimension 240x120(px) and should be displayable on browsers.**
 
 <pre class="prettyprint lang-js">
 {
@@ -1144,9 +1182,13 @@ Here two examples of how the generic card can be used :
 | url | Url pointing at a picture | String/URL | ✓ | Any picture supported by navigators |
 | description | Textual description of the picture (alt field) | String | ✓ | |
 
-**Images must be of dimension 240x120(px) and in a format supported by navigator**
+<br />
 
 ###### Action
+
+Actions can be used to offers options to one visitor. Today, only link actions can be used.
+
+A link action is one action that can redirect one user to a given url link. It will
 
 <pre class="prettyprint lang-js">
 {
@@ -1163,7 +1205,8 @@ Here two examples of how the generic card can be used :
 | name | name to display link | String | ✓ | |
 | url | Link to be used in action | String/URL | ✓ | |
 
-As of today, actions can only be links. 
+<br />
+
 
 ## Add webhooks
 
