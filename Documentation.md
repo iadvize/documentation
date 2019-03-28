@@ -798,7 +798,7 @@ Here is a full conversation example :
                     "idQuickReply": "1ef5145b-a9b6-4e86-8743-b6e3b4026b2c"
                 },
                 {
-                    "contentType": "text",
+                    "contentType": "text/quick-reply",
                     "value": "Bad",
                     "idQuickReply": "13594c9b-dcff-4add-81fc-5e1093e443a7"
                 }
@@ -898,12 +898,16 @@ Here is a full conversation example :
 | updateAt | Date of the last message received | DateTime | ✓ | ISO-8601 |
 
 #### Conversation objects
-<br/>
+
+<br />
+
 Several kinds of payloads can be used within your bot replies in order to enrich your responses. You will find in this section information about every type of content you can send with your iAdvize bot.
 
 
 ##### Sending a simple message 
-<br/>
+
+<br />
+
 A text payload is a simple text message.
 
 <pre class="prettyprint lang-js">
@@ -921,12 +925,18 @@ A text payload is a simple text message.
 <br />
 
 ##### Quick reply : multiple choice question
-<br/>
+
+<br />
+
 A quick reply is used for offering several choices to a visitor. Each choice needs to be specified in the "quickReplies" field  of a [reply](#conversation-flow-endpoints). The answer sent by the visitor to the multiple choice question can only contain text. There is no maximum number of quick replies you can display. However we recommend not to use more than 3 quick replies for a single question.
-<br/>
+
+<br />
+
 <img src="./assets/images/example-quick-replies.png" alt="Example of a text payload reply with two quick replies" width="300" height="260" style="margin: auto;">
 <p align="center"><em>Quick replies example (Text payload reply with two quick replies)</em></p>
-<br/>
+
+<br />
+
 <pre class="prettyprint lang-js">
 {
     "contentType": "text/quick-reply",
@@ -934,6 +944,7 @@ A quick reply is used for offering several choices to a visitor. Each choice nee
     "idQuickReply": "1ef5145b-a9b6-4e86-8743-b6e3b4026b2c"
 }
 </pre>
+
 <br />
 
 | Field | Description | Values | Constraints |
@@ -945,16 +956,23 @@ A quick reply is used for offering several choices to a visitor. Each choice nee
 <br />
 
 ##### Generic card : Sending rich-content
-<br/>
+
+<br />
+
 A generic card is a payload you can use to send a more structured message. It always contains at least one link and can be used to help a visitor to navigate on a website by redirecting him to specific pages. You can specify multiple links on a single generic card. Generic card can also include a title, a description and an image. This help give context to the visitor about the links you are sending.
-<br/>
+
+<br />
 
 <img src="./assets/images/example-generic-card-with-title-text-and-picture.png" alt="Example of a generic card with title, text and picture set" width="300" height="260" style="margin: auto;">
 <p align="center"><em>A generic card with a title, a text, an image and a single link.</em></p>
-<br/>
+
+<br />
+
 <img src="./assets/images/example-generic-card-with-several-links.png" alt="Example of a generic card with several links" width="300" height="260" style="margin: auto;">
 <p align="center"><em>A generic card with several links.</em></p>
-<br/>
+
+<br />
+
 <pre class="prettyprint lang-js">
 {
     "contentType": "card/content",
@@ -1057,7 +1075,7 @@ A product offer payload lets you send a product offer to your visitor. Using the
 
 <img src="./assets/images/example-product-offer-payload.png" alt="Example of a product offer with offer" width="300" height="260" style="margin: auto;">
 <p align="center"><em>Example of a product offer with the price, avaibility, image and special offer.</em></p>
-<br/>
+<br />
 
 <pre class="prettyprint lang-js">
 {
@@ -1186,8 +1204,6 @@ An attachment lets you send files directly in the chatbox. If you send an image 
 <br />
 
 ###### Image
-
-<br />
 
 An Image object can be used to display one image. **The picture linked need to be of dimension 240x120(px) and should be displayable on browsers.**
 
