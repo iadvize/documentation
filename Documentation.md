@@ -898,17 +898,18 @@ Here is a full conversation example :
 | updateAt | Date of the last message received | DateTime | ✓ | ISO-8601 |
 
 #### Conversation objects
+<br/>
+Several kinds of payloads can be used within your bot replies in order to enrich your responses. You will find in this section information about every type of content you can send with your iAdvize bot.
 
-Several kind of payload can be used within sent replies.
 
-##### Text payload : simple message 
-
+##### Sending a simple message 
+<br/>
 A text payload is a simple text message.
 
 <pre class="prettyprint lang-js">
 {
     "contentType": "text",
-    "value": "example"
+    "value": "Hi, i am a simple message."
 }
 </pre>
 
@@ -919,14 +920,13 @@ A text payload is a simple text message.
 
 <br />
 
-##### Quick reply : choices in a multiple choice question
-
+##### Quick reply : multiple choice question
+<br/>
+A quick reply is used for offering several choices to a visitor. Each choice needs to be specified in the "quickReplies" field  of a [reply](#conversation-flow-endpoints). The answer sent by the visitor to the multiple choice question can only contain text. There is no maximum number of quick replies you can display. However we recommend not to use more than 3 quick replies for a single question.
+<br/>
 <img src="./assets/images/example-quick-replies.png" alt="Example of a text payload reply with two quick replies" width="300" height="260" style="margin: auto;">
-
 <p align="center"><em>Quick replies example (Text payload reply with two quick replies)</em></p>
-
-A quick reply is a special item that is used for offering several choices to a visitor. Those needs to be specified in the field "quickReplies" of one [reply](#conversation-flow-endpoints). The answer sent by the visitor to the multiple choice question will only contains text. There is no maximum to the number of quick replies you can display however we recommend to use 3 for one question.
-
+<br/>
 <pre class="prettyprint lang-js">
 {
     "contentType": "text/quick-reply",
@@ -934,6 +934,7 @@ A quick reply is a special item that is used for offering several choices to a v
     "idQuickReply": "1ef5145b-a9b6-4e86-8743-b6e3b4026b2c"
 }
 </pre>
+<br />
 
 | Field | Description | Values | Constraints |
 | --- | --- | --- | --- |
@@ -944,17 +945,16 @@ A quick reply is a special item that is used for offering several choices to a v
 <br />
 
 ##### Generic card : Sending rich-content
+<br/>
+A generic card is a payload you can use to send a more structured message. It always contains at least one link and can be used to help a visitor to navigate on a website by redirecting him to specific pages. You can specify multiple links on a single generic card. Generic card can also include a title, a description and an image. This help give context to the visitor about the links you are sending.
+<br/>
 
 <img src="./assets/images/example-generic-card-with-title-text-and-picture.png" alt="Example of a generic card with title, text and picture set" width="300" height="260" style="margin: auto;">
-
-<p align="center"><em>With a title, text, image and one link</em></p>
-
+<p align="center"><em>A generic card with a title, a text, an image and a single link.</em></p>
+<br/>
 <img src="./assets/images/example-generic-card-with-several-links.png" alt="Example of a generic card with several links" width="300" height="260" style="margin: auto;">
-
-<p align="center"><em>With several links</em></p>
-
-A generic card is a payload that can be use to send a more structured message. It always contains at least one link and can be used to help one visitor to navigate on one website. You can specify multiple links at once and choose what context you want to add to those links. 
-
+<p align="center"><em>A generic card with several links.</em></p>
+<br/>
 <pre class="prettyprint lang-js">
 {
     "contentType": "card/content",
@@ -966,7 +966,7 @@ A generic card is a payload that can be use to send a more structured message. I
     "text": "Learn more about dispatch and delivery times, methods and costs.",
     "actions": [{
         "type": "LINK",
-        "name": "See more"
+        "name": "See more",
         "url": "http://mylink/delivery"
     }]
 }
@@ -1003,13 +1003,18 @@ A generic card is a payload that can be use to send a more structured message. I
 
 <br />
 
-##### Generic card bundle (Carousel) : Sending multiple card at once
+##### Generic card bundle : Carousel
+
+<br />
+
+With the generic card bundle you can create a carousel for the visitor. Sliders are an efficient tool to present multiple services, offers or products to your visitors.
+
+<br />
 
 <img src="./assets/images/example-generic-card-bundle.png" alt="Example of a generic card with title, text and picture set" width="300" height="260" style="margin: auto;">
+<p align="center"><em>Example of a carousel built with a bundle of generic cards.</em></p>
 
-<p align="center"><em>Bundle with several cards</em></p>
-
-A card bundle enables you to send multiple generic cards at once. This lets one visitor look at different options on one website. 
+<br />
 
 <pre class="prettyprint lang-js">
 {
@@ -1026,7 +1031,7 @@ A card bundle enables you to send multiple generic cards at once. This lets one 
             "text": "Learn more about our policies",
             "actions": [{
                 "type": "LINK",
-                "name": "See more"
+                "name": "See more",
                 "url": "http://mylink/delivery"
             }]
         },
@@ -1042,13 +1047,17 @@ A card bundle enables you to send multiple generic cards at once. This lets one 
 
 <br />
 
-##### Product offer : Sending a product offer
+##### Sending a product offer
+
+<br />
+
+A product offer payload lets you send a product offer to your visitor. Using the product offer you can showcase various attributes of your product such as the price, the photography of your product, the availability or a special offer. To show your visitors a carousel of product offers please see [Product offer bundle](##### Product offer bundle (Carousel) : Sending multiple product offers at once)
+
+<br />
 
 <img src="./assets/images/example-product-offer-payload.png" alt="Example of a product offer with offer" width="300" height="260" style="margin: auto;">
-
-<p align="center"><em>Example of a message with a product offer payload</em></p>
-
-A product offer payload lets you send a product offer to one visitor. You can per example specify if there is a discount or if the product is available. 
+<p align="center"><em>Example of a product offer with the price, avaibility, image and special offer.</em></p>
+<br/>
 
 <pre class="prettyprint lang-js">
 {
@@ -1065,7 +1074,7 @@ A product offer payload lets you send a product offer to one visitor. You can pe
     },
     "actions": [{
         "type": "LINK",
-        "name": "See more"
+        "name": "See more",
         "url": "http://mylink/TvSamsung"
     }]
 }
@@ -1086,11 +1095,17 @@ A product offer payload lets you send a product offer to one visitor. You can pe
 
 ##### Product offer bundle (Carousel) : Sending multiple product offers at once
 
+<br />
+
+A product offer bundle is an efficient tool to showcase multiple products at one to your visitor. The visitor can navigate among the offers you sent using a slider.
+
+<br />
+
 <img src="./assets/images/example-product-offer-bundle.png" alt="Example of a generic card with title, text and picture set" width="300" height="260" style="margin: auto;">
+<p align="center"><em>Example of a product offers bundle.</em></p>
 
-<p align="center"><em>Bundle with several product offers</em></p>
+<br />
 
-A product offer bundle lets you suggest several products at once. The visitor can navigate among the sent offers.
 
 <pre class="prettyprint lang-js">
 {
@@ -1112,7 +1127,7 @@ A product offer bundle lets you suggest several products at once. The visitor ca
             },
             "actions": [{
                 "type": "LINK",
-                "name": "See more"
+                "name": "See more",
                 "url": "http://mylink/TvPanasonic"
             }]
         },
@@ -1130,15 +1145,23 @@ A product offer bundle lets you suggest several products at once. The visitor ca
 
 ##### Attachment : Sending a file
 
+<br />
+
+An attachment lets you send files directly in the chatbox. If you send an image it will be directly shown to the visitors if it is in a supported format by the visitor's browser. For a non-picture file it will offer the possibility to download it. 
+
+<br />
+
 <img src="./assets/images/example-attachment-payload.png" alt="Example of a document payload" width="300" height="260" style="margin: auto;">
 
-<p align="center"><em>Example of a message with a file attachment payload</em></p>
+<p align="center"><em>Example of a message with a pdf attachment payload.</em></p>
+
+<br />
 
 <img src="./assets/images/example-attachment-pic-payload.png" alt="Example of a picture payload" width="300" height="260" style="margin: auto;">
 
-<p align="center"><em>Example of a message with a picture attachment payload</em></p>
+<p align="center"><em>Example of a message with a picture attachment payload.</em></p>
 
-An attachment lets you send a link (to a file) in the chatbox. If the link points at a picture, It will be shown as such. For a non-picture file, it will let one user download it. Pictures will be considered as such if they can be displayed in a browser. 
+<br />
 
 <pre class="prettyprint lang-js">
 {
@@ -1164,6 +1187,8 @@ An attachment lets you send a link (to a file) in the chatbox. If the link point
 
 ###### Image
 
+<br />
+
 An Image object can be used to display one image. **The picture linked need to be of dimension 240x120(px) and should be displayable on browsers.**
 
 <pre class="prettyprint lang-js">
@@ -1182,9 +1207,7 @@ An Image object can be used to display one image. **The picture linked need to b
 
 ###### Action
 
-Actions can be used to offers options to one visitor. Today, only link actions can be used.
-
-A link action is one action that can redirect one user to a given url link.
+Actions can be used to offers options to one visitor. Today, only link actions can be used. A link action is one action that can redirect one user to a given url link.
 
 <pre class="prettyprint lang-js">
 {
