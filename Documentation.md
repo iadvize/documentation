@@ -2148,28 +2148,51 @@ To use the GraphQL API, call the URL below with the Authorization header contain
 </pre>
 
 # Webhooks
+When an event occurs, an HTTP `POST` call is issued on the callback urls you set up with the event data.
+Data is sent with `application/json` header content-type, and `json` format as payload.
+Callback urls must be defined with HTTPS protocol and should be available with `POST` verb to send data payload.
+iAdvize expect to have à 20x http status in callback result.
 
 ## Events description
+| Domain | Name | Description | Available for |
+| --- | --- | --- | --- | 
+| conversations.domain | `v2.conversation.pushed` | A conversation has been pushed to an operator | `CHAT`
 
-| Domain | Name | Description |
-| --- | --- | --- |
-| conversations.domain | `conversation.started` | Chat or call conversation |
-| conversations.domain | `conversation.closed` | Chat or call conversation |
-| conversations.domain | `conversation.transferred` | Chat conversation |
-| conversations.domain | `visitor.updated` | Visitor information updated from desk or admin view |
-| users.domain | `user.created` | User created |
-| users.domain | `user.updated` | User information updated |
-| users.domain | `satisfaction.filled` | |
-| users.domain | `user.connected` | |
-| users.domain | `user.disconnected` | |
+## Payload 
+
+### v2.conversation.pushed
+<pre class="prettyprint lang-js">
+{
+  "eventId": "0f0bb3af-5035-4ba3-b3fb-ff4879a3a74d",
+  "eventType": "v2.conversation.pushed",
+  "platform": "ha",
+  "projectId": 1549,
+  "clientId": 335,
+  "conversationId": "4c8c7408-f73c-42cd-89e9-afbbee7d9024",
+  "operatorId": 15253,
+  "visitorExternalId": "63429889",
+  "channel": "CHAT",
+  "createdAt": "2019-04-12T07:58:35.171Z",
+  "sentAt": "2019-04-12T07:58:35.496Z"
+}
+</pre>
+
+## Events description (to be replaced by v2 events)
+
+| Domain | Name | Description | Deprecated by |
+| --- | --- | --- | --- |
+| conversations.domain | `conversation.started` | ~~Chat~~ or call conversation | `v2.conversation.pushed` (for chat only) |
+| conversations.domain | `conversation.closed` | Chat or call conversation | |
+| ~~conversations.domain~~ | ~~`conversation.transferred`~~ | ~~Chat conversation~~ | `v2.conversation.pushed` |
+| conversations.domain | `visitor.updated` | Visitor information updated from desk or admin view | |
+| users.domain | `user.created` | User created | |
+| users.domain | `user.updated` | User information updated | |
+| users.domain | `satisfaction.filled` | | |
+| users.domain | `user.connected` | | | 
+| users.domain | `user.disconnected` | | |
 
 
 ## Payloads
-When an event occurs, an HTTP POST call is issued on the callback urls you set up with the event data.
-Data is sent with “application/json” header content-type, and “json” format as payload.
-Callback urls must be defined with HTTPS protocol and should be available with POST verb to send data payload.
-iAdvize expect to have à 20x http status in callback result.
-
 **Output examples of Conversations domain:**
 
 Please note :
@@ -2179,7 +2202,7 @@ Please note :
 | clientId | As a client of iAdvize you have a specific ID, it is what this one represents |
 | visitorId | Each visitor has a unique ID. iAdvize calls it visitor unique ID |
 
-#### conversation.started
+#### ~~conversation.started~~ replaced by v2.conversation.pushed
 
 <pre class="prettyprint lang-js">{
     "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
@@ -2213,7 +2236,7 @@ Please note :
 }
 </pre>
 
-#### conversation.transferred
+#### ~~conversation.transferred~~ replaced by v2.conversation.pushed
 
 <pre class="prettyprint lang-js">{
     "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
