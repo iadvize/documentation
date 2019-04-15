@@ -2153,19 +2153,27 @@ Data is sent with `application/json` header content-type, and `json` format as p
 Callback urls must be defined with HTTPS protocol and should be available with `POST` verb to send data payload.
 iAdvize expect to have à 20x http status in callback result.
 
-## Conversation Events description
+
+## Conversation events description
 | Domain | Name | Description | Deprecated by | Available for |
 | --- | --- | --- | --- | --- | 
 | conversations.domain | `v2.conversation.pushed` | A conversation has been pushed to an operator | | `CHAT`
 | conversations.domain | `conversation.started` | ~~Chat~~ or call conversation | `v2.conversation.pushed` (for chat only) | `CALL`
-| conversations.domain | `conversation.closed` | Chat or call conversation | | `CHAT`, `CALL`
 | ~~conversations.domain~~ | ~~`conversation.transferred`~~ | ~~Chat conversation~~ | `v2.conversation.pushed` | `CHAT`
+| conversations.domain | `conversation.closed` | Chat or call conversation | | `CHAT`, `CALL`
 | conversations.domain | `visitor.updated` | Visitor information updated from desk or admin view | |
 
 ## Payload
+**Output examples of Conversations domain:**
+Please note :
+
+| Attribut | Description |
+| --- | --- |
+| clientId | As a client of iAdvize you have a specific ID, it is what this one represents |
+| visitorId | Each visitor has a unique ID. iAdvize calls it visitor unique ID |
+
 ### v2.conversation.pushed
-<pre class="prettyprint lang-js">
-{
+<pre class="prettyprint lang-js">{
   "eventId": "0f0bb3af-5035-4ba3-b3fb-ff4879a3a74d",
   "eventType": "v2.conversation.pushed",
   "platform": "ha",
@@ -2180,49 +2188,11 @@ iAdvize expect to have à 20x http status in callback result.
 }
 </pre>
 
-## User events description
-
-| Domain | Name | Description | Deprecated by |
-| --- | --- | --- | --- |
-| users.domain | `user.created` | User created | |
-| users.domain | `user.updated` | User information updated | |
-| users.domain | `satisfaction.filled` | | |
-| users.domain | `user.connected` | | | 
-| users.domain | `user.disconnected` | | |
-
-
-## Payloads
-**Output examples of Conversations domain:**
-
-Please note :
-
-| Attribut | Description |
-| --- | --- |
-| clientId | As a client of iAdvize you have a specific ID, it is what this one represents |
-| visitorId | Each visitor has a unique ID. iAdvize calls it visitor unique ID |
-
 #### ~~conversation.started~~ replaced by v2.conversation.pushed
 
 <pre class="prettyprint lang-js">{
     "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
     "eventType": "conversation.started",
-    "platform": "sd",
-    "websiteId": 1,
-    "clientId": 1,
-    "conversationId": 1,
-    "operatorId": 1,
-    "channel": "chat",
-    "visitorId": "593de0891b628a50b09835dc6c0e92565329c74baa90e",
-    "createdAt": "2017-04-22T11:01:00+02:00",
-    "sentAt": "2017-04-22T11:01:00+02:00"
-}
-</pre>
-
-#### conversation.closed
-
-<pre class="prettyprint lang-js">{
-    "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
-    "eventType": "conversation.closed",
     "platform": "sd",
     "websiteId": 1,
     "clientId": 1,
@@ -2253,6 +2223,48 @@ Please note :
 }
 </pre>
 
+#### conversation.closed
+
+<pre class="prettyprint lang-js">{
+    "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
+    "eventType": "conversation.closed",
+    "platform": "sd",
+    "websiteId": 1,
+    "clientId": 1,
+    "conversationId": 1,
+    "operatorId": 1,
+    "channel": "chat",
+    "visitorId": "593de0891b628a50b09835dc6c0e92565329c74baa90e",
+    "createdAt": "2017-04-22T11:01:00+02:00",
+    "sentAt": "2017-04-22T11:01:00+02:00"
+}
+</pre>
+
+#### visitor.updated
+<pre class="prettyprint lang-js">{
+    "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
+    "eventType": "visitor.updated",
+    "platform": "sd",
+    "clientId": 1,
+    "operatorId": 1,
+    "visitorId": "593de0891b628a50b09835dc6c0e92565329c74baa90e",
+    "createdAt": "2017-04-22T11:01:00+02:00",
+    "sentAt": "2017-04-22T11:01:00+02:00"
+}
+</pre>
+
+## User events description
+
+| Domain | Name | Description |
+| --- | --- | --- |
+| users.domain | `user.created` | User created |
+| users.domain | `user.updated` | User information updated |
+| users.domain | `satisfaction.filled` | |
+| users.domain | `user.connected` | |
+| users.domain | `user.disconnected` | |
+
+
+## Payloads
 #### user.created
 <pre class="prettyprint lang-js">{
     "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
@@ -2272,19 +2284,6 @@ Please note :
     "platform": "sd",
     "clientId": 1,
     "userId": 1,
-    "createdAt": "2017-04-22T11:01:00+02:00",
-    "sentAt": "2017-04-22T11:01:00+02:00"
-}
-</pre>
-
-#### visitor.updated
-<pre class="prettyprint lang-js">{
-    "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
-    "eventType": "visitor.updated",
-    "platform": "sd",
-    "clientId": 1,
-    "operatorId": 1,
-    "visitorId": "593de0891b628a50b09835dc6c0e92565329c74baa90e",
     "createdAt": "2017-04-22T11:01:00+02:00",
     "sentAt": "2017-04-22T11:01:00+02:00"
 }
