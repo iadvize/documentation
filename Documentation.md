@@ -2153,13 +2153,16 @@ Data is sent with `application/json` header content-type, and `json` format as p
 Callback urls must be defined with HTTPS protocol and should be available with `POST` verb to send data payload.
 iAdvize expect to have à 20x http status in callback result.
 
-## Events description
-| Domain | Name | Description | Available for |
-| --- | --- | --- | --- | 
-| conversations.domain | `v2.conversation.pushed` | A conversation has been pushed to an operator | `CHAT`
+## Conversation Events description
+| Domain | Name | Description | Deprecated by | Available for |
+| --- | --- | --- | --- | --- | 
+| conversations.domain | `v2.conversation.pushed` | A conversation has been pushed to an operator | | `CHAT`
+| conversations.domain | `conversation.started` | ~~Chat~~ or call conversation | `v2.conversation.pushed` (for chat only) | `CALL`
+| conversations.domain | `conversation.closed` | Chat or call conversation | | `CHAT`, `CALL`
+| ~~conversations.domain~~ | ~~`conversation.transferred`~~ | ~~Chat conversation~~ | `v2.conversation.pushed` | `CHAT`
+| conversations.domain | `visitor.updated` | Visitor information updated from desk or admin view | |
 
-## Payload 
-
+## Payload
 ### v2.conversation.pushed
 <pre class="prettyprint lang-js">
 {
@@ -2177,14 +2180,10 @@ iAdvize expect to have à 20x http status in callback result.
 }
 </pre>
 
-## Events description (to be replaced by v2 events)
+## User events description
 
 | Domain | Name | Description | Deprecated by |
 | --- | --- | --- | --- |
-| conversations.domain | `conversation.started` | ~~Chat~~ or call conversation | `v2.conversation.pushed` (for chat only) |
-| conversations.domain | `conversation.closed` | Chat or call conversation | |
-| ~~conversations.domain~~ | ~~`conversation.transferred`~~ | ~~Chat conversation~~ | `v2.conversation.pushed` |
-| conversations.domain | `visitor.updated` | Visitor information updated from desk or admin view | |
 | users.domain | `user.created` | User created | |
 | users.domain | `user.updated` | User information updated | |
 | users.domain | `satisfaction.filled` | | |
