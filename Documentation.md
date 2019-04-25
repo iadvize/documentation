@@ -1587,6 +1587,7 @@ formatted conversation history.
 | skill_id | Skill identifier | ?filters[skill_id]=123 |
 | tag_id | Tag identifier | ?filters[tag_id]=123 |
 | rule_id | Rule identifier | ?filters[rule_id]=123 |
+| conversation_id | Conversation identifier in conversation workflow V2 | ?filters[conversation_id]=uuid |
 
 A request cannot fetch the conversations for a period over 3 months.
 The following rules apply :
