@@ -2155,15 +2155,14 @@ iAdvize expect to have à 20x http status in callback result.
 
 
 ## Conversation events description
-| Domain | Name | Description | Deprecated by | Available for |
+| Name | Description | Deprecated by | Available for |
 | --- | --- | --- | --- | --- | 
-| conversations.domain | `v2.conversation.pushed` | A conversation has been pushed to an operator | | `CHAT`
-| conversations.domain | `conversation.started` | ~~Chat~~ or call conversation | `v2.conversation.pushed` (for chat only) | `CALL`
-| ~~conversations.domain~~ | ~~`conversation.transferred`~~ | ~~Chat conversation~~ | `v2.conversation.pushed` | `CHAT`
-| conversations.domain | `conversation.closed` | Chat or call conversation | | `CHAT`, `CALL`
-| conversations.domain | `visitor.updated` | Visitor information updated from desk or admin view | |
+| `conversation.started` | ~~Chat~~ or call conversation | `v2.conversation.pushed` | `CHAT`, `CALL`
+| ~~`conversation.transferred`~~ | ~~Chat conversation~~ | `v2.conversation.pushed` | `CHAT`
+| `conversation.closed` | Chat or call conversation | | `CHAT`, `CALL`
+| `visitor.updated` | Visitor information updated from desk or admin view | |
 
-## Payload
+### Payload
 **Output examples of Conversations domain:**
 Please note :
 
@@ -2171,22 +2170,6 @@ Please note :
 | --- | --- |
 | clientId | As a client of iAdvize you have a specific ID, it is what this one represents |
 | visitorId | Each visitor has a unique ID. iAdvize calls it visitor unique ID |
-
-### v2.conversation.pushed
-<pre class="prettyprint lang-js">{
-  "eventId": "0f0bb3af-5035-4ba3-b3fb-ff4879a3a74d",
-  "eventType": "v2.conversation.pushed",
-  "platform": "ha",
-  "projectId": 1549,
-  "clientId": 335,
-  "conversationId": "4c8c7408-f73c-42cd-89e9-afbbee7d9024",
-  "operatorId": 15253,
-  "visitorExternalId": "63429889",
-  "channel": "CHAT",
-  "createdAt": "2019-04-12T07:58:35.171Z",
-  "sentAt": "2019-04-12T07:58:35.496Z"
-}
-</pre>
 
 #### ~~conversation.started~~ replaced by v2.conversation.pushed
 
@@ -2253,15 +2236,44 @@ Please note :
 }
 </pre>
 
+
+## V2 Conversation events description
+
+We are currently migrating our events to a new format to offer you more flexibility in the way you can query our data. 
+With V2 events, you can query the corresponding resources through our [GraphQL api](#graphql-api-alpha).
+
+
+| Name | Description | Available for |
+| --- | --- | --- | --- | --- | 
+| `v2.conversation.pushed` | A conversation has been pushed to an operator | `CHAT`, `CALL`
+
+### Payload
+
+#### v2.conversation.pushed
+<pre class="prettyprint lang-js">{
+  "eventId": "0f0bb3af-5035-4ba3-b3fb-ff4879a3a74d",
+  "eventType": "v2.conversation.pushed",
+  "platform": "ha",
+  "projectId": 1549,
+  "clientId": 335,
+  "conversationId": "4c8c7408-f73c-42cd-89e9-afbbee7d9024",
+  "operatorId": 15253,
+  "visitorExternalId": "63429889",
+  "channel": "CHAT",
+  "createdAt": "2019-04-12T07:58:35.171Z",
+  "sentAt": "2019-04-12T07:58:35.496Z"
+}
+</pre>
+
 ## User events description
 
 | Domain | Name | Description |
-| --- | --- | --- |
-| users.domain | `user.created` | User created |
-| users.domain | `user.updated` | User information updated |
-| users.domain | `satisfaction.filled` | |
-| users.domain | `user.connected` | |
-| users.domain | `user.disconnected` | |
+| --- | --- |
+| `user.created` | User created |
+| `user.updated` | User information updated |
+| `satisfaction.filled` | |
+| `user.connected` | |
+| `user.disconnected` | |
 
 
 ## Payloads
