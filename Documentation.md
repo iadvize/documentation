@@ -766,7 +766,7 @@ Here is a full conversation example :
             "contentType": "text",
             "value": "Hi, are you there ? Shall we begin ?"
         },
-        "createdAt": "2017-11-22T12:04:00Z"
+        "createdAt": "2017-11-22T12:04:00Z[Etc/UTC]"
     }
 }
 </pre>
