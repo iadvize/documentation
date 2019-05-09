@@ -2242,10 +2242,9 @@ Please note :
 We are currently migrating our events to a new format to offer you more flexibility in the way you can query our data. 
 With V2 events, you can query the corresponding resources through our [GraphQL api](#graphql-api-alpha).
 
-
 | Name | Description | Available for |
 | --- | --- | --- | --- | --- | 
-| `v2.conversation.pushed` | A conversation has been pushed to an operator | `CHAT`, `CALL`
+| `v2.conversation.pushed` | A conversation has been pushed to an operator | `CHAT`, `FACEBOOK`, `TWITTER`, `FACEBOOK_BUSINESS_ON_MESSENGER`, `INSTAGRAM`, `SMS`, `WHATSAPP`, `MOBILE_APP` or `VIDEO`
 
 ### Payload
 
