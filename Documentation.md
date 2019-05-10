@@ -2148,30 +2148,22 @@ To use the GraphQL API, call the URL below with the Authorization header contain
 </pre>
 
 # Webhooks
-
-## Events description
-
-| Domain | Name | Description |
-| --- | --- | --- |
-| conversations.domain | `conversation.started` | Chat or call conversation |
-| conversations.domain | `conversation.closed` | Chat or call conversation |
-| conversations.domain | `conversation.transferred` | Chat conversation |
-| conversations.domain | `visitor.updated` | Visitor information updated from desk or admin view |
-| users.domain | `user.created` | User created |
-| users.domain | `user.updated` | User information updated |
-| users.domain | `satisfaction.filled` | |
-| users.domain | `user.connected` | |
-| users.domain | `user.disconnected` | |
-
-
-## Payloads
-When an event occurs, an HTTP POST call is issued on the callback urls you set up with the event data.
-Data is sent with “application/json” header content-type, and “json” format as payload.
-Callback urls must be defined with HTTPS protocol and should be available with POST verb to send data payload.
+When an event occurs, an HTTP `POST` call is issued on the callback urls you set up with the event data.
+Data is sent with `application/json` header content-type, and `json` format as payload.
+Callback urls must be defined with HTTPS protocol and should be available with `POST` verb to send data payload.
 iAdvize expect to have à 20x http status in callback result.
 
-**Output examples of Conversations domain:**
 
+## Conversation events description
+| Name | Description | Deprecated by | Available for |
+| --- | --- | --- | --- | --- | 
+| `conversation.started` | ~~Chat~~ or call conversation | `v2.conversation.pushed` | `CHAT`, `CALL`
+| ~~`conversation.transferred`~~ | ~~Chat conversation~~ | `v2.conversation.pushed` | `CHAT`
+| `conversation.closed` | Chat or call conversation | | `CHAT`, `CALL`
+| `visitor.updated` | Visitor information updated from desk or admin view | |
+
+### Payload
+**Output examples of Conversations domain:**
 Please note :
 
 | Attribut | Description |
@@ -2179,7 +2171,7 @@ Please note :
 | clientId | As a client of iAdvize you have a specific ID, it is what this one represents |
 | visitorId | Each visitor has a unique ID. iAdvize calls it visitor unique ID |
 
-#### conversation.started
+#### ~~conversation.started~~ replaced by v2.conversation.pushed
 
 <pre class="prettyprint lang-js">{
     "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
@@ -2188,6 +2180,24 @@ Please note :
     "websiteId": 1,
     "clientId": 1,
     "conversationId": 1,
+    "operatorId": 1,
+    "channel": "chat",
+    "visitorId": "593de0891b628a50b09835dc6c0e92565329c74baa90e",
+    "createdAt": "2017-04-22T11:01:00+02:00",
+    "sentAt": "2017-04-22T11:01:00+02:00"
+}
+</pre>
+
+#### ~~conversation.transferred~~ replaced by v2.conversation.pushed
+
+<pre class="prettyprint lang-js">{
+    "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
+    "eventType": "conversation.transferred",
+    "platform": "sd",
+    "websiteId": 1,
+    "clientId": 1,
+    "conversationId": 2,
+    "transferredConversationId": 1,
     "operatorId": 1,
     "channel": "chat",
     "visitorId": "593de0891b628a50b09835dc6c0e92565329c74baa90e",
@@ -2213,24 +2223,59 @@ Please note :
 }
 </pre>
 
-#### conversation.transferred
-
+#### visitor.updated
 <pre class="prettyprint lang-js">{
     "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
-    "eventType": "conversation.transferred",
+    "eventType": "visitor.updated",
     "platform": "sd",
-    "websiteId": 1,
     "clientId": 1,
-    "conversationId": 2,
-    "transferredConversationId": 1,
     "operatorId": 1,
-    "channel": "chat",
     "visitorId": "593de0891b628a50b09835dc6c0e92565329c74baa90e",
     "createdAt": "2017-04-22T11:01:00+02:00",
     "sentAt": "2017-04-22T11:01:00+02:00"
 }
 </pre>
 
+
+## V2 Conversation events description
+
+We are currently migrating our events to a new format to offer you more flexibility in the way you can query our data. 
+With V2 events, you can query the corresponding resources through our [GraphQL api](#graphql-api-alpha).
+
+| Name | Description | Available for |
+| --- | --- | --- | --- | --- | 
+| `v2.conversation.pushed` | A conversation has been pushed to an operator | `CHAT`, `VIDEO`
+
+### Payload
+
+#### v2.conversation.pushed
+<pre class="prettyprint lang-js">{
+  "eventId": "0f0bb3af-5035-4ba3-b3fb-ff4879a3a74d",
+  "eventType": "v2.conversation.pushed",
+  "platform": "ha",
+  "projectId": 1549,
+  "clientId": 335,
+  "conversationId": "4c8c7408-f73c-42cd-89e9-afbbee7d9024",
+  "operatorId": 15253,
+  "visitorExternalId": "63429889",
+  "channel": "CHAT",
+  "createdAt": "2019-04-12T07:58:35.171Z",
+  "sentAt": "2019-04-12T07:58:35.496Z"
+}
+</pre>
+
+## User events description
+
+| Domain | Name | Description |
+| --- | --- |
+| `user.created` | User created |
+| `user.updated` | User information updated |
+| `satisfaction.filled` | |
+| `user.connected` | |
+| `user.disconnected` | |
+
+
+## Payloads
 #### user.created
 <pre class="prettyprint lang-js">{
     "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
@@ -2250,19 +2295,6 @@ Please note :
     "platform": "sd",
     "clientId": 1,
     "userId": 1,
-    "createdAt": "2017-04-22T11:01:00+02:00",
-    "sentAt": "2017-04-22T11:01:00+02:00"
-}
-</pre>
-
-#### visitor.updated
-<pre class="prettyprint lang-js">{
-    "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
-    "eventType": "visitor.updated",
-    "platform": "sd",
-    "clientId": 1,
-    "operatorId": 1,
-    "visitorId": "593de0891b628a50b09835dc6c0e92565329c74baa90e",
     "createdAt": "2017-04-22T11:01:00+02:00",
     "sentAt": "2017-04-22T11:01:00+02:00"
 }
