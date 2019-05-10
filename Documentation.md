@@ -2244,7 +2244,7 @@ With V2 events, you can query the corresponding resources through our [GraphQL a
 
 | Name | Description | Available for |
 | --- | --- | --- | --- | --- | 
-| `v2.conversation.pushed` | A conversation has been pushed to an operator | `CHAT`, `MOBILE_APP` or `VIDEO`
+| `v2.conversation.pushed` | A conversation has been pushed to an operator | `CHAT`, `VIDEO`
 
 ### Payload
 
