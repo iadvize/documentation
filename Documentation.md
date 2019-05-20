@@ -1786,6 +1786,7 @@ See [reading section](#read) to discover some output examples.
 | note_welcome | Welcome note | Double (percentage) |
 | note_resolution | Resolution note | Double (percentage) |
 | node_delay | Delay note | Double (percentage) |
+| comment | Comment | String
 | created_at | Date of creation | Date `YYYY-MM-DD HH:MM:SS` |
 | website_id | Website identifier | Integer |
 | operator_id | Operator identifier | Integer |
