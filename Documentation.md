@@ -78,6 +78,29 @@ Your App can be available for all iAdvize's customers or for selected customers.
 Our team is still working on the accessibility mode under the Private mode.
 In alpha version, we will make it available manually for the specific customers you have selected.
 
+### Health check 
+To be able to detect that a connector is healthy and is behaving as expected, you are required to implement an healthcheck endpoint, such as:
+
+#### Healthcheck endpoint
+###### Request - GET method
+
+| Query parameter | Description | Values |
+| --- | --- | --- |
+| No parameter | | |
+
+###### Response - status object
+<pre class="prettyprint lang-js">
+{
+    "status": "UP"
+}
+</pre>
+
+| Field | Description | Values | Required |
+| --- | --- | --- | --- |
+| status | The current status of your connector | `UP` | ✓ |
+
+Note that this endpoint will be checked on a regular basis, at the url you specified in the App information section. It **MUST** return `200` status, or it will be considered unhealthy.
+
 ## App Authentication
 The App Authentication section is where you can set the authentication information that the final user will have to enter in order to install your connector. Once the user authenticated, the connector will be able to access the right data from iAdvize and from the third-party app. For example, you can ask the user for his/her third app's email and password.
 Users will need to follow these authentication steps to install your app.
