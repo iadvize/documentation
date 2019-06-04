@@ -79,7 +79,7 @@ Our team is still working on the accessibility mode under the Private mode.
 In alpha version, we will make it available manually for the specific customers you have selected.
 
 ### Health check 
-To be able to detect that a connector is healthy and is behaving as expected, you are required to implement an healthcheck endpoint, such as:
+In order to ensure satisfaction from our customers we require that every integrator provide an health check route. Using the provided endpoint iAdvize must be able to detect that a connector is healthy and is behaving as expected. You are required to implement an healthcheck endpoint as specified below.
 
 #### Healthcheck endpoint
 ###### Request - GET method
