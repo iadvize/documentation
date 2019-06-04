@@ -99,7 +99,7 @@ In order to ensure satisfaction from our customers we require that every integra
 | --- | --- | --- | --- |
 | status | The current status of your connector | `UP` | ✓ |
 
-Note that this endpoint will be checked on a regular basis, at the url you specified in the App information section. It **MUST** return `200` status, or it will be considered unhealthy.
+Note that this endpoint will be checked on a regular basis at the url you specified in the App information section. It **MUST** return `200` status or it will be considered unhealthy.
 
 ## App Authentication
 The App Authentication section is where you can set the authentication information that the final user will have to enter in order to install your connector. Once the user authenticated, the connector will be able to access the right data from iAdvize and from the third-party app. For example, you can ask the user for his/her third app's email and password.
