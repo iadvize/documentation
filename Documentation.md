@@ -24,7 +24,6 @@ The iAdvize platform has 2 interfaces:
 
 The iAdvize Developer Platform allows developers to build apps and use our public APIs.
 Do you want to develop an app? We are providing you with documentation and a private testing environment.
-(The Developer Platform will be available in private beta from November, 2017.)
 
 ## Why to build apps to iAdvize?
 
@@ -38,11 +37,11 @@ Here is the example of a potential protocol between iAdvize and a CRM software t
 ![CRM Webhook](./assets/images/CRM-webhook.png)
 
 # Getting Started
-Do you want to join our developer community as a beta tester 🤘🏽? Follow these steps to be part of the adventure:
+Do you want to join our developer community 🤘🏽? Follow these steps to be part of the adventure:
 
 ## Get a Developer Account
 To build apps that iAdvize’s customers can use, first, you need to get a developer account.
-The Developer Platform will be available in private beta version from November, 17. We invite you to apply to the early access program thanks to our [online form](https://docs.google.com/forms/d/e/1FAIpQLSfKbBBwHtXU60D0bw6dPejF1_h2VBiPAf60LpQWtJ7h6dvXeg/viewform?usp=sf_link).
+We invite you to apply thanks to our [online form](https://docs.google.com/forms/d/e/1FAIpQLSfKbBBwHtXU60D0bw6dPejF1_h2VBiPAf60LpQWtJ7h6dvXeg/viewform?usp=sf_link).
 
 * Apply and share your integration project with our team,
 * The iAdvize team will contact you within 48 hours.
@@ -76,7 +75,7 @@ This is where you will be able to define your app's profile. Also, this is where
 **How does the Private mode work?**
 Your App can be available for all iAdvize's customers or for selected customers.
 Our team is still working on the accessibility mode under the Private mode.
-In alpha version, we will make it available manually for the specific customers you have selected.
+We will make it available manually for the specific customers you have selected.
 
 ### Health check 
 In order to ensure satisfaction from our customers we require that every integrator provide an health check route. Using the provided endpoint iAdvize must be able to detect that a connector is healthy and is behaving as expected. You are required to implement an healthcheck endpoint as specified below.
