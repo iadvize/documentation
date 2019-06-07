@@ -2178,15 +2178,16 @@ iAdvize expect to have à 20x http status in callback result.
 
 
 ## Conversation events description
-| Name | Description | Deprecated by | Available for |
-| --- | --- | --- | --- | --- | 
-| `conversation.started` | ~~Chat~~ or call conversation | `v2.conversation.pushed` | `CHAT`, `CALL`
-| ~~`conversation.transferred`~~ | ~~Chat conversation~~ | `v2.conversation.pushed` | `CHAT`
-| `conversation.closed` | Chat or call conversation | | `CHAT`, `CALL`
-| `visitor.updated` | Visitor information updated from desk or admin view | |
+| Name | Channel | Desciption | Comment |
+| --- | --- | --- | --- | 
+| `conversation.started` |`CALL`| Beginning of a call conversation | - 
+| `v2.conversation.pushed` |`CHAT`,`VIDEO`| Beginning of a chat conversation or receiving of a conversation transfgerred by another operator. | Replace the use of old deprecated events (conversation.started and conversation.transferred)
+| `conversation.closed` |`CHAT`, `CALL`| Closure of a chat or call conversation | - 
+| `visitor.updated` | | Visitor information updated from desk or admin view | |
 
-### Payload
+### Examples of payload for conversation events
 **Output examples of Conversations domain:**
+
 Please note :
 
 | Attribut | Description |
@@ -2194,7 +2195,9 @@ Please note :
 | clientId | As a client of iAdvize you have a specific ID, it is what this one represents |
 | visitorId | Each visitor has a unique ID. iAdvize calls it visitor unique ID |
 
-#### ~~conversation.started~~ replaced by v2.conversation.pushed
+#### conversation.started (only for call channel)
+
+Payload example on the right column =>
 
 <pre class="prettyprint lang-js">{
     "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
@@ -2204,32 +2207,17 @@ Please note :
     "clientId": 1,
     "conversationId": 1,
     "operatorId": 1,
-    "channel": "chat",
+    "channel": "call",
     "visitorId": "593de0891b628a50b09835dc6c0e92565329c74baa90e",
     "createdAt": "2017-04-22T11:01:00+02:00",
     "sentAt": "2017-04-22T11:01:00+02:00"
 }
 </pre>
 
-#### ~~conversation.transferred~~ replaced by v2.conversation.pushed
-
-<pre class="prettyprint lang-js">{
-    "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
-    "eventType": "conversation.transferred",
-    "platform": "sd",
-    "websiteId": 1,
-    "clientId": 1,
-    "conversationId": 2,
-    "transferredConversationId": 1,
-    "operatorId": 1,
-    "channel": "chat",
-    "visitorId": "593de0891b628a50b09835dc6c0e92565329c74baa90e",
-    "createdAt": "2017-04-22T11:01:00+02:00",
-    "sentAt": "2017-04-22T11:01:00+02:00"
-}
-</pre>
 
 #### conversation.closed
+
+Payload example on the right column =>
 
 <pre class="prettyprint lang-js">{
     "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
@@ -2247,6 +2235,9 @@ Please note :
 </pre>
 
 #### visitor.updated
+
+Payload example on the right column =>
+
 <pre class="prettyprint lang-js">{
     "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
     "eventType": "visitor.updated",
@@ -2260,18 +2251,15 @@ Please note :
 </pre>
 
 
-## V2 Conversation events description
-
 We are currently migrating our events to a new format to offer you more flexibility in the way you can query our data. 
 With V2 events, you can query the corresponding resources through our [GraphQL api](#graphql-api-alpha).
 
-| Name | Description | Available for |
-| --- | --- | --- | --- | --- | 
-| `v2.conversation.pushed` | A conversation has been pushed to an operator | `CHAT`, `VIDEO`
-
-### Payload
+### Payload examples of v2 conversation events
 
 #### v2.conversation.pushed
+
+Payload example on the right column =>
+
 <pre class="prettyprint lang-js">{
   "eventId": "0f0bb3af-5035-4ba3-b3fb-ff4879a3a74d",
   "eventType": "v2.conversation.pushed",
@@ -2284,6 +2272,52 @@ With V2 events, you can query the corresponding resources through our [GraphQL a
   "channel": "CHAT",
   "createdAt": "2019-04-12T07:58:35.171Z",
   "sentAt": "2019-04-12T07:58:35.496Z"
+}
+</pre>
+
+### Deprecated conversation events
+
+`WARNING`: the following events should not be used anymore, they still appear in this documentation only for history purposes!
+
+####~~conversation.started for channel chat~~
+
+Payload example on the right column =>
+
+PLEASE DO NOT USE (refer to warning above).
+
+<pre class="prettyprint lang-js">{
+    "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
+    "eventType": "conversation.started",
+    "platform": "sd",
+    "websiteId": 1,
+    "clientId": 1,
+    "conversationId": 1,
+    "operatorId": 1,
+    "channel": "chat",
+    "visitorId": "593de0891b628a50b09835dc6c0e92565329c74baa90e",
+    "createdAt": "2017-04-22T11:01:00+02:00",
+    "sentAt": "2017-04-22T11:01:00+02:00"
+}
+</pre>
+####~~conversation.transferred ~~
+
+Payload example on the right column =>
+
+PLEASE DO NOT USE (refer to warning above).
+
+<pre class="prettyprint lang-js">{
+    "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
+    "eventType": "conversation.transferred",
+    "platform": "sd",
+    "websiteId": 1,
+    "clientId": 1,
+    "conversationId": 2,
+    "transferredConversationId": 1,
+    "operatorId": 1,
+    "channel": "chat",
+    "visitorId": "593de0891b628a50b09835dc6c0e92565329c74baa90e",
+    "createdAt": "2017-04-22T11:01:00+02:00",
+    "sentAt": "2017-04-22T11:01:00+02:00"
 }
 </pre>
 
