@@ -2172,10 +2172,17 @@ To use the GraphQL API, call the URL below with the Authorization header contain
 </pre>
 
 # Webhooks
+## Introduction
 When an event occurs, an HTTP `POST` call is issued on the callback urls you set up with the event data.
 Data is sent with `application/json` header content-type, and `json` format as payload.
 Callback urls must be defined with HTTPS protocol and should be available with `POST` verb to send data payload.
 iAdvize expect to have à 20x http status in callback result.
+
+## Subscribe to your first webhook
+In order to subscribe to the webhooks of your website, you need to create an app in our marketplace.
+You'll need to have a developer account that you can get by signing up on [this page]. (https://developers.iadvize.com/login)
+You'll then be able to subscribe to all the available webhooks through our webhook building interface:
+![iAdvize](./assets/images/Webhook_creation_interface.png)
 
 
 ## Conversation events description
