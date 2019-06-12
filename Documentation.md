@@ -25,7 +25,7 @@ The iAdvize platform has 2 interfaces:
 The iAdvize Developer Platform allows developers to build apps and use our public APIs.
 Do you want to develop an app? We are providing you with documentation and a private testing environment.
 
-## Why to build apps to iAdvize?
+## Why build apps on iAdvize?
 
 There are three main reasons for building an app with the iAdvize Developer Platform:
 
@@ -46,6 +46,7 @@ We invite you to apply thanks to our [online form](https://docs.google.com/forms
 * The iAdvize team will contact you within 48 hours.
 
 ## Features Overview
+
 iAdvize's Developer Platform will provide you with some easy-to-use tools so you can:
 
 * Manager the privacy mode of your app for it to be public or private
@@ -54,9 +55,21 @@ iAdvize's Developer Platform will provide you with some easy-to-use tools so you
 * Create plugins to enhance some of iAdvize's predefined features
 * Use outgoing webhooks to receive updates in real-time
 
-Once your app is ready, you will be able to submit your connector for review.
-Then, the iAdvize team will review your app to make sure it fits the Developer Platform policies, and will get back to you within 48 hours (on working days).
-And then hurrah... You can publish your app on iAdvize’s marketplace!
+## App Reviewing Process
+
+Once your app is ready you will be able to submit your connector for review. The iAdvize team will review your app to make sure it fits the Developer Platform policies and will get back to you within 48 hours (on working days).
+
+Before submitting your app please make your you meet the following requirements:
+
+| Item                        | Description                  |
+| --------------------------- | ---------------------------- |
+| INFO - App description      | The provided description of your application will be displayed on the marketplace (if your app is public). |
+| INFO - App logo             | The icon should be in JPG/PNG/GIF format and respect at least the following dimensions : 165x150. |
+| INFO - App screenshots      | Image should be in JPG/PNG/GIF format and respect a 8:5 ratio. |
+| INFO - Contacts             | Please give us the main technical contact for the app as well as a generic support contact in case of emergency and unavailibility of the main contact. |
+| MONITORING - Health check   | As described in our documentation a [Health check route is required.](https://developers.iadvize.com/documentation#health-check) |
+| SECURITY - Signature usage  | The App must refuse any request containing a missing or bad signature. |
+| DEMO                        | If your application is a public app we will ask you for a demo environment in order to be able to test the integration. Please provide us with access for testing trough slack when you submit the application.  |
 
 # Build apps
 Once you are logged in your developer account, you are ready to build apps.
