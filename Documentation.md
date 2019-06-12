@@ -61,8 +61,8 @@ Once your app is ready you will be able to submit your connector for review. The
 
 Before submitting your app please make your you meet the following requirements:
 
-| Item                        | Description                  |
-| --------------------------- | ---------------------------- |
+| Item                           | Description                  |
+| ------------------------------ | ---------------------------- |
 | INFO - App description      | The provided description of your application will be displayed on the marketplace (if your app is public). |
 | INFO - App logo             | The icon should be in JPG/PNG/GIF format and respect at least the following dimensions : 165x150. |
 | INFO - App screenshots      | Image should be in JPG/PNG/GIF format and respect a 8:5 ratio. |
