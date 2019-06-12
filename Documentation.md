@@ -24,7 +24,6 @@ The iAdvize platform has 2 interfaces:
 
 The iAdvize Developer Platform allows developers to build apps and use our public APIs.
 Do you want to develop an app? We are providing you with documentation and a private testing environment.
-(The Developer Platform will be available in private beta from November, 2017.)
 
 ## Why to build apps to iAdvize?
 
@@ -37,11 +36,11 @@ Here is the example of a potential protocol between iAdvize and a CRM software t
 ![CRM Webhook](./assets/images/CRM-webhook.png)
 
 # Getting Started
-Do you want to join our developer community as a beta tester 🤘🏽? Follow these steps to be part of the adventure:
+Do you want to join our developer community 🤘🏽? Follow these steps to be part of the adventure:
 
 ## Get a Developer Account
 To build apps that iAdvize’s customers can use, first, you need to get a developer account.
-The Developer Platform will be available in private beta version from November, 17. We invite you to apply to the early access program thanks to our [online form](https://docs.google.com/forms/d/e/1FAIpQLSfKbBBwHtXU60D0bw6dPejF1_h2VBiPAf60LpQWtJ7h6dvXeg/viewform?usp=sf_link).
+We invite you to apply thanks to our [online form](https://docs.google.com/forms/d/e/1FAIpQLSfKbBBwHtXU60D0bw6dPejF1_h2VBiPAf60LpQWtJ7h6dvXeg/viewform?usp=sf_link).
 
 * Apply and share your integration project with our team,
 * The iAdvize team will contact you within 48 hours.
@@ -87,7 +86,7 @@ This is where you will be able to define your app's profile. Also, this is where
 **How does the Private mode work?**
 Your App can be available for all iAdvize's customers or for selected customers.
 Our team is still working on the accessibility mode under the Private mode.
-In alpha version, we will make it available manually for the specific customers you have selected.
+We will make it available manually for the specific customers you have selected.
 
 ### Health check 
 In order to ensure satisfaction from our customers we require that every integrator provide an health check route. Using the provided endpoint iAdvize must be able to detect that a connector is healthy and is behaving as expected. You are required to implement an healthcheck endpoint as specified below.
@@ -2197,15 +2196,16 @@ You'll then be able to subscribe to all the available webhooks through our webho
 
 
 ## Conversation events description
-| Name | Description | Deprecated by | Available for |
-| --- | --- | --- | --- | --- | 
-| `conversation.started` | ~~Chat~~ or call conversation | `v2.conversation.pushed` | `CHAT`, `CALL`
-| ~~`conversation.transferred`~~ | ~~Chat conversation~~ | `v2.conversation.pushed` | `CHAT`
-| `conversation.closed` | Chat or call conversation | | `CHAT`, `CALL`
-| `visitor.updated` | Visitor information updated from desk or admin view | |
+| Name | Channel | Desciption | Comment |
+| --- | --- | --- | --- | 
+| `conversation.started` |`CALL`| Beginning of a call conversation | - 
+| `v2.conversation.pushed` |`CHAT`,`VIDEO`| Beginning of a chat conversation or receiving of a conversation transfgerred by another operator. | Replace the use of old deprecated events (conversation.started and conversation.transferred)
+| `conversation.closed` |`CHAT`, `CALL`| Closure of a chat or call conversation | - 
+| `visitor.updated` | | Visitor information updated from desk or admin view | |
 
-### Payload
+### Examples of payload for conversation events
 **Output examples of Conversations domain:**
+
 Please note :
 
 | Attribut | Description |
@@ -2213,7 +2213,9 @@ Please note :
 | clientId | As a client of iAdvize you have a specific ID, it is what this one represents |
 | visitorId | Each visitor has a unique ID. iAdvize calls it visitor unique ID |
 
-#### ~~conversation.started~~ replaced by v2.conversation.pushed
+#### conversation.started (only for call channel)
+
+Payload example on the right column =>
 
 <pre class="prettyprint lang-js">{
     "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
@@ -2223,32 +2225,17 @@ Please note :
     "clientId": 1,
     "conversationId": 1,
     "operatorId": 1,
-    "channel": "chat",
+    "channel": "call",
     "visitorId": "593de0891b628a50b09835dc6c0e92565329c74baa90e",
     "createdAt": "2017-04-22T11:01:00+02:00",
     "sentAt": "2017-04-22T11:01:00+02:00"
 }
 </pre>
 
-#### ~~conversation.transferred~~ replaced by v2.conversation.pushed
-
-<pre class="prettyprint lang-js">{
-    "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
-    "eventType": "conversation.transferred",
-    "platform": "sd",
-    "websiteId": 1,
-    "clientId": 1,
-    "conversationId": 2,
-    "transferredConversationId": 1,
-    "operatorId": 1,
-    "channel": "chat",
-    "visitorId": "593de0891b628a50b09835dc6c0e92565329c74baa90e",
-    "createdAt": "2017-04-22T11:01:00+02:00",
-    "sentAt": "2017-04-22T11:01:00+02:00"
-}
-</pre>
 
 #### conversation.closed
+
+Payload example on the right column =>
 
 <pre class="prettyprint lang-js">{
     "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
@@ -2266,6 +2253,9 @@ Please note :
 </pre>
 
 #### visitor.updated
+
+Payload example on the right column =>
+
 <pre class="prettyprint lang-js">{
     "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
     "eventType": "visitor.updated",
@@ -2279,18 +2269,15 @@ Please note :
 </pre>
 
 
-## V2 Conversation events description
-
 We are currently migrating our events to a new format to offer you more flexibility in the way you can query our data. 
 With V2 events, you can query the corresponding resources through our [GraphQL api](#graphql-api-alpha).
 
-| Name | Description | Available for |
-| --- | --- | --- | --- | --- | 
-| `v2.conversation.pushed` | A conversation has been pushed to an operator | `CHAT`, `VIDEO`
-
-### Payload
+### Payload examples of v2 conversation events
 
 #### v2.conversation.pushed
+
+Payload example on the right column =>
+
 <pre class="prettyprint lang-js">{
   "eventId": "0f0bb3af-5035-4ba3-b3fb-ff4879a3a74d",
   "eventType": "v2.conversation.pushed",
@@ -2303,6 +2290,52 @@ With V2 events, you can query the corresponding resources through our [GraphQL a
   "channel": "CHAT",
   "createdAt": "2019-04-12T07:58:35.171Z",
   "sentAt": "2019-04-12T07:58:35.496Z"
+}
+</pre>
+
+### Deprecated conversation events
+
+`WARNING`: the following events should not be used anymore, they still appear in this documentation only for history purposes!
+
+####~~conversation.started for channel chat~~
+
+Payload example on the right column =>
+
+PLEASE DO NOT USE (refer to warning above).
+
+<pre class="prettyprint lang-js">{
+    "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
+    "eventType": "conversation.started",
+    "platform": "sd",
+    "websiteId": 1,
+    "clientId": 1,
+    "conversationId": 1,
+    "operatorId": 1,
+    "channel": "chat",
+    "visitorId": "593de0891b628a50b09835dc6c0e92565329c74baa90e",
+    "createdAt": "2017-04-22T11:01:00+02:00",
+    "sentAt": "2017-04-22T11:01:00+02:00"
+}
+</pre>
+####~~conversation.transferred ~~
+
+Payload example on the right column =>
+
+PLEASE DO NOT USE (refer to warning above).
+
+<pre class="prettyprint lang-js">{
+    "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
+    "eventType": "conversation.transferred",
+    "platform": "sd",
+    "websiteId": 1,
+    "clientId": 1,
+    "conversationId": 2,
+    "transferredConversationId": 1,
+    "operatorId": 1,
+    "channel": "chat",
+    "visitorId": "593de0891b628a50b09835dc6c0e92565329c74baa90e",
+    "createdAt": "2017-04-22T11:01:00+02:00",
+    "sentAt": "2017-04-22T11:01:00+02:00"
 }
 </pre>
 
