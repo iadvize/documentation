@@ -32,7 +32,6 @@ There are three main reasons for building an app with the iAdvize Developer Plat
 
 * You build apps and publish them for our customer community. (We've got more than 500 customers to amaze!)
 * You build apps in private mode and make them available only for one or more specific customers
-* You get rewarded based on how frequently your apps are used
 
 Here is the example of a potential protocol between iAdvize and a CRM software thanks to a connector:
 ![CRM Webhook](./assets/images/CRM-webhook.png)
@@ -63,6 +62,18 @@ And then hurrah... You can publish your app on iAdvize’s marketplace!
 # Build apps
 Once you are logged in your developer account, you are ready to build apps.
 So let's go through the different sections of the Developer Platform:
+
+
+## Milestones of the app creation process
+Here are the different steps of an app creation:
+* Sign up to our [developer platform](https://developers.iadvize.com/login).
+* You'll receive within 48 hours a confirmation of your subscribtion and your credentials to access your test environment.
+* You build your awesome app and send it for approval when it's finished.
+* You get notified of the acceptance or not of your app publication (see app validation process section).
+* If your app is approved, congratulations, iAdvize customer can now benefit from your work!
+* If your app is private: one or few selected customers can install it on their production environment.
+* If your app is public: any iAdvize customer can install it directly on the marketplace.
+* If you need to create a new version of your app, please refer to the "versionning of your apps" section of this documentation.
 
 ## My apps
 This is the place where you can see the list of all the apps you have built on iAdvize. You can also see their current status:
@@ -2172,10 +2183,17 @@ To use the GraphQL API, call the URL below with the Authorization header contain
 </pre>
 
 # Webhooks
+## Introduction
 When an event occurs, an HTTP `POST` call is issued on the callback urls you set up with the event data.
 Data is sent with `application/json` header content-type, and `json` format as payload.
 Callback urls must be defined with HTTPS protocol and should be available with `POST` verb to send data payload.
 iAdvize expect to have à 20x http status in callback result.
+
+## Subscribe to your first webhook
+In order to subscribe to the webhooks of your website, you need to create an app in our marketplace.
+You'll need to have a developer account that you can get by signing up on [this page](https://developers.iadvize.com/login).
+You'll then be able to subscribe to all the available webhooks through our webhook building interface:
+![iAdvize](./assets/images/Webhook_creation_interface.png).
 
 
 ## Conversation events description
