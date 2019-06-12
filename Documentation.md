@@ -63,13 +63,13 @@ Before submitting your app please make your you meet the following requirements:
 
 | Item                           | Description                  |
 | ------------------------------ | ---------------------------- |
-| INFO - App description      | The provided description of your application will be displayed on the marketplace (if your app is public). |
-| INFO - App logo             | The icon should be in JPG/PNG/GIF format and respect at least the following dimensions : 165x150. |
-| INFO - App screenshots      | Image should be in JPG/PNG/GIF format and respect a 8:5 ratio. |
-| INFO - Contacts             | Please give us the main technical contact for the app as well as a generic support contact in case of emergency and unavailibility of the main contact. |
-| MONITORING - Health check   | As described in our documentation a [Health check route is required.](https://developers.iadvize.com/documentation#health-check) |
-| SECURITY - Signature usage  | The App must refuse any request containing a missing or bad signature. |
-| DEMO                        | If your application is a public app we will ask you for a demo environment in order to be able to test the integration. Please provide us with access for testing trough slack when you submit the application.  |
+| App description      | The provided description of your application will be displayed on the marketplace (if your app is public). |
+| App logo             | The icon should be in JPG/PNG/GIF format and respect at least the following dimensions : 165x150. |
+| App screenshots      | Image should be in JPG/PNG/GIF format and respect a 8:5 ratio. |
+| Contact | Please give us the main technical contact for the app as well as a generic support contact in case of emergency and unavailibility of the main contact. |
+| Health check   | As described in our documentation a [Health check route is required.](https://developers.iadvize.com/documentation#health-check) |
+| Signature usage  | The App must refuse any request containing a missing or bad signature. |
+| Demo                        | If your application is a public app we will ask you for a demo environment in order to be able to test the integration. Please provide us with access for testing trough slack when you submit the application.  |
 
 # Build apps
 Once you are logged in your developer account, you are ready to build apps.
