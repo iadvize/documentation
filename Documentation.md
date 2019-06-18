@@ -66,13 +66,13 @@ So let's go through the different sections of the Developer Platform:
 ## Milestones of the app creation process
 Here are the different steps of an app creation:
 * Sign up to our [developer platform](https://developers.iadvize.com/login).
-* You'll receive within 48 hours a confirmation of your subscribtion and your credentials to access your test environment.
+* You'll receive within 48 hours a confirmation of your subscription and your credentials to access your test environment.
 * You build your awesome app and send it for approval when it's finished.
 * You get notified of the acceptance or not of your app publication (see app validation process section).
 * If your app is approved, congratulations, iAdvize customer can now benefit from your work!
 * If your app is private: one or few selected customers can install it on their production environment.
 * If your app is public: any iAdvize customer can install it directly on the marketplace.
-* If you need to create a new version of your app, please refer to the "versionning of your apps" section of this documentation.
+* If you need to create a new version of your app, please refer to the "versioning of your apps" section of this documentation.
 
 ## My apps
 This is the place where you can see the list of all the apps you have built on iAdvize. You can also see their current status:
@@ -460,7 +460,7 @@ Let your bot interact with online visitors directly within iAdvize’s chatbox.
 The External bot plugin enables iAdvize's Admins and Managers to create users with the role “bot” from iAdvize’s administration. The scenario and availability of the bot are managed by your app.
 
 To put it in a nutshell, the External bot plugin:
-* Allows bots providers to create their connector thanks to the Developper Platform
+* Allows bots providers to create their connector thanks to the Developer Platform
 * Allows customers to connect their iAdvize account to a bot provider and connect bots seamlessly. These bots interact with iAdvize like a human agent.
 
 ![Bot plugin](./assets/images/plugins/external-bots-main.gif)
@@ -682,7 +682,7 @@ Bot is ready and should be available accordingly to the availability strategy an
 There are 3 Conversation flow endpoints :
 
 * Each time a conversation is created, we call the _conversation initialisation endpoint_. In the current setup, the visitor is always the first to talk, so you should response with an empty array of replies.
-* This initialisation call will be immediatly followed by a call to the _new message & reply reception endpoint_, this second call will contain the first message of the visitor. You should response to this call with some reply (usually a welcoming message reply).
+* This initialisation call will be immediately followed by a call to the _new message & reply reception endpoint_, this second call will contain the first message of the visitor. You should response to this call with some reply (usually a welcoming message reply).
 * **Be careful**, from this point the calls to _new message & reply reception endpoint_ can contains the visitor's messages or **your own replies**. See the example below.
 
 ![Bot plugin](./assets/images/plugins/bot-scenarios-conversation-flow.jpg)
@@ -2196,7 +2196,7 @@ You'll then be able to subscribe to all the available webhooks through our webho
 
 
 ## Conversation events description
-| Name | Channel | Desciption | Comment |
+| Name | Channel | Description | Comment |
 | --- | --- | --- | --- | 
 | `conversation.started` |`CALL`| Beginning of a call conversation | - 
 | `v2.conversation.pushed` |`CHAT`,`VIDEO`| Beginning of a chat conversation or receiving of a conversation transferred by another operator. | Replace the use of old deprecated events (conversation.started and conversation.transferred)
@@ -2208,7 +2208,7 @@ You'll then be able to subscribe to all the available webhooks through our webho
 
 Please note :
 
-| Attribut | Description |
+| Attribute | Description |
 | --- | --- |
 | clientId | As a client of iAdvize you have a specific ID, it is what this one represents |
 | visitorId | Each visitor has a unique ID. iAdvize calls it visitor unique ID |
@@ -2523,7 +2523,7 @@ iAdvize provides Javascript callbacks functions that can be used to perform acti
 
 To execute custom code during an iAdvize callback function you have to define a `var iAdvizeCallbacks;` variable that will contain the callbacks you want to use. **You must declare that variable before iAdvize tracking code.**
 
-Each callback function has a `obj` variable passed as a parameter that could contain some extra informations about iAdvize elements.
+Each callback function has a `obj` variable passed as a parameter that could contain some extra information about iAdvize elements.
 
 In the example we want to track Google Analytics events when a chat or a call starts / ends :
 
