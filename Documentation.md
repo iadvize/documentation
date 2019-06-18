@@ -2199,8 +2199,8 @@ You'll then be able to subscribe to all the available webhooks through our webho
 | Name | Channel | Desciption | Comment |
 | --- | --- | --- | --- | 
 | `conversation.started` |`CALL`| Beginning of a call conversation | - 
-| `v2.conversation.pushed` |`CHAT`,`VIDEO`| Beginning of a chat conversation or receiving of a conversation transfgerred by another operator. | Replace the use of old deprecated events (conversation.started and conversation.transferred)
-| `conversation.closed` |`CHAT`, `CALL`| Closure of a chat or call conversation | - 
+| `v2.conversation.pushed` |`CHAT`,`VIDEO`| Beginning of a chat conversation or receiving of a conversation transferred by another operator. | Replace the use of old deprecated events (conversation.started and conversation.transferred)
+| `v2.conversation.closed` | Onsite: `CHAT`, `CALL`, `VIDEO`<br /> Offsite: `FACEBOOK`, `FACEBOOK_BUSINESS_ON_MESSENGER`, `TWITTER`, `MOBILE_APP`, `SMS` | End of a conversation. <br />Conversations on offsite channels are automatically closed after 7 days of inactivity | Replace the use of old deprecated event (conversation.closed)
 | `visitor.updated` | | Visitor information updated from desk or admin view | |
 
 ### Examples of payload for conversation events
@@ -2226,26 +2226,6 @@ Payload example on the right column =>
     "conversationId": 1,
     "operatorId": 1,
     "channel": "call",
-    "visitorId": "593de0891b628a50b09835dc6c0e92565329c74baa90e",
-    "createdAt": "2017-04-22T11:01:00+02:00",
-    "sentAt": "2017-04-22T11:01:00+02:00"
-}
-</pre>
-
-
-#### conversation.closed
-
-Payload example on the right column =>
-
-<pre class="prettyprint lang-js">{
-    "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
-    "eventType": "conversation.closed",
-    "platform": "sd",
-    "websiteId": 1,
-    "clientId": 1,
-    "conversationId": 1,
-    "operatorId": 1,
-    "channel": "chat",
     "visitorId": "593de0891b628a50b09835dc6c0e92565329c74baa90e",
     "createdAt": "2017-04-22T11:01:00+02:00",
     "sentAt": "2017-04-22T11:01:00+02:00"
@@ -2293,11 +2273,33 @@ Payload example on the right column =>
 }
 </pre>
 
+#### v2.conversation.closed
+
+Payload example on the right column =>
+
+<pre class="prettyprint lang-js">{
+  "eventId": "0f0bb3af-5035-4ba3-b3fb-ff4879a3a74d",
+  "eventType": "v2.conversation.closed",
+  "platform": "ha",
+  "projectId": 1549,
+  "clientId": 335,
+  "conversationId": "4c8c7408-f73c-42cd-89e9-afbbee7d9024",
+  "operatorId": [
+    15253,
+    15254
+   ],
+  "visitorExternalId": "63429889",
+  "channel": "CHAT",
+  "createdAt": "2019-04-12T07:58:35.171Z",
+  "sentAt": "2019-04-12T07:58:35.496Z"
+}
+</pre>
+
 ### Deprecated conversation events
 
 `WARNING`: the following events should not be used anymore, they still appear in this documentation only for history purposes!
 
-####~~conversation.started for channel chat~~
+#### ~~conversation.started for channel chat~~
 
 Payload example on the right column =>
 
@@ -2317,7 +2319,8 @@ PLEASE DO NOT USE (refer to warning above).
     "sentAt": "2017-04-22T11:01:00+02:00"
 }
 </pre>
-####~~conversation.transferred ~~
+
+#### ~~conversation.transferred ~~
 
 Payload example on the right column =>
 
@@ -2339,6 +2342,27 @@ PLEASE DO NOT USE (refer to warning above).
 }
 </pre>
 
+#### ~~conversation.closed ~~
+
+Payload example on the right column =>
+
+PLEASE DO NOT USE (refer to warning above).
+
+<pre class="prettyprint lang-js">{
+    "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
+    "eventType": "conversation.closed",
+    "platform": "sd",
+    "websiteId": 1,
+    "clientId": 1,
+    "conversationId": 1,
+    "operatorId": 1,
+    "channel": "chat",
+    "visitorId": "593de0891b628a50b09835dc6c0e92565329c74baa90e",
+    "createdAt": "2017-04-22T11:01:00+02:00",
+    "sentAt": "2017-04-22T11:01:00+02:00"
+}
+</pre>
+
 ## User events description
 
 | Domain | Name | Description |
@@ -2350,7 +2374,7 @@ PLEASE DO NOT USE (refer to warning above).
 | `user.disconnected` | |
 
 
-## Payloads
+### Payloads
 #### user.created
 <pre class="prettyprint lang-js">{
     "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
