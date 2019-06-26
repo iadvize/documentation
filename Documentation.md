@@ -771,7 +771,7 @@ Here is a full conversation example :
 | replies.quickReplies.value | Textual content of the quick reply | String | ✓ | replies.type == `message` |
 | replies.quickReplies.idQuickReply | Identifier of the quick reply | String | ✓ | replies.type == `message` |
 | replies.distributionRule | Distribution rules to transfer to | String |  | replies.type == `transfer` |
-| variables | Collected variables | Array |  | UUID |
+| variables | Collected variables | Array | ✓ | UUID |
 | variables.key | Key of the variable collected | String | ✓ |  |
 | variables.value | Value of the variable collected | String | ✓ |  |
 | createdAt | Creation date of the conversation | DateTime |  ✓ | ISO-8601 |
