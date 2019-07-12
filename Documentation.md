@@ -995,7 +995,9 @@ To retrieve the token(s) you must contact us at developers@iadvize.com and we wi
 
 Once the secret token set, iAdvize will create a hash signature.
 This hash signature is passed along with each request in the headers as `X-iAdvize-Signature`.
+
 For `GET` requests, hash signature starts with algorithm name `sha256=` and is computed by hashing the **raw query string** with HMAC hexdigest algorithm and your secret token as salt.
+
 For `POST`, `PUT`... requests, hash signature starts with algorithm name `sha256=` and is computed by hashing the **raw body string** with HMAC hexdigest algorithm and your secret token as salt.
 
 <pre class="prettyprint lang-js">
