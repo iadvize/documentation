@@ -2470,6 +2470,10 @@ We will try to send you the following requests:
 
 In case of failure, you may need to track events in error, by following "X-iAdvize-CorrelationId" in headers, or "eventId" in payload.
 
+## Webhook security
+
+Please refer to [this section](#app-security).
+
 # Javascript Callbacks
 
 iAdvize provides Javascript callbacks functions that can be used to perform actions on specific events.
