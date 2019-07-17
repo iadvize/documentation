@@ -765,7 +765,7 @@ Here is a full conversation example :
 | replies.duration.unit | Awaiting unit of time | `millis` or `seconds` or `minutes` |  | replies.type == `await` |
 | replies.duration.value | Awaiting value of time | Long |  | replies.type == `await` |
 | replies.payload | Typed payload of the message | Object | ✓ | replies.type == `message` |
-| replies.payload.contentType | Type of the message’s content | `text` or `text/quick-reply`  | ✓ | replies.type == `message` |
+| replies.payload.contentType | Type of the message’s content | `text/quick-reply`  | ✓ | replies.type == `message` |
 | replies.payload.value | Textual content of the message | String | ✓ | replies.type == `message` |
 | replies.quickReplies | Quick replies proposed to the visitor | Array |  | replies.type == `message` |
 | replies.quickReplies.value | Textual content of the quick reply | String | ✓ | replies.type == `message` |
@@ -841,7 +841,7 @@ Here is a full conversation example :
                     "idQuickReply": "1ef5145b-a9b6-4e86-8743-b6e3b4026b2c"
                 },
                 {
-                    "contentType": "text",
+                    "contentType": "text/quick-reply",
                     "value": "Bad",
                     "idQuickReply": "13594c9b-dcff-4add-81fc-5e1093e443a7"
                 }
