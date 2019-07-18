@@ -988,39 +988,52 @@ Once your server is configured to receive payloads, you can set up a secret toke
 First, you need to get one secret token depending on your connector.
 You can retrieve this token in the 'App information' section on our developer platform.
 
+Once your server is configured to receive payloads, you can set up a secret token and verify the information.
+
+Note: If you want to use the webhook system without building a connector, you will have to use one token per webhook.
+To retrieve the token(s) you must contact us at developers@iadvize.com and we will generate the token for you.
+
 ### Validating payloads from iAdvize
 
 Once the secret token set, iAdvize will create a hash signature.
 This hash signature is passed along with each request in the headers as `X-iAdvize-Signature`.
-Hash signature starts with algorithm name `sha256=` and is computed by hashing query string with HMAC hexdigest algorithm and your secret token as salt.
+
+For `GET` requests, hash signature starts with algorithm name `sha256=` and is computed by hashing the **raw query string** with HMAC hexdigest algorithm and your secret token as salt.
+
+For `POST`, `PUT`... requests, hash signature starts with algorithm name `sha256=` and is computed by hashing the **raw body string** with HMAC hexdigest algorithm and your secret token as salt.
 
 <pre class="prettyprint lang-js">
 X-iAdvize-Signature: sha256=110e8400-e29b-11d4-a716-446655440000
 </pre>
 
-
 You have to compute a new hash using your secret token, and to compare it with `X-iAdvize-Signature` and make sure it matches.
+Here is an example of a PHP implementation:
 
 <pre class="prettyprint lang-php">
+// Example for a POST request
 $secretToken       = 'yourSecretToken';
-$queryString       = $request->getUri()->getQuery();
+$headers           = getallheaders();
 $iAdvizeSignature  = $headers['X-iAdvize-Signature'];
 
 // Get alogrithm and hash
 list($algorithm, $iAdvizeHash) = explode('=', $iAdvizeSignature, 2);
 
-// Computed hash with query parameters
-$queryParametersHash = hash_hmac($algorithm, $queryString, $secretToken);
+// Get body payload from webhook
+$bodyPayload = file_get_contents('php://input');
+
+// Computed hash with body payload
+$bodyPayloadHash = hash_hmac($algorithm, $bodyPayload, $secretToken);
 
 // Final check
-if (! hash_equals($iAdvizeHash, $queryParametersHash)) {
+if (! hash_equals($iAdvizeHash, $bodyPayloadHash)) {
     exit('Validation hash failed');
 }
 </pre>
 
 
 We strongly recommend you, to use the **constant time** string comparison method (`hash_equals` vs `===`  in our example),
-to be less vulnerable to [timing attacks](https://en.wikipedia.org/wiki/Timing_attack).
+to be less vulnerable to timing attacks.
+
 
 ## Developer Policy
 Developers host their code on their own host service.
@@ -2463,57 +2476,7 @@ In case of failure, you may need to track events in error, by following "X-iAdvi
 
 ## Webhook security
 
-For security reasons iAdvize provides you with a method to verify and secure your Webhooks notifications. You will be able to make sure that the payloads have not been subjected to modifications, and to verify its source in order for example to limit the requests to those coming from iAdvize.
-
-Once your server is configured to receive payloads, you can set up a secret token and verify the information.
-
-### Set you secret token
-
-First, you need to get one or several secret token depending on your project.
-
-If you build a connector thanks to our Developer Platform, you will have to use one token per connector (no matters the number of webhook you set within your connector).
-You can retrieve this token in the 'App information' section.
-
-If you want to use the webhook system without building a connector, you will have to use one token per webhook.
-To retrieve the token(s) you must contact us at developers@iadvize.com and we will generate the token for you.
-
-### Validating payloads from iAdvize
-
-Once the secret token set, iAdvize will create a hash signature.
-This hash signature is passed along with each request in the headers as `X-iAdvize-Signature`.
-Hash signature starts with algorithm name `sha256=` and is computed by hashing body payload with HMAC hexdigest algorithm and your secret token as salt.
-
-<pre class="prettyprint lang-js">
-X-iAdvize-Signature: sha256=110e8400-e29b-11d4-a716-446655440000
-</pre>
-
-
-You have to compute a new hash using your secret token, and to compare it with `X-iAdvize-Signature` and make sure it matches.
-Here is an example of a PHP implementation:
-
-<pre class="prettyprint lang-php">
-$secretToken       = 'yourSecretToken';
-$headers           = getallheaders();
-$iAdvizeSignature  = $headers['X-iAdvize-Signature'];
-
-// Get alogrithm and hash
-list($algorithm, $iAdvizeHash) = explode('=', $iAdvizeSignature, 2);
-
-// Get body payload from webhook
-$bodyPayload = file_get_contents('php://input');
-
-// Computed hash with body payload
-$bodyPayloadHash = hash_hmac($algorithm, $bodyPayload, $secretToken);
-
-// Final check
-if (! hash_equals($iAdvizeHash, $bodyPayloadHash)) {
-    exit('Validation hash failed');
-}
-</pre>
-
-
-We strongly recommend you, to use the **constant time** string comparison method (`hash_equals` vs `===`  in our example),
-to be less vulnerable to timing attacks.
+Please refer to [this section](#app-security).
 
 # Javascript Callbacks
 
