@@ -2303,7 +2303,7 @@ Payload example on the right column =>
     15253,
     15254
    ],
-  "visitorExternalId": "63429889",
+  "visitorExternalId": "63429889", //or null for offsite channels such as Facebook
   "channel": "CHAT",
   "createdAt": "2019-04-12T07:58:35.171Z",
   "sentAt": "2019-04-12T07:58:35.496Z"
