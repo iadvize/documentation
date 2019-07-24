@@ -111,16 +111,85 @@ In order to ensure satisfaction from our customers we require that every integra
 
 Note that this endpoint will be checked on a regular basis at the url you specified in the App information section. It **MUST** return `200` status or it will be considered unhealthy.
 
-## App Authentication
-The App Authentication section is where you can set the authentication information that the final user will have to enter in order to install your connector. Once the user authenticated, the connector will be able to access the right data from iAdvize and from the third-party app. For example, you can ask the user for his/her third app's email and password.
+## App Parameters
+By adding parameters to the installation process, the client has the possibility to configure your connector. 
+
+You can request two kinds of parameters:
+* sensitive parameters such as API keys, emails... it must be declared under the [Authentication parameter step](#1.-define-authentication-parameters)
+* regular parameters such as texts, boolean it must be declared under the  [App parameter step](#2.-define-app-settings)
+
+A connector parameter has 4 to 5 properties:
+* Key: the key of your parameter according to your code.
+* Label: the name of your parameter, this is what users will see in the marketplace upon installing your connector.
+* Type: it defines the type of entry. (For instance: text)
+* Url: only required to type "toggle". To dynamically retrieve options from the given url 
+* Required: specify if the parameter is required for your connector
+
+Currently, we support 3 types of parameters:
+* "text". For textual input values
+* "selectpicker". For dynamically loaded options from the configured url
+* "toggle". For enabling / disabling a part of the parameters. It is useful if you want to allow your clients to enable / disable specific features of your connector 
+
+##### Text parameter
+###### Usage in the dev platform
+![Selectpicker usage](./assets/images/text_usage.png)
+
+###### Result in the marketplace
+![Selectpicker result](./assets/images/text_result.png)
+
+##### Select picker parameter
+###### Usage in the dev platform
+![Selectpicker usage](./assets/images/selectpicker_usage.png)
+
+###### Result in the marketplace
+![Selectpicker result](./assets/images/selectpicker_result.png)
+
+Note: To retrieve the options of the selectpicker, we will call the endpoint:
+
+###### Request - GET method
+
+| Query parameter | Description | Values |
+| --- | --- | --- |
+| idWebsite | Unique identifier of the website on which your connector is being installed on | ?idWebsite=ha-123  |
+
+###### Response - Array of options
+
+<pre class="prettyprint lang-js">
+[
+  {
+    "label": "I am transferring you to my colleague",
+    "value": "direct_transfer"
+  },
+  {
+    "label": "Wait a moment, I am transferring you.",
+    "value": "wait_a_moment"
+  },
+  {
+    "label": "My colleague is going to take over this conversation, bye !",
+    "value": "colleague_take_over"
+  }
+]
+</pre> 
+
+| Field | Description | Values | Required |
+| --- | --- | --- | --- |
+| label | The displayed label in the select picker | String | ✓ |
+| value | The value of the option | String | ✓ |
+
+
+
+##### Toggle parameter
+###### Usage in the dev platform
+![Toggle usage](./assets/images/toggle_usage.png)
+
+###### Result in the marketplace
+![Toggle result](./assets/images/toggle_result.png)
+
+### 1. Define Authentication parameters
+The App Authentication section is where you can set the authentication information that the final user will have to enter in order to install your connector. Once the user is authenticated, the connector will be able to access the right data from iAdvize and from the third-party app. For example, you can ask the user for his/her third app's email and password.
 Users will need to follow these authentication steps to install your app.
 
-**Define app's authentication parameters**
 You can add parameters and define the type of entry you need (text, numeric, etc.).
-
-* Key: the key of your parameter according to your code.
-* Label: it’s the name of your parameter, this is what users will see.
-* Type: it defines the type of entry. (For instance: alphanumeric).
 
 You can add as much parameters as you need.
 This is the first thing users will see once they click on the "install" button on the iAdvize Marketplace.
@@ -136,7 +205,7 @@ Users have to fill in the parameters during the installation process first, on t
 
 ![Authentication admin](./assets/images/marketplace-configure.png)
 
-## App Settings
+### 2. Define App Settings parameters
 
 Just as in the section dedicated to your app's authentication, you are able to set the parameters that users will need to install your connector.
 These are the parameters that the iAdvize administrator will fill in to install and configure your connector from the iAdvize Marketplace.
