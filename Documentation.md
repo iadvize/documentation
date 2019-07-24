@@ -409,7 +409,7 @@ In order to set the right plugin parameters, all you have to do is to declare:
 | id | Unique identifier | string | ✓ |
 | idParent | Parent identifier, if the field depends on it| string | |
 | label | Label | string | ✓ |
-| fieldType | Field type | `TEXT`, `CHECKBOX` or `SELECT` | ✓ |
+| fieldType | Field type | `TEXT`, `CHECKBOX`, `SELECT` or `TEXTAREA` | ✓ |
 | isRequired | Required | Boolean | ✓ |
 | options | List of options object for `SELECT` type | array |  |
 | options.label | Label displayed for this option | string | ✓ |
@@ -428,6 +428,12 @@ In order to set the right plugin parameters, all you have to do is to declare:
         "idParent": "1",
         "label": "Brand name",
         "fieldType": "TEXT",
+        "isRequired": true
+    },
+    {
+        "id": "brand_description",
+        "label": "Brand name brings a totally new concept \n to their customers.",
+        "fieldType": "TEXTAREA",
         "isRequired": true
     },
     {
