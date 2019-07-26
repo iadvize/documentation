@@ -221,7 +221,11 @@ For instance it could be: Username
 These configuration steps will take place immediately after authentication (if any).
 The order of appearance of the steps depends on their order of creation. The first created parameter will appear first and the last created parameter will appear last to the user.
 
-![Setting](./assets/images/developer-settings.jpg)
+![Setting](./assets/images/settings-usage.png)
+
+Users have to fill in the parameters during the installation process first, on the iAdvize Marketplace.
+
+![Setting](./assets/images/settings-result.png)
 
 ## App Plugins
 Use plugins to enhance the iAdvize interface by adding or editing predefined features.
