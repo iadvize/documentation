@@ -120,29 +120,36 @@ You can request two kinds of parameters:
 
 A connector parameter has 4 to 5 properties:
 * Key: the key of your parameter according to your code.
-* Label: the name of your parameter, this is what users will see in the marketplace upon installing your connector.
+* Label: the name of your parameter, this is what users will see in the marketplace during the installation process
 * Type: it defines the type of entry. (For instance: text)
-* Url: only required to type "toggle". To dynamically retrieve options from the given url 
+* Url: only required for type "selectpicker". To dynamically retrieve options from the given url 
 * Required: specify if the parameter is required for your connector
 
 Currently, we support 3 types of parameters:
 * "text". For textual input values
-* "selectpicker". For dynamically loaded options from the configured url
 * "toggle". For enabling / disabling a part of the parameters. It is useful if you want to allow your clients to enable / disable specific features of your connector 
+* "selectpicker". For dynamically loaded options from the configured url
 
 ##### Text parameter
 ###### Usage in the dev platform
-![Selectpicker usage](./assets/images/text_usage.png)
+![Selectpicker usage](./assets/images/text-usage.png)
 
 ###### Result in the marketplace
-![Selectpicker result](./assets/images/text_result.png)
+![Selectpicker result](./assets/images/text-result.png)
+
+##### Toggle parameter
+###### Usage in the dev platform
+![Toggle usage](./assets/images/toggle-usage.png)
+
+###### Result in the marketplace
+![Toggle result](./assets/images/toggle-result.png)
 
 ##### Select picker parameter
 ###### Usage in the dev platform
-![Selectpicker usage](./assets/images/selectpicker_usage.png)
+![Selectpicker usage](./assets/images/selectpicker-usage.png)
 
 ###### Result in the marketplace
-![Selectpicker result](./assets/images/selectpicker_result.png)
+![Selectpicker result](./assets/images/selectpicker-result.png)
 
 Note: To retrieve the options of the selectpicker, we will call the endpoint:
 
@@ -176,15 +183,6 @@ Note: To retrieve the options of the selectpicker, we will call the endpoint:
 | label | The displayed label in the select picker | String | ✓ |
 | value | The value of the option | String | ✓ |
 
-
-
-##### Toggle parameter
-###### Usage in the dev platform
-![Toggle usage](./assets/images/toggle_usage.png)
-
-###### Result in the marketplace
-![Toggle result](./assets/images/toggle_result.png)
-
 ### 1. Define Authentication parameters
 The App Authentication section is where you can set the authentication information that the final user will have to enter in order to install your connector. Once the user is authenticated, the connector will be able to access the right data from iAdvize and from the third-party app. For example, you can ask the user for his/her third app's email and password.
 Users will need to follow these authentication steps to install your app.
@@ -199,11 +197,11 @@ Parameters appear to users according to their order of creation (the 1st entry c
 
 *i.e. users might be required to authenticate with an email and a password. In this case, you need to create two different parameters, one for the email and one for the password.*
 
-![Authentication](./assets/images/developer-authentication.png)
+![Authentication](./assets/images/authentication-usage.png)
 
 Users have to fill in the parameters during the installation process first, on the iAdvize Marketplace.
 
-![Authentication admin](./assets/images/marketplace-configure.png)
+![Authentication admin](./assets/images/authentication-result.png)
 
 ### 2. Define App Settings parameters
 
