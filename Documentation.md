@@ -774,7 +774,7 @@ Here is a full conversation example :
 * 03:43 - Our operator/bot sends _"Ok, i'm transferring you to a human"_, your plugin response with an immediate transfer.
 
 
-##### Conversation initialisation (endpoint)
+##### <a name="postConversation"></a>Conversation initialisation (endpoint)
 
 ###### Request - POST /conversations
 
@@ -1026,6 +1026,68 @@ Here is a full conversation example :
 | variables.value | Value of the variable collected | String | ✓ |  |
 | createdAt | Creation date of the conversation | DateTime | ✓ | ISO-8601 |
 | updateAt | Date of the last message received | DateTime | ✓ | ISO-8601 |
+
+
+##### Get the proactive replies (endpoint)
+`proactive-replies` is an endpoint used to engage new visitors with your bot. 
+So, the response would be the first replies you want to send to a new visitor that didn't write any messages yet.
+
+Make sure that the `replies` you send here are the same as in the [POST /conversation](#postConversation) with empty `history`
+
+###### Request - GET /bots/:idOperator/proactive-replies
+
+| Parameters         | In    | Description                                                            | Values                                                   | Required |
+| ---                | ---   | ---                                                                    | ---                                                      | ---      |
+| idConnectorVersion | Query | Connector version id                                                   | ?idConnectorVersion=c008849d-7cb1-40ca-9503-d6df2c5cddd8 | ✓        |
+
+###### Response
+
+<pre class="prettyprint lang-js">
+{  
+   "replies":[  
+      {  
+         "type":"message",
+         "payload":{  
+            "contentType":"text",
+            "value":"Hi, my name is robot and I'm here to help"
+         },
+         "quickReplies":[]
+      },
+      {  
+         "type":"message",
+         "payload":{  
+            "contentType":"text",
+            "value":"How can I help you ?"
+         },
+         "quickReplies":[  
+            {  
+               "contentType":"text/quick-reply",
+               "value":"I didn't receive my order",
+               "idQuickReply":"1ef5145b-a9b6-4e86-8743-b6e3b4026b2c"
+            },
+            {  
+               "contentType":"text/quick-reply",
+               "value":"Payment problem",
+               "idQuickReply":"13594c9b-dcff-4add-81fc-5e1093e443a7"
+            }
+         ]
+      }
+   ]
+}
+</pre>
+
+| Field                             | Description                           | Values                                   | Required | Constraints               |
+| ---                               | ---                                   | ---                                      | ---      | ---                       |
+| replies                           | Array of replies                      | Array                                    | ✓        |                           |
+| replies.type                      | Reply/action type                     | `message` (other types would be ignored) | ✓        |                           |
+| replies.content                   | Typed payload of the message          | Object                                   | ✓        | replies.type == `message` |
+| replies.content.contentType       | Type of the message’s content         | `text`                                   | ✓        | replies.type == `message` |
+| replies.content.value             | Textual content of the message        | String                                   | ✓        | replies.type == `message` |
+| replies.quickReplies              | Quick replies proposed to the visitor | Array                                    |          | replies.type == `message` |
+| replies.quickReplies.value        | Textual content of the quick reply    | String                                   | ✓        | replies.type == `message` |
+| replies.quickReplies.contentType  | Type of the quick-reply’s content     | `text/quick-reply`                       | ✓        | replies.type == `message` |
+| replies.quickReplies.idQuickReply | Identifier of the quick reply         | String                                   | ✓        | replies.type == `message` |
+
 
 ## Add webhooks
 
