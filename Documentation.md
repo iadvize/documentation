@@ -774,7 +774,7 @@ Here is a full conversation example :
 * 03:43 - Our operator/bot sends _"Ok, i'm transferring you to a human"_, your plugin response with an immediate transfer.
 
 
-##### <a name="postConversation"></a>Conversation initialisation (endpoint)
+##### Conversation initialisation (endpoint)
 
 ###### Request - POST /conversations
 
@@ -1029,16 +1029,20 @@ Here is a full conversation example :
 
 
 ##### Get the proactive replies (endpoint)
-`proactive-replies` is an endpoint used to engage new visitors with your bot. 
-So, the response would be the first replies you want to send to a new visitor that didn't write any messages yet.
+*If you don't need your bot to be proactive, you can ignore the endpoint*
 
-Make sure that the `replies` you send here are the same as in the [POST /conversation](#postConversation) with empty `history`
+`proactive-replies` is the endpoint used to proactively engage new visitors with your bot. 
+It should return the first `replies` you want to send at the start of a conversation, before the first visitor message.
+
+Beware that the `replies` returned here **must** be same the as in the first [POST /conversation](#conversation-initialisation-endpoint) (when no `history` is provided)
+
+
 
 ###### Request - GET /bots/:idOperator/proactive-replies
 
-| Parameters         | In    | Description                                                            | Values                                                   | Required |
-| ---                | ---   | ---                                                                    | ---                                                      | ---      |
-| idConnectorVersion | Query | Connector version id                                                   | ?idConnectorVersion=c008849d-7cb1-40ca-9503-d6df2c5cddd8 | ✓        |
+| Parameters         | In    | Description          | Values                                                   | Required |
+| ---                | ---   | ---                  | ---                                                      | ---      |
+| idConnectorVersion | Query | Connector version id | ?idConnectorVersion=c008849d-7cb1-40ca-9503-d6df2c5cddd8 | ✓        |
 
 ###### Response
 
