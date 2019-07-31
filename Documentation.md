@@ -159,7 +159,7 @@ Note: To retrieve the options of the selectpicker, we will call the endpoint:
 | --- | --- | --- |
 | idWebsite | Unique identifier of the website on which your connector is being installed on | ?idWebsite=ha-123  |
 
-###### Response - Array of options
+###### Response - Array of options (must NOT be empty)
 
 <pre class="prettyprint lang-js">
 [
