@@ -480,7 +480,7 @@ In order to set the right plugin parameters, all you have to do is to declare:
 | id | Unique identifier | string | ✓ |
 | idParent | Parent identifier, if the field depends on it| string | |
 | label | Label | string | ✓ |
-| fieldType | Field type | `TEXT`, `CHECKBOX`, `SELECT` or `TEXTAREA` | ✓ |
+| fieldType | Field type | `TEXT`, `CHECKBOX`, `SELECT`, `TEXTAREA`, `INTEGER` or `DECIMAL` | ✓ |
 | isRequired | Required | Boolean | ✓ |
 | options | List of options object for `SELECT` type | array |  |
 | options.label | Label displayed for this option | string | ✓ |
@@ -527,6 +527,18 @@ In order to set the right plugin parameters, all you have to do is to declare:
                 "value": "TRIVIAL",
             },
         ],
+    },
+    {
+        "id": "order_id",
+        "label": "The order id related to the claim",
+        "fieldType": "INTEGER",
+        "isRequired": false
+    },
+    {
+        "id": "order_discount",
+        "label": "The discount granted to the customer",
+        "fieldType": "DECIMAL",
+        "isRequired": false
     }
 ]
 </pre>
