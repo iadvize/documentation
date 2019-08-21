@@ -516,17 +516,17 @@ In order to set the right plugin parameters, all you have to do is to declare:
         "options": [
             {
                 "label": "Major",
-                "value": "MAJOR",
+                "value": "MAJOR"
             },
             {
                 "label": "Minor",
-                "value": "MINOR",
+                "value": "MINOR"
             },
             {
                 "label": "Trivial",
-                "value": "TRIVIAL",
-            },
-        ],
+                "value": "TRIVIAL"
+            }
+        ]
     },
     {
         "id": "order_id",
