@@ -496,7 +496,6 @@ In order to set the right plugin parameters, all you have to do is to declare:
     },
     {
         "id": "brand_name",
-        "idParent": "1",
         "label": "Brand name",
         "fieldType": "TEXT",
         "isRequired": true
@@ -509,7 +508,7 @@ In order to set the right plugin parameters, all you have to do is to declare:
     },
     {
         "id": "ticket_priority",
-        "idParent": "1",
+        "idParent": "create_crm_ticket",
         "label": "Priority",
         "fieldType": "SELECT",
         "isRequired": true,
