@@ -2886,7 +2886,7 @@ To find the parameter `dest` that interest you, look the URL address of the page
 With this example, the SSO URL address will be:
 `https://www.iadvize.com/admin/login?key={SSO_KEY}&dest=/admin/users/`
 
-# SDK
+# Mobile SDK
 
 Take your app to the next step and provide a unique conversational experience to your users!
 
