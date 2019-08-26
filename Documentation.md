@@ -2202,7 +2202,7 @@ See below to discover used fields and see [reading section](#read) to discover s
 </pre>
 
 
-# GraphQL API <span class="tag">alpha</span>
+# GraphQL API
 
 ## Getting started on GraphQL
 
