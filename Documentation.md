@@ -230,7 +230,8 @@ Users have to fill in the parameters during the installation process first, on t
 ## App Plugins
 Use plugins to enhance the iAdvize interface by adding or editing predefined features.
 
-Plugins are basically HTTP endpoints whose json responses fit the plugin json-schema. For each plugin one or more endpoint have to be defined. When a plugin is used on user interface, we will make a GET http call to endpoint with documented query parameters. Your http response have to comply with plugin json-schema.
+Plugins are basically HTTP endpoints whose json responses fit the plugin json-schema. For each plugin one or more endpoint have to be defined. When a plugin is used on user interface, we will make a http call to endpoint with documented query parameters. Your http response have to comply with plugin json-schema.
+You can find a link of the json schema below each plugin route. It can be used to validate your http responses on your side.
 
 The plugins already available are:
 
@@ -299,7 +300,7 @@ To make sure your connector uses the Product list plugin correctly, all you have
 | products | products | Array of strings |  |
 | productsCount | Number of products | Integer | ✓ |
 
-You can validate your response data format with the associated [json schema](/json-schemas/product-list%2Fcategory).
+You can validate your response data format with the associated [json schema](/json-schemas/product-list/category.json).
 
 #### Products data
 
@@ -365,7 +366,7 @@ You can validate your response data format with the associated [json schema](/js
 | pricePromotion | Price promotion | String |  |
 | priceSpecial | Price special | String |  |
 
-You can validate your response data format with the associated [json schema](/json-schemas/product-list%2Fproduct).
+You can validate your response data format with the associated [json schema](/json-schemas/product-list/product.json).
 
 
 ### Customer information
@@ -428,7 +429,7 @@ In order to set the right plugin parameters, all you have to do is to declare:
 | value | Value | String | ✓ |
 | fieldType | Field type | `ACTION`, `TEXT` or `URL` | ✓ |
 
-You can validate your response data format with the associated [json schema](/json-schemas/customer%2Finformation).
+You can validate your response data format with the associated [json schema](/json-schemas/customer/information.json).
 
 #### Customer information action URL
 
@@ -457,7 +458,7 @@ You can validate your response data format with the associated [json schema](/js
 | success | Result of the action | Boolean | ✓ |
 | message | Result message of the action | String |  |
 
-You can validate your response data format with the associated [json schema](/json-schemas/customer%2Faction).
+You can validate your response data format with the associated [json schema](/json-schemas/customer/action.json).
 
 ### Conversation closing form
 
@@ -550,7 +551,7 @@ In order to set the right plugin parameters, all you have to do is to declare:
 ]
 </pre>
 
-You can validate your response data format with the associated [json schema](/json-schemas/conversation-closing-form%2Ffield).
+You can validate your response data format with the associated [json schema](/json-schemas/conversation-closing-form/field.json).
 
 ### External bot
 
@@ -618,7 +619,7 @@ There are 4 endpoints related to Operator form flow. This is related to the crea
 | description | Description of the bot | String |  |
 | editorUrl | Url used to redirect user to your bot editor| A valid URL | ✓ |
 
-You can validate your response data format with the associated [json schema](/json-schemas/bot%2Fexternal-bot).
+You can validate your response data format with the associated [json schema](/json-schemas/bot/external-bot.json).
 
 ##### Modify bot information (endpoint)
 
@@ -692,7 +693,7 @@ You can validate your response data format with the associated [json schema](/js
 | createdAt | Creation date of you bot | String | ✓ | ISO 8601 |
 | updatedAt | Last modification date of your bot| String | ✓ | ISO 8601 |
 
-You can validate your response data format with the associated [json schema](/json-schemas/bot%2Fbot).
+You can validate your response data format with the associated [json schema](/json-schemas/bot/bot.json).
 
 ##### Get bot information (endpoint)
 
@@ -739,7 +740,7 @@ You can validate your response data format with the associated [json schema](/js
 | createdAt | Creation date of you bot | String | ✓ | ISO 8601 |
 | updatedAt | Last modification date of your bot| String | ✓ | ISO 8601 |
 
-You can validate your response data format with the associated [json schema](/json-schemas/bot%2Fbot).
+You can validate your response data format with the associated [json schema](/json-schemas/bot/bot.json).
 
 ##### Get bot availability strategies (endpoint)
 
@@ -781,7 +782,7 @@ Bot is ready and should be available accordingly to the availability strategy an
 | distributionRulesToCheck | All distribution rules we should check for availability. This is subset of DistributionRules returned by the Get bot endpoint. | Array of String | | Required if strategy is equal to `atLeastOne` or `all` |
 | availability | Allow the connector to handle the availability of the bot | Boolean | | Required if strategy is equal to `customAvailability` |
 
-You can validate your response data format with the associated [json schema](/json-schemas/bot%2Favailability-strategies).
+You can validate your response data format with the associated [json schema](/json-schemas/bot/availability-strategies.json).
 
 #### Conversation flow endpoints
 
@@ -884,7 +885,7 @@ Here is a full conversation example :
 | createdAt | Creation date of the conversation | DateTime |  ✓ | ISO-8601 |
 | updateAt | Date of the last message received | DateTime |  ✓ | ISO-8601 |
 
-You can validate your response data format with the associated [json schema](/json-schemas/bot%2Fconversation).
+You can validate your response data format with the associated [json schema](/json-schemas/bot/conversation.json).
 
 ##### New message & reply reception (endpoint)
 
@@ -984,7 +985,7 @@ You can validate your response data format with the associated [json schema](/js
 | createdAt | Creation date of the conversation | DateTime | ✓ | ISO-8601 |
 | updateAt | Date of the last message received | DateTime | ✓ | ISO-8601 |
 
-You can validate your response data format with the associated [json schema](/json-schemas/bot%2Fconversation).
+You can validate your response data format with the associated [json schema](/json-schemas/bot/conversation.json).
 
 ##### Get the conversation content (endpoint)
 
@@ -1059,7 +1060,7 @@ You can validate your response data format with the associated [json schema](/js
 | createdAt | Creation date of the conversation | DateTime | ✓ | ISO-8601 |
 | updateAt | Date of the last message received | DateTime | ✓ | ISO-8601 |
 
-You can validate your response data format with the associated [json schema](/json-schemas/bot%2Fconversation).
+You can validate your response data format with the associated [json schema](/json-schemas/bot/conversation.json).
 
 ## Add webhooks
 
