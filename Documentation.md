@@ -59,17 +59,17 @@ iAdvize's Developer Platform will provide you with some easy-to-use tools so you
 
 Once your app is ready you will be able to submit your connector for review. The iAdvize team will review your app to make sure it fits the Developer Platform policies and will get back to you within 48 hours (on working days).
 
-Before submitting your app please make your you meet the following requirements:
+Before submitting your app please make sure your app meet the following requirements:
 
 | Item                           | Description                  |
 | ------------------------------ | ---------------------------- |
-| App description      | The provided description of your application will be displayed on the marketplace (if your app is public). |
+| App description      | The provided description of your application will be displayed on the marketplace if your app is public. Event if for private releases, please provide a brief description of your connector. |
 | App logo             | The icon should be in JPG/PNG/GIF format and respect at least the following dimensions : 165x150. |
 | App screenshots      | Image should be in JPG/PNG/GIF format and respect a 8:5 ratio. |
 | Contact | Please give us the main technical contact for the app as well as a generic support contact in case of emergency and unavailibility of the main contact. |
 | Health check   | As described in our documentation a [Health check route is required.](https://developers.iadvize.com/documentation#health-check) |
 | Signature usage  | The App must refuse any request containing a missing or bad signature. |
-| Demo                        | If your application is a public app we will ask you for a demo environment in order to be able to test the integration. Please provide us with access for testing trough slack when you submit the application.  |
+| Demo                        | If your application is a public app we will ask you for a demo environment in order to be able to test the integration. Please provide us with access for testing through slack when you submit the application.  |
 
 # Build apps
 Once you are logged in your developer account, you are ready to build apps.
