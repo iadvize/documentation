@@ -1,7 +1,7 @@
 * [General information](/documentation/general-information#general-information)
   * [What is iAdvize?](/documentation/general-information#what-is-iadvize?)
   * [What is the Developer Platform?](/documentation/general-information#what-is-the-developer-platform?)
-  * [Why build apps on iAdvize?](/documentation/general-information#why-to-build-apps-to-iadvize?)
+  * [Why build apps on iAdvize?](/documentation/general-information#why-build-apps-to-iadvize?)
 * [Getting Started](/documentation/getting-started#getting-started)
   * [Get a Developer Account](/documentation/getting-started#get-a-developer-account)
   * [Features Overview](/documentation/getting-started#features-overview)
