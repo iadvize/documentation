@@ -32,8 +32,6 @@ Please note :
 
 #### conversation.started (only for call channel)
 
-Payload example on the right column =>
-
 <pre class="prettyprint lang-js">{
     "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
     "eventType": "conversation.started",
@@ -50,8 +48,6 @@ Payload example on the right column =>
 </pre>
 
 #### visitor.updated
-
-Payload example on the right column =>
 
 <pre class="prettyprint lang-js">{
     "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
@@ -73,8 +69,6 @@ With V2 events, you can query the corresponding resources through our [GraphQL a
 
 #### v2.conversation.pushed
 
-Payload example on the right column =>
-
 <pre class="prettyprint lang-js">{
   "eventId": "0f0bb3af-5035-4ba3-b3fb-ff4879a3a74d",
   "eventType": "v2.conversation.pushed",
@@ -91,8 +85,6 @@ Payload example on the right column =>
 </pre>
 
 #### v2.conversation.closed
-
-Payload example on the right column =>
 
 <pre class="prettyprint lang-js">{
   "eventId": "0f0bb3af-5035-4ba3-b3fb-ff4879a3a74d",
@@ -118,8 +110,6 @@ Payload example on the right column =>
 
 #### ~~conversation.started for channel chat~~
 
-Payload example on the right column =>
-
 PLEASE DO NOT USE (refer to warning above).
 
 <pre class="prettyprint lang-js">{
@@ -138,8 +128,6 @@ PLEASE DO NOT USE (refer to warning above).
 </pre>
 
 #### ~~conversation.transferred ~~
-
-Payload example on the right column =>
 
 PLEASE DO NOT USE (refer to warning above).
 
@@ -160,8 +148,6 @@ PLEASE DO NOT USE (refer to warning above).
 </pre>
 
 #### ~~conversation.closed ~~
-
-Payload example on the right column =>
 
 PLEASE DO NOT USE (refer to warning above).
 
