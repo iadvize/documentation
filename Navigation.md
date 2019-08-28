@@ -40,7 +40,7 @@
     * [Operator](/documentation/rest-api#operator)
     * [Group](/documentation/rest-api#group)
     * [Skill](/documentation/rest-api#skill)
-    * [Conversation](/documentation/rest-api#conversation)
+    * [Conversation](/documentation/rest-api#conversation-api)
     * [Tag](/documentation/rest-api#tag)
     * [Transaction](/documentation/rest-api#transaction)
     * [Satisfaction](/documentation/rest-api#satisfaction)
