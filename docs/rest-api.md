@@ -569,7 +569,7 @@ See [updating section](#update) to discover some output examples.
 
 See [deleting section](#responses-delete) to discover some output examples.
 
-### Conversation
+### Conversation <span hidden>API</span>
 
 #### List your conversations
 
