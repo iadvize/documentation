@@ -5,6 +5,7 @@
 * [Getting Started](#getting-started)
   * [Get a Developer Account](#get-a-developer-account)
   * [Features Overview](#features-overview)
+  * [App Reviewing Process](#app-reviewing-process)
 * [Build apps](#build-apps)
   * [Milestones of the app creation process](#milestones-of-the-app-creation-process)
   * [My apps](#my-apps)
