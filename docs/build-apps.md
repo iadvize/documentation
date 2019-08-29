@@ -987,7 +987,7 @@ You can validate your response data format with the associated [json schema](/js
 
 &nbsp;
 
-**Disclaimer:** The following conversation objects `Carousel`, `Product offer` and `Action` are only working with our new chatbox. Get in touch with us if you need such objects in your conversation flow.
+**Disclaimer:** The following conversation objects `Carousel`, `Product offer` and `Action` are only working with our new chatbox. [Get in touch with us](https://iadvize-developers.slack.com/join/shared_invite/enQtNzQ0NjM1Mzk5NzAyLTg1MDU2ODJhYzBhZjM0NWNkOWNmMDg1ZTUyYjRlM2JhYWFhMzQzM2E2MDFiNzVjMGU0MmM4NzI5ZjczMDQ4ZDc) if you need such objects in your conversation flow.
 
 Several kinds of payloads can be used within your bot replies in order to enrich your responses. You will find in this section information about every type of content you can send with your iAdvize bot.
 
