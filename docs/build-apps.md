@@ -54,8 +54,8 @@ Note that this endpoint will be checked on a regular basis at the url you specif
 By adding parameters to the installation process, the client has the possibility to configure your connector. 
 
 You can request two kinds of parameters:
-* sensitive parameters such as API keys, emails... it must be declared under the [Authentication parameter step](#1.-define-authentication-parameters)
-* regular parameters such as texts, boolean it must be declared under the  [App parameter step](#2.-define-app-settings)
+* sensitive parameters such as API keys, emails... it must be declared under the [Authentication parameter step](/documentation/build-apps#1.-define-authentication-parameters)
+* regular parameters such as texts, boolean it must be declared under the  [App parameter step](/documentation/build-apps#2.-define-app-settings-parameters)
 
 A connector parameter has 4 to 5 properties:
 * Key: the key of your parameter according to your code.
@@ -685,7 +685,7 @@ Bot is ready and should be available accordingly to the availability strategy an
 
 ###### Request - GET /availability-strategies
 
-| Parameters | In | Description | ValuesYou can validate your response data format with the associated [json schema](/json-schemas/bot/availability-strategies.json). | Required |
+| Parameters | In | Description | Values | Required |
 | --- | --- | --- | --- | --- |
 | idConnectorVersion | Query | Connector version id | ?idConnectorVersion=c008849d-7cb1-40ca-9503-d6df2c5cddd8 | ✓ |
 | idWebsite | Query | Unique identifier of the website on which your connector is installed | ?idWebsite=ha-123  | ✓ |
@@ -765,10 +765,10 @@ Here is a full conversation example :
 }
 </pre>
 
-| Parameters | In | Description | Values | Required |
-| --- | --- | --- | --- | --- |
-| idConnectorVersion | Query | Connector version id | ?idConnectorVersion=c008849d-7cb1-40ca-9503-d6df2c5cddd8 | ✓ |
-| idWebsite | Query | Unique identifier of the website on which your connector is installed | ?idWebsite=ha-123  | ✓ |
+| Parameters | Description | Values | Required |
+| --- | --- | --- | --- |
+| idConnectorVersion | Connector version id | ?idConnectorVersion=c008849d-7cb1-40ca-9503-d6df2c5cddd8 | ✓ |
+| idWebsite  | Unique identifier of the website on which your connector is installed | ?idWebsite=ha-123  | ✓ |
 
 | Field | Description | Values | Constraints |
 | --- | --- | --- | --- |
@@ -777,9 +777,7 @@ Here is a full conversation example :
 | history | First messages of the conversations | Array |  |
 | history.idMessage | Unique identifier of this message | String | UUID |
 | history.author.role | author of the message | `operator` or `visitor` |  |  |
-| history.payload | Typed payload of the message | Object | |
-| history.payload.contentType | Type of the message’s content | String | `text` |
-| history.payload.value | Message content | String |  |
+| history.payload | Typed payload of the message | Object | `text` or `card/content` |
 | history.createdAt | Date the message was sent | String | ISO-8601 |
 
 ###### Response
@@ -808,13 +806,9 @@ Here is a full conversation example :
 | replies.type | Reply/action type | `await` or `message` or `transfer` or `close` | ✓ |  |
 | replies.duration.unit | Awaiting unit of time | `millis` or `seconds` or `minutes` |  | replies.type == `await` |
 | replies.duration.value | Awaiting value of time | Long |  | replies.type == `await` |
-| replies.payload | Typed payload of the message | Object | ✓ | replies.type == `message` |
+| replies.payload | Typed payload of the message | [Payload](#message-payloads) | ✓ | replies.type == `message`, [payload](#message-payloads) can be `text` or `card/content` |
 | replies.payload.contentType | Type of the message’s content | `text` or `text/quick-reply`  | ✓ | replies.type == `message` |
-| replies.payload.value | Textual content of the message | String | ✓ | replies.type == `message` |
-| replies.quickReplies | Quick replies proposed to the visitor | Array |  | replies.type == `message` |
-| replies.quickReplies.value | Textual content of the quick reply | String | ✓ | replies.type == `message` |
-| replies.quickReplies.idQuickReply | Identifier of the quick reply | String | ✓ | replies.type == `message` |
-| replies.distributionRule | Distribution rules to transfer to | String |  | replies.type == `transfer` |
+| replies.quickReplies | Quick replies proposed to the visitor | Array of [Quick replies](#quick-reply-:-choices-in-a-multiple-choice-question) |  | replies.type == `message` |
 | variables | Collected variables | Array | ✓ | |
 | variables.key | Key of the variable collected | String | ✓ |  |
 | variables.value | Value of the variable collected | String | ✓ |  |
@@ -827,10 +821,10 @@ You can validate your response data format with the associated [json schema](/js
 
 ###### Request - POST /conversations/:conversationId:/messages
 
-| Parameters | In | Description | Values | Required |
+| Parameters | Description | Values | Required |
 | --- | --- | --- | --- | --- |
-| idConnectorVersion | Query | Connector version id | ?idConnectorVersion=c008849d-7cb1-40ca-9503-d6df2c5cddd8 | ✓ |
-| idWebsite | Query | Unique identifier of the website on which your connector is installed | ?idWebsite=ha-123  | ✓ |
+| idConnectorVersion | Connector version id | ?idConnectorVersion=c008849d-7cb1-40ca-9503-d6df2c5cddd8 | ✓ |
+| idWebsite | Unique identifier of the website on which your connector is installed | ?idWebsite=ha-123  | ✓ |
 
 <pre class="prettyprint lang-js">
 {
@@ -854,10 +848,7 @@ You can validate your response data format with the associated [json schema](/js
 | idOperator | iAdvize bot operator identifier that we associate to your bot scenario | String |  |
 | message.idMessage | The unique identifier for this message |  | UUID |
 | message.author.role | The author of the message | `visitor` or `operator` |  |
-| message.payload | Typed payload of the message | Object |  |
-| message.payload.contentType | Type of the message’s content | `text` |  |
-| message.payload.value | Textual content of the message | String |  |
-| message.createdAt | Date the message was sent | DateTime | ISO-8601 |
+| message.payload | Typed payload of the message | Object | can be of `text` or `card/content` type |
 
 ###### Response
 
@@ -907,14 +898,9 @@ You can validate your response data format with the associated [json schema](/js
 | replies.type | Reply/action type | `await` or `message` or `transfer` or `close` | ✓ |  |
 | replies.duration.unit | Awaiting unit of time | `millis` or `seconds` or `minutes` |  | replies.type == `await` |
 | replies.duration.value | Awaiting value of time | Long |  | replies.type == `await` |
-| replies.payload | Typed payload of the message | Object | ✓ | replies.type == `message` |
-| replies.payload.contentType | Type of the message’s content | `text` | ✓ | replies.type == `message` |
-| replies.payload.value | Textual content of the message | String | ✓ | replies.type == `message` |
-| replies.quickReplies | Quick replies proposed to the visitor | Array |  | replies.type == `message` |
-| replies.quickReplies.contentType | Type of the quick-reply’s content | `text/quick-reply` | ✓ | replies.type == `message` |
-| replies.quickReplies.value | Textual content of the quick reply | String | ✓ | replies.type == `message` |
-| replies.quickReplies.idQuickReply | Identifier of the quick reply | String | ✓ | replies.type == `message` |
-| replies.distributionRule | Distribution rules to transfer to | String |  | replies.type == `transfer` |
+| replies.payload | Typed payload of the message | [Payload](#message-payloads) | ✓ | replies.type == `message`, [payload](#message-payloads) can be `text` or `card/content` |
+| replies.content.contentType | Type of the message’s content | `text` or `text/quick-reply`  | ✓ | replies.type == `message` |
+| replies.quickReplies | Quick replies proposed to the visitor | Array of [Quick replies](#multiple-choice-question) |  | replies.type == `message`|
 | variables | Collected variables | Array | ✓ |  |
 | variables.key | Key of the variable collected | String | ✓ |  |
 | variables.value | Value of the variable collected | String | ✓ |  |
@@ -927,11 +913,11 @@ You can validate your response data format with the associated [json schema](/js
 
 ###### Request - GET /conversations/:conversationId:
 
-| Parameters | In | Description | Values | Required |
-| --- | --- | --- | --- | --- |
-| idConnectorVersion | Query | Connector version id | ?idConnectorVersion=c008849d-7cb1-40ca-9503-d6df2c5cddd8 | ✓ |
-| idWebsite | Query | Unique identifier of the website on which your connector is installed | ?idWebsite=ha-123  | ✓ |
-| idOperator | Query | iAdvize bot operator identifier that we associate to your bot scenario | ?idOperator=456678  | ✓ |
+| Parameters | Description | Values | Required |
+| --- | --- | --- | --- |
+| idConnectorVersion | Connector version id | ?idConnectorVersion=c008849d-7cb1-40ca-9503-d6df2c5cddd8 | ✓ |
+| idWebsite | Unique identifier of the website on which your connector is installed | ?idWebsite=ha-123  | ✓ |
+| idOperator | iAdvize bot operator identifier that we associate to your bot scenario | ?idOperator=456678  | ✓ |
 
 ###### Response
 
@@ -985,10 +971,9 @@ You can validate your response data format with the associated [json schema](/js
 | replies.content | Typed payload of the message | Object | ✓ | replies.type == `message` |
 | replies.content.contentType | Type of the message’s content | `text` | ✓ | replies.type == `message` |
 | replies.content.value | Textual content of the message | String | ✓ | replies.type == `message` |
-| replies.quickReplies | Quick replies proposed to the visitor | Array |  | replies.type == `message` |
-| replies.quickReplies.value | Textual content of the quick reply | String | ✓ | replies.type == `message` |
-| replies.quickReplies.contentType | Type of the quick-reply’s content | `text/quick-reply` | ✓ | replies.type == `message` |
-| replies.quickReplies.idQuickReply | Identifier of the quick reply | String | ✓ | replies.type == `message` |
+| replies.payload | Typed payload of the message | [Payload](#message-payloads) | ✓ | replies.type == `message`, [payload](#message-payloads) can be `text` or `card/content` |
+| replies.content.contentType | Type of the message’s content | `text` or `text/quick-reply`  | ✓ | replies.type == `message` |
+| replies.quickReplies | Quick replies proposed to the visitor | Array of [Quick replies](#quick-reply-:-choices-in-a-multiple-choice-question) |  | replies.type == `message` |
 | replies.distributionRule | Distribution rules to transfer to | String |  | replies.type == `transfer` |
 | variables | Collected variables | Array |  | UUID |
 | variables.key | Key of the variable collected | String | ✓ |  |
@@ -998,13 +983,360 @@ You can validate your response data format with the associated [json schema](/js
 
 You can validate your response data format with the associated [json schema](/json-schemas/bot/conversation.json).
 
+#### Conversation objects
+
+&nbsp;
+
+**Disclaimer:** The following conversation objects `Carousel`, `Product offer` and `Action` are only working with our new chatbox. [Get in touch with us](https://iadvize-developers.slack.com/join/shared_invite/enQtNzQ0NjM1Mzk5NzAyLTg1MDU2ODJhYzBhZjM0NWNkOWNmMDg1ZTUyYjRlM2JhYWFhMzQzM2E2MDFiNzVjMGU0MmM4NzI5ZjczMDQ4ZDc) if you need such objects in your conversation flow.
+
+Several kinds of payloads can be used within your bot replies in order to enrich your responses. You will find in this section information about every type of content you can send with your iAdvize bot.
+
+
+##### Sending a simple message 
+
+&nbsp;
+
+A text payload is a simple text message.
+
+<pre class="prettyprint lang-js">
+{
+    "contentType": "text",
+    "value": "Hi, i am a simple message."
+}
+</pre>
+
+| Field | Description | Values | Constraints |
+| --- | --- | --- | --- |
+| contentType | Type of the message’s content | String | `text` |
+| value | Textual content of the message | String | |
+
+&nbsp;
+
+##### Quick reply : multiple choice question
+
+&nbsp;
+
+A quick reply is used for offering several choices to a visitor. Each choice needs to be specified in the "quickReplies" field  of a [reply](#conversation-flow-endpoints). The answer sent by the visitor to the multiple choice question can only contain text. There is no maximum number of quick replies you can display. However we recommend not to use more than 3 quick replies for a single question.
+
+&nbsp;
+
+<img src="./assets/images/example-quick-replies.png" alt="Example of a text payload reply with two quick replies" width="300" height="260" style="margin: auto;">
+<p align="center"><em>Quick replies example (Text payload reply with two quick replies)</em></p>
+
+&nbsp;
+
+<pre class="prettyprint lang-js">
+{
+    "contentType": "text/quick-reply",
+    "value": "Yes",
+    "idQuickReply": "1ef5145b-a9b6-4e86-8743-b6e3b4026b2c"
+}
+</pre>
+
+&nbsp;
+
+| Field | Description | Values | Constraints |
+| --- | --- | --- | --- |
+| contentType | Type of the message’s content | String | `text/quick-reply` |
+| value | Textual content of the quick-reply | String | |
+| idQuickReply | id of the quick reply | String | UUID |
+
+&nbsp;
+
+##### Generic card : Sending rich-content
+
+&nbsp;
+
+A generic card is a payload you can use to send a more structured message. It always contains at least one link and can be used to help a visitor to navigate on a website by redirecting him to specific pages. You can specify multiple links on a single generic card. Generic card can also include a title, a description and an image. This help give context to the visitor about the links you are sending.
+
+&nbsp;
+
+<img src="./assets/images/example-generic-card-with-title-text-and-picture.png" alt="Example of a generic card with title, text and picture set" width="300" height="260" style="margin: auto;">
+<p align="center"><em>A generic card with a title, a text, an image and a single link.</em></p>
+
+&nbsp;
+
+<img src="./assets/images/example-generic-card-with-several-links.png" alt="Example of a generic card with several links" width="300" height="260" style="margin: auto;">
+<p align="center"><em>A generic card with several links.</em></p>
+
+&nbsp;
+
+<pre class="prettyprint lang-js">
+{
+    "contentType": "card/content",
+    "image": {
+        "url": "http://image.net/delivery.jpg",
+        "description": "delivery picture"
+    },
+    "title": "Delivery & Pickup",
+    "text": "Learn more about dispatch and delivery times, methods and costs.",
+    "actions": [{
+        "type": "LINK",
+        "name": "See more",
+        "url": "http://mylink/delivery"
+    }]
+}
+</pre>
+
+<pre class="prettyprint lang-js">
+{
+    "contentType": "card/content",
+    "actions": [{
+        "type": "LINK",
+        "name": "How to print on an A4 page"
+        "url": "http://mylink/a4page"
+    },{
+          "type": "LINK",
+          "name": "I could not print my stamps"
+          "url": "http://mylink/stamps"
+    },{
+        "type": "LINK",
+        "name": "What are the different support and formats for etiquette?"
+        "url": "http://mylink/etiquette"
+    }]
+}
+</pre>
+
+| Field | Description | Values | Required | Constraints |
+| --- | --- | --- | --- | --- |
+| contentType | Type of the message’s content | String | ✓ | `card/content` |
+| image | Json describing attached picture | [Image](#image) | | |
+| title | Title of the card | String | | |
+| text | Textual content of the message | String | | |
+| action | List of actions to be sent with the card | Array of [Action](#action) | ✓ | length > 0 |
+
+*Constraint* : action must include at least one link.
+
+&nbsp;
+
+##### Generic card bundle : Carousel
+
+&nbsp;
+
+With the generic card bundle you can create a carousel for the visitor. Sliders are an efficient tool to present multiple services, offers or products to your visitors.
+
+&nbsp;
+
+<img src="./assets/images/example-generic-card-bundle.png" alt="Example of a generic card with title, text and picture set" width="300" height="260" style="margin: auto;">
+<p align="center"><em>Example of a carousel built with a bundle of generic cards.</em></p>
+
+&nbsp;
+
+<pre class="prettyprint lang-js">
+{
+    "contentType": "bundle/card",
+    "cards": [
+        { ... },
+        {
+            "contentType": "card/content",
+            "image": {
+                "url": "http://image.net/delivery.jpg",
+                "description": "delivery picture"
+            },
+            "title": "Delivery & Pickup",
+            "text": "Learn more about our policies",
+            "actions": [{
+                "type": "LINK",
+                "name": "See more",
+                "url": "http://mylink/delivery"
+            }]
+        },
+        { ... }
+    ]
+}
+</pre>
+
+| Field | Description | Values | Required | Constraints |
+| --- | --- | --- | --- | --- |
+| contentType | Type of the message’s content | String | ✓ | `bundle/card` |
+| cards | List of cards to send | Array of [Generic Card](#generic-card-:-sending-rich-content) | ✓ | |
+
+&nbsp;
+
+##### Sending a product offer
+
+&nbsp;
+
+A product offer payload lets you send a product offer to your visitor. Using the product offer you can showcase various attributes of your product such as the price, the photography of your product, the availability or a special offer. To show your visitors a carousel of product offers please see [Product offer bundle](#product-offer-bundle-(carousel)-:-sending-multiple-product-offers-at-once)
+
+&nbsp;
+
+<img src="./assets/images/example-product-offer-payload.png" alt="Example of a product offer with offer" width="300" height="260" style="margin: auto;">
+<p align="center"><em>Example of a product offer with the price, avaibility, image and special offer.</em></p>
+&nbsp;
+
+<pre class="prettyprint lang-js">
+{
+    "contentType": "product-offer",
+    "image": {
+        "url": "http://image.net/tvsamsumg.jpg",
+        "description": "picture of a TV"
+    },
+    "name": "Samsung Frame 4K UHD TC",
+    "price": "€1,499.99",
+    "offerPrice": "€1,299.99",
+    "availability": {
+        "status": "AVAILABLE"
+    },
+    "actions": [{
+        "type": "LINK",
+        "name": "See more",
+        "url": "http://mylink/TvSamsung"
+    }]
+}
+</pre>
+
+| Field | Description | Values | Required | Constraints |
+| --- | --- | --- | --- | --- |
+| contentType | Type of the message’s content | String | ✓ | `product-offer` |
+| image | Json describing attached picture | [Image](#image) | | |
+| name | Name of the product | String | ✓ | |
+| price | Price of the product without offer | String | ✓ | |
+| offerPrice | Price of the product with offer | String | | |
+| description | Description of the product | String | | |
+| availability.status | Status of availability | String | | `AVAILABLE` or `UNAVAILABLE`|
+| action | List of actions to be sent with the card | Array of [Action](#action) | ✓ | |
+
+&nbsp;
+
+##### Product offer bundle (Carousel) : Sending multiple product offers at once
+
+&nbsp;
+
+A product offer bundle is an efficient tool to showcase multiple products at one to your visitor. The visitor can navigate among the offers you sent using a slider.
+
+&nbsp;
+
+<img src="./assets/images/example-product-offer-bundle.png" alt="Example of a generic card with title, text and picture set" width="300" height="260" style="margin: auto;">
+<p align="center"><em>Example of a product offers bundle.</em></p>
+
+&nbsp;
+
+
+<pre class="prettyprint lang-js">
+{
+    "contentType": "bundle/product-offer",
+    "offers": [
+        { ... },
+        {
+            "contentType": "product-offer",
+            "image": {
+                "url": "http://image.net/tvpanasonic.jpg",
+                "description": "picture of a TV"
+            },
+            "name": "Panasonic Smart TV 4K",
+            "price": "€1,499.99",
+            "offerPrice": "€1,299.99",
+            "description": "Enhance your everyday space with The Frame TV that reflects your style and fits your space",
+            "availability": {
+                "status": "AVAILABLE"
+            },
+            "actions": [{
+                "type": "LINK",
+                "name": "See more",
+                "url": "http://mylink/TvPanasonic"
+            }]
+        },
+        { ... }
+    ]
+}
+</pre>
+
+| Field | Description | Values | Required | Constraints |
+| --- | --- | --- | --- | --- |
+| contentType | Type of the message’s content | String | ✓ | `bundle/product-offers` |
+| offers | List of product offers to display | Array of [Product Offer](#sending-a-product-offer) | ✓ | |
+
+&nbsp;
+
+##### Attachment : Sending a file
+
+&nbsp;
+
+An attachment lets you send files directly in the chatbox. If you send an image it will be directly shown to the visitors if it is in a supported format by the visitor's browser. For a non-picture file it will offer the possibility to download it. 
+
+&nbsp;
+
+<img src="./assets/images/example-attachment-payload.png" alt="Example of a document payload" width="300" height="260" style="margin: auto;">
+
+<p align="center"><em>Example of a message with a pdf attachment payload.</em></p>
+
+&nbsp;
+
+<img src="./assets/images/example-attachment-pic-payload.png" alt="Example of a picture payload" width="300" height="260" style="margin: auto;">
+
+<p align="center"><em>Example of a message with a picture attachment payload.</em></p>
+
+&nbsp;
+
+<pre class="prettyprint lang-js">
+{
+    "contentType": "file",
+    "fileName": "Can I add more information about my order?",
+    "mimeType": "application/pdf",
+    "url": "http://my-website/order.pdf"
+}
+</pre>
+
+| Field | Description | Values | Required | Constraints |
+| --- | --- | --- | --- | --- |
+| contentType | Type of the message’s content | String | ✓ | `file` |
+| fileName | Name of the file to be displayed | String | ✓ | |
+| mimeType | Mime type of the file | String | ✓ | Mime types available on desk (including `image/gif`) |
+| url | Textual content of the message | String | ✓ | URL |
+
+&nbsp;
+
+##### Generic JSON types used
+
+&nbsp;
+
+###### Image
+
+An Image object can be used to display one image. **The picture linked need to be of dimension 240x120(px) and should be displayable on browsers.**
+
+<pre class="prettyprint lang-js">
+{
+    "url": "http://image.net/image.jpg",
+    "description": "picture of an image"
+}
+</pre>
+
+| Field | Description | Values | Required | Constraints |
+| --- | --- | --- | --- | --- |
+| url | Url pointing at a picture | String/URL | ✓ | Any picture supported by navigators |
+| description | Textual description of the picture (alt field) | String | ✓ | |
+
+&nbsp;
+
+###### Action
+
+Actions can be used to offers options to one visitor. Today, only link actions can be used. A link action is one action that can redirect one user to a given url link.
+
+<pre class="prettyprint lang-js">
+{
+    "type": "LINK",
+    "name": "My link"
+    "url": "http://mylink"
+}
+</pre>
+
+
+| Field | Description | Values | Required | Constraints |
+| --- | --- | --- | --- | --- |
+| type | Type of the action | String | ✓ | `LINK` |
+| name | name to display link | String | ✓ | |
+| url | Link to be used in action | String/URL | ✓ | |
+
+&nbsp;
+
 ## Add webhooks
 
 The webhook system allows external applications to subscribe to events (via callback URLs) to receive updates in real-time.
 When you build your app, you can subscribe to a list of events.
 When customers install your app, it automatically creates webhooks for these customers as well as for events based on your app's configuration.
 
-This subscription is based on the events happening on different domains. See the list of events available in the [Webhooks documentation](#webhooks).
+This subscription is based on the events happening on different domains. See the list of events available in the [Webhooks documentation](webhooks#webhooks).
 
 You can create as much outgoing webhooks as you need.
 A webhook can cover several events.
