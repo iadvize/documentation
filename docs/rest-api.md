@@ -243,6 +243,7 @@ See below to discover used fields and see [reading section](#read) to discover s
 | id | Operator identifier | | ?filters[id]=123 |
 | group_id | Group identifier | | ?filters[group_id]=123 |
 | website_id | Website identifier | | ?filters[website_id]=123 |
+| website_list | Website identifiers | | ?filters[website_list]=1,2,3 |
 | skill_id | Skill identifier | | ?filters[skill_id]=123 |
 | name | Operator name | | ?filters[name]=genius |
 | external_id | External identifier | | ?filters[external_id]=MyExternalId |
