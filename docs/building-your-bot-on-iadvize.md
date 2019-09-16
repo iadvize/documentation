@@ -13,14 +13,14 @@ A bot is a regular agent. It has all the properties of an agent and can interact
 
 ### Bots can
 Among other things, bot are able to:
-* Be available to chat
-* Handle a conversation in one language
-* Reply to a user
-  * ask questions and act on replies
-  * send rich content such as links, carousels, and much more
-  * schedule messages to be sent later on
-* Escalate a conversation to another operator
-* Prequalify some visitor data
+* Be available to chat.
+* Handle a conversation in one language.
+* Reply to a user:
+  * ask questions and act on replies;
+  * send rich content such as links, carousels, and much more;
+  * schedule messages to be sent later on;
+* Escalate a conversation to another operator.
+* Prequalify some visitor data (identification number, email address…).
 * And much more !
 
 ### Bots <span hidden>really</span> cannot
