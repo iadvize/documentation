@@ -308,7 +308,7 @@ To fully handle a conversation you only need to implement 2 endpoints:
 * `POST /conversations` to handle a new conversation creation
 * `POST /conversations/:conversationId:/messages` to receive messages from the visitor and reply to the visitor. Mind that all the messages posted in a conversation will result into this API call (which means you will also receive your own replies).
 
-![Conversation flow diagram](TO DO) 
+![Conversation flow diagram](./assets/images/plugins/bot-scenarios-conversation-flow.jpg) 
 
 Here is a full conversation example:
 
