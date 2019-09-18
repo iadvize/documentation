@@ -710,7 +710,7 @@ Actions can be used to offers options to one visitor. Today, only link actions c
 <pre class="prettyprint lang-js">
 {
     "type": "LINK",
-    "name": "My link"
+    "name": "My link",
     "url": "http://mylink"
 }
 </pre>
