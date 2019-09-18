@@ -740,7 +740,7 @@ A quick reply is used for offering several choices to a visitor. Each choice nee
 ## Bots and conversational experience
 In order to provide a great conversational experience here are some of the best practices we advise every integrator to follow. 
 
-⚠️ Please note that these guidelines are important for your app to pass the [iAdvize review process](/documentation/getting-started#app-reviewing-process).⚠️
+⚠️ Please note that these guidelines are important for your app to pass the [iAdvize review process](/documentation/getting-started#app-reviewing-process). ⚠️
 
 #### Awaits on Bot Transfers
 As of now our bot transfer process allows you to set any `await`s time you might like. Please be advised that you should not set an await time inferior to 15 seconds. Under that delay our system will not have a sufficient amount of time to verify availability. This delay if perfectly acceptable in term of conversational experience and is required for the transfer to operate correctly.
