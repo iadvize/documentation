@@ -50,7 +50,7 @@
     * [Conversation payload objects](/documentation/building-your-bot-on-iadvize#conversation-objects)
   * [Bots and conversational experience](/documentation/building-your-bot-on-iadvize#bots-and-conversational-experience)
   * [FAQ](/documentation/building-your-bot-on-iadvize#faq)
-  * [Troubleshooting](/documentation/building-your-bot-on-iadvize#troubleshooting-your-bot)
+  * [Troubleshooting](/documentation/building-your-bot-on-iadvize#bot-troubleshooting)
 * [REST API](/documentation/rest-api#rest-api)
   * [Base URL](/documentation/rest-api#base-url)
   * [Authentication](/documentation/rest-api#authentication)
