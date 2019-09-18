@@ -864,7 +864,7 @@ You can schedule a message to be sent after a while such as:
 #### How can I check availability of a rule before a transfer
 Currently it is not possible to do this.
 
-## Troubleshooting your bot
+## Bot troubleshooting
 **Q:** My chat does not display, even if I went through all the bot creation process and campaign creation process
 
 **A1:** Is your browser main language is the language the bot is configured to chat in ? If not, make sure they match
