@@ -64,11 +64,11 @@ Now, create a new routing group (a group of agents). Go to “Routing” then se
 
 ## Chat with your bot
 To be able to chat on iAdvize you need to take several steps:
-1. Install the iAdvize tag on your website
-2. Create a campaign
-3. Create a targeting rule (when to show the chat notification to the visitor)
-4. Create a distribution group (to distribute conversations to your bots)
-5. Define a distribution rule (to route the conversations to your bots)
+* 1. Install the iAdvize tag on your website
+* 2. Create a campaign
+* 3. Create a targeting rule (when to show the chat notification to the visitor)
+* 4. Create a distribution group (to distribute conversations to your bots)
+* 5. Define a distribution rule (to route the conversations to your bots)
 
 ### Set up the iAdvize tag
 In the admin, go to “Engagement”. Create a new campaign such as: 
@@ -298,7 +298,7 @@ This endpoint will be called on a frequent basis (as of now, every second) and w
     }
 ]
 </pre>
-**Note:** You can validate your response data format with the associated [json schema](/json-schemas/availability-strategies.json).
+**Note:** You can validate your response data format with the associated [json schema](/json-schemas/bot/availability-strategies.json).
 
 
 ## Implement the conversation flow
@@ -743,12 +743,12 @@ In order to provide a great conversational experience here are some of the best 
 ⚠️ Please note that these guidelines are important for your app to pass the [iAdvize review process](/documentation/getting-started#app-reviewing-process).⚠️
 
 #### Awaits on Bot Transfers
-As of now our bot transfer process allows you to set any `await`s time you might like. Please be advised that you should not set an await time inferior to 15 seconds. Under that delay our system will not have a sufficient amount of time to verify avaibility. This delay if perfectly acceptable in term of conversational experience and is required for the transfer to operate correctly.
+As of now our bot transfer process allows you to set any `await`s time you might like. Please be advised that you should not set an await time inferior to 15 seconds. Under that delay our system will not have a sufficient amount of time to verify availability. This delay if perfectly acceptable in term of conversational experience and is required for the transfer to operate correctly.
 
 #### Delay your answers
 We strongly advise to put an `await` between each answer your bot is going to send to the visitor  to enhance the conversational experience with your bot. You can use an await of a few seconds for each message you send to the visitor. Answering directly would be too unnatural otherwise.
 
-#### Do not disguize your bot as a human
+#### Do not disguise your bot as a human
 We will refuse any integration that masks the fact that a bot is a human. According to our experience, we know that it results in important satisfaction drop. You should state at the beginning of the conversation that the operator is not human. Also provide a specific avatar that makes it clear that the agent is a bot.
 
 #### Be careful about the length of your messages
@@ -869,7 +869,7 @@ Currently it is not possible to do this.
 
 **A1:** Is your browser main language is the language the bot is configured to chat in ? If not, make sure they match
 
-**A2:** Is your bot available to chat ? Make sure that your bot is available to chat i.e. the availability endpoint is reachable and returns true. See the availability-strategy endpointd here (link).
+**A2:** Is your bot available to chat ? Make sure that your bot is available to chat i.e. the availability endpoint is reachable and returns true. See the availability-strategy endpoint here (link).
 
 ---
 
