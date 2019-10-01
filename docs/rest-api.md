@@ -195,6 +195,7 @@ See [reading section](#read) to discover some output examples.
 | --- | --- | --- |
 | id | Identifier | Integer |
 | lang | Language | String (2 chars) |
+| premium_enabled | The client has access to premium features | Boolean |
 
 ### Website
 
