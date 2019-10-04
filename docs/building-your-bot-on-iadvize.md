@@ -265,7 +265,7 @@ This endpoint will be called on a frequent basis (as of now, every second) and w
 
 | Parameters         | In    | Description                                                            | Type   | Example                              |
 | ------------------ | ----- | ---------------------------------------------------------------------- | ------ | ------------------------------------ |
-| idOperator         | Path  | iAdvize bot operator identifier that we associate to your bot scenario | String | ha-456678                            |
+| idOperator         | Query  | iAdvize bot operator identifier that we associate to your bot scenario | String | ha-456678                            |
 | idConnectorVersion | Query | Connector version identifier                                           | Uuid   | c008849d-7cb1-40ca-9503-d6df2c5cddd8 |
 | idWebsite          | Query | Project identifier on which your connector is installed on             | String | ha-123                               |
 
