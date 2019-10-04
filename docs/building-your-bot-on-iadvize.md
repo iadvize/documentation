@@ -110,7 +110,7 @@ To have a fully functional bot, you will be required to implement two distinct s
   * `GET /availability-strategies` to define when the bot is available
 * two endpoints to handle a conversation flow
   * `POST /conversations/` to create a new conversation
-  * `POST /convesations/conversationId/messageId`  to reply to a user
+  * `POST /conversations/conversationId/messageId`  to reply to a user
   
 ## Implement the bot creation flow
 A bot gets created when an admin creates a new agent of type “Bot” under the “People” section. Several information are required to be able to create a bot:
