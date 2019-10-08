@@ -33,6 +33,6 @@ Before submitting your app please make sure your app meet the following requirem
 | App logo             | The icon should be in JPG/PNG/GIF format and respect at least the following dimensions : 165x150. |
 | App screenshots      | Image should be in JPG/PNG/GIF format and respect a 8:5 ratio. |
 | Contact | Please give us the main technical contact for the app as well as a generic support contact in case of emergency and unavailibility of the main contact. |
-| Health check   | As described in our documentation a [Health check route is required.](https://developers.iadvize.com/documentation#health-check) |
+| Health check   | As described in our documentation a [Health check route is required.](https://developers.iadvize.com/documentation/build-apps#health-check) |
 | Signature usage  | The App must refuse any request containing a missing or bad signature. |
 | Demo                        | If your application is a public app we will ask you for a demo environment in order to be able to test the integration. Please provide us with access for testing through slack when you submit the application.  |
