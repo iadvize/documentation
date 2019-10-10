@@ -48,6 +48,7 @@
   * [Implement the conversation flow](/documentation/building-your-bot-on-iadvize#implement-the-conversation-flow)
     * [Create a conversation](/documentation/building-your-bot-on-iadvize#create-a-conversation)
     * [Receive and reply to messages](/documentation/building-your-bot-on-iadvize#receive-a-message-and-reply-to-it)
+  * [Implement a bot that initiates conversations](/documentation/building-your-bot-on-iadvize#implement-a-bot-that-initiates-conversations)
     * [Conversation payload objects](/documentation/building-your-bot-on-iadvize#conversation-objects)
   * [Bots and conversational experience](/documentation/building-your-bot-on-iadvize#bots-and-conversational-experience)
   * [FAQ](/documentation/building-your-bot-on-iadvize#faq)
