@@ -177,8 +177,8 @@ This endpoint is being called when a user finalises the bot creation or when bot
 | pseudo                  | Body | Bot pseudo used during the conversation                    | String                      | Botty     |
 | language                | Body | Language spoken by the bot                                 | String - ISO 3166-1 alpha-2 | fr        |
 | distributionRules       | Body | Distribution rule that can be used inside transfer replies | Array                       |  |         |
-| distributionRules.id    | Body | Distribution rule identifier                               | Uuid                        |  |         |
-| distributionRules.label | Body | Distribution rule label                                    | String                      |  |         |
+| distributionRules.id    | Body | Distribution rule identifier                               | Uuid                        |  | ef4670c3-d715-4a21-8226-ed17f354fc44        |
+| distributionRules.label | Body | Distribution rule label                                    | String                      |  | Distribution rule label        |
 | external.idBot          | Body | Existing bot unique identifier for this connector          | String                      | ha-456678 |
 
 
@@ -191,7 +191,7 @@ This endpoint is being called when a user finalises the bot creation or when bot
     "distributionRules": [
         {
             "id": "ef4670c3-d715-4a21-8226-ed17f354fc44",
-            "label": "Human SAV guys"
+            "label": "Distribution rule label"
         }
     ],
     "external": {
