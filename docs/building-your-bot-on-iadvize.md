@@ -171,12 +171,15 @@ This endpoint is being called when a user finalises the bot creation or when bot
 | idConnectorVersion | Query | Connector version identifier                                           | Uuid   | c008849d-7cb1-40ca-9503-d6df2c5cddd8 |
 | idWebsite          | Query | Project identifier on which your connector is installed on             | String | ha-123                               |
 
-| Field          | In   | Description                                       | Type                        | Example   |
-| -------------- | ---- | ------------------------------------------------- | --------------------------- | --------- |
-| name           | Body | Bot name on your platform                         | String                      | My bot    |
-| pseudo         | Body | Bot pseudo used during the conversation           | String                      | Botty     |
-| language       | Body | Language spoken by the bot                        | String - ISO 3166-1 alpha-2 | fr        |
-| external.idBot | Body | Existing bot unique identifier for this connector | String                      | ha-456678 |
+| Field                   | In   | Description                                                | Type                        | Example   |
+| ----------------------  | ---- | ---------------------------------------------------------- | --------------------------- | --------- |
+| name                    | Body | Bot name on your platform                                  | String                      | My bot    |
+| pseudo                  | Body | Bot pseudo used during the conversation                    | String                      | Botty     |
+| language                | Body | Language spoken by the bot                                 | String - ISO 3166-1 alpha-2 | fr        |
+| distributionRules       | Body | Distribution rule that can be used inside transfer replies | Array                       |  |         |
+| distributionRules.id    | Body | Distribution rule identifier                               | Uuid                        |  |         |
+| distributionRules.label | Body | Distribution rule label                                    | String                      |  |         |
+| external.idBot          | Body | Existing bot unique identifier for this connector          | String                      | ha-456678 |
 
 
 #### Request example
@@ -185,6 +188,12 @@ This endpoint is being called when a user finalises the bot creation or when bot
     "name": "My first bot !",
     "pseudo": "Botty",
     "language": "fr",
+    "distributionRules": [
+        {
+            "id": "ef4670c3-d715-4a21-8226-ed17f354fc44",
+            "label": "Human SAV guys"
+        }
+    ],
     "external": {
         "idBot": "ha-456678"
     }
