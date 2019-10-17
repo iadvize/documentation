@@ -646,7 +646,7 @@ A product offer bundle is an efficient tool to showcase multiple products at one
 
 | Field       | Description                       | Type                                                                             | Required | Example                 |
 | ----------- | --------------------------------- | -------------------------------------------------------------------------------- | -------- | ----------------------- |
-| contentType | Type of the message’s content     | String `bundle/product-offers`                                                   | ✓        | `bundle/product-offers` |
+| contentType | Type of the message’s content     | String `bundle/product-offer`                                                   | ✓        | `bundle/product-offer` |
 | offers      | List of product offers to display | Array of Product Offer payload<br><br>See [Product offer payload](#product-offer-payload) for more details | ✓        |                         |
 
 ![Example of a generic card with title, text and picture set](./assets/images/bots/example-product-offer-bundle.png)
