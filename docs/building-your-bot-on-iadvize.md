@@ -555,7 +555,7 @@ A product offer payload lets you send a product offer to your visitor. Using the
     "url": "http://image.net/tvsamsumg.jpg",
     "description": "picture of a TV"
   },
-  "name": "Samsung Frame 4K UHD TC",
+  "name": "Samsung Frame 4K UHD TV",
   "price": "€1,499.99",
   "offerPrice": "€1,299.99",
   "availability": {
@@ -749,7 +749,7 @@ As of now our bot transfer process allows you to set any `await`s time you might
 We strongly advise to put an `await` between each answer your bot is going to send to the visitor  to enhance the conversational experience with your bot. You can use an await of a few seconds for each message you send to the visitor. Answering directly would be too unnatural otherwise.
 
 #### Do not disguise your bot as a human
-We will refuse any integration that masks the fact that a bot is a human. According to our experience, we know that it results in important satisfaction drop. You should state at the beginning of the conversation that the operator is not human. Also provide a specific avatar that makes it clear that the agent is a bot.
+We will refuse any integration that masks the fact that a bot isn't a human. According to our experience, we know that it results in important satisfaction drop. You should state at the beginning of the conversation that the operator is not human. Also provide a specific avatar that makes it clear that the agent is a bot.
 
 #### Be careful about the length of your messages
 You should never send a message over 450 characters long (technical limitation). We even advise not to send more than 250 characters per message (optimal Ux). To offer a great conversational experience try to write short and concise answers. If you really need to send a long answer we recommend splitting your entire message in smaller ones of max. 250 characters that are semantically coherent.
