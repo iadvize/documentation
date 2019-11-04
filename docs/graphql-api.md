@@ -61,13 +61,24 @@ To use the GraphQL API, call the URL below with the Authorization header contain
 | variables | Variables to be used in the GraphQL query | String | No |
 | operationName | Operation to perform if the GraphQL query contains several operations | String | No |
 
-### Connectors
-#### Get connector
-<pre class="prettyprint lang-js">{
+**Complete example**
+You can sent this kind of payload directly from a HTTP client to `https://api.iadvize.com/graphql`.
+<pre class="prettyprint lang-js">
+{
   "query": "query GetConnector($connectorId: UUID!) { connector(id: $connectorId) { name } }",
   "variables": {
     "connectorId": "41c64064-4729-4d83-a939-8d46ac06d207"
   }
+}
+</pre>
+Following examples describe uniquely the graphQL query (that has to be serialized into the JSON)
+### Connectors
+#### GraphQL query example
+<pre class="prettyprint lang-js">
+query {
+    GetConnector(41c64064-4729-4d83-a939-8d46ac06d207: UUID!) {
+        connector(id: 41c64064-4729-4d83-a939-8d46ac06d207) { name }
+    }
 }
 </pre>
 
@@ -83,7 +94,7 @@ To use the GraphQL API, call the URL below with the Authorization header contain
 
 ### Satisfaction survey responses
 
-#### Query <span hidden>survey responses</span>
+#### GraphQL query example<span hidden>survey responses</span>
 
 <pre class="prettyprint lang-js">
 query {
