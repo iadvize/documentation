@@ -53,6 +53,7 @@ You can verify token validity with the authenticated route below.
 To use the GraphQL API, call the URL below with the Authorization header containing your access token.
 
 `POST /graphql`
+
 **Parameters** (sent as application/json)
 
 | Parameter | Description | Values | Mandatory |
@@ -62,6 +63,7 @@ To use the GraphQL API, call the URL below with the Authorization header contain
 | operationName | Operation to perform if the GraphQL query contains several operations | String | No |
 
 **Complete example**
+
 You can sent this kind of payload directly from a HTTP client to `https://api.iadvize.com/graphql`.
 <pre class="prettyprint lang-js">
 {
@@ -71,9 +73,13 @@ You can sent this kind of payload directly from a HTTP client to `https://api.ia
   }
 }
 </pre>
+
 Following examples describe uniquely the graphQL query (that has to be serialized into the JSON)
+
 ### Connectors
+
 #### GraphQL query example
+
 <pre class="prettyprint lang-js">
 query {
     GetConnector(41c64064-4729-4d83-a939-8d46ac06d207: UUID!) {
@@ -94,7 +100,7 @@ query {
 
 ### Satisfaction survey responses
 
-#### GraphQL query example<span hidden>survey responses</span>
+#### GraphQL query example <span hidden>survey responses</span>
 
 <pre class="prettyprint lang-js">
 query {
