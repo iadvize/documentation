@@ -114,5 +114,4 @@
 * [Single Sign On](/documentation/single-sign-on#single-sign-on)
   * [Benefits](/documentation/single-sign-on#benefits)
   * [Implementation](/documentation/single-sign-on#implementation)
-  * [Use specific links](/documentation/single-sign-on#use-specific-links)
 * [Mobile SDK](/documentation/mobile-sdk#mobile-sdk)
