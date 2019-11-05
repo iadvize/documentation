@@ -18,21 +18,3 @@ To connect an operator to its iAdvize console :
 *   Use it in the following URL : `https://www.iadvize.com/admin/login?key={SSO_KEY}`
 
 That's all! When a user visit the URL, he will be automatically logged to its iAdvize account and no login / password will be asked to him.
-
-## Use specific links
-
-It's possible to use a specific link with a parameter called `dest` to go to a specific page.
-
-Examples below:
-
-| Page | URL |
-| --- | --- |
-| Discussion panel | `https://www.iadvize.com/admin/login?key={SSO_KEY}&dest=/pupitre` |
-| Users | `https://www.iadvize.com/admin/login?key={SSO_KEY}&dest=/admin/users` |
-
-To find the parameter `dest` that interest you, look the URL address of the page in your favorite web browser.
-
-![URL example](./assets/images/sso-url.png)
-
-With this example, the SSO URL address will be:
-`https://www.iadvize.com/admin/login?key={SSO_KEY}&dest=/admin/users/`
