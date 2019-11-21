@@ -98,9 +98,76 @@ query {
 }
 </pre>
 
+### Clients
+
+#### Query <span hidden>list clients</span>
+
+List clients
+
+<pre class="prettyprint lang-js">
+query {
+    clients(first: 10, after: "Y3Vyc29yMQ==") {
+      edges {
+        node {
+          id
+          name
+        }
+      }
+    }
+  }
+</pre>
+
+#### Result <span hidden>list clients</span>
+
+<pre class="prettyprint lang-js">{
+{
+  "data": {
+    "clients": {
+      "edges": [
+        {
+          "node": {
+            "id": 335,
+            "name": "R&D Boss"
+          }
+        }
+      ]
+    }
+  }
+}
+</pre>
+
+#### Query <span hidden>get client by identifier</span>
+
+List clients
+
+<pre class="prettyprint lang-js">
+query {
+    client(clientId: 335) {
+      id
+      name
+    }
+  }
+
+</pre>
+
+#### Result <span hidden>get client by identifier</span>
+
+<pre class="prettyprint lang-js">{
+{
+  "data": {
+    "client": {
+      "id": 335,
+      "name": "R&D Boss"
+    }
+  }
+}
+</pre>
+
 ### Satisfaction survey responses
 
 #### GraphQL query example <span hidden>survey responses</span>
+
+Get the 100 first responses to the satisfaction survey during the given time interval.
 
 <pre class="prettyprint lang-js">
 query {
@@ -140,16 +207,6 @@ query {
   }
 }
 </pre>
-
-Get the 100 first responses to the satisfaction survey during the given time interval.
-
-| Parameter | Description | Values | Mandatory |
-| --- | --- | --- | --- |
-| interval | Filter responses on this time interval between 'from' and 'to' using ISO 8601 format | Object | Yes |
-| interval.from | Time interval start | ISO 8601 Date as String | Yes |
-| interval.to | Time interval end | ISO 8601 Date as String | Yes |
-| projectIds | Filter responses on project id | Array of Integer | No |
-| cursor | 'endCursor' of the previous request to get the next 100 responses | String | No |
 
 #### Result <span hidden>survey responses</span>
 
@@ -196,36 +253,3 @@ Get the 100 first responses to the satisfaction survey during the given time int
         }
       }
 </pre>
-
-| Satisfaction survey fields | Description | Values | Mandatory |
-| --- | --- | --- | --- |
-| customerSatisfaction | response to the customer satisfaction question | Integer 1 to 5 | Yes |
-| netPromoterScore | response to the net promoter question | Integer 0 to 10 | No |
-| satisfactionComment | response to the comment question | String | No |
-| conversation | conversation preceding to the survey | Conversation | Yes |
-
-| Conversation fields | Description | Values | Mandatory |
-| --- | --- | --- | --- |
-| id | conversation unique id | String | Yes |
-| createdAt | date when the conversation was initiated | ISO 8601 Date as String | Yes |
-| closedAt | date when the agent closed the conversation | ISO 8601 Date as String | Yes |
-| project | project of the conversation | Project | Yes |
-| agents | list of agents which participated to the conversation | Array of Agent | Yes |
-
-| Project field | Description | Values | Mandatory |
-| --- | --- | --- | --- |
-| id | project unique id | Integer | Yes |
-| name | project name | String | Yes |
-
-| Agent field | Description | Values | Mandatory |
-| --- | --- | --- | --- |
-| id | agent unique id | Integer | Yes |
-| firstName | agent first name | String | No |
-| lastName | agent last name | String | Yes |
-| __typename | user type | String (Expert, Bot, Professional) | Yes |
-
-| Page info field | Description | Values | Mandatory |
-| --- | --- | --- | --- |
-| endCursor | cursor to fetch the next page of responses | String | No |
-| hasNextPage | true if there is more responses | Boolean | Yes |
-
