@@ -102,8 +102,6 @@ query {
 
 #### Query <span hidden>list clients</span>
 
-List clients
-
 <pre class="prettyprint lang-js">
 query {
     clients(first: 10, after: "Y3Vyc29yMQ==") {
@@ -138,8 +136,6 @@ query {
 
 #### Query <span hidden>get client by identifier</span>
 
-List clients
-
 <pre class="prettyprint lang-js">
 query {
     client(clientId: 335) {
@@ -156,6 +152,67 @@ query {
 {
   "data": {
     "client": {
+      "id": 335,
+      "name": "R&D Boss"
+    }
+  }
+}
+</pre>
+
+### Projects
+
+#### Query <span hidden>list projects</span>
+
+<pre class="prettyprint lang-js">
+query {
+    projects(first: 10, after: "Y3Vyc29yMQ==") {
+      edges {
+        node {
+          id
+          name
+        }
+      }
+    }
+  }
+</pre>
+
+#### Result <span hidden>list projects</span>
+
+<pre class="prettyprint lang-js">{
+{
+  "data": {
+    "projects": {
+      "edges": [
+        {
+          "node": {
+            "id": 335,
+            "name": "R&D Boss"
+          }
+        }
+      ]
+    }
+  }
+}
+</pre>
+
+#### Query <span hidden>get project by identifier</span>
+
+<pre class="prettyprint lang-js">
+query {
+    project(projectId: 335) {
+      id
+      name
+    }
+  }
+
+</pre>
+
+#### Result <span hidden>get project by identifier</span>
+
+<pre class="prettyprint lang-js">{
+{
+  "data": {
+    "project": {
       "id": 335,
       "name": "R&D Boss"
     }
