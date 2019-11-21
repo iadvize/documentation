@@ -83,7 +83,9 @@ Following examples describe uniquely the graphQL query (that has to be serialize
 <pre class="prettyprint lang-js">
 query {
     GetConnector(41c64064-4729-4d83-a939-8d46ac06d207: UUID!) {
-        connector(id: 41c64064-4729-4d83-a939-8d46ac06d207) { name }
+        connector(id: 41c64064-4729-4d83-a939-8d46ac06d207) { 
+            name
+        }
     }
 }
 </pre>
@@ -101,6 +103,8 @@ query {
 ### Clients
 
 #### Query <span hidden>list clients</span>
+
+List clients
 
 <pre class="prettyprint lang-js">
 query {
@@ -136,6 +140,8 @@ query {
 
 #### Query <span hidden>get client by identifier</span>
 
+Get client by identifier
+
 <pre class="prettyprint lang-js">
 query {
     client(clientId: 335) {
@@ -162,6 +168,8 @@ query {
 ### Projects
 
 #### Query <span hidden>list projects</span>
+
+List projects
 
 <pre class="prettyprint lang-js">
 query {
@@ -196,6 +204,8 @@ query {
 </pre>
 
 #### Query <span hidden>get project by identifier</span>
+
+Get project by identifier
 
 <pre class="prettyprint lang-js">
 query {
