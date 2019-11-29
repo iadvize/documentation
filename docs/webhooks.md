@@ -264,4 +264,4 @@ In case of failure, you may need to track events in error, by following "X-iAdvi
 
 ## Webhook security
 
-Please refer to [this section](#app-security).
+Please refer to [this section](/documentation/build-apps#app-security).
