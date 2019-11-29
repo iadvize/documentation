@@ -576,6 +576,11 @@ if (! hash_equals($iAdvizeHash, $bodyPayloadHash)) {
 We strongly recommend you, to use the **constant time** string comparison method (`hash_equals` vs `===`  in our example),
 to be less vulnerable to timing attacks.
 
+### Validate our IPs
+We use 3 IPs when we call your webhooks or plugins :
+- 35.158.241.155 
+- 35.158.90.142
+- 35.156.32.28
 
 ## Developer Policy
 Developers host their code on their own host service.
