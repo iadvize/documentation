@@ -24,6 +24,7 @@
   * [App security](/documentation/build-apps#app-security)
     * [Set you secret token](/documentation/build-apps#set-you-secret-token)
     * [Validating payloads from iAdvize](/documentation/build-apps#validating-payloads-from-iadvize)
+    * [Validate our IPs](https://developers.iadvize.com/documentation/build-apps#validate-our-ips)
   * [Developer Policy](/documentation/build-apps#developer-policy)
 * [Building your bot on iAdvize](/documentation/building-your-bot-on-iadvize#building-your-bot-on-iadvize)
   * [What is a bot at iAdvize ?](/documentation/building-your-bot-on-iadvize#what-is-a-bot-at-iadvize-?)
