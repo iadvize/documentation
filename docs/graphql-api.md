@@ -65,6 +65,7 @@ To use the GraphQL API, call the URL below with the Authorization header contain
 **Complete example**
 
 You can sent this kind of payload directly from a HTTP client to `https://api.iadvize.com/graphql`.
+
 <pre class="prettyprint lang-js">
 {
   "query": "query GetConnector($connectorId: UUID!) { connector(id: $connectorId) { name } }",
