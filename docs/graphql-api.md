@@ -44,9 +44,11 @@ You can verify token validity with the authenticated route below.
     curl -H "Authorization: Bearer {ACCESS_TOKEN}" https://api.iadvize.com/_authenticated
 </pre>
 
-## Resources <span hidden>GraphQL</span>
+## Documentation and tooling <span hidden>GraphQL</span>
 
 [Documentation GraphQL](/bundles/devplatformapp/graphqldoc/index.html)
+
+[Explore & test our GraphQL API](/tools/graphiql)
 
 ## Examples <span hidden>GraphQL</span>
 

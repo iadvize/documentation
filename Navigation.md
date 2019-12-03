@@ -78,7 +78,7 @@
 * [GraphQL API](/documentation/graphql-api#graphql-api)
   * [Getting started on GraphQL](/documentation/graphql-api#getting-started-on-graphql)
   * [Authentication](/documentation/graphql-api#authentication-on-graphql)
-  * [Resources GraphQL](/documentation/graphql-api#resources-graphql)
+  * [Documentation and tooling](/documentation/graphql-api#resources-graphql)
   * [Examples](/documentation/graphql-api#examples-graphql)
     * [Connectors](/documentation/graphql-api#connectors)
     * [Satisfaction survey](/documentation/graphql-api#satisfaction-survey-responses)
