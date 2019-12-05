@@ -48,7 +48,10 @@ You can verify token validity with the authenticated route below.
 
 [Documentation GraphQL](/bundles/devplatformapp/graphqldoc/index.html)
 
-[Explore & test our GraphQL API](/tools/graphiql)
+[Test our GraphQL API](/tools/graphiql)
+
+[Explore our GraphQL API](/tools/voyager-view)
+
 
 ## Examples <span hidden>GraphQL</span>
 
