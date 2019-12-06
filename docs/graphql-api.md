@@ -60,9 +60,6 @@ curl --request GET \
 
 [Test our GraphQL API](/tools/graphiql)
 
-[Explore our GraphQL API](/tools/voyager-view)
-
-
 ## Examples <span hidden>GraphQL</span>
 
 To use the GraphQL API, call the URL below with the Authorization header containing your access token.
