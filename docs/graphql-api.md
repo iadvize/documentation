@@ -58,10 +58,15 @@ curl --request GET \
 
 [Documentation GraphQL](/bundles/devplatformapp/graphqldoc/index.html)
 
+See static documentation of our GraphQL types, queries and mutation.
+
 [Test our GraphQL API](/tools/graphiql)
+
+Get your API key and make requests to our GraphQL API with ease.
 
 [Explore our GraphQL API](/tools/voyager-view)
 
+Display graphically all our Graph, ressources and links between them.
 
 ## Examples <span hidden>GraphQL</span>
 
