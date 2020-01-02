@@ -48,7 +48,7 @@ In order to ensure satisfaction from our customers we require that every integra
 | --- | --- | --- | --- |
 | status | The current status of your connector | `UP` | ✓ |
 
-Note that this endpoint will be checked on a regular basis at the url you specified in the App information section. It **MUST** return `200` status or it will be considered unhealthy.
+Note that this endpoint will be checked on a regular basis at the url you specified in the App information section. It **MUST** be public and **MUST** return `200` status or it will be considered unhealthy.
 
 ## App Parameters
 By adding parameters to the installation process, the client has the possibility to configure your connector. 
