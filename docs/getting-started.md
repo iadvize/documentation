@@ -30,7 +30,7 @@ Before submitting your app please make sure your app meet the following requirem
 | Item                           | Description                  |
 | ------------------------------ | ---------------------------- |
 | App description      | The provided description of your application will be displayed on the marketplace if your app is public. Event if for private releases, please provide a brief description of your connector. |
-| App logo             | The icon should be in JPG/PNG/GIF format and respect at least the following dimensions : 165x150. |
+| App logo             | The icon should bee in JPG/PNG/GIF format and respect at least the following dimensions : 165x150. |
 | App screenshots      | Image should be in JPG/PNG/GIF format and respect a 8:5 ratio. |
 | Contact | Please give us the main technical contact for the app as well as a generic support contact in case of emergency and unavailibility of the main contact. |
 | Health check   | As described in our documentation a [Health check route is required.](https://developers.iadvize.com/documentation/build-apps#health-check) |
