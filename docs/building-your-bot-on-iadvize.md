@@ -412,7 +412,7 @@ This endpoint is called when a new message is received in the conversation, whet
 | reply.distributionRule              | Body | Distribution rules to transfer to                                      | UUID                                                                                  | Required if reply.type is equal to `transfer`                   |                                      |
 | reply.transferOptions               | Body | Transfer options                                                       | Object                                                                                |                                                                 |                                      |
 | reply.transferOptions.timeout       | Body | Configure how long must we wait until transfer cancel                  | Object                                                                                | Required                                                        |                                      |
-| reply.transferOptions.timeout.value | Body | Transfer timeout value                                                 | Long                                                                                  | Required                                                        |                                      |
+| reply.transferOptions.timeout.value | Body | Transfer timeout value (**must** be between 5 and 60 seconds)                                                 | Long                                                                                  | Required                                                        |                                      |
 | reply.transferOptions.timeout.unit  | Body | Transfer timeout unit                                                  | One of: `millis` or `seconds` or `minute                                              | Required                                                        |                                      |
 | variables                           | Body | Collected variables                                                    | Array                                                                                 |                                                                 |                                      |
 | variables.key                       | Body | Key of the variable collected                                          | String                                                                                |                                                                 | visitor_state_of_mind                |
@@ -443,7 +443,13 @@ This endpoint is called when a new message is received in the conversation, whet
         },
         {
             "type": "transfer",
-            "distributionRule": "ef4670c3-d715-4a21-8226-ed17f354fc44"
+            "distributionRule": "ef4670c3-d715-4a21-8226-ed17f354fc44",
+            "transferOptions": {
+              "timeout": {
+                "value": 20,
+                "unit": "seconds"
+              }
+            }
         },
         {
             "type": "close"
