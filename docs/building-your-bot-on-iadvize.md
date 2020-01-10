@@ -784,13 +784,12 @@ Transferring a conversation is quite straightforward. You can send the following
     "replies": [
         {
             "type": "transfer",
-            "distributionRule": "ef4670c3-d715-4a21-8226-ed17f354fc44"
-        },
-        {
-            "type": "await",
-            "duration": {
-                "unit": "seconds",
-                "value": 20
+            "distributionRule": "ef4670c3-d715-4a21-8226-ed17f354fc44",
+            "transferOptions": {
+              "timeout": {
+                "value": 20,
+                "unit": "seconds"
+              }
             }
         },
         {
