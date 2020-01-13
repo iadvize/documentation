@@ -752,8 +752,23 @@ In order to provide a great conversational experience here are some of the best 
 
 ⚠️ Please note that these guidelines are important for your app to pass the [iAdvize review process](/documentation/getting-started#app-reviewing-process). ⚠️
 
-#### Awaits on Bot Transfers
-As of now our bot transfer process allows you to set any `await`s time you might like. Please be advised that you should not set an await time inferior to 15 seconds. Under that delay our system will not have a sufficient amount of time to verify availability. This delay if perfectly acceptable in term of conversational experience and is required for the transfer to operate correctly.
+#### Awaits / timeout on Bot Transfers
+Our bot transfer process allows you to set any `timeout` value you might like. Please be advised that you should not set a timeout value inferior to 15 seconds. Under that delay our system will not have a sufficient amount of time to verify availability. This delay if perfectly acceptable in term of conversational experience and is required for the transfer to operate correctly.
+
+You can specify a `timeout` in a `transferOptions` key as below :
+
+<pre class="prettyprint lang-js">
+{
+  "type": "transfer",
+  "distributionRule": "ef4670c3-d715-4a21-8226-ed17f354fc44",
+  "transferOptions": {
+    "timeout": {
+      "value": 20,
+      "unit": "seconds"
+    }
+  }
+}
+</pre>
 
 #### Delay your answers
 We strongly advise to put an `await` between each answer your bot is going to send to the visitor  to enhance the conversational experience with your bot. You can use an await of a few seconds for each message you send to the visitor. Answering directly would be too unnatural otherwise.
