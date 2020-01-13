@@ -16,7 +16,7 @@ For GraphQL API, you have to generate static documentation in connectors-app, se
   
 ## How to test
 
-You can test your branch with the route https://developers.iadvize.com/documentation/test/branchName. This route uses the Documentation.md file of your branch directly without any cache system.
+You can test your branch with the route https://developers.iadvize.com/documentation in production by adding the preview header X-iAdvize-Preview containing the branch name you want to test.
 
 You can check if the rendering is right and if the global documentation with the generating menu is not broken. We will do the same check before publishing it.
 

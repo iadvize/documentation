@@ -408,22 +408,26 @@ This endpoint is called when a new message is received in the conversation, whet
 
 #### Response format
 
-| Field                  | In   | Description                                                            | Type                                                                       | Required                                                        | Example                              |
-| ---------------------- | ---- | ---------------------------------------------------------------------- | -------------------------------------------------------------------------- | --------------------------------------------------------------- | ------------------------------------ |
-| idConversation         | Body | Conversation unique identifier                                         | UUID                                                                       | ✓                                                               | a0c65ae0-4e04-4909-a5cc-80dd0f05de96 |
-| idOperator             | Body | iAdvize bot operator identifier that we associate to your bot scenario | String                                                                     | ✓                                                               | ha-456678                            |
-| replies                | Body | Array of replies                                                       | Array or Reply                                                             | ✓                                                               |                                      |
-| reply.type             | Body | Reply/action type                                                      | One of: `await` or `message` or `transfer` or `close`                      | ✓                                                               |                                      |
-| reply.duration.unit    | Body | Awaiting unit of time                                                  | One of: `millis` or `seconds` or `minutes`                                 | Required if replies.type is equal to `await`                    |                                      |
-| reply.duration.value   | Body | Awaiting value of time                                                 | Long                                                                       | Required if replies.type is equal to `await`                    |                                      |
-| reply.payload          | Body | Typed payload of the message                                           | One of Payload object<br><br>see [Payload objects](#payload-objects) for more details          | Only available and required if reply.type is equal to `message` |                                      |
-| reply.quickReplies     | Body | Quick replies proposed to the visitor                                  | Array of Quick Reply object<br><br>see [Quick reply object](#quick-reply-object) for more details |                                                                 |                                      |
-| reply.distributionRule | Body | Distribution rules to transfer to                                      | UUID                                                                       | Required if reply.type is equal to `transfer`                   |                                      |
-| variables              | Body | Collected variables                                                    | Array                                                                      |                                                                 |                                      |
-| variables.key          | Body | Key of the variable collected                                          | String                                                                     |                                                                 | visitor_state_of_mind                |
-| variables.value        | Body | Value of the variable collected                                        | String                                                                     |                                                                 | Ok                                   |
-| createdAt              | Body | Creation date of the conversation                                      | String - ISO 8601                                                          | ✓                                                               |                                      |
-| updateAt               | Body | Date of the last message received                                      | String - ISO 8601                                                          | ✓                                                               |                                      |
+| Field                               | In   | Description                                                            | Type                                                                                  | Required                                                        | Example                              |
+| ----------------------------------- | ---- | ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | --------------------------------------------------------------- | ------------------------------------ |
+| idConversation                      | Body | Conversation unique identifier                                         | UUID                                                                                  | ✓                                                               | a0c65ae0-4e04-4909-a5cc-80dd0f05de96 |
+| idOperator                          | Body | iAdvize bot operator identifier that we associate to your bot scenario | String                                                                                | ✓                                                               | ha-456678                            |
+| replies                             | Body | Array of replies                                                       | Array or Reply                                                                        | ✓                                                               |                                      |
+| reply.type                          | Body | Reply/action type                                                      | One of: `await` or `message` or `transfer` or `close`                                 | ✓                                                               |                                      |
+| reply.duration.unit                 | Body | Awaiting unit of time                                                  | One of: `millis` or `seconds` or `minutes`                                            | Required if replies.type is equal to `await`                    |                                      |
+| reply.duration.value                | Body | Awaiting value of time                                                 | Long                                                                                  | Required if replies.type is equal to `await`                    |                                      |
+| reply.payload                       | Body | Typed payload of the message                                           | One of Payload object<br><br>see [Payload objects](#payload-objects) for more details | Only available and required if reply.type is equal to `message` |                                      |
+| reply.quickReplies                  | Body | Quick replies proposed to the visitor                                  | Array of Quick Reply object<br><br>see [Quick reply object](#quick-reply-object) for more details |                                                     |                                      |
+| reply.distributionRule              | Body | Distribution rules to transfer to                                      | UUID                                                                                  | Required if reply.type is equal to `transfer`                   |                                      |
+| reply.transferOptions               | Body | Transfer options                                                       | Object                                                                                |                                                                 |                                      |
+| reply.transferOptions.timeout       | Body | Configure how long must we wait until transfer cancel                  | Object                                                                                | Required                                                        |                                      |
+| reply.transferOptions.timeout.value | Body | Transfer timeout value (**must** be between 5 and 60 seconds)                                                 | Long                                                                                  | Required                                                        |                                      |
+| reply.transferOptions.timeout.unit  | Body | Transfer timeout unit                                                  | One of: `millis` or `seconds` or `minute                                              | Required                                                        |                                      |
+| variables                           | Body | Collected variables                                                    | Array                                                                                 |                                                                 |                                      |
+| variables.key                       | Body | Key of the variable collected                                          | String                                                                                |                                                                 | visitor_state_of_mind                |
+| variables.value                     | Body | Value of the variable collected                                        | String                                                                                |                                                                 | Ok                                   |
+| createdAt                           | Body | Creation date of the conversation                                      | String - ISO 8601                                                                     | ✓                                                               |                                      |
+| updateAt                            | Body | Date of the last message received                                      | String - ISO 8601                                                                     | ✓                                                               |                                      |
 
 #### Response example 
 <pre class="prettyprint lang-js">
@@ -448,7 +452,13 @@ This endpoint is called when a new message is received in the conversation, whet
         },
         {
             "type": "transfer",
-            "distributionRule": "ef4670c3-d715-4a21-8226-ed17f354fc44"
+            "distributionRule": "ef4670c3-d715-4a21-8226-ed17f354fc44",
+            "transferOptions": {
+              "timeout": {
+                "value": 20,
+                "unit": "seconds"
+              }
+            }
         },
         {
             "type": "close"
@@ -751,8 +761,25 @@ In order to provide a great conversational experience here are some of the best 
 
 ⚠️ Please note that these guidelines are important for your app to pass the [iAdvize review process](/documentation/getting-started#app-reviewing-process). ⚠️
 
-#### Awaits on Bot Transfers
-As of now our bot transfer process allows you to set any `await`s time you might like. Please be advised that you should not set an await time inferior to 15 seconds. Under that delay our system will not have a sufficient amount of time to verify availability. This delay if perfectly acceptable in term of conversational experience and is required for the transfer to operate correctly.
+#### Awaits / timeout on Bot Transfers
+Our bot transfer process allows you to set any `timeout` value you might like. Please be advised that you should not set a timeout value inferior to 15 seconds. Under that delay our system will not have a sufficient amount of time to verify availability. This delay is perfectly acceptable in term of conversational experience and is required for the transfer to operate correctly.
+
+> :warning: Please note that if you don't specify a `transferOptions`, the timeout value will be 60 seconds
+
+You can specify a `timeout` in a `transferOptions` key as below :
+
+<pre class="prettyprint lang-js">
+{
+  "type": "transfer",
+  "distributionRule": "ef4670c3-d715-4a21-8226-ed17f354fc44",
+  "transferOptions": {
+    "timeout": {
+      "value": 20,
+      "unit": "seconds"
+    }
+  }
+}
+</pre>
 
 #### Delay your answers
 We strongly advise to put an `await` between each answer your bot is going to send to the visitor  to enhance the conversational experience with your bot. You can use an await of a few seconds for each message you send to the visitor. Answering directly would be too unnatural otherwise.
@@ -783,13 +810,12 @@ Transferring a conversation is quite straightforward. You can send the following
     "replies": [
         {
             "type": "transfer",
-            "distributionRule": "ef4670c3-d715-4a21-8226-ed17f354fc44"
-        },
-        {
-            "type": "await",
-            "duration": {
-                "unit": "seconds",
-                "value": 20
+            "distributionRule": "ef4670c3-d715-4a21-8226-ed17f354fc44",
+            "transferOptions": {
+              "timeout": {
+                "value": 20,
+                "unit": "seconds"
+              }
             }
         },
         {
