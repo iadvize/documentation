@@ -753,7 +753,9 @@ In order to provide a great conversational experience here are some of the best 
 ⚠️ Please note that these guidelines are important for your app to pass the [iAdvize review process](/documentation/getting-started#app-reviewing-process). ⚠️
 
 #### Awaits / timeout on Bot Transfers
-Our bot transfer process allows you to set any `timeout` value you might like. Please be advised that you should not set a timeout value inferior to 15 seconds. Under that delay our system will not have a sufficient amount of time to verify availability. This delay if perfectly acceptable in term of conversational experience and is required for the transfer to operate correctly.
+Our bot transfer process allows you to set any `timeout` value you might like. Please be advised that you should not set a timeout value inferior to 15 seconds. Under that delay our system will not have a sufficient amount of time to verify availability. This delay is perfectly acceptable in term of conversational experience and is required for the transfer to operate correctly.
+
+> :warning: Please note that if you don't specify a `transferOptions`, the timeout value will be 60 seconds
 
 You can specify a `timeout` in a `transferOptions` key as below :
 
