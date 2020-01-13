@@ -393,7 +393,7 @@ This endpoint is called when a new message is received in the conversation, whet
 
 #### Request - POST /conversations/:idConversation:/messages
 
-> :warning: Please note that in order to offer the best user experience, your bot **must** return a response in less than 5 seconds. If not, you'll receive a timeout and the bot answer will not be displayed to the user.
+> ⚠️ Please note that in order to offer the best user experience, your bot **must** return a response in less than 5 seconds. If not, you'll receive a timeout and the bot answer will not be displayed to the user.
 
 | Parameters         | In    | Description                                                           | Type   | Example                              |
 | ------------------ | ----- | --------------------------------------------------------------------- | ------ | ------------------------------------ |
