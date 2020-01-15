@@ -388,9 +388,13 @@ Everytime a conversation starts, this endpoint is called. It allows iAdvize to n
 </pre>
 
 ### Receive a message and reply to it
+
 This endpoint is called when a new message is received in the conversation, whether the bot or the user sent it. 
 
 #### Request - POST /conversations/:idConversation:/messages
+
+> ⚠️ Please note that in order to offer the best user experience, your bot **must** return a response in less than 5 seconds. If not, you'll receive a timeout and the bot answer will not be displayed to the user.
+
 | Parameters         | In    | Description                                                           | Type   | Example                              |
 | ------------------ | ----- | --------------------------------------------------------------------- | ------ | ------------------------------------ |
 | idConnectorVersion | Query | Connector version identifier                                          | String | c008849d-7cb1-40ca-9503-d6df2c5cddd8 |
