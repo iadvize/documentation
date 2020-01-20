@@ -2,8 +2,6 @@
 
 iAdvize provides Javascript callbacks functions that can be used to perform actions on specific events.
 
-*Please be advised that on Q4 of 2019 iAdvize will deliver a new Javascript SDK containing much more features. Current callbacks will be deprecated but we will insure a smooth transition for existing integrations.*
-
 ## How to use callbacks
 
 To execute custom code during an iAdvize callback function you have to define a `var iAdvizeCallbacks;` variable that will contain the callbacks you want to use. **You must declare that variable before iAdvize tracking code.**
