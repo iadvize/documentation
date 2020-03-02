@@ -4,11 +4,13 @@ iAdvize provides Javascript callbacks functions that can be used to perform acti
 
 ## How to use callbacks
 
-To execute custom code during an iAdvize callback function you have to define a `var iAdvizeCallbacks;` variable that will contain the callbacks you want to use. **You must declare that variable before iAdvize tracking code.**
+To execute custom code during an iAdvize callback function you have to define an `iAdvizeCallbacks` variable that will contain the callbacks you want to use.
 
-Each callback function has a `obj` variable passed as a parameter that could contain some extra information about iAdvize elements.
+**⚠️ Please note that you must declare this variable before the main iAdvize tag.**
 
-In the example we want to track Google Analytics events when a chat or a call starts / ends :
+Each callback function has an `obj` variable passed as a parameter that could contain some extra information about iAdvize elements.
+
+In the example bellow we want to track Google Analytics events when a chat or a call starts / ends :
 
 <pre class="prettyprint lang-js">var iAdvizeCallbacks = {
   //iAdvize callback functions are listed here
@@ -64,8 +66,8 @@ In the example we want to track Google Analytics events when a chat or a call st
 
 - Called when : a chat discussion has started.
 - Parameter(s) : `obj` contain 2 values:
--- `obj.id` -> Chat identifier
--- `obj.startedBy` -> Who started the chat (can be one of 'operator', 'visitor' or 'proactif')
+  - `obj.id` -> Chat identifier
+  - `obj.startedBy` -> Who started the chat (can be one of 'operator', 'visitor' or 'proactif')
 
 <pre class="prettyprint lang-js">var iAdvizeCallbacks = {
     onChatStarted: function(obj){
@@ -79,8 +81,8 @@ In the example we want to track Google Analytics events when a chat or a call st
 
 - Called when : a chat discussion has ended.
 - Parameter(s) : `obj` contain 2 values:
--- `obj.id` -> Chat identifier
--- `obj.endedBy` -> Who ended the chat ('operator' or 'visitor')
+  - `obj.id` -> Chat identifier
+  - `obj.endedBy` -> Who ended the chat ('operator' or 'visitor')
 
 <pre class="prettyprint lang-js">var iAdvizeCallbacks = {
     onChatEnded: function(obj){
@@ -106,9 +108,13 @@ In the example we want to track Google Analytics events when a chat or a call st
 ### onMessageReceived
 
 - Called when : an operator message is received by the visitor.
-- Parameter(s) : `obj` contain 2 values:
--- `obj.time` -> local time of the message (visitor time)
--- `obj.msg` -> the message itself
+- Parameter(s) : `obj` contain 4 values:
+  - `obj.time` -> local time of the message (visitor time)
+  - `obj.msg` -> the message itself
+  - `obj.date` -> local datetime of the message ([ISO 8601](https://www.w3.org/TR/NOTE-datetime))
+  - `obj.operator` -> (optional) operator information if available
+    - `obj.operator.id` -> iAdvize operator id
+    - `obj.operator.externalId` -> operator external id or null if not provided in iAdvize admin 
 
 <pre class="prettyprint lang-js">var iAdvizeCallbacks = {
     onMessageReceived: function(obj){
@@ -122,8 +128,8 @@ In the example we want to track Google Analytics events when a chat or a call st
 
 - Called when : the visitor sends a message.
 - Parameter(s) : `obj` contain 2 values:
--- `obj.time` -> local time of the message (visitor time)
--- `obj.msg` -> the message itself
+  - `obj.time` -> local time of the message (visitor time)
+  - `obj.msg` -> the message itself
 
 <pre class="prettyprint lang-js">var iAdvizeCallbacks = {
     onMessageSent: function(obj){
