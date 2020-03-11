@@ -50,7 +50,7 @@ The API key must be attached to each request. You can use it in one of the follo
 }
 </pre>
 
-##### `POST /my_resource my_field=my_value (with error)`
+##### `POST /my_resource my_field=my_value` (with error)
 
 <pre class="prettyprint lang-js">{
   meta: {
@@ -95,9 +95,9 @@ The API key must be attached to each request. You can use it in one of the follo
 
 | Filter | Description | Values |
 | --- | --- | --- |
-| page | Page number | ?page=1 |
-| limit | Maximum number of resources per page (maximum possible value is 100) | ?limit=1 |
-| full | Show all fields of the resource | ?full=1 |
+| page | Page number | `?page=1` |
+| limit | Maximum number of resources per page (maximum possible value is 100) | `?limit=1` |
+| full | Show all fields of the resource | `?full=1` |
 
 Use the `*` character to broaden the scope of your search. E.g.: `filters[name]=*uli*`
 
@@ -161,7 +161,7 @@ Use the `*` character to broaden the scope of your search. E.g.: `filters[name]=
   }
 }</pre>
 
-**DELETE /my_resource/456 (with error)**
+##### `DELETE /my_resource/456` (with error)
 
 <pre class="prettyprint lang-js">{
   meta: {
@@ -240,15 +240,14 @@ See below to discover used fields and see [reading section](#read) to discover s
 **Filters**
 
 | Filter | Description | Values | Use |
-| --- | --- | --- |
-| id | Operator identifier | | ?filters[id]=123 |
-| group_id | Group identifier | | ?filters[group_id]=123 |
-| website_id | Website identifier | | ?filters[website_id]=123 |
-| website_list | Website identifiers | | ?filters[website_list]=1,2,3 |
-| skill_id | Skill identifier | | ?filters[skill_id]=123 |
-| name | Operator name | | ?filters[name]=genius |
-| external_id | External identifier | | ?filters[external_id]=MyExternalId |
-| connected | Operator online status | 0 (offline) or 1 (online) | ?filters[connected]=1 |
+| --- | --- | --- | --- |
+| id | Operator identifier | | `?filters[id]=123` |
+| group_id | Group identifier | | `?filters[group_id]=123` |
+| website_id | Website identifier | | `?filters[website_id]=123` |
+| website_list | Website identifiers | | `?filters[website_list]=1,2,3` |
+| skill_id | Skill identifier | | `?filters[skill_id]=123` |
+| name | Operator name | | `?filters[name]=genius` |
+| external_id | External identifier | | `?filters[external_id]=MyExternalId` |
 
 #### Get operator's details
 
@@ -342,7 +341,7 @@ Get the live availability of all of your operators.
 
 You can use previous filters.
 *   In order to have more accurate results, only available operators are displayed in the default view.
-*   If you want to display offline operators, we invite you to use the `connected` filter. Please note that you will only see agents that logged in to the iAdvize platform at least once.
+*   If you want to display offline operators, we invite you to use the `connected=0` filter. Please note that you will only see agents that logged in to the iAdvize platform at least once.
 *   If your operators have `skills` or `groups`, you need to specify it in your request.
 
 #### Get operator's live availability
@@ -432,7 +431,7 @@ See [reading section](#read) to discover some output examples.
     conversation_number: 589,
     satisfaction_global_rate: 0.86,
     experience: 5630
-  }
+  } 
 }
 </pre>
 
@@ -454,7 +453,7 @@ See [reading section](#read) to discover some output examples.
 | city | City | String |
 | country | Country | String |
 
-##### Response
+**Response**
 
 <pre class="prettyprint lang-js">{
   meta: {
@@ -484,7 +483,7 @@ See below to discover used fields and see [reading section](#read) to discover s
 
 | Filter | Description | Use |
 | --- | --- | --- |
-| parent_id | Parent group identifier | ?filters[parent_id]=1987 |
+| parent_id | Parent group identifier | `?filters[parent_id]=1987` |
 
 #### Get a group details
 
@@ -533,8 +532,8 @@ See below to discover used fields and see [reading section](#read) to discover s
 
 | Filter | Description | Use |
 | --- | --- | --- |
-| operator_id | Operator identifier | ?filters[operator_id]=123 |
-| parent_id | Parent skill identifier | ?filters[parent_id]=123 |
+| operator_id | Operator identifier | `?filters[operator_id]=123` |
+| parent_id | Parent skill identifier | `?filters[parent_id]=123` |
 
 #### Get a skill details
 
@@ -551,7 +550,7 @@ See [reading section](#read) to discover some output examples.
 | order | Order | Integer |
 | created_at | Date of creation | Date `YYYY-MM-DD HH:MM:SS` |
 | parent_id | Parent skill identifier | Integer |
-| operator_list`deprecated, use the Operator resource with the skill_id filter instead` | List of operator identifiers | List of integers |
+| operator_list **Deprecated: use the Operator resource with the skill_id filter instead** | List of operator identifiers | List of integers |
 
 #### Create a skill
 
@@ -585,15 +584,15 @@ formatted conversation history.
 
 | Filter | Description | Values | Use |
 | --- | --- | --- | --- |
-| channel | Channel | `chat`, `call`, `video` or `social` | ?filters[channel]=chat |
-| from | Date from (see more information below) | `YYYY-MM-DD` or `YYYY-MM-DD HH:MM:SS` | ?filters[from]=2013-08-22 |
-| to | Date to (see more information below) | `YYYY-MM-DD` or `YYYY-MM-DD HH:MM:SS` | ?filters[to]=2013-08-25 |
-| website_id | Website identifier | ?filters[website_id]=123 |
-| operator_id | Operator identifier | ?filters[operator_id]=123 |
-| visitor_id | Visitor identifier | ?filters[visitor_id]=123 |
-| skill_id | Skill identifier | ?filters[skill_id]=123 |
-| tag_id | Tag identifier | ?filters[tag_id]=123 |
-| rule_id | Rule identifier | ?filters[rule_id]=123 |
+| channel | Channel | `chat`, `call`, `video` or `social` | `?filters[channel]=chat` |
+| from | Date from (see more information below) | `YYYY-MM-DD` or `YYYY-MM-DD HH:MM:SS` | `?filters[from]=2013-08-22` |
+| to | Date to (see more information below) | `YYYY-MM-DD` or `YYYY-MM-DD HH:MM:SS` | `?filters[to]=2013-08-25` |
+| website_id | Website identifier | `?filters[website_id]=123` |
+| operator_id | Operator identifier | `?filters[operator_id]=123` |
+| visitor_id | Visitor identifier | `?filters[visitor_id]=123` |
+| skill_id | Skill identifier | `?filters[skill_id]=123` |
+| tag_id | Tag identifier | `?filters[tag_id]=123` |
+| rule_id | Rule identifier | `?filters[rule_id]=123` |
 
 A request cannot fetch the conversations for a period over 3 months.
 The following rules apply :
@@ -638,12 +637,12 @@ You can retrieve different types of messages into the conversation.
 
 | Field | Description | Values |
 | :--- | :--- | :--- |
-| history | Text message sent by Operator | [1,"2016-02-16 11:24:43","Hello, how can I help you?",1455618283869], |
-| history | Text message sent by Visitor | [2,"2016-02-16 11:25:26","I would like to know if my order: xxx has been sent",1455618327321], |
-| history | Software notifications | [3,"2016-02-16 11:24:31","The chat rule has been activated."], [3,"2016-02-16 11:26:43","OPERATOR_CHAT_CLOSE"] |
-| history | URL - Link | [5,"2016-02-16 11:24:21","http://iadvize.com/"] |
-| history | Rich content sent by Operator | [6,"2016-02-16 11:24:21","http://img.png/"] |
-| history | Rich content sent by Visitor | [7,"2016-02-16 11:24:21","http://img.png/"] |
+| history | Text message sent by Operator | `[1,"2016-02-16 11:24:43","Hello, how can I help you?",1455618283869]` |
+| history | Text message sent by Visitor | `[2,"2016-02-16 11:25:26","I would like to know if my order: xxx has been sent",1455618327321]` |
+| history | Software notifications | `[3,"2016-02-16 11:24:31","The chat rule has been activated."], [3,"2016-02-16 11:26:43","OPERATOR_CHAT_CLOSE"]` |
+| history | URL - Link | `[5,"2016-02-16 11:24:21","http://iadvize.com/"]` |
+| history | Rich content sent by Operator | `[6,"2016-02-16 11:24:21","http://img.png/"]` |
+| history | Rich content sent by Visitor | `[7,"2016-02-16 11:24:21","http://img.png/"]` |
 
 Conversation history types example
 <pre class="prettyprint lang-js">
@@ -673,7 +672,7 @@ See below to discover used fields and see [reading section](#read) to discover s
 
 | Filter | Description | Use |
 | --- | --- | --- |
-| website_id | Website identifier | ?filters[website_id]=123 |
+| website_id | Website identifier | `?filters[website_id]=123` |
 
 #### Get a tag details
 
@@ -689,7 +688,7 @@ See [reading section](#read) to discover some output examples.
 | name | Name | String |
 | website_id | List of website identifiers | List of integers |
 
-#### Create tag(s)
+#### Create tags
 
 `POST /tag`
 
@@ -773,11 +772,11 @@ See below to discover used fields and see [reading section](#read) to discover s
 
 | Filter | Description | Values | Use |
 | --- | --- | --- | --- |
-| website_id | Website identifier | ?filters[website_id]=123 | |
-| operator_id | Operator identifier | ?filters[operator_id]=123 | |
-| conversation_id | Conversation identifier | ?filters[conversation_id]=123 | |
-| from | Date from | `YYYY-MM-DD` or `YYYY-MM-DD HH:MM:SS` | ?filters[from]=YYYY-MM-DD HH:MM:SS |
-| to | Date to | `YYYY-MM-DD` or `YYYY-MM-DD HH:MM:SS` | ?filters[to]=YYYY-MM-DD HH:MM:SS |
+| website_id | Website identifier | `?filters[website_id]=123` | |
+| operator_id | Operator identifier | `?filters[operator_id]=123` | |
+| conversation_id | Conversation identifier | `?filters[conversation_id]=123` | |
+| from | Date from | `YYYY-MM-DD` or `YYYY-MM-DD HH:MM:SS` | `?filters[from]=YYYY-MM-DD HH:MM:SS` |
+| to | Date to | `YYYY-MM-DD` or `YYYY-MM-DD HH:MM:SS` | `?filters[to]=YYYY-MM-DD HH:MM:SS` |
 
 #### Get a satisfaction details
 
@@ -825,7 +824,7 @@ See below to discover used fields and see [reading section](#read) to discover s
 
 #### Contact indicators
 
-##### available on `chat`, `call`, `video`, `facebook`, `twitter`, `facebookBusinessOnMessenger`, `sms`, `whatsapp`
+**available on `chat`, `call`, `video`, `facebook`, `twitter`, `facebookBusinessOnMessenger`, `sms`, `whatsapp`**
 
 | Indicator | Label | Description | Value |
 | --- | --- | --- | --- |
@@ -838,7 +837,7 @@ See below to discover used fields and see [reading section](#read) to discover s
 | contact_received_message_number | Received messages | Total number of messages within a conversation received by the agents. | Number |
 | contact_unanswered_number | Contacts initiated with no response | Number of contacts initiated by a visitor with no response from an agent. | Number |
 
-##### available on `chat`
+**available on `chat`**
 
 | Indicator | Label | Description | Value |
 | --- | --- | --- | --- |
@@ -847,7 +846,7 @@ See below to discover used fields and see [reading section](#read) to discover s
 | contact_missed_with_no_operators_number | Missed contact opportunities (agents absent) | Estimated number of contacts missed because the agents were either not connected or not in production. | Number |
 | contact_simultaneous_number | Simultaneous contacts | Average number of contacts processed simultaneously by an agent during his online presence. | Number |
 
-##### available on `chat`, and `video`
+**available on `chat`, and `video`**
 
 | Indicator | Label | Description | Value |
 | --- | --- | --- | --- |
@@ -857,7 +856,7 @@ See below to discover used fields and see [reading section](#read) to discover s
 | contact_waiting_duration | Waiting time before contact | Average waiting time of visitors in the queue. | Second |
 | contact_waiting_number | Initiated contacts | Average waiting time of visitors in the queue. | Number |
 
-##### available on `chat`, `call`, `video`
+**available on `chat`, `call`, `video`**
 
 | Indicator | Label | Description | Value |
 | --- | --- | --- | --- |
@@ -870,7 +869,7 @@ See below to discover used fields and see [reading section](#read) to discover s
 
 #### Presence indicators
 
-##### available on `chat`, `call` and `video`
+**available on `chat`, `call` and `video`**
 
 | Indicator | Label | Description | Number |
 | --- | --- | --- | --- |
@@ -882,7 +881,7 @@ See below to discover used fields and see [reading section](#read) to discover s
 | presentation_duration | Smoothed period of button presentation | Period during which buttons are displayable. Length of the time slot covered with at least one agent available. | Second |
 | production_smoothed_duration | Smoothed period of production | Period during which operators were in production. Length of the time slot covered with at least one agent in production. | Second |
 
-##### available on `chat`, `call`, `video`, `facebook`, `twitter` `facebookBusinessOnMessenger`, `sms`, `whatsapp`
+**available on `chat`, `call`, `video`, `facebook`, `twitter` `facebookBusinessOnMessenger`, `sms`, `whatsapp`**
 
 | Indicator | Label | Description | Value |
 | --- | --- | --- | --- |
@@ -897,7 +896,7 @@ See below to discover used fields and see [reading section](#read) to discover s
 
 #### Satisfaction indicators
 
-##### available on `chat`, `call` and `video`
+**available on `chat`, `call` and `video`**
 
 | Indicator | Label | Description | Value |
 | --- | --- | --- | --- |
@@ -912,7 +911,7 @@ See below to discover used fields and see [reading section](#read) to discover s
 
 #### Transactions indicators
 
-##### available on `chat`, `call`, `video`, `facebook`, `twitter`, `facebookBusinessOnMessenger`, `sms`, `whatsapp`
+**available on `chat`, `call`, `video`, `facebook`, `twitter`, `facebookBusinessOnMessenger`, `sms`, `whatsapp`**
 
 | Indicator | Label | Description | Value |
 | --- | --- | --- | --- |
