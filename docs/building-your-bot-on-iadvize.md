@@ -111,7 +111,9 @@ To have a fully functional bot, you will be required to implement two distinct s
 * two endpoints to handle a conversation flow
   * `POST /conversations/` to create a new conversation
   * `POST /conversations/conversationId/messageId`  to reply to a user
-  
+* one optional endpoint to initiate conversation with new visitors.
+  * `GET /bots/:idOperator/conversation-first-messages` to retrieve first messages
+
 ## Implement the bot creation flow
 A bot gets created when an admin creates a new agent of type “Bot” under the “People” section. Several information are required to be able to create a bot:
 * which scenario it can be associated to
@@ -344,7 +346,7 @@ Here is a full conversation example:
 ### Create a conversation
 Everytime a conversation starts, this endpoint is called. It allows iAdvize to notify your bot a conversation starts.
 
-⚠️Do not include any replies (leave the array empty) as another call to `POST /conversations/conversationId/messages` is triggered right after `POST /conversations`. It will be the right time to answer the visitor. ⚠️
+⚠️ Do not include any replies (leave the array empty) as another call to `POST /conversations/conversationId/messages` is triggered right after `POST /conversations`. It will be the right time to answer the visitor. ⚠️
 
 #### Request - POST /conversations
 | Parameters         | In    | Description                                                           | Type   | Example                              |
@@ -389,7 +391,7 @@ Everytime a conversation starts, this endpoint is called. It allows iAdvize to n
 
 ### Receive a message and reply to it
 
-This endpoint is called when a new message is received in the conversation, whether the bot or the user sent it. 
+This endpoint is called when a new message is received in the conversation, whether the bot or the user sent it.
 
 #### Request - POST /conversations/:idConversation:/messages
 
@@ -758,6 +760,65 @@ A quick reply is used for offering several choices to a visitor. Each choice nee
     "idQuickReply": "1ef5145b-a9b6-4e86-8743-b6e3b4026b2c"
 }
 </pre>
+
+## Implement a bot that initiates conversations
+
+If you don't need your bot to initiate the conversation, you can ignore this endpoint.
+
+This endpoint is used if you want your bot initiate the conversation with new visitors. It should return the first messages you want to send as soon as the visitor opens up the chatbox, before the first visitor message.
+
+⚠️ Beware that the replies returned here must be the same as in the first POST /conversation (when no history is provided)
+
+#### Request - GET /bots/:idOperator/conversation-first-messages
+| Parameters         | In    | Description                                                           | Type   | Example                              |
+| ------------------ | ----- | --------------------------------------------------------------------- | ------ | ------------------------------------ |
+| idConnectorVersion | Query | Connector version identifier                                          | String | c008849d-7cb1-40ca-9503-d6df2c5cddd8 |
+| idOperator         | Path | iAdvize bot operator identifier that we associate to your bot scenario | String | ha-123                               |
+
+#### Response format
+| Field                  | In   | Description                                                            | Type                                                                       | Required                                                        | Example                              |
+| ---------------------- | ---- | ---------------------------------------------------------------------- | -------------------------------------------------------------------------- | --------------------------------------------------------------- | ------------------------------------ |
+| replies                | Body | Array of replies                                                       | Array or Reply                                                             | ✓                                                               |                                      |
+| reply.type             | Body | Reply/action type                                                      | `message`  (other types will be ignored)                                   | ✓                                                               |                                      |
+| reply.payload          | Body | Typed payload of the message                                           | One of Payload object<br><br>see [Payload objects](#payload-objects) for more details          |                                             |                                      |
+| reply.quickReplies     | Body | Quick replies proposed to the visitor                                  | Array of Quick Reply object<br><br>see [Quick reply object](#quick-reply-object) for more details |                                          |                                      |
+
+#### Response example
+<pre class="prettyprint lang-js">
+{
+   "replies":[
+      {
+         "type":"message",
+         "payload":{
+            "contentType":"text",
+            "value":"Hi, my name is robot and I'm here to help"
+         },
+         "quickReplies":[]
+      },
+      {
+         "type":"message",
+         "payload":{
+            "contentType":"text",
+            "value":"How can I help you ?"
+         },
+         "quickReplies":[
+            {
+               "contentType":"text/quick-reply",
+               "value":"I didn't receive my order",
+               "idQuickReply":"1ef5145b-a9b6-4e86-8743-b6e3b4026b2c"
+            },
+            {
+               "contentType":"text/quick-reply",
+               "value":"Payment problem",
+               "idQuickReply":"13594c9b-dcff-4add-81fc-5e1093e443a7"
+            }
+         ]
+      }
+   ]
+}
+</pre>
+
+**Note:** You can validate your response data format with the associated [json schema](/json-schemas/bot/conversation-first-messages.json).
 
 
 ## Bots and conversational experience
