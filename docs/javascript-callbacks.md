@@ -68,7 +68,7 @@ In the example bellow we want to track Google Analytics events when a chat or a 
 - Parameter(s) : `obj` contain 2 values:
   - `obj.id` -> Chat identifier that you can use with our REST API
   - `obj.conversationId` -> Conversation UUID that you can use with our GraphQL API
-  - `obj.visitorId` -> Unique identifier generated (string) that you can use for analytics purposes
+  - `obj.vuid` -> Visitor Uniq Id is a random string that you can use for analytics purposes
   - `obj.startedBy` -> Who started the chat (can be one of 'operator', 'visitor' or 'proactif')
 
 <pre class="prettyprint lang-js">var iAdvizeCallbacks = {
