@@ -73,7 +73,7 @@ In the example bellow we want to track Google Analytics events when a chat or a 
 <pre class="prettyprint lang-js">var iAdvizeCallbacks = {
     onChatStarted: function(obj){
         // Chat is started
-        console.log('chat #' +obj.id + ' was started by ' + obj.startedBy);
+        console.log('chat #' +obj.id + ' was started');
     }
 };
 </pre>
