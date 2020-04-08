@@ -50,6 +50,7 @@
     * [Receive and reply to messages](/documentation/building-your-bot-on-iadvize#receive-a-message-and-reply-to-it)
   * [Implement a bot that initiates conversations](/documentation/building-your-bot-on-iadvize#implement-a-bot-that-initiates-conversations)
     * [Conversation payload objects](/documentation/building-your-bot-on-iadvize#conversation-objects)
+  * [Customize replies with Markdown](/documentation/building-your-bot-on-iadvize#customize-replies-with-markdown)
   * [Bots and conversational experience](/documentation/building-your-bot-on-iadvize#bots-and-conversational-experience)
   * [FAQ](/documentation/building-your-bot-on-iadvize#faq)
   * [Troubleshooting](/documentation/building-your-bot-on-iadvize#bot-troubleshooting)
