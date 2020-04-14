@@ -38,7 +38,7 @@ In the example bellow we want to track Google Analytics events when a chat or a 
 
 ### onChatDisplayed
 
-- Called when : a chat popin is displayed on the visitor screen.
+- Called when : a chat popin is displayed on the visitor screen **(either opened or reduced)**.
 - Parameter(s) : `obj` is null
 
 <pre class="prettyprint lang-js">var iAdvizeCallbacks = {
