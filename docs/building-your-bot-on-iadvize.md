@@ -346,7 +346,7 @@ Here is a full conversation example:
 ### Create a conversation
 Everytime a conversation starts, this endpoint is called. It allows iAdvize to notify your bot a conversation starts.
 
-⚠️ Unless you'll implement the optional `GET /bots/:idOperator/conversation-first-messages` route, leave the `replies` array empty as another call to `POST /conversations/conversationId/messages` is triggered right after `POST /conversations`. It will be the right time to answer the visitor.
+⚠️ Unless you implement the optional `GET /bots/:idOperator/conversation-first-messages` route, leave the `replies` array empty as another call to `POST /conversations/conversationId/messages` is triggered right after `POST /conversations`. It will be the right time to answer the visitor.
 
 #### Request - POST /conversations
 | Parameters         | In    | Description                                                           | Type   | Example                              |
