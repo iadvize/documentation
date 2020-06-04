@@ -93,7 +93,7 @@ With V2 events, you can query the corresponding resources through our [GraphQL a
   "projectId": 1549,
   "clientId": 335,
   "conversationId": "4c8c7408-f73c-42cd-89e9-afbbee7d9024",
-  "operatorId": [
+  "operatorIds": [
     15253,
     15254
    ],
