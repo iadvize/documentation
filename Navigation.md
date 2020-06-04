@@ -107,7 +107,7 @@
     * [onChatEnded](/documentation/javascript-callbacks#onchatended)
     * [onCallButtonDisplayed](/documentation/javascript-callbacks#oncallbuttondisplayed)
     * [onMessageReceived](/documentation/javascript-callbacks#onmessagereceived)
-    * [onMessageReceived](/documentation/javascript-callbacks#onmessagesent)
+    * [onMessageSent](/documentation/javascript-callbacks#onmessagesent)
     * [onSatisfactionDisplayed](/documentation/javascript-callbacks#onsatisfactiondisplayed)
     * [onSatisfactionAnswered](/documentation/javascript-callbacks#onsatisfactionanswered)
 * [Single Sign On](/documentation/single-sign-on#single-sign-on)
