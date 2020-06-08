@@ -41,10 +41,6 @@ curl --request POST \
 }
 </pre>
 
-<pre class="prettyprint lang-bash">
-    curl -XPOST https://api.iadvize.com/oauth2/token -d "username={EMAIL}&password={PASSWORD}&grant_type=password"
-</pre>
-
 To authenticate an API call just pass the access token in an authorization header.
 You can verify token validity with the authenticated route below.
 
