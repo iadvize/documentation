@@ -6,7 +6,6 @@
   * [Get a Developer Account](/documentation/getting-started#get-a-developer-account)
   * [Features Overview](/documentation/getting-started#features-overview)
   * [App Reviewing Process](/documentation/getting-started#app-reviewing-process)
-  
 * [GraphQL API](/documentation/graphql-api#graphql-api)
   * [Getting started on GraphQL](/documentation/graphql-api#getting-started-on-graphql)
   * [Authentication](/documentation/graphql-api#authentication-on-graphql)
@@ -16,7 +15,6 @@
     * [Connectors](/documentation/graphql-api#connectors)
     * [Projects](/documentation/graphql-api#projects)
     * [Satisfaction survey](/documentation/graphql-api#satisfaction-survey-responses)
-
 * [REST API](/documentation/rest-api#rest-api)
   * [Base URL](/documentation/rest-api#base-url)
   * [Authentication](/documentation/rest-api#authentication)
@@ -40,7 +38,6 @@
     * [Visitor](/documentation/rest-api#visitor)
     * [Call meeting](/documentation/rest-api#call-meeting)
     * [Callback Odigo](/documentation/rest-api#callback-odigo)
-    
 * [Webhooks](/documentation/webhooks#webhooks)
   * [Introduction](/documentation/webhooks#introduction)
   * [Subscribe to your first webhook](/documentation/webhooks#subscribe-to-your-first-webhook)
@@ -53,7 +50,6 @@
   * [Delivery headers](/documentation/webhooks#delivery-headers)
   * [Webhook retry management](/documentation/webhooks#webhook-retry-management)
   * [Webhook security](/documentation/webhooks#webhook-security)
-  
 * [Javascript Callbacks](/documentation/javascript-callbacks#javascript-callbacks)
   * [How to use callbacks](/documentation/javascript-callbacks#how-to-use-callbacks)
   * [Callbacks Index](/documentation/javascript-callbacks#callbacks-index)
@@ -66,7 +62,6 @@
     * [onMessageReceived](/documentation/javascript-callbacks#onmessagesent)
     * [onSatisfactionDisplayed](/documentation/javascript-callbacks#onsatisfactiondisplayed)
     * [onSatisfactionAnswered](/documentation/javascript-callbacks#onsatisfactionanswered)
-  
 * [Build apps](/documentation/build-apps#build-apps)
   * [Milestones of the app creation process](/documentation/build-apps#milestones-of-the-app-creation-process)
   * [My apps](/documentation/build-apps#my-apps)
@@ -87,7 +82,6 @@
     * [Validating payloads from iAdvize](/documentation/build-apps#validating-payloads-from-iadvize)
     * [Validate our IPs](https://developers.iadvize.com/documentation/build-apps#validate-our-ips)
   * [Developer Policy](/documentation/build-apps#developer-policy)
-  
 * [Building your bot on iAdvize](/documentation/building-your-bot-on-iadvize#building-your-bot-on-iadvize)
   * [What is a bot at iAdvize ?](/documentation/building-your-bot-on-iadvize#what-is-a-bot-at-iadvize-?)
     * [Bots can](/documentation/building-your-bot-on-iadvize#bots-can)
@@ -116,9 +110,7 @@
   * [Bots and conversational experience](/documentation/building-your-bot-on-iadvize#bots-and-conversational-experience)
   * [FAQ](/documentation/building-your-bot-on-iadvize#faq)
   * [Troubleshooting](/documentation/building-your-bot-on-iadvize#bot-troubleshooting)
-  
 * [Single Sign On](/documentation/single-sign-on#single-sign-on)
   * [Benefits](/documentation/single-sign-on#benefits)
   * [Implementation](/documentation/single-sign-on#implementation)
-  
 * [Mobile SDK](/documentation/mobile-sdk#mobile-sdk)
