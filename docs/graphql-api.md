@@ -15,6 +15,9 @@ A lot of GraphQL clients are available in [Official GraphQL documentation](https
 ## Authentication <span hidden>on GraphQL</span>
 
 Authentication uses temporary & revocable access tokens.
+
+⚠️ Please note that the token lifetime is 24 hours
+
 You can generate an access token by calling the url below with a user email & password.
 
 `POST https://api.iadvize.com/oauth2/token`
