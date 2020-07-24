@@ -15,6 +15,10 @@ If your users have to switch between several apps (including iAdvize) during the
 To connect an operator to its iAdvize console :
 
 *   Get his sso_key in the [operator resource of the REST API](#operator).
-*   Use it in the following URL : `https://www.iadvize.com/admin/login?key={SSO_KEY}`
+*   Use it in the following URL :
+
+| Standard platform | High availability platform |
+| --- | --- |
+| `https://www.iadvize.com/admin/login?key={SSO_KEY}` | `https://ha.iadvize.com/admin/login?key={SSO_KEY}` |
 
 That's all! When a user visit the URL, he will be automatically logged to its iAdvize account and no login / password will be asked to him.
