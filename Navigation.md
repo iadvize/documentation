@@ -33,7 +33,7 @@
     * [Conversation](/documentation/rest-api#conversation-api)
     * [Tag](/documentation/rest-api#tag)
     * [Transaction](/documentation/rest-api#transaction)
-    * [Satisfaction](/documentation/rest-api#satisfaction)
+    * ~~[Satisfaction](/documentation/rest-api#satisfaction)~~ (deprecated)
     * [Statistic](/documentation/rest-api#statistic)
     * [Visitor](/documentation/rest-api#visitor)
     * [Call meeting](/documentation/rest-api#call-meeting)
