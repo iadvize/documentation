@@ -421,7 +421,7 @@ See [reading section](#read) to discover some output examples.
 | --- | --- | --- |
 | id | Operator identifier | Integer |
 | conversation_number | Conversations number done by operator | Integer |
-| satisfaction_global_rate | Satisfaction average for operator conversations | Float |
+| ~~satisfaction_global_rate~~ (deprecated) | ~~Satisfaction average for operator conversations~~ | ~~Float~~ |
 | experience | Operator experience | Integer |
 
 **Response**
@@ -433,7 +433,7 @@ See [reading section](#read) to discover some output examples.
   data: {
     id: 123,
     conversation_number: 589,
-    satisfaction_global_rate: 0.86,
+    satisfaction_global_rate: 0.86, // deprecated
     experience: 5630
   } 
 }
