@@ -173,7 +173,9 @@ Use the `*` character to broaden the scope of your search. E.g.: `filters[name]=
 
 ## Resources
 
-### Client
+### Client (deprecated)
+
+⚠️ **This resource is deprecated.** You should consider using our GraphQL API with the `client` resource
 
 #### List all clients
 
@@ -197,7 +199,9 @@ See [reading section](#read) to discover some output examples.
 | lang | Language | String (2 chars) |
 | premium_enabled | The client has access to premium features | Boolean |
 
-### Website
+### Website (deprecated)
+
+⚠️ **This resource is deprecated.** You should consider using our GraphQL API with the `project` or `projects` resources
 
 #### List all your websites
 
@@ -760,7 +764,9 @@ See [reading section](#read) to discover some output examples.
 | operator_id | Operator identifier | Integer |
 | conversation_id | Conversation identifier | Integer |
 
-### Satisfaction
+### Satisfaction (deprecated)
+
+⚠️ **This resource is deprecated.** You should consider using our GraphQL API with the query `satisfactionSurveyResponses` or with the node `satisfactionSurvey` in the `searchClosedConversations` query.
 
 #### List your satisfactions
 
