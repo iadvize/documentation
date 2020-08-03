@@ -175,7 +175,7 @@ Use the `*` character to broaden the scope of your search. E.g.: `filters[name]=
 
 ### ~~Client~~ (deprecated)
 
-⚠️ **This resource is deprecated.** You should consider using our GraphQL API with the `client` resource
+⚠️ **This resource is deprecated.** You should consider using our GraphQL API with the `client` object
 
 #### List all clients
 
@@ -201,7 +201,7 @@ See [reading section](#read) to discover some output examples.
 
 ### ~~Website~~ (deprecated)
 
-⚠️ **This resource is deprecated.** You should consider using our GraphQL API with the `project` or `projects` resources
+⚠️ **This resource is deprecated.** You should consider using our GraphQL API with the `project` or `projects` objects
 
 #### List all your websites
 
@@ -766,7 +766,7 @@ See [reading section](#read) to discover some output examples.
 
 ### ~~Satisfaction~~ (deprecated)
 
-⚠️ **This resource is deprecated.** You should consider using our GraphQL API with the query `satisfactionSurveyResponses` or with the node `satisfactionSurvey` in the `searchClosedConversations` query.
+⚠️ **This resource is deprecated.** You should consider using our GraphQL API with the query `satisfactionSurveyResponses` or with the object `satisfactionSurvey` contained in the `searchClosedConversations` query.
 
 #### List your satisfactions
 
@@ -900,7 +900,9 @@ See below to discover used fields and see [reading section](#read) to discover s
 | production_duration | In production | Period during which an agent is connected to the panel and is available or busy. |
 
 
-#### Satisfaction indicators
+#### ~~Satisfaction indicators~~ (deprecated)
+
+⚠️ These indicators are no longer available in our REST API since the new satisfaction is computed in a different way. You should consider using our GraphQL API with the query `satisfactionSurveyResponses` or with the object `satisfactionSurvey` contained in the `searchClosedConversations` query.
 
 **available on `chat`, `call` and `video`**
 
