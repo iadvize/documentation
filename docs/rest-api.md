@@ -173,7 +173,7 @@ Use the `*` character to broaden the scope of your search. E.g.: `filters[name]=
 
 ## Resources
 
-### ~~Client~~ (deprecated)
+### ~~Client~~ deprecated
 
 ⚠️ **This resource is deprecated.** You should consider using our GraphQL API with the `client` object
 
@@ -199,7 +199,7 @@ See [reading section](#read) to discover some output examples.
 | lang | Language | String (2 chars) |
 | premium_enabled | The client has access to premium features | Boolean |
 
-### ~~Website~~ (deprecated)
+### ~~Website~~ deprecated
 
 ⚠️ **This resource is deprecated.** You should consider using our GraphQL API with the `project` or `projects` objects
 
@@ -764,7 +764,7 @@ See [reading section](#read) to discover some output examples.
 | operator_id | Operator identifier | Integer |
 | conversation_id | Conversation identifier | Integer |
 
-### ~~Satisfaction~~ (deprecated)
+### ~~Satisfaction~~ deprecated
 
 ⚠️ **This resource is deprecated.** You should consider using our GraphQL API with the query `satisfactionSurveyResponses` or with the object `satisfactionSurvey` contained in the `searchClosedConversations` query.
 
@@ -900,9 +900,9 @@ See below to discover used fields and see [reading section](#read) to discover s
 | production_duration | In production | Period during which an agent is connected to the panel and is available or busy. |
 
 
-#### ~~Satisfaction indicators~~ (deprecated)
+#### ~~Satisfaction indicators~~ deprecated
 
-⚠️ These indicators are no longer available in our REST API since the new satisfaction is computed in a different way. You should consider using our GraphQL API with the query `satisfactionSurveyResponses` or with the object `satisfactionSurvey` contained in the `searchClosedConversations` query.
+⚠️ **These indicators are no longer available in our REST API** since the new satisfaction is computed in a different way. You should consider using our GraphQL API with the query `satisfactionSurveyResponses` or with the object `satisfactionSurvey` contained in the `searchClosedConversations` query.
 
 **available on `chat`, `call` and `video`**
 
@@ -998,7 +998,7 @@ See [updating section](#update) to discover some output examples.
 
 See [deleting section](#responses-delete) to discover some output examples.
 
-### ~~Call meeting~~ (deprecated)
+### ~~Call meeting~~ deprecated
 
 #### Get call meetings
 
@@ -1027,7 +1027,7 @@ See below to discover used fields and see [reading section](#read) to discover s
 | targeting_rule_id | Targeting rule identifier associated to call meeting | String |
 | skill_id | Skill identifier associated to call meeting | String |
 
-### ~~Callback Odigo~~ (deprecated)
+### ~~Callback Odigo~~ deprecated
 
 #### Pick up callback
 
