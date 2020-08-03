@@ -664,7 +664,9 @@ Conversation history types example
 }
 </pre>
 
-### Tag
+### ~~Tag~~ deprecated
+
+⚠️ **This resource is deprecated.** You should consider using our GraphQL API with the `conversationTag` object
 
 #### List your tags
 
