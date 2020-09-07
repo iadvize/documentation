@@ -37,7 +37,6 @@
     * [Statistic](/documentation/rest-api#statistic)
     * [Visitor](/documentation/rest-api#visitor)
     * [Call meeting](/documentation/rest-api#call-meeting)
-    * [Callback Odigo](/documentation/rest-api#callback-odigo)
 * [Webhooks](/documentation/webhooks#webhooks)
   * [Introduction](/documentation/webhooks#introduction)
   * [Subscribe to your first webhook](/documentation/webhooks#subscribe-to-your-first-webhook)
