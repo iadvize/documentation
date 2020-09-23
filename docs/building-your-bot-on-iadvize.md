@@ -944,6 +944,8 @@ Transferring a conversation is quite straightforward. You can send the following
 
 **Explanation:** we send a transfer message and schedule a failed transfer message afterward. If the transfer is successful, the message for failed transfer is not published in the conversation. If the transfer happens to fail, the message is sent to the conversation. This way you can notify your user about it and continue the conversation.
 
+⚠️ Please note that the distribution rule you specify in the payload must be configured as "asynchronous" in the iAdvize admin (slots in conversation queue must be greater than 0). ⚠️
+
 #### How to end a conversation
 A conversations is automatically closed after 5 minutes if nothing happens in the conversation. You can send a close conversation message such as: 
 
