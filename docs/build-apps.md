@@ -490,6 +490,8 @@ In order to set the right plugin parameters, all you have to do is to declare:
 
 You can validate your response data format with the associated [json schema](/json-schemas/conversation-closing-form/field.json).
 
+⚠️ iAdvize can save up to 512 characters in each field
+
 ## External bots
 Bots are an important part of iAdvize integration ecosystem. That's why they have their [own dedicated documentation](/documentation/building-your-bot-on-iadvize#building-your-bot-on-iadvize).
 
