@@ -53,6 +53,12 @@ curl --request GET \
      --header 'Authorization: Bearer {ACCESS_TOKEN}'
 </pre>
 
+### Rate limit policy on authentication
+
+Please note the following rules on authentication :
+* 10 logins per minute per user
+* 100 logins per minute per ip address
+
 ## Documentation and tooling
 
 [Documentation GraphQL](/bundles/devplatformapp/graphqldoc/index.html)
