@@ -173,7 +173,9 @@ Use the `*` character to broaden the scope of your search. E.g.: `filters[name]=
 
 ## Resources
 
-### Client
+### ~~Client~~ deprecated
+
+⚠️ **This resource is deprecated.** You should consider using our GraphQL API with the `client` object
 
 #### List all clients
 
@@ -197,7 +199,9 @@ See [reading section](#read) to discover some output examples.
 | lang | Language | String (2 chars) |
 | premium_enabled | The client has access to premium features | Boolean |
 
-### Website
+### ~~Website~~ deprecated
+
+⚠️ **This resource is deprecated.** You should consider using our GraphQL API with the `project` or `projects` objects
 
 #### List all your websites
 
@@ -417,7 +421,7 @@ See [reading section](#read) to discover some output examples.
 | --- | --- | --- |
 | id | Operator identifier | Integer |
 | conversation_number | Conversations number done by operator | Integer |
-| satisfaction_global_rate | Satisfaction average for operator conversations | Float |
+| ~~satisfaction_global_rate~~ (deprecated) | ~~Satisfaction average for operator conversations~~ | ~~Float~~ |
 | experience | Operator experience | Integer |
 
 **Response**
@@ -429,7 +433,7 @@ See [reading section](#read) to discover some output examples.
   data: {
     id: 123,
     conversation_number: 589,
-    satisfaction_global_rate: 0.86,
+    satisfaction_global_rate: 0.86, // deprecated
     experience: 5630
   } 
 }
@@ -660,7 +664,9 @@ Conversation history types example
 }
 </pre>
 
-### Tag
+### ~~Tag~~ deprecated
+
+⚠️ **This resource is deprecated.** You should consider using our GraphQL API with the `conversationTag` object
 
 #### List your tags
 
@@ -760,7 +766,9 @@ See [reading section](#read) to discover some output examples.
 | operator_id | Operator identifier | Integer |
 | conversation_id | Conversation identifier | Integer |
 
-### Satisfaction
+### ~~Satisfaction~~ deprecated
+
+⚠️ **This resource is deprecated.** You should consider using our GraphQL API with the query `satisfactionSurveyResponses` or with the object `satisfactionSurvey` contained in the `searchClosedConversations` query.
 
 #### List your satisfactions
 
@@ -894,7 +902,9 @@ See below to discover used fields and see [reading section](#read) to discover s
 | production_duration | In production | Period during which an agent is connected to the panel and is available or busy. |
 
 
-#### Satisfaction indicators
+#### ~~Satisfaction indicators~~ deprecated
+
+⚠️ **These indicators are no longer available in our REST API** since the new satisfaction is computed in a different way. You should consider using our GraphQL API with the query `satisfactionSurveyResponses` or with the object `satisfactionSurvey` contained in the `searchClosedConversations` query.
 
 **available on `chat`, `call` and `video`**
 
@@ -990,7 +1000,7 @@ See [updating section](#update) to discover some output examples.
 
 See [deleting section](#responses-delete) to discover some output examples.
 
-### Call meeting
+### ~~Call meeting~~ deprecated
 
 #### Get call meetings
 
