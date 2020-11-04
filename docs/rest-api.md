@@ -34,32 +34,6 @@ The API key must be attached to each request. You can use it in one of the follo
 }
 </pre>
 
-### Create
-
-##### `POST /my_resource my_field=my_value`
-
-<pre class="prettyprint lang-js">{
-  meta: {
-    status: "success"
-  },
-  data: {
-    id: 123,
-    my_field: "my_value",
-    _link: "/my_resource/123"
-  }
-}
-</pre>
-
-##### `POST /my_resource my_field=my_value` (with error)
-
-<pre class="prettyprint lang-js">{
-  meta: {
-    status: "fail",
-    message: "Field 'my_field_2' is missing.",
-  }
-}
-</pre>
-
 ### Read
 
 ##### `GET /my_resource`
@@ -125,52 +99,6 @@ Use the `*` character to broaden the scope of your search. E.g.: `filters[name]=
 }
 </pre>
 
-### Update
-
-##### `PUT /my_resource/123 my_field=my_new_value`
-
-<pre class="prettyprint lang-js">{
-  meta: {
-    status: "success"
-  },
-  data: {
-    id: 123,
-    my_field: "my_new_value",
-    _link: "/my_resource/123"
-  }
-}
-</pre>
-
-##### `PUT /my_resource/123 my_field=my_value` (with error)
-
-<pre class="prettyprint lang-js">{
-  meta: {
-    status: "fail",
-    message: "Value of field 'my_field' is not valid."
-  }
-}
-</pre>
-
-### Delete
-
-##### `DELETE /my_resource/123`
-
-<pre class="prettyprint lang-js">{
-  meta: {
-    status: "success"
-  }
-}</pre>
-
-##### `DELETE /my_resource/456` (with error)
-
-<pre class="prettyprint lang-js">{
-  meta: {
-    status: "fail"
-    message: "Unknown 'my_resource' with 'id' 456"
-  }
-}
-</pre>
-
 ## Resources
 
 ### ~~Client~~ deprecated
@@ -226,12 +154,6 @@ See [reading section](#read) to discover some output examples.
 | currency | Currency | String |
 | language_admin | Admin language | `en`, `de`, `es`, `it`, `pt`, `nl`, `se`, `tw`, `ja`, `ko` or `fr` |
 | timezone | Timezone | String |
-
-#### Update a website
-
-`PUT /website/1`
-
-See [updating section](#update) to discover some output examples.
 
 ### Operator
 
@@ -506,24 +428,6 @@ See [reading section](#read) to discover some output examples.
 | operator_list | List of operators identifiers | List of integers |
 | parent_list | List of parent's group ids | List of integers |
 
-#### Create a group
-
-`POST /group`
-
-See [creating section](#create) to discover some output examples.
-
-#### Update a group
-
-`PUT /group/1`
-
-See [updating section](#update) to discover some output examples.
-
-#### Delete a group
-
-`DELETE /group/1`
-
-See [deleting section](#responses-delete) to discover some output examples.
-
 ### Skill
 
 #### List your skills
@@ -555,24 +459,6 @@ See [reading section](#read) to discover some output examples.
 | created_at | Date of creation | Date `YYYY-MM-DD HH:MM:SS` |
 | parent_id | Parent skill identifier | Integer |
 | operator_list **Deprecated: use the Operator resource with the skill_id filter instead** | List of operator identifiers | List of integers |
-
-#### Create a skill
-
-`POST /skill`
-
-See [creating section](#create) to discover some output examples.
-
-#### Update a skill
-
-`PUT /skill/1`
-
-See [updating section](#update) to discover some output examples.
-
-#### Delete a skill
-
-`DELETE /skill/1`
-
-See [deleting section](#responses-delete) to discover some output examples.
 
 ### Conversation <span hidden>API</span>
 
@@ -693,40 +579,6 @@ See [reading section](#read) to discover some output examples.
 | id | Tag identifier | Integer |
 | name | Name | String |
 | website_id | List of website identifiers | List of integers |
-
-#### Create tags
-
-`POST /tag`
-
-**Parameters** (send an array of object as application/json)
-
-| Field | Description | Values | Mandatory |
-| --- | --- | --- | --- |
-| name | Name | String | Yes |
-| website_id | website identifier | Integer | Yes |
-
-**Response**
-
-<pre class="prettyprint lang-js">{
-    meta: {
-        status: "success"
-    },
-    data: [
-        {
-            id: 123,
-            name: "my_value",
-            website_id: 1,
-            _link: "/tag/123"
-        },
-        {
-            id: 124,
-            name: "my_value_2",
-            website_id: 1,
-            _link: "/tag/124"
-        }
-    ]
-}
-</pre>
 
 ### Transaction
 
@@ -981,24 +833,6 @@ See [reading section](#read) to discover some output examples.
 | browser | Browser used by visitor | String |
 | website_id | List of website identifiers | List of integers |
 | created_at | Visitor creation date | Date `YYYY-MM-DD HH:MM:SS` |
-
-#### Create a visitor
-
-`POST /visitor`
-
-See [creating section](#create) to discover some output examples.
-
-#### Update a visitor
-
-`PUT /visitor/560`
-
-See [updating section](#update) to discover some output examples.
-
-#### Delete a visitor
-
-`DELETE /visitor/560`
-
-See [deleting section](#responses-delete) to discover some output examples.
 
 ### ~~Call meeting~~ deprecated
 
