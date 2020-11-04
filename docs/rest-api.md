@@ -34,32 +34,6 @@ The API key must be attached to each request. You can use it in one of the follo
 }
 </pre>
 
-### Create
-
-##### `POST /my_resource my_field=my_value`
-
-<pre class="prettyprint lang-js">{
-  meta: {
-    status: "success"
-  },
-  data: {
-    id: 123,
-    my_field: "my_value",
-    _link: "/my_resource/123"
-  }
-}
-</pre>
-
-##### `POST /my_resource my_field=my_value` (with error)
-
-<pre class="prettyprint lang-js">{
-  meta: {
-    status: "fail",
-    message: "Field 'my_field_2' is missing.",
-  }
-}
-</pre>
-
 ### Read
 
 ##### `GET /my_resource`
@@ -121,52 +95,6 @@ Use the `*` character to broaden the scope of your search. E.g.: `filters[name]=
   meta: {
     status: "fail",
     message: "Unknown 'my_resource' with 'id' 456."
-  }
-}
-</pre>
-
-### Update
-
-##### `PUT /my_resource/123 my_field=my_new_value`
-
-<pre class="prettyprint lang-js">{
-  meta: {
-    status: "success"
-  },
-  data: {
-    id: 123,
-    my_field: "my_new_value",
-    _link: "/my_resource/123"
-  }
-}
-</pre>
-
-##### `PUT /my_resource/123 my_field=my_value` (with error)
-
-<pre class="prettyprint lang-js">{
-  meta: {
-    status: "fail",
-    message: "Value of field 'my_field' is not valid."
-  }
-}
-</pre>
-
-### Delete
-
-##### `DELETE /my_resource/123`
-
-<pre class="prettyprint lang-js">{
-  meta: {
-    status: "success"
-  }
-}</pre>
-
-##### `DELETE /my_resource/456` (with error)
-
-<pre class="prettyprint lang-js">{
-  meta: {
-    status: "fail"
-    message: "Unknown 'my_resource' with 'id' 456"
   }
 }
 </pre>
