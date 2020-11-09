@@ -313,9 +313,11 @@ This endpoint will be called on a frequent basis (as of now, every second) and w
 
 
 ## Implement the conversation flow
+
 A conversation is typically initiated by a user. The bot can only reply to user’s message which means that iAdvize will call your endpoints when a message is received in the conversation.
 
-To fully handle a conversation you only need to implement 2 endpoints:
+To fully handle a conversation you only need to implement 3 endpoints:
+* `GET /bots/:idOperator/conversation-first-messages` to return the first messages you want to send as soon as the visitor opens up the chatbox (before the conversation really starts)
 * `POST /conversations` to handle a new conversation creation
 * `POST /conversations/:conversationId:/messages` to receive messages from the visitor and reply to the visitor. Mind that all the messages posted in a conversation will result into this API call (which means you will also receive your own replies).
 
@@ -343,10 +345,65 @@ Here is a full conversation example:
 | 03:43 | “Ok, i'm transferring you to a human” |                                        | ⟹           |                                                                                                                                 | POST /conversations/idConversation/messages<br>“Ok, i'm transferring you to a human"  | Do not reply to your own message                                                                                                                                            |
 |       |                                       |                                        | ⟸           | (empty replies)                                                                                                                 | Response                                                                              |                                                                                                                                                                             |
 
+### Send messages before the conversation starts
+
+This endpoint is used if you want your bot initiate the conversation with new visitors. It should return the first messages you want to send as soon as the visitor opens up the chatbox, before the first visitor message.
+
+#### Request - GET /bots/:idOperator/conversation-first-messages
+| Parameters         | In    | Description                                                           | Type   | Example                              |
+| ------------------ | ----- | --------------------------------------------------------------------- | ------ | ------------------------------------ |
+| idConnectorVersion | Query | Connector version identifier                                          | String | c008849d-7cb1-40ca-9503-d6df2c5cddd8 |
+| idOperator         | Path | iAdvize bot operator identifier that we associate to your bot scenario | String | ha-123                               |
+
+#### Response format
+| Field                  | In   | Description                                                            | Type                                                                       | Required                                                        | Example                              |
+| ---------------------- | ---- | ---------------------------------------------------------------------- | -------------------------------------------------------------------------- | --------------------------------------------------------------- | ------------------------------------ |
+| replies                | Body | Array of replies                                                       | Array or Reply                                                             | ✓                                                               |                                      |
+| reply.type             | Body | Reply/action type                                                      | `message`  (other types will be ignored)                                   | ✓                                                               |                                      |
+| reply.payload          | Body | Typed payload of the message                                           | One of Payload object<br><br>see [Payload objects](#payload-objects) for more details          |                                             |                                      |
+| reply.quickReplies     | Body | Quick replies proposed to the visitor                                  | Array of Quick Reply object<br><br>see [Quick reply object](#quick-reply-object) for more details |                                          |                                      |
+
+#### Response example
+<pre class="prettyprint lang-js">
+{
+   "replies":[
+      {
+         "type":"message",
+         "payload":{
+            "contentType":"text",
+            "value":"Hi, my name is robot and I'm here to help"
+         },
+         "quickReplies":[]
+      },
+      {
+         "type":"message",
+         "payload":{
+            "contentType":"text",
+            "value":"How can I help you ?"
+         },
+         "quickReplies":[
+            {
+               "contentType":"text/quick-reply",
+               "value":"I didn't receive my order",
+               "idQuickReply":"1ef5145b-a9b6-4e86-8743-b6e3b4026b2c"
+            },
+            {
+               "contentType":"text/quick-reply",
+               "value":"Payment problem",
+               "idQuickReply":"13594c9b-dcff-4add-81fc-5e1093e443a7"
+            }
+         ]
+      }
+   ]
+}
+</pre>
+
+**Note:** You can validate your response data format with the associated [json schema](/json-schemas/bot/conversation-first-messages.json).
+
 ### Create a conversation
 Everytime a conversation starts, this endpoint is called. It allows iAdvize to notify your bot a conversation starts.
 
-⚠️ Unless you implement the optional `GET /bots/:idOperator/conversation-first-messages` route, leave the `replies` array empty as another call to `POST /conversations/conversationId/messages` is triggered right after `POST /conversations`. It will be the right time to answer the visitor.
+⚠️ Leave the `replies` array empty as another call to `POST /conversations/conversationId/messages` is triggered right after `POST /conversations`. It will be the right time to answer the visitor.
 
 #### Request - POST /conversations
 | Parameters         | In    | Description                                                           | Type   | Example                              |
@@ -428,7 +485,7 @@ This endpoint is called when a new message is received in the conversation, whet
 | reply.transferOptions               | Body | Transfer options                                                       | Object                                                                                |                                                                 |                                      |
 | reply.transferOptions.timeout       | Body | Configure how long must we wait until transfer cancel                  | Object                                                                                | Required                                                        |                                      |
 | reply.transferOptions.timeout.value | Body | Transfer timeout value (**must** be between 5 and 60 seconds)                                                 | Long                                                                                  | Required                                                        |                                      |
-| reply.transferOptions.timeout.unit  | Body | Transfer timeout unit                                                  | One of: `millis` or `seconds` or `minute                                              | Required                                                        |                                      |
+| reply.transferOptions.timeout.unit  | Body | Transfer timeout unit                                                  | One of: `millis` or `seconds` or `minute`                                              | Required                                                        |                                      |
 | variables                           | Body | Collected variables                                                    | Array                                                                                 |                                                                 |                                      |
 | variables.key                       | Body | Key of the variable collected                                          | String                                                                                |                                                                 | visitor_state_of_mind                |
 | variables.value                     | Body | Value of the variable collected                                        | String                                                                                |                                                                 | Ok                                   |
@@ -481,13 +538,16 @@ This endpoint is called when a new message is received in the conversation, whet
 }
 </pre>
 
-### Conversation objects
-#### Payload objects 
+## Conversation objects
+
+### Payload objects 
+
 Several kinds of payloads can be used within your bot replies in order to enrich your responses. You will find in this section information about every type of content you can send with your iAdvize bot.
 
 **Disclaimer:** The following features [Carousel](#card-bundle-payload), [Product offer](#product-offer-payload) and [Action](#actions) are only working with our **new chatbox**. Get in touch with us if you need such objects in your conversation flow.
 
-##### Text payload
+#### Text payload
+
 Sending a simple message
 
 | Field       | Description                    | Type          | Required | Example                    |
@@ -502,7 +562,8 @@ Sending a simple message
 }
 </pre>
 
-##### Generic card payload
+#### Generic card payload
+
 A generic card is a payload you can use to send a more structured message. It always contains at least one link and can be used to help a visitor to navigate on a website by redirecting him to specific pages. You can specify multiple links on a single generic card. Generic card can also include a title, a description and an image. This help give context to the visitor about the links you are sending
 
 | Field       | Description                              | Type                                                                           | Required                              | Example                                                          |
@@ -559,7 +620,8 @@ A generic card is a payload you can use to send a more structured message. It al
 }
 </pre>
 
-##### Product Offer payload
+#### Product Offer payload
+
 A product offer payload lets you send a product offer to your visitor. Using the product offer you can showcase various attributes of your product such as the price, the photography of your product, the availability or a special offer. To show your visitors a carousel of product offers please see Product offer bundle
 
 | Field               | Description                              | Type                                                                           | Required | Example                 |
@@ -598,9 +660,8 @@ A product offer payload lets you send a product offer to your visitor. Using the
 
 ![Example of a product offer with offer](./assets/images/bots/example-product-offer-payload.png)
 
+#### File payload
 
-
-##### File payload
 An attachment lets you send files directly in the chatbox. If you send an image it will be directly shown to the visitors if it is in a supported format by the visitor's browser. For a non-picture file it will offer the possibility to download it.
 
 | Field       | Description                      | Type                                                                | Required | Example                                    |
@@ -632,7 +693,8 @@ An attachment lets you send files directly in the chatbox. If you send an image 
 }
 </pre>
 
-##### Card bundle payload
+#### Card bundle payload
+
 With the generic card bundle you can create a carousel for the visitor. Sliders are an efficient tool to present multiple services, offers or products to your visitors.
 
 | Field       | Description                   | Types                                                                  | Required | Example       |
@@ -666,7 +728,8 @@ With the generic card bundle you can create a carousel for the visitor. Sliders 
 }
 </pre>
 
-##### Product Offer bundle payload 
+#### Product Offer bundle payload 
+
 A product offer bundle is an efficient tool to showcase multiple products at one to your visitor. The visitor can navigate among the offers you sent using a slider.
 
 | Field       | Description                       | Type                                                                             | Required | Example                 |
@@ -705,9 +768,10 @@ A product offer bundle is an efficient tool to showcase multiple products at one
 }
 </pre>
 
-#### Generic JSON object
+### Generic JSON object
 
-##### Image 
+#### Image
+
 An Image object can be used to display one image. The picture linked need to be of dimension 240x120(px) and should be displayable on browsers.
 
 | Field       | Description                                    | Type   | Required | Example                    |
@@ -722,7 +786,8 @@ An Image object can be used to display one image. The picture linked need to be 
 }
 </pre>
 
-##### Actions
+#### Actions
+
 Actions can be used to offers options to one visitor. Today, only link actions can be used. A link action is one action that can redirect one user to a given url link.
 
 | Field | Description               | Type          | Required | Example       |
@@ -740,7 +805,7 @@ Actions can be used to offers options to one visitor. Today, only link actions c
 }
 </pre>
 
-#### Quick reply object
+### Quick reply object
 
 A quick reply is used for offering several choices to a visitor. Each choice needs to be specified in the "quickReplies" field of a reply. The answer sent by the visitor to the multiple choice question can only contain text. There is no maximum number of quick replies you can display. However we recommend not to use more than 3 quick replies for a single question.
 
@@ -760,66 +825,6 @@ A quick reply is used for offering several choices to a visitor. Each choice nee
     "idQuickReply": "1ef5145b-a9b6-4e86-8743-b6e3b4026b2c"
 }
 </pre>
-
-## Implement a bot that initiates conversations
-
-If you don't need your bot to initiate the conversation, you can ignore this endpoint.
-
-This endpoint is used if you want your bot initiate the conversation with new visitors. It should return the first messages you want to send as soon as the visitor opens up the chatbox, before the first visitor message.
-
-⚠️ Beware that the replies returned here must be the same as in the first POST /conversation (when no history is provided)
-
-#### Request - GET /bots/:idOperator/conversation-first-messages
-| Parameters         | In    | Description                                                           | Type   | Example                              |
-| ------------------ | ----- | --------------------------------------------------------------------- | ------ | ------------------------------------ |
-| idConnectorVersion | Query | Connector version identifier                                          | String | c008849d-7cb1-40ca-9503-d6df2c5cddd8 |
-| idOperator         | Path | iAdvize bot operator identifier that we associate to your bot scenario | String | ha-123                               |
-
-#### Response format
-| Field                  | In   | Description                                                            | Type                                                                       | Required                                                        | Example                              |
-| ---------------------- | ---- | ---------------------------------------------------------------------- | -------------------------------------------------------------------------- | --------------------------------------------------------------- | ------------------------------------ |
-| replies                | Body | Array of replies                                                       | Array or Reply                                                             | ✓                                                               |                                      |
-| reply.type             | Body | Reply/action type                                                      | `message`  (other types will be ignored)                                   | ✓                                                               |                                      |
-| reply.payload          | Body | Typed payload of the message                                           | One of Payload object<br><br>see [Payload objects](#payload-objects) for more details          |                                             |                                      |
-| reply.quickReplies     | Body | Quick replies proposed to the visitor                                  | Array of Quick Reply object<br><br>see [Quick reply object](#quick-reply-object) for more details |                                          |                                      |
-
-#### Response example
-<pre class="prettyprint lang-js">
-{
-   "replies":[
-      {
-         "type":"message",
-         "payload":{
-            "contentType":"text",
-            "value":"Hi, my name is robot and I'm here to help"
-         },
-         "quickReplies":[]
-      },
-      {
-         "type":"message",
-         "payload":{
-            "contentType":"text",
-            "value":"How can I help you ?"
-         },
-         "quickReplies":[
-            {
-               "contentType":"text/quick-reply",
-               "value":"I didn't receive my order",
-               "idQuickReply":"1ef5145b-a9b6-4e86-8743-b6e3b4026b2c"
-            },
-            {
-               "contentType":"text/quick-reply",
-               "value":"Payment problem",
-               "idQuickReply":"13594c9b-dcff-4add-81fc-5e1093e443a7"
-            }
-         ]
-      }
-   ]
-}
-</pre>
-
-**Note:** You can validate your response data format with the associated [json schema](/json-schemas/bot/conversation-first-messages.json).
-
 
 ## Customize replies with Markdown
 
