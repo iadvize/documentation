@@ -611,7 +611,7 @@ Several kinds of payloads can be used within your bot replies in order to enrich
 | ------------ | ---------------------------------------- | ----------------------------------------- | -------- | -------------------------- |
 | type         | Type of the conversation object          | String                                    | ✓        | `message`                  |
 | payload      | One of payload describes below           | JSON Object                               | ✓        | see below                  |
-| quickReplies | Quick replies to allow visitor to answer | [Quick reply object](#quick-reply-object) | ✓        | see [Quick reply object](#quick-reply-object)                  |
+| quickReplies | Quick replies to allow visitor to answer | [Quick reply object](#quick-reply-object) |          | see [Quick reply object](#quick-reply-object)                  |
 
 #### Text payload
 
