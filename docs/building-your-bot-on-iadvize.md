@@ -89,7 +89,7 @@ To finish, we need to create a targeting rule. Go to “Routing”, in the upper
 ![Create a bot distribution rule](./assets/images/bots/create-distribution-rule.png)
 
 ### Check that everything is correctly setup
-​​Go to “Campaigns” and click on the “edit” button. If you did everything correctly you should see that your campaign is routed this way: 
+Go to “Campaigns” and click on the “edit” button. If you did everything correctly you should see that your campaign is routed this way: 
 
 ![Check targeting rule](./assets/images/bots/targeting-rule-routed.png)
 
@@ -108,11 +108,10 @@ To have a fully functional bot, you will be required to implement two distinct s
   * `PUT /bots/operatorId` to create a bot
   * `GET /bots/operatorId` to retrieve a bot details
   * `GET /availability-strategies` to define when the bot is available
-* two endpoints to handle a conversation flow
+* three endpoints to handle a conversation flow
+  * `GET /bots/:idOperator/conversation-first-messages` to send messages before the conversation starts
   * `POST /conversations/` to create a new conversation
   * `POST /conversations/conversationId/messageId`  to reply to a user
-* one optional endpoint to initiate conversation with new visitors.
-  * `GET /bots/:idOperator/conversation-first-messages` to retrieve first messages
 
 ## Implement the bot creation flow
 A bot gets created when an admin creates a new agent of type “Bot” under the “People” section. Several information are required to be able to create a bot:
@@ -542,11 +541,77 @@ This endpoint is called when a new message is received in the conversation, whet
 
 ## Conversation objects
 
-### Payload objects 
+Conversation objects are used to describe the different events that can occur during a conversation with a visitor.
+
+These objects allow you to:
+* [make a pause (between two messages for example)](#await-object)
+* [end the conversation](#close-object)
+* [transfer the visitor to a group of agents](#transfer-object)
+* [send messages (simple or complex)](#await-object)
+
+### Await object
+
+| Field          | Description                      | Type                     | Required | Example   |
+| -------------- | -------------------------------- | ------------------------ | -------- | ----------|
+| type           | Type of the conversation object  | String                   | ✓        | `await`   |
+| duration.unit  | Unit type                        | `seconds | milliseconds` | ✓        | `seconds` |
+| duration.value | Delay value                      | Integer                  | ✓        | `20`      |
+
+<pre class="prettyprint lang-js">
+{
+  type: 'await',
+  duration: {
+    unit: 'seconds',
+    value: 2
+  }
+}
+</pre>
+
+### Close object
+
+| Field       | Description                      | Type          | Required | Example                    |
+| ----------- | -------------------------------- | ------------- | -------- | -------------------------- |
+| type        | Type of the conversation object  | String        | ✓        | `close`                    |
+
+<pre class="prettyprint lang-js">
+{
+  type: "close"
+}
+</pre>
+
+### Transfer object
+
+| Field                         | Description                               | Type                     | Required | Example                                |
+| ----------------------------- | ----------------------------------------- | ------------------------ | -------- | -------------------------------------- |
+| type                          | Type of the conversation object           | String                   | ✓        | `transfer`                             |
+| distributionRule              | Distribution rule to transfer the visitor | UUID                     | ✓        | `f1cfbc00-1272-4780-9482-6597f56b39c3` |
+| transferOptions.timeout.unit  | Unit type                                 | `seconds | milliseconds` | ✓        | `seconds`                              |
+| transferOptions.timeout.value | Delay value                               | Integer                  | ✓        | `20`                                   |
+
+<pre class="prettyprint lang-js">
+{
+  type: "transfer",
+  distributionRule: "f1cfbc00-1272-4780-9482-6597f56b39c3",
+  transferOptions: {
+    timeout: {
+      unit: "seconds",
+      value: 20
+    }
+  }
+}
+</pre>
+
+### Message objects
 
 Several kinds of payloads can be used within your bot replies in order to enrich your responses. You will find in this section information about every type of content you can send with your iAdvize bot.
 
 **Disclaimer:** The following features [Carousel](#card-bundle-payload), [Product offer](#product-offer-payload) and [Action](#actions) are only working with our **new chatbox**. Get in touch with us if you need such objects in your conversation flow.
+
+| Field        | Description                              | Type                                      | Required | Example                    |
+| ------------ | ---------------------------------------- | ----------------------------------------- | -------- | -------------------------- |
+| type         | Type of the conversation object          | String                                    | ✓        | `message`                  |
+| payload      | One of payload describes below           | JSON Object                               | ✓        | see below                  |
+| quickReplies | Quick replies to allow visitor to answer | [Quick reply object](#quick-reply-object) | ✓        | see [Quick reply object](#quick-reply-object)                  |
 
 #### Text payload
 
@@ -554,7 +619,7 @@ Sending a simple message
 
 | Field       | Description                    | Type          | Required | Example                    |
 | ----------- | ------------------------------ | ------------- | -------- | -------------------------- |
-| contentType | Type of the message’s content  | String `text` | ✓        | `text`                     |
+| contentType | Type of the message’s content  | String        | ✓        | `text`                     |
 | value       | Textual content of the message | String        | ✓        | Hi, i am a simple message. |
 
 <pre class="prettyprint lang-js">
@@ -770,9 +835,9 @@ A product offer bundle is an efficient tool to showcase multiple products at one
 }
 </pre>
 
-### Generic JSON objects
+#### Generic JSON objects
 
-#### Image
+##### Image
 
 An Image object can be used to display one image. The picture linked need to be of dimension 240x120(px) and should be displayable on browsers.
 
@@ -788,7 +853,7 @@ An Image object can be used to display one image. The picture linked need to be 
 }
 </pre>
 
-#### Actions
+##### Actions
 
 Actions can be used to offers options to one visitor. Today, only link actions can be used. A link action is one action that can redirect one user to a given url link.
 
@@ -807,7 +872,7 @@ Actions can be used to offers options to one visitor. Today, only link actions c
 }
 </pre>
 
-### Quick reply object
+#### Quick reply object
 
 A quick reply is used for offering several choices to a visitor. Each choice needs to be specified in the "quickReplies" field of a reply. The answer sent by the visitor to the multiple choice question can only contain text. There is no maximum number of quick replies you can display. However we recommend not to use more than 3 quick replies for a single question.
 
@@ -1012,7 +1077,8 @@ You can schedule a message to be sent after a while such as:
 **Explanation:** After 2 minutes, the message `Can I still help you ?` will be sent to the visitor. If the visitor sends a message before the 2 minutes timer, this message is not sent to the conversation.
 
 #### How can I check availability of a rule before a transfer
-Currently it is not possible to do this.
+
+You can check the availability with our GraphQL API
 
 ## Bot troubleshooting
 **Q:** My chat does not display, even if I went through all the bot creation process and campaign creation process
