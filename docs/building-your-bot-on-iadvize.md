@@ -544,10 +544,10 @@ This endpoint is called when a new message is received in the conversation, whet
 Conversation objects are used to describe the different events that can occur during a conversation with a visitor.
 
 These objects allow you to:
-* [make a pause (between two messages for example)](#await-object)
-* [end the conversation](#close-object)
-* [transfer the visitor to a group of agents](#transfer-object)
-* [send messages (simple or complex)](#await-object)
+* make a pause (between two messages for example) [see await object](#await-object)
+* end the conversation [see close object](#close-object)
+* transfer the visitor to a group of agents [see transfer object](#transfer-object)
+* send messages (simple or complex) [see message objects](#message-objects)
 
 ### Await object
 
