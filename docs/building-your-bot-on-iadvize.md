@@ -349,6 +349,8 @@ Here is a full conversation example:
 
 This endpoint is used if you want your bot initiate the conversation with new visitors. It should return the first messages you want to send as soon as the visitor opens up the chatbox, before the first visitor message.
 
+⚠️ Please note that your bot **must** return a response in less than 2 seconds. If not, you'll receive a timeout and the bot messages will not be displayed to the user.
+
 #### Request - GET /bots/:idOperator/conversation-first-messages
 | Parameters         | In    | Description                                                           | Type   | Example                              |
 | ------------------ | ----- | --------------------------------------------------------------------- | ------ | ------------------------------------ |
@@ -446,7 +448,7 @@ Everytime a conversation starts, this endpoint is called. It allows iAdvize to n
 }
 </pre>
 
-### Receive a message and reply to it
+### Receive and reply to messages
 
 This endpoint is called when a new message is received in the conversation, whether the bot or the user sent it.
 
@@ -768,7 +770,7 @@ A product offer bundle is an efficient tool to showcase multiple products at one
 }
 </pre>
 
-### Generic JSON object
+### Generic JSON objects
 
 #### Image
 
