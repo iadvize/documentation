@@ -551,11 +551,11 @@ These objects allow you to:
 
 ### Await object
 
-| Field          | Description                      | Type                     | Required | Example   |
-| -------------- | -------------------------------- | ------------------------ | -------- | ----------|
-| type           | Type of the conversation object  | String                   | ✓        | `await`   |
-| duration.unit  | Unit type                        | `seconds | milliseconds` | ✓        | `seconds` |
-| duration.value | Delay value                      | Integer                  | ✓        | `20`      |
+| Field          | Description                      | Type                         | Required | Example   |
+| -------------- | -------------------------------- | ---------------------------- | -------- | ----------|
+| type           | Type of the conversation object  | String                       | ✓        | `await`   |
+| duration.unit  | Unit type                        | `millis | seconds | minutes` | ✓        | `seconds` |
+| duration.value | Delay value                      | Integer                      | ✓        | `20`      |
 
 <pre class="prettyprint lang-js">
 {
@@ -581,12 +581,12 @@ These objects allow you to:
 
 ### Transfer object
 
-| Field                         | Description                               | Type                     | Required | Example                                |
-| ----------------------------- | ----------------------------------------- | ------------------------ | -------- | -------------------------------------- |
-| type                          | Type of the conversation object           | String                   | ✓        | `transfer`                             |
-| distributionRule              | Distribution rule to transfer the visitor | UUID                     | ✓        | `f1cfbc00-1272-4780-9482-6597f56b39c3` |
-| transferOptions.timeout.unit  | Unit type                                 | `seconds | milliseconds` | ✓        | `seconds`                              |
-| transferOptions.timeout.value | Delay value                               | Integer                  | ✓        | `20`                                   |
+| Field                         | Description                               | Type                         | Required | Example                                |
+| ----------------------------- | ----------------------------------------- | ---------------------------- | -------- | -------------------------------------- |
+| type                          | Type of the conversation object           | String                       | ✓        | `transfer`                             |
+| distributionRule              | Distribution rule to transfer the visitor | UUID                         | ✓        | `f1cfbc00-1272-4780-9482-6597f56b39c3` |
+| transferOptions.timeout.unit  | Unit type                                 | `millis | seconds | minutes` | ✓        | `seconds`                              |
+| transferOptions.timeout.value | Delay value                               | Integer                      | ✓        | `20`                                   |
 
 <pre class="prettyprint lang-js">
 {
