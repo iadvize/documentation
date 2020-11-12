@@ -348,7 +348,7 @@ Here is a full conversation example:
 
 This endpoint is used if you want your bot to initiate a conversation with new visitors. It should return the first messages you want to send as soon as the visitor opens up the chatbox, before the first visitor message.
 
-⚠️ Please note that your bot **must** return a response in less than 2 seconds. If not, you'll receive a timeout and the bot messages will not be displayed to the user.
+⚠️ Please note that your bot **must** return a response in less than 2 seconds. Otherwise, you'll receive a timeout and the bot messages will not be displayed to the user.
 
 #### Request - GET /bots/:idOperator/conversation-first-messages
 | Parameters         | In    | Description                                                           | Type   | Example                              |
