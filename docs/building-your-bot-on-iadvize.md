@@ -109,7 +109,7 @@ To have a fully functional bot, you will be required to implement two distinct s
   * `GET /bots/operatorId` to retrieve a bot details
   * `GET /availability-strategies` to define when the bot is available
 * three endpoints to handle a conversation flow
-  * `GET /bots/:idOperator/conversation-first-messages` to send messages before the conversation starts
+  * `GET /bots/:idOperator/conversation-first-messages` to return the messages to be displayed before the conversation starts
   * `POST /conversations/` to create a new conversation
   * `POST /conversations/conversationId/messageId`  to reply to a user
 
