@@ -1058,4 +1058,4 @@ You can check the availability with our GraphQL API
 
 **Q:** Why is the iAdvize bot selected and not my external bot in the iAdvize admin interface?
 
-**A:** Did you implement the [`GET /external-bots`](#request---get-/external-bots), [`PUT /bot/:id`](request---put-/bots/:idoperator:) and [`GET /bot/:id`](request---get-/bots/:idoperator:) correctly ?
+**A:** Did you implement the [`GET /external-bots`](#request---get-/external-bots), [`PUT /bot/:id`](#request---put-/bots/:idoperator:) and [`GET /bot/:id`](#request---get-/bots/:idoperator:) correctly ?
