@@ -569,6 +569,8 @@ These objects allow you to:
 
 ### Close object
 
+A conversations is automatically closed after 5 minutes if nothing happens in the conversation. You can send a close conversation message such as:
+
 | Field       | Description                      | Type          | Required | Example                    |
 | ----------- | -------------------------------- | ------------- | -------- | -------------------------- |
 | type        | Type of the conversation object  | String        | ✓        | `close`                    |
@@ -580,6 +582,12 @@ These objects allow you to:
 </pre>
 
 ### Transfer object
+
+Transferring a conversation is quite straightforward. You can send the following messages:
+
+The `timeout` object (in the `transferOptions` key) allows you to specify the period of time during which iAdvize will try to perform the transfer. If the timeout is reached and the transfer could not be performed, the scenario continues and iAdvize will display the following messages.
+
+⚠️ Please note that the distribution rule (=routing rule) you specify in the payload must be configured as "asynchronous" in the iAdvize admin (slots in conversation queue must be greater than 0). ⚠️
 
 | Field                         | Description                               | Type                         | Required | Example                                |
 | ----------------------------- | ----------------------------------------- | ---------------------------- | -------- | -------------------------------------- |
@@ -598,8 +606,21 @@ These objects allow you to:
       value: 20
     }
   }
+},
+{
+  type: "message",
+  payload: {
+    contentType: "text",
+    value: "Transfer failed, please try again later"
+  },
+  quickReplies: []
+},
+{
+  type: "close"
 }
 </pre>
+
+**Explanation:** We send a transfer message and schedule a failed transfer message afterward. If the transfer is successful, the message for failed transfer is not published in the conversation. If the transfer fails, the message is sent to the conversation. This way you can notify your user about it and continue the conversation.
 
 ### Message objects
 
@@ -978,72 +999,6 @@ Try and offer multiple versions of your common answers. It will help you deliver
 
 ## FAQ
 
-#### How to Transfer a conversation
-Transferring a conversation is quite straightforward. You can send the following messages:
-
-<pre class="prettyprint lang-js">
-{
-    "idConversation": "ce41ba2c-c25a-4351-b946-09527d8b940b",
-    "idOperator": "ha-456678",
-    "replies": [
-        {
-            "type": "transfer",
-            "distributionRule": "ef4670c3-d715-4a21-8226-ed17f354fc44",
-            "transferOptions": {
-              "timeout": {
-                "value": 20,
-                "unit": "seconds"
-              }
-            }
-        },
-        {
-            "type": "message",
-            "payload": {
-                "contentType": "text",
-                "value": "Transfer failed, please try again later"
-             },
-            "quickReplies": []
-        },
-        {
-            "type": "close"
-        }
-    ],
-    "variables": [],
-    "createdAt": "2017-11-22T12:04:00Z",
-    "updatedAt": "2017-11-22T12:23:00Z"
-}
-</pre>
-
-**Explanation:** we send a transfer message and schedule a failed transfer message afterward. If the transfer is successful, the message for failed transfer is not published in the conversation. If the transfer happens to fail, the message is sent to the conversation. This way you can notify your user about it and continue the conversation.
-
-⚠️ Please note that the distribution rule you specify in the payload must be configured as "asynchronous" in the iAdvize admin (slots in conversation queue must be greater than 0). ⚠️
-
-#### How to end a conversation
-A conversations is automatically closed after 5 minutes if nothing happens in the conversation. You can send a close conversation message such as: 
-
-<pre class="prettyprint lang-js">
-{
-    "idConversation": "ce41ba2c-c25a-4351-b946-09527d8b940b",
-    "idOperator": "ha-456678",
-    "replies": [
-        {
-            "type": "message",
-            "payload": {
-                "contentType": "text",
-                "value": "Have a nice day ! Bye !"
-             },
-            "quickReplies": []
-        },
-        {
-            "type": "close"
-        }
-    ],
-    "variables": [],
-    "createdAt": "2017-11-22T12:04:00Z",
-    "updatedAt": "2017-11-22T12:23:00Z"
-}
-</pre>
-
 #### My visitor is being inactive in the conversation, how can I send him/her a message ?
 You can schedule a message to be sent after a while such as:
 
@@ -1098,3 +1053,9 @@ You can check the availability with our GraphQL API
 **Q:** My bot always appears to be offline, how can I change that ?
 
 **A:** Did you implement the [`GET /availability-strategies`](#request---get-/availability-strategies) correctly ?
+
+---
+
+**Q:** Why is the iAdvize bot selected and not my external bot in the iAdvize admin interface?
+
+**A:** Did you implement the [`GET /external-bots`](#request---get-/external-bots), [`PUT /bot/:id`](#request---put-/bots/:idoperator:) and [`GET /bot/:id`](#request---get-/bots/:idoperator:) correctly ?
