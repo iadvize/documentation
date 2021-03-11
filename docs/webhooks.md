@@ -172,7 +172,7 @@ PLEASE DO NOT USE (refer to warning above).
 | --- | --- |
 | `user.created` | User created |
 | `user.updated` | User information updated |
-| `satisfaction.filled` | |
+| `satisfaction.answered` | |
 | `user.connected` | |
 | `user.disconnected` | |
 
@@ -199,6 +199,53 @@ PLEASE DO NOT USE (refer to warning above).
     "userId": 1,
     "createdAt": "2017-04-22T11:01:00+02:00",
     "sentAt": "2017-04-22T11:01:00+02:00"
+}
+</pre>
+
+#### satisfaction.answered
+
+##### Example with `customerSatisfaction` filled
+
+<pre class="prettyprint lang-js">{
+    "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
+    "eventType": "satisfaction.answered",
+    "platform": "sd",
+    "projectId": 3030,
+    "clientId": 1,
+    "createdAt": "2017-04-22T11:01:00+02:00",
+    "sentAt": "2017-04-22T11:01:00+02:00",
+    "conversationId": "d36cd3c4-2d16-4a77-97c2-620bde859b40",
+    "customerSatisfaction" : 3
+}
+</pre>
+
+##### Example with `netPromoterScore` filled
+
+<pre class="prettyprint lang-js">{
+    "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
+    "eventType": "satisfaction.answered",
+    "platform": "sd",
+    "projectId": 3030,
+    "clientId": 1,
+    "createdAt": "2017-04-22T11:01:00+02:00",
+    "sentAt": "2017-04-22T11:01:00+02:00",
+    "conversationId": "d36cd3c4-2d16-4a77-97c2-620bde859b40",
+    "netPromoterScore" : 3
+}
+</pre>
+
+##### Example with `satisfactionComment` filled
+
+<pre class="prettyprint lang-js">{
+    "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
+    "eventType": "satisfaction.answered",
+    "platform": "sd",
+    "projectId": 3030,
+    "clientId": 1,
+    "createdAt": "2017-04-22T11:01:00+02:00",
+    "sentAt": "2017-04-22T11:01:00+02:00",
+    "conversationId": "d36cd3c4-2d16-4a77-97c2-620bde859b40",
+    "satisfactionComment" : "It was very helpful"
 }
 </pre>
 
