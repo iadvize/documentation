@@ -425,7 +425,7 @@ See [reading section](#read) to discover some output examples.
 | name | Group name | String |
 | created_at | Date of creation | Date `YYYY-MM-DD HH:MM:SS` |
 | parent_id | Parent identifier | Integer |
-| operator_list | List of operators identifiers | List of integers |
+| operator_list **Deprecated: use the Operator resource with the group_id filter instead** | List of operators identifiers | List of integers |
 | parent_list | List of parent's group ids | List of integers |
 
 ### Skill
