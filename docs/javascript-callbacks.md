@@ -8,7 +8,7 @@ iAdvize provides Javascript callbacks functions that can be used to perform acti
 
 Some callbacks have a parameter that contains data specific to the triggered event.
 
-### How to use callbacks**
+### How to use callbacks
 
 To execute custom code during an iAdvize callback function you have to define the callbacks you want to use in a `window.iAdvizeCallbacks` object.
 
