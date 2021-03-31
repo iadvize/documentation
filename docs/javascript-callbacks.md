@@ -19,15 +19,15 @@ To execute custom code during an iAdvize callback function you have to define th
 ## Reference
 | Callback name             | Description                                                                                   |
 | ------------------------- | --------------------------------------------------------------------------------------------- |
-| `onChatDisplayed`         | Triggered when the chatbox is displayed on the visitor screen **(either opened or reduced)**. |
-| `onChatButtonDisplayed`   | Triggered when a “click to chat” button is displayed on the visitor screen.                   |
-| `onChatStarted`           | Triggered when a chat conversation has started.                                               |
-| `onChatEnded`             | Triggered when a chat conversation has ended.                                                 |
-| `onCallButtonDisplayed`   | Triggered when a “click to call” button is displayed on the visitor screen.                   |
-| `onMessageReceived`       | Triggered when an operator message is received by the visitor.                                |
-| `onMessageSent`           | Triggered when the visitor sends a message.                                                   |
-| `onSatisfactionDisplayed` | Triggered when the satisfaction survey is displayed to the visitor.                           |
-| `onSatisfactionAnswered`  | Triggered when the visitor answers the satisfaction survey.                                   |
+| [onChatDisplayed](/documentation/javascript-callbacks#onchatdisplayed)         | Triggered when the chatbox is displayed on the visitor screen **(either opened or reduced)**. |
+| [onChatButtonDisplayed](/documentation/javascript-callbacks#onchatbuttondisplayed)   | Triggered when a “click to chat” button is displayed on the visitor screen.                   |
+| [onChatStarted](/documentation/javascript-callbacks#onchatstarted)           | Triggered when a chat conversation has started.                                               |
+| [onChatEnded](/documentation/javascript-callbacks#onchatended)             | Triggered when a chat conversation has ended.                                                 |
+| [onCallButtonDisplayed](/documentation/javascript-callbacks#oncallButtondisplayed)   | Triggered when a “click to call” button is displayed on the visitor screen.                   |
+| [onMessageReceived](/documentation/javascript-callbacks#onmessagereceived)       | Triggered when an operator message is received by the visitor.                                |
+| [onMessageSent](/documentation/javascript-callbacks#onmessagesent)           | Triggered when the visitor sends a message.                                                   |
+| [onSatisfactionDisplayed](/documentation/javascript-callbacks#onSatisfactionDisplayed) | Triggered when the satisfaction survey is displayed to the visitor.                           |
+| [onSatisfactionAnswered](/documentation/javascript-callbacks#onsatisfactionanswered)  | Triggered when the visitor answers the satisfaction survey.                                   |
 
 ### onChatDisplayed
 
@@ -37,8 +37,8 @@ Triggered when the chat window is displayed on the visitor screen **(either open
 
 <pre class="prettyprint lang-js">
 window.iAdvizeCallbacks.onChatDisplayed = function() {
-    // Chat window is displayed
-    ...
+  // Chat window is displayed
+  ...
 };
 </pre>
 
