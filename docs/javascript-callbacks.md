@@ -85,7 +85,7 @@ Triggered when a chat conversation has ended.
 | Property                 | Description                                                                   |
 | ------------------------ | ----------------------------------------------------------------------------- |
 | `context.id`             | Legacy conversation ID (integer ID)                                           |
-| `context.endedBy`        | DEPRECATED. The conversation can only be ended by an operator                 |
+| `context.endedBy`        | **⚠️ DEPRECATED.** The conversation can only be ended by an operator           |
 | `context.conversationId` | New conversation ID in UUID format that you can use in our GraphQL API        |
 | `context.vuid`           | Visitor Unique Id is a random string which can be used for analytics purposes |
 
