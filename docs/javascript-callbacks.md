@@ -27,7 +27,7 @@ To execute custom code during an iAdvize callback function you have to define th
 | [onMessageReceived](/documentation/javascript-callbacks#onmessagereceived)       | Triggered when an operator message is received by the visitor.                                |
 | [onMessageSent](/documentation/javascript-callbacks#onmessagesent)           | Triggered when the visitor sends a message.                                                   |
 | [onSatisfactionDisplayed](/documentation/javascript-callbacks#onsatisfactiondisplayed) | Triggered when the satisfaction survey is displayed to the visitor.                           |
-| [onSatisfactionAnswered](/documentation/javascript-callbacks#onsatisfactionanswered)  | Triggered when the visitor answers the satisfaction survey.                                   |
+| [onSatisfactionAnswered](/documentation/javascript-callbacks#onsatisfactionanswered)  | Triggered when the visitor has answered all the questions in the satisfaction survey.                                   |
 
 ### onChatDisplayed
 
@@ -169,7 +169,7 @@ window.iAdvizeCallbacks.onSatisfactionDisplayed = function() {
 
 ### onSatisfactionAnswered
 
-Triggered when the visitor answers the satisfaction survey.
+Triggered when the visitor has answered all the questions in the satisfaction survey.
 
 #### Example:
 
