@@ -61,6 +61,7 @@
     * [How to use callbacks](/documentation/javascript-callbacks#how-to-use-callbacks)
   * [Reference](/documentation/javascript-callbacks#reference)
     * [onChatDisplayed](/documentation/javascript-callbacks#onchatdisplayed)
+    * [onChatHidden](/documentation/javascript-callbacks#onchathidden)
     * [onChatButtonDisplayed](/documentation/javascript-callbacks#onchatbuttondisplayed)
     * [onChatStarted](/documentation/javascript-callbacks#onchatstarted)
     * [onChatEnded](/documentation/javascript-callbacks#onchatended)
