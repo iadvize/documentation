@@ -1033,7 +1033,37 @@ You can schedule a message to be sent after a while such as:
 
 #### How can I check availability of a rule before a transfer
 
-You can check the availability with our GraphQL API
+You can check the availability with the `routingRule` query in our GraphQL API. This query returns a routingRule object in which there is an availability field allowing to know the availability of the different channels.
+
+Here is an example of a query to retrieve the availability on chat channel:
+
+<pre class="prettyprint lang-js">
+query getAvailabilityOfMyRoutingRule {
+  routingRule(id: "MY_ROUTING_RULE_UUID") {
+    availability {
+      chat {
+        isAvailable
+      }
+    }
+  }
+}
+</pre>
+
+And its result:
+
+<pre class="prettyprint lang-js">
+{
+  "data": {
+    "routingRule": {
+      "availability": {
+        "chat": {
+          "isAvailable": false
+        }
+      }
+    }
+  }
+}
+</pre>
 
 ## Bot troubleshooting
 **Q:** My chat does not display, even if I went through all the bot creation process and campaign creation process
