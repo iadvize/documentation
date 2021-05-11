@@ -20,6 +20,7 @@ To execute custom code during an iAdvize callback function you have to define th
 | Callback name             | Description                                                                                   |
 | ------------------------- | --------------------------------------------------------------------------------------------- |
 | [onChatDisplayed](/documentation/javascript-callbacks#onchatdisplayed)         | Triggered when the chatbox is displayed on the visitor screen **(either opened or reduced)**. |
+| [onChatHidden](/documentation/javascript-callbacks#onchathidden)         | Triggered when the visitor closes the chatbox (after the conversation has been closed by the operator). |
 | [onChatButtonDisplayed](/documentation/javascript-callbacks#onchatbuttondisplayed)   | Triggered when a “click to chat” button is displayed on the visitor screen.                   |
 | [onChatStarted](/documentation/javascript-callbacks#onchatstarted)           | Triggered when a chat conversation has started.                                               |
 | [onChatEnded](/documentation/javascript-callbacks#onchatended)             | Triggered when a chat conversation has ended.                                                 |
@@ -38,6 +39,19 @@ Triggered when the chat window is displayed on the visitor screen **(either open
 <pre class="prettyprint lang-js">
 window.iAdvizeCallbacks.onChatDisplayed = function() {
   // Chat window is displayed
+  ...
+};
+</pre>
+
+### onChatHidden
+
+Triggered when the visitor closes the chatbox (after the conversation has been closed by the operator).
+
+#### Example:
+
+<pre class="prettyprint lang-js">
+window.iAdvizeCallbacks.onChatHidden = function() {
+  // Chat window is hidden
   ...
 };
 </pre>
