@@ -1,6 +1,6 @@
 # Webhooks
 
-## Overview<span hidden>webhooks</span>
+## Overview <span hidden>webhooks</span>
 
 When an event occurs, an HTTP `POST` call is issued on the callback urls you set up with the event data.
 Data is sent with `application/json` header content-type, and `json` format as payload.
@@ -27,7 +27,7 @@ In case of failure, you may need to track events in error, by following "X-iAdvi
 
 Please refer to [this section](/documentation/build-apps#app-security).
 
-## Reference<span hidden>webhooks</span>
+## Reference <span hidden>webhooks</span>
 
 | Name | Description  |
 | --- | --- | 
@@ -310,7 +310,7 @@ PLEASE DO NOT USE (refer to warning above).
 }
 </pre>
 
-## Guides<span hidden>webhooks</span>
+## Guides <span hidden>webhooks</span>
 
 ### Subscribe to your first webhook
 
