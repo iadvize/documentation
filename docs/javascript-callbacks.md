@@ -1,6 +1,6 @@
 # Javascript Callbacks
 
-## Overview
+## Overview <span hidden>callbacks</span>
 
 ### Introduction
 
@@ -16,7 +16,8 @@ To execute custom code during an iAdvize callback function you have to define th
 
 ---
 
-## Reference
+## Reference <span hidden>callbacks</span>
+
 | Callback name             | Description                                                                                   |
 | ------------------------- | --------------------------------------------------------------------------------------------- |
 | [onChatDisplayed](/documentation/javascript-callbacks#onchatdisplayed)         | Triggered when the chatbox is displayed on the visitor screen **(either opened or reduced)**. |
@@ -196,7 +197,7 @@ window.iAdvizeCallbacks.onSatisfactionAnswered = function() {
 
 ---
 
-## Guides
+## Guides <span hidden>callbacks</span>
 
 ### Safely adds events in `window.iAdvizeCallbacks` object
 
