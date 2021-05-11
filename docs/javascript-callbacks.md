@@ -1,6 +1,6 @@
 # Javascript Callbacks
 
-## Overview<span hidden>callbacks</span>
+## Overview <span hidden>callbacks</span>
 
 ### Introduction
 
@@ -16,7 +16,7 @@ To execute custom code during an iAdvize callback function you have to define th
 
 ---
 
-## Reference<span hidden>callbacks</span>
+## Reference <span hidden>callbacks</span>
 
 | Callback name             | Description                                                                                   |
 | ------------------------- | --------------------------------------------------------------------------------------------- |
@@ -197,7 +197,7 @@ window.iAdvizeCallbacks.onSatisfactionAnswered = function() {
 
 ---
 
-## Guides<span hidden>callbacks</span>
+## Guides <span hidden>callbacks</span>
 
 ### Safely adds events in `window.iAdvizeCallbacks` object
 
