@@ -184,12 +184,12 @@ curl  --request POST \
 
 **Execute GraphQL queries**
 
-[1. Create an access_token](https://paper.dropbox.com/doc/GraphQL-API--BKuErSqW9yNsRHPu~K1aukzRAg-3Q2elEheFtgSgnXbZSZtG#:uid=843733020809470286902015&h2=Create-an-access_token)
-[2. Open the GraphiQL tool](/tools/graphiql)
-3. In the header section, add a new **Key** `Authorization` (if it does not already exists).
-4. Then, in the **Value** field, enter `Bearer <token>`, where `<token>` is the token you generated previously.
+* [Create an access_token](#create-an-access_token)
+* [Open the GraphiQL tool](/tools/graphiql)
+* In the header section, add a new **Key** `Authorization` (if it does not already exists).
+* Then, in the **Value** field, enter `Bearer <token>`, where `<token>` is the token you generated previously.
   ⚠️ Don’t forget to check the box to enable the header
-5. and here we go!
+* and here we go!
 
 You can test your access by querying your projects:
 
