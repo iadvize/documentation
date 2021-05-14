@@ -182,14 +182,14 @@ curl  --request POST \
 
 ### Using GraphiQL
 
-#### Execute GraphQL queries
+**Execute GraphQL queries**
 
-1. [Create an access_token](https://paper.dropbox.com/doc/GraphQL-API--BKuErSqW9yNsRHPu~K1aukzRAg-3Q2elEheFtgSgnXbZSZtG#:uid=843733020809470286902015&h2=Create-an-access_token)
-2. [Open the GraphiQL tool](/tools/graphiql)
-3. In the header section, add a new **Key** `Authorization` (if it does not already exists).
-4. Then, in the **Value** field, enter `Bearer <token>`, where `<token>` is the token you generated previously.
-    ⚠️ Don’t forget to check the box to enable the header
-5. and here we go!
+* [1. Create an access_token](https://paper.dropbox.com/doc/GraphQL-API--BKuErSqW9yNsRHPu~K1aukzRAg-3Q2elEheFtgSgnXbZSZtG#:uid=843733020809470286902015&h2=Create-an-access_token)
+* [2. Open the GraphiQL tool](/tools/graphiql)
+* 3. In the header section, add a new **Key** `Authorization` (if it does not already exists).
+* 4. Then, in the **Value** field, enter `Bearer <token>`, where `<token>` is the token you generated previously.
+  ⚠️ Don’t forget to check the box to enable the header
+* 5. and here we go!
 
 You can test your access by querying your projects:
 
@@ -206,7 +206,7 @@ query {
 }
 </pre>
 
-#### The sidebar docs
+**The sidebar docs**
 
 The collapsible **Docs** pane on the right side of the Explorer page allows you to browse documentation about the type system.
 
@@ -214,6 +214,6 @@ All types in a GraphQL schema include a `description` field compiled into docume
 
 The **Docs** sidebar contains the same content that is automatically generated from the schema under [Reference](#reference-graphql). It is just formatted differently.
 
-#### Using the query variables pane
+**Using the query variables pane**
 
 If you want to learn more about variables in GraphQL you can read this documentation : https://graphql.org/learn/queries/#variables
