@@ -1,8 +1,8 @@
 # GraphQL API
 
-# Overview <span hidden>GraphQL</span>
+## Overview <span hidden>GraphQL</span>
 
-## About the GraphQL API
+### About the GraphQL API
 
 The new iAdvize GraphQL API offers flexibility and the ability to define precisely the data you want to fetch.
 
@@ -12,7 +12,7 @@ If you wan to learn more about GraphQL, please check [Learn GraphQL](https://gra
 
 Also, a lot of GraphQL clients are available in [Official GraphQL documentation](https://graphql.org/code/#graphql-clients).
 
-## Root endpoint
+### Root endpoint
 
 The REST API has numerous endpoints; the GraphQL API has a single endpoint: `https://api.iadvize.com/graphql`
 
@@ -20,7 +20,7 @@ The endpoint remains constant no matter what operation you perform.
 
 If your environment is on the `SD` platform, your endpoint is: `https://api.iadvize.com/graphql?platform=sd`
 
-## Authentication <span hidden>GraphQL</span>
+### Authentication <span hidden>GraphQL</span>
 
 The iAdvize authentication mecanism uses temporary tokens that has a 24 hours lifetime.
 
@@ -37,7 +37,7 @@ Read the following articles to learn more about authentication and how to:
 - [Authenticate your API calls](#authenticate-your-api-calls)
 - [Check the validity of an access_token](#check-the-validity-of-an-access_token)
 
-## GraphiQL
+### GraphiQL
 
 You can run queries on real iAdvize data using GraphiQL, an integrated development environment in your browser that includes docs, syntax highlighting, and validation errors.
 
@@ -45,15 +45,15 @@ https://developers.iadvize.com/tools/graphiql
 
 [Learn how to to use GraphiQL with iAdvize](#using-graphiql)
 
-# Reference <span hidden>GraphQL</span>
+## Reference <span hidden>GraphQL</span>
 
-## Documentation
+### Documentation
 
 View reference documentation to learn about the data types available in the iAdvize GraphQL API schema.
 
 [See static documentation of our GraphQL types, queries and mutation.](/bundles/devplatformapp/graphqldoc/index.html)
 
-## Discovering the GraphQL API
+### Discovering the GraphQL API
 
 Since graphQL is [introspective](https://graphql.org/learn/introspection/), it means you can query a GraphQL schema for details about itself.
 
@@ -89,7 +89,7 @@ query {
 }
 </pre>
 
-## GraphQL Voyager
+### GraphQL Voyager
 
 With GraphQL Voyager, you can visually explore the iAdvize GraphQL API as an interactive graph.
 
@@ -98,9 +98,9 @@ This is a great tool that represent all the iAdvize GraphQL API as an interactiv
 [Let's start the journey!](/tools/voyager-view)
 
 
-# Guides <span hidden>GraphQL</span>
+## Guides <span hidden>GraphQL</span>
 
-## Create an access_token
+### Create an access_token
 
 You have make a `POST` call on the following endpoint: `https://api.iadvize.com/oauth2/token` and send the following parameters:
 
@@ -120,7 +120,7 @@ curl  --request POST \
       --data "username={EMAIL}&password={PASSWORD}&grant_type=password"
 </pre>
 
-## Authenticate your API calls
+### Authenticate your API calls
 
 To authenticate an API call just pass the access token in an authorization header.
 
@@ -132,7 +132,7 @@ curl  --request POST \
       --data "YOUR_QUERY"
 </pre>
 
-## Check the validity of an access_token
+### Check the validity of an access_token
 
 You can verify token validity with the authenticated route below.
 
@@ -159,7 +159,7 @@ If your token is expired or invalid, you will receive the following response:
 }
 </pre>
 
-## Forming queries with GraphQL
+### Forming queries with GraphQL
 
 Because GraphQL operations consist of multiline JSON, we strongly recommend using the GraphiQL tool to make GraphQL calls. But, you can also use cURL or any other HTTP-speaking library.
 
@@ -180,9 +180,9 @@ curl  --request POST \
 
 ⚠️ **Note**: The string value of `"query"` must escape newline characters or the schema will not parse it correctly. For the `POST` body, use outer double quotes and escaped inner double quotes.
 
-## Using GraphiQL
+### Using GraphiQL
 
-### Execute GraphQL queries
+#### Execute GraphQL queries
 
 1. [Create an access_token](https://paper.dropbox.com/doc/GraphQL-API--BKuErSqW9yNsRHPu~K1aukzRAg-3Q2elEheFtgSgnXbZSZtG#:uid=843733020809470286902015&h2=Create-an-access_token)
 2. [Open the GraphiQL tool](/tools/graphiql)
@@ -206,7 +206,7 @@ query {
 }
 </pre>
 
-### The sidebar docs
+#### The sidebar docs
 
 The collapsible **Docs** pane on the right side of the Explorer page allows you to browse documentation about the type system.
 
@@ -214,6 +214,6 @@ All types in a GraphQL schema include a `description` field compiled into docume
 
 The **Docs** sidebar contains the same content that is automatically generated from the schema under [Reference](#reference-graphql). It is just formatted differently.
 
-### Using the query variables pane
+#### Using the query variables pane
 
 If you want to learn more about variables in GraphQL you can read this documentation : https://graphql.org/learn/queries/#variables
