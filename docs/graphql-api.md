@@ -20,7 +20,7 @@ The endpoint remains constant no matter what operation you perform.
 
 If your environment is on the `SD` platform, your endpoint is: `https://api.iadvize.com/graphql?platform=sd`
 
-## Authentication
+## Authentication <span hidden>GraphQL</span>
 
 The iAdvize authentication mecanism uses temporary tokens that has a 24 hours lifetime.
 
@@ -33,9 +33,9 @@ Unlike our REST API, you can generate your own tokens with a user email & passwo
 
 Read the following articles to learn more about authentication and how to:
 
-- [Create an access_token](#create-an-access-token)
+- [Create an access_token](#create-an-access_token)
 - [Authenticate your API calls](#authenticate-your-api-calls)
-- [Check the validity of an access_token](#check-the-validity-of-an-access-token)
+- [Check the validity of an access_token](#check-the-validity-of-an-access_token)
 
 ## GraphiQL
 
