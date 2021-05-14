@@ -1,328 +1,219 @@
 # GraphQL API
 
-## Getting started on GraphQL
+## Overview <span hidden>GraphQL</span>
 
-GraphQL is our new API, all new resources will only be exposed in this new API.
-We are currently migrating old resources from Rest API to GraphQL.
-Please note that we are in alpha version, resources are pretty stable but
-authentication method will change in the next months.
+### About the GraphQL API
 
-One of the power of GraphQL API is to allow you retrieve many resources in one HTTP call.
-You can request only fields you need. If you wan to learn more about GraphQL, please check [Learn GraphQL](https://graphql.org/learn/).
+The new iAdvize GraphQL API offers flexibility and the ability to define precisely the data you want to fetch.
 
-A lot of GraphQL clients are available in [Official GraphQL documentation](https://graphql.org/code/#graphql-clients).
+One of the power of GraphQL API is to allow you retrieve many resources in one HTTP call and you can request only fields you need.
 
-## Authentication <span hidden>on GraphQL</span>
+If you wan to learn more about GraphQL, please check [Learn GraphQL](https://graphql.org/learn/).
 
-Authentication uses temporary & revocable access tokens.
+Also, a lot of GraphQL clients are available in [Official GraphQL documentation](https://graphql.org/code/#graphql-clients).
 
-⚠️ Please note that the token lifetime is 24 hours
+### Root endpoint
 
-You can generate an access token by calling the url below with a user email & password.
+The REST API has numerous endpoints; the GraphQL API has a single endpoint: `https://api.iadvize.com/graphql`
 
-`POST https://api.iadvize.com/oauth2/token`
-**Parameters** (sent as application/x-www-form-urlencoded)
+The endpoint remains constant no matter what operation you perform.
 
-| Parameter | Description | Values | Mandatory |
-| --- | --- | --- | --- |
-| username | User email | String | Yes |
-| password | User password | String | Yes |
-| grant_type | Oauth2 grant type (only password is supported) | String | Yes |
+If your environment is on the `SD` platform, your endpoint is: `https://api.iadvize.com/graphql?platform=sd`
 
-<pre class="prettyprint lang-sh">
-curl --request POST \
-     --url 'https://api.iadvize.com/oauth2/token' \
-     --data 'username={EMAIL}&password={PASSWORD}&grant_type=password'
-</pre>
+### Authentication <span hidden>GraphQL</span>
+
+The iAdvize authentication mecanism uses temporary tokens that has a 24 hours lifetime.
+
+Unlike our REST API, you can generate your own tokens with a user email & password.
+
+⚠️ Please note the following policy on **authentication**:
+
+- 10 logins per minute per user
+- 100 logins per minute per ip address
+
+Read the following articles to learn more about authentication and how to:
+
+- [Create an access_token](#create-an-access_token)
+- [Authenticate your API calls](#authenticate-your-api-calls)
+- [Check the validity of an access_token](#check-the-validity-of-an-access_token)
+
+### GraphiQL
+
+You can run queries on real iAdvize data using GraphiQL, an integrated development environment in your browser that includes docs, syntax highlighting, and validation errors.
+
+https://developers.iadvize.com/tools/graphiql
+
+[Learn how to to use GraphiQL with iAdvize](#using-graphiql)
+
+## Reference <span hidden>GraphQL</span>
+
+### Documentation
+
+View reference documentation to learn about the data types available in the iAdvize GraphQL API schema.
+
+[See static documentation of our GraphQL types, queries and mutation.](/bundles/devplatformapp/graphqldoc/index.html)
+
+### Discovering the GraphQL API
+
+Since graphQL is [introspective](https://graphql.org/learn/introspection/), it means you can query a GraphQL schema for details about itself.
+
+Query `__schema` to list all types defined in the schema and get details about each:
 
 <pre class="prettyprint lang-js">
-{
-    "refresh_token": "***************************",
-    "token_type": "bearer",
-    "expires_in": 86400,
-    "access_token": "***************************"
+query {
+  __schema {
+    types {
+      name
+      kind
+      description
+      fields {
+        name
+      }
+    }
+  }
 }
 </pre>
 
+Query `__type` to get details about any type:
+
+<pre class="prettyprint lang-js">
+query {
+  __type(name: "Conversation") {
+    name
+    kind
+    description
+    fields {
+      name
+    }
+  }
+}
+</pre>
+
+### GraphQL Voyager
+
+With GraphQL Voyager, you can visually explore the iAdvize GraphQL API as an interactive graph.
+
+This is a great tool that represent all the iAdvize GraphQL API as an interactive graph.
+
+[Let's start the journey!](/tools/voyager-view)
+
+
+## Guides <span hidden>GraphQL</span>
+
+### Create an access_token
+
+You have make a `POST` call on the following endpoint: `https://api.iadvize.com/oauth2/token` and send the following parameters:
+
+| **Parameter**  | **Description**                                  | **Type** | **Mandatory** |
+| -------------- | ------------------------------------------------ | -------- | ------------- |
+| **username**   | User email                                       | String   | Yes           |
+| **password**   | User password                                    | String   | Yes           |
+| **grant_type** | Oauth2 grant type (only `password` is supported) | String   | Yes           |
+
+⚠️ Please note that parameters must be sent as `application/x-www-form-urlencoded` 
+
+**Example:**
+
+<pre class="prettyprint lang-sh">
+curl  --request POST \
+      --url https://api.iadvize.com/oauth2/token \
+      --data "username={EMAIL}&password={PASSWORD}&grant_type=password"
+</pre>
+
+### Authenticate your API calls
+
 To authenticate an API call just pass the access token in an authorization header.
+
+<pre class="prettyprint lang-sh">
+curl  --request POST \
+      --url https://api.iadvize.com/graphql \
+      --header "Content-Type: application/json" \
+      --header "Authorization: Bearer {YOUR_ACCESS_TOKEN}" \
+      --data "YOUR_QUERY"
+</pre>
+
+### Check the validity of an access_token
+
 You can verify token validity with the authenticated route below.
 
 <pre class="prettyprint lang-sh">
-curl --request GET \
-     --url https://api.iadvize.com/_authenticated \
-     --header 'Authorization: Bearer {ACCESS_TOKEN}'
+curl  --request GET \
+      --url https://api.iadvize.com/_authenticated \
+      --header "Authorization: Bearer {YOUR_ACCESS_TOKEN}"
 </pre>
 
-### Rate limit policy on authentication
+If your token is valid, you will receive a response that looks like this:
 
-Please note the following rules on authentication :
-* 10 logins per minute per user
-* 100 logins per minute per ip address
+<pre class="prettyprint lang-js">
+{
+  "authenticated": true
+}
+</pre>
 
-## Documentation and tooling
+If your token is expired or invalid, you will receive the following response:
 
-[Documentation GraphQL](/bundles/devplatformapp/graphqldoc/index.html)
+<pre class="prettyprint lang-js">
+{
+  "error_description": "access token not valid",
+  "error": "invalid_token"
+}
+</pre>
 
-See static documentation of our GraphQL types, queries and mutation.
+### Forming queries with GraphQL
 
-[Test our GraphQL API](/tools/graphiql)
+Because GraphQL operations consist of multiline JSON, we strongly recommend using the GraphiQL tool to make GraphQL calls. But, you can also use cURL or any other HTTP-speaking library.
 
-Get your API key and make requests to our GraphQL API with ease.
+While with REST we use HTTP verbs to define the operations to perform, in GraphQL we will use the HTTP POST verb, because you will provide a JSON-encoded body whether you are performing a query or a mutation.
 
-[Explore our GraphQL API](/tools/voyager-view)
-
-Display graphically all our Graph, ressources and links between them.
-
-## Examples <span hidden>GraphQL</span>
-
-To use the GraphQL API, call the URL below with the Authorization header containing your access token.
-
-`POST /graphql`
-
-**Parameters** (sent as application/json)
-
-| Parameter | Description | Values | Mandatory |
-| --- | --- | --- | --- |
-| query | GraphQL query | String | Yes |
-| variables | Variables to be used in the GraphQL query | String | No |
-| operationName | Operation to perform if the GraphQL query contains several operations | String | No |
-
-**Complete example**
+**Here is an example to list all the projects :**
 
 <pre class="prettyprint lang-sh">
-curl --request POST \
-     --url 'https://api.iadvize.com/graphql' \
-     --header 'authorization: Bearer {ACCESS_TOKEN}' \
-     --header 'content-type: application/json' \
-     --data '{"query":"{ clients { pageInfo { hasNextPage } edges { node { id, name } } } }"}'
+curl  --request POST \
+      --url https://api.iadvize.com/graphql \
+      --header "Content-Type: application/json" \
+      --header "Authorization: Bearer {YOUR_ACCESS_TOKEN}" \
+      --data "\
+      { \
+        \"query\": \"{projects { edges { node { id name}}}}\" \
+      }"
 </pre>
 
-Following examples describe uniquely the graphQL query (that has to be serialized into the JSON)
+⚠️ **Note**: The string value of `"query"` must escape newline characters or the schema will not parse it correctly. For the `POST` body, use outer double quotes and escaped inner double quotes.
 
-### Clients
+### Using GraphiQL
 
-#### List clients
+**Execute GraphQL queries**
+
+* [Create an access_token](#create-an-access_token)
+* [Open the GraphiQL tool](/tools/graphiql)
+* In the header section, add a new **Key** `Authorization` (if it does not already exists).
+* Then, in the **Value** field, enter `Bearer <token>`, where `<token>` is the token you generated previously.
+  ⚠️ Don’t forget to check the box to enable the header
+* and here we go!
+
+You can test your access by querying your projects:
 
 <pre class="prettyprint lang-js">
 query {
-    clients(first: 10, after: "Y3Vyc29yMQ==") {
-      edges {
-        node {
-          id
-          name
-        }
-      }
-    }
-  }
-</pre>
-
-<pre class="prettyprint lang-js">
-{
-  "data": {
-    "clients": {
-      "edges": [
-        {
-          "node": {
-            "id": 335,
-            "name": "R&D Boss"
-          }
-        }
-      ]
-    }
-  }
-}
-</pre>
-
-#### Get client by identifier
-
-<pre class="prettyprint lang-js">
-query {
-    client(clientId: 335) {
-      id
-      name
-    }
-  }
-
-</pre>
-
-<pre class="prettyprint lang-js">
-{
-  "data": {
-    "client": {
-      "id": 335,
-      "name": "R&D Boss"
-    }
-  }
-}
-</pre>
-
-### Connectors
-
-#### Get connector by identifier
-
-<pre class="prettyprint lang-js">
-query {
-    connector(id: 41c64064-4729-4d83-a939-8d46ac06d207) { 
-        name 
-        isPrivate 
-        createdAt
-    }
-}
-</pre>
-
-<pre class="prettyprint lang-js">
-{
-  "data": {
-    "connector": {
-      "name": "My connector",
-      "isPrivate": false,
-      "createdAt": "2019-07-03T11:25:38Z"
-    }
-  }
-}
-</pre>
-
-### Projects
-
-#### List projects
-
-<pre class="prettyprint lang-js">
-query {
-    projects(first: 10, after: "Y3Vyc29yMQ==") {
-      edges {
-        node {
-          id
-          name
-        }
-      }
-    }
-  }
-</pre>
-
-<pre class="prettyprint lang-js">
-{
-  "data": {
-    "projects": {
-      "edges": [
-        {
-          "node": {
-            "id": 335,
-            "name": "R&D Boss"
-          }
-        }
-      ]
-    }
-  }
-}
-</pre>
-
-#### Get project by identifier
-
-<pre class="prettyprint lang-js">
-query {
-    project(projectId: 335) {
-      id
-      name
-    }
-  }
-
-</pre>
-
-<pre class="prettyprint lang-js">
-{
-  "data": {
-    "project": {
-      "id": 335,
-      "name": "R&D Boss"
-    }
-  }
-}
-</pre>
-
-### Satisfaction survey responses
-
-#### Get the 100 first responses to the satisfaction survey during the given time interval:
-
-<pre class="prettyprint lang-js">
-query {
-    satisfactionSurveyResponses(
-        projectIds: [1,2], 
-        interval: {
-	    from: "2019-01-04T00:00:00+01:00",
-	    to: "2019-01-04T23:59:59+01:00"
-        }
-    ) {
+  projects {
     edges {
       node {
-        customerSatisfaction,
-        netPromoterScore,
-        satisfactionComment,
-        conversation {
-          id,
-          createdAt,
-          closedAt,
-          project {
-            id,
-            name,
-          },
-          agents {
-            id,
-            firstName,
-            lastName,
-            __typename
-          }
-        }
+        id
+        name
       }
-    },
-    pageInfo {
-      endCursor
-      hasNextPage
     }
   }
 }
 </pre>
 
-<pre class="prettyprint lang-js">
-{
-  "data": {
-    "satisfactionSurveyResponses": {
-      "edges": [
-        {
-          "node": {
-            "customerSatisfaction": 5,
-            "netPromoterScore": 10,
-            "satisfactionComment": "Rapide",
-            "conversation": {
-              "id": "d42d8291-6542-4eed-bb44-988e5264fc2d",
-              "createdAt": "2019-01-04T11:12:13Z",
-              "closedAt": "2019-01-04T12:13:14Z",
-              "project": {
-                "id": 1,
-                "name": "My brand online"
-              },
-              "agents": [
-                {
-                  "id": 30,
-                  "firstName": null,
-                  "lastName": "Wall-e",
-                  "type": "bot"
-                },
-                {
-                  "id": 31,
-                  "firstName": "Jean",
-                  "lastName": "Robert",
-                  "__typename": "Expert"
-                }
-              ]
-            }
-          }
-        }
-      ],
-      "pageInfo": {
-        "endCursor": "MTU0NjU5NzY5MjAwMCYmMmVhMTYyZjgtNTlkZC00MzkxLTljNTMtMmJkNjM2YzFlNWU1",
-        "hasNextPage": true
-      }
-    }
-  }
-}
-</pre>
+**The sidebar docs**
+
+The collapsible **Docs** pane on the right side of the Explorer page allows you to browse documentation about the type system.
+
+All types in a GraphQL schema include a `description` field compiled into documentation that is automatically updated.
+
+The **Docs** sidebar contains the same content that is automatically generated from the schema under [Reference](#reference-graphql). It is just formatted differently.
+
+**Using the query variables pane**
+
+If you want to learn more about variables in GraphQL you can read this documentation : https://graphql.org/learn/queries/#variables
