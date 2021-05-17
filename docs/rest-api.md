@@ -1,10 +1,15 @@
 # REST API
-**Current version:** 2.0
+
+## Overview <span hidden>rest</span>
+
+### Introduction
+
+⚠️ This API is partially deprecated, you should use our new GraphQL API. ⚠️
 
 This API provides access and basic CRUD operations (create, read, update, delete) for the resources described in the documentation.
 The REST API uses JSON exclusively. XML is not supported.
 
-## Base URL
+### Base URL
 
 All URLs referenced in the documentation have the following base:
 
@@ -14,7 +19,7 @@ All URLs referenced in the documentation have the following base:
 
 The iAdvize REST API is served over HTTPS.
 
-## Authentication
+### Authentication <span hidden>rest</span>
 
 The API key must be attached to each request. You can use it in one of the following ways:
 
@@ -22,9 +27,9 @@ The API key must be attached to each request. You can use it in one of the follo
 *   Passed in as a `key` GET parameter
 *   Passed in as the username <small>(with an arbitrary password)</small> via `HTTP Basic authentication`
 
-## Calls, errors & responses
+### Calls, errors & responses
 
-### Authentication failed
+#### Authentication failed
 
 <pre class="prettyprint lang-js">{
   meta: {
@@ -34,7 +39,7 @@ The API key must be attached to each request. You can use it in one of the follo
 }
 </pre>
 
-### Read
+#### Read
 
 ##### `GET /my_resource`
 
@@ -99,7 +104,7 @@ Use the `*` character to broaden the scope of your search. E.g.: `filters[name]=
 }
 </pre>
 
-## Resources
+## Reference <span hidden>rest</span>
 
 ### ~~Client~~ deprecated
 
@@ -460,7 +465,9 @@ See [reading section](#read) to discover some output examples.
 | parent_id | Parent skill identifier | Integer |
 | operator_list **Deprecated: use the Operator resource with the skill_id filter instead** | List of operator identifiers | List of integers |
 
-### Conversation <span hidden>API</span>
+### ~~Conversation~~ <span hidden>deprecated</span>
+
+⚠️ **This resource is deprecated.** You should consider using our GraphQL API with the `Conversation` object (through `searchClosedConversations` or `conversation` queries).
 
 #### List your conversations
 
