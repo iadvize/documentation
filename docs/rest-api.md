@@ -19,7 +19,7 @@ All URLs referenced in the documentation have the following base:
 
 The iAdvize REST API is served over HTTPS.
 
-### Authentication
+### Authentication <span hidden>rest</span>
 
 The API key must be attached to each request. You can use it in one of the following ways:
 
