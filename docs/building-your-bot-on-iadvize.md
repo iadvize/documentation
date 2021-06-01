@@ -587,8 +587,6 @@ Transferring a conversation is quite straightforward. You can send the following
 
 The `timeout` object (in the `transferOptions` key) allows you to specify the period of time during which iAdvize will try to perform the transfer. If the timeout is reached and the transfer could not be performed, the scenario continues and iAdvize will display the following messages.
 
-⚠️ Please note that the distribution rule (=routing rule) you specify in the payload must be configured as "asynchronous" in the iAdvize admin (slots in conversation queue must be greater than 0). ⚠️
-
 | Field                         | Description                               | Type                         | Required | Example                                |
 | ----------------------------- | ----------------------------------------- | ---------------------------- | -------- | -------------------------------------- |
 | type                          | Type of the conversation object           | String                       | ✓        | `transfer`                             |
