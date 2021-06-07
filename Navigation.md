@@ -40,7 +40,7 @@
     * [~~Satisfaction~~ (deprecated)](/documentation/rest-api#satisfaction-deprecated)
     * [Statistic](/documentation/rest-api#statistic)
     * [Visitor](/documentation/rest-api#visitor)
-    * [~~Call meeting~~ (deprecated)](/documentation/rest-api#call-meeting-deprecated)
+    * [Call meeting](/documentation/rest-api#call-meeting)
 * [Webhooks](/documentation/webhooks#webhooks)
   * [Overview](/documentation/webhooks#overview-webhooks)
     * [Delivery headers](/documentation/webhooks#delivery-headers)
