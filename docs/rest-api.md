@@ -841,7 +841,7 @@ See [reading section](#read) to discover some output examples.
 | website_id | List of website identifiers | List of integers |
 | created_at | Visitor creation date | Date `YYYY-MM-DD HH:MM:SS` |
 
-### ~~Call meeting~~ deprecated
+### Call meeting
 
 #### Get call meetings
 
@@ -862,8 +862,8 @@ See below to discover used fields and see [reading section](#read) to discover s
 | Field | Description | Values |
 | --- | --- | --- |
 | id | Call meeting identifier | Integer |
+| unique_id | Visitor unique identifier | String |
 | phone_number | Visitor phone number | String |
-| visitor_uid | Visitor unique identifier | String |
 | status | Call meeting status (pending, progress, done, failed, working) | String |
 | start_at | Date of call | DateTime |
 | website_id | Website identifier | Integer |
