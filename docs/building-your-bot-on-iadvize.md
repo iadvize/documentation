@@ -93,7 +93,7 @@ Add the rule, and publish your campaign.
 
 ### Create a routing group
 
-It is no longer necessary to manually create a distribution group since it is automatically created for each bot you create via the "Automation" section.
+It is no longer necessary to manually create a routing group since it is automatically created for each bot you create via the "Automation" section.
 
 ### Create a routing rule
 
