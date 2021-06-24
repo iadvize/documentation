@@ -49,18 +49,30 @@ Click on save and… congratulations! You created your bot application. Of cours
 
 ### In the admin
 #### Install the bot connector
-​​In the [admin](https://ha.iadvize.com/admin/login/), go to “Apps” and mind to select the project you want to install your connector on. In the list, find your connector, in our case the “My bot” section. Click on the card. You should land on an installation page such as:
+In the [admin](https://ha.iadvize.com/admin/login/), go to “Apps” and mind to select the project you want to install your connector on. In the list, find your connector, in our case the “My bot” section. Click on the card. You should land on an installation page such as:
 
 ![Install a bot connector](./assets/images/bots/install-bot-connector.png)
 
 You just have to click on “Install” and go through the installation process. Finalise the installation by clicking on “Install” and you are done. You just enabled some bot capabilities on the project you selected. It means that from now on, you can create an operator of type Bot 🎉. 
 
 #### Create a bot agent
-Now, create a new routing group (a group of agents). Go to “Routing” then select “Routing groups”  in the upper left corner. Click on the “➕” and create a group “All bots”,  including all the agents of type “Bot” such as:
+
+In the Automation menu, then Bots, click on "Create a bot".
+
+Select "External" then "Create a bot".
 
 ![Create a bot agent](./assets/images/bots/create-bot-agent.png)
 
-**Note:** a bot operator is associated to ONE and only ONE language. So if you want your bot to answer several languages, you have to create multiple bot operators.
+**Note:** If you do not have any bot application installed on your iAdvize project, you will not see the “External” option in this window.
+
+Fill in the different information of your bot:
+
+![Bot agent details](./assets/images/bots/bot-agent-details.png)
+
+**Note:** A bot operator is associated to ONE and only ONE language. So, if you want your bot to answer several languages, you have to create multiple bot operators.
+
+**Note2:** Make sure you enter the right language because you can't change the language of a bot.
+
 
 ## Chat with your bot
 To be able to chat on iAdvize you need to take several steps:
@@ -80,15 +92,17 @@ Now we need to define “engagement rules” i.e. how to target the visitor. Cli
 Add the rule, and publish your campaign. 
 
 ### Create a routing group
-Now, create a new routing group (a group of agents). Go to “Routing” then select “Routing groups”  in the upper left corner. Click on the “➕” and create a group “All bots”, including all the agents of type “Bot” such as:
-![Create a routing group](./assets/images/bots/create-routing-group.png)
-**Note:** if it is setup correctly, you should see “1 agent match in your segment”. If not, make sure that your bot is associated with the skill “Bot” we created during the bot creation process.
 
-### Create a distribution rule
-To finish, we need to create a targeting rule. Go to “Routing”, in the upper left select picker, select “Routing rules” and create a rule “Bot targeting”, for the “Bot” notification, that will handover the conversations to the agents of group “All bots”. Such as:
+It is no longer necessary to manually create a distribution group since it is automatically created for each bot you create via the "Automation" section.
+
+### Create a routing rule
+
+To finish, we need to create a routing rule. Go to “Routing”, in the upper left select picker, select “Routing rules” and create a rule “Bot targeting”, for the “Bot” notification, that will handover the conversations to the agents of group “[NAME OF YOUR BOT] chatbot routing group”. Such as:
+
 ![Create a bot distribution rule](./assets/images/bots/create-distribution-rule.png)
 
 ### Check that everything is correctly setup
+
 Go to “Campaigns” and click on the “edit” button. If you did everything correctly you should see that your campaign is routed this way: 
 
 ![Check targeting rule](./assets/images/bots/targeting-rule-routed.png)
