@@ -75,18 +75,22 @@ Fill in the different information of your bot:
 
 
 ## Chat with your bot
-To be able to chat on iAdvize you need to take several steps:
-* 1. Install the iAdvize tag on your website
-* 2. Create a campaign
-* 3. Create a targeting rule (when to show the chat notification to the visitor)
-* 4. Create a distribution group (to distribute conversations to your bots)
-* 5. Define a distribution rule (to route the conversations to your bots)
 
-### Set up the iAdvize tag
+To be able to chat on iAdvize you need to take several steps:
+
+* 1. [Install the iAdvize tag on your website](https://help.iadvize.com/hc/en-gb/articles/202575988)
+* 2. Create a campaign
+* 3. Create a targeting rule
+* 4. Create a routing group
+* 5. Create a routing rule
+
+### Create a campaign
+
 In the admin, go to “Engagement”. Create a new campaign such as: 
 ![Create a bot campaign](./assets/images/bots/create-bot-campaign.png)
 
 ### Create a targeting rule
+
 Now we need to define “engagement rules” i.e. how to target the visitor. Click on the “➕” and create a rule “Bot”. In our case, we will define that the button is being displayed when the current url contains the name “bot”. Which means you can add ?bot to any url and it will display the notification.
 ![Create a targeting rule](./assets/images/bots/create-targeting-rule.png)
 Add the rule, and publish your campaign. 
@@ -112,6 +116,7 @@ To sum up, you created a campaign that you associated some engagement rules (whe
 Last but not least let's trigger the chat. Go to the website you installed the iAdvize tag on. Just append `?bot` to the current url and reload the page. You should see the chat. You are ready to chat ! 🎉
  
 ## Implement a bot
+
 To have a fully functional bot, you will be required to implement two distinct sets of endpoints:
 
 * several endpoints to create and configure your bot from iAdvize UI
@@ -125,6 +130,7 @@ To have a fully functional bot, you will be required to implement two distinct s
   * `POST /conversations/conversationId/messageId`  to reply to a user
 
 ## Implement the bot creation flow
+
 A bot gets created when an admin creates a new agent of type “Bot” under the “People” section. Several information are required to be able to create a bot:
 * which scenario it can be associated to
 * what is the availability strategy associated to the bot
@@ -132,6 +138,7 @@ A bot gets created when an admin creates a new agent of type “Bot” under the
 ![Bot creation flow](./assets/images/plugins/bot-scenarios-operator-flow.jpg)
 
 ### List available scenarios
+
 First, you need to implement the `GET /external-bots` endpoint to list all the scenarios a new bot can be associated to. This route is called by iAdvize during the bot creation process and the result will appear directly in the scenario select picker.
 
 ⚠️ A scenario can only be associated to only one bot agent, which means if you have two bot operators, you need to provide at least two scenarios. ⚠️
