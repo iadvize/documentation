@@ -93,9 +93,6 @@ Go to “Campaigns” and click on the “edit” button. If you did everything 
 
 ![Check targeting rule](./assets/images/bots/targeting-rule-routed.png)
 
-Last but not least, make sure that your bot is available. Go to “People”, look for “Botty” in the list and check the status: 
-![Check bot availability](./assets/images/bots/check-bot-availability.png)
-
 To sum up, you created a campaign that you associated some engagement rules (when the visitor will see the notification) with, some targeting rules (to which agents the conversations should be handed to). 
 
 Last but not least let's trigger the chat. Go to the website you installed the iAdvize tag on. Just append `?bot` to the current url and reload the page. You should see the chat. You are ready to chat ! 🎉
