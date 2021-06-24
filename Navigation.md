@@ -112,7 +112,7 @@
     * [Set up the iAdvize tag](/documentation/building-your-bot-on-iadvize#set-up-the-iadvize-tag)
     * [Create an targeting rule](/documentation/building-your-bot-on-iadvize#create-a-targeting-rule)
     * [Create a routing group](/documentation/building-your-bot-on-iadvize#create-a-routing-group)
-    * [Create a distribution rule](/documentation/building-your-bot-on-iadvize#create-a-distribution-rule)
+    * [Create a routing rule](/documentation/building-your-bot-on-iadvize#create-a-routing-rule)
     * [Check that everything is correctly setup](/documentation/building-your-bot-on-iadvize#check-that-everything-is-correctly-setup)
   * [Implement a bot](/documentation/building-your-bot-on-iadvize#implement-a-bot)
   * [Implement the bot creation flow](/documentation/building-your-bot-on-iadvize#implement-the-bot-creation-flow)
