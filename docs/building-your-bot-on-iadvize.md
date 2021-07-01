@@ -682,7 +682,7 @@ A generic card is a payload you can use to send a more structured message. It al
 <pre class="prettyprint lang-js">
 {
   "type": "message",
-  "payload: {
+  "payload": {
     "contentType": "card/content",
     "image": {
       "url": "http://image.net/delivery.jpg",
