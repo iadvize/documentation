@@ -642,8 +642,6 @@ The `timeout` object (in the `transferOptions` key) allows you to specify the pe
 
 Several kinds of payloads can be used within your bot replies in order to enrich your responses. You will find in this section information about every type of content you can send with your iAdvize bot.
 
-**Disclaimer:** The following features [Carousel](#card-bundle-payload), [Product offer](#product-offer-payload) and [Action](#actions) are only working with our **new chatbox**. Get in touch with us if you need such objects in your conversation flow.
-
 | Field        | Description                              | Type                                      | Required | Example                    |
 | ------------ | ---------------------------------------- | ----------------------------------------- | -------- | -------------------------- |
 | type         | Type of the conversation object          | String                                    | ✓        | `message`                  |
