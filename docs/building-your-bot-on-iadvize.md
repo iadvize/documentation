@@ -628,8 +628,7 @@ The `timeout` object (in the `transferOptions` key) allows you to specify the pe
   payload: {
     contentType: "text",
     value: "Transfer failed, please try again later"
-  },
-  quickReplies: []
+  }
 },
 {
   type: "close"
@@ -642,25 +641,25 @@ The `timeout` object (in the `transferOptions` key) allows you to specify the pe
 
 Several kinds of payloads can be used within your bot replies in order to enrich your responses. You will find in this section information about every type of content you can send with your iAdvize bot.
 
-| Field        | Description                              | Type                                      | Required | Example                    |
-| ------------ | ---------------------------------------- | ----------------------------------------- | -------- | -------------------------- |
-| type         | Type of the conversation object          | String                                    | ✓        | `message`                  |
-| payload      | One of payload describes below           | JSON Object                               | ✓        | see below                  |
-| quickReplies | Quick replies to allow visitor to answer | [Quick reply object](#quick-reply-object) |          | see [Quick reply object](#quick-reply-object)                  |
-
 #### Text payload
 
 Sending a simple message
 
 | Field       | Description                    | Type          | Required | Example                    |
 | ----------- | ------------------------------ | ------------- | -------- | -------------------------- |
-| contentType | Type of the message’s content  | String        | ✓        | `text`                     |
-| value       | Textual content of the message | String        | ✓        | Hi, i am a simple message. |
+| type         | Type of the conversation object          | String                                    | ✓        | `message`                  |
+| payload      | Payload described below           | JSON Object                               | ✓        | see below                  |
+| payload.contentType | Type of the message’s content  | String        | ✓        | `text`                     |
+| payload.value       | Textual content of the message | String        | ✓        | Hi, i am a simple message. |
+| quickReplies | Quick replies to allow visitor to answer | [Quick reply object](#quick-reply-object) |          | see [Quick reply object](#quick-reply-object)                  |
 
 <pre class="prettyprint lang-js">
 {
+  "type": "message",
+  "payload": {
     "contentType": "text",
     "value": "Hi, i am a simple message."
+  }
 }
 </pre>
 
@@ -670,30 +669,35 @@ A generic card is a payload you can use to send a more structured message. It al
 
 | Field       | Description                              | Type                                                                           | Required                              | Example                                                          |
 | ----------- | ---------------------------------------- | ------------------------------------------------------------------------------ | ------------------------------------- | ---------------------------------------------------------------- |
-| contentType | Type of the message’s content            | String                                                                         | ✓                                     | `card/content`                                                   |
-| image       | Json describing attached picture         | Image object<br><br>see [Generic JSON object](#generic-json-object) section for more details           |                                       |                                                                  |
-| title       | Title of the card                        | String                                                                         |                                       | Delivery & Pickup                                                |
-| text        | Textual content of the message           | String                                                                         |                                       | Learn more about dispatch and delivery times, methods and costs. |
-| actions     | List of actions to be sent with the card | Array of Action object<br><br>see [Generic JSON object](#generic-json-object) section for more details | Action must contains at least on link |                                                                  |
+| type         | Type of the conversation object          | String                                    | ✓        | `message`                  |
+| payload      | Payload described below           | JSON Object                               | ✓        | see below                  |
+| payload.contentType | Type of the message’s content            | String                                                                         | ✓                                     | `card/content`                                                   |
+| payload.image       | Json describing attached picture         | Image object<br><br>see [Generic JSON object](#generic-json-object) section for more details           |                                       |                                                                  |
+| payload.title       | Title of the card                        | String                                                                         |                                       | Delivery & Pickup                                                |
+| payload.text        | Textual content of the message           | String                                                                         |                                       | Learn more about dispatch and delivery times, methods and costs. |
+| payload.actions     | List of actions to be sent with the card | Array of Action object<br><br>see [Generic JSON object](#generic-json-object) section for more details | Action must contains at least on link |                                                                  |
 
 ![Example of a generic card with title, text and picture set](./assets/images/bots/example-generic-card-with-title-text-and-picture.png)
 
 <pre class="prettyprint lang-js">
 {
-  "contentType": "card/content",
-  "image": {
-    "url": "http://image.net/delivery.jpg",
-    "description": "delivery picture"
-  },
-  "title": "Delivery & Pickup",
-  "text": "Learn more about dispatch and delivery times, methods and costs.",
-  "actions": [
-    {
-      "type": "LINK",
-      "name": "See more",
-      "url": "http://mylink.com/delivery"
-    }
-  ]
+  "type": "message",
+  "payload": {
+    "contentType": "card/content",
+    "image": {
+      "url": "http://image.net/delivery.jpg",
+      "description": "delivery picture"
+    },
+    "title": "Delivery & Pickup",
+    "text": "Learn more about dispatch and delivery times, methods and costs.",
+    "actions": [
+      {
+        "type": "LINK",
+        "name": "See more",
+        "url": "http://mylink.com/delivery"
+      }
+    ]
+  }
 }
 </pre>
 
@@ -701,24 +705,27 @@ A generic card is a payload you can use to send a more structured message. It al
 
 <pre class="prettyprint lang-js">
 {
-  "contentType": "card/content",
-  "actions": [
-    {
-      "type": "LINK",
-      "name": "How to print on an A4 page",
-      "url": "http://mylink/a4page"
-    },
-    {
-      "type": "LINK",
-      "name": "I could not print my stamps",
-      "url": "http://mylink/stamps"
-    },
-    {
-      "type": "LINK",
-      "name": "What are the different support and formats for etiquette?",
-      "url": "http://mylink.com/etiquette"
-    }
-  ]
+  "type": "message",
+  "payload": {
+    "contentType": "card/content",
+    "actions": [
+      {
+        "type": "LINK",
+        "name": "How to print on an A4 page",
+        "url": "http://mylink/a4page"
+      },
+      {
+        "type": "LINK",
+        "name": "I could not print my stamps",
+        "url": "http://mylink/stamps"
+      },
+      {
+        "type": "LINK",
+        "name": "What are the different support and formats for etiquette?",
+        "url": "http://mylink.com/etiquette"
+      }
+    ]
+  }
 }
 </pre>
 
@@ -728,35 +735,40 @@ A product offer payload lets you send a product offer to your visitor. Using the
 
 | Field               | Description                              | Type                                                                           | Required | Example                 |
 | ------------------- | ---------------------------------------- | ------------------------------------------------------------------------------ | -------- | ----------------------- |
-| contentType         | Type of the message’s content            | String: `product-offer`                                                        | ✓        | `product-offer`         |
-| image               | Json describing attached picture         | Image object<br><br>see [Generic JSON object](#generic-json-object) section for more details           |          |                         |
-| name                | Name of the product                      | String                                                                         | ✓        | Samsung Frame 4K UHD TV |
-| price               | Price of the product without offer       | String                                                                         | ✓        | 1,499,99 €              |
-| offerPrice          | Price of the product with offer          | String                                                                         |          | 1,299,99 €              |
-| description         | Description of the product               | String                                                                         |          |                         |
-| availability.status | Status of availability                   | One of: `AVAILABLE` or `UNAVAILABLE`                                           |          | `AVAILABLE`             |
-| action              | List of actions to be sent with the card | Array of Action object<br><br>see [Generic JSON object](#generic-json-object) section for more details | ✓        |                         |
+| type         | Type of the conversation object          | String                                    | ✓        | `message`                  |
+| payload      | Payload described below           | JSON Object                               | ✓        | see below                  |
+| payload.contentType         | Type of the message’s content            | String: `product-offer`                                                        | ✓        | `product-offer`         |
+| payload.image               | Json describing attached picture         | Image object<br><br>see [Generic JSON object](#generic-json-object) section for more details           |          |                         |
+| payload.name                | Name of the product                      | String                                                                         | ✓        | Samsung Frame 4K UHD TV |
+| payload.price               | Price of the product without offer       | String                                                                         | ✓        | 1,499,99 €              |
+| payload.offerPrice          | Price of the product with offer          | String                                                                         |          | 1,299,99 €              |
+| payload.description         | Description of the product               | String                                                                         |          |                         |
+| payload.availability.status | Status of availability                   | One of: `AVAILABLE` or `UNAVAILABLE`                                           |          | `AVAILABLE`             |
+| payload.actions              | List of actions to be sent with the card | Array of Action object<br><br>see [Generic JSON object](#generic-json-object) section for more details | ✓        |                         |
 
 <pre class="prettyprint lang-js">
 {
-  "contentType": "product-offer",
-  "image": {
-    "url": "http://image.net/tvsamsumg.jpg",
-    "description": "picture of a TV"
-  },
-  "name": "Samsung Frame 4K UHD TV",
-  "price": "€1,499.99",
-  "offerPrice": "€1,299.99",
-  "availability": {
-    "status": "AVAILABLE"
-  },
-  "actions": [
-    {
-      "type": "LINK",
-      "name": "See more",
-      "url": "http://mylink/TvSamsung"
-    }
-  ]
+  "type": "message",
+  "payload": {
+    "contentType": "product-offer",
+    "image": {
+      "url": "http://image.net/tvsamsumg.jpg",
+      "description": "picture of a TV"
+    },
+    "name": "Samsung Frame 4K UHD TV",
+    "price": "€1,499.99",
+    "offerPrice": "€1,299.99",
+    "availability": {
+      "status": "AVAILABLE"
+    },
+    "actions": [
+      {
+        "type": "LINK",
+        "name": "See more",
+        "url": "http://mylink/TvSamsung"
+      }
+    ]
+  }
 }
 </pre>
 
@@ -768,19 +780,24 @@ An attachment lets you send files directly in the chatbox. If you send an image 
 
 | Field       | Description                      | Type                                                                | Required | Example                                    |
 | ----------- | -------------------------------- | ------------------------------------------------------------------- | -------- | ------------------------------------------ |
-| contentType | Type of the message’s content    | String `file`                                                       | ✓        | `file`                                     |
-| fileName    | Name of the file to be displayed | String                                                              | ✓        | Can I add more information about my order? |
-| mimeType    | Mime type of the file            | One of: `image/gif`, `application/pdf`, `image/png` or `image/jpeg` | ✓        | `image/gif`                                |
-| url         | Textual content of the message   | String                                                              | ✓        | http://my-website/order.pdf                |
+| type         | Type of the conversation object          | String                                    | ✓        | `message`                  |
+| payload      | Payload described below           | JSON Object                               | ✓        | see below                  |
+| payload.contentType | Type of the message’s content    | String `file`                                                       | ✓        | `file`                                     |
+| payload.fileName    | Name of the file to be displayed | String                                                              | ✓        | Can I add more information about my order? |
+| payload.mimeType    | Mime type of the file            | One of: `image/gif`, `application/pdf`, `image/png` or `image/jpeg` | ✓        | `image/gif`                                |
+| payload.url         | Textual content of the message   | String                                                              | ✓        | http://my-website/order.pdf                |
 
 ![Example of a document payload](./assets/images/bots/example-attachment-payload.png)
 
 <pre class="prettyprint lang-js">
 {
-    "contentType": "file",
-    "fileName": "Can I add more information about my order?",
-    "mimeType": "application/pdf",
-    "url": "http://my-website.com/order.pdf"
+  "type": "message",
+  "payload": {
+      "contentType": "file",
+      "fileName": "Can I add more information about my order?",
+      "mimeType": "application/pdf",
+      "url": "http://my-website.com/order.pdf"
+  }
 }
 </pre>
 
@@ -788,10 +805,13 @@ An attachment lets you send files directly in the chatbox. If you send an image 
 
 <pre class="prettyprint lang-js">
 {
+  "type": "message",
+  "payload": {
     "contentType": "file",
     "fileName": "My picture name",
     "mimeType": "image/png",
     "url": "http://my-website.com/image.png"
+  }
 }
 </pre>
 
@@ -801,32 +821,37 @@ With the generic card bundle you can create a carousel for the visitor. Sliders 
 
 | Field       | Description                   | Types                                                                  | Required | Example       |
 | ----------- | ----------------------------- | ---------------------------------------------------------------------- | -------- | ------------- |
-| contentType | Type of the message’s content | String `bundle/card`                                                   | ✓        | `bundle/card` |
-| cards       | List of cards to send         | Array of Generic Card<br><br>See [Generic Card payload](#generic-card-payload) for more details | ✓        |               |
+| type         | Type of the conversation object          | String                                    | ✓        | `message`                  |
+| payload      | Payload described below           | JSON Object                               | ✓        | see below                  |
+| payload.contentType | Type of the message’s content | String `bundle/card`                                                   | ✓        | `bundle/card` |
+| payload.cards       | List of cards to send         | Array of Generic Card<br><br>See [Generic Card payload](#generic-card-payload) for more details | ✓        |               |
 
 ![Example of a generic card with title, text and picture set](./assets/images/bots/example-generic-card-bundle.png)
 
 <pre class="prettyprint lang-js">
 {
+  "type": "message",
+  "payload": {
     "contentType": "bundle/card",
     "cards": [
-        { ... },
-        {
-            "contentType": "card/content",
-            "image": {
-                "url": "http://image.net/delivery.jpg",
-                "description": "delivery picture"
-            },
-            "title": "Delivery & Pickup",
-            "text": "Learn more about our policies",
-            "actions": [{
-                "type": "LINK",
-                "name": "See more",
-                "url": "http://mylink/delivery"
-            }]
-        },
-        { ... }
+      { ... },
+      {
+          "contentType": "card/content",
+          "image": {
+            "url": "http://image.net/delivery.jpg",
+            "description": "delivery picture"
+          },
+          "title": "Delivery & Pickup",
+          "text": "Learn more about our policies",
+          "actions": [{
+            "type": "LINK",
+            "name": "See more",
+            "url": "http://mylink/delivery"
+          }]
+      },
+      { ... }
     ]
+  }
 }
 </pre>
 
@@ -836,37 +861,42 @@ A product offer bundle is an efficient tool to showcase multiple products at one
 
 | Field       | Description                       | Type                                                                             | Required | Example                 |
 | ----------- | --------------------------------- | -------------------------------------------------------------------------------- | -------- | ----------------------- |
-| contentType | Type of the message’s content     | String `bundle/product-offer`                                                   | ✓        | `bundle/product-offer` |
-| offers      | List of product offers to display | Array of Product Offer payload<br><br>See [Product offer payload](#product-offer-payload) for more details | ✓        |                         |
+| type         | Type of the conversation object          | String                                    | ✓        | `message`                  |
+| payload      | Payload described below           | JSON Object                               | ✓        | see below                  |
+| payload.contentType | Type of the message’s content     | String `bundle/product-offer`                                                   | ✓        | `bundle/product-offer` |
+| payload.offers      | List of product offers to display | Array of Product Offer payload<br><br>See [Product offer payload](#product-offer-payload) for more details | ✓        |                         |
 
 ![Example of a generic card with title, text and picture set](./assets/images/bots/example-product-offer-bundle.png)
 
 <pre class="prettyprint lang-js">
 {
+  "type": "message",
+  "payload": {
     "contentType": "bundle/product-offer",
     "offers": [
-        { ... },
-        {
-            "contentType": "product-offer",
-            "image": {
-                "url": "http://image.net/tvpanasonic.jpg",
-                "description": "picture of a TV"
-            },
-            "name": "Panasonic Smart TV 4K",
-            "price": "€1,499.99",
-            "offerPrice": "€1,299.99",
-            "description": "Enhance your everyday space with The Frame TV that reflects your style and fits your space",
-            "availability": {
-                "status": "AVAILABLE"
-            },
-            "actions": [{
-                "type": "LINK",
-                "name": "See more",
-                "url": "http://mylink/TvPanasonic"
-            }]
+      { ... },
+      {
+        "contentType": "product-offer",
+        "image": {
+          "url": "http://image.net/tvpanasonic.jpg",
+          "description": "picture of a TV"
         },
-        { ... }
+        "name": "Panasonic Smart TV 4K",
+        "price": "€1,499.99",
+        "offerPrice": "€1,299.99",
+        "description": "Enhance your everyday space with The Frame TV that reflects your style and fits your space",
+        "availability": {
+          "status": "AVAILABLE"
+        },
+        "actions": [{
+          "type": "LINK",
+          "name": "See more",
+          "url": "http://mylink/TvPanasonic"
+        }]
+      },
+      { ... }
     ]
+  }
 }
 </pre>
 
@@ -883,8 +913,8 @@ An Image object can be used to display one image. The picture linked need to be 
 
 <pre class="prettyprint lang-js">
 {
-    "url": "http://image.net/image.jpg",
-    "description": "picture of an image"
+  "url": "http://image.net/image.jpg",
+  "description": "picture of an image"
 }
 </pre>
 
@@ -901,9 +931,9 @@ Actions can be used to offers options to one visitor. Today, only link actions c
 
 <pre class="prettyprint lang-js">
 {
-    "type": "LINK",
-    "name": "My link",
-    "url": "http://mylink"
+  "type": "LINK",
+  "name": "My link",
+  "url": "http://mylink"
 }
 </pre>
 
@@ -922,9 +952,9 @@ A quick reply is used for offering several choices to a visitor. Each choice nee
 
 <pre class="prettyprint lang-js">
 {
-    "contentType": "text/quick-reply",
-    "value": "Yes",
-    "idQuickReply": "1ef5145b-a9b6-4e86-8743-b6e3b4026b2c"
+  "contentType": "text/quick-reply",
+  "value": "Yes",
+  "idQuickReply": "1ef5145b-a9b6-4e86-8743-b6e3b4026b2c"
 }
 </pre>
 
