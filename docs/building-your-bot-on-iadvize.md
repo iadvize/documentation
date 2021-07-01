@@ -941,7 +941,7 @@ Actions can be used to offers options to one visitor. Today, only link actions c
 
 A quick reply is used for offering several choices to a visitor. Each choice needs to be specified in the "quickReplies" field of a reply. The answer sent by the visitor to the multiple choice question can only contain text. There is no maximum number of quick replies you can display. However we recommend not to use more than 3 quick replies for a single question.
 
-⚠️ Even if you have to fill in a QuickReply id for each of your choices, *currently only the value is sent to your bot*.
+⚠️ Even if you have to fill in a QuickReply id for each of your choices, **currently only the value is sent to your bot**.
 
 | Field        | Description                        | Type               | Required | Example                              |
 | ------------ | ---------------------------------- | ------------------ | -------- | ------------------------------------ |
