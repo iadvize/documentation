@@ -1122,7 +1122,18 @@ And its result:
 
 **Q:** My bot is stuck in an infinite loop, it keeps replying to itself.
 
-**A:** Mind that all the messages sent in the conversation (whether your bot is the author or not) trigger a call to the `POST /conversations/conversationId/messages`. To avoid to reply to yourself, you have to filter on the author. If the author equals `visitor` then you can reply otherwise, just ignore the message.
+**A:** Mind that all the messages sent in the conversation (whether your bot is the author or not) trigger a call to the `POST /conversations/conversationId/messages`. To avoid to reply to yourself, you have to filter on the author. If the author equals `visitor` then you can reply otherwise, just return an empty "replies" array:
+
+<pre class="prettyprint lang-js">
+{
+  idConversation: ...,
+  idOperator: ...,
+  replies: [], // Empty replies
+  variables: [],
+  createdAt: ...,
+  updatedAt: ...
+}
+</pre>
 
 ---
 
