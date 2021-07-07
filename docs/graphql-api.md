@@ -170,15 +170,23 @@ While with REST we use HTTP verbs to define the operations to perform, in GraphQ
 <pre class="prettyprint lang-sh">
 curl  --request POST \
       --url https://api.iadvize.com/graphql \
-      --header "Content-Type: application/json" \
       --header "Authorization: Bearer {YOUR_ACCESS_TOKEN}" \
+      --header "Content-Type: application/json" \
       --data "\
       { \
-        \"query\": \"{projects { edges { node { id name}}}}\" \
+        \"query\":\"{ \
+          routingRule(id: \\\"e69d1ca8-cd3e-4f61-9fe6-95e94f8dbe25\\\") { \
+            availability { \
+              chat { \
+                isAvailable \
+              } \
+            } \
+          } \
+        }\" \
       }"
 </pre>
 
-⚠️ **Note**: The string value of `"query"` must escape newline characters or the schema will not parse it correctly. For the `POST` body, use outer double quotes and escaped inner double quotes.
+⚠️ **Note**: The string value of `"query"` must escape quotes and backslashes characters or the schema will not parse it correctly.
 
 ### Using GraphiQL
 
