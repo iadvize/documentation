@@ -175,7 +175,7 @@ curl  --request POST \
       --data "\
       { \
         \"query\":\"{ \
-          routingRule(id: \\\"e69d1ca8-cd3e-4f61-9fe6-95e94f8dbe25\\\") { \
+          routingRule(id: \\\"10ba02f1-ec5c-4687-a10a-e7871ee72903\\\") { \
             availability { \
               chat { \
                 isAvailable \
