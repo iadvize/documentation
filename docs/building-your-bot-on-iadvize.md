@@ -446,9 +446,6 @@ Everytime a conversation starts, this endpoint is called. It allows iAdvize to n
 | idConversation  | Body | Conversation unique identifier                                         | UUID              | ✓        | ce41ba2c-c25a-4351-b946-09527d8b940b |
 | idOperator      | Body | iAdvize bot operator identifier that we associate to your bot scenario | String            | ✓        | ha-456678                            |
 | replies         | Body | Array of replies                                                       | Array of Reply   | ✓        | []                                   |
-| variables       | Body | Collected variables                                                    | Array             |          |                                      |
-| variables.key   | Body | Key of the variable collected                                          | String            |          | visitor_state_of_mind                |
-| variables.value | Body | Value of the variable collected                                        | String            |          | Ok                                   |
 | createdAt       | Body | Creation date of the conversation                                      | String - ISO 8601 | ✓        |                                      |
 | updatedAt       | Body | Date of the last message received                                      | String - ISO 8601 | ✓        |                                      |
 
@@ -459,7 +456,6 @@ Everytime a conversation starts, this endpoint is called. It allows iAdvize to n
     "idConversation": "ce41ba2c-c25a-4351-b946-09527d8b940b",
     "idOperator": "ha-456678",
     "replies": [],
-    "variables": [],
     "createdAt": "2017-11-22T12:04:00Z",
     "updatedAt": "2017-11-22T12:23:00Z"
 }
@@ -505,9 +501,6 @@ This endpoint is called when a new message is received in the conversation, whet
 | reply.transferOptions.timeout       | Body | Configure how long must we wait until transfer cancel                  | Object                                                                                | Required                                                        |                                      |
 | reply.transferOptions.timeout.value | Body | Transfer timeout value (**must** be between 5 and 60 seconds)                                                 | Long                                                                                  | Required                                                        |                                      |
 | reply.transferOptions.timeout.unit  | Body | Transfer timeout unit                                                  | One of: `millis` or `seconds` or `minutes`                                              | Required                                                        |                                      |
-| variables                           | Body | Collected variables                                                    | Array                                                                                 |                                                                 |                                      |
-| variables.key                       | Body | Key of the variable collected                                          | String                                                                                |                                                                 | visitor_state_of_mind                |
-| variables.value                     | Body | Value of the variable collected                                        | String                                                                                |                                                                 | Ok                                   |
 | createdAt                           | Body | Creation date of the conversation                                      | String - ISO 8601                                                                     | ✓                                                               |                                      |
 | updateAt                            | Body | Date of the last message received                                      | String - ISO 8601                                                                     | ✓                                                               |                                      |
 
@@ -544,12 +537,6 @@ This endpoint is called when a new message is received in the conversation, whet
         },
         {
             "type": "close"
-        }
-    ],
-    "variables": [
-        {
-            "key": "visitor_state_of_mind",
-            "value": "Ok"
         }
     ],
     "createdAt": "2017-11-22T12:04:00Z",
@@ -1069,7 +1056,6 @@ You can schedule a message to be sent after a while such as:
             "quickReplies": []
         }
     ],
-    "variables": [],
     "createdAt": "2017-11-22T12:04:00Z",
     "updatedAt": "2017-11-22T12:23:00Z"
 }
@@ -1129,7 +1115,6 @@ And its result:
   idConversation: ...,
   idOperator: ...,
   replies: [], // Empty replies
-  variables: [],
   createdAt: ...,
   updatedAt: ...
 }
