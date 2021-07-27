@@ -506,24 +506,28 @@ This is done by configuring the `X-FRAME-OPTIONS` header.
 The app can communicate with the desk by using a library provided by iAdvize.
 
 To use the library an app must include a javascript bundle in the html with the following code.
-```html
-<script src="https://static.iadvize.com/conversation-panel-app-lib/1.2.0/idzcpa.umd.production.min.js"></script>
-```
+
+<pre class="prettyprint lang-html">
+&lt;script src="https://static.iadvize.com/conversation-panel-app-lib/1.2.0/idzcpa.umd.production.min.js"&gt;&lt;/script&gt;
+</pre>
 
 Then in the javascript code of the app the library can be used as follows.
-```js
+
+<pre class="prettyprint lang-js">
 window.idzCpa.init().then(client => {
-  client.insertTextInComposeBox('Hello world!');
+    client.insertTextInComposeBox('Hello world!');
 });
-```
+</pre>
 
 The client is obtained via the `idzCpa.init` function that returns a Promise.
 In the `then` statement of the promise the `client` can then be used to invoke functions to interact with the desk.
 
 At present the library only allows to send some text to the compose zone with the following function.
-```ts
+
+<pre class="prettyprint lang-js">
 function insertTextInComposeBox(value: string) {}
-```
+</pre>
+
 Please note that one iframe is created per conversation in order to keep a context for an app for each conversation.
 It is recommended to keep the app very lightweight and avoid heavy processing or streaming updates.
 
@@ -531,15 +535,15 @@ The library also prive a standalone stylesheet with CSS variables built to fit i
 
 An app can include it either in its HTML: 
 
-```html
-<link rel="stylesheet" src="https://static.iadvize.com/conversation-panel-app-lib/1.2.0/idzcpa.base.css">
-```
+<pre class="prettyprint lang-html">
+&lt;link rel="stylesheet" src="https://static.iadvize.com/conversation-panel-app-lib/1.2.0/idzcpa.base.css"&gt;
+</pre>
 
 Or as a top-level import inside a preprocessed-stylesheet: 
 
-```scss
+<pre class="prettyprint lang-css">
 @import 'https://static.iadvize.com/conversation-panel-app-lib/1.2.0/idzcpa.base.css';
-```
+</pre>
 
 #### Configuration
 Under the Plugins section create a Conversation Panel App and then edit the following fields:
@@ -549,17 +553,14 @@ This is the name that will show in the toolbar button that starts your app.
 The name must be provided as a json object that contains a `default` name and then names for each language the app needs
 to support.
 
-For instance
-```json
-{"default": "Orders", "EN": "Orders", "FR":  "Commandes"}
-```
+For instance `{"default": "Orders", "EN": "Orders", "FR":  "Commandes"}`.
 #### Icon name
 The icon name refers to a set of predefined icons provided by iAdvize that will appear in the button that starts the app.
 
 A live preview of each icon can be found [here](https://front.storybook.iadvize.net/icons/master/iframe.html?id=special-icons-for-conversation-panel-apps--page&viewMode=story)
 
 Here is the list of available options by domain - the name must be entered in upper case.
-```
+<pre class="prettyprint lang-js">
 Coupon
 COUPON, DOLLAR, PERCENTAGE, TICKETS
 
@@ -619,7 +620,8 @@ HOTELS, HOTELOFFER, SERVICES
 
 Generic/Random
 NOTEBOOK, DIAMOND, BOUSSOLE, SHIRT, GEAR, FRAME45, TARGETING
-```
+</pre>
+
 ![Conversation panel app icons](./assets/images/conversation-panel-app.png)
 
 #### iFrame URL
