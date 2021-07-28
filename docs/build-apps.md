@@ -495,6 +495,9 @@ You can validate your response data format with the associated [json schema](/js
 ### Conversation panel app
 Conversation panel apps extends the capabilities of the Desk by allowing our clients to embed their own apps in a dedicated panel.
 
+#### General guidelines
+A complete breakdown of our guidelines for Conversation Panel Apps can be found in [our knowledge base](https://help.iadvize.com/hc/en-gb/articles/4404351307026-Conversation-Panel-Apps-Guidelines).
+
 #### App development
 The apps that can be embedded in the Desk are web apps coded in any web compliant technology - static web page,
 dynamic web pages such as php or jsp generated, single page applications written in Angular or React, etc...
@@ -544,6 +547,8 @@ Or as a top-level import inside a preprocessed-stylesheet:
 <pre class="prettyprint lang-css">
 @import 'https://static.iadvize.com/conversation-panel-app-lib/1.2.0/idzcpa.base.css';
 </pre>
+
+A complete description of the provided variables can be found in [our knowledge base](https://help.iadvize.com/hc/en-gb/articles/4404351307026-Conversation-Panel-Apps-Guidelines#5-how-to-easily-style-your-conversation-panel-app-for-a-consistent-user-interface-integration-in-the-desk).
 
 #### Configuration
 Under the Plugins section create a Conversation Panel App and then edit the following fields:

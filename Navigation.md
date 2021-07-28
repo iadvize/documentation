@@ -93,6 +93,7 @@
     * [Product list](/documentation/build-apps#product-list)
     * [Customer information](/documentation/build-apps#customer-information)
     * [Conversation closing form](/documentation/build-apps#conversation-closing-form)
+    * [Conversation Panel App](/documentation/build-apps#conversation-panel-app)
     * [External bot](/documentation/build-apps#external-bots)
   * [Add webhooks](/documentation/build-apps#add-webhooks)
   * [Submit your apps](/documentation/build-apps#submit-your-apps)
