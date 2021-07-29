@@ -492,6 +492,149 @@ You can validate your response data format with the associated [json schema](/js
 
 ⚠️ iAdvize can save up to 1024 characters in each field
 
+### Conversation panel app
+Conversation panel apps extends the capabilities of the Desk by allowing our clients to embed their own apps in a dedicated panel.
+
+#### General guidelines
+A complete breakdown of our guidelines for Conversation Panel Apps can be found in [our knowledge base](https://help.iadvize.com/hc/en-gb/articles/4404351307026-Conversation-Panel-Apps-Guidelines).
+
+#### App development
+The apps that can be embedded in the Desk are web apps coded in any web compliant technology - static web page,
+dynamic web pages such as php or jsp generated, single page applications written in Angular or React, etc...
+
+These apps will be embedded in an `iframe` element in the Desk, and the web server serving these apps must allow them to run 
+in an iframe on the iAdvize domains: https://www.iadvize.com or https://ha.iadvize.com.
+This is done by configuring the `X-FRAME-OPTIONS` header.
+
+The app can communicate with the desk by using a library provided by iAdvize.
+
+To use the library an app must include a javascript bundle in the html with the following code.
+
+<pre class="prettyprint lang-html">
+&lt;script src="https://static.iadvize.com/conversation-panel-app-lib/1.2.0/idzcpa.umd.production.min.js"&gt;&lt;/script&gt;
+</pre>
+
+Then in the javascript code of the app the library can be used as follows.
+
+<pre class="prettyprint lang-js">
+window.idzCpa.init().then(client => {
+    client.insertTextInComposeBox('Hello world!');
+});
+</pre>
+
+The client is obtained via the `idzCpa.init` function that returns a Promise.
+In the `then` statement of the promise the `client` can then be used to invoke functions to interact with the desk.
+
+At present the library only allows to send some text to the compose zone with the following function.
+
+<pre class="prettyprint lang-js">
+function insertTextInComposeBox(value: string) {}
+</pre>
+
+Please note that one iframe is created per conversation in order to keep a context for an app for each conversation.
+It is recommended to keep the app very lightweight and avoid heavy processing or streaming updates.
+
+The library also prive a standalone stylesheet with CSS variables built to fit iAdvize's design guidelines.
+
+An app can include it either in its HTML: 
+
+<pre class="prettyprint lang-html">
+&lt;link rel="stylesheet" src="https://static.iadvize.com/conversation-panel-app-lib/1.2.0/idzcpa.base.css"&gt;
+</pre>
+
+Or as a top-level import inside a preprocessed-stylesheet: 
+
+<pre class="prettyprint lang-css">
+@import 'https://static.iadvize.com/conversation-panel-app-lib/1.2.0/idzcpa.base.css';
+</pre>
+
+A complete description of the provided variables can be found in [our knowledge base](https://help.iadvize.com/hc/en-gb/articles/4404351307026-Conversation-Panel-Apps-Guidelines#5-how-to-easily-style-your-conversation-panel-app-for-a-consistent-user-interface-integration-in-the-desk).
+
+#### Configuration
+Under the Plugins section create a Conversation Panel App and then edit the following fields:
+
+#### App name
+This is the name that will show in the toolbar button that starts your app.
+The name must be provided as a json object that contains a `default` name and then names for each language the app needs
+to support.
+
+For instance `{"default": "Orders", "EN": "Orders", "FR":  "Commandes"}`.
+#### Icon name
+The icon name refers to a set of predefined icons provided by iAdvize that will appear in the button that starts the app.
+
+A live preview of each icon can be found [here](https://front.storybook.iadvize.net/icons/master/iframe.html?id=special-icons-for-conversation-panel-apps--page&viewMode=story)
+
+Here is the list of available options by domain - the name must be entered in upper case.
+<pre class="prettyprint lang-js">
+Coupon
+COUPON, DOLLAR, PERCENTAGE, TICKETS
+
+Qualify lead
+STAMP
+ 
+Segmentation
+TARGET, CARD
+
+Delivery
+DELIVERY, PACKAGE
+
+Orders
+ORDER, BOXES
+
+Stock
+STOCK, WAREHOUSE
+
+Knowledge base
+RECOMMENDATION, FILES, FOLDERS, SEARCH
+
+User account
+PROFILE, TARGETING, PROFILECARDS
+
+Invoicing
+INVOICING
+
+Payment
+PAYMENT
+
+Shopping cart
+SHOPPINGCART, SEARCHSHOPPINGCART
+
+Product availability
+BAGQUESTION, BAGSEARCH, PACKAGESEARCH
+
+Stores
+STORE
+
+Location
+LOCATION, POSITION, LOCATIONPIN
+
+Assistance
+TOOLS, TOOLING, HELP
+
+Note
+NOTE
+
+Booking
+BOOKING
+
+Tags
+TAG
+
+Hotels & Services
+HOTELS, HOTELOFFER, SERVICES
+
+Generic/Random
+NOTEBOOK, DIAMOND, BOUSSOLE, SHIRT, GEAR, FRAME45, TARGETING
+</pre>
+
+![Conversation panel app icons](./assets/images/conversation-panel-app.png)
+
+#### iFrame URL
+This field provides the URL that the Desk will use to start your app. It must be a public URL that can be targeted by
+the browser that runs the desk and available via https.
+
+For instance: `https://mycompany.com/ordersapp`
+
 ## External bots
 Bots are an important part of iAdvize integration ecosystem. That's why they have their [own dedicated documentation](/documentation/building-your-bot-on-iadvize#building-your-bot-on-iadvize).
 
