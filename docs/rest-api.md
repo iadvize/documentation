@@ -605,6 +605,8 @@ See below to discover used fields and see [reading section](#read) to discover s
 | from | Date from | `YYYY-MM-DD` or `YYYY-MM-DD HH:MM:SS` | `?filters[from]=YYYY-MM-DD HH:MM:SS` |
 | to | Date to | `YYYY-MM-DD` or `YYYY-MM-DD HH:MM:SS` | `?filters[to]=YYYY-MM-DD HH:MM:SS` |
 
+ℹ️ The maximum duration allowed between `from` and `to` is 1 month.
+
 #### Get a transaction details
 
 `GET /transaction/123`
