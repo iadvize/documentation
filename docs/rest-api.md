@@ -219,8 +219,8 @@ See [reading section](#read) to discover some output examples.
 | Field | Description | Values |
 | --- | --- | --- |
 | type | Pickup type | `ANSWER_FROM_PHONE` or `ANSWER_FROM_DESK` *(default)* |
-| ask_phone_number_at_every_connection | Allows you to define whether iAdvize proposes to the operator to change his phone number each time he connects to the desk | Boolean |
-| phone_number | Phone number used to receive calls *(optionnal)* | String *(optional)* |
+| ask_phone_number_at_every_connection | Allows you to define whether iAdvize proposes to the operator to change his phone number each time he connects to the desk | Boolean *(default: `false`)* |
+| phone_number | Phone number used to receive calls | String *(optional)* |
 
 #### Create an operator
 
