@@ -212,15 +212,15 @@ See [reading section](#read) to discover some output examples.
 | website_list | Website list identifiers | List of integer |
 | skill_list | Skill list identifiers | List of integer |
 | sso_key | [SSO token](/documentation/single-sign-on#single-sign-on) | String |
-| call_config | Configuration of the call pickup mode (optional) | Object |
+| **call_config** | Configuration of the call pickup mode (optional) | `Object` |
 
-**call_config fields**
+**call_config**
 
 | Field | Description | Values |
 | --- | --- | --- |
 | type | Pickup type | `ANSWER_FROM_PHONE` or `ANSWER_FROM_DESK` *(default)* |
-| ask_phone_number_at_every_connection | Allows you to define whether iAdvize proposes to the operator to change his phone number each time he connects to the desk. *(Default value is `false`)* | Boolean |
-| phone_number | Phone number used to receive calls *(optionnal)* | String |
+| ask_phone_number_at_every_connection | Allows you to define whether iAdvize proposes to the operator to change his phone number each time he connects to the desk | Boolean |
+| phone_number | Phone number used to receive calls *(optionnal)* | String *(optional)* |
 
 #### Create an operator
 
