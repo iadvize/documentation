@@ -218,10 +218,9 @@ See [reading section](#read) to discover some output examples.
 
 | Field | Description | Values |
 | --- | --- | --- |
-| type | Pickup type | `ANSWER_FROM_PHONE` or `ANSWER_FROM_DESK` *(default)* |
+| type | Pickup type. ⚠️ Please note that if the type is `ANSWER_FROM_PHONE` you must either fill in the `phone_number` field or set the `ask_phone_number_at_every_connection` field to `true` | `ANSWER_FROM_PHONE` or `ANSWER_FROM_DESK` *(default)* |
 | ask_phone_number_at_every_connection | If type is `ANSWER_FROM_PHONE`: allows you to define whether iAdvize proposes to the operator to change his phone number each time he connects to the desk | Boolean *(default: `false`)* |
 | phone_number | If type is `ANSWER_FROM_PHONE`: this is the phone number used to receive calls | Valid phone number with prefix (e.g.: +33123456789) *(optional)* |
-⚠️ Please note that if the type is `ANSWER_FROM_PHONE` you must either fill in the `phone_number` field or set the `ask_phone_number_at_every_connection` field to `true` 
 
 #### Create an operator
 
