@@ -212,7 +212,7 @@ See [reading section](#read) to discover some output examples.
 | website_list | Website list identifiers | List of integer |
 | skill_list | Skill list identifiers | List of integer |
 | sso_key | [SSO token](/documentation/single-sign-on#single-sign-on) | String |
-| **call_config** | Configuration of the call pickup mode (optional) | `Object` |
+| **call_config** | Configuration of the call pickup mode | `Object` *(optional)* |
 
 **call_config**
 
