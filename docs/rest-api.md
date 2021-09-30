@@ -203,6 +203,7 @@ See [reading section](#read) to discover some output examples.
 | video_enabled | Ability to process video | Boolean |
 | chat_max_number | Max. amount of chats an operator can process at the same time | Integer |
 | chat_and_call | Ability to process chat and call simultaneously | Boolean |
+| chat_to_video | Ability to handle chat to video escalation | Boolean |
 | chat_priority | Chat priority of the operator | `0` or `10` |
 | call_priority | Call priority of the operator | `0` or `10` |
 | video_priority | Video priority of the operator | `0` or `10` |
