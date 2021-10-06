@@ -635,6 +635,12 @@ the browser that runs the desk and available via https.
 
 For instance: `https://mycompany.com/ordersapp`
 
+#### Enable for operators
+Check this checkbox to make the app available for operators.
+
+#### Enable for experts
+Check this checkbox to make the app available for ibbü experts.
+
 ## External bots
 Bots are an important part of iAdvize integration ecosystem. That's why they have their [own dedicated documentation](/documentation/building-your-bot-on-iadvize#building-your-bot-on-iadvize).
 
