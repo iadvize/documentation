@@ -15,7 +15,7 @@ All URLs referenced in the documentation have the following base:
 
 | Standard platform | High availability platform |
 | --- | --- |
-| `https://www.iadvize.com/api/2` | `https://ha.iadvize.com/api/2` |
+| `https://sd.iadvize.com/api/2` | `https://ha.iadvize.com/api/2` |
 
 The iAdvize REST API is served over HTTPS.
 
