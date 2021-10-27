@@ -503,7 +503,7 @@ The apps that can be embedded in the Desk are web apps coded in any web complian
 dynamic web pages such as php or jsp generated, single page applications written in Angular or React, etc...
 
 These apps will be embedded in an `iframe` element in the Desk, and the web server serving these apps must allow them to run 
-in an iframe on the iAdvize domains: https://www.iadvize.com or https://ha.iadvize.com.
+in an iframe on the iAdvize domains: https://sd.iadvize.com or https://ha.iadvize.com.
 This is done by configuring the `X-FRAME-OPTIONS` header.
 
 The app can communicate with the desk by using a library provided by iAdvize.

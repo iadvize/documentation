@@ -19,6 +19,6 @@ To connect an operator to its iAdvize console :
 
 | Standard platform | High availability platform |
 | --- | --- |
-| `https://www.iadvize.com/admin/login?key={SSO_KEY}` | `https://ha.iadvize.com/admin/login?key={SSO_KEY}` |
+| `https://sd.iadvize.com/admin/login?key={SSO_KEY}` | `https://ha.iadvize.com/admin/login?key={SSO_KEY}` |
 
 That's all! When a user visit the URL, he will be automatically logged to its iAdvize account and no login / password will be asked to him.
