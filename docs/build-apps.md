@@ -693,10 +693,10 @@ This hash signature is passed along with each request in the headers as `X-iAdvi
 
 For `GET` requests, hash signature starts with algorithm name `sha256=` and is computed by hashing the **raw query string** with HMAC hexdigest algorithm and your secret token as salt.
 
-For `POST`, `PUT`... requests, hash signature starts with algorithm name `sha256=` and is computed by hashing the **raw body string** with HMAC hexdigest algorithm and your secret token as salt.
+For `POST`, `PUT`... requests, hash signature starts with algorithm name `sha256=` and is computed by hashing the **raw body string** with HMAC hexdigest algorithm and your secret token as salt (the result is a string).
 
 <pre class="prettyprint lang-js">
-X-iAdvize-Signature: sha256=110e8400-e29b-11d4-a716-446655440000
+X-iAdvize-Signature: sha256=b847f045bde28959da58adbbb8fdb58dca33e9ff5ebb746ea324a7b71cc4f912
 </pre>
 
 You have to compute a new hash using your secret token, and to compare it with `X-iAdvize-Signature` and make sure it matches.
