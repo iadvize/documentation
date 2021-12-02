@@ -17,7 +17,7 @@ Using your operator account please log into the [iAdvize Desk](https://ha.iadviz
 
 The iAdvize operator desk is the place where the conversations that are assigned to your account will pop up. Please ensure that your status is “Available to chat” by enabling the chat toggle button in the upper right corner:
 
-![The chat button is green, your operator can receive incoming conversations.](assets/images/mobile-sdk/01-operator-desk.png)
+![The chat button is green, your operator can receive incoming conversations.](./assets/images/mobile-sdk/01-operator-desk.png)
 
 If the toggle button is yellow, it means you have reached your maximum simultaneous chat slots, please end your current conversations to free a chat slot and allow the conversations to be assigned to you. If the toggle is red you are not available to chat.
 
@@ -345,7 +345,7 @@ If all the following conditions are met, the default chat button should appear:
 
 This schema describes the process when you activate a targeting rule on the iAdvize Messenger SDK:
 
-![Targeting process](assets/images/mobile-sdk/02-targeting-process.png)
+![Targeting process](./assets/images/mobile-sdk/02-targeting-process.png)
 
 
 
@@ -353,8 +353,8 @@ This schema describes the process when you activate a targeting rule on the iAdv
 
 Once the default chat button is displayed, the visitor tap on it to access the Chatbox. After composing and sending a message a new conversation should pop up in the operator desk.
 
-![Chat button is displayed. Visitor composes a message & send it.](assets/images/mobile-sdk/03-conv-start-mobile.png)
-![Conversation appears in the operator desk](assets/images/mobile-sdk/04-conv-start-desk.png)
+![Chat button is displayed. Visitor composes a message & send it.](./assets/images/mobile-sdk/03-conv-start-mobile.png)
+![Conversation appears in the operator desk](./assets/images/mobile-sdk/04-conv-start-desk.png)
 
 
 
@@ -418,7 +418,7 @@ IAdvizeSDK.chatboxController.setupChatbox(configuration)
 
 When no conversation is ongoing, the welcome message is displayed to the visitor:
 
-![When no conversation is ongoing, the welcome message is displayed to the visitor](assets/images/mobile-sdk/05-welcome-message.png)
+![When no conversation is ongoing, the welcome message is displayed to the visitor](./assets/images/mobile-sdk/05-welcome-message.png)
 
 
 
@@ -428,7 +428,7 @@ If you need to get the visitor consent on GDPR before he starts chatting, you ca
 
 If enabled, a message will request the visitor approval before starting the conversation and allowing him to send a message:
 
-![GDPR approval request](assets/images/mobile-sdk/06-gdpr-approval.png)
+![GDPR approval request](./assets/images/mobile-sdk/06-gdpr-approval.png)
 
 
 This `GDPROption` dictates how the SDK behaves when the user taps on the `More information` button. You can either:
@@ -1015,4 +1015,4 @@ object : SDKCallback {
 
 The visitor data you registered are displayed in the iAdvize Operator Desk in the conversation sidebar, in a tab labelled  `Custom data`:
 
-![Custom data tab shows registered data from the SDK](assets/images/mobile-sdk/07-custom-data.png)
+![Custom data tab shows registered data from the SDK](./assets/images/mobile-sdk/07-custom-data.png)
