@@ -363,7 +363,9 @@ As seen above, the chatbox is empty by default. You can configure a welcome mess
 
 <pre class="prettyprint lang-swift">
 var configuration = ChatboxConfiguration()
-configuration.automaticMessage = NSLocalizedString("Any question? Say Hello to Smart and we will answer you as soon as possible! 😊", comment: "")
+configuration.automaticMessage = NSLocalizedString(
+    "Any question? Say Hello to Smart and we will answer you as soon as possible! 😊",
+    comment: "")
 IAdvizeSDK.shared.chatboxController.setupChatbox(configuration: configuration)
 </pre>
 
@@ -419,7 +421,9 @@ Just like the welcome message above, the GDPR message can also be configured via
 
 <pre class="prettyprint lang-swift">
 var configuration = ChatboxConfiguration()
-configuration.automaticMessage = NSLocalizedString("Any question? Say Hello to Smart and we will answer you as soon as possible! 😊", comment: "")
+configuration.automaticMessage = NSLocalizedString(
+    "Any question? Say Hello to Smart and we will answer you as soon as possible! 😊",
+    comment: "")
 configuration.gdprMessage = "Your own GDPR message."
 IAdvizeSDK.shared.chatboxController.setupChatbox(configuration: configuration)
 </pre>
@@ -832,7 +836,9 @@ When the visitor taps on your custom chat button you should open the chatbox by 
 ##### iOS
 
 <pre class="prettyprint lang-swift">
-IAdvizeSDK.shared.conversationController.presentConversationViewModal(animated: Bool, presentingViewController: UIViewController?) {
+IAdvizeSDK.shared.conversationController.presentConversationViewModal(
+    animated: Bool,
+    presentingViewController: UIViewController?) {
     // ...
 }
 </pre>
