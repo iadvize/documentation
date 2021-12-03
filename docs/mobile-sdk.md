@@ -11,7 +11,7 @@ You will also need some information related to the project for the SDK setup. Pl
 
 > *⚠️ Your iAdvize administrator should already have configured the project on the [iAdvize Administration Desk](https://ha.iadvize.com/admin/login/) and created an operator account for you. If it is not yet the case please contact your iAdvize Technical Project Manager.*
 
-### 🧑‍💻 Connecting to your iAdvize Operator Desk
+### 💻 Connecting to your iAdvize Operator Desk
 
 Using your operator account please log into the [iAdvize Desk](https://ha.iadvize.com/admin/login/).
 
@@ -353,7 +353,7 @@ val navOption = NavigationOption.ActivateNewRule(newRuleId)
 IAdvizeSDK.targetingController.registerUserNavigation(navOption)
 </pre>
 
-### 👋 Configuring GDPR & welcome message
+### 👋 Configuring GDPR and welcome message
 
 #### 1️⃣ Adding a welcome message
 
