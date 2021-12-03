@@ -21,9 +21,7 @@ The iAdvize operator desk is the place where the conversations that are assigned
 
 If the toggle button is yellow, it means you have reached your maximum simultaneous chat slots, please end your current conversations to free a chat slot and allow the conversations to be assigned to you. If the toggle is red you are not available to chat.
 
-
-
-## 📱Mobile SDK integration
+## 📱 Mobile SDK integration
 
 ### 📔 API reference
 
@@ -568,7 +566,6 @@ IAdvizeSDK.chatboxController.setupChatbox(configuration)
 
 > *⚠️ Before starting this part you will need to configure push notifications inside your application. You can refer to the following resources if needed:*
 
-
 | iOS | Android |
 | --- | ------- |
 | [Push notification setup tutorial](https://www.raywenderlich.com/11395893-push-notifications-tutorial-getting-started) | [Firebase Cloud Messaging documentation](https://firebase.google.com/docs/cloud-messaging/android/client) |
@@ -717,7 +714,7 @@ With a custom button it is your responsibility to:
 - hide/show the button following the active targeting rule availability and the ongoing conversation status
 - open the chatbox when the user presses your button
 
-#### 1️⃣  Disabling the default chat button
+#### 1️⃣ Disabling the default chat button
 
 ##### iOS
 
