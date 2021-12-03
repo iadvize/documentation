@@ -546,10 +546,13 @@ The operator avatar displayed alongside his messages can be updated for branding
 
 <pre class="prettyprint lang-swift">
 var configuration = ChatboxConfiguration()
+
 // Update the incoming message avatar with a UIImage.
 configuration.incomingMessageAvatar = .image(image: UIImage(named: "BrandAvatar"))
+
 // Update the incoming message avatar with an URL.
 configuration.incomingMessageAvatar = .url(url: "http://avatar.url")
+
 IAdvizeSDK.shared.chatboxController.setupChatbox(configuration: configuration)
 </pre>
 
@@ -557,10 +560,14 @@ IAdvizeSDK.shared.chatboxController.setupChatbox(configuration: configuration)
 
 <pre class="prettyprint lang-kotlin">
 val configuration = ChatboxConfiguration()
+
 // Update the incoming message avatar with a Drawable resource.
-configuration.incomingMessageAvatar = IncomingMessageAvatar.Image(ContextCompat.getDrawable(context, R.drawable.ic_brand_avatar))
+configuration.incomingMessageAvatar =
+  IncomingMessageAvatar.Image(ContextCompat.getDrawable(context, R.drawable.ic_brand_avatar))
+
 // Update the incoming message avatar with an URL.
 configuration.incomingMessageAvatar = IncomingMessageAvatar.Url(URL("http://avatar.url"))
+
 IAdvizeSDK.chatboxController.setupChatbox(configuration)
 </pre>
 
