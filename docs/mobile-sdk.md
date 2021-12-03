@@ -334,7 +334,17 @@ While your user navigates through your app, you will have to update the active t
 ##### iOS
 
 <pre class="prettyprint lang-swift">
-TODO
+// To clear the active targeting rule (this is the default behavior)
+let navOption: NavigationOption = .clearActiveRule
+
+// To keep the active targeting rule in the new user screen
+let navOption: NavigationOption = .keepActiveRule
+
+// To activate a new targeting rule
+let navOption: NavigationOption = .activateNewRule(targetinRuleId: newRuleId)
+
+// Register the user navigation through your app
+IAdvizeSDK.shared.targetingController.activateTargetingRule(navigationOption: navOption)
 </pre>
 
 ##### Android
