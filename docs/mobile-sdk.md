@@ -15,6 +15,8 @@ You will also need some information related to the project for the SDK setup. Pl
 
 Using your operator account please log into the [iAdvize Desk](https://ha.iadvize.com/admin/login/).
 
+> *⚠️ If you have the Administrator status in addition to your operator account, you will be directed to the Admin Desk when logging in. Just click on the `Chat` button in the upper right corner to open the Operator Desk.*
+
 The iAdvize operator desk is the place where the conversations that are assigned to your account will pop up. Please ensure that your status is “Available to chat” by enabling the chat toggle button in the upper right corner:
 
 ![The chat button is green, your operator can receive incoming conversations.](./assets/images/mobile-sdk/01-operator-desk.png)
@@ -37,7 +39,7 @@ The latest release version for the SDK can be found on the public Github reposit
 
 | iOS | Android |
 | --- | ------- |
-| [https://github.com/iadvize/iadvize-ios-sdk/releases](https://github.com/iadvize/iadvize-ios-sdk/releases) | [https://github.com/iadvize/iadvize-android-sdk/releases](https://github.com/iadvize/iadvize-android-sdk/releases) |
+| [https://github.com/iadvize/iadvize-ios-sdk/releases/latest](https://github.com/iadvize/iadvize-ios-sdk/releases/latest) | [https://github.com/iadvize/iadvize-android-sdk/releases/latest](https://github.com/iadvize/iadvize-android-sdk/releases/latest) |
 
 > *⚠️ In the following snippets the SDK version is written as `x.y.z`, don’t forget to change it with the latest SDK version found at the above links.*
 
@@ -204,6 +206,8 @@ IAdvizeSDK.activate(
 - [SDK Initiation](https://github.com/iadvize/iadvize-android-sdk/blob/d15e3415c4d4a0afc097cfcfee67f50aa4631556/sample/app/src/main/java/com/iadvize/conversation/sdk/demo/App.kt#L40)
 - [SDK Activation](https://github.com/iadvize/iadvize-android-sdk/blob/master/sample/app/src/main/java/com/iadvize/conversation/sdk/demo/activities/MainActivity.kt#L143)
 
+##### Authentication modes
+
 You can choose between multiple authentication options:
 
 - **anonymous**: when you have an unidentified user browsing your app
@@ -344,7 +348,7 @@ let navOption: NavigationOption = .keepActiveRule
 let navOption: NavigationOption = .activateNewRule(targetinRuleId: newRuleId)
 
 // Register the user navigation through your app
-IAdvizeSDK.shared.targetingController.activateTargetingRule(navigationOption: navOption)
+IAdvizeSDK.shared.targetingController.registerUserNavigation(navigationOption: navOption)
 </pre>
 
 ##### Android
@@ -407,6 +411,8 @@ This `GDPROption` dictates how the SDK behaves when the user taps on the `More i
 
 - provide an URL pointing to your GPDR policy, it will be opened on user click 
 - provide a listener/delegate, it will be called on user click and you can then implement your own custom behavior
+
+> *⚠️ If your visitors have already consented to GDPR inside your application, you can activate the iAdvize SDK without the GDPR process. However, be careful to explicitly mention the iAdvize Chat part in your GDPR consent details.*
 
 Let’s activate the iAdvize Messenger SDK using the first option:
 
@@ -480,7 +486,7 @@ You can setup a main color on the SDK which will be applied to:
 - the default Chat button (if you use it)
 - the send button in the Chatbox
 - the blinking text cursor in the message input of the Chatbox
-- the background of the visitor message bubbles
+- the background of the visitor messages bubbles
 
 ##### iOS
 
@@ -603,6 +609,8 @@ For the SDK to be able to send notifications to the visitor’s device, its uniq
 IAdvizeSDK.shared.notificationController.registerPushToken("the_device_push_token", applicationMode: .prod)
 </pre>
 
+> *⚠️ You have to pass `.dev` as the `applicationMode` if you want to test the push notifications in `DEBUG`*
+
 ⌨️ **In-context example:** [Device token register](https://github.com/iadvize/iadvize-ios-sdk/blob/master/Example/IAdvizeSwiftExample/IAdvizeSwiftExample/Source/AppDelegate%2BPushNotification.swift#L27)
 
 ##### Android
@@ -656,9 +664,9 @@ IAdvizeSDK.notificationController.disablePushNotifications(object : SDKCallback 
 })
 </pre>
 
-#### 3️⃣ Handling notification reception
+#### 3️⃣ Handling push notifications reception
 
-Once setup, you will receive push notifications when the operator sends any message. As the SDK notifications are caught in the same place than your app other notifications, you first have to distinguish if the receive notification come from iAdvize or not. This can be done using:
+Once setup, you will receive push notifications when the operator sends any message. As the SDK notifications are caught in the same place than your app other notifications, you first have to distinguish if the received notification comes from iAdvize or not. This can be done using:
 
 ##### iOS
 
