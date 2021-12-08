@@ -7,7 +7,7 @@ This document aims to help you integrate the iAdvize Messenger SDK into your mob
 ### 💬 Setting up your iAdvize environment
 
 Before integrating the SDK, you need to check that your iAdvize environment is ready to use (i.e. you have an account ready to receive and answer to conversations from the SDK).
-You will also need some information related to the project for the SDK setup. Please ask your iAdvize administrator to follow the instructions available on the [SDK Knowledge Base](https://help.iadvize.com/hc/en-gb/articles/360019839480-Install-the-iAdvize-chat-on-your-mobile-app-Mobile-SDK-V2-Open-beta-) and to provide you with the **Project Identifier** as well as a **Targeting Rule Identifier**.
+You will also need some information related to the project for the SDK setup. Please ask your iAdvize administrator to follow the instructions available on the [SDK Knowledge Base](https://help.iadvize.com/hc/en-gb/articles/360019839480) and to provide you with the **Project Identifier** as well as a **Targeting Rule Identifier**.
 
 > *⚠️ Your iAdvize administrator should already have configured the project on the [iAdvize Administration Desk](https://ha.iadvize.com/admin/login/) and created an operator account for you. If it is not yet the case please contact your iAdvize Technical Project Manager.*
 
@@ -591,7 +591,7 @@ IAdvizeSDK.chatboxController.setupChatbox(configuration)
 | --- | ------- |
 | [Push notification setup tutorial](https://www.raywenderlich.com/11395893-push-notifications-tutorial-getting-started) | [Firebase Cloud Messaging documentation](https://firebase.google.com/docs/cloud-messaging/android/client) |
 
-> *You will also need to ensure that the push notifications are setup in your iAdvize project. The process is described above in the [SDK Knowledge Base](https://help.iadvize.com/hc/en-gb/articles/360019839480-Install-the-iAdvize-chat-on-your-mobile-app-Mobile-SDK-V2-Open-beta-)*
+> *You will also need to ensure that the push notifications are setup in your iAdvize project. The process is described above in the [SDK Knowledge Base](https://help.iadvize.com/hc/en-gb/articles/360019839480)*
 
 #### 1️⃣ Registering the device token
 
@@ -620,7 +620,7 @@ class NotificationService : FirebaseMessagingService() {
 
 #### 2️⃣ Enabling/disabling push notifications
 
-Push notifications are activated as long as you have setup the push notifications information for your app on the iAdvize administration website (process is described in the  [SDK Knowledge Base](https://help.iadvize.com/hc/en-gb/articles/360019839480-Install-the-iAdvize-chat-on-your-mobile-app-Mobile-SDK-V2-Open-beta-)). You can manually enable/disable them at any time using:
+Push notifications are activated as long as you have setup the push notifications information for your app on the iAdvize administration website (process is described in the [SDK Knowledge Base](https://help.iadvize.com/hc/en-gb/articles/360019839480)). You can manually enable/disable them at any time using:
 
 ##### iOS
 
