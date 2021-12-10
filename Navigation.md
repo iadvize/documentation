@@ -137,7 +137,7 @@
 * [Single Sign On](/documentation/single-sign-on#single-sign-on)
   * [Benefits](/documentation/single-sign-on#benefits)
   * [Implementation](/documentation/single-sign-on#implementation)
-* [Mobile SDK](/documentation/mobile-sdk#mobile-sdk)
+* [Mobile SDK](/documentation/mobile-sdk#iadvize-messenger-sdk-:-integration-guide)
   * [Prerequisites](/documentation/mobile-sdk#⚙️-prerequisites)
     * [Setting up your iAdvize environment](/documentation/mobile-sdk#💬-setting-up-your-iadvize-environment)
     * [Connecting to your iAdvize Operator Desk](/documentation/mobile-sdk#💻-connecting-to-your-iadvize-operator-desk)

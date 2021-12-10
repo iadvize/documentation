@@ -54,13 +54,13 @@ The SDK is distributed as an XCFramework, therefore **you are required to use** 
 
 Add this line to your Podfile, inside the `target` section:
 
-<pre class="prettyprint lang-rb">
+<pre class="prettyprint">
 pod 'iAdvize', 'x.y.z'
 </pre>
 
 Add the following to the bottom of your Podfile:
 
-<pre class="prettyprint lang-rb">
+<pre class="prettyprint">
 post_install do |installer|
     installer.pods_project.targets.each do |target|
         target.build_configurations.each do |config|
@@ -74,7 +74,7 @@ end
 
 Your Podfile final form should look like: 
 
-<pre class="prettyprint lang-rb">
+<pre class="prettyprint">
 platform :ios, '12.0'
 use_frameworks!
 inhibit_all_warnings!
@@ -102,7 +102,7 @@ After running `pod install` you should be able to mport the iAdvize dependency i
 
 Add the iAdvize repository to your project repositories inside your top-level Gradle build file:
 
-<pre class="prettyprint lang-kotlin">
+<pre class="prettyprint">
 // Project-level build.gradle.kts
     
 allprojects {
@@ -114,7 +114,7 @@ allprojects {
 
 Add the iAdvize Messenger SDK dependency inside your module-level Gradle build file:
 
-<pre class="prettyprint lang-kotlin">
+<pre class="prettyprint">
 // Module-level build.gradle.kts
     
 configurations {
@@ -143,7 +143,7 @@ After syncing your project you should be able to import the iAdvize dependency i
 To activate the SDK you must use the `activate` function with your `projectId` (see the [Prerequisites](#prerequisites) section above to get that identifier). You have access to callbacks in order to know if the SDK has been successfully activated. In case of an SDK activation failure the callback will give you the reason of the failure and you may want to retry later:
 
 ##### iOS
-<pre class="prettyprint lang-swift">
+<pre class="prettyprint">
 IAdvizeSDK.shared.activate(projectId: 0000,
                            authenticationOption: .simple(userId: "UserIdentifier"),
                            gdprOption: .disabled)) { success in
@@ -161,7 +161,7 @@ On Android there is an additional step required before activating the SDK. You w
 
 In your `AndroidManifest.xml` declare your application class:
 
-<pre class="prettyprint lang-xml">
+<pre class="prettyprint">
 &lt;application
   android:name=&quot;my.app.package.App&quot;&gt;
   &lt;!-- your activities etc... --&gt;
@@ -170,7 +170,7 @@ In your `AndroidManifest.xml` declare your application class:
 
 This class should then initiate the SDK:
 
-<pre class="prettyprint lang-kotlin">
+<pre class="prettyprint">
 package my.app.package.App
     
 class App : Application() {
@@ -185,7 +185,7 @@ class App : Application() {
 
 After that you can activate the SDK:
 
-<pre class="prettyprint lang-kotlin">
+<pre class="prettyprint">
 IAdvizeSDK.activate(
   projectId = 0000,
   authenticationOption = AuthenticationOption.Simple("UserIdentifier"),
@@ -227,7 +227,7 @@ If you are using the **simple authentication** mode you will have to explicitly 
 
 ##### iOS
 
-<pre class="prettyprint lang-swift">
+<pre class="prettyprint">
 IAdvizeSDK.shared.logout() {
     // You can reactivate in anonymous mode if you want to enable iAdvize for your anonymous users
     IAdvizeSDK.shared.activate(projectId: 0000, authenticationOption: .anonymous, gdprOption: .disabled) {
@@ -237,7 +237,7 @@ IAdvizeSDK.shared.logout() {
 
 ##### Android
 
-<pre class="prettyprint lang-kotlin">
+<pre class="prettyprint">
 IAdvizeSDK.logout()
 </pre>
 
@@ -257,13 +257,13 @@ To do so just add this line to your project:
 
 ##### iOS
 
-<pre class="prettyprint lang-swift">
+<pre class="prettyprint">
 IAdvizeSDK.shared.logLevel = .verbose
 </pre>
 
 ##### Android
 
-<pre class="prettyprint lang-kotlin">
+<pre class="prettyprint">
 IAdvizeSDK.logLevel = Logger.Level.VERBOSE
 </pre>
 
@@ -280,13 +280,13 @@ By default, the targeting rule language used is the user’s device current lang
 
 ##### iOS
 
-<pre class="prettyprint lang-swift">
+<pre class="prettyprint">
 IAdvizeSDK.shared.targetingController.language = .custom(value: .fr)
 </pre>
 
 ##### Android
 
-<pre class="prettyprint lang-kotlin">
+<pre class="prettyprint">
 IAdvizeSDK.targetingController.language = SDKLanguageOption.Custom(Language.FR)
 </pre>
 
@@ -298,7 +298,7 @@ Using a targeting rule UUID (see the [Prerequisites](#prerequisites) section abo
 
 ##### iOS
 
-<pre class="prettyprint lang-swift">
+<pre class="prettyprint">
 IAdvizeSDK.shared.targetingController.activateTargetingRule(targetingRuleId: UUID)
 </pre>
 
@@ -306,7 +306,7 @@ IAdvizeSDK.shared.targetingController.activateTargetingRule(targetingRuleId: UUI
 
 ##### Android
 
-<pre class="prettyprint lang-kotlin">
+<pre class="prettyprint">
 IAdvizeSDK.targetingController.activateTargetingRule(targetingRuleUUID)
 </pre>
 
@@ -337,7 +337,7 @@ While your user navigates through your app, you will have to update the active t
 
 ##### iOS
 
-<pre class="prettyprint lang-swift">
+<pre class="prettyprint">
 // To clear the active targeting rule (this is the default behavior)
 let navOption: NavigationOption = .clearActiveRule
 
@@ -353,7 +353,7 @@ IAdvizeSDK.shared.targetingController.registerUserNavigation(navigationOption: n
 
 ##### Android
 
-<pre class="prettyprint lang-kotlin">
+<pre class="prettyprint">
 // To clear the active targeting rule (this is the default behavior)
 val navOption = NavigationOption.ClearActiveRule 
     
@@ -375,7 +375,7 @@ As seen above, the chatbox is empty by default. You can configure a welcome mess
 
 ##### iOS
 
-<pre class="prettyprint lang-swift">
+<pre class="prettyprint">
 var configuration = ChatboxConfiguration()
 configuration.automaticMessage = NSLocalizedString(
     "Any question? Say Hello to Smart and we will answer you as soon as possible! 😊",
@@ -387,7 +387,7 @@ IAdvizeSDK.shared.chatboxController.setupChatbox(configuration: configuration)
 
 ##### Android
 
-<pre class="prettyprint lang-kotlin">
+<pre class="prettyprint">
 val configuration = ChatboxConfiguration()
 configuration.automaticMessage = "Any question? Say Hello to Smart and we will answer you as soon as possible! 😊"
 IAdvizeSDK.chatboxController.setupChatbox(configuration)
@@ -418,7 +418,7 @@ Let’s activate the iAdvize Messenger SDK using the first option:
 
 ##### iOS
 
-<pre class="prettyprint lang-swift">
+<pre class="prettyprint">
 if let legalInfoURL = URL(string: "http://yourlegalinformationurl.com/legal") {
   IAdvizeSDK.shared.activate(projectId: 0000,
                             authenticationOption: .anonymous,
@@ -435,7 +435,7 @@ if let legalInfoURL = URL(string: "http://yourlegalinformationurl.com/legal") {
 
 Just like the welcome message above, the GDPR message can also be configured via the `ChatboxConfiguration` object:
 
-<pre class="prettyprint lang-swift">
+<pre class="prettyprint">
 var configuration = ChatboxConfiguration()
 configuration.automaticMessage = NSLocalizedString(
     "Any question? Say Hello to Smart and we will answer you as soon as possible! 😊",
@@ -451,7 +451,7 @@ IAdvizeSDK.shared.chatboxController.setupChatbox(configuration: configuration)
 
 ##### Android
 
-<pre class="prettyprint lang-kotlin">
+<pre class="prettyprint">
 val legalInfoUri = URI.create("http://yourlegalinformationurl.com/legal")
 IAdvizeSDK.activate(
   projectId = projectId,
@@ -463,7 +463,7 @@ IAdvizeSDK.activate(
 
 Just like the welcome message above, the GDPR message can also be configured via the `ChatboxConfiguration` object:
 
-<pre class="prettyprint lang-kotlin">
+<pre class="prettyprint">
 val configuration = ChatboxConfiguration()
 configuration.automaticMessage = "Any question? Say Hello to Smart and we will answer you as soon as possible! 😊"
 configuration.gdprMessage = "Your own GDPR message."
@@ -490,7 +490,7 @@ You can setup a main color on the SDK which will be applied to:
 
 ##### iOS
 
-<pre class="prettyprint lang-swift">
+<pre class="prettyprint">
 var configuration = ChatboxConfiguration()
 configuration.mainColor = .red
 IAdvizeSDK.shared.chatboxController.setupChatbox(configuration: configuration)
@@ -498,7 +498,7 @@ IAdvizeSDK.shared.chatboxController.setupChatbox(configuration: configuration)
 
 ##### Android
 
-<pre class="prettyprint lang-kotlin">
+<pre class="prettyprint">
 val configuration = ChatboxConfiguration()
 configuration.mainColor = Color.RED
 IAdvizeSDK.chatboxController.setupChatbox(configuration)
@@ -514,7 +514,7 @@ Some parts of the he toolbar/navigationbar appearing at the top of the Chatbox c
 
 ##### iOS
 
-<pre class="prettyprint lang-swift">
+<pre class="prettyprint">
 var configuration = ChatboxConfiguration()
 configuration.navigationBarBackgroundColor = .black
 configuration.navigationBarMainColor = .white
@@ -524,7 +524,7 @@ IAdvizeSDK.shared.chatboxController.setupChatbox(configuration: configuration)
 
 ##### Android
 
-<pre class="prettyprint lang-kotlin">
+<pre class="prettyprint">
 val configuration = ChatboxConfiguration()
 configuration.toolbarBackgroundColor = Color.BLACK,
 configuration.toolbarMainColor = COLOR.WHITE,
@@ -538,7 +538,7 @@ The font used in the Chatbox can easily be updated using your own font:
 
 ##### iOS
 
-<pre class="prettyprint lang-swift">
+<pre class="prettyprint">
 var configuration = ChatboxConfiguration()
 configuration.font = UIFont(name: "AmericanTypewriter-Condensed", size: 11.0)
 IAdvizeSDK.shared.chatboxController.setupChatbox(configuration: configuration)
@@ -546,7 +546,7 @@ IAdvizeSDK.shared.chatboxController.setupChatbox(configuration: configuration)
 
 ##### Android
 
-<pre class="prettyprint lang-kotlin">
+<pre class="prettyprint">
 val configuration = ChatboxConfiguration()
 configuration.fontPath = "fonts/comic_sans_ms_regular.ttf"
 IAdvizeSDK.chatboxController.setupChatbox(configuration)
@@ -560,7 +560,7 @@ The operator avatar displayed alongside his messages can be updated for branding
 
 ##### iOS
 
-<pre class="prettyprint lang-swift">
+<pre class="prettyprint">
 var configuration = ChatboxConfiguration()
 
 // Update the incoming message avatar with a UIImage.
@@ -574,7 +574,7 @@ IAdvizeSDK.shared.chatboxController.setupChatbox(configuration: configuration)
 
 ##### Android
 
-<pre class="prettyprint lang-kotlin">
+<pre class="prettyprint">
 val configuration = ChatboxConfiguration()
 
 // Update the incoming message avatar with a Drawable resource.
@@ -605,7 +605,7 @@ For the SDK to be able to send notifications to the visitor’s device, its uniq
 
 ##### iOS
 
-<pre class="prettyprint lang-swift">
+<pre class="prettyprint">
 IAdvizeSDK.shared.notificationController.registerPushToken("the_device_push_token", applicationMode: .prod)
 </pre>
 
@@ -615,7 +615,7 @@ IAdvizeSDK.shared.notificationController.registerPushToken("the_device_push_toke
 
 ##### Android
 
-<pre class="prettyprint lang-kotlin">
+<pre class="prettyprint">
 class NotificationService : FirebaseMessagingService() {
   override fun onNewToken(token: String) {
     super.onNewToken(token)
@@ -632,7 +632,7 @@ Push notifications are activated as long as you have setup the push notification
 
 ##### iOS
 
-<pre class="prettyprint lang-swift">
+<pre class="prettyprint">
 IAdvizeSDK.shared.notificationController.enablePushNotifications { success in
   ...
 }
@@ -644,7 +644,7 @@ IAdvizeSDK.shared.notificationController.disablePushNotifications { success in
 
 ##### Android
 
-<pre class="prettyprint lang-kotlin">
+<pre class="prettyprint">
 IAdvizeSDK.notificationController.enablePushNotifications(object : SDKCallback {
   override fun onSuccess() {
     // Enable succeded
@@ -670,7 +670,7 @@ Once setup, you will receive push notifications when the operator sends any mess
 
 ##### iOS
 
-<pre class="prettyprint lang-swift">
+<pre class="prettyprint">
 func application(_ application: UIApplication,
                  didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                  fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
@@ -682,7 +682,7 @@ func application(_ application: UIApplication,
 
 ##### Android
 
-<pre class="prettyprint lang-kotlin">
+<pre class="prettyprint">
 class NotificationService : FirebaseMessagingService() {
   override fun onMessageReceived(remoteMessage: RemoteMessage) {
       if (IAdvizeSDK.notificationController.isIAdvizePushNotification(remoteMessage.data)) {
@@ -696,7 +696,7 @@ class NotificationService : FirebaseMessagingService() {
 
 ##### iOS
 
-<pre class="prettyprint lang-swift">
+<pre class="prettyprint">
 func shouldDisplayNotification(userInfo: [AnyHashable: Any]) -> Bool {
   guard IAdvizeSDK.shared.notificationController.isIAdvizePushNotification(with: userInfo) else {
     return false
@@ -712,7 +712,7 @@ func shouldDisplayNotification(userInfo: [AnyHashable: Any]) -> Bool {
 
 ##### Android
 
-<pre class="prettyprint lang-kotlin">
+<pre class="prettyprint">
 fun shouldDisplayNotification(remoteMessage: RemoteMessage) =
   IAdvizeSDK.notificationController.isIAdvizePushNotification(remoteMessage.data) 
   && !IAdvizeSDK.chatboxController.isChatboxPresented()
@@ -725,7 +725,7 @@ fun shouldDisplayNotification(remoteMessage: RemoteMessage) =
 By default, the title of the notification is set to the string key `iadvize_notification_title`.
 If you want to update/translate this title you can override this value by adding the iadvize_notification_title key in your `Localizable.strings` file:
 
-<pre class="prettyprint lang-swift">
+<pre class="prettyprint">
 "iadvize_notification_title" = "You have received a new message";
 </pre>
 
@@ -747,13 +747,13 @@ With a custom button it is your responsibility to:
 
 ##### iOS
 
-<pre class="prettyprint lang-swift">
+<pre class="prettyprint">
 IAdvizeSDK.shared.chatboxController.useDefaultChatButton = false
 </pre>
 
 ##### Android
 
-<pre class="prettyprint lang-kotlin">
+<pre class="prettyprint">
 IAdvizeSDK.chatboxController.useDefaultChatButton = false
 </pre>
 
@@ -764,7 +764,7 @@ First of all you need to implement the appropriate callbacks:
 
 ##### iOS
 
-<pre class="prettyprint lang-swift">
+<pre class="prettyprint">
 extension IntegrationApp: TargetingControllerDelegate {
   func activeTargetingRuleAvailabilityDidUpdate(isActiveTargetingRuleAvailable: Bool) {
     // SDK active rule availability changed to isActiveTargetingRuleAvailable
@@ -788,7 +788,7 @@ extension IntegrationApp: ConversationControllerDelegate {
 
 ##### Android
 
-<pre class="prettyprint lang-kotlin">
+<pre class="prettyprint">
 IAdvizeSDK.targetingController.listeners.add(object : TargetingListener {
   override fun onActiveTargetingRuleAvailabilityChanged(isActiveTargetingRuleAvailable: Boolean) {
     // SDK active rule availability changed to isActiveTargetingRuleAvailable
@@ -818,7 +818,7 @@ The chat button gives access to the chatbox so it should be visible:
 
 ##### iOS
 
-<pre class="prettyprint lang-swift">
+<pre class="prettyprint">
 func updateChatButtonVisibility() {  
   guard IAdvizeSDK.shared.activationStatus == .activated else {
     hideChatButton()
@@ -839,7 +839,7 @@ func updateChatButtonVisibility() {
 
 ##### Android
 
-<pre class="prettyprint lang-kotlin">
+<pre class="prettyprint">
 fun updateChatButtonVisibility() {
   val sdkActivated = IAdvizeSDK.activationStatus == IAdvizeSDK.ActivationStatus.ACTIVATED
   val chatboxOpened = IAdvizeSDK.chatboxController.isChatboxPresented()
@@ -860,7 +860,7 @@ When the visitor taps on your custom chat button you should open the chatbox by 
 
 ##### iOS
 
-<pre class="prettyprint lang-swift">
+<pre class="prettyprint">
 IAdvizeSDK.shared.conversationController.presentConversationViewModal(
     animated: Bool,
     presentingViewController: UIViewController?) {
@@ -870,7 +870,7 @@ IAdvizeSDK.shared.conversationController.presentConversationViewModal(
 
 ##### Android
 
-<pre class="prettyprint lang-kotlin">
+<pre class="prettyprint">
 IAdvizeSDK.chatboxController.presentChatboxActivity(context)
 </pre>
 
@@ -888,14 +888,14 @@ You can register a transaction made within your application:
 
 ##### iOS
 
-<pre class="prettyprint lang-swift">
+<pre class="prettyprint">
 let transaction = Transaction(externalTransactionId: "transactionId", date: Date(), amount: 10.0, currency: .eur)
 IAdvizeSDK.shared.transactionController.registerTransaction(transaction)
 </pre>
 
 ##### Android
 
-<pre class="prettyprint lang-kotlin">
+<pre class="prettyprint">
 IAdvizeSDK.transactionController.register(
   Transaction(
     "transactionId",
@@ -912,7 +912,7 @@ The iAdvize Messenger SDK allows you to save data related to the visitor convers
 
 ##### iOS
 
-<pre class="prettyprint lang-swift">
+<pre class="prettyprint">
 IAdvizeSDK.shared.visitorController.registerCustomData(customData:
   ["Test": .customDataString("Test"),
    "Test2": .customDataBoolean(false),
@@ -924,7 +924,7 @@ IAdvizeSDK.shared.visitorController.registerCustomData(customData:
 
 ##### Android
 
-<pre class="prettyprint lang-kotlin">
+<pre class="prettyprint">
 IAdvizeSDK.visitorController.registerCustomData(listOf(
   CustomData.fromString("Test", "Test"),
   CustomData.fromBoolean("Test2", false),
