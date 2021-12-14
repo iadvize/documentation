@@ -129,6 +129,8 @@ To have a fully functional bot, you will be required to implement two distinct s
   * `POST /conversations/` to create a new conversation
   * `POST /conversations/conversationId/messageId`  to reply to a user
 
+⚠️ Please note that all endpoints are subject to a 10 second timeout except for `GET /bots/:idOperator/conversation-first-messages` which has a 2 second timeout.
+
 ## Implement the bot creation flow
 
 A bot gets created when an admin creates a new agent of type “Bot” under the “People” section. Several information are required to be able to create a bot:
