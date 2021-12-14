@@ -951,6 +951,8 @@ Bot replies can be further customized using Markdown syntax to add style, linkin
 
 Some Markdown features are fully functional, some are partially supported and some are not supported. Here is a table showing the status of each feature:
 
+⚠️ As not all social channels support markdown in the same way, be careful with the tags you use.
+
 | **Feature**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | **Supported?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;** | **Example**                                                                                                     | **Comments**                                                                                                                                                           |
 | ------------------------------------------ | --------------- | --------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Bold                                       | 🟢 Yes          | `**bold**`                                                                                                      |                                                                                                                                                                        |
