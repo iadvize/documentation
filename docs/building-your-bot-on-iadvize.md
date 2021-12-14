@@ -403,13 +403,11 @@ This endpoint is used if you want your bot to initiate a conversation with new v
          "quickReplies":[
             {
                "contentType":"text/quick-reply",
-               "value":"I didn't receive my order",
-               "idQuickReply":"1ef5145b-a9b6-4e86-8743-b6e3b4026b2c"
+               "value":"I didn't receive my order"
             },
             {
                "contentType":"text/quick-reply",
-               "value":"Payment problem",
-               "idQuickReply":"13594c9b-dcff-4add-81fc-5e1093e443a7"
+               "value":"Payment problem"
             }
          ]
       }
@@ -934,7 +932,6 @@ A quick reply is used for offering several choices to a visitor. Each choice nee
 | ------------ | ---------------------------------- | ------------------ | -------- | ------------------------------------ |
 | contentType  | Type of the message’s content      | `text/quick-reply` | ✓        | `text/quick-reply`                   |
 | value        | Textual content of the quick-reply | String             | ✓        | Yes                                  |
-| idQuickReply | Quick reply identifier             | UUID               | ✓        | 1ef5145b-a9b6-4e86-8743-b6e3b4026b2c |
 
 
 ![Example of a text payload reply with two quick replies](./assets/images/bots/example-quick-replies.png)
@@ -942,8 +939,7 @@ A quick reply is used for offering several choices to a visitor. Each choice nee
 <pre class="prettyprint lang-js">
 {
   "contentType": "text/quick-reply",
-  "value": "Yes",
-  "idQuickReply": "1ef5145b-a9b6-4e86-8743-b6e3b4026b2c"
+  "value": "Yes"
 }
 </pre>
 
