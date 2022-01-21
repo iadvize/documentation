@@ -19,14 +19,15 @@ Among other things, bot are able to:
   * ask questions and act on replies;
   * send rich content such as links, carousels, and much more;
   * schedule messages to be sent later on;
+* Proactively send a message to the user (after the conversation has started)
 * Escalate a conversation to another operator.
 * Prequalify some visitor data (identification number, email address…).
 * And much more !
 
 ### Bots <span hidden>really</span> cannot
 This is what bots are not able to do:
-* Send a message directly to the user (reply only mode)
 * Be part of a conversation at the same time than another agent
+* Proactively engage a conversation
 
 ## Create and configure a bot in iAdvize
 To be able to create a bot on the iAdvize platform, you will need to:
@@ -71,7 +72,7 @@ Fill in the different information of your bot:
 
 **Note:** A bot operator is associated to ONE and only ONE language. So, if you want your bot to answer several languages, you have to create multiple bot operators.
 
-**Note2:** Make sure you enter the right language because you can't change the language of a bot.
+**Note2:** Make sure you specify the right language because you can't change the language of a bot.
 
 
 ## Chat with your bot
@@ -333,7 +334,7 @@ This endpoint will be called on a frequent basis (as of now, every second) and w
 
 ## Implement the conversation flow
 
-A conversation is typically initiated by a user. The bot can only reply to user’s message which means that iAdvize will call your endpoints when a message is received in the conversation.
+A conversation is typically initiated by a user. The bot can reply to user’s message, which means that iAdvize will call your endpoints when a message is received in the conversation.
 
 To fully handle a conversation you only need to implement 3 endpoints:
 * `GET /bots/:idOperator/conversation-first-messages` to return the first messages you want to send as soon as the visitor opens up the chatbox (before the conversation really starts)
@@ -420,11 +421,13 @@ This endpoint is used if you want your bot to initiate a conversation with new v
 **Note:** You can validate your response data format with the associated [json schema](/json-schemas/bot/conversation-first-messages.json).
 
 ### Create a conversation
+
 Everytime a conversation starts, this endpoint is called. It allows iAdvize to notify your bot a conversation starts.
 
 ⚠️ Leave the `replies` array empty as another call to `POST /conversations/conversationId/messages` is triggered right after `POST /conversations`. It will be the right time to answer the visitor.
 
 #### Request - POST /conversations
+
 | Parameters         | In    | Description                                                           | Type   | Example                              |
 | ------------------ | ----- | --------------------------------------------------------------------- | ------ | ------------------------------------ |
 | idConnectorVersion | Query | Connector version identifier                                          | String | c008849d-7cb1-40ca-9503-d6df2c5cddd8 |
@@ -441,6 +444,7 @@ Everytime a conversation starts, this endpoint is called. It allows iAdvize to n
 | history.createdAt   | Body | Date the message was sent                                                                                                          | String - ISO 8601                                                 | 2018-07-16T13:53:57.961Z             |
 
 #### Response format
+
 | Field           | In   | Description                                                            | Type              | Required | Example                              |
 | --------------- | ---- | ---------------------------------------------------------------------- | ----------------- | -------- | ------------------------------------ |
 | idConversation  | Body | Conversation unique identifier                                         | UUID              | ✓        | ce41ba2c-c25a-4351-b946-09527d8b940b |
@@ -451,6 +455,7 @@ Everytime a conversation starts, this endpoint is called. It allows iAdvize to n
 
 
 #### Response example
+
 <pre class="prettyprint lang-js">
 {
     "idConversation": "ce41ba2c-c25a-4351-b946-09527d8b940b",
@@ -543,6 +548,56 @@ This endpoint is called when a new message is received in the conversation, whet
     "updatedAt": "2017-11-22T12:23:00Z"
 }
 </pre>
+
+### Proactively send messages to the visitor
+
+🎉 Through our GraphQL API you can now proactively send messages to the visitor **after the conversation has started**.
+You no longer need to wait for the visitor to systematically send you a message to get a chance to respond, and you are no longer constrained by the 10 seconds timeout which gives you time to trigger internal processes that may take time.
+
+**⚠️ Note 1:** this option does not exempt you from implementing the previous endpoint `POST /conversations/:idConversation/messages` (however, you can just reply an empty response list and only use this new way to answer the visitor).
+
+**⚠️ Note 2:** with this solution you can only send one "message" (or action) at a time and only after the conversation has started (= after the visitor has sent a first message).
+
+#### The `chatbotMessageSend` GraphQL mutation
+
+
+To be able to use this new GraphQL mutation you will have to add an **Accept** header with the following value: `application/vnd.iadvize.automation-chatbot-conversation-preview+json`.
+
+Here is an example of a query that will send the message **"Hello world!"** in the conversation `34562f45-187c-4290-976e-1b992b7b9799` via your iAdvize chatbot id (external bot id) **123456**.
+
+<pre class="prettyprint lang-js">
+mutation SendProactiveMessage {
+  chatbotMessageSend(
+    input: {
+      conversationId: "34562f45-187c-4290-976e-1b992b7b9799",
+      chatbotId: 123456,
+      actionOrMessage: {
+        chatbotMessage: {
+          chatbotSimpleTextMessage: "Hello world!"
+        }
+      }
+    }
+  ) {
+    userErrors {
+      __typename
+    }
+  }
+}
+</pre>
+
+#### conversationId
+
+This is the id of the **iAdvize conversation** you receive on the `POST /conversation` route in the body (`idConversation`).
+
+**⚠️ Warning:** if you return your own conversation id in the body of the call to `POST /conversations`, be careful not to use the conversation id passed in the call to `POST /conversations/:idConversation/messages` (because it will be your own conversation id and not the one from iAdvize).
+
+#### chatbotId
+
+This is the id of your external bot (=chatbotId) at iAdvize in integer format
+
+**⚠️ Warning:** the format of the operator id you receive in the REST endpoints you have implemented is slightly different: it is a string containing the operator id (=chatbotId) prefixed with the iAdvize environment `sd-` or `ha-`. One possibility is to split the hyphen (`-`) and get the platform on one hand and the operator id (=chatbotId) on the other hand.
+
+Using our [GraphiQL tool](https://developers.iadvize.com/documentation/graphql-api#graphiql), you can learn more about the different options you have to interact with the visitor.
 
 ## Conversation objects
 
