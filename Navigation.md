@@ -125,6 +125,7 @@
     * [Send messages before the conversation starts](/documentation/building-your-bot-on-iadvize#send-messages-before-the-conversation-starts)
     * [Create a conversation](/documentation/building-your-bot-on-iadvize#create-a-conversation)
     * [Receive and reply to messages](/documentation/building-your-bot-on-iadvize#receive-and-reply-to-messages)
+    * [Proactively send messages to the visitor](/documentation/building-your-bot-on-iadvize#proactively-send-messages-to-the-visitor)
   * [Conversation objects](/documentation/building-your-bot-on-iadvize#conversation-objects)
     * [Await object](/documentation/building-your-bot-on-iadvize#await-objects)
     * [Close object](/documentation/building-your-bot-on-iadvize#close-object)
