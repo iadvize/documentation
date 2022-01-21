@@ -554,15 +554,16 @@ This endpoint is called when a new message is received in the conversation, whet
 🎉 Through our GraphQL API you can now proactively send messages to the visitor **after the conversation has started**.
 You no longer need to wait for the visitor to systematically send you a message to get a chance to respond, and you are no longer constrained by the 10 seconds timeout which gives you time to trigger internal processes that may take time.
 
-⚠️ Note 1: this option does not exempt you from implementing the previous endpoint `POST /conversations/:idConversation/messages` (however, you can just reply an empty response list and only use this new way to answer the visitor).
+**⚠️ Note 1:** this option does not exempt you from implementing the previous endpoint `POST /conversations/:idConversation/messages` (however, you can just reply an empty response list and only use this new way to answer the visitor).
 
-⚠️ Note 2: with this solution you can only send one "message" (or action) at a time and only after the conversation has started (= after the visitor has sent a first message).
+**⚠️ Note 2:** with this solution you can only send one "message" (or action) at a time and only after the conversation has started (= after the visitor has sent a first message).
 
 #### The `chatbotMessageSend` GraphQL mutation
 
+
 To be able to use this new GraphQL mutation you will have to add an **Accept** header with the following value: `application/vnd.iadvize.automation-chatbot-conversation-preview+json`.
 
-Here is an example of a query that will send the message "Hello world!" in the conversation `34562f45-187c-4290-976e-1b992b7b9799` via your iAdvize chatbot id (external bot id) 123456.
+Here is an example of a query that will send the message **"Hello world!"** in the conversation `34562f45-187c-4290-976e-1b992b7b9799` via your iAdvize chatbot id (external bot id) **123456**.
 
 <pre class="prettyprint lang-js">
 mutation SendProactiveMessage {
@@ -584,11 +585,17 @@ mutation SendProactiveMessage {
 }
 </pre>
 
-**conversationId** : this is the id of the **iAdvize conversation** you receive on the POST /conversation route in the body (`idConversation`).
-> ⚠️ Warning: if you return your own conversation id in the body of the call to `POST /conversations`, be careful not to use the conversation id passed in the call to `POST /conversations/:idConversation/messages` (because it will be your own conversation id and not the one from iAdvize).
+#### conversationId
 
-**chatbotId** : this is the id of your external bot (chatbot) at iAdvize in integer format
-> ⚠️ Warning: the format of the operator id you receive in the REST endpoints you have implemented is slightly different: it is a string containing the operator id (=chatbotId) prefixed with the iAdvize environment `sd-` or `ha-`. One possibility is to split the hyphen (-) and get the platform on one hand and the operator id (=chatbotId) on the other hand.
+This is the id of the **iAdvize conversation** you receive on the POST /conversation route in the body (`idConversation`).
+
+**⚠️ Warning:** if you return your own conversation id in the body of the call to `POST /conversations`, be careful not to use the conversation id passed in the call to `POST /conversations/:idConversation/messages` (because it will be your own conversation id and not the one from iAdvize).
+
+#### chatbotId
+
+This is the id of your external bot (chatbot) at iAdvize in integer format
+
+**⚠️ Warning:** the format of the operator id you receive in the REST endpoints you have implemented is slightly different: it is a string containing the operator id (=chatbotId) prefixed with the iAdvize environment `sd-` or `ha-`. One possibility is to split the hyphen (-) and get the platform on one hand and the operator id (=chatbotId) on the other hand.
 
 Using our [GraphiQL tool](https://developers.iadvize.com/documentation/graphql-api#graphiql), you can learn more about the different options you have to interact with the visitor.
 
