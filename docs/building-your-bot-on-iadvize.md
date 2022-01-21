@@ -19,7 +19,7 @@ Among other things, bot are able to:
   * ask questions and act on replies;
   * send rich content such as links, carousels, and much more;
   * schedule messages to be sent later on;
-* Send a message directly to the user (after the conversation has started)
+* Proactively send a message to the user (after the conversation has started)
 * Escalate a conversation to another operator.
 * Prequalify some visitor data (identification number, email address…).
 * And much more !
@@ -27,6 +27,7 @@ Among other things, bot are able to:
 ### Bots <span hidden>really</span> cannot
 This is what bots are not able to do:
 * Be part of a conversation at the same time than another agent
+* Proactively engage a conversation
 
 ## Create and configure a bot in iAdvize
 To be able to create a bot on the iAdvize platform, you will need to:
@@ -71,7 +72,7 @@ Fill in the different information of your bot:
 
 **Note:** A bot operator is associated to ONE and only ONE language. So, if you want your bot to answer several languages, you have to create multiple bot operators.
 
-**Note2:** Make sure you enter the right language because you can't change the language of a bot.
+**Note2:** Make sure you specify the right language because you can't change the language of a bot.
 
 
 ## Chat with your bot
@@ -550,17 +551,18 @@ This endpoint is called when a new message is received in the conversation, whet
 
 ### Proactively send messages to the visitor
 
-🎉 Through our GraphQL API you can now proactively send messages to the visitor after the conversation has started. You no longer need to wait for the visitor to systematically send you a message to get a chance to respond, and you are no longer constrained by the 10 second timeout.
+🎉 Through our GraphQL API you can now proactively send messages to the visitor **after the conversation has started**.
+You no longer need to wait for the visitor to systematically send you a message to get a chance to respond, and you are no longer constrained by the 10 seconds timeout which gives you time to trigger internal processes that may take time.
 
-⚠️ Note 1: this option does not exempt you from implementing the previous endpoint `POST /conversations/:idConversation/messages` (however, you can just reply an empty response list)
+⚠️ Note 1: this option does not exempt you from implementing the previous endpoint `POST /conversations/:idConversation/messages` (however, you can just reply an empty response list and only use this new way to answer the visitor).
 
-⚠️ Note 2: with this solution you can only send one "message" (or action) at a time and that you can only do so once the conversation has started (after the visitor has sent a first message).
+⚠️ Note 2: with this solution you can only send one "message" (or action) at a time and only after the conversation has started (= after the visitor has sent a first message).
 
 #### The `chatbotMessageSend` GraphQL mutation
 
-To be able to use this new GraphQL mutation you will have to fill an **Accept** header with the following value: `application/vnd.iadvize.automation-chatbot-conversation-preview+json`.
+To be able to use this new GraphQL mutation you will have to add an **Accept** header with the following value: `application/vnd.iadvize.automation-chatbot-conversation-preview+json`.
 
-The following query will send the message "Hello world!" in the conversation `34562f45-187c-4290-976e-1b992b7b9799` via your iAdvize chatbot id (external bot id) 123456.
+Here is an example of a query that will send the message "Hello world!" in the conversation `34562f45-187c-4290-976e-1b992b7b9799` via your iAdvize chatbot id (external bot id) 123456.
 
 <pre class="prettyprint lang-js">
 mutation SendProactiveMessage {
@@ -587,6 +589,8 @@ mutation SendProactiveMessage {
 
 **chatbotId** : this is the id of your external bot (chatbot) at iAdvize in integer format
 > ⚠️ Warning: the format of the operator id you receive in the REST endpoints you have implemented is slightly different: it is a string containing the operator id (=chatbotId) prefixed with the iAdvize environment `sd-` or `ha-`. One possibility is to split the hyphen (-) and get the platform on one hand and the operator id (=chatbotId) on the other hand.
+
+Using our [GraphiQL tool](https://developers.iadvize.com/documentation/graphql-api#graphiql), you can learn more about the different options you have to interact with the visitor.
 
 ## Conversation objects
 
