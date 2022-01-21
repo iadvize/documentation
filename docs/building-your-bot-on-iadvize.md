@@ -587,15 +587,15 @@ mutation SendProactiveMessage {
 
 #### conversationId
 
-This is the id of the **iAdvize conversation** you receive on the POST /conversation route in the body (`idConversation`).
+This is the id of the **iAdvize conversation** you receive on the `POST /conversation` route in the body (`idConversation`).
 
 **⚠️ Warning:** if you return your own conversation id in the body of the call to `POST /conversations`, be careful not to use the conversation id passed in the call to `POST /conversations/:idConversation/messages` (because it will be your own conversation id and not the one from iAdvize).
 
 #### chatbotId
 
-This is the id of your external bot (chatbot) at iAdvize in integer format
+This is the id of your external bot (=chatbotId) at iAdvize in integer format
 
-**⚠️ Warning:** the format of the operator id you receive in the REST endpoints you have implemented is slightly different: it is a string containing the operator id (=chatbotId) prefixed with the iAdvize environment `sd-` or `ha-`. One possibility is to split the hyphen (-) and get the platform on one hand and the operator id (=chatbotId) on the other hand.
+**⚠️ Warning:** the format of the operator id you receive in the REST endpoints you have implemented is slightly different: it is a string containing the operator id (=chatbotId) prefixed with the iAdvize environment `sd-` or `ha-`. One possibility is to split the hyphen (`-`) and get the platform on one hand and the operator id (=chatbotId) on the other hand.
 
 Using our [GraphiQL tool](https://developers.iadvize.com/documentation/graphql-api#graphiql), you can learn more about the different options you have to interact with the visitor.
 
