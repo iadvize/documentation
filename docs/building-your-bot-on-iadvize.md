@@ -552,7 +552,7 @@ This endpoint is called when a new message is received in the conversation, whet
 ### Proactively send messages to the visitor
 
 🎉 Through our GraphQL API you can now proactively send messages to the visitor **after the conversation has started**.
-You no longer need to wait for the visitor to systematically send you a message to get a chance to respond, and you are no longer constrained by the 10 seconds timeout which gives you time to trigger internal processes that may take time.
+You no longer need to wait for the visitor to systematically send you a message to get a chance to respond. Therefore you are no longer constrained by the 10 seconds timeout which allows you to trigger internal processes that may take time.
 
 **⚠️ Note 1:** this option does not exempt you from implementing the previous endpoint `POST /conversations/:idConversation/messages` (however, you can just reply an empty response list and only use this new way to answer the visitor).
 
