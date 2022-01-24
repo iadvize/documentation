@@ -511,7 +511,7 @@ The app can communicate with the desk by using a library provided by iAdvize.
 To use the library an app must include a javascript bundle in the html with the following code.
 
 <pre class="prettyprint lang-html">
-&lt;script src="https://static.iadvize.com/conversation-panel-app-lib/1.2.0/idzcpa.umd.production.min.js"&gt;&lt;/script&gt;
+&lt;script src="https://static.iadvize.com/conversation-panel-app-lib/2.0.3/idzcpa.umd.production.min.js"&gt;&lt;/script&gt;
 </pre>
 
 Then in the javascript code of the app the library can be used as follows.
@@ -521,6 +521,8 @@ window.idzCpa.init().then(client => {
     client.insertTextInComposeBox('Hello world!');
 });
 </pre>
+
+⚠️ CPAs available on the iAdvize iOS and Android apps must use the version 2.0.3 or greater.  
 
 The client is obtained via the `idzCpa.init` function that returns a Promise.
 In the `then` statement of the promise the `client` can then be used to invoke functions to interact with the desk.
@@ -534,21 +536,29 @@ function insertTextInComposeBox(value: string) {}
 Please note that one iframe is created per conversation in order to keep a context for an app for each conversation.
 It is recommended to keep the app very lightweight and avoid heavy processing or streaming updates.
 
-The library also prive a standalone stylesheet with CSS variables built to fit iAdvize's design guidelines.
+The library also provides a standalone stylesheet with CSS variables built to fit iAdvize's design guidelines.
 
 An app can include it either in its HTML: 
 
 <pre class="prettyprint lang-html">
-&lt;link rel="stylesheet" src="https://static.iadvize.com/conversation-panel-app-lib/1.2.0/idzcpa.base.css"&gt;
+&lt;link rel="stylesheet" src="https://static.iadvize.com/conversation-panel-app-lib/2.0.3/idzcpa.base.css"&gt;
 </pre>
 
 Or as a top-level import inside a preprocessed-stylesheet: 
 
 <pre class="prettyprint lang-css">
-@import 'https://static.iadvize.com/conversation-panel-app-lib/1.2.0/idzcpa.base.css';
+@import 'https://static.iadvize.com/conversation-panel-app-lib/2.0.3/idzcpa.base.css';
 </pre>
 
 A complete description of the provided variables can be found in [our knowledge base](https://help.iadvize.com/hc/en-gb/articles/4404351307026-Conversation-Panel-Apps-Guidelines#5-how-to-easily-style-your-conversation-panel-app-for-a-consistent-user-interface-integration-in-the-desk).
+
+*Library Change log*
+
+| Version | Description |
+| --- | --- |
+| 1.0.0 | Initial version with support for inserting text in the compose box via `insertTextInComposeBox`. |
+| 1.2.0 | Add Conversation Panel App style sheet. |
+| 2.0.3 | Add mobile apps support - from this version apps hosted in the iAdvize iOS and Android apps can use this library. |
 
 #### Configuration
 Under the Plugins section create a Conversation Panel App and then edit the following fields:
