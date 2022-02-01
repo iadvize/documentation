@@ -552,14 +552,15 @@ This endpoint is called when a new message is received in the conversation, whet
 ### Proactively send messages to the visitor
 
 🎉 Through our GraphQL API you can now proactively send messages to the visitor **after the conversation has started**.
-You no longer need to wait for the visitor to systematically send you a message to get a chance to respond. So, if you think your response to the `POST /conversations/:idConversation/messages` might take some time (if you call an external api for example), you can send it asynchronously with this new endpoint
+You no longer need to wait for the visitor to systematically send you a message to get a chance to respond. So, if you think your response to the `POST /conversations/:idConversation/messages` might take some time (if you call an external api for example), you can send it asynchronously with this new endpoint.
 
 **⚠️ Note 1:** this option does not exempt you from implementing the previous endpoint `POST /conversations/:idConversation/messages` (however, you can just reply an empty response list and only use this new way to answer the visitor).
 
 **⚠️ Note 2:** with this solution you can only send one "message" (or action) at a time and only after the conversation has started (= after the visitor has sent a first message).
 
-#### The `chatbotMessageSend` GraphQL mutation
+**⚠️ Note 2:** iAdvize will close the conversation automatically if there are no new messages for more than 5 minutes. So if you have performed a task that can potentially take more than 5 minutes, you can send a message at regular intervals to inform the visitor.
 
+#### The `chatbotMessageSend` GraphQL mutation
 
 To be able to use this new GraphQL mutation you will have to add an **Accept** header with the following value: `application/vnd.iadvize.automation-chatbot-conversation-preview+json`.
 
