@@ -508,10 +508,14 @@ This is done by configuring the `X-FRAME-OPTIONS` header.
 
 The app can communicate with the desk by using a library provided by iAdvize.
 
+Please note that one iframe is created per conversation in order to keep a context for an app for each conversation.
+It is recommended to keep the app very lightweight and avoid heavy processing or streaming updates.
+
+##### Library quick start
 To use the library an app must include a javascript bundle in the html with the following code.
 
 <pre class="prettyprint lang-html">
-&lt;script src="https://static.iadvize.com/conversation-panel-app-lib/2.0.3/idzcpa.umd.production.min.js"&gt;&lt;/script&gt;
+&lt;script src="https://static.iadvize.com/conversation-panel-app-lib/2.1.0/idzcpa.umd.production.min.js"&gt;&lt;/script&gt;
 </pre>
 
 Then in the javascript code of the app the library can be used as follows.
@@ -524,30 +528,62 @@ window.idzCpa.init().then(client => {
 
 ⚠️ CPAs available on the iAdvize iOS and Android apps must use the version 2.0.3 or greater.  
 
-The client is obtained via the `idzCpa.init` function that returns a Promise.
-In the `then` statement of the promise the `client` can then be used to invoke functions to interact with the desk.
+##### API reference
+###### idzCpa
+`idzCpa` is a global variable used as the entry point of the CPA library.
 
-At present the library only allows to send some text to the compose zone with the following function.
+####### init
+```js
+function init(): Promise<Client>
+```
+The client is obtained via the `idzCpa.init` function that returns a Promise<Client>.
+```js
+const clientPromise = idzCpa.init();
+clientPromise.then(client => { /* do something */});
+```
 
-<pre class="prettyprint lang-js">
-function insertTextInComposeBox(value: string) {}
-</pre>
+###### Client
+####### context
+```js
+client.context // => Context
 
-Please note that one iframe is created per conversation in order to keep a context for an app for each conversation.
-It is recommended to keep the app very lightweight and avoid heavy processing or streaming updates.
+type Context = {
+    conversationId: string;
+    projectId: string;
+}
+```
 
+The `context` property on the client returns the conversation context: conversation ID and project ID.
+
+```js
+client.context.conversationId // => '5701a92f-a8e3-49ad-81dc-ac801171f799'
+client.context.projectId // => '3103'
+```
+
+####### insertTextInComposeBox
+```js
+function insertTextInComposeBox(value: string): void
+```
+
+`insertTextInComposeBox` allows the CPA to send some text to the active thread compose zone.
+
+```js
+client.insertTextInComposeBox('Hello world!');
+```
+
+##### Style sheet
 The library also provides a standalone stylesheet with CSS variables built to fit iAdvize's design guidelines.
 
 An app can include it either in its HTML: 
 
 <pre class="prettyprint lang-html">
-&lt;link rel="stylesheet" src="https://static.iadvize.com/conversation-panel-app-lib/2.0.3/idzcpa.base.css"&gt;
+&lt;link rel="stylesheet" src="https://static.iadvize.com/conversation-panel-app-lib/2.1.0/idzcpa.base.css"&gt;
 </pre>
 
 Or as a top-level import inside a preprocessed-stylesheet: 
 
 <pre class="prettyprint lang-css">
-@import 'https://static.iadvize.com/conversation-panel-app-lib/2.0.3/idzcpa.base.css';
+@import 'https://static.iadvize.com/conversation-panel-app-lib/2.1.0/idzcpa.base.css';
 </pre>
 
 A complete description of the provided variables can be found in [our knowledge base](https://help.iadvize.com/hc/en-gb/articles/4404351307026-Conversation-Panel-Apps-Guidelines#5-how-to-easily-style-your-conversation-panel-app-for-a-consistent-user-interface-integration-in-the-desk).
@@ -559,6 +595,7 @@ A complete description of the provided variables can be found in [our knowledge 
 | 1.0.0 | Initial version with support for inserting text in the compose box via `insertTextInComposeBox`. |
 | 1.2.0 | Add Conversation Panel App style sheet. |
 | 2.0.3 | Add mobile apps support - from this version apps hosted in the iAdvize iOS and Android apps can use this library. |
+| 2.1.0 | Return the conversation context in the client.
 
 #### Configuration
 Under the Plugins section create a Conversation Panel App and then edit the following fields:
@@ -650,6 +687,46 @@ Check this checkbox to make the app available for operators.
 
 #### Enable for experts
 Check this checkbox to make the app available for ibbü experts.
+
+#### Use authentication
+Check this checkbox if your app requires a proof that the CPA is loaded within the desk or if you want the ID of the operator.
+You will receive a JWT in the url parameters that is signed with the secret token defined in the connector of the CPA.
+For instance a URL with a JWT will look like this:
+
+https://app.iadvize.com/order.html?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...
+
+The JWT can be decoded and validated by standard JWT libraries, for instance the jsonwebtoken library from auth0 https://github.com/auth0/node-jsonwebtoken
+
+The code to decode a JWT looks like this:
+```js
+const inputToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...";
+
+const secrettoken = '97db6bc85144af406a0e0040ad6f354b';
+try {
+    const verifiedToken = jwt.verify(
+        inputToken, 
+        secretToken, 
+        { algorithms: ['HS256'] });
+    // do something with verifiedToken
+    // example token
+    // {
+    //     iss: 'iadvize',
+    //     sub: '270586',
+    //     aud: 'https://app.iadvize.com/order.html',
+    //     exp: 1644502986,
+    //     iat: 1644502926
+    // }
+} catch(err) {
+    // handle the error by returning an unauthorised response
+}
+```
+
+The JWT contains the following properties:
+- `iss` the issuer is always `iadvize`
+- `sub` the subject, it is the operator ID
+- `aud` the audience is the url of the targeted CPA
+- `iat` the issue time, unix timestamp in number of seconds
+- `exp` the expiry time, unix timestamp in number of seconds
 
 ## External bots
 Bots are an important part of iAdvize integration ecosystem. That's why they have their [own dedicated documentation](/documentation/building-your-bot-on-iadvize#building-your-bot-on-iadvize).
