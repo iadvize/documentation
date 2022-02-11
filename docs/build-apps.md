@@ -533,43 +533,43 @@ window.idzCpa.init().then(client => {
 `idzCpa` is a global variable used as the entry point of the CPA library.
 
 ####### init
-```js
+<pre class="prettyprint lang-js">
 function init(): Promise<Client>
-```
+</pre>
 The client is obtained via the `idzCpa.init` function that returns a Promise<Client>.
-```js
+<pre class="prettyprint lang-js">
 const clientPromise = idzCpa.init();
 clientPromise.then(client => { /* do something */});
-```
+</pre>
 
 ###### Client
 ####### context
-```js
+<pre class="prettyprint lang-js">
 client.context // => Context
 
 type Context = {
     conversationId: string;
     projectId: string;
 }
-```
+</pre>
 
 The `context` property on the client returns the conversation context: conversation ID and project ID.
 
-```js
+<pre class="prettyprint lang-js">
 client.context.conversationId // => '5701a92f-a8e3-49ad-81dc-ac801171f799'
 client.context.projectId // => '3103'
-```
+</pre>
 
 ####### insertTextInComposeBox
-```js
+<pre class="prettyprint lang-js">
 function insertTextInComposeBox(value: string): void
-```
+</pre>
 
 `insertTextInComposeBox` allows the CPA to send some text to the active thread compose zone.
 
-```js
+<pre class="prettyprint lang-js">
 client.insertTextInComposeBox('Hello world!');
-```
+</pre>
 
 ##### Style sheet
 The library also provides a standalone stylesheet with CSS variables built to fit iAdvize's design guidelines.
@@ -698,7 +698,7 @@ https://app.iadvize.com/order.html?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...
 The JWT can be decoded and validated by standard JWT libraries, for instance the jsonwebtoken library from auth0 https://github.com/auth0/node-jsonwebtoken
 
 The code to decode a JWT looks like this:
-```js
+<pre class="prettyprint lang-js">
 const inputToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...";
 
 const secrettoken = '97db6bc85144af406a0e0040ad6f354b';
@@ -719,7 +719,7 @@ try {
 } catch(err) {
     // handle the error by returning an unauthorised response
 }
-```
+</pre>
 
 The JWT contains the following properties:
 - `iss` the issuer is always `iadvize`
