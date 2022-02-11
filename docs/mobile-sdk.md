@@ -952,6 +952,6 @@ The visitor data you registered are displayed in the iAdvize Operator Desk in th
 From SDK version `2.4.0` and onward, the customer satisfaction survey is automatically sent to the visitor at the end of the conversation, as long as it is activated in the iAdvize administration website.
 The survey is presented to the visitor in a conversational approach, directly into the Chatbox.
 
-![Satisfaction survey](./assets/images/mobile-sdk/08-satisfaction-survey.gif)
+<img src="./assets/images/mobile-sdk/08-satisfaction-survey.gif" alt="Satisfaction survey" style="display: block; width: 20%; height: auto;" />
 
 > *⚠️ Only the `CSAT`, `NPS` and `COMMENT` steps of the survey are supported.*
