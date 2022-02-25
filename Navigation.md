@@ -152,3 +152,4 @@
     * [Handling push notifications](/documentation/mobile-sdk#🔔-handling-push-notifications)
     * [Using a custom chat button](/documentation/mobile-sdk#✨-using-a-custom-chat-button)
     * [Adding value to the conversation](/documentation/mobile-sdk#📈-adding-value-to-the-conversation)
+    * [Visitor satisfaction survey](/documentation/mobile-sdk#👍-visitor-satisfaction-survey)

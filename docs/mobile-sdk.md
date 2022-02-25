@@ -371,7 +371,7 @@ IAdvizeSDK.targetingController.registerUserNavigation(navOption)
 
 #### 1️⃣ Adding a welcome message
 
-As seen above, the chatbox is empty by default. You can configure a welcome message that will be displayed to the visitor when no conversation is ongoing.
+As seen above, the Chatbox is empty by default. You can configure a welcome message that will be displayed to the visitor when no conversation is ongoing.
 
 ##### iOS
 
@@ -692,7 +692,7 @@ class NotificationService : FirebaseMessagingService() {
 }
 </pre>
 
-> *⚠️ Notifications will be received in your app for all messages sent by the agent. It is your responsability to display the notification and to check wether or not it is relevant to display it. For instance you don’t need to show a notification to the visitor when the chatbox is opened:*
+> *⚠️ Notifications will be received in your app for all messages sent by the agent. It is your responsability to display the notification and to check wether or not it is relevant to display it. For instance you don’t need to show a notification to the visitor when the Chatbox is opened:*
 
 ##### iOS
 
@@ -741,7 +741,7 @@ With a custom button it is your responsibility to:
 
 - design the floating or fixed button to invite your user to chat
 - hide/show the button following the active targeting rule availability and the ongoing conversation status
-- open the chatbox when the user presses your button
+- open the Chatbox when the user presses your button
 
 #### 1️⃣ Disabling the default chat button
 
@@ -811,7 +811,7 @@ IAdvizeSDK.conversationController.listeners.add(object : ConversationListener {
 })
 </pre>
 
-The chat button gives access to the chatbox so it should be visible:
+The chat button gives access to the Chatbox so it should be visible:
 
 - at all times when a conversation is ongoing to allow the visitor to come back to the current conversation
 - when the active targeting rule is available, to engage the visitor to chat
@@ -854,9 +854,9 @@ fun updateChatButtonVisibility() {
 }
 </pre>
 
-#### 3️⃣ Opening the chatbox
+#### 3️⃣ Opening the Chatbox
 
-When the visitor taps on your custom chat button you should open the chatbox by calling the following method:
+When the visitor taps on your custom chat button you should open the Chatbox by calling the following method:
 
 ##### iOS
 
@@ -946,3 +946,12 @@ object : SDKCallback {
 The visitor data you registered are displayed in the iAdvize Operator Desk in the conversation sidebar, in a tab labelled  `Custom data`:
 
 ![Custom data tab shows registered data from the SDK](./assets/images/mobile-sdk/07-custom-data.png)
+
+### 👍 Visitor satisfaction survey
+
+From SDK version `2.4.0` and onward, the customer satisfaction survey is automatically sent to the visitor at the end of the conversation, as long as it is activated in the iAdvize administration website.
+The survey is presented to the visitor in a conversational approach, directly into the Chatbox.
+
+<img src="./assets/images/mobile-sdk/08-satisfaction-survey.gif" alt="Satisfaction survey" style="display: block; width: 20%; height: auto;" />
+
+> *⚠️ Only the `CSAT`, `NPS` and `COMMENT` steps of the survey are supported.*
