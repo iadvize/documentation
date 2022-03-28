@@ -173,10 +173,26 @@ window.iAdvizeCallbacks.onMessageSent = function(context) {
 
 Triggered when the satisfaction survey is displayed to the visitor.
 
+#### Context parameter:
+
+| Property                | Description                     |
+| ----------------------- | ------------------------------- |
+| `context.surveyAnswers` | Array of survey's answers       |
+<br />
+#### SurveyAnswers items properties:
+
+| Property       | Description                              |
+| -------------- | ---------------------------------------- |
+| `id`           | Conversation id                          |
+| `vuid`         | Conversation vuid                        |
+| `grade`        | Question type identifier <br/>'CSAT', 'NPS', 'CUSTOM_QUESTION' or 'COMMENT'   |
+| `value`        | Answer value                             |
+
+
 #### Example:
 
 <pre class="prettyprint lang-js">
-window.iAdvizeCallbacks.onSatisfactionDisplayed = function() {
+window.iAdvizeCallbacks.onSatisfactionDisplayed = function(context) {
   // Satisfaction survey displayed to the visitor
   ...
 };
