@@ -714,7 +714,8 @@ try {
     //     sub: '270586',
     //     aud: 'https://app.iadvize.com/order.html',
     //     exp: 1644502986,
-    //     iat: 1644502926
+    //     iat: 1644502926,
+    //     email: 'operator@company.com'
     // }
 } catch(err) {
     // handle the error by returning an unauthorised response
@@ -727,6 +728,7 @@ The JWT contains the following properties:
 - `aud` the audience is the url of the targeted CPA
 - `iat` the issue time, unix timestamp in number of seconds
 - `exp` the expiry time, unix timestamp in number of seconds
+- `email` the operator email address
 
 ## External bots
 Bots are an important part of iAdvize integration ecosystem. That's why they have their [own dedicated documentation](/documentation/building-your-bot-on-iadvize#building-your-bot-on-iadvize).
