@@ -38,9 +38,14 @@ Triggered when the chat window is displayed on the visitor screen **(either open
 #### Example:
 
 <pre class="prettyprint lang-js">
-window.iAdvizeCallbacks.onChatDisplayed = function() {
-  // Chat window is displayed
-  ...
+window.iAdvizeCallbacks = {
+  ...window.iAdvizeCallbacks,
+  
+  onChatDisplayed() {
+    // Chat window is displayed
+    ...
+  }
+  
 };
 </pre>
 
@@ -51,9 +56,14 @@ Triggered when the visitor closes the chatbox (after the conversation has been c
 #### Example:
 
 <pre class="prettyprint lang-js">
-window.iAdvizeCallbacks.onChatHidden = function() {
-  // Chat window is hidden
-  ...
+window.iAdvizeCallbacks = {
+  ...window.iAdvizeCallbacks,
+  
+  onChatHidden() {
+    // Chat window is hidden
+    ...
+  }
+  
 };
 </pre>
 
@@ -64,9 +74,14 @@ Triggered when a “click to chat” button is displayed on the visitor screen.
 #### Example:
 
 <pre class="prettyprint lang-js">
-window.iAdvizeCallbacks.onChatButtonDisplayed = function() {
-  // Chat button is displayed
-  ...
+window.iAdvizeCallbacks = {
+  ...window.iAdvizeCallbacks,
+  
+  onChatButtonDisplayed() {
+    // Chat button is displayed
+    ...
+  }
+  
 };
 </pre>
 
@@ -85,9 +100,14 @@ Triggered when a chat conversation has started.
 #### Example:
 
 <pre class="prettyprint lang-js">
-window.iAdvizeCallbacks.onChatStarted = function(context) {
-  // Chat is started
-  ...
+window.iAdvizeCallbacks = {
+  ...window.iAdvizeCallbacks,
+  
+  .onChatStarted(context) {
+    // Chat conversation has started
+    ...
+  }
+  
 };
 </pre>
 
@@ -107,9 +127,14 @@ Triggered when a chat conversation has ended.
 #### Example:
 
 <pre class="prettyprint lang-js">
-window.iAdvizeCallbacks.onChatEnded = function(context) {
-  // Chat conversation is closed
-  ...
+window.iAdvizeCallbacks = {
+  ...window.iAdvizeCallbacks,
+  
+  onChatEnded(context) {
+    // Chat conversation is closed
+    ...
+  }
+  
 };
 </pre>
 
@@ -120,9 +145,14 @@ Triggered when a “click to call” button is displayed on the visitor screen.
 #### Example:
 
 <pre class="prettyprint lang-js">
-window.iAdvizeCallbacks.onCallButtonDisplayed = function() {
-  // Call button is displayed
-  ...
+window.iAdvizeCallbacks = {
+  ...window.iAdvizeCallbacks,
+  
+  onCallButtonDisplayed() {
+    // Call button is displayed
+    ...
+  }
+  
 };
 </pre>
 
@@ -143,9 +173,14 @@ Triggered when an operator message is received by the visitor.
 #### Example:
 
 <pre class="prettyprint lang-js">
-window.iAdvizeCallbacks.onMessageReceived = function(context) {
-  // Operator message received
-  ...
+window.iAdvizeCallbacks = {
+  ...window.iAdvizeCallbacks,
+  
+  onMessageReceived(context) {
+    // Operator message received
+    ...
+  }
+  
 };
 </pre>
 
@@ -163,9 +198,14 @@ Triggered when the visitor sends a message.
 #### Example:
 
 <pre class="prettyprint lang-js">
-window.iAdvizeCallbacks.onMessageSent = function(context) {
-  // Visitor message sent
-  ...
+window.iAdvizeCallbacks = {
+  ...window.iAdvizeCallbacks,
+  
+  onMessageSent(context) {
+    // Visitor message sent
+    ...
+  }
+  
 };
 </pre>
 
@@ -176,22 +216,32 @@ Triggered when the satisfaction survey is displayed to the visitor.
 #### Example:
 
 <pre class="prettyprint lang-js">
-window.iAdvizeCallbacks.onSatisfactionDisplayed = function() {
-  // Satisfaction survey displayed to the visitor
-  ...
+window.iAdvizeCallbacks = {
+  ...window.iAdvizeCallbacks,
+  
+  onSatisfactionDisplayed() {
+    // Satisfaction survey displayed to the visitor
+    ...
+  }
+  
 };
 </pre>
 
 ### onSatisfactionAnswered
 
-Triggered when the visitor has answered all the questions in the satisfaction survey.
+Triggered when the visitor has answered **all** the questions in the satisfaction survey.
 
 #### Example:
 
 <pre class="prettyprint lang-js">
-window.iAdvizeCallbacks.onSatisfactionAnswered = function() {
-  // Satisfaction survey answered by the visitor
-  ...
+window.iAdvizeCallbacks = {
+  ...window.iAdvizeCallbacks,
+  
+  onSatisfactionAnswered() {
+    // Satisfaction survey answered by the visitor
+    ...
+  }
+  
 };
 </pre>
 
@@ -201,12 +251,34 @@ window.iAdvizeCallbacks.onSatisfactionAnswered = function() {
 
 ### Safely adds events in `window.iAdvizeCallbacks` object
 
-If you need to add callbacks in different places in your code and to prevent overriding a previous callback definition, you should always use this line before adding your callbacks:
+If you need to add iAdvize callbacks in different places in your code, you should always declare your callbacks like the following example to avoid overwriting a previous callback definition:
 
 <pre class="prettyprint lang-js">
-// Used to prevent overriding a previous definition
-window.iAdvizeCallbacks = window.iAdvizeCallbacks || {};
+window.iAdvizeCallbacks = {
+  ...window.iAdvizeCallbacks,
+  
+  onChatStarted() {
+    // Do something
+  },
+  
+  onChatEnded() {
+    // Do something
+  }
+  
+};
+
+// Later in your code:
+window.iAdvizeCallbacks = {
+  ...window.iAdvizeCallbacks,
+  
+  onMessageReceived(context) {
+    // Do something
+  }
+  
+};
 </pre>
+
+With this approach, iAdvize will see 3 callbacks: `onChatStarted`, `onChatEnded` et `onMessageReceived`.
 
 ### Safely define a function for an event
 
@@ -215,44 +287,50 @@ If your code is splitted in multiple files or module, you may need to define sev
 Here is a solution to avoid overwriting a previous function:
 
 <pre class="prettyprint lang-js">
-// Used to prevent overriding a previous definition
-window.iAdvizeCallbacks = window.iAdvizeCallbacks || {};
+var tempOnChatStarted = window.iAdvizeCallbacks.onChatStarted || () => {};
 
-var tempOnChatStarted = window.iAdvizeCallbacks.onChatStarted || function(){};
-window.iAdvizeCallbacks.onChatStarted = function(context) {
+window.iAdvizeCallbacks = {
+  ...window.iAdvizeCallbacks,
+  
+  onChatStarted(context) {
 
-  // Call the possible already defined callback
-  tempOnChatStarted(context);
+    // Call the possible already defined callback
+    tempOnChatStarted(context);
 
-  // Your new custom code here
-  // ...
-
+    // Your new custom code here
+    // ...
+    
+  }
+  
 };
 </pre>
 
 ### Track some Google Analytics events
 
 <pre class="prettyprint lang-js">
-// Used to prevent overriding a previous definition
-window.iAdvizeCallbacks = window.iAdvizeCallbacks || {};
+window.iAdvizeCallbacks = {
 
-// Chat session starts
-window.iAdvizeCallbacks.onChatStarted = function(context) {
-  _gaq.push(['_trackEvent', 'iAdvize', 'Chat Start', context.startedBy]);
-};
+  ...window.iAdvizeCallbacks,
+  
+  // Chat conversation starts
+  onChatStarted(context) {
+    _gaq.push(['_trackEvent', 'iAdvize', 'Chat Start', context.startedBy]);
+  },
+  
+  // Chat conversation ends
+  onChatEnded(context) {
+    _gaq.push(['_trackEvent', 'iAdvize', 'Chat End', context.startedBy]);
+  },
+  
+  // Call conversation starts
+  onCallStarted() {
+    _gaq.push(['_trackEvent', 'iAdvize', 'Call Start']);
+  },
+  
+  // Call conversation ends
+  onCallEnded() {
+    _gaq.push(['_trackEvent', 'iAdvize', 'Call End']);
+  }
 
-// Chat session ends
-window.iAdvizeCallbacks.onChatEnded = function(context) {
-  _gaq.push(['_trackEvent', 'iAdvize', 'Chat End', context.startedBy]);
-};
-
-// Call session starts
-window.iAdvizeCallbacks.onCallStarted = function() {
-  _gaq.push(['_trackEvent', 'iAdvize', 'Call Start']);
-};
-
-// Call session ends
-window.iAdvizeCallbacks.onCallEnded = function() {
-  _gaq.push(['_trackEvent', 'iAdvize', 'Call End']);
 };
 </pre>
