@@ -54,8 +54,9 @@ Emitted on a beginning of a conversation or a receiving of a conversation transf
   "clientId": 335,
   "conversationId": "4c8c7408-f73c-42cd-89e9-afbbee7d9024",
   "operatorId": 15253,
-  "visitorExternalId": "63429889",
+  "visitorExternalId": "63429889", // deprecated. Only available for ONSITE conversations. Use `visitorId` field instead.
   "channel": "CHAT",
+  "visitorId": "b05f1b45-c891-4a9c-b47e-91ee6c8ffb44",
   "createdAt": "2019-04-12T07:58:35.171Z",
   "sentAt": "2019-04-12T07:58:35.496Z"
 }
@@ -83,8 +84,9 @@ Emitted on an end of a conversation. Conversations on offsite channels are autom
     15253,
     15254
    ],
-  "visitorExternalId": "63429889", //or null for offsite channels such as Facebook
+  "visitorExternalId": "63429889", // deprecated. Only available for ONSITE conversations. Use `visitorId` field instead.
   "channel": "CHAT",
+  "visitorId": "b05f1b45-c891-4a9c-b47e-91ee6c8ffb44",
   "createdAt": "2019-04-12T07:58:35.171Z",
   "sentAt": "2019-04-12T07:58:35.496Z"
 }
