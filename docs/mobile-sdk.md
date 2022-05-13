@@ -17,7 +17,7 @@ Using your operator account please log into the [iAdvize Desk](https://ha.iadviz
 
 > *⚠️ If you have the Administrator status in addition to your operator account, you will be directed to the Admin Desk when logging in. Just click on the `Chat` button in the upper right corner to open the Operator Desk.*
 
-The iAdvize operator desk is the place where the conversations that are assigned to your account will pop up. Please ensure that your status is “Available to chat” by enabling the chat toggle button in the upper right corner:
+The iAdvize operator desk is the place where the conversations that are assigned to your account will pop up. Please ensure that your status is “Available" by enabling the corresponding chat or video toggle buttons in the upper right corner:
 
 ![The chat button is green, your operator can receive incoming conversations.](./assets/images/mobile-sdk/01-operator-desk.png)
 
@@ -136,7 +136,7 @@ After syncing your project you should be able to import the iAdvize dependency i
 
 - [Project-level Gradle file](https://github.com/iadvize/iadvize-android-sdk/blob/master/sample/build.gradle.kts)
 - [Module-level Gradle file](https://github.com/iadvize/iadvize-android-sdk/blob/master/sample/app/build.gradle.kts)
-- [Import](https://github.com/iadvize/iadvize-android-sdk/blob/d15e3415c4d4a0afc097cfcfee67f50aa4631556/sample/app/src/main/java/com/iadvize/conversation/sdk/demo/App.kt#L9)
+- [Import](https://github.com/iadvize/iadvize-android-sdk/blob/master/sample/app/src/main/java/com/iadvize/conversation/sdk/demo/App.kt#L9)
 
 #### 2️⃣ Activating the SDK
 
@@ -190,7 +190,7 @@ IAdvizeSDK.activate(
   projectId = 0000,
   authenticationOption = AuthenticationOption.Simple("UserIdentifier"),
   gdprOption = GDPROption.Disabled,
-  callback = object : IAdvizeSDKCallback {
+  callback = object : IAdvizeSDK.Callback {
     override fun onSuccess() {
       Log.d("iAdvize SDK", "The SDK has been activated.")
     }
@@ -203,8 +203,8 @@ IAdvizeSDK.activate(
 
 ⌨️ **In-context example:**
 
-- [SDK Initiation](https://github.com/iadvize/iadvize-android-sdk/blob/d15e3415c4d4a0afc097cfcfee67f50aa4631556/sample/app/src/main/java/com/iadvize/conversation/sdk/demo/App.kt#L40)
-- [SDK Activation](https://github.com/iadvize/iadvize-android-sdk/blob/master/sample/app/src/main/java/com/iadvize/conversation/sdk/demo/activities/MainActivity.kt#L143)
+- [SDK Initiation](https://github.com/iadvize/iadvize-android-sdk/blob/master/sample/app/src/main/java/com/iadvize/conversation/sdk/demo/App.kt#L40)
+- [SDK Activation](https://github.com/iadvize/iadvize-android-sdk/blob/master/sample/app/src/main/java/com/iadvize/conversation/sdk/demo/activities/MainActivity.kt#L158)
 
 ##### Authentication modes
 
@@ -307,10 +307,13 @@ IAdvizeSDK.shared.targetingController.activateTargetingRule(targetingRuleId: UUI
 ##### Android
 
 <pre class="prettyprint">
-IAdvizeSDK.targetingController.activateTargetingRule(targetingRuleUUID)
+IAdvizeSDK.targetingController.activateTargetingRule(TargetingRule(
+    targetingRuleUUID,
+    ConversationChannel.CHAT // or ConversationChannel.VIDEO
+))
 </pre>
 
-⌨️ **In-context example:** [Targeting rule activation](https://github.com/iadvize/iadvize-android-sdk/blob/master/sample/app/src/main/java/com/iadvize/conversation/sdk/demo/activities/MainActivity.kt#L52)
+⌨️ **In-context example:** [Targeting rule activation](https://github.com/iadvize/iadvize-android-sdk/blob/master/sample/app/src/main/java/com/iadvize/conversation/sdk/demo/activities/MainActivity.kt#L62)
 
 If all the following conditions are met, the default chat button should appear:
 
@@ -361,7 +364,7 @@ val navOption = NavigationOption.ClearActiveRule
 val navOption = NavigationOption.KeepActiveRule
     
 // To activate a new targeting rule
-val navOption = NavigationOption.ActivateNewRule(newRuleId)
+val navOption = NavigationOption.ActivateNewRule(newRule)
     
 // Register the user navigation through your app
 IAdvizeSDK.targetingController.registerUserNavigation(navOption)
@@ -393,7 +396,7 @@ configuration.automaticMessage = "Any question? Say Hello to Smart and we will a
 IAdvizeSDK.chatboxController.setupChatbox(configuration)
 </pre>
 
-⌨️ **In-context example:** [Welcome message](https://github.com/iadvize/iadvize-android-sdk/blob/master/sample/app/src/main/java/com/iadvize/conversation/sdk/demo/activities/MainActivity.kt#L111)
+⌨️ **In-context example:** [Welcome message](https://github.com/iadvize/iadvize-android-sdk/blob/master/sample/app/src/main/java/com/iadvize/conversation/sdk/demo/activities/MainActivity.kt#L118)
 
 When no conversation is ongoing, the welcome message is displayed to the visitor:
 
@@ -472,8 +475,8 @@ IAdvizeSDK.chatboxController.setupChatbox(configuration)
 
 ⌨️ **In-context example:**
 
-- [GDPR Option](https://github.com/iadvize/iadvize-android-sdk/blob/d15e3415c4d4a0afc097cfcfee67f50aa4631556/sample/app/src/main/java/com/iadvize/conversation/sdk/demo/activities/MainActivity.kt#L155)
-- [GDPR Message](https://github.com/iadvize/iadvize-android-sdk/blob/d15e3415c4d4a0afc097cfcfee67f50aa4631556/sample/app/src/main/java/com/iadvize/conversation/sdk/demo/activities/MainActivity.kt#L108)
+- [GDPR Option](https://github.com/iadvize/iadvize-android-sdk/blob/master/sample/app/src/main/java/com/iadvize/conversation/sdk/demo/activities/MainActivity.kt#L174)
+- [GDPR Message](https://github.com/iadvize/iadvize-android-sdk/blob/master/sample/app/src/main/java/com/iadvize/conversation/sdk/demo/activities/MainActivity.kt#L118)
 
 ### 🎨 Branding the Chatbox
 
@@ -483,7 +486,6 @@ The `ChatboxConfiguration` object that we used in the previous section to custom
 
 You can setup a main color on the SDK which will be applied to:
 
-- the default Chat button (if you use it)
 - the send button in the Chatbox
 - the blinking text cursor in the message input of the Chatbox
 - the background of the visitor messages bubbles
@@ -589,153 +591,46 @@ IAdvizeSDK.chatboxController.setupChatbox(configuration)
 
 > *⚠️ GIFs are not supported*
 
-### 🔔 Handling push notifications
+### 🎨 Branding the Default Floating Button
 
-> *⚠️ Before starting this part you will need to configure push notifications inside your application. You can refer to the following resources if needed:*
-
-| iOS | Android |
-| --- | ------- |
-| [Push notification setup tutorial](https://www.raywenderlich.com/11395893-push-notifications-tutorial-getting-started) | [Firebase Cloud Messaging documentation](https://firebase.google.com/docs/cloud-messaging/android/client) |
-
-> *You will also need to ensure that the push notifications are setup in your iAdvize project. The process is described above in the [SDK Knowledge Base](https://help.iadvize.com/hc/en-gb/articles/360019839480)*
-
-#### 1️⃣ Registering the device token
-
-For the SDK to be able to send notifications to the visitor’s device, its unique `device push token` must be registered:
+By default, the SDK uses its own Default Floating Button to the user to engage the conversation. This Default Floating Button display process is automated by the SDK and works out of the box. You have however limited possibilities to brand it to your needs.
 
 ##### iOS
 
-<pre class="prettyprint">
-IAdvizeSDK.shared.notificationController.registerPushToken("the_device_push_token", applicationMode: .prod)
-</pre>
-
-> *⚠️ You have to pass `.dev` as the `applicationMode` if you want to test the push notifications in `DEBUG`*
-
-⌨️ **In-context example:** [Device token register](https://github.com/iadvize/iadvize-ios-sdk/blob/master/Example/IAdvizeSwiftExample/IAdvizeSwiftExample/Source/AppDelegate%2BPushNotification.swift#L27)
-
-##### Android
+The Default Floating Button will use hardcoded icons and the main color of the ChatboxConfiguration a background color:
 
 <pre class="prettyprint">
-class NotificationService : FirebaseMessagingService() {
-  override fun onNewToken(token: String) {
-    super.onNewToken(token)
-    IAdvizeSDK.notificationController.registerPushToken(token)
-  }
-}
-</pre>
-
-⌨️ **In-context example:** [Device token register](https://github.com/iadvize/iadvize-android-sdk/blob/49bc8b7036c051e89a0bf011b264199a71949cd2/sample/app/src/main/java/com/iadvize/conversation/sdk/demo/notifications/MyFirebaseMessagingService.kt#L44)
-
-#### 2️⃣ Enabling/disabling push notifications
-
-Push notifications are activated as long as you have setup the push notifications information for your app on the iAdvize administration website (process is described in the [SDK Knowledge Base](https://help.iadvize.com/hc/en-gb/articles/360019839480)). You can manually enable/disable them at any time using:
-
-##### iOS
-
-<pre class="prettyprint">
-IAdvizeSDK.shared.notificationController.enablePushNotifications { success in
-  ...
-}
-    
-IAdvizeSDK.shared.notificationController.disablePushNotifications { success in
-  ...
-}
+var configuration = ChatboxConfiguration()
+configuration.mainColor = .red
+IAdvizeSDK.shared.chatboxController.setupChatbox(configuration: configuration)
 </pre>
 
 ##### Android
 
-<pre class="prettyprint">
-IAdvizeSDK.notificationController.enablePushNotifications(object : SDKCallback {
-  override fun onSuccess() {
-    // Enable succeded
-  }
-  override fun onFailure(t: Throwable) {
-    // Enable failed
-  }
-})
-    
-IAdvizeSDK.notificationController.disablePushNotifications(object : SDKCallback {
-  override fun onSuccess() {
-    // Disable succeded
-  }
-  override fun onFailure(t: Throwable) {
-    // Disable failed
-  }
-})
-</pre>
-
-#### 3️⃣ Handling push notifications reception
-
-Once setup, you will receive push notifications when the operator sends any message. As the SDK notifications are caught in the same place than your app other notifications, you first have to distinguish if the received notification comes from iAdvize or not. This can be done using:
-
-##### iOS
+The Default Floating Button can be parametrized, both in its look (colors / icon) and position (anchor / margins) using the appropriate configuration:
 
 <pre class="prettyprint">
-func application(_ application: UIApplication,
-                 didReceiveRemoteNotification userInfo: [AnyHashable: Any],
-                 fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-    if IAdvizeSDK.shared.notificationController.isIAdvizePushNotification(with: userInfo) {
-        // This is an iAdvize SDK notification
-    }
-}
+val configuration = DefaultFloatingButtonConfiguration(
+  anchor = Gravity.START or Gravity.BOTTOM,
+  margins = DefaultFloatingButtonMargins(),
+  backgroundTint = ContextCompat.getColor(this, R.color.colorPrimary),
+  iconResIds = mapOf(
+    ConversationChannel.CHAT to R.drawable.chat_icon,
+    ConversationChannel.VIDEO to R.drawable.video_icon
+  )
+  iconTint = Color.WHITE
+)
+val option = DefaultFloatingButtonOption.Enabled(configuration)
+IAdvizeSDK.defaultFloatingButtonController.setupDefaultFloatingButton(option)
 </pre>
 
-##### Android
+⌨️ **In-context example:**
 
-<pre class="prettyprint">
-class NotificationService : FirebaseMessagingService() {
-  override fun onMessageReceived(remoteMessage: RemoteMessage) {
-      if (IAdvizeSDK.notificationController.isIAdvizePushNotification(remoteMessage.data)) {
-          // This is an iAdvize SDK notification
-      }
-  }
-}
-</pre>
-
-> *⚠️ Notifications will be received in your app for all messages sent by the agent. It is your responsability to display the notification and to check wether or not it is relevant to display it. For instance you don’t need to show a notification to the visitor when the Chatbox is opened:*
-
-##### iOS
-
-<pre class="prettyprint">
-func shouldDisplayNotification(userInfo: [AnyHashable: Any]) -> Bool {
-  guard IAdvizeSDK.shared.notificationController.isIAdvizePushNotification(with: userInfo) else {
-    return false
-  }
-  
-  guard !IAdvizeSDK.shared.conversationController.isChatboxPresented() else {
-    return false
-  }
-  
-  return true
-}
-</pre>
-
-##### Android
-
-<pre class="prettyprint">
-fun shouldDisplayNotification(remoteMessage: RemoteMessage) =
-  IAdvizeSDK.notificationController.isIAdvizePushNotification(remoteMessage.data) 
-  && !IAdvizeSDK.chatboxController.isChatboxPresented()
-</pre>
-
-#### 4️⃣ Updating notification title
-
-##### iOS
-
-By default, the title of the notification is set to the string key `iadvize_notification_title`.
-If you want to update/translate this title you can override this value by adding the iadvize_notification_title key in your `Localizable.strings` file:
-
-<pre class="prettyprint">
-"iadvize_notification_title" = "You have received a new message";
-</pre>
-
-##### Android
-
-On Android you are already responsible for displaying the notification so you can use any title you want.
+- [Default Floating Button Configuration](https://github.com/iadvize/iadvize-android-sdk/blob/master/sample/app/src/main/java/com/iadvize/conversation/sdk/demo/activities/MainActivity.kt#L132)
 
 ### ✨ Using a custom chat button
 
-If you are not satisfied with the default chat button look and feel or if you want to implement a specific behavior related to its display you may need to use a custom chat button.
+If you are not satisfied with the Default Floating Button look and feel or if you want to implement a specific behavior related to its display you may need to use a custom conversation button.
 
 With a custom button it is your responsibility to:
 
@@ -743,7 +638,7 @@ With a custom button it is your responsibility to:
 - hide/show the button following the active targeting rule availability and the ongoing conversation status
 - open the Chatbox when the user presses your button
 
-#### 1️⃣ Disabling the default chat button
+#### 1️⃣ Disabling the Default Floating Button
 
 ##### iOS
 
@@ -754,7 +649,7 @@ IAdvizeSDK.shared.chatboxController.useDefaultChatButton = false
 ##### Android
 
 <pre class="prettyprint">
-IAdvizeSDK.chatboxController.useDefaultChatButton = false
+IAdvizeSDK.defaultFloatingButtonController.setupDefaultFloatingButton(DefaultFloatingButtonOption.Disabled)
 </pre>
 
 #### 2️⃣ Displaying/hiding the chat button
@@ -790,15 +685,15 @@ extension IntegrationApp: ConversationControllerDelegate {
 
 <pre class="prettyprint">
 IAdvizeSDK.targetingController.listeners.add(object : TargetingListener {
-  override fun onActiveTargetingRuleAvailabilityChanged(isActiveTargetingRuleAvailable: Boolean) {
+  override fun onActiveTargetingRuleAvailabilityUpdated(isActiveTargetingRuleAvailable: Boolean) {
     // SDK active rule availability changed to isActiveTargetingRuleAvailable
     updateChatButtonVisibility()
   }
 })
 
 IAdvizeSDK.conversationController.listeners.add(object : ConversationListener {
-  override fun onOngoingConversationStatusChanged(hasOngoingConversation: Boolean) {
-    // SDK ongoing conversation status changed to hasOngoingConversation
+  override fun onOngoingConversationUpdated(ongoingConversation: OngoingConversation?) {
+    // SDK ongoing conversation has updated
     updateChatButtonVisibility()
   }
   override fun onNewMessageReceived(content: String) {
@@ -843,8 +738,8 @@ func updateChatButtonVisibility() {
 fun updateChatButtonVisibility() {
   val sdkActivated = IAdvizeSDK.activationStatus == IAdvizeSDK.ActivationStatus.ACTIVATED
   val chatboxOpened = IAdvizeSDK.chatboxController.isChatboxPresented()
-  val ruleAvailable = IAdvizeSDK.targetingController.hasAvailableActiveTargetingRule() ?: false
-  val hasOngoingConv = IAdvizeSDK.conversationController.hasOngoingConversation() ?: false
+  val ruleAvailable = IAdvizeSDK.targetingController.isActiveTargetingRuleAvailable()
+  val hasOngoingConv = IAdvizeSDK.conversationController.ongoingConversation() != null
     
   if (sdkActivated && !chatboxOpened && (hasOngoingConv || ruleAvailable)) {
     showChatButton()
@@ -871,7 +766,7 @@ IAdvizeSDK.shared.conversationController.presentConversationViewModal(
 ##### Android
 
 <pre class="prettyprint">
-IAdvizeSDK.chatboxController.presentChatboxActivity(context)
+IAdvizeSDK.chatboxController.presentChatbox(context)
 </pre>
 
 ⌨️ **In-context example:**
@@ -879,6 +774,150 @@ IAdvizeSDK.chatboxController.presentChatboxActivity(context)
 | iOS | Android |
 | --- | ------- |
 | [Full custom chat button implementation](https://gist.github.com/alexandrekarst/74da3ce5a9eaf68f7bd83eaf77c6d3dc) | [Full custom chat button implementation](https://gist.github.com/Judas/d0a34a50f1b6b8d542d77af5db9d9787) |
+
+### 🔔 Handling push notifications
+
+> *⚠️ Before starting this part you will need to configure push notifications inside your application. You can refer to the following resources if needed:*
+
+| iOS | Android |
+| --- | ------- |
+| [Push notification setup tutorial](https://www.raywenderlich.com/11395893-push-notifications-tutorial-getting-started) | [Firebase Cloud Messaging documentation](https://firebase.google.com/docs/cloud-messaging/android/client) |
+
+> *You will also need to ensure that the push notifications are setup in your iAdvize project. The process is described above in the [SDK Knowledge Base](https://help.iadvize.com/hc/en-gb/articles/360019839480)*
+
+#### 1️⃣ Registering the device token
+
+For the SDK to be able to send notifications to the visitor’s device, its unique `device push token` must be registered:
+
+##### iOS
+
+<pre class="prettyprint">
+IAdvizeSDK.shared.notificationController.registerPushToken("the_device_push_token", applicationMode: .prod)
+</pre>
+
+> *⚠️ You have to pass `.dev` as the `applicationMode` if you want to test the push notifications in `DEBUG`*
+
+⌨️ **In-context example:** [Device token register](https://github.com/iadvize/iadvize-ios-sdk/blob/master/Example/IAdvizeSwiftExample/IAdvizeSwiftExample/Source/AppDelegate%2BPushNotification.swift#L27)
+
+##### Android
+
+<pre class="prettyprint">
+class NotificationService : FirebaseMessagingService() {
+  override fun onNewToken(token: String) {
+    super.onNewToken(token)
+    IAdvizeSDK.notificationController.registerPushToken(token)
+  }
+}
+</pre>
+
+⌨️ **In-context example:** [Device token register](https://github.com/iadvize/iadvize-android-sdk/blob/master/sample/app/src/main/java/com/iadvize/conversation/sdk/demo/notifications/MyFirebaseMessagingService.kt#L44)
+
+#### 2️⃣ Enabling/disabling push notifications
+
+Push notifications are activated as long as you have setup the push notifications information for your app on the iAdvize administration website (process is described in the [SDK Knowledge Base](https://help.iadvize.com/hc/en-gb/articles/360019839480)). You can manually enable/disable them at any time using:
+
+##### iOS
+
+<pre class="prettyprint">
+IAdvizeSDK.shared.notificationController.enablePushNotifications { success in
+  ...
+}
+    
+IAdvizeSDK.shared.notificationController.disablePushNotifications { success in
+  ...
+}
+</pre>
+
+##### Android
+
+<pre class="prettyprint">
+IAdvizeSDK.notificationController.enablePushNotifications(object : IAdvizeSDK.Callback {
+  override fun onSuccess() {
+    // Enable succeded
+  }
+  override fun onFailure(t: Throwable) {
+    // Enable failed
+  }
+})
+    
+IAdvizeSDK.notificationController.disablePushNotifications(object : IAdvizeSDK.Callback {
+  override fun onSuccess() {
+    // Disable succeded
+  }
+  override fun onFailure(t: Throwable) {
+    // Disable failed
+  }
+})
+</pre>
+
+#### 3️⃣ Handling push notifications reception
+
+Once setup, you will receive push notifications when the operator sends any message. As the SDK notifications are caught in the same place than your app other notifications, you first have to distinguish if the received notification comes from iAdvize or not. This can be done using:
+
+##### iOS
+
+<pre class="prettyprint">
+func application(_ application: UIApplication,
+                 didReceiveRemoteNotification userInfo: [AnyHashable: Any],
+                 fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+    if IAdvizeSDK.shared.notificationController.isIAdvizePushNotification(with: userInfo) {
+        // This is an iAdvize SDK notification
+    }
+}
+</pre>
+
+##### Android
+
+<pre class="prettyprint">
+class NotificationService : FirebaseMessagingService() {
+  override fun onMessageReceived(remoteMessage: RemoteMessage) {
+    if (IAdvizeSDK.notificationController.isIAdvizePushNotification(remoteMessage.data)) {
+      // This is an iAdvize SDK notification
+    }
+  }
+}
+</pre>
+
+> *⚠️ Notifications will be received in your app for all messages sent by the agent. It is your responsability to display the notification and to check wether or not it is relevant to display it. For instance you don’t need to show a notification to the visitor when the Chatbox is opened:*
+
+##### iOS
+
+<pre class="prettyprint">
+func shouldDisplayNotification(userInfo: [AnyHashable: Any]) -> Bool {
+  guard IAdvizeSDK.shared.notificationController.isIAdvizePushNotification(with: userInfo) else {
+    return false
+  }
+  
+  guard !IAdvizeSDK.shared.conversationController.isChatboxPresented() else {
+    return false
+  }
+  
+  return true
+}
+</pre>
+
+##### Android
+
+<pre class="prettyprint">
+fun shouldDisplayNotification(remoteMessage: RemoteMessage) =
+  IAdvizeSDK.notificationController.isIAdvizePushNotification(remoteMessage.data) 
+  && !IAdvizeSDK.chatboxController.isChatboxPresented()
+</pre>
+
+#### 4️⃣ Updating notification title
+
+##### iOS
+
+By default, the title of the notification is set to the string key `iadvize_notification_title`.
+If you want to update/translate this title you can override this value by adding the iadvize_notification_title key in your `Localizable.strings` file:
+
+<pre class="prettyprint">
+"iadvize_notification_title" = "You have received a new message";
+</pre>
+
+##### Android
+
+On Android you are already responsible for displaying the notification so you can use any title you want.
 
 ### 📈 Adding value to the conversation
 
@@ -931,7 +970,7 @@ IAdvizeSDK.visitorController.registerCustomData(listOf(
   CustomData.fromDouble("Test3", 2.0),
   CustomData.fromInt("Test4", 3)
 ),
-object : SDKCallback {
+object : IAdvizeSDK.Callback {
   override fun onSuccess() {
     // Success
   }
