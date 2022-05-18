@@ -33,7 +33,7 @@ You can find the full API reference here:
 | --- | ------- |
 | [https://iadvize.github.io/iadvize-ios-sdk/](https://iadvize.github.io/iadvize-ios-sdk/) | [https://iadvize.github.io/iadvize-android-sdk/](https://iadvize.github.io/iadvize-android-sdk/) |
 
-### 🗓 SDK latest release version
+### 🗓 Native SDK latest release version
 
 The latest release version for the SDK can be found on the public Github repository:
 
@@ -42,6 +42,16 @@ The latest release version for the SDK can be found on the public Github reposit
 | [https://github.com/iadvize/iadvize-ios-sdk/releases/latest](https://github.com/iadvize/iadvize-ios-sdk/releases/latest) | [https://github.com/iadvize/iadvize-android-sdk/releases/latest](https://github.com/iadvize/iadvize-android-sdk/releases/latest) |
 
 > *⚠️ In the following snippets the SDK version is written as `x.y.z`, don’t forget to change it with the latest SDK version found at the above links.*
+
+### ⚛️ Hybrid SDK plugins
+
+Hybrid plugins for the iAdvize Conversation SDK are also available:
+
+| ReactNative |
+| ----------- |
+| [https://github.com/iadvize/iadvize-react-native-sdk](https://github.com/iadvize/iadvize-react-native-sdk) |
+
+> *⚠️ Please note that there may be delays between Native SDK releases and the corresponding hybrid plugins update deliveries.*
 
 ### ⚙️ Setting up the SDK
 
