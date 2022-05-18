@@ -314,7 +314,8 @@ Using a targeting rule UUID (see the [Prerequisites](#⚙️-prerequisites) sect
 ##### iOS
 
 <pre class="prettyprint">
-IAdvizeSDK.shared.targetingController.activateTargetingRule(targetingRuleId: UUID)
+let targetingRule = TargetingRule(id: UUID, conversationChannel: {.video|.chat})
+IAdvizeSDK.shared.targetingController.activateTargetingRule(targetingRule: targetingRule)
 </pre>
 
 ⌨️ **In-context example:** [Targeting rule activation](https://github.com/iadvize/iadvize-ios-sdk/blob/master/Example/IAdvizeSwiftExample/IAdvizeSwiftExample/Source/AppDelegate%2BiAdvize.swift#L69)
@@ -734,11 +735,11 @@ func updateChatButtonVisibility() {
     hideChatButton()
     return
   }
-  guard !IAdvizeSDK.shared.conversationController.isChatboxPresented() else {
+  guard !IAdvizeSDK.shared.chatboxController.isChatboxPresented() else {
     hideChatButton()
     return
   }
-  guard IAdvizeSDK.shared.targetingController.hasOngoingConversation ||
+  guard IAdvizeSDK.shared.conversationController.hasOngoingConversation ||
         IAdvizeSDK.shared.targetingController.isActiveTargetingRuleAvailable else {
       hideChatButton()
       return
@@ -771,7 +772,7 @@ When the visitor taps on your custom chat button you should open the Chatbox by 
 ##### iOS
 
 <pre class="prettyprint">
-IAdvizeSDK.shared.conversationController.presentConversationViewModal(
+IAdvizeSDK.shared.chatboxController.presentChatbox(
     animated: Bool,
     presentingViewController: UIViewController?) {
     // ...
@@ -903,7 +904,7 @@ func shouldDisplayNotification(userInfo: [AnyHashable: Any]) -> Bool {
     return false
   }
   
-  guard !IAdvizeSDK.shared.conversationController.isChatboxPresented() else {
+  guard !IAdvizeSDK.shared.chatboxController.isChatboxPresented() else {
     return false
   }
   
