@@ -148,6 +148,11 @@ After syncing your project you should be able to import the iAdvize dependency i
 - [Module-level Gradle file](https://github.com/iadvize/iadvize-android-sdk/blob/master/sample/app/build.gradle.kts)
 - [Import](https://github.com/iadvize/iadvize-android-sdk/blob/master/sample/app/src/main/java/com/iadvize/conversation/sdk/demo/App.kt#L9)
 
+
+From the version 2.5 and onward, the SDK supports video conversation using a third party native (C++) binaries.
+If you are delivering your app using an APK you will note a size increase as the default behavior of the build system is to include the binaries for each ABI in a single APK.
+We strongly recommended that you take advantage of either [App Bundles](https://developer.android.com/guide/app-bundle) or [APK Splits](https://developer.android.com/studio/build/configure-apk-splits) to reduce the size of your APKs while still maintaining maximum device compatibility.
+
 #### 2️⃣ Activating the SDK
 
 To activate the SDK you must use the `activate` function with your `projectId` (see the [Prerequisites](⚙️-prerequisites) section above to get that identifier). You have access to callbacks in order to know if the SDK has been successfully activated. In case of an SDK activation failure the callback will give you the reason of the failure and you may want to retry later:
