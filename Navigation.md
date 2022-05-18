@@ -155,3 +155,4 @@
     * [Handling push notifications](/documentation/mobile-sdk#🔔-handling-push-notifications)
     * [Adding value to the conversation](/documentation/mobile-sdk#📈-adding-value-to-the-conversation)
     * [Visitor satisfaction survey](/documentation/mobile-sdk#👍-visitor-satisfaction-survey)
+    * [Testing the SDK](/documentation/mobile-sdk#🚦-testing-the-sdk)

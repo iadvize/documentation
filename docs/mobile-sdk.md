@@ -150,7 +150,7 @@ After syncing your project you should be able to import the iAdvize dependency i
 
 #### 2️⃣ Activating the SDK
 
-To activate the SDK you must use the `activate` function with your `projectId` (see the [Prerequisites](#prerequisites) section above to get that identifier). You have access to callbacks in order to know if the SDK has been successfully activated. In case of an SDK activation failure the callback will give you the reason of the failure and you may want to retry later:
+To activate the SDK you must use the `activate` function with your `projectId` (see the [Prerequisites](⚙️-prerequisites) section above to get that identifier). You have access to callbacks in order to know if the SDK has been successfully activated. In case of an SDK activation failure the callback will give you the reason of the failure and you may want to retry later:
 
 ##### iOS
 <pre class="prettyprint">
@@ -304,7 +304,7 @@ IAdvizeSDK.targetingController.language = SDKLanguageOption.Custom(Language.FR)
 
 #### 2️⃣ Activating a targeting rule
 
-Using a targeting rule UUID (see the [Prerequisites](#prerequisites) section above to get that identifier), you can engage a user by calling:
+Using a targeting rule UUID (see the [Prerequisites](#⚙️-prerequisites) section above to get that identifier), you can engage a user by calling:
 
 ##### iOS
 
@@ -996,11 +996,26 @@ The visitor data you registered are displayed in the iAdvize Operator Desk in th
 
 ![Custom data tab shows registered data from the SDK](./assets/images/mobile-sdk/07-custom-data.png)
 
-### 👍 Visitor satisfaction survey
+### 👍 Fetching visitor satisfaction
 
-From SDK version `2.4.0` and onward, the customer satisfaction survey is automatically sent to the visitor at the end of the conversation, as long as it is activated in the iAdvize administration website.
+From SDK version `2.4.0` and onward, the satisfaction survey is automatically sent to the visitor at the end of the conversation, as long as it is activated in the iAdvize administration website.
 The survey is presented to the visitor in a conversational approach, directly into the Chatbox.
 
 <img src="./assets/images/mobile-sdk/08-satisfaction-survey.gif" alt="Satisfaction survey" style="display: block; width: 20%; height: auto;" />
 
 > *⚠️ Only the `CSAT`, `NPS` and `COMMENT` steps of the survey are supported.*
+
+### 🚦 Testing the SDK
+
+##### Android
+
+If you are running unit tests that implies the SDK, some additional steps mayu be needed.
+
+The Android SDK uses two device system constants that are not instantiated inside unit test flow, you will have to register them inside your unit tests initiation:
+
+<pre class="prettyprint">
+ReflectionHelpers.setStaticField(android.os.Build::class.java, "MODEL", "whatever")
+ReflectionHelpers.setStaticField(android.os.Build::class.java, "MANUFACTURER", "whatever")
+</pre>
+
+Please also be sure to initiate the SDK during the unit tests setup  (see the [Setting up the SDK](#⚙️-setting-up-the-sdk) section above).
