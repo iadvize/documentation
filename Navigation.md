@@ -144,7 +144,7 @@
     * [Connecting to your iAdvize Operator Desk](/documentation/mobile-sdk#💻-connecting-to-your-iadvize-operator-desk)
   * [Mobile SDK integration](/documentation/mobile-sdk#📱-mobile-sdk-integration)
     * [API reference](/documentation/mobile-sdk#📔-api-reference)
-    * [Native SDK latest release version](/documentation/mobile-sdk#🗓-sdk-latest-release-version)
+    * [Native SDK latest release version](/documentation/mobile-sdk#🗓-native-sdk-latest-release-version)
     * [Hybrid SDK plugins](/documentation/mobile-sdk#⚛️-hybrid-sdk-plugins)
     * [Setting up the SDK](/documentation/mobile-sdk#⚙️-setting-up-the-sdk)
     * [Starting a conversation](/documentation/mobile-sdk#💬-starting-a-conversation)
