@@ -491,7 +491,7 @@ formatted conversation history.
 
 | Filter | Description | Values | Use |
 | --- | --- | --- | --- |
-| channel | Channel | `chat`, `call`, `video` or `social` | `?filters[channel]=chat` |
+| channel | Channel | `chat`, `call`, `video` | `?filters[channel]=chat` |
 | from | Date from (see more information below) | `YYYY-MM-DD` or `YYYY-MM-DD HH:MM:SS` | `?filters[from]=2013-08-22` |
 | to | Date to (see more information below) | `YYYY-MM-DD` or `YYYY-MM-DD HH:MM:SS` | `?filters[to]=2013-08-25` |
 | website_id | Website identifier | `?filters[website_id]=123` |
