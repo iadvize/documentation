@@ -153,7 +153,7 @@ After syncing your project you should be able to import the iAdvize dependency i
 
 #### 2️⃣ Activating the SDK
 
-To activate the SDK you must use the `activate` function with your `projectId` (see the [Prerequisites](⚙️-prerequisites) section above to get that identifier). You have access to callbacks in order to know if the SDK has been successfully activated. In case of an SDK activation failure the callback will give you the reason of the failure and you may want to retry later:
+To activate the SDK you must use the `activate` function with your `projectId` (see the [Prerequisites](#⚙️-prerequisites) section above to get that identifier). You have access to callbacks in order to know if the SDK has been successfully activated. In case of an SDK activation failure the callback will give you the reason of the failure and you may want to retry later:
 
 ##### iOS
 <pre class="prettyprint">
