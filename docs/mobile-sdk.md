@@ -1013,7 +1013,7 @@ The survey is presented to the visitor in a conversational approach, directly in
 
 ##### Android
 
-If you are running unit tests that implies the SDK, some additional steps mayu be needed.
+If you are running unit tests that implies the SDK, some additional steps may be needed.
 
 The Android SDK uses two device system constants that are not instantiated inside unit test flow, you will have to register them inside your unit tests initiation:
 
