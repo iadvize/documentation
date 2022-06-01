@@ -108,6 +108,13 @@ After running `pod install` you should be able to mport the iAdvize dependency i
 - [Podfile](https://github.com/iadvize/iadvize-ios-sdk/blob/master/Example/IAdvizeSwiftExample/Podfile#L1)
 - [Import](https://github.com/iadvize/iadvize-ios-sdk/blob/master/Example/IAdvizeSwiftExample/IAdvizeSwiftExample/Source/AppDelegate%2BiAdvize.swift#L10)
 
+> *⚠️ From the version 2.5.0 and onward, the SDK supports video conversations. Thus it will request camera and microphone access before entering a video call. To avoid the app to crash, you have to setup two keys in your app Info.plist:*
+
+<pre class="prettyprint">
+NSMicrophoneUsageDescription
+NSCameraUsageDescription
+</pre>
+
 ##### Android
 
 Add the iAdvize repository to your project repositories inside your top-level Gradle build file:
@@ -149,7 +156,7 @@ After syncing your project you should be able to import the iAdvize dependency i
 - [Import](https://github.com/iadvize/iadvize-android-sdk/blob/master/sample/app/src/main/java/com/iadvize/conversation/sdk/demo/App.kt#L9)
 
 
-> *⚠️ From the version 2.5 and onward, the SDK supports video conversation using a third party native (C++) binaries. If you are delivering your app using an APK you will note a size increase as the default behavior of the build system is to include the binaries for each ABI in a single APK. We strongly recommended that you take advantage of either [App Bundles](https://developer.android.com/guide/app-bundle) or [APK Splits](https://developer.android.com/studio/build/configure-apk-splits) to reduce the size of your APKs while still maintaining maximum device compatibility.*
+> *⚠️ From the version 2.5 and onward, the SDK supports video conversations using a third party native (C++) binaries. If you are delivering your app using an APK you will note a size increase as the default behavior of the build system is to include the binaries for each ABI in a single APK. We strongly recommended that you take advantage of either [App Bundles](https://developer.android.com/guide/app-bundle) or [APK Splits](https://developer.android.com/studio/build/configure-apk-splits) to reduce the size of your APKs while still maintaining maximum device compatibility.*
 
 #### 2️⃣ Activating the SDK
 
