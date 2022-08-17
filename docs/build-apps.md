@@ -620,15 +620,15 @@ function insertCardInConversationThread(value: Card): void
 *Example*
 <pre class="prettyprint lang-js">
 const card: Card = {
-    title: 'Card 1 title',
-    text: 'Card 1 description',
+    title: "Card 1 title",
+    text: "Card 1 description",
     action: {
-        title: 'Click here',
-        url: 'https://...',
+        title: "Click here",
+        url: "https://..."
     },
     image: {
-        url: 'https://...',
-        description: 'Image description add to alt img attribute'
+        url: "https://...",
+        description: "Image description add to alt img attribute"
     }
 }
 
@@ -661,28 +661,28 @@ function insertCarouselInConversationThread(value: Carousel): void
 *Example*
 <pre class="prettyprint lang-js">
 const card1: Card = {
-    title: 'Card 1 title',
-    text: 'Card 1 description',
+    title: "Card 1 title",
+    text: "Card 1 description",
     action: {
-        title: 'Click here',
-        url: 'https://...',
+        title: "Click here",
+        url: "https://..."
     },
     image: {
-        url: 'https://...',
-        description: 'Image description add to alt img attribute'
+        url: "https://...",
+        description: "Image description add to alt img attribute"
     }
 }
 
 const card2: Card = {
-    title: 'Card 2 title',
-    text: 'Card 2 description',
+    title: "Card 2 title",
+    text: "Card 2 description",
     action: {
-        title: 'Click here',
-        url: 'https://...',
+        title: "Click here",
+        url: "https://..."
     },
     image: {
-        url: 'https://...',
-        description: 'Image description add to alt img attribute'
+        url: "https://...",
+        description: "Image description add to alt img attribute"
     }
 }
 
