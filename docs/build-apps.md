@@ -576,15 +576,17 @@ client.context.projectId // => '3103'
 Allows the CPA to send some text to the active thread compose zone.
 
 *Signature*
-<pre class="prettyprint lang-js">
+
+```javascript
 function insertTextInComposeBox(value: string): void
-</pre>
+```
 ⚠️  value field is required
 
 *Example*
-<pre class="prettyprint lang-js">
+
+```javascript
 client.insertTextInComposeBox('Hello world!');
-</pre>
+```
 
 *Result*
 ![insertTextInComposeBox](./assets/images/cpa-insertTextInComposeBox.png)
@@ -596,8 +598,7 @@ Allows the CPA to send an image card to the active conversation thread.
 
 *Signature*
 
-<pre class="prettyprint lang-js">
-
+```javascript
 type Card = {
     title: string;
     text: string;
@@ -613,12 +614,13 @@ type Card = {
 
 
 function insertCardInConversationThread(value: Card): void
-</pre>
+```
 
 ⚠️  All fields of the Card are required
 
 *Example*
-<pre class="prettyprint lang-js">
+
+```javascript
 const card: Card = {
     title: "Card 1 title",
     text: "Card 1 description",
@@ -633,7 +635,7 @@ const card: Card = {
 }
 
 client.insertCardInConversationThread(card)
-</pre>
+```
 
 *Result*
 ![insertCardInConversationThread](./assets/images/cpa-insertCardInConversationThread.png)
@@ -645,21 +647,23 @@ client.insertCardInConversationThread(card)
 Allows the CPA to send an image card carousel to the active conversation thread.
 
 *Signature*
-<pre class="prettyprint lang-js">
+
+```javascript
 type Carousel = {
     title?: string;
     cards: Card[]; // See insertCardInConversationThread command for more information of Card type
 }
 
 function insertCarouselInConversationThread(value: Carousel): void
-</pre>
+```
 
 ⚠️  *title* field of Carousel is optional
 ⚠️  *cards* field of Carousel is required
 
 
 *Example*
-<pre class="prettyprint lang-js">
+
+```javascript
 const card1: Card = {
     title: "Card 1 title",
     text: "Card 1 description",
@@ -689,7 +693,7 @@ const card2: Card = {
 const carousel: Carousel = { cards: [ card1, card2 ] }
 
 client.insertCarouselInConversationThread(carousel)
-</pre>
+```
 
 *Result*
 ![insertCarouselInConversationThread](./assets/images/cpa-insertCarouselInConversationThread.png)
