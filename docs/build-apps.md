@@ -630,9 +630,9 @@ const card: Card = {
         url: 'https://...',
         description: 'Image description add to alt img attribute'
     }
-};
+}
 
-client.insertCardInConversationThread(card);
+client.insertCardInConversationThread(card)
 </pre>
 
 *Result*
@@ -646,7 +646,6 @@ Allows the CPA to send an image card carousel to the active conversation thread.
 
 *Signature*
 <pre class="prettyprint lang-js">
-
 type Carousel = {
     title?: string;
     cards: Card[]; // See insertCardInConversationThread command for more information of Card type
@@ -672,7 +671,7 @@ const card1: Card = {
         url: 'https://...',
         description: 'Image description add to alt img attribute'
     }
-};
+}
 
 const card2: Card = {
     title: 'Card 2 title',
@@ -685,13 +684,11 @@ const card2: Card = {
         url: 'https://...',
         description: 'Image description add to alt img attribute'
     }
-};
-
-const carousel: Carousel = {
-    cards: [ card1, card2 ],
 }
 
-client.insertCarouselInConversationThread(carousel);
+const carousel: Carousel = { cards: [ card1, card2 ] }
+
+client.insertCarouselInConversationThread(carousel)
 </pre>
 
 *Result*
