@@ -589,6 +589,7 @@ client.insertTextInComposeBox('Hello world!');
 ```
 
 *Result*
+
 ![insertTextInComposeBox](./assets/images/cpa-insertTextInComposeBox.png)
 
 ***
@@ -611,7 +612,6 @@ type Card = {
         description: string;
     }
 }
-
 
 function insertCardInConversationThread(value: Card): void
 ```
@@ -638,6 +638,7 @@ client.insertCardInConversationThread(card)
 ```
 
 *Result*
+
 ![insertCardInConversationThread](./assets/images/cpa-insertCardInConversationThread.png)
 
 
@@ -696,6 +697,7 @@ client.insertCarouselInConversationThread(carousel)
 ```
 
 *Result*
+
 ![insertCarouselInConversationThread](./assets/images/cpa-insertCarouselInConversationThread.png)
 
 
