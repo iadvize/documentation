@@ -646,7 +646,7 @@ client.pushCardInConversationThread(card)
 
 *Result*
 
-![pushCardInConversationThread](./assets/images/cpa-insertCardInConversationThread.png)
+![pushCardInConversationThread](./assets/images/cpa-pushCardInConversationThread.png)
 
 
 ***
@@ -711,7 +711,7 @@ client.pushCardBundleInConversationThread(carousel)
 
 *Result*
 
-![pushCardBundleInConversationThread](./assets/images/cpa-insertCarouselInConversationThread.png)
+![pushCardBundleInConversationThread](./assets/images/cpa-pushCardBundleInConversationThread.png)
 
 
 ##### Style sheet
