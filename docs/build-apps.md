@@ -515,7 +515,7 @@ It is recommended to keep the app very lightweight and avoid heavy processing or
 To use the library an app must include a javascript bundle in the html with the following code.
 
 <pre class="prettyprint lang-html">
-&lt;script src="https://static.iadvize.com/conversation-panel-app-lib/2.3.1/idzcpa.umd.production.min.js"&gt;&lt;/script&gt;
+&lt;script src="https://static.iadvize.com/conversation-panel-app-lib/2.4.0/idzcpa.umd.production.min.js"&gt;&lt;/script&gt;
 </pre>
 
 Then in the javascript code of the app the library can be used as follows.
@@ -565,8 +565,8 @@ client.context.projectId // => '3103'
 | Command | Description |
 | --- | --- |
 | `insertTextInComposeBox` | Allows the CPA to send some text to the active thread compose zone. |
-| `insertCardInConversationThread` | Allows the CPA to send an image card to the active conversation thread. |
-| `insertCarouselInConversationThread` | Allows the CPA to send an image card carousel to the active conversation thread. |
+| `pushCardInConversationThread` | Allows the CPA to send a card to the active conversation thread. |
+| `pushCardBundleInConversationThread` | Allows the CPA to send a card carousel to the active conversation thread. |
 
 #### How to use each command
 
@@ -593,30 +593,34 @@ client.insertTextInComposeBox('Hello world!');
 ![insertTextInComposeBox](./assets/images/cpa-insertTextInComposeBox.png)
 
 ***
-##### insertCardInConversationThread
+##### pushCardInConversationThread
 
-Allows the CPA to send an image card to the active conversation thread.
+Allows the CPA to send a card to the active conversation thread.
 
 *Signature*
 
 ```javascript
-type Card = {
+type Action = {
+    type: 'LINK';
     title: string;
-    text: string;
-    action: {
-        title: string;
-        url: string;
-    },
-    image: {
+    url: string;
+}
+
+type Card = {
+    title?: string;
+    text?: string;
+    actions: Action[],
+    image?: {
         url: string;
         description: string;
     }
 }
 
-function insertCardInConversationThread(value: Card): void
+function pushCardInConversationThread(value: Card): void
 ```
 
-⚠️  All fields of the Card are required
+⚠️  *actions* field is required and must contain at least one action of LINK type
+⚠️  *title*, *text* and *image* fields are optional
 
 *Example*
 
@@ -624,38 +628,41 @@ function insertCardInConversationThread(value: Card): void
 const card: Card = {
     title: "Card 1 title",
     text: "Card 1 description",
-    action: {
-        title: "Click here",
-        url: "https://..."
-    },
+    actions: [
+        {
+          type: 'LINK',
+          title: "Click here",
+          url: "https://..."
+        },
+    ],
     image: {
         url: "https://...",
-        description: "Image description add to alt img attribute"
+        description: "Image description add to alt img attribute",
     }
 }
 
-client.insertCardInConversationThread(card)
+client.pushCardInConversationThread(card)
 ```
 
 *Result*
 
-![insertCardInConversationThread](./assets/images/cpa-insertCardInConversationThread.png)
+![pushCardInConversationThread](./assets/images/cpa-insertCardInConversationThread.png)
 
 
 ***
-##### insertCarouselInConversationThread
+##### pushCardBundleInConversationThread
 
-Allows the CPA to send an image card carousel to the active conversation thread.
+Allows the CPA to send a card carousel to the active conversation thread.
 
 *Signature*
 
 ```javascript
 type Carousel = {
     title?: string;
-    cards: Card[]; // See insertCardInConversationThread command for more information of Card type
+    cards: Card[]; // See pushCardInConversationThread command for more information of Card type
 }
 
-function insertCarouselInConversationThread(value: Carousel): void
+function pushCardBundleInConversationThread(value: Carousel): void
 ```
 
 ⚠️  *title* field of Carousel is optional
@@ -668,10 +675,13 @@ function insertCarouselInConversationThread(value: Carousel): void
 const card1: Card = {
     title: "Card 1 title",
     text: "Card 1 description",
-    action: {
-        title: "Click here",
-        url: "https://..."
-    },
+    actions: [
+        {
+          type: "LINK",
+          title: "Click here",
+          url: "https://...",
+        }
+    ],
     image: {
         url: "https://...",
         description: "Image description add to alt img attribute"
@@ -681,10 +691,13 @@ const card1: Card = {
 const card2: Card = {
     title: "Card 2 title",
     text: "Card 2 description",
-    action: {
-        title: "Click here",
-        url: "https://..."
-    },
+    actions: [
+        {
+          type: "LINK",
+          title: "Click here",
+          url: "https://...",
+        }
+    ],
     image: {
         url: "https://...",
         description: "Image description add to alt img attribute"
@@ -693,12 +706,12 @@ const card2: Card = {
 
 const carousel: Carousel = { cards: [ card1, card2 ] }
 
-client.insertCarouselInConversationThread(carousel)
+client.pushCardBundleInConversationThread(carousel)
 ```
 
 *Result*
 
-![insertCarouselInConversationThread](./assets/images/cpa-insertCarouselInConversationThread.png)
+![pushCardBundleInConversationThread](./assets/images/cpa-insertCarouselInConversationThread.png)
 
 
 ##### Style sheet
@@ -707,13 +720,13 @@ The library also provides a standalone stylesheet with CSS variables built to fi
 An app can include it either in its HTML: 
 
 <pre class="prettyprint lang-html">
-&lt;link rel="stylesheet" src="https://static.iadvize.com/conversation-panel-app-lib/2.3.1/idzcpa.base.css"&gt;
+&lt;link rel="stylesheet" src="https://static.iadvize.com/conversation-panel-app-lib/2.4.0/idzcpa.base.css"&gt;
 </pre>
 
 Or as a top-level import inside a preprocessed-stylesheet: 
 
 <pre class="prettyprint lang-css">
-@import 'https://static.iadvize.com/conversation-panel-app-lib/2.3.1/idzcpa.base.css';
+@import 'https://static.iadvize.com/conversation-panel-app-lib/2.4.0/idzcpa.base.css';
 </pre>
 
 A complete description of the provided variables can be found in [our knowledge base](https://help.iadvize.com/hc/en-gb/articles/4404351307026-Conversation-Panel-Apps-Guidelines#5-how-to-easily-style-your-conversation-panel-app-for-a-consistent-user-interface-integration-in-the-desk).
@@ -727,6 +740,7 @@ A complete description of the provided variables can be found in [our knowledge 
 | 2.0.3 | Add mobile apps support - from this version apps hosted in the iAdvize iOS and Android apps can use this library. |
 | 2.1.0 | Return the conversation context in the client.
 | 2.3.1 | Support for inserting image type card and carousel of image type cards in the conversation thread via `insertCardInConversationThread` and `insertCarouselInConversationThread` |
+| 2.4.0 | Replace command name and signature of each command: `insertCardInConversationThread` is replaced by `pushCardInConversationThread` and `insertCarouselInConversationThread` is replaced by `pushCardBundleInConversationThread`|
 
 #### Configuration
 Under the Plugins section create a Conversation Panel App and then edit the following fields:
