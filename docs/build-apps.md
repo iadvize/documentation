@@ -577,16 +577,16 @@ Allows the CPA to send some text to the active thread compose zone.
 
 *Signature*
 
-```javascript
+<pre class="prettyprint">
 function insertTextInComposeBox(value: string): void
-```
+</pre>
 ⚠️  value field is required
 
 *Example*
 
-```javascript
+<pre class="prettyprint">
 client.insertTextInComposeBox('Hello world!');
-```
+</pre>
 
 *Result*
 
@@ -599,7 +599,7 @@ Allows the CPA to send a card to the active conversation thread.
 
 *Signature*
 
-```javascript
+<pre class="prettyprint">
 type Action = {
     type: 'LINK';
     title: string;
@@ -617,14 +617,14 @@ type Card = {
 }
 
 function pushCardInConversationThread(value: Card): void
-```
+</pre>
 
 ⚠️  *actions* field is required and must contain at least one action of LINK type
 ⚠️  *title*, *text* and *image* fields are optional
 
 *Example*
 
-```javascript
+<pre class="prettyprint">
 const card: Card = {
     title: "Card 1 title",
     text: "Card 1 description",
@@ -642,7 +642,7 @@ const card: Card = {
 }
 
 client.pushCardInConversationThread(card)
-```
+</pre>
 
 *Result*
 
@@ -656,14 +656,14 @@ Allows the CPA to send a card carousel to the active conversation thread.
 
 *Signature*
 
-```javascript
+<pre class="prettyprint">
 type Carousel = {
     title?: string;
     cards: Card[]; // See pushCardInConversationThread command for more information of Card type
 }
 
 function pushCardBundleInConversationThread(value: Carousel): void
-```
+</pre>
 
 ⚠️  *title* field of Carousel is optional
 ⚠️  *cards* field of Carousel is required
@@ -671,7 +671,7 @@ function pushCardBundleInConversationThread(value: Carousel): void
 
 *Example*
 
-```javascript
+<pre class="prettyprint">
 const card1: Card = {
     title: "Card 1 title",
     text: "Card 1 description",
@@ -707,7 +707,7 @@ const card2: Card = {
 const carousel: Carousel = { cards: [ card1, card2 ] }
 
 client.pushCardBundleInConversationThread(carousel)
-```
+</pre>
 
 *Result*
 
