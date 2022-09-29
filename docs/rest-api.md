@@ -179,6 +179,7 @@ See below to discover used fields and see [reading section](#read) to discover s
 | skill_id | Skill identifier | | `?filters[skill_id]=123` |
 | name | Operator name | | `?filters[name]=genius` |
 | external_id | External identifier | | `?filters[external_id]=MyExternalId` |
+| email | Operator email | | `?filters[email]=my-email@iadvize.com` |
 
 #### Get operator's details
 
