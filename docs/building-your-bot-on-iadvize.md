@@ -122,13 +122,13 @@ To have a fully functional bot, you will be required to implement two distinct s
 
 * several endpoints to create and configure your bot from iAdvize UI
   * `GET /external-bots` to list available scenarios
-  * `PUT /bots/operatorId` to create a bot
-  * `GET /bots/operatorId` to retrieve a bot details
+  * `PUT /bots/:idOperator` to create a bot
+  * `GET /bots/:idOperator` to retrieve a bot details
   * `GET /availability-strategies` to define when the bot is available
 * three endpoints to handle a conversation flow
   * `GET /bots/:idOperator/conversation-first-messages` to return the messages to be displayed before the conversation starts
   * `POST /conversations/` to create a new conversation
-  * `POST /conversations/conversationId/messageId`  to reply to a user
+  * `POST /conversations/:idConversation/messages`  to reply to a user
 
 ⚠️ Please note that all endpoints are subject to a 10 second timeout except for `GET /bots/:idOperator/conversation-first-messages` which has a 2 second timeout.
 
@@ -186,7 +186,7 @@ It will look like this in the UI.
 ### Create and modify a bot
 This endpoint is being called when a user finalises the bot creation or when bot information are being updated (such as name, scenario association…).
 
-#### Request - PUT /bots/:idOperator:
+#### Request - PUT /bots/:idOperator
 | Parameters         | In    | Description                                                            | Type   | Example                              |
 | ------------------ | ----- | ---------------------------------------------------------------------- | ------ | ------------------------------------ |
 | idOperator         | Path  | iAdvize bot operator identifier that we associate to your bot scenario | String | ha-456678                            |
@@ -254,7 +254,7 @@ This endpoint is being called when a user finalises the bot creation or when bot
 ### Get bot
 When an admin wants to edit a bot user, we have to first load the existing information related to this bot. The GET endpoints allow you do give back those information.
 
-#### Request - GET /bots/:idOperator:
+#### Request - GET /bots/:idOperator
 | Parameters         | In    | Description                                                            | Type   | Example                              |
 | ------------------ | ----- | ---------------------------------------------------------------------- | ------ | ------------------------------------ |
 | idOperator         | Path  | iAdvize bot operator identifier that we associate to your bot scenario | String | ha-456678                            |
@@ -339,7 +339,7 @@ A conversation is typically initiated by a user. The bot can reply to user’s m
 To fully handle a conversation you only need to implement 3 endpoints:
 * `GET /bots/:idOperator/conversation-first-messages` to return the first messages you want to send as soon as the visitor opens up the chatbox (before the conversation really starts)
 * `POST /conversations` to handle a new conversation creation
-* `POST /conversations/:conversationId:/messages` to receive messages from the visitor and reply to the visitor. Mind that all the messages posted in a conversation will result into this API call (which means you will also receive your own replies).
+* `POST /conversations/:conversationId/messages` to receive messages from the visitor and reply to the visitor. Mind that all the messages posted in a conversation will result into this API call (which means you will also receive your own replies).
 
 ![Conversation flow diagram](./assets/images/plugins/bot-scenarios-conversation-flow.jpg) 
 
@@ -349,20 +349,20 @@ Here is a full conversation example:
 | ----- | ------------------------------------- | -------------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 00:00 |                                       | “Hi, are you there ? Shall we begin ?” | ⟹           |                                                                                                                                 | POST /conversations                                                                   | Create a conversation in the bot connector                                                                                                                                  |
 |       |                                       |                                        | ⟸           | (empty replies)                                                                                                                 | Response                                                                              |                                                                                                                                                                             |
-| 00:00 |                                       |                                        | ⟹           |                                                                                                                                 | POST /conversations/idConversation/messages<br>“Hi, are you there ? Shall we begin ?” | Reply to the first user’s message                                                                                                                                           |
+| 00:00 |                                       |                                        | ⟹           |                                                                                                                                 | POST /conversations/:idConversation/messages<br>“Hi, are you there ? Shall we begin ?” | Reply to the first user’s message                                                                                                                                           |
 |       |                                       |                                        | ⟸<br>⟸<br>⟸ | Await 5s<br>“How are you ?”<br>“Fine” or “Bad”<br>Await 3 minutes<br>“Are you there ?”                                          | Response                                                                              |                                                                                                                                                                             |
-| 00:05 | “How are you ? ”                      |                                        | ⟹           |                                                                                                                                 | POST /conversations/idConversation/messages<br>“How are you ?”                        | Do not reply to your own scheduled message (filter on author operator)                                                                                                      |
+| 00:05 | “How are you ? ”                      |                                        | ⟹           |                                                                                                                                 | POST /conversations/:idConversation/messages<br>“How are you ?”                        | Do not reply to your own scheduled message (filter on author operator)                                                                                                      |
 |       |                                       |                                        | ⟸<br>⟸      | (empty replies)                                                                                                                 | Response                                                                              |                                                                                                                                                                             |
 | 🕐    |                                       |                                        |             |                                                                                                                                 |                                                                                       |                                                                                                                                                                             |
-| 03:05 | “Are you there ?”                     |                                        | ⟹           |                                                                                                                                 | POST /conversations/idConversation/messages<br>“Are you there ?”                      | Do not reply to your own scheduled message                                                                                                                                  |
+| 03:05 | “Are you there ?”                     |                                        | ⟹           |                                                                                                                                 | POST /conversations/:idConversation/messages<br>“Are you there ?”                      | Do not reply to your own scheduled message                                                                                                                                  |
 |       |                                       |                                        | ⟸           | (empty replies)                                                                                                                 | Response                                                                              |                                                                                                                                                                             |
-| 03:12 |                                       | “Yes I'm here, sorry"                  | ⟹           |                                                                                                                                 | POST /conversations/idConversation/messages<br>“Yes I’m here, sorry ?”                | Reply to the user’s message by repeating the question                                                                                                                       |
+| 03:12 |                                       | “Yes I'm here, sorry"                  | ⟹           |                                                                                                                                 | POST /conversations/:idConversation/messages<br>“Yes I’m here, sorry ?”                | Reply to the user’s message by repeating the question                                                                                                                       |
 |       |                                       |                                        | ⟸           | Await 1s<br>“How are you ?”<br>“Fine” or “Bad”                                                                                  | Response                                                                              |                                                                                                                                                                             |
-| 03:13 | “How are you ?”                       |                                        | ⟹           |                                                                                                                                 | POST /conversations/idConversation/messages<br>“How are you ?”                        | Do not reply to your own message                                                                                                                                            |
+| 03:13 | “How are you ?”                       |                                        | ⟹           |                                                                                                                                 | POST /conversations/:idConversation/messages<br>“How are you ?”                        | Do not reply to your own message                                                                                                                                            |
 |       |                                       |                                        | ⟸           | (empty replies)                                                                                                                 | Response                                                                              |                                                                                                                                                                             |
-| 03:42 |                                       | “Good”                                 | ⟹           |                                                                                                                                 | POST /conversations/idConversation/messages<br>“Good”                                 | User received quick-reply  clicked on good, take action action accordingly                                                                                                  |
+| 03:42 |                                       | “Good”                                 | ⟹           |                                                                                                                                 | POST /conversations/:idConversation/messages<br>“Good”                                 | User received quick-reply  clicked on good, take action action accordingly                                                                                                  |
 |       |                                       |                                        | ⟸<br>⟸      | Await 1s<br>Ok, i'm transferring you to a human"<br>transfer<br>Await 20s<br>“Transfer failed, please try again later”<br>close | Response                                                                              | Transfer the user, and notify the user about it.<br><br><br>Schedule a message in case the transfer fail. The message is not going to be sent if the transfer is successful |
-| 03:43 | “Ok, i'm transferring you to a human” |                                        | ⟹           |                                                                                                                                 | POST /conversations/idConversation/messages<br>“Ok, i'm transferring you to a human"  | Do not reply to your own message                                                                                                                                            |
+| 03:43 | “Ok, i'm transferring you to a human” |                                        | ⟹           |                                                                                                                                 | POST /conversations/:idConversation/messages<br>“Ok, i'm transferring you to a human"  | Do not reply to your own message                                                                                                                                            |
 |       |                                       |                                        | ⟸           | (empty replies)                                                                                                                 | Response                                                                              |                                                                                                                                                                             |
 
 ### Send messages before the conversation starts
@@ -424,7 +424,7 @@ This endpoint is used if you want your bot to initiate a conversation with new v
 
 Everytime a conversation starts, this endpoint is called. It allows iAdvize to notify your bot a conversation starts.
 
-⚠️ Leave the `replies` array empty as another call to `POST /conversations/conversationId/messages` is triggered right after `POST /conversations`. It will be the right time to answer the visitor.
+⚠️ Leave the `replies` array empty as another call to `POST /conversations/:idConversation/messages` is triggered right after `POST /conversations`. It will be the right time to answer the visitor.
 
 #### Request - POST /conversations
 
@@ -470,7 +470,7 @@ Everytime a conversation starts, this endpoint is called. It allows iAdvize to n
 
 This endpoint is called when a new message is received in the conversation, whether the bot or the user sent it.
 
-#### Request - POST /conversations/:idConversation:/messages
+#### Request - POST /conversations/:idConversation/messages
 
 ⚠️ Please note that in order to offer the best user experience, your bot **must** return a response in less than 10 seconds. If not, you'll receive a timeout and the bot answer will not be displayed to the user.
 
@@ -1186,4 +1186,4 @@ And its result:
 
 **Q:** Why is the iAdvize bot selected and not my external bot in the iAdvize admin interface?
 
-**A:** Did you implement the [`GET /external-bots`](#request---get-/external-bots), [`PUT /bot/:id`](#request---put-/bots/:idoperator:) and [`GET /bot/:id`](#request---get-/bots/:idoperator:) correctly ?
+**A:** Did you implement the [`GET /external-bots`](#request---get-/external-bots), [`PUT /bot/:id`](#request---put-/bots/:idoperator) and [`GET /bot/:id`](#request---get-/bots/:idoperator) correctly ?
