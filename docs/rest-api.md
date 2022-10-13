@@ -600,6 +600,8 @@ See [reading section](#read) to discover some output examples.
 
 ### Transaction
 
+⚠️ Transactions from a given day will be availableon the next day **after 5am** .
+
 #### List your transactions
 
 `GET /transaction`
