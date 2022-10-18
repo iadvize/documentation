@@ -5,7 +5,7 @@
 When an event occurs, an HTTP `POST` call is issued on the callback urls you set up with the event data.
 Data is sent with `application/json` header content-type, and `json` format as payload.
 Callback urls must be defined with HTTPS protocol and should be available with `POST` verb to send data payload.
-iAdvize expect to have à 20x http status in callback result.
+iAdvize expects to have a 20x HTTP status in callback result.
 
 ### Delivery headers
 iAdvize will send the payload with three additional headers:
@@ -38,7 +38,7 @@ Please refer to [this section](/documentation/build-apps#app-security).
 | [user.connected](/documentation/webhooks#user.connected) | Emitted when user is connecting to administration or desk. |
 | [user.disconnected](/documentation/webhooks#user.disconnected) | Emitted when user is disconnecting of administration or desk. |
 | [visitor.updated](/documentation/webhooks#visitor.updated) | Emitted when a visitor information is updated from desk or admin view. |
-| [satisfaction.answered](/documentation/webhooks#satisfaction.answered) | Emitted when visitor has answered a customer satisfaction, net promoter score or satisfaction comment. <br />Will be emitted at every click on answer by visitor. |
+| [satisfaction.answered](/documentation/webhooks#satisfaction.answered) | Emitted when visitor has answered a customer satisfaction, net promoter score, satisfaction comment or custom question. <br />Will be emitted at every click on answer by visitor. |
 | [transaction.attributed](/documentation/webhooks#transaction.attributed) | Emitted when a transaction is attributed to a conversation. |
 
 
@@ -176,7 +176,7 @@ Emitted when a visitor information is updated from desk or admin view.
 
 ### `satisfaction.answered`
 
-Emitted when visitor has answered a customer satisfaction, net promoter score or satisfaction comment. Will be emitted at every click on an answer by the visitor.
+Emitted when visitor has answered a customer satisfaction, net promoter score, satisfaction comment or custom question. Will be emitted at every click on an answer by the visitor.
 
 ***Example with `customerSatisfaction` filled***
 
@@ -220,6 +220,21 @@ Emitted when visitor has answered a customer satisfaction, net promoter score or
     "sentAt": "2017-04-22T11:01:00+02:00",
     "conversationId": "2d90a8a2-16df-45f5-897e-31adf9aa165d",
     "satisfactionComment" : "It was very helpful"
+}
+</pre>
+
+***Example with `customQuestion` filled***
+
+<pre class="prettyprint lang-js">{
+    "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
+    "eventType": "satisfaction.answered",
+    "platform": "sd",
+    "projectId": 3030,
+    "clientId": 1,
+    "createdAt": "2017-04-22T11:01:00+02:00",
+    "sentAt": "2017-04-22T11:01:00+02:00",
+    "conversationId": "2d90a8a2-16df-45f5-897e-31adf9aa165d",
+    "customQuestion" : true
 }
 </pre>
 
