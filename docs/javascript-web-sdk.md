@@ -9,6 +9,7 @@ The Web SDK is a way to interact with the iAdvize solution from the client side.
 If the iAdvize tag was installed using the recommended script (see https://ha.iadvize.com/admin/site/current/code), there should be a global `window.iAdvizeInterface` available. You can safely push functions inside `window.iAdvizeInterface` : they are guaranteed to be executed once the iAdvize tag is fully loaded. 
 
 <pre class="prettyprint lang-js">
+window.iAdvizeInterface = window.iAdvizeInterface || [];
 window.iAdvizeInterface.push(function(iAdvize) {
   // Ex : accessing the tag version
   const tagVersion = iAdvize.get('tag:version');
@@ -45,6 +46,7 @@ These methods are used for authentication. Please see the dedicated Help Center 
 
 Ex : 
 <pre class="prettyprint lang-js">
+window.iAdvizeInterface = window.iAdvizeInterface || [];
 window.iAdvizeInterface.push(function(iAdvize) {
   const visitorCookiesConsent = iAdvize.get('visitor:cookiesConsent');
 });
@@ -61,8 +63,9 @@ Every property available on `iAdvize.get` also has a corresponding event (iAdviz
 
 Ex : 
 <pre class="prettyprint lang-js">
+window.iAdvizeInterface = window.iAdvizeInterface || [];
 window.iAdvizeInterface.push(function(iAdvize) {
-  iAdvize.on('visitor:cookiesConsent', function(visitorCookiesConsent) {
+  iAdvize.on('visitor:cookiesConsentChange', function(visitorCookiesConsent) {
     console.log(visitorCookiesConsent);
   });
 });
@@ -78,6 +81,7 @@ Set editable properties.
 
 Ex : 
 <pre class="prettyprint lang-js">
+window.iAdvizeInterface = window.iAdvizeInterface || [];
 window.iAdvizeInterface.push(function(iAdvize) {
   iAdvize.set('visitor:GDPRConsent', true);
 });
@@ -93,6 +97,7 @@ Allows to record transactions. See the dedicated article on the Help Center : ht
 
 Ex : 
 <pre class="prettyprint lang-js">
+window.iAdvizeInterface = window.iAdvizeInterface || [];
 window.iAdvizeInterface.push(function(iAdvize) {
   iAdvize.recordTransaction({
     id: 'unique-id',
