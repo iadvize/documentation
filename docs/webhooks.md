@@ -37,6 +37,7 @@ Please refer to [this section](/documentation/build-apps#app-security).
 | [user.updated](/documentation/webhooks#user.updated) | Emitted on user update in administration or API Rest. |
 | [user.connected](/documentation/webhooks#user.connected) | Emitted when user is connecting to administration or desk. |
 | [user.disconnected](/documentation/webhooks#user.disconnected) | Emitted when user is disconnecting of administration or desk. |
+| [user.availability.updated](/documentation/webhooks#user.availability.updated) | Emitted when user's availability is updated. |
 | [visitor.updated](/documentation/webhooks#visitor.updated) | Emitted when a visitor information is updated from desk or admin view. |
 | [satisfaction.answered](/documentation/webhooks#satisfaction.answered) | Emitted when visitor has answered a customer satisfaction, net promoter score, satisfaction comment or custom question. <br />Will be emitted at every click on answer by visitor. |
 | [transaction.attributed](/documentation/webhooks#transaction.attributed) | Emitted when a transaction is attributed to a conversation. |
@@ -50,10 +51,10 @@ Emitted on a beginning of a conversation or a receiving of a conversation transf
   "eventId": "0f0bb3af-5035-4ba3-b3fb-ff4879a3a74d",
   "eventType": "v2.conversation.pushed",
   "platform": "ha",
-  "projectId": 1549,
+  "projectId": 1,
   "clientId": 335,
   "conversationId": "4c8c7408-f73c-42cd-89e9-afbbee7d9024",
-  "operatorId": 15253,
+  "operatorId": 1,
   "visitorExternalId": "63429889", // deprecated. Only available for ONSITE conversations. Use `visitorId` field instead.
   "channel": "CHAT",
   "visitorId": "b05f1b45-c891-4a9c-b47e-91ee6c8ffb44",
@@ -77,12 +78,12 @@ Emitted on an end of a conversation. Conversations on offsite channels are autom
   "eventId": "0f0bb3af-5035-4ba3-b3fb-ff4879a3a74d",
   "eventType": "v2.conversation.closed",
   "platform": "ha",
-  "projectId": 1549,
-  "clientId": 335,
+  "projectId": 1,
+  "clientId": 1,
   "conversationId": "4c8c7408-f73c-42cd-89e9-afbbee7d9024",
   "operatorIds": [
-    15253,
-    15254
+    1,
+    2
    ],
   "visitorExternalId": "63429889", // deprecated. Only available for ONSITE conversations. Use `visitorId` field instead.
   "channel": "CHAT",
@@ -158,6 +159,38 @@ Emitted when user is disconnecting to administration or desk.
 }
 </pre>
 
+
+### `user.availability.updated`
+
+Emitted when user's availability is updated.
+
+<pre class="prettyprint lang-js">{
+    "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
+    "eventType": "user.availability.updated",
+    "platform": "sd",
+    "clientId": 1,
+    "userId": 1,
+    "origin": "desk",
+    "availabilities": [
+        {"channel": "CHAT", "status": "AVAILABLE"},
+        {"channel": "CALL", "status": "AVAILABLE"},
+        {"channel": "VIDEO", "status": "AVAILABLE"},
+        {"channel": "THIRD_PARTY", "status": "UNAVAILABLE"}
+    ],
+    "createdAt": "2017-04-22T11:01:00+02:00",
+    "sentAt": "2017-04-22T11:01:00+02:00"
+}
+</pre>
+
+
+Please note :
+
+| Attribute | Description                                       |
+|-----------|---------------------------------------------------|
+| channel   | Could be `CHAT`, `CALL`, `VIDEO` or `THIRD_PARTY` |
+| status    | Could be `AVAILABLE` or `UNAVAILABLE`             |
+
+
 ### `visitor.updated`
 
 Emitted when a visitor information is updated from desk or admin view.
@@ -184,7 +217,7 @@ Emitted when visitor has answered a customer satisfaction, net promoter score, s
     "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
     "eventType": "satisfaction.answered",
     "platform": "sd",
-    "projectId": 3030,
+    "projectId": 1,
     "clientId": 1,
     "createdAt": "2017-04-22T11:01:00+02:00",
     "sentAt": "2017-04-22T11:01:00+02:00",
@@ -199,7 +232,7 @@ Emitted when visitor has answered a customer satisfaction, net promoter score, s
     "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
     "eventType": "satisfaction.answered",
     "platform": "sd",
-    "projectId": 3030,
+    "projectId": 1,
     "clientId": 1,
     "createdAt": "2017-04-22T11:01:00+02:00",
     "sentAt": "2017-04-22T11:01:00+02:00",
@@ -214,7 +247,7 @@ Emitted when visitor has answered a customer satisfaction, net promoter score, s
     "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
     "eventType": "satisfaction.answered",
     "platform": "sd",
-    "projectId": 3030,
+    "projectId": 1,
     "clientId": 1,
     "createdAt": "2017-04-22T11:01:00+02:00",
     "sentAt": "2017-04-22T11:01:00+02:00",
@@ -229,7 +262,7 @@ Emitted when visitor has answered a customer satisfaction, net promoter score, s
     "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
     "eventType": "satisfaction.answered",
     "platform": "sd",
-    "projectId": 3030,
+    "projectId": 1,
     "clientId": 1,
     "createdAt": "2017-04-22T11:01:00+02:00",
     "sentAt": "2017-04-22T11:01:00+02:00",
@@ -246,7 +279,7 @@ Emit when a transaction is attributed to a conversation.
     "eventId": "d36cd3c4-2d16-4a77-97c2-620bde859b29",
     "eventType": "transaction.attributed",
     "platform": "sd",
-    "projectId": 3030,
+    "projectId": 1,
     "clientId": 1,
     "createdAt": "2017-04-22T11:01:00+02:00",
     "sentAt": "2017-04-22T11:01:00+02:00",
@@ -256,7 +289,7 @@ Emit when a transaction is attributed to a conversation.
     "amount": 300.20,
     "conversationId": "2d90a8a2-16df-45f5-897e-31adf9aa165d",
     "source": "Onsite",
-    "operatorId": 15253
+    "operatorId": 1
 }
 </pre>
 
