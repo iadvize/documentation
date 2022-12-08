@@ -53,6 +53,20 @@ Hybrid plugins for the iAdvize Conversation SDK are also available:
 
 > *⚠️ Please note that there may be delays between Native SDK releases and the corresponding hybrid plugins update deliveries.*
 
+##### ReactNative
+
+Our iOS SDK is delivered as a binary framework (in an XCFramework bundle), which is a standard way of distributing closed-source binaries. The SDK relies on external dependencies to provide several rich features. These dependencies are not directly integrated into our SDK. They are installed in your app at the same time the SDK is installed (when executing the `pod install` command). Thus, our SDK and its dependencies must be linked dynamically. For this reason, the `use_frameworks!` option is required in the `Podfile`, to ensure CocoaPods use dynamic frameworks instead of static libraries. For the same reason, the `use_frameworks! :linkage => :static` directive will not work.
+
+The ReactNative applications integrating our SDK through our ReactNative wrapper module should also use this `use_frameworks!` option in the iOS app configuration `Podfile` in order for it to compile and run.
+
+Some ReactNative base libraries like `Flipper` or `Hermes` do not work well with this option. ReactNative documentation recommends to disable `Flipper` when applying the `use_frameworks!` option.
+https://github.com/facebook/flipper/issues?q=is%3Aissue+is%3Aopen+use_frameworks
+
+As for `Hermes` the compatibility with `use_frameworks!` may be possible depending on your project dependencies & machine (Apple Silicon or Intel). Various workarounds can be found that may or may not work for your precise environment. Here are some useful links describing them:
+https://github.com/facebook/react-native/issues/34381
+https://github.com/facebook/react-native/issues/34344
+https://github.com/facebook/react-native/issues/31941
+
 ### ⚙️ Setting up the SDK
 
 #### 1️⃣ Adding the SDK dependency
