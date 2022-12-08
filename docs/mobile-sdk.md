@@ -47,9 +47,9 @@ The latest release version for the SDK can be found on the public Github reposit
 
 Hybrid plugins for the iAdvize Conversation SDK are also available:
 
-| ReactNative |
-| ----------- |
-| [https://github.com/iadvize/iadvize-react-native-sdk](https://github.com/iadvize/iadvize-react-native-sdk) |
+| ReactNative | Flutter |
+| ----------- | ------- |
+| [https://github.com/iadvize/iadvize-react-native-sdk](https://github.com/iadvize/iadvize-react-native-sdk) | [https://github.com/iadvize/iadvize-flutter-sdk](https://github.com/iadvize/iadvize-flutter-sdk) |
 
 > *⚠️ Please note that there may be delays between Native SDK releases and the corresponding hybrid plugins update deliveries.*
 
