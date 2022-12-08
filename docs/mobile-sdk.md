@@ -231,7 +231,8 @@ IAdvizeSDK.activate(
 You can choose between multiple authentication options:
 
 - **anonymous**: when you have an unidentified user browsing your app
-- **simple(userId: String)**: when you have a logged in user in your app. You must pass a unique identifier so that the visitor will retrieve his conversation history across multiple devices and platforms
+- **simple**: when you have a logged in user in your app. You must pass a unique string identifier (*userId*) so that the visitor will retrieve his conversation history across multiple devices and platforms
+- **secured**: use it in conjunction with your in-house authentication system. You must pass a *JWE provider* callback that will be called when an authentication is required, you will then have to call your third party authentication system for a valid JWE to provide to the SDK
 
 > *⚠️ For the __simple__ authentication mode, the identifier that you pass must be __unique and non-discoverable for each different logged-in user__.*
 
