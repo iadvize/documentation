@@ -29,7 +29,7 @@ The iAdvize Messenger SDK for iOS is available through its dedicated demo projec
 | Latest release | [https://github.com/iadvize/iadvize-ios-sdk/releases/latest](https://github.com/iadvize/iadvize-ios-sdk/releases/latest) |
 | API reference | [https://iadvize.github.io/iadvize-ios-sdk](https://iadvize.github.io/iadvize-ios-sdk) |
 
-## 1️⃣ Adding the SDK dependency
+### 1️⃣ Adding the SDK dependency
 
 To integrate the iAdvize Messenger SDK, you will have to use **CocoaPods**.
 > *⚠️  The SDK is distributed as an XCFramework, therefore **you are required to use CocoaPods 1.9.0 or newer** and the `use_frameworks!` directive.*
@@ -87,7 +87,7 @@ NSMicrophoneUsageDescription
 NSCameraUsageDescription
 </pre>
 
-## 2️⃣ Activating the SDK
+### 2️⃣ Activating the SDK
 
 To activate the SDK you must use the `activate`function with your `projectId` (see the [Setting up your iAdvize environment](#💬-setting-up-your-iadvize-environment) section above to get that identifier). You have access to callbacks in order to know if the SDK has been successfully activated. In case of an SDK activation failure the callback will give you the reason of the failure and you may want to retry later:
 
@@ -103,7 +103,7 @@ IAdvizeSDK.shared.activate(projectId: 0000,
  
 ⌨️ **In-context example:** [SDK Activation](https://github.com/iadvize/iadvize-ios-sdk/blob/master/Example/IAdvizeSwiftExample/IAdvizeSwiftExample/Source/AppDelegate%2BiAdvize.swift#L61)
 
-### Authentication modes
+#### Authentication modes
 
 You can choose between multiple authentication options:
 
@@ -130,7 +130,7 @@ Once the iAdvize Messenger SDK is successfully activated, you should see a succe
 ✅ iAdvize conversation activated, the version is x.y.z
 </pre>
 
-## 3️⃣ Logging the user out
+### 3️⃣ Logging the user out
 
 You will have to explicitly call the `logout` function of the iAdvize Messenger SDK when your user sign out of your app:
 
@@ -142,7 +142,7 @@ IAdvizeSDK.shared.logout() {
 }
 </pre>
 
-## 4️⃣ Displaying logs
+### 4️⃣ Displaying logs
 
 To have more information on what’s happening on the SDK side you can change the log level and choose between:
 
@@ -164,7 +164,7 @@ IAdvizeSDK.shared.logLevel = .verbose
 
 To be able to start a conversation you will first have to **trigger a targeting rule** in order for the default chat button to be displayed. The Chatbox will then be accessible by clicking on that chat button.
 
-## 1️⃣ Configuring the targeting language
+### 1️⃣ Configuring the targeting language
 
 The targeting rule configured in the iAdvize Administration Panel is setup for a given language.
 This means that if, for example, you setup a targeting rule to be triggered only for `EN` users and your current user’s device is in `FR`, the targeting rule will not trigger.
@@ -177,7 +177,7 @@ IAdvizeSDK.shared.targetingController.language = .custom(value: .fr)
 
 > *⚠️ This `language` property is __NOT__ intended to change the language displayed in the SDK. It is solely used for the targeting process purpose.*
 
-## 2️⃣ Activating a targeting rule
+### 2️⃣ Activating a targeting rule
 
 Using a targeting rule UUID (see the [Setting up your iAdvize environment](#💬-setting-up-your-iadvize-environment) section above to get that identifier), you can engage a user by calling:
 
@@ -196,14 +196,14 @@ If all the following conditions are met, the default chat button should appear:
 
 ⌨️ **In-context example:** [Targeting rule activation](https://github.com/iadvize/iadvize-ios-sdk/blob/master/Example/IAdvizeSwiftExample/IAdvizeSwiftExample/Source/AppDelegate%2BiAdvize.swift#L69)
 
-## 3️⃣ Initiating the conversation
+### 3️⃣ Initiating the conversation
 
 Once the default chat button is displayed, the visitor tap on it to access the Chatbox. After composing and sending a message a new conversation should pop up in the operator desk.
 
 ![Chat button is displayed. Visitor composes a message & send it.](./assets/images/mobile-sdk/02-conv-start-mobile.png)
 ![Conversation appears in the operator desk](./assets/images/mobile-sdk/03-conv-start-desk.png)
 
-## 4️⃣ Following user navigation
+### 4️⃣ Following user navigation
 
 While your user navigates through your app, you will have to update the active targeting rule in order to engage him/her with the best conversation partner at any time. In order to so, the SDK provides you with multiple navigation options to customize the behavior according to your needs:
 
@@ -225,7 +225,7 @@ IAdvizeSDK.shared.targetingController.registerUserNavigation(navigationOption: n
 
 ## 👋 Configuring GDPR and welcome message
 
-## 1️⃣ Adding a welcome message
+### 1️⃣ Adding a welcome message
 
 As seen above, the Chatbox is empty by default. You can configure a welcome message that will be displayed to the visitor when no conversation is ongoing.
 
@@ -244,7 +244,7 @@ When no conversation is ongoing, the welcome message is displayed to the visitor
 
 ![When no conversation is ongoing, the welcome message is displayed to the visitor](./assets/images/mobile-sdk/04-welcome-message.png)
 
-## 2️⃣ Enabling GDPR approval
+### 2️⃣ Enabling GDPR approval
 
 If you need to get the visitor consent on GDPR before he starts chatting, you can pass a `GDPROption` while activating the SDK. By default this option is set to `Disabled`.
 
@@ -298,7 +298,7 @@ IAdvizeSDK.shared.chatboxController.setupChatbox(configuration: configuration)
 
 The `ChatboxConfiguration` object that we used in the previous section to customize the welcome and GDPR messages can also be used to change the Chatbox UI to better fit into the look and feel of your application.
 
-## 1️⃣ Changing the Chatbox color
+### 1️⃣ Changing the Chatbox color
 
 You can setup a main color on the SDK which will be applied to:
 
@@ -312,7 +312,7 @@ configuration.mainColor = .red
 IAdvizeSDK.shared.chatboxController.setupChatbox(configuration: configuration)
 </pre>
 
-## 2️⃣ Styling the navigation bar
+### 2️⃣ Styling the navigation bar
 
 Some parts of the he toolbar/navigationbar appearing at the top of the Chatbox can also be customized:
 
@@ -328,7 +328,7 @@ configuration.navigationBarTitle = "Conversation"
 IAdvizeSDK.shared.chatboxController.setupChatbox(configuration: configuration)
 </pre>
 
-## 3️⃣ Updating the font
+### 3️⃣ Updating the font
 
 The font used in the Chatbox can easily be updated using your own font:
 
@@ -340,7 +340,7 @@ IAdvizeSDK.shared.chatboxController.setupChatbox(configuration: configuration)
 
 > *⚠️ The font should be placed inside the assets folder. Here the file is located at `src/main/assets/fonts/comic_sans_ms_regular.ttf`*
 
-## 4️⃣ Using a brand avatar
+### 4️⃣ Using a brand avatar
 
 The operator avatar displayed alongside his messages can be updated for branding purposes. You can specify a drawable either via an URL or a local resource.
 
@@ -380,13 +380,13 @@ With a custom button it is your responsibility to:
 - hide/show the button following the active targeting rule availability and the ongoing conversation status
 - open the Chatbox when the user presses your button
 
-## 1️⃣ Disabling the Default Floating Button
+### 1️⃣ Disabling the Default Floating Button
 
 <pre class="prettyprint">
 IAdvizeSDK.shared.chatboxController.useDefaultChatButton = false
 </pre>
 
-## 2️⃣ Displaying/hiding the chat button
+### 2️⃣ Displaying/hiding the chat button
 
 The chat button is linked to the targeting and conversation workflow and should update its visibility each time the status of those workflows is changed.
 First of all you need to implement the appropriate callbacks:
@@ -437,7 +437,7 @@ func updateChatButtonVisibility() {
 }
 </pre>
 
-## 3️⃣ Opening the Chatbox
+### 3️⃣ Opening the Chatbox
 
 When the visitor taps on your custom chat button you should open the Chatbox by calling the following method:
 
@@ -456,7 +456,7 @@ IAdvizeSDK.shared.chatboxController.presentChatbox(
 
 > *⚠️ Before starting this part you will need to configure push notifications inside your application. You can refer to the following resources if needed: [Push notification setup tutorial](https://www.raywenderlich.com/11395893-push-notifications-tutorial-getting-started). You will also need to ensure that the push notifications are setup in your iAdvize project. The process is described in the [SDK Knowledge Base](https://help.iadvize.com/hc/en-gb/articles/360019839480).*
 
-## 1️⃣ Registering the device token
+### 1️⃣ Registering the device token
 
 For the SDK to be able to send notifications to the visitor’s device, its unique `device push token` must be registered:
 
@@ -466,7 +466,7 @@ IAdvizeSDK.shared.notificationController.registerPushToken("the_device_push_toke
 
 ⌨️ **In-context example:** [Device token register](https://github.com/iadvize/iadvize-ios-sdk/blob/master/Example/IAdvizeSwiftExample/IAdvizeSwiftExample/Source/AppDelegate%2BPushNotification.swift#L27)
 
-## 2️⃣ Enabling/disabling push notifications
+### 2️⃣ Enabling/disabling push notifications
 
 Push notifications are activated as long as you have setup the push notifications information for your app on the iAdvize administration website (process is described in the [SDK Knowledge Base](https://help.iadvize.com/hc/en-gb/articles/360019839480)). You can manually enable/disable them at any time using:
 
@@ -480,7 +480,7 @@ IAdvizeSDK.shared.notificationController.disablePushNotifications { success in
 }
 </pre>
 
-## 3️⃣ Handling push notifications reception
+### 3️⃣ Handling push notifications reception
 
 Once setup, you will receive push notifications when the operator sends any message. As the SDK notifications are caught in the same place than your app other notifications, you first have to distinguish if the received notification comes from iAdvize or not. This can be done using:
 
@@ -512,7 +512,7 @@ func shouldDisplayNotification(userInfo: [AnyHashable: Any]) -> Bool {
 }
 </pre>
 
-## 4️⃣ Customizing the notification
+### 4️⃣ Customizing the notification
 
 By default, the title of the notification is set to the string key `iadvize_notification_title`.
 If you want to update/translate this title you can override this value by adding the `iadvize_notification_title` key in your `Localizable.strings` file:
@@ -523,7 +523,7 @@ If you want to update/translate this title you can override this value by adding
 
 ## 📈 Adding value to the conversation
 
-## 1️⃣ Registering visitor transactions
+### 1️⃣ Registering visitor transactions
 
 You can register a transaction made within your application:
 
@@ -532,7 +532,7 @@ let transaction = Transaction(externalTransactionId: "transactionId", date: Date
 IAdvizeSDK.shared.transactionController.registerTransaction(transaction)
 </pre>
 
-## 2️⃣ Saving visitor custom data
+### 2️⃣ Saving visitor custom data
 
 The iAdvize Messenger SDK allows you to save data related to the visitor conversation:
 
