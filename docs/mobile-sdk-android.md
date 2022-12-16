@@ -7,16 +7,13 @@ This document aims to help you integrate the iAdvize Messenger Android SDK into 
 Before integrating the SDK, you need to check that your iAdvize environment is ready to use (i.e. you have an account ready to receive and answer to conversations from the SDK).
 You will also need some information related to the project for the SDK setup. Please ask your iAdvize administrator to follow the instructions available on the [SDK Knowledge Base](https://help.iadvize.com/hc/en-gb/articles/360019839480) and to provide you with the **Project Identifier** as well as a **Targeting Rule Identifier**.
 
-
 > *⚠️ Your iAdvize administrator should already have configured the project on the [iAdvize Administration Desk](https://ha.iadvize.com/admin/login/) and created an operator account for you. If it is not yet the case please contact your iAdvize Technical Project Manager.*
 
 ## 💻 Connecting to your iAdvize Operator Desk
 
 Using your operator account please log into the [iAdvize Desk](https://ha.iadvize.com/admin/login/).
 
-
 > *⚠️ If you have the Administrator status in addition to your operator account, you will be directed to the Admin Desk when logging in. Just click on the `Chat` button in the upper right corner to open the Operator Desk.*
-
 
 The iAdvize operator desk is the place where the conversations that are assigned to your account will pop up. Please ensure that your status is “Available" by enabling the corresponding chat or video toggle buttons in the upper right corner:
 
@@ -64,7 +61,6 @@ dependencies {
 
 > *⚠️ The `exclude` configuration is required because the iAdvize Messenger SDK uses [Smack](https://github.com/igniterealtime/Smack), an XMPP library that is built upon `xpp3`, which is bundled by default in the Android framework. This exclude ensures that your app does not also bundle `xpp3` to avoid classes duplication errors.*
 
-
 After syncing your project you should be able to import the iAdvize dependency in your application code with `import com.iadvize.conversation.sdk.IAdvizeSDK`
 
 ⌨️ **In-context example:**
@@ -72,7 +68,6 @@ After syncing your project you should be able to import the iAdvize dependency i
 - [Project-level Gradle file](https://github.com/iadvize/iadvize-android-sdk/blob/master/build.gradle.kts)
 - [Module-level Gradle file](https://github.com/iadvize/iadvize-android-sdk/blob/master/mobile/build.gradle.kts)
 - [Import](https://github.com/iadvize/iadvize-android-sdk/blob/master/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/App.kt#L5)
-
 
 > *⚠️ From the version 2.5 and onward, the SDK supports video conversations using a third party native (C++) binaries. If you are delivering your app using an APK you will note a size increase as the default behavior of the build system is to include the binaries for each ABI in a single APK. We strongly recommended that you take advantage of either [App Bundles](https://developer.android.com/guide/app-bundle) or [APK Splits](https://developer.android.com/studio/build/configure-apk-splits) to reduce the size of your APKs while still maintaining maximum device compatibility.*
 
@@ -145,7 +140,6 @@ AuthenticationOption.Secured(object : AuthenticationOption.JWEProvider {
 
 > *⚠️ For the __Simple__ authentication mode, the identifier that you pass must be __unique and non-discoverable for each different logged-in user__.*
 
-
 Once the iAdvize Messenger SDK is successfully activated, you should see a success message in the console:
 
 <pre class="prettyprint">
@@ -213,7 +207,6 @@ If all the following conditions are met, the default chat button should appear:
 - the targeting rule language set in the SDK matches the language configured for this rule
 - an operator assigned to this rule is available to answer (connected and with a free chat slot)
 
-
 > *⚠️ After you activate a rule and it succeeds (by displaying the button), those conditions are checked every 30 seconds to verify that the button should still be displayed or not. At the first failure from this periodic check, the button is hidden and the SDK stops verifying the conditions. It means that if the rule cannot be triggered (after the first call, or after any successive check), you will have to call the `activateTargetingRule` (or `registerUserNavigation`) method again to restart the engagement process.*
 
 ### 3️⃣ Initiating the conversation
@@ -242,7 +235,6 @@ IAdvizeSDK.targetingController.registerUserNavigation(navOption)
 </pre>
 
 > *⚠️ Please note that calling `registerUserNavigation` with `NavigationOption.ClearActiveRule` will stop the engagement process, and calling it with other options will start it if it is stopped. Thus you may never use `activateTargetingRule` in your app and only rely on `registerUserNavigation` for your engagement process management.*
-
 
 ⌨️ **In-context example:** [Registering User Navigation](https://github.com/iadvize/iadvize-android-sdk/blob/master/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/product/ProductDetailFragment.kt#L42)
 
@@ -277,9 +269,7 @@ This `GDPROption` dictates how the SDK behaves when the user taps on the `More i
 - provide an URL pointing to your GPDR policy, it will be opened on user click
 - provide a listener/delegate, it will be called on user click and you can then implement your own custom behavior
 
-
 > *⚠️ If your visitors have already consented to GDPR inside your application, you can activate the iAdvize SDK without the GDPR process. However, be careful to explicitly mention the iAdvize Chat part in your GDPR consent details.*
-
 
 Let’s activate the iAdvize Messenger SDK using the first option:
 
@@ -590,7 +580,6 @@ object : IAdvizeSDK.Callback {
 
 > *⚠️ As those data are related to the conversation they cannot be sent if there is no ongoing conversation. Custom data registered before the start of a conversation are stored and the SDK automatically tries to send them when the conversation starts.*
 
-
 The visitor data you registered are displayed in the iAdvize Operator Desk in the conversation sidebar, in a tab labelled  `Custom data`:
 
 ![Custom data tab shows registered data from the SDK](./assets/images/mobile-sdk/06-custom-data.png)
@@ -601,7 +590,6 @@ From SDK version `2.4.0` and onward, the satisfaction survey is automatically se
 The survey is presented to the visitor in a conversational approach, directly into the Chatbox.
 
 <img src="./assets/images/mobile-sdk/07-satisfaction-survey.gif" alt="Satisfaction survey" style="display: block; width: 20%; height: auto;" />
-
 
 > *⚠️ Only the `CSAT`, `NPS` and `COMMENT` steps of the survey are supported.*
 

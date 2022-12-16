@@ -7,16 +7,13 @@ This document aims to help you integrate the iAdvize Messenger iOS SDK into your
 Before integrating the SDK, you need to check that your iAdvize environment is ready to use (i.e. you have an account ready to receive and answer to conversations from the SDK).
 You will also need some information related to the project for the SDK setup. Please ask your iAdvize administrator to follow the instructions available on the [SDK Knowledge Base](https://help.iadvize.com/hc/en-gb/articles/360019839480) and to provide you with the **Project Identifier** as well as a **Targeting Rule Identifier**.
 
-
 > *⚠️ Your iAdvize administrator should already have configured the project on the [iAdvize Administration Desk](https://ha.iadvize.com/admin/login/) and created an operator account for you. If it is not yet the case please contact your iAdvize Technical Project Manager.*
 
 ## 💻 Connecting to your iAdvize Operator Desk
 
 Using your operator account please log into the [iAdvize Desk](https://ha.iadvize.com/admin/login/).
 
-
 > *⚠️ If you have the Administrator status in addition to your operator account, you will be directed to the Admin Desk when logging in. Just click on the `Chat` button in the upper right corner to open the Operator Desk.*
-
 
 The iAdvize operator desk is the place where the conversations that are assigned to your account will pop up. Please ensure that your status is “Available" by enabling the corresponding chat or video toggle buttons in the upper right corner:
 
@@ -43,7 +40,6 @@ pod 'iAdvize', 'x.y.z'
 
 > *⚠️  The SDK is distributed as an XCFramework, therefore **you are required to use CocoaPods 1.9.0 or newer** and the `use_frameworks!` directive.*
 
-
 Add the following to the bottom of your Podfile:
 
 <pre class="prettyprint">
@@ -58,8 +54,7 @@ end
 
 > *⚠️ This `post_install` hook is required because the iAdvize Messenger SDK supports [module stability](https://swift.org/blog/abi-stability-and-more/). Therefore, all its dependencies must be built using the `Build Libraries for Distribution` option.*
 
-
-Your Podfile should look like: 
+Your Podfile should look like:
 
 <pre class="prettyprint">
 platform :ios, '12.0'
@@ -84,7 +79,6 @@ After running `pod install` you should be able to mport the iAdvize dependency i
 
 - [Podfile](https://github.com/iadvize/iadvize-ios-sdk/blob/master/Example/IAdvizeSwiftExample/Podfile#L1)
 - [Import](https://github.com/iadvize/iadvize-ios-sdk/blob/master/Example/IAdvizeSwiftExample/IAdvizeSwiftExample/Source/AppDelegate%2BiAdvize.swift#L10)
-
 
 > *⚠️ From the version 2.5.0 and onward, the SDK supports video conversations. Thus it will request camera and microphone access before entering a video call. To avoid the app to crash, you have to setup two keys in your app Info.plist:*
 
@@ -129,7 +123,6 @@ let authenticationOption = .secured(jweProvider: authProvider)
 </pre>
 
 > *⚠️ For the __Simple__ authentication mode, the identifier that you pass must be __unique and non-discoverable for each different logged-in user__.*
-
 
 Once the iAdvize Messenger SDK is successfully activated, you should see a success message in the console:
 
@@ -199,9 +192,7 @@ If all the following conditions are met, the default chat button should appear:
 - the targeting rule language set in the SDK matches the language configured for this rule
 - an operator assigned to this rule is available to answer (connected and with a free chat slot)
 
-
 > *⚠️ After you activate a rule and it succeeds (by displaying the button), those conditions are checked every 30 seconds to verify that the button should still be displayed or not. At the first failure from this periodic check, the button is hidden and the SDK stops verifying the conditions. It means that if the rule cannot be triggered (after the first call, or after any successive check), you will have to call the `activateTargetingRule` (or `registerUserNavigation`) method again to restart the engagement process.*
-
 
 ⌨️ **In-context example:** [Targeting rule activation](https://github.com/iadvize/iadvize-ios-sdk/blob/master/Example/IAdvizeSwiftExample/IAdvizeSwiftExample/Source/AppDelegate%2BiAdvize.swift#L69)
 
@@ -266,9 +257,7 @@ This `GDPROption` dictates how the SDK behaves when the user taps on the `More i
 - provide an URL pointing to your GPDR policy, it will be opened on user click
 - provide a listener/delegate, it will be called on user click and you can then implement your own custom behavior
 
-
 > *⚠️ If your visitors have already consented to GDPR inside your application, you can activate the iAdvize SDK without the GDPR process. However, be careful to explicitly mention the iAdvize Chat part in your GDPR consent details.*
-
 
 Let’s activate the iAdvize Messenger SDK using the first option:
 
@@ -561,7 +550,6 @@ IAdvizeSDK.shared.visitorController.registerCustomData(
 
 > *⚠️ As those data are related to the conversation they cannot be sent if there is no ongoing conversation. Custom data registered before the start of a conversation are stored and the SDK automatically tries to send them when the conversation starts.*
 
-
 The visitor data you registered are displayed in the iAdvize Operator Desk in the conversation sidebar, in a tab labelled  `Custom data`:
 
 ![Custom data tab shows registered data from the SDK](./assets/images/mobile-sdk/06-custom-data.png)
@@ -572,6 +560,5 @@ From SDK version `2.4.0` and onward, the satisfaction survey is automatically se
 The survey is presented to the visitor in a conversational approach, directly into the Chatbox.
 
 <img src="./assets/images/mobile-sdk/07-satisfaction-survey.gif" alt="Satisfaction survey" style="display: block; width: 20%; height: auto;" />
-
 
 > *⚠️ Only the `CSAT`, `NPS` and `COMMENT` steps of the survey are supported.*
