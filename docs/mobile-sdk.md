@@ -25,15 +25,15 @@ If the toggle button is yellow, it means you have reached your maximum simultane
 
 ### ⚛️ Finding the SDK for your platform
 
-The iAdvize Messenger SDK is developped and released for the native mobile platforms (Android/iOS). Plugins for bridging with the native SDK are also provided for projects on some hybrid platforms (ReactNative/Flutter).
+The iAdvize Messenger SDK is developped and released for the native mobile platforms (Android/iOS). Plugins for bridging with the native SDK are also provided for some hybrid platforms (ReactNative/Flutter).
 
 > *⚠️ Please note that there may be delays between Native SDK releases and the corresponding hybrid plugins update deliveries.*
 
 | Platform | Demo | API Reference | Documentation |
 | --- | --- | --- | --- |
-| Android | [GitHub](https://github.com/iadvize/iadvize-android-sdk) | [Dokka](https://iadvize.github.io/iadvize-android-sdk/) | [Documentation](https://developers.iadvize.com/documentation/mobile-sdk-android) |
-| iOS | [GitHub](https://github.com/iadvize/iadvize-ios-sdk) | [Jazzy](https://iadvize.github.io/iadvize-ios-sdk/) | [Documentation](https://developers.iadvize.com/documentation/mobile-sdk-ios) |
-| ReactNative | [GitHub](https://github.com/iadvize/iadvize-react-native-sdk) | | [Documentation](https://developers.iadvize.com/documentation/mobile-sdk-reactnative) |
-| Flutter | [GitHub](https://github.com/iadvize/iadvize-flutter-sdk) | | [Documentation](https://developers.iadvize.com/documentation/mobile-sdk-flutter) |
+| Android | [GitHub](https://github.com/iadvize/iadvize-android-sdk) | [Dokka](https://iadvize.github.io/iadvize-android-sdk/) | [Integration](https://developers.iadvize.com/documentation/mobile-sdk-android) |
+| iOS | [GitHub](https://github.com/iadvize/iadvize-ios-sdk) | [Jazzy](https://iadvize.github.io/iadvize-ios-sdk/) | [Integration](https://developers.iadvize.com/documentation/mobile-sdk-ios) |
+| ReactNative | [GitHub](https://github.com/iadvize/iadvize-react-native-sdk) | | [Integration](https://developers.iadvize.com/documentation/mobile-sdk-reactnative) |
+| Flutter | [GitHub](https://github.com/iadvize/iadvize-flutter-sdk) | | [Integration](https://developers.iadvize.com/documentation/mobile-sdk-flutter) |
 
 To proceed with the SDK integration, please follow the link to the documentation corresponding to your mobile platform.
