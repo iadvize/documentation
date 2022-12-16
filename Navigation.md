@@ -179,5 +179,6 @@
     * [Visitor satisfaction survey](/documentation/mobile-sdk#👍-fetching-visitor-satisfaction)
     * [Testing the SDK](/documentation/mobile-sdk#🚦-testing-the-sdk)
   * [iOS](/documentation/mobile-sdk#ios)
+    * [Demo project](/documentation/mobile-sdk#test-anchor)
   * [ReactNative](/documentation/mobile-sdk#reactnative)
   * [Flutter](/documentation/mobile-sdk#flutter)

@@ -639,7 +639,7 @@ Please also be sure to initiate the SDK during the unit tests setup (see the [Se
 
 ## iOS
 
-### ✨ Demo project
+### <a name="test-anchor"></a> ✨ Demo project
 TODO
 
 ## ReactNative
