@@ -1,22 +1,24 @@
 # iAdvize Messenger SDK : Integration guide for Android
 
-## ✨ Demo project
+This document aims to help you integrate the iAdvize Messenger Android SDK into your native Android mobile applications.
 
-A demo project is available, a lot of the SDK code snippets used in this documentation can be found there in a real application context: [Demo Project](https://github.com/iadvize/iadvize-android-sdk)
+### ✨ Demo project
 
-## 🆕 Latest SDK release
+A demo project is available on [Github](https://github.com/iadvize/iadvize-android-sdk), almost all of the SDK code snippets used in this documentation can be found there in a real application context.
+
+### 🆕 Latest SDK release
 
 The latest Android SDK release is available on the same GitHub repository release page: [https://github.com/iadvize/iadvize-android-sdk/releases/latest](https://github.com/iadvize/iadvize-android-sdk/releases/latest).
 
 > *⚠️ In the following snippets the SDK version is written as `x.y.z`, don’t forget to change it with the latest SDK version found at the above links.*
 
-## 📔 API reference
+### 📔 API reference
 
 The full Kotlin API reference can be found on the following link: [https://iadvize.github.io/iadvize-android-sdk/](https://iadvize.github.io/iadvize-android-sdk/).
 
-## ⚙️ Setting up the SDK
+### ⚙️ Setting up the SDK
 
-### 1️⃣ Adding the SDK dependency
+#### 1️⃣ Adding the SDK dependency
 
 Add the iAdvize repository to your project repositories inside your top-level Gradle build file:
 
@@ -59,7 +61,7 @@ After syncing your project you should be able to import the iAdvize dependency i
 
 > *⚠️ From the version 2.5 and onward, the SDK supports video conversations using a third party native (C++) binaries. If you are delivering your app using an APK you will note a size increase as the default behavior of the build system is to include the binaries for each ABI in a single APK. We strongly recommended that you take advantage of either [App Bundles](https://developer.android.com/guide/app-bundle) or [APK Splits](https://developer.android.com/studio/build/configure-apk-splits) to reduce the size of your APKs while still maintaining maximum device compatibility.*
 
-### 2️⃣ Activating the SDK
+#### 2️⃣ Activating the SDK
 
 Before activating the SDK, you will need to provide a reference to your application object and initiate the SDK with it.
 
@@ -108,7 +110,7 @@ IAdvizeSDK.activate(
 - [SDK Initiation](https://github.com/iadvize/iadvize-android-sdk/blob/master/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/App.kt#L15)
 - [SDK Activation](https://github.com/iadvize/iadvize-android-sdk/blob/master/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/App.kt#L32)
 
-#### Authentication modes
+###### Authentication modes
 
 You can choose between multiple authentication options:
 
@@ -134,7 +136,7 @@ Once the iAdvize Messenger SDK is successfully activated, you should see a succe
 ✅ iAdvize conversation activated, the version is x.y.z
 </pre>
 
-### 3️⃣ Logging the user out
+#### 3️⃣ Logging the user out
 
 You will have to explicitly call the `logout` function of the iAdvize Messenger SDK when your user sign out of your app:
 
@@ -142,7 +144,7 @@ You will have to explicitly call the `logout` function of the iAdvize Messenger 
 IAdvizeSDK.logout()
 </pre>
 
-### 4️⃣ Displaying logs
+#### 4️⃣ Displaying logs
 
 To have more information on what’s happening on the SDK side you can change the log level and choose between:
 
@@ -159,11 +161,11 @@ To do so just add this line to your project:
 IAdvizeSDK.logLevel = Logger.Level.VERBOSE
 </pre>
 
-## 💬 Starting a conversation
+### 💬 Starting a conversation
 
 To be able to start a conversation you will first have to **trigger a targeting rule** in order for the default chat button to be displayed. The Chatbox will then be accessible by clicking on that chat button.
 
-### 1️⃣ Configuring the targeting language
+#### 1️⃣ Configuring the targeting language
 
 The targeting rule configured in the iAdvize Administration Panel is setup for a given language.
 This means that if, for example, you setup a targeting rule to be triggered only for `EN` users and your current user’s device is in `FR`, the targeting rule will not trigger.
@@ -176,7 +178,7 @@ IAdvizeSDK.targetingController.language = SDKLanguageOption.Custom(Language.FR)
 
 > *⚠️ This `language` property is __NOT__ intended to change the language displayed in the SDK. It is solely used for the targeting process purpose.*
 
-### 2️⃣ Activating a targeting rule
+#### 2️⃣ Activating a targeting rule
 
 Using a targeting rule UUID (see the [Prerequisites](https://developers.iadvize.com/documentation/mobile-sdk#⚙️-prerequisites) section to get that identifier), you can engage a user by calling:
 
@@ -197,14 +199,14 @@ If all the following conditions are met, the default chat button should appear:
 
 > *⚠️ After you activate a rule and it succeeds (by displaying the button), those conditions are checked every 30 seconds to verify that the button should still be displayed or not. At the first failure from this periodic check, the button is hidden and the SDK stops verifying the conditions. It means that if the rule cannot be triggered (after the first call, or after any successive check), you will have to call the `activateTargetingRule` (or `registerUserNavigation`) method again to restart the engagement process.*
 
-### 3️⃣ Initiating the conversation
+#### 3️⃣ Initiating the conversation
 
 Once the default chat button is displayed, the visitor tap on it to access the Chatbox. After composing and sending a message a new conversation should pop up in the operator desk.
 
 ![Chat button is displayed. Visitor composes a message & send it.](./assets/images/mobile-sdk/02-conv-start-mobile.png)
 ![Conversation appears in the operator desk](./assets/images/mobile-sdk/03-conv-start-desk.png)
 
-### 4️⃣ Following user navigation
+#### 4️⃣ Following user navigation
 
 While your user navigates through your app, you will have to update the active targeting rule in order to engage him/her with the best conversation partner at any time. In order to so, the SDK provides you with multiple navigation options to customize the behavior according to your needs:
 
@@ -226,9 +228,9 @@ IAdvizeSDK.targetingController.registerUserNavigation(navOption)
 
 ⌨️ **In-context example:** [Registering User Navigation](https://github.com/iadvize/iadvize-android-sdk/blob/master/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/product/ProductDetailFragment.kt#L42)
 
-## 👋 Configuring GDPR and welcome message
+### 👋 Configuring GDPR and welcome message
 
-### 1️⃣ Adding a welcome message
+#### 1️⃣ Adding a welcome message
 
 As seen above, the Chatbox is empty by default. You can configure a welcome message that will be displayed to the visitor when no conversation is ongoing.
 
@@ -244,7 +246,7 @@ When no conversation is ongoing, the welcome message is displayed to the visitor
 
 ![When no conversation is ongoing, the welcome message is displayed to the visitor](./assets/images/mobile-sdk/04-welcome-message.png)
 
-### 2️⃣ Enabling GDPR approval
+#### 2️⃣ Enabling GDPR approval
 
 If you need to get the visitor consent on GDPR before he starts chatting, you can pass a `GDPROption` while activating the SDK. By default this option is set to `Disabled`.
 
@@ -285,11 +287,11 @@ IAdvizeSDK.chatboxController.setupChatbox(configuration)
 - [GDPR Option](https://github.com/iadvize/iadvize-android-sdk/blob/master/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/IAdvizeSDKConfig.kt#L38)
 - [GDPR Message](https://github.com/iadvize/iadvize-android-sdk/blob/master/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/IAdvizeSDKConfig.kt#L60)
 
-## 🎨 Branding the Chatbox
+### 🎨 Branding the Chatbox
 
 The `ChatboxConfiguration` object that we used in the previous section to customize the welcome and GDPR messages can also be used to change the Chatbox UI to better fit into the look and feel of your application.
 
-### 1️⃣ Changing the Chatbox color
+#### 1️⃣ Changing the Chatbox color
 
 You can setup a main color on the SDK which will be applied to:
 
@@ -303,7 +305,7 @@ configuration.mainColor = Color.RED
 IAdvizeSDK.chatboxController.setupChatbox(configuration)
 </pre>
 
-### 2️⃣ Styling the navigation bar
+#### 2️⃣ Styling the navigation bar
 
 Some parts of the he toolbar/navigationbar appearing at the top of the Chatbox can also be customized:
 
@@ -319,7 +321,7 @@ configuration.toolbarTitle = "Conversation"
 IAdvizeSDK.chatboxController.setupChatbox(configuration)
 </pre>
 
-### 3️⃣ Updating the font
+#### 3️⃣ Updating the font
 
 The font used in the Chatbox can easily be updated using your own font:
 
@@ -331,7 +333,7 @@ IAdvizeSDK.chatboxController.setupChatbox(configuration)
 
 > *⚠️ The font should be placed inside the assets folder. Here the file is located at `src/main/assets/fonts/comic_sans_ms_regular.ttf`*
 
-### 4️⃣ Using a brand avatar
+#### 4️⃣ Using a brand avatar
 
 The operator avatar displayed alongside his messages can be updated for branding purposes. You can specify a drawable either via an URL or a local resource.
 
@@ -351,7 +353,7 @@ IAdvizeSDK.chatboxController.setupChatbox(configuration)
 
 > *⚠️ GIFs are not supported*
 
-## 🎨 Branding the Default Floating Button
+### 🎨 Branding the Default Floating Button
 
 By default, the SDK uses its own Default Floating Button to the user to engage the conversation. This Default Floating Button display process is automated by the SDK and works out of the box. You have however limited possibilities to brand it to your needs.
 
@@ -374,7 +376,7 @@ IAdvizeSDK.defaultFloatingButtonController.setupDefaultFloatingButton(option)
 
 ⌨️ **In-context example:** [Default Floating Button Configuration](https://github.com/iadvize/iadvize-android-sdk/blob/master/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/IAdvizeSDKConfig.kt#L43)
 
-## ✨ Using a custom chat button
+### ✨ Using a custom chat button
 
 If you are not satisfied with the Default Floating Button look and feel or if you want to implement a specific behavior related to its display you may need to use a custom conversation button.
 
@@ -384,13 +386,13 @@ With a custom button it is your responsibility to:
 - hide/show the button following the active targeting rule availability and the ongoing conversation status
 - open the Chatbox when the user presses your button
 
-### 1️⃣ Disabling the Default Floating Button
+#### 1️⃣ Disabling the Default Floating Button
 
 <pre class="prettyprint">
 IAdvizeSDK.defaultFloatingButtonController.setupDefaultFloatingButton(DefaultFloatingButtonOption.Disabled)
 </pre>
 
-### 2️⃣ Displaying/hiding the chat button
+#### 2️⃣ Displaying/hiding the chat button
 
 The chat button is linked to the targeting and conversation workflow and should update its visibility each time the status of those workflows is changed.
 First of all you need to implement the appropriate callbacks:
@@ -438,7 +440,7 @@ fun updateChatButtonVisibility() {
 }
 </pre>
 
-### 3️⃣ Opening the Chatbox
+#### 3️⃣ Opening the Chatbox
 
 When the visitor taps on your custom chat button you should open the Chatbox by calling the following method:
 
@@ -448,11 +450,11 @@ IAdvizeSDK.chatboxController.presentChatbox(context)
 
 ⌨️ **In-context example:** [Full custom chat button implementation](https://gist.github.com/Judas/d0a34a50f1b6b8d542d77af5db9d9787)
 
-## 🔔 Handling push notifications
+### 🔔 Handling push notifications
 
 > *⚠️ Before starting this part you will need to configure push notifications inside your application. You can refer to the following resources if needed: [Firebase Cloud Messaging documentation](https://firebase.google.com/docs/cloud-messaging/android/client). You will also need to ensure that the push notifications are setup in your iAdvize project. The process is described in the [SDK Knowledge Base](https://help.iadvize.com/hc/en-gb/articles/360019839480).*
 
-### 1️⃣ Registering the device token
+#### 1️⃣ Registering the device token
 
 For the SDK to be able to send notifications to the visitor’s device, its unique `device push token` must be registered:
 
@@ -467,7 +469,7 @@ class NotificationService : FirebaseMessagingService() {
 
 ⌨️ **In-context example:** [Device token register](https://github.com/iadvize/iadvize-android-sdk/blob/master/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/notifications/NotificationService.kt#L55)
 
-### 2️⃣ Enabling/disabling push notifications
+#### 2️⃣ Enabling/disabling push notifications
 
 Push notifications are activated as long as you have setup the push notifications information for your app on the iAdvize administration website (process is described in the [SDK Knowledge Base](https://help.iadvize.com/hc/en-gb/articles/360019839480)). You can manually enable/disable them at any time using:
 
@@ -491,7 +493,7 @@ IAdvizeSDK.notificationController.disablePushNotifications(object : IAdvizeSDK.C
 })
 </pre>
 
-### 3️⃣ Handling push notifications reception
+#### 3️⃣ Handling push notifications reception
 
 Once setup, you will receive push notifications when the operator sends any message. As the SDK notifications are caught in the same place than your app other notifications, you first have to distinguish if the received notification comes from iAdvize or not. This can be done using:
 
@@ -513,7 +515,7 @@ fun shouldDisplayNotification(remoteMessage: RemoteMessage) =
   && !IAdvizeSDK.chatboxController.isChatboxPresented()
 </pre>
 
-### 4️⃣ Customizing the notification
+#### 4️⃣ Customizing the notification
 
 You are responsible for displaying the notification so you can use any title / text / icon you want.
 The text sent by the agent is available in the `content` part of the notification data received.
@@ -528,9 +530,9 @@ override fun onMessageReceived(remoteMessage: RemoteMessage) {
 
 ⌨️ **In-context example:** [Handling received notification](https://github.com/iadvize/iadvize-android-sdk/blob/master/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/notifications/NotificationService.kt#L68)
 
-## 📈 Adding value to the conversation
+### 📈 Adding value to the conversation
 
-### 1️⃣ Registering visitor transactions
+#### 1️⃣ Registering visitor transactions
 
 You can register a transaction made within your application:
 
@@ -545,7 +547,7 @@ IAdvizeSDK.transactionController.register(
 )
 </pre>
 
-### 2️⃣ Saving visitor custom data
+#### 2️⃣ Saving visitor custom data
 
 The iAdvize Messenger SDK allows you to save data related to the visitor conversation:
 
@@ -572,7 +574,7 @@ The visitor data you registered are displayed in the iAdvize Operator Desk in th
 
 ![Custom data tab shows registered data from the SDK](./assets/images/mobile-sdk/06-custom-data.png)
 
-## 👍 Fetching visitor satisfaction
+### 👍 Fetching visitor satisfaction
 
 From SDK version `2.4.0` and onward, the satisfaction survey is automatically sent to the visitor at the end of the conversation, as long as it is activated in the iAdvize administration website.
 The survey is presented to the visitor in a conversational approach, directly into the Chatbox.
@@ -581,7 +583,7 @@ The survey is presented to the visitor in a conversational approach, directly in
 
 > *⚠️ Only the `CSAT`, `NPS` and `COMMENT` steps of the survey are supported.*
 
-## 🚦 Testing the SDK
+### 🚦 Testing the SDK
 
 If you are running unit tests that implies the SDK, some additional steps may be needed.
 
