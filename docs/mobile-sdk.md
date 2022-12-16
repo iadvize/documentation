@@ -42,21 +42,21 @@ To proceed with the SDK integration, please follow the link to the documentation
 
 This document aims to help you integrate the iAdvize Messenger Android SDK into your native Android mobile applications.
 
-### ✨ Demo project
+### <a name="android-demo"></a>✨ Demo project
 
 A demo project is available on [Github](https://github.com/iadvize/iadvize-android-sdk), almost all of the SDK code snippets used in this documentation can be found there in a real application context.
 
-### 🆕 Latest SDK release
+### <a name="android-latest"></a>🆕 Latest SDK release
 
 The latest Android SDK release is available on the same GitHub repository release page: [https://github.com/iadvize/iadvize-android-sdk/releases/latest](https://github.com/iadvize/iadvize-android-sdk/releases/latest).
 
 > *⚠️ In the following snippets the SDK version is written as `x.y.z`, don’t forget to change it with the latest SDK version found at the above links.*
 
-### 📔 API reference
+### <a name="android-api"></a>📔 API reference
 
 The full Kotlin API reference can be found on the following link: [https://iadvize.github.io/iadvize-android-sdk/](https://iadvize.github.io/iadvize-android-sdk/).
 
-### ⚙️ Setting up the SDK
+### <a name="android-activate"></a>⚙️ Setting up the SDK
 
 #### 1️⃣ Adding the SDK dependency
 
@@ -201,7 +201,7 @@ To do so just add this line to your project:
 IAdvizeSDK.logLevel = Logger.Level.VERBOSE
 </pre>
 
-### 💬 Starting a conversation
+### <a name="android-targeting"></a>💬 Starting a conversation
 
 To be able to start a conversation you will first have to **trigger a targeting rule** in order for the default chat button to be displayed. The Chatbox will then be accessible by clicking on that chat button.
 
@@ -268,7 +268,7 @@ IAdvizeSDK.targetingController.registerUserNavigation(navOption)
 
 ⌨️ **In-context example:** [Registering User Navigation](https://github.com/iadvize/iadvize-android-sdk/blob/master/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/product/ProductDetailFragment.kt#L42)
 
-### 👋 Configuring GDPR and welcome message
+### <a name="android-gdpr"></a>👋 Configuring GDPR and welcome message
 
 #### 1️⃣ Adding a welcome message
 
@@ -327,7 +327,7 @@ IAdvizeSDK.chatboxController.setupChatbox(configuration)
 - [GDPR Option](https://github.com/iadvize/iadvize-android-sdk/blob/master/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/IAdvizeSDKConfig.kt#L38)
 - [GDPR Message](https://github.com/iadvize/iadvize-android-sdk/blob/master/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/IAdvizeSDKConfig.kt#L60)
 
-### 🎨 Branding the Chatbox
+### <a name="android-chatbox"></a>🎨 Branding the Chatbox
 
 The `ChatboxConfiguration` object that we used in the previous section to customize the welcome and GDPR messages can also be used to change the Chatbox UI to better fit into the look and feel of your application.
 
@@ -393,7 +393,7 @@ IAdvizeSDK.chatboxController.setupChatbox(configuration)
 
 > *⚠️ GIFs are not supported*
 
-### 🎨 Branding the Default Floating Button
+### <a name="android-default-button"></a>🎨 Branding the Default Floating Button
 
 By default, the SDK uses its own Default Floating Button to the user to engage the conversation. This Default Floating Button display process is automated by the SDK and works out of the box. You have however limited possibilities to brand it to your needs.
 
@@ -416,7 +416,7 @@ IAdvizeSDK.defaultFloatingButtonController.setupDefaultFloatingButton(option)
 
 ⌨️ **In-context example:** [Default Floating Button Configuration](https://github.com/iadvize/iadvize-android-sdk/blob/master/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/IAdvizeSDKConfig.kt#L43)
 
-### ✨ Using a custom chat button
+### <a name="android-custom-button"></a>✨ Using a custom chat button
 
 If you are not satisfied with the Default Floating Button look and feel or if you want to implement a specific behavior related to its display you may need to use a custom conversation button.
 
@@ -490,7 +490,7 @@ IAdvizeSDK.chatboxController.presentChatbox(context)
 
 ⌨️ **In-context example:** [Full custom chat button implementation](https://gist.github.com/Judas/d0a34a50f1b6b8d542d77af5db9d9787)
 
-### 🔔 Handling push notifications
+### <a name="android-notifications"></a>🔔 Handling push notifications
 
 > *⚠️ Before starting this part you will need to configure push notifications inside your application. You can refer to the following resources if needed: [Firebase Cloud Messaging documentation](https://firebase.google.com/docs/cloud-messaging/android/client). You will also need to ensure that the push notifications are setup in your iAdvize project. The process is described in the [SDK Knowledge Base](https://help.iadvize.com/hc/en-gb/articles/360019839480).*
 
@@ -570,7 +570,7 @@ override fun onMessageReceived(remoteMessage: RemoteMessage) {
 
 ⌨️ **In-context example:** [Handling received notification](https://github.com/iadvize/iadvize-android-sdk/blob/master/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/notifications/NotificationService.kt#L68)
 
-### 📈 Adding value to the conversation
+### <a name="android-value"></a>📈 Adding value to the conversation
 
 #### 1️⃣ Registering visitor transactions
 
@@ -614,7 +614,7 @@ The visitor data you registered are displayed in the iAdvize Operator Desk in th
 
 ![Custom data tab shows registered data from the SDK](./assets/images/mobile-sdk/06-custom-data.png)
 
-### 👍 Fetching visitor satisfaction
+### <a name="android-satisfaction"></a>👍 Fetching visitor satisfaction
 
 From SDK version `2.4.0` and onward, the satisfaction survey is automatically sent to the visitor at the end of the conversation, as long as it is activated in the iAdvize administration website.
 The survey is presented to the visitor in a conversational approach, directly into the Chatbox.
@@ -623,7 +623,7 @@ The survey is presented to the visitor in a conversational approach, directly in
 
 > *⚠️ Only the `CSAT`, `NPS` and `COMMENT` steps of the survey are supported.*
 
-### 🚦 Testing the SDK
+### <a name="android-tests"></a>🚦 Testing the SDK
 
 If you are running unit tests that implies the SDK, some additional steps may be needed.
 
@@ -639,9 +639,18 @@ Please also be sure to initiate the SDK during the unit tests setup (see the [Se
 
 ## iOS
 
-### <a name="test-anchor"></a> ✨ Demo project
+### <a name="ios-demo"></a> ✨ Demo project
+
 TODO
 
 ## ReactNative
 
+### <a name="rn-demo"></a> ✨ Demo project
+
+TODO
+
 ## Flutter
+
+### <a name="flutter-demo"></a> ✨ Demo project
+
+TODO
