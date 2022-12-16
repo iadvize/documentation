@@ -1,1 +1,0 @@
-# iAdvize Messenger SDK : Integration guide for ReactNative
