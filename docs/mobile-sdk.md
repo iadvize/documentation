@@ -178,7 +178,7 @@ To have more information on what’s happening on the SDK side you can change th
 <pre class="prettyprint">
 VERBOSE
 INFO
-WARNING
+WARNING // This is the default
 ERROR
 </pre>
 
@@ -378,7 +378,7 @@ configuration.incomingMessageAvatar = IncomingMessageAvatar.Url(URL("http://avat
 IAdvizeSDK.chatboxController.setupChatbox(configuration)
 </pre>
 
-> *⚠️ GIFs are not supported*
+> *⚠️ GIFs are not supported.*
 
 ### 🎨 Branding the Default Floating Button <span hidden>android</span>
 
@@ -647,11 +647,11 @@ Add the following to the bottom of your Podfile:
 
 <pre class="prettyprint">
 post_install do |installer|
-    installer.pods_project.targets.each do |target|
-        target.build_configurations.each do |config|
-            config.build_settings['BUILD_LIBRARY_FOR_DISTRIBUTION'] = 'YES'
-        end
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['BUILD_LIBRARY_FOR_DISTRIBUTION'] = 'YES'
     end
+  end
 end
 </pre>
 
@@ -664,15 +664,15 @@ platform :ios, '12.0'
 use_frameworks!
 inhibit_all_warnings!
 target 'YOUR_TARGET' do
-    project 'YOUR_PROJECT'
-    pod 'iAdvize', 'x.y.z'
+  project 'YOUR_PROJECT'
+  pod 'iAdvize', 'x.y.z'
 end
 post_install do |installer|
-    installer.pods_project.targets.each do |target|
-        target.build_configurations.each do |config|
-            config.build_settings['BUILD_LIBRARY_FOR_DISTRIBUTION'] = 'YES'
-        end
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['BUILD_LIBRARY_FOR_DISTRIBUTION'] = 'YES'
     end
+  end
 end
 </pre>
 
@@ -686,13 +686,15 @@ After running `pod install` you should be able to mport the iAdvize dependency i
 > *⚠️ From the version 2.5.0 and onward, the SDK supports video conversations. Thus it will request camera and microphone access before entering a video call. To avoid the app to crash, you have to setup two keys in your app Info.plist:*
 
 <pre class="prettyprint">
-NSMicrophoneUsageDescription
-NSCameraUsageDescription
+<key>NSCameraUsageDescription</key>
+<string>This application will use the camera to share photos and during video calls.</string>
+<key>NSMicrophoneUsageDescription</key>
+<string>This application will use the microphone during video calls.</string>
 </pre>
 
 #### 2️⃣ Activating the SDK <span hidden>ios</span>
 
-To activate the SDK you must use the `activate`function with your `projectId` (see the [Setting up your iAdvize environment](#💬-setting-up-your-iadvize-environment) section above to get that identifier). You have access to callbacks in order to know if the SDK has been successfully activated. In case of an SDK activation failure the callback will give you the reason of the failure and you may want to retry later:
+To activate the SDK you must use the `activate`function with your `projectId` (see the [Prerequisites](#⚙️-prerequisites)section above to get that identifier). You have access to callbacks in order to know if the SDK has been successfully activated. In case of an SDK activation failure the callback will give you the reason of the failure and you may want to retry later:
 
 <pre class="prettyprint">
 IAdvizeSDK.shared.activate(projectId: 0000,
@@ -752,7 +754,7 @@ To have more information on what’s happening on the SDK side you can change th
 <pre class="prettyprint">
 verbose
 info
-warning
+warning // This is the default
 error
 success
 </pre>
@@ -782,7 +784,7 @@ IAdvizeSDK.shared.targetingController.language = .custom(value: .fr)
 
 #### 2️⃣ Activating a targeting rule <span hidden>ios</span>
 
-Using a targeting rule UUID (see the [Setting up your iAdvize environment](#💬-setting-up-your-iadvize-environment) section above to get that identifier), you can engage a user by calling:
+Using a targeting rule UUID (see the [Prerequisites](#⚙️-prerequisites) section above to get that identifier), you can engage a user by calling:
 
 <pre class="prettyprint">
 let targetingRule = TargetingRule(id: UUID, conversationChannel: .chat) // or .video
@@ -824,7 +826,7 @@ let navOption: NavigationOption = .activateNewRule(targetinRuleId: newRuleId)
 IAdvizeSDK.shared.targetingController.registerUserNavigation(navigationOption: navOption)
 </pre>
 
-> *⚠️ Please note that calling `registerUserNavigation` with `NavigationOption.ClearActiveRule` will stop the engagement process, and calling it with other options will start it if it is stopped. Thus you may never use `activateTargetingRule` in your app and only rely on `registerUserNavigation` for your engagement process management.*
+> *⚠️ Please note that calling `registerUserNavigation` with `.clearActiveRule` will stop the engagement process, and calling it with other options will start it if it is stopped. Thus you may never use `activateTargetingRule` in your app and only rely on `registerUserNavigation` for your engagement process management.*
 
 ### 👋 Configuring GDPR and welcome message <span hidden>ios</span>
 
@@ -941,7 +943,7 @@ configuration.font = UIFont(name: "AmericanTypewriter-Condensed", size: 11.0)
 IAdvizeSDK.shared.chatboxController.setupChatbox(configuration: configuration)
 </pre>
 
-> *⚠️ The font should be placed inside the assets folder. Here the file is located at `src/main/assets/fonts/comic_sans_ms_regular.ttf`*
+> *⚠️ The font should either be a system font, or be a font embedded into the app, with a font file inside the bundle and its corresponding declaration into the `Info.plist` file.*
 
 #### 4️⃣ Using a brand avatar <span hidden>ios</span>
 
@@ -959,7 +961,7 @@ configuration.incomingMessageAvatar = .url(url: "http://avatar.url")
 IAdvizeSDK.shared.chatboxController.setupChatbox(configuration: configuration)
 </pre>
 
-> *⚠️ GIFs are not supported*
+> *⚠️ GIFs are not supported.*
 
 ### 🎨 Branding the Default Floating Button <span hidden>ios</span>
 
@@ -1057,7 +1059,7 @@ IAdvizeSDK.shared.chatboxController.presentChatbox(
 
 ### 🔔 Handling push notifications <span hidden>ios</span>
 
-> *⚠️ Before starting this part you will need to configure push notifications inside your application. You can refer to the following resources if needed: [Push notification setup tutorial](https://www.raywenderlich.com/11395893-push-notifications-tutorial-getting-started). You will also need to ensure that the push notifications are setup in your iAdvize project. The process is described in the [SDK Knowledge Base](https://help.iadvize.com/hc/en-gb/articles/360019839480).*
+> *⚠️ Before starting this part you will need to configure push notifications inside your application. You can refer to the following resources if needed: [Push notification setup tutorial](https://www.kodeco.com/11395893-push-notifications-tutorial-getting-started). You will also need to ensure that the push notifications are setup in your iAdvize project. The process is described in the [SDK Knowledge Base](https://help.iadvize.com/hc/en-gb/articles/360019839480).*
 
 #### 1️⃣ Registering the device token <span hidden>ios</span>
 
@@ -1173,6 +1175,470 @@ The iAdvize Messenger SDK Plugin for ReactNative is available on `NPM`:
 | Demo project | Latest release |
 | --- | --- |
 | [https://github.com/iadvize/iadvize-react-native-sdk](https://github.com/iadvize/iadvize-react-native-sdk) | [NPM](https://www.npmjs.com/package/@iadvize-oss/iadvize-react-native-sdk?activeTab=versions) |
+
+### ⚙️ Setting up the SDK <span hidden>reactnative</span>
+
+#### 1️⃣ Adding the SDK dependency <span hidden>reactnative</span>
+
+Download the library from `NPM` using the following command:
+
+<pre class="prettyprint">
+npm install @iadvize-oss/iadvize-react-native-sdk
+</pre>
+
+Alternatively, you can use `Yarn`:
+
+<pre class="prettyprint">
+yarn add @iadvize-oss/iadvize-react-native-sdk
+</pre>
+
+The SDK API is then available via the following import:
+
+<pre class="prettyprint">
+import Iadvize from '@iadvize-oss/iadvize-react-native-sdk';
+</pre>
+
+##### Android Setup
+
+In your `android/build.gradle` file, ensure you are using the latest Android framework, and add the iAdvize SDK repository:
+
+<pre class="prettyprint">
+buildscript {
+	ext {
+		buildToolsVersion = "33.0.1"
+		minSdkVersion = 21
+		compileSdkVersion = 33
+		targetSdkVersion = 33
+	}
+}
+
+allprojects {
+	repositories {
+		maven { url "https://raw.github.com/iadvize/iadvize-android-sdk/master" }
+	}
+}
+</pre>
+
+In your `android/app/build.gradle` file, add the iAdvize SDK dependency and exclude the `xpp3` module (it is present by default on all Android devices):
+
+<pre class="prettyprint">
+dependencies {
+  implementation 'com.iadvize:iadvize-sdk:x.y.z' // Replace with android latest available version
+}
+
+configurations {
+  all*.exclude group: 'xpp3', module: 'xpp3'
+  debug
+  release
+}
+</pre>
+
+In your `android/app/src/main/java/com/sample/MainApplication.java` file, initiate the iAdvize SDK:
+
+<pre class="prettyprint">
+import com.iadvize.conversation.sdk.IAdvizeSDK;
+
+public class MainApplication extends Application implements ReactApplication {
+  @Override
+  public void onCreate() {
+    super.onCreate();
+    ...
+    
+    IAdvizeSDK.initiate(this);
+  }
+}
+</pre>
+
+##### iOS Setup
+
+Our iOS SDK is delivered as a binary framework (in an XCFramework bundle), which is a standard way of distributing closed-source binaries. The SDK relies on external dependencies to provide several rich features. These dependencies are not directly integrated into our SDK. They are installed in your app at the same time the SDK is installed (when executing the pod install command). Thus, our SDK and its dependencies must be linked dynamically. For this reason, the `use_frameworks!` option is required in the Podfile, to ensure CocoaPods use dynamic frameworks instead of static libraries. For the same reason, the `use_frameworks! :linkage => :static` will not work.
+
+The ReactNative applications integrating our SDK through our ReactNative wrapper module should also use this `use_frameworks!` option in the iOS app configuration `Podfile` in order for it to compile and run.
+
+Add the `use_frameworks!` in your Podfile.
+
+> The SDK is distributed as an XCFramework, therefore **you are required to use CocoaPods 1.9.0 or newer**.
+
+Some ReactNative base libraries like `Flipper` or `Hermes` do not work well with this `use_frameworks!` directive. ReactNative documentation recommends to disable `Flipper` when applying the `use_frameworks!` option.
+
+<pre class="prettyprint">
+use_react_native!(
+	...
+	:hermes_enabled => false,
+	:flipper_configuration => FlipperConfiguration.disabled,
+	...
+)
+</pre>
+
+Add the following to the bottom of your Podfile:
+
+<pre class="prettyprint">
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['BUILD_LIBRARY_FOR_DISTRIBUTION'] = 'YES'
+    end
+  end
+end
+</pre>
+
+> This post_install hook is required because the iAdvize SDK supports [module stability](https://swift.org/blog/abi-stability-and-more/). Therefore, all its dependencies must be built using the "Build Libraries for Distribution" option.
+
+For iOS app make sure to go to `ios` folder and install Cocoapods dependencies:
+
+<pre class="prettyprint">
+cd ios && pod install
+</pre>
+
+> *⚠️ From the version 2.5.0 and onward, the SDK supports video conversations. Thus it will request camera and microphone access before entering a video call. To avoid the app to crash, you have to setup two keys in your app Info.plist:*
+
+<pre class="prettyprint">
+<key>NSCameraUsageDescription</key>
+<string>This application will use the camera to share photos and during video calls.</string>
+<key>NSMicrophoneUsageDescription</key>
+<string>This application will use the microphone during video calls.</string>
+</pre>
+
+#### 2️⃣ Activating the SDK <span hidden>reactnative</span>
+
+To activate the SDK you must use the `activate`function with your `projectId` (see the [Prerequisites](#⚙️-prerequisites) section above to get that identifier). You have access to callbacks in order to know if the SDK has been successfully activated. In case of an SDK activation failure the callback will give you the reason of the failure and you may want to retry later:
+
+<pre class="prettyprint">
+try {
+  await Iadvize.activate(projectId, 'userId', 'gdprInfoURL' OR null);
+  // SDK is activated
+} catch (e) {
+  // SDK failed to activate
+}
+</pre>
+
+##### Authentication modes <span hidden>reactnative</span>
+
+// TODO
+
+Once the iAdvize Messenger SDK is successfully activated, you should see a success message in the console:
+
+<pre class="prettyprint">
+✅ iAdvize conversation activated, the version is x.y.z
+</pre>
+
+#### 3️⃣ Logging the user out <span hidden>reactnative</span>
+
+You will have to explicitly call the `logout` function of the iAdvize Messenger SDK when your user sign out of your app:
+
+<pre class="prettyprint">
+Iadvize.logout()
+</pre>
+
+#### 4️⃣ Displaying logs <span hidden>reactnative</span>
+
+To have more information on what’s happening on the SDK side you can change the log level and choose between:
+
+<pre class="prettyprint">
+export enum LogLevel {
+  VERBOSE = 0,
+  INFO,
+  WARNING, // This is the default
+  ERROR,
+  SUCCESS,
+}
+</pre>
+
+To do so just add this line to your project:
+
+<pre class="prettyprint">
+Iadvize.setLogLevel(LogLevel.VERBOSE);
+</pre>
+
+### 💬 Starting a conversation <span hidden>reactnative</span>
+
+To be able to start a conversation you will first have to **trigger a targeting rule** in order for the default chat button to be displayed. The Chatbox will then be accessible by clicking on that chat button.
+
+#### 1️⃣ Configuring the targeting language <span hidden>reactnative</span>
+
+The targeting rule configured in the iAdvize Administration Panel is setup for a given language.
+This means that if, for example, you setup a targeting rule to be triggered only for `EN` users and your current user’s device is in `FR`, the targeting rule will not trigger.
+
+By default, the targeting rule language used is the user’s device current language. You can force the targeting language to a specific value using:
+
+<pre class="prettyprint">
+Iadvize.setLanguage('fr');
+</pre>
+
+> *⚠️ This `language` property is __NOT__ intended to change the language displayed in the SDK. It is solely used for the targeting process purpose.*
+
+#### 2️⃣ Activating a targeting rule <span hidden>reactnative</span>
+
+Using a targeting rule UUID (see the [Prerequisites](#⚙️-prerequisites) section above to get that identifier), you can engage a user by calling:
+
+<pre class="prettyprint">
+Iadvize.activateTargetingRule(targetingRuleUUIDString, ConversationChannel.CHAT); // OR ConversationChannel.VIDEO
+</pre>
+
+If all the following conditions are met, the default chat button should appear:
+
+- the targeting rule exists and is enabled in the administration panel
+- the targeting rule language set in the SDK matches the language configured for this rule
+- an operator assigned to this rule is available to answer (connected and with a free chat slot)
+
+> *⚠️ After you activate a rule and it succeeds (by displaying the button), those conditions are checked every 30 seconds to verify that the button should still be displayed or not. At the first failure from this periodic check, the button is hidden and the SDK stops verifying the conditions. It means that if the rule cannot be triggered (after the first call, or after any successive check), you will have to call the `activateTargetingRule` (or `registerUserNavigation`) method again to restart the engagement process.*
+
+#### 3️⃣ Initiating the conversation <span hidden>reactnative</span>
+
+Once the default chat button is displayed, the visitor tap on it to access the Chatbox. After composing and sending a message a new conversation should pop up in the operator desk.
+
+![Chat button is displayed. Visitor composes a message & send it.](./assets/images/mobile-sdk/02-conv-start-mobile.png)
+![Conversation appears in the operator desk](./assets/images/mobile-sdk/03-conv-start-desk.png)
+
+#### 4️⃣ Following user navigation <span hidden>reactnative</span>
+
+While your user navigates through your app, you will have to update the active targeting rule in order to engage him/her with the best conversation partner at any time. In order to so, the SDK provides you with multiple navigation options to customize the behavior according to your needs:
+
+<pre class="prettyprint">
+// To clear the active targeting rule and thus stopping the engagement process (this is the default behavior)
+Iadvize.registerUserNavigation(NavigationOption.clear, "", "");
+
+// To keep/start the engagement process with the same active targeting rule in the new user screen
+Iadvize.registerUserNavigation(NavigationOption.keep, "", "");
+
+// To keep/start the engagement process but with another targeting rule for this screen
+Iadvize.registerUserNavigation(NavigationOption.new, targetingRuleUUIDString, channel);
+</pre>
+
+> *⚠️ Please note that calling `registerUserNavigation` with `NavigationOption.clear` will stop the engagement process, and calling it with other options will start it if it is stopped. Thus you may never use `activateTargetingRule` in your app and only rely on `registerUserNavigation` for your engagement process management.*
+
+### 👋 Configuring GDPR and welcome message <span hidden>reactnative</span>
+
+#### 1️⃣ Adding a welcome message <span hidden>reactnative</span>
+
+As seen above, the Chatbox is empty by default. You can configure a welcome message that will be displayed to the visitor when no conversation is ongoing.
+
+<pre class="prettyprint">
+const configuration: ChatboxConfiguration = {
+  automaticMessage: "Any question? Say Hello to Smart and we will answer you as soon as possible! 😊",
+};
+Iadvize.setChatboxConfiguration(configuration);
+</pre>
+
+When no conversation is ongoing, the welcome message is displayed to the visitor:
+
+![When no conversation is ongoing, the welcome message is displayed to the visitor](./assets/images/mobile-sdk/04-welcome-message.png)
+
+#### 2️⃣ Enabling GDPR approval <span hidden>reactnative</span>
+
+// TODO
+
+### 🎨 Branding the Chatbox <span hidden>reactnative</span>
+
+The `ChatboxConfiguration` object that we used in the previous section to customize the welcome and GDPR messages can also be used to change the Chatbox UI to better fit into the look and feel of your application.
+
+#### 1️⃣ Changing the Chatbox color <span hidden>reactnative</span>
+
+You can setup a main color on the SDK which will be applied to:
+
+- the send button in the Chatbox
+- the blinking text cursor in the message input of the Chatbox
+- the background of the visitor messages bubbles
+
+<pre class="prettyprint">
+var configuration = ChatboxConfiguration()
+configuration.mainColor = .red
+IAdvizeSDK.shared.chatboxController.setupChatbox(configuration: configuration)
+</pre>
+
+#### 2️⃣ Styling the navigation bar <span hidden>reactnative</span>
+
+Some parts of the he toolbar/navigationbar appearing at the top of the Chatbox can also be customized:
+
+- the background color
+- the main color
+- the title
+
+<pre class="prettyprint">
+const configuration: ChatboxConfiguration = {
+  navigationBarBackgroundColor: '#000000',
+  navigationBarMainColor: '#FFFFFF',
+  navigationBarTitle: 'Conversation'
+};
+Iadvize.setChatboxConfiguration(configuration);
+</pre>
+
+#### 3️⃣ Updating the font <span hidden>reactnative</span>
+
+The font used in the Chatbox can easily be updated using your own font:
+
+<pre class="prettyprint">
+const configuration: ChatboxConfiguration = {
+  // For iOS devices
+  fontName: 'AmericanTypewriter-Condensed',
+  fontSize: 11, // iOS only
+
+  // For Android devices
+  fontPath: 'fonts/comic_sans_ms_regular.ttf',
+};
+</pre>
+
+> *⚠️ On iOS, the font should either be a system font, or be a font embedded into the app, with a font file inside the bundle and its corresponding declaration into the `Info.plist` file.*
+
+> *⚠️ On Android, the font should be placed inside the assets folder. Here the file is located at `src/main/assets/fonts/comic_sans_ms_regular.ttf`.*
+
+#### 4️⃣ Using a brand avatar <span hidden>reactnative</span>
+
+The operator avatar displayed alongside his messages can be updated for branding purposes. You can specify a drawable either via an URL or a local resource.
+
+<pre class="prettyprint">
+const configuration: ChatboxConfiguration = {
+  incomingMessageAvatarImageName: Image.resolveAssetSource(require('./test.jpeg')).uri,
+  incomingMessageAvatarURL: 'https://picsum.photos/200/200',
+};
+</pre>
+
+> *⚠️ If you fill both fields, `incomingMessageAvatarImageName` will take priority.*
+
+> *⚠️ GIFs are not supported.*
+
+### 🎨 Branding the Default Floating Button <span hidden>reactnative</span>
+
+By default, the SDK uses its own Default Floating Button to the user to engage the conversation. This Default Floating Button display process is automated by the SDK and works out of the box. You have however limited possibilities to brand it to your needs.
+
+The Default Floating Button will use hardcoded icons and the main color of the ChatboxConfiguration a background color:
+
+<pre class="prettyprint">
+const configuration: ChatboxConfiguration = {
+  mainColor: '#000000',
+};
+</pre>
+
+### ✨ Using a custom chat button <span hidden>reactnative</span>
+
+If you are not satisfied with the Default Floating Button look and feel or if you want to implement a specific behavior related to its display you may need to use a custom conversation button.
+
+With a custom button it is your responsibility to:
+
+- design the floating or fixed button to invite your user to chat
+- hide/show the button following the active targeting rule availability and the ongoing conversation status
+- open the Chatbox when the user presses your button
+
+#### 1️⃣ Disabling the Default Floating Button <span hidden>reactnative</span>
+
+<pre class="prettyprint">
+Iadvize.setDefaultFloatingButton(false);
+</pre>
+
+#### 2️⃣ Displaying/hiding the chat button <span hidden>reactnative</span>
+
+The chat button is linked to the targeting and conversation workflow and should update its visibility each time the status of those workflows is changed.
+First of all you need to implement the appropriate callbacks:
+
+<pre class="prettyprint">
+IadvizeListeners.onActiveTargetingRuleAvailabilityUpdated?.(function (data: any) {
+  // SDK active rule availability changed
+  updateChatButtonVisibility()
+});
+
+IadvizeListeners.onOngoingConversationStatusChanged?.(function (data: any) {
+  // SDK ongoing conversation status changed
+  updateChatButtonVisibility()
+});
+</pre>
+
+The chat button gives access to the Chatbox so it should be visible:
+
+- at all times when a conversation is ongoing to allow the visitor to come back to the current conversation
+- when the active targeting rule is available, to engage the visitor to chat
+
+<pre class="prettyprint">
+const updateChatButtonVisibility = async () => {
+  const ruleAvailable = IadvizeSDK.isActiveTargetingRuleAvailable()
+  const hasOngoingConv = IadvizeSDK.ongoingConversationId().trim().length !== 0
+
+  if (hasOngoingConv || ruleAvailable) {
+    showChatButton()
+  } else {
+    hideChatButton()
+  }
+};
+</pre>
+
+#### 3️⃣ Opening the Chatbox <span hidden>reactnative</span>
+
+When the visitor taps on your custom chat button you should open the Chatbox by calling the following method:
+
+<pre class="prettyprint">
+IAdvizeSDK.presentChatbox()
+</pre>
+
+### 🔔 Handling push notifications <span hidden>reactnative</span>
+
+> *⚠️ Before starting this part you will need to configure push notifications inside your application. You can refer to the following resources if needed: [Android](https://firebase.google.com/docs/cloud-messaging/android/client), & [iOS](https://www.raywenderlich.com/11395893-push-notifications-tutorial-getting-started). You will also need to ensure that the push notifications are setup in your iAdvize project. The process is described in the [SDK Knowledge Base](https://help.iadvize.com/hc/en-gb/articles/360019839480).*
+
+#### 1️⃣ Registering the device token <span hidden>reactnative</span>
+
+For the SDK to be able to send notifications to the visitor’s device, its unique `device push token` must be registered:
+
+<pre class="prettyprint">
+Iadvize.registerPushToken('the_device_push_token', ApplicationMode.PROD); // or ApplicationMode.DEV
+</pre>
+
+> *⚠️ The `ApplicationMode` is used only for the iOS application.*
+
+#### 2️⃣ Enabling/disabling push notifications <span hidden>reactnative</span>
+
+Push notifications are activated as long as you have setup the push notifications information for your app on the iAdvize administration website (process is described in the [SDK Knowledge Base](https://help.iadvize.com/hc/en-gb/articles/360019839480)). You can manually enable/disable them at any time using:
+
+<pre class="prettyprint">
+try {
+  await Iadvize.enablePushNotifications();
+  // Push notifications enabled
+} catch (e) {
+  // Error enabling push notifications
+}
+
+try {
+  await Iadvize.disablePushNotifications();
+  // Push notifications disabled
+} catch (e) {
+  // Error disabling push notifications
+}
+</pre>
+
+#### 3️⃣ Handling push notifications reception <span hidden>reactnative</span>
+
+TODO
+
+#### 4️⃣ Customizing the notification <span hidden>reactnative</span>
+
+TODO
+
+### 📈 Adding value to the conversation <span hidden>reactnative</span>
+
+#### 1️⃣ Registering visitor transactions <span hidden>reactnative</span>
+
+You can register a transaction made within your application:
+
+<pre class="prettyprint">
+const transaction: Transaction = {
+  transactionId: 'transactionId',
+  currency: 'EUR',
+  amount: 10
+};
+Iadvize.registerTransaction(transaction);
+</pre>
+
+> *⚠️ The currency value should respect [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217).*
+
+#### 2️⃣ Saving visitor custom data <span hidden>reactnative</span>
+
+TODO
+
+### 👍 Fetching visitor satisfaction <span hidden>reactnative</span>
+
+From SDK version `2.4.0` and onward, the satisfaction survey is automatically sent to the visitor at the end of the conversation, as long as it is activated in the iAdvize administration website.
+The survey is presented to the visitor in a conversational approach, directly into the Chatbox.
+
+<img src="./assets/images/mobile-sdk/07-satisfaction-survey.gif" alt="Satisfaction survey" style="display: block; width: 20%; height: auto;" />
+
+> *⚠️ Only the `CSAT`, `NPS` and `COMMENT` steps of the survey are supported.*
 
 ## Flutter integration guide
 
