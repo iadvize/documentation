@@ -2,7 +2,7 @@
 
 This document aims to help you integrate the iAdvize Messenger SDK into your mobile application.
 
-## ⚙ Prerequisites
+## ⚙️ Prerequisites
 
 There are a few steps required before you start integrating the iAdvize Messenger SDK.
 
