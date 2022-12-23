@@ -1215,24 +1215,24 @@ In your `android/build.gradle` file, and add the iAdvize SDK repository. As a go
 
 <pre class="prettyprint">
 buildscript {
-	ext {
-		buildToolsVersion = "33.0.1"
-		minSdkVersion = 21
-		compileSdkVersion = 33
-		targetSdkVersion = 33
-	}
+  ext {
+    buildToolsVersion = "33.0.1"
+    minSdkVersion = 21
+    compileSdkVersion = 33
+    targetSdkVersion = 33
+  }
 }
 
 allprojects {
-	repositories {
-		maven { url "https://raw.github.com/iadvize/iadvize-android-sdk/master" }
-	}
+  repositories {
+    maven { url "https://raw.github.com/iadvize/iadvize-android-sdk/master" }
+  }
 }
 </pre>
 
 > *⚠️ iAdvize Messenger SDK requires a minSdkVersion >= 21.*
 
-The iADvize Messenger SDK default floating button use an ActivityLifecycleController that must be started before the main ReactNative activity is created, otherwise the controller won't be able to trigger the button display. Thus you need to add those lines in the `android/src/main/java/yourpackage/MainApplication.java` to initiate the SDK properly:
+The iAdvize Messenger SDK default floating button use an ActivityLifecycleController that must be started before the main ReactNative activity is created, otherwise the controller won't be able to trigger the button display. Thus you need to add those lines in the `android/src/main/java/yourpackage/MainApplication.java` to initiate the SDK properly:
 
 <pre class="prettyprint">
 import com.iadvize.conversation.sdk.IAdvizeSDK;
@@ -1260,10 +1260,10 @@ Some ReactNative base libraries like `Flipper` or `Hermes` do not work well with
 
 <pre class="prettyprint">
 use_react_native!(
-	...
-	:hermes_enabled => false,
-	:flipper_configuration => FlipperConfiguration.disabled,
-	...
+  ...
+  :hermes_enabled => false,
+  :flipper_configuration => FlipperConfiguration.disabled,
+  ...
 )
 </pre>
 
@@ -1712,24 +1712,26 @@ import 'package:iadvize_flutter_sdk/iadvize_sdk.dart';
 
 ##### Android Setup
 
-In your `android/build.gradle` file, ensure you are using the latest Android framework, and add the iAdvize SDK repository:
+In your `android/build.gradle` file, and add the iAdvize SDK repository. As a good practice you can also ensure that you are using the latest Android framework:
 
 <pre class="prettyprint">
 buildscript {
-	ext {
-		buildToolsVersion = "33.0.1"
-		minSdkVersion = 21
-		compileSdkVersion = 33
-		targetSdkVersion = 33
-	}
+  ext {
+    buildToolsVersion = "33.0.1"
+    minSdkVersion = 21
+    compileSdkVersion = 33
+    targetSdkVersion = 33
+  }
 }
 
 allprojects {
-	repositories {
-		maven { url "https://raw.github.com/iadvize/iadvize-android-sdk/master" }
-	}
+  repositories {
+    maven { url "https://raw.github.com/iadvize/iadvize-android-sdk/master" }
+  }
 }
 </pre>
+
+> *⚠️ iAdvize Messenger SDK requires a minSdkVersion >= 21.*
 
 ##### iOS Setup
 
