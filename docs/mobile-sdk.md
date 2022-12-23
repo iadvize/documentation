@@ -157,6 +157,8 @@ AuthenticationOption.Secured(object : AuthenticationOption.JWEProvider {
 
 > *⚠️ For the __Simple__ authentication mode, the identifier that you pass must be __unique and non-discoverable for each different logged-in user__.*
 
+> *⚠️ For a full understanding of how the secured authentication works in the iAdvize platform you can refer to this [Knowledge Base article](https://help.iadvize.com/hc/fr/articles/6043078724626-Messagerie-authentifi%C3%A9e-iAdvize-impl%C3%A9mentation-c%C3%B4t%C3%A9-client-web).*
+
 Once the iAdvize Messenger SDK is successfully activated, you should see a success message in the console:
 
 <pre class="prettyprint">
@@ -718,9 +720,10 @@ You can choose between multiple authentication options:
 
 <pre class="prettyprint">
 class AuthProvider: JWEProvider {
-    func willRequestJWE(completion: @escaping (Result<JWE, Error>) -> Void) {
-        completion(.success(JWE(value: "jwe-token")))
-    }
+  func willRequestJWE(completion: @escaping (Result<JWE, Error>) -> Void) {
+    // Fetch JWE from your own secure auth process
+    completion(.success(JWE(value: "jwe-token")))
+  }
 }
 
 let authProvider = AuthProvider()
@@ -728,6 +731,8 @@ let authenticationOption = .secured(jweProvider: authProvider)
 </pre>
 
 > *⚠️ For the __Simple__ authentication mode, the identifier that you pass must be __unique and non-discoverable for each different logged-in user__.*
+
+> *⚠️ For a full understanding of how the secured authentication works in the iAdvize platform you can refer to this [Knowledge Base article](https://help.iadvize.com/hc/fr/articles/6043078724626-Messagerie-authentifi%C3%A9e-iAdvize-impl%C3%A9mentation-c%C3%B4t%C3%A9-client-web).*
 
 Once the iAdvize Messenger SDK is successfully activated, you should see a success message in the console:
 
@@ -1201,12 +1206,12 @@ yarn add @iadvize-oss/iadvize-react-native-sdk
 The SDK API is then available via the following import:
 
 <pre class="prettyprint">
-import Iadvize from '@iadvize-oss/iadvize-react-native-sdk';
+import IAdvizeSDK from '@iadvize-oss/iadvize-react-native-sdk';
 </pre>
 
 ##### Android Setup
 
-In your `android/build.gradle` file, ensure you are using the latest Android framework, and add the iAdvize SDK repository:
+In your `android/build.gradle` file, and add the iAdvize SDK repository. As a good practice you can also ensure that you are using the latest Android framework:
 
 <pre class="prettyprint">
 buildscript {
@@ -1225,33 +1230,19 @@ allprojects {
 }
 </pre>
 
-In your `android/app/build.gradle` file, add the iAdvize SDK dependency and exclude the `xpp3` module (it is present by default on all Android devices):
+> *⚠️ iAdvize Messenger SDK requires a minSdkVersion >= 21.*
 
-<pre class="prettyprint">
-dependencies {
-  implementation 'com.iadvize:iadvize-sdk:x.y.z' // Replace with android latest available version
-}
-
-configurations {
-  all*.exclude group: 'xpp3', module: 'xpp3'
-  debug
-  release
-}
-</pre>
-
-In your `android/app/src/main/java/com/sample/MainApplication.java` file, initiate the iAdvize SDK:
+The iADvize Messenger SDK default floating button use an ActivityLifecycleController that must be started before the main ReactNative activity is created, otherwise the controller won't be able to trigger the button display. Thus you need to add those lines in the `android/src/main/java/yourpackage/MainApplication.java` to initiate the SDK properly:
 
 <pre class="prettyprint">
 import com.iadvize.conversation.sdk.IAdvizeSDK;
 
 public class MainApplication extends Application implements ReactApplication {
-  @Override
-  public void onCreate() {
-    super.onCreate();
-    ...
-    
-    IAdvizeSDK.initiate(this);
-  }
+   @Override
+   public void onCreate() {
+     super.onCreate();
+     IAdvizeSDK.initiate(this);
+   }
 }
 </pre>
 
@@ -1311,7 +1302,7 @@ To activate the SDK you must use the `activate`function with your `projectId` (s
 
 <pre class="prettyprint">
 try {
-  await Iadvize.activate(projectId, 'userId', 'gdprInfoURL' OR null);
+  await IAdvizeSDK.activate(projectId, 'userId', ...);
   // SDK is activated
 } catch (e) {
   // SDK failed to activate
@@ -1321,6 +1312,10 @@ try {
 ##### Authentication modes <span hidden>reactnative</span>
 
 // TODO
+
+> *⚠️ For the __Simple__ authentication mode, the identifier that you pass must be __unique and non-discoverable for each different logged-in user__.*
+
+> *⚠️ For a full understanding of how the secured authentication works in the iAdvize platform you can refer to this [Knowledge Base article](https://help.iadvize.com/hc/fr/articles/6043078724626-Messagerie-authentifi%C3%A9e-iAdvize-impl%C3%A9mentation-c%C3%B4t%C3%A9-client-web).*
 
 Once the iAdvize Messenger SDK is successfully activated, you should see a success message in the console:
 
@@ -1333,7 +1328,7 @@ Once the iAdvize Messenger SDK is successfully activated, you should see a succe
 You will have to explicitly call the `logout` function of the iAdvize Messenger SDK when your user sign out of your app:
 
 <pre class="prettyprint">
-Iadvize.logout()
+IAdvizeSDK.logout()
 </pre>
 
 #### 4️⃣ Displaying logs <span hidden>reactnative</span>
@@ -1353,7 +1348,7 @@ export enum LogLevel {
 To do so just add this line to your project:
 
 <pre class="prettyprint">
-Iadvize.setLogLevel(LogLevel.VERBOSE);
+IAdvizeSDK.setLogLevel(LogLevel.VERBOSE);
 </pre>
 
 ### 💬 Starting a conversation <span hidden>reactnative</span>
@@ -1368,7 +1363,7 @@ This means that if, for example, you setup a targeting rule to be triggered only
 By default, the targeting rule language used is the user’s device current language. You can force the targeting language to a specific value using:
 
 <pre class="prettyprint">
-Iadvize.setLanguage('fr');
+IAdvizeSDK.setLanguage('fr');
 </pre>
 
 > *⚠️ This `language` property is __NOT__ intended to change the language displayed in the SDK. It is solely used for the targeting process purpose. The language string should respect [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1).*
@@ -1378,7 +1373,7 @@ Iadvize.setLanguage('fr');
 Using a targeting rule UUID (see the [Prerequisites](#⚙️-prerequisites) section above to get that identifier), you can engage a user by calling:
 
 <pre class="prettyprint">
-Iadvize.activateTargetingRule(targetingRuleUUIDString, ConversationChannel.CHAT); // OR ConversationChannel.VIDEO
+IAdvizeSDK.activateTargetingRule(targetingRuleUUIDString, ConversationChannel.CHAT); // OR ConversationChannel.VIDEO
 </pre>
 
 If all the following conditions are met, the default chat button should appear:
@@ -1402,13 +1397,13 @@ While your user navigates through your app, you will have to update the active t
 
 <pre class="prettyprint">
 // To clear the active targeting rule and thus stopping the engagement process (this is the default behavior)
-Iadvize.registerUserNavigation(NavigationOption.clear, "", "");
+IAdvizeSDK.registerUserNavigation(NavigationOption.clear, "", "");
 
 // To keep/start the engagement process with the same active targeting rule in the new user screen
-Iadvize.registerUserNavigation(NavigationOption.keep, "", "");
+IAdvizeSDK.registerUserNavigation(NavigationOption.keep, "", "");
 
 // To keep/start the engagement process but with another targeting rule for this screen
-Iadvize.registerUserNavigation(NavigationOption.new, targetingRuleUUIDString, channel);
+IAdvizeSDK.registerUserNavigation(NavigationOption.new, targetingRuleUUIDString, channel);
 </pre>
 
 > *⚠️ Please note that calling `registerUserNavigation` with `NavigationOption.clear` will stop the engagement process, and calling it with other options will start it if it is stopped. Thus you may never use `activateTargetingRule` in your app and only rely on `registerUserNavigation` for your engagement process management.*
@@ -1423,7 +1418,7 @@ As seen above, the Chatbox is empty by default. You can configure a welcome mess
 const configuration: ChatboxConfiguration = {
   automaticMessage: "Any question? Say Hello to Smart and we will answer you as soon as possible! 😊",
 };
-Iadvize.setChatboxConfiguration(configuration);
+IAdvizeSDK.setChatboxConfiguration(configuration);
 </pre>
 
 When no conversation is ongoing, the welcome message is displayed to the visitor:
@@ -1432,7 +1427,46 @@ When no conversation is ongoing, the welcome message is displayed to the visitor
 
 #### 2️⃣ Enabling GDPR approval <span hidden>reactnative</span>
 
-// TODO
+If you need to get the visitor consent on GDPR before he starts chatting, you will have to enable this option while activating the SDK.
+
+If enabled, a message will request the visitor approval before allowing him to send a message to start the conversation:
+
+![GDPR approval request](./assets/images/mobile-sdk/05-gdpr-approval.png)
+
+You can also configure how the SDK behaves when the user taps on the `More information` button by either:
+
+- providing an URL pointing to your GPDR policy, it will be opened on user click
+- providing a listener/delegate, it will be called on user click and you can then implement your own custom behavior
+
+> *⚠️ If your visitors have already consented to GDPR inside your application, you can activate the iAdvize SDK without the GDPR process. However, be careful to explicitly mention the iAdvize Chat part in your GDPR consent details.*
+
+<pre class="prettyprint">
+// No listener set + null URL => GDPR is disabled
+await IAdvizeSDK.activate(projectId, userId, null);
+
+// No listener set + non-null URL => GDPR is enabled, the webpage opens when user click on more info button
+await IAdvizeSDK.activate(projectId, userId, "http://my.gdpr.rules.com");
+
+// Listener set => GDPR is enabled, the listener is called when user click on more info button
+IAdvizeSDKListeners.onGDPRMoreInfoClicked(function (eventData: any) {
+  // Implement your own behavior
+});
+await IAdvizeSDK.activate(projectId, userId, null);
+</pre>
+
+> *⚠️ If you set both the listener and an URL, the listener will take the priority.*
+
+Just like the welcome message above, the GDPR message can also be configured via the `ChatboxConfiguration` object:
+
+<pre class="prettyprint">
+var configuration = ChatboxConfiguration()
+configuration.automaticMessage = NSLocalizedString(
+  "Any question? Say Hello to Smart and we will answer you as soon as possible! 😊",
+  comment: ""
+)
+configuration.gdprMessage = "Your own GDPR message."
+IAdvizeSDK.shared.chatboxController.setupChatbox(configuration: configuration)
+</pre>
 
 ### 🎨 Branding the Chatbox <span hidden>reactnative</span>
 
@@ -1466,7 +1500,7 @@ const configuration: ChatboxConfiguration = {
   navigationBarMainColor: '#FFFFFF',
   navigationBarTitle: 'Conversation'
 };
-Iadvize.setChatboxConfiguration(configuration);
+IAdvizeSDK.setChatboxConfiguration(configuration);
 </pre>
 
 #### 3️⃣ Updating the font <span hidden>reactnative</span>
@@ -1518,7 +1552,7 @@ const configuration: ChatboxConfiguration = {
 The Default Floating Button is anchored to the bottom left side of the screen. You can modify its placement by specifying the button margins:
 
 <pre class="prettyprint">
-Iadvize.setFloatingButtonPosition(20, 20);
+IAdvizeSDK.setFloatingButtonPosition(20, 20);
 </pre>
 
 ### ✨ Using a custom chat button <span hidden>reactnative</span>
@@ -1534,7 +1568,7 @@ With a custom button it is your responsibility to:
 #### 1️⃣ Disabling the Default Floating Button <span hidden>reactnative</span>
 
 <pre class="prettyprint">
-Iadvize.setDefaultFloatingButton(false);
+IAdvizeSDK.setDefaultFloatingButton(false);
 </pre>
 
 #### 2️⃣ Displaying/hiding the chat button <span hidden>reactnative</span>
@@ -1543,12 +1577,12 @@ The chat button is linked to the targeting and conversation workflow and should 
 First of all you need to implement the appropriate callbacks:
 
 <pre class="prettyprint">
-IadvizeListeners.onActiveTargetingRuleAvailabilityUpdated?.(function (data: any) {
+IAdvizeSDKListeners.onActiveTargetingRuleAvailabilityUpdated(function (eventData: any) {
   // SDK active rule availability changed
   updateChatButtonVisibility()
 });
 
-IadvizeListeners.onOngoingConversationStatusChanged?.(function (data: any) {
+IAdvizeSDKListeners.onOngoingConversationStatusChanged(function (eventData: any) {
   // SDK ongoing conversation status changed
   updateChatButtonVisibility()
 });
@@ -1561,8 +1595,8 @@ The chat button gives access to the Chatbox so it should be visible:
 
 <pre class="prettyprint">
 const updateChatButtonVisibility = async () => {
-  const ruleAvailable = IadvizeSDK.isActiveTargetingRuleAvailable()
-  const hasOngoingConv = IadvizeSDK.ongoingConversationId().trim().length !== 0
+  const ruleAvailable = IAdvizeSDK.isActiveTargetingRuleAvailable()
+  const hasOngoingConv = IAdvizeSDK.ongoingConversationId().trim().length !== 0
 
   if (hasOngoingConv || ruleAvailable) {
     showChatButton()
@@ -1589,7 +1623,7 @@ IAdvizeSDK.presentChatbox()
 For the SDK to be able to send notifications to the visitor’s device, its unique `device push token` must be registered:
 
 <pre class="prettyprint">
-Iadvize.registerPushToken('the_device_push_token', ApplicationMode.PROD); // or ApplicationMode.DEV
+IAdvizeSDK.registerPushToken('the_device_push_token', ApplicationMode.PROD); // or ApplicationMode.DEV
 </pre>
 
 > *⚠️ The `ApplicationMode` is used only for the iOS application.*
@@ -1600,14 +1634,14 @@ Push notifications are activated as long as you have setup the push notification
 
 <pre class="prettyprint">
 try {
-  await Iadvize.enablePushNotifications();
+  await IAdvizeSDK.enablePushNotifications();
   // Push notifications enabled
 } catch (e) {
   // Error enabling push notifications
 }
 
 try {
-  await Iadvize.disablePushNotifications();
+  await IAdvizeSDK.disablePushNotifications();
   // Push notifications disabled
 } catch (e) {
   // Error disabling push notifications
@@ -1634,7 +1668,7 @@ const transaction: Transaction = {
   currency: 'EUR',
   amount: 10
 };
-Iadvize.registerTransaction(transaction);
+IAdvizeSDK.registerTransaction(transaction);
 </pre>
 
 > *⚠️ The currency value should respect [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217).*
@@ -1694,36 +1728,6 @@ allprojects {
 	repositories {
 		maven { url "https://raw.github.com/iadvize/iadvize-android-sdk/master" }
 	}
-}
-</pre>
-
-In your `android/app/build.gradle` file, add the iAdvize SDK dependency and exclude the `xpp3` module (it is present by default on all Android devices):
-
-<pre class="prettyprint">
-dependencies {
-  implementation 'com.iadvize:iadvize-sdk:x.y.z' // Replace with android latest available version
-}
-
-configurations {
-  all*.exclude group: 'xpp3', module: 'xpp3'
-  debug
-  release
-}
-</pre>
-
-In your `android/app/src/main/java/com/sample/MainApplication.java` file, initiate the iAdvize SDK:
-
-<pre class="prettyprint">
-import com.iadvize.conversation.sdk.IAdvizeSDK;
-
-public class MainApplication extends Application implements ReactApplication {
-  @Override
-  public void onCreate() {
-    super.onCreate();
-    ...
-    
-    IAdvizeSDK.initiate(this);
-  }
 }
 </pre>
 
@@ -1795,6 +1799,8 @@ AuthenticationOption.secured(onJweRequested: () {
 </pre>
 
 > *⚠️ For the __Simple__ authentication mode, the identifier that you pass must be __unique and non-discoverable for each different logged-in user__.*
+
+> *⚠️ For a full understanding of how the secured authentication works in the iAdvize platform you can refer to this [Knowledge Base article](https://help.iadvize.com/hc/fr/articles/6043078724626-Messagerie-authentifi%C3%A9e-iAdvize-impl%C3%A9mentation-c%C3%B4t%C3%A9-client-web).*
 
 Once the iAdvize Messenger SDK is successfully activated, you should see a success message in the console:
 
