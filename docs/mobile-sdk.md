@@ -688,10 +688,10 @@ After running `pod install` you should be able to mport the iAdvize dependency i
 > *⚠️ From the version 2.5.0 and onward, the SDK supports video conversations. Thus it will request camera and microphone access before entering a video call. To avoid the app to crash, you have to setup two keys in your app Info.plist:*
 
 <pre class="prettyprint">
-<key>NSCameraUsageDescription</key>
-<string>This application will use the camera to share photos and during video calls.</string>
-<key>NSMicrophoneUsageDescription</key>
-<string>This application will use the microphone during video calls.</string>
+&lt;key&gt;NSCameraUsageDescription&lt;/key&gt;
+&lt;string&gt;This application will use the camera to share photos and during video calls.&lt;/string&gt;
+&lt;key&gt;NSMicrophoneUsageDescription&lt;/key&gt;
+&lt;string&gt;This application will use the microphone during video calls.&lt;/string&gt;
 </pre>
 
 #### 2️⃣ Activating the SDK <span hidden>ios</span>
@@ -1290,10 +1290,10 @@ cd ios && pod install
 > *⚠️ From the version 2.5.0 and onward, the SDK supports video conversations. Thus it will request camera and microphone access before entering a video call. To avoid the app to crash, you have to setup two keys in your app Info.plist:*
 
 <pre class="prettyprint">
-<key>NSCameraUsageDescription</key>
-<string>This application will use the camera to share photos and during video calls.</string>
-<key>NSMicrophoneUsageDescription</key>
-<string>This application will use the microphone during video calls.</string>
+&lt;key&gt;NSCameraUsageDescription&lt;/key&gt;
+&lt;string&gt;This application will use the camera to share photos and during video calls.&lt;/string&gt;
+&lt;key&gt;NSMicrophoneUsageDescription&lt;/key&gt;
+&lt;string&gt;This application will use the microphone during video calls.&lt;/string&gt;
 </pre>
 
 #### 2️⃣ Activating the SDK <span hidden>reactnative</span>
@@ -1766,10 +1766,10 @@ cd ios && pod install
 > *⚠️ From the version 2.5.0 and onward, the SDK supports video conversations. Thus it will request camera and microphone access before entering a video call. To avoid the app to crash, you have to setup two keys in your app Info.plist:*
 
 <pre class="prettyprint">
-<key>NSCameraUsageDescription</key>
-<string>This application will use the camera to share photos and during video calls.</string>
-<key>NSMicrophoneUsageDescription</key>
-<string>This application will use the microphone during video calls.</string>
+&lt;key&gt;NSCameraUsageDescription&lt;/key&gt;
+&lt;string&gt;This application will use the camera to share photos and during video calls.&lt;/string&gt;
+&lt;key&gt;NSMicrophoneUsageDescription&lt;/key&gt;
+&lt;string&gt;This application will use the microphone during video calls.&lt;/string&gt;
 </pre>
 
 #### 2️⃣ Activating the SDK <span hidden>flutter</span>
