@@ -95,8 +95,7 @@ Before activating the SDK, you will need to provide a reference to your applicat
 In your `AndroidManifest.xml` declare your application class:
 
 <pre class="prettyprint">
-&lt;application
-  android:name=&quot;my.app.package.App&quot;&gt;
+&lt;application android:name=&quot;my.app.package.App&quot;&gt;
   &lt;!-- your activities etc... --&gt;
 &lt;/application&gt;
 </pre>
@@ -1232,7 +1231,7 @@ allprojects {
 
 > *⚠️ iAdvize Messenger SDK requires a minSdkVersion >= 21.*
 
-The iAdvize Messenger SDK default floating button use an ActivityLifecycleController that must be started before the main ReactNative activity is created, otherwise the controller won't be able to trigger the button display. Thus you need to add those lines in the `android/src/main/java/yourpackage/MainApplication.java` to initiate the SDK properly:
+On Android, the iAdvize Messenger SDK needs to be initiated before use to allow several functionnalities to work. For instance, the default floating button use an ActivityLifecycleController that must be started before the main ReactNative activity is created, otherwise the controller won't be able to trigger the button display. Thus you need to add those lines in the `android/src/main/java/yourpackage/MainApplication.java` to initiate the SDK properly:
 
 <pre class="prettyprint">
 import com.iadvize.conversation.sdk.IAdvizeSDK;
@@ -1311,7 +1310,29 @@ try {
 
 ##### Authentication modes <span hidden>reactnative</span>
 
-// TODO
+You can choose between multiple authentication options:
+
+- **Anonymous**, when you have an unidentified user browsing your app
+- **Simple**, when you have a logged in user in your app. You must pass a unique string identifier so that the visitor will retrieve his conversation history across multiple devices and platforms
+- **Secured**: use it in conjunction with your in-house authentication system. You must pass a *JWE provider* callback that will be called when an authentication is required, you will then have to call your third party authentication system for a valid JWE to provide to the SDK
+
+<pre class="prettyprint">
+// Anonymous Auth => Do not set the onJWERequested listener & set an empty userId
+await IAdvizeSDK.activate(projectId, '', gdprUrl);
+
+// Simple Auth => Do not set the onJWERequested listener & set a non-empty userId
+await IAdvizeSDK.activate(projectId, "my-user-unique-id", gdprUrl);
+
+// Secured Auth => Set the onJWERequested listener
+IAdvizeSDKListeners.onJWERequested(function (eventData: any) {
+  console.log('onJWERequested' + ' ' + eventData);
+  var jwe = ... ;// Fetch JWE from your 3rd-party auth system
+  return jwe;
+});
+await IAdvizeSDK.activate(projectId, '', null);
+</pre>
+
+> *⚠️ If you set both the listener and an user id, the listener will take the priority.*
 
 > *⚠️ For the __Simple__ authentication mode, the identifier that you pass must be __unique and non-discoverable for each different logged-in user__.*
 
@@ -1597,8 +1618,9 @@ The chat button gives access to the Chatbox so it should be visible:
 const updateChatButtonVisibility = async () => {
   const ruleAvailable = IAdvizeSDK.isActiveTargetingRuleAvailable()
   const hasOngoingConv = IAdvizeSDK.ongoingConversationId().trim().length !== 0
+  const chatboxOpened = IAdvizeSDK.chatboxController.isChatboxPresented()
 
-  if (hasOngoingConv || ruleAvailable) {
+  if (!chatboxOpened && (hasOngoingConv || ruleAvailable)) {
     showChatButton()
   } else {
     hideChatButton()
@@ -1675,7 +1697,23 @@ IAdvizeSDK.registerTransaction(transaction);
 
 #### 2️⃣ Saving visitor custom data <span hidden>reactnative</span>
 
-TODO
+The iAdvize Messenger SDK allows you to save data related to the visitor conversation:
+
+<pre class="prettyprint">
+var customData = {
+  "Test": "Test",
+  "Test2": false,
+  "Test3": 2.5,
+  "Test4": 3
+};
+IAdvizeSDK.registerCustomData(customData);
+</pre>
+
+> *⚠️ As those data are related to the conversation they cannot be sent if there is no ongoing conversation. Custom data registered before the start of a conversation are stored and the SDK automatically tries to send them when the conversation starts.*
+
+The visitor data you registered are displayed in the iAdvize Operator Desk in the conversation sidebar, in a tab labelled  `Custom data`:
+
+![Custom data tab shows registered data from the SDK](./assets/images/mobile-sdk/06-custom-data.png)
 
 ### 👍 Fetching visitor satisfaction <span hidden>reactnative</span>
 
