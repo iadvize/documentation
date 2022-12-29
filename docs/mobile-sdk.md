@@ -10,17 +10,15 @@ There are a few steps required before you start integrating the iAdvize Messenge
 
 Before integrating the SDK, you need to check that your iAdvize environment is ready to use (i.e. you have an account ready to receive and answer to conversations from the SDK).
 You will also need some information related to the project for the SDK setup. Please ask your iAdvize administrator to follow the instructions available on the [SDK Knowledge Base](https://help.iadvize.com/hc/en-gb/articles/360019839480) and to provide you with the **Project Identifier** as well as a **Targeting Rule Identifier**.
-<br />
 
 > *⚠️ Your iAdvize administrator should already have configured the project on the [iAdvize Administration Desk](https://ha.iadvize.com/admin/login/) and created an operator account for you. If it is not yet the case please contact your iAdvize Technical Project Manager.*
 
 ### 💻 Connecting to your iAdvize Operator Desk
 
 Using your operator account please log into the [iAdvize Desk](https://ha.iadvize.com/admin/login/).
-<br />
 
 > *⚠️ If you have the Administrator status in addition to your operator account, you will be directed to the Admin Desk when logging in. Just click on the `Chat` button in the upper right corner to open the Operator Desk.*
-<br />
+
 The iAdvize operator desk is the place where the conversations that are assigned to your account will pop up. Please ensure that your status is “Available" by enabling the corresponding chat or video toggle buttons in the upper right corner:
 
 ![The chat button is green, your operator can receive incoming conversations.](./assets/images/mobile-sdk/01-operator-desk.png)
@@ -2218,7 +2216,24 @@ IAdvizeSdk.registerTransaction(Transaction(
 
 #### 2️⃣ Saving visitor custom data <span hidden>flutter</span>
 
-TODO
+The iAdvize Messenger SDK allows you to save data related to the visitor conversation:
+
+<pre class="prettyprint">
+List<CustomData> customData = <CustomData>[
+  CustomData.fromString("Test", "Test"),
+  CustomData.fromBoolean("Test2", false),
+  CustomData.fromDouble("Test3", 2.0),
+  CustomData.fromInt("Test4", 3)
+];
+IAdvizeSdk.registerCustomData(customData).then((bool success) =>
+    log('iAdvize Example : custom data registered: $success'));
+</pre>
+
+> *⚠️ As those data are related to the conversation they cannot be sent if there is no ongoing conversation. Custom data registered before the start of a conversation are stored and the SDK automatically tries to send them when the conversation starts.*
+
+The visitor data you registered are displayed in the iAdvize Operator Desk in the conversation sidebar, in a tab labelled  `Custom data`:
+
+![Custom data tab shows registered data from the SDK](./assets/images/mobile-sdk/06-custom-data.png)
 
 ### 👍 Fetching visitor satisfaction <span hidden>flutter</span>
 
