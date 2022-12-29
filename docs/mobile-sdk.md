@@ -10,7 +10,6 @@ There are a few steps required before you start integrating the iAdvize Messenge
 
 Before integrating the SDK, you need to check that your iAdvize environment is ready to use (i.e. you have an account ready to receive and answer to conversations from the SDK).
 You will also need some information related to the project for the SDK setup. Please ask your iAdvize administrator to follow the instructions available on the [SDK Knowledge Base](https://help.iadvize.com/hc/en-gb/articles/360019839480) and to provide you with the **Project Identifier** as well as a **Targeting Rule Identifier**.
-
 <br />
 
 > *⚠️ Your iAdvize administrator should already have configured the project on the [iAdvize Administration Desk](https://ha.iadvize.com/admin/login/) and created an operator account for you. If it is not yet the case please contact your iAdvize Technical Project Manager.*
@@ -18,13 +17,10 @@ You will also need some information related to the project for the SDK setup. Pl
 ### 💻 Connecting to your iAdvize Operator Desk
 
 Using your operator account please log into the [iAdvize Desk](https://ha.iadvize.com/admin/login/).
-
 <br />
 
 > *⚠️ If you have the Administrator status in addition to your operator account, you will be directed to the Admin Desk when logging in. Just click on the `Chat` button in the upper right corner to open the Operator Desk.*
-
 <br />
-
 The iAdvize operator desk is the place where the conversations that are assigned to your account will pop up. Please ensure that your status is “Available" by enabling the corresponding chat or video toggle buttons in the upper right corner:
 
 ![The chat button is green, your operator can receive incoming conversations.](./assets/images/mobile-sdk/01-operator-desk.png)
@@ -1644,15 +1640,24 @@ IAdvizeSDK.presentChatbox()
 
 ### 🔔 Handling push notifications <span hidden>reactnative</span>
 
-> *⚠️ Before starting this part you will need to configure push notifications inside your application. You can refer to the following resources if needed: [Android](https://firebase.google.com/docs/cloud-messaging/android/client), & [iOS](https://www.raywenderlich.com/11395893-push-notifications-tutorial-getting-started). You will also need to ensure that the push notifications are setup in your iAdvize project. The process is described in the [SDK Knowledge Base](https://help.iadvize.com/hc/en-gb/articles/360019839480).*
+> *⚠️ Before starting this part you will need to configure push notifications inside your application. You can refer to the following resources if needed: [React Native Firebase Setup](https://rnfirebase.io) & [React Native Firebase Messaging Setup](https://rnfirebase.io/messaging/usage). You will also need to ensure that the push notifications are setup in your iAdvize project. The process is described in the [SDK Knowledge Base](https://help.iadvize.com/hc/en-gb/articles/360019839480).*
 
 #### 1️⃣ Registering the device token <span hidden>reactnative</span>
 
 For the SDK to be able to send notifications to the visitor’s device, its unique `device push token` must be registered:
 
 <pre class="prettyprint">
-IAdvizeSDK.registerPushToken('the_device_push_token', ApplicationMode.PROD); // or ApplicationMode.DEV
-</pre>
+import messaging from '@react-native-firebase/messaging';
+
+const registerPushToken = async () => {
+  try {
+    const token = await messaging().getToken();
+    IAdvizeSDK.registerPushToken(token, ApplicationMode.DEV);
+    console.log('iAdvize SDK registerPushToken success');
+  } catch (e) {
+    console.error(e);
+  }
+};</pre>
 
 > *⚠️ The `ApplicationMode` is used only for the iOS application.*
 
@@ -1678,11 +1683,61 @@ try {
 
 #### 3️⃣ Handling push notifications reception <span hidden>reactnative</span>
 
-TODO
+In order to receive the push notifications sent to the user's device, you will have to register the Firebase message listeners:
+
+<pre class="prettyprint">
+// Firebase Messaging notification handlers
+
+messaging().onMessage(async remoteMessage => {
+  console.log('Received a foreground notification message');
+  handleNotification(remoteMessage)
+});
+
+messaging().setBackgroundMessageHandler(async remoteMessage => {
+  console.log('Received a background notification message');
+  handleNotification(remoteMessage)
+});
+</pre>
+
+Once setup, you will receive push notifications when the operator sends any message. As the SDK notifications are caught in the same place than your app other notifications, you first have to distinguish if the received notification comes from iAdvize or not. This can be done using:
+
+<pre class="prettyprint">
+function handleNotification(remoteMessage: any) {
+  console.log('handling notification', JSON.stringify(remoteMessage));
+  var isIAdvizeSDKNotification = IAdvizeSDK.isIAdvizePushNotification(remoteMessage.data)
+}
+</pre>
+
+> *⚠️ Notifications will be received in your app for all messages sent by the agent. It is your responsability to display the notification and to check wether or not it is relevant to display it. For instance you don’t need to show a notification to the visitor when the Chatbox is opened:*
+
+<pre class="prettyprint">
+function handleNotification(remoteMessage: any) {
+  console.log('handling notification', JSON.stringify(remoteMessage));
+
+  var chatboxOpened = IAdvizeSDK.isChatboxPresented()
+  var isIAdvizeSDKNotification = IAdvizeSDK.isIAdvizePushNotification(remoteMessage.data)
+  var shouldDisplay = chatboxOpened == false && isIAdvizeSDKNotification
+
+  console.log("chatboxOpened:", chatboxOpened, "isIAdvizeSDKNotification", isIAdvizeSDKNotification, "shouldDisplay=>", shouldDisplay);
+}
+</pre>
 
 #### 4️⃣ Customizing the notification <span hidden>reactnative</span>
 
-TODO
+You are responsible for displaying the notification so you can use any title / text / icon you want.
+The text sent by the agent is available in the `content` part of the notification data received.
+
+<pre class="prettyprint">
+override fun onMessageReceived(remoteMessage: RemoteMessage) {
+  if (IAdvizeSDK.notificationController.isIAdvizePushNotification(remoteMessage.data)) {
+    val agentMessageReceived = remoteMessage.data["content"] ?: "Default text"
+  }
+}
+function handleNotification(remoteMessage: any) {
+  console.log('handling notification', JSON.stringify(remoteMessage));
+  var messageContent = remoteMessage.data.content
+}
+</pre>
 
 ### 📈 Adding value to the conversation <span hidden>reactnative</span>
 
