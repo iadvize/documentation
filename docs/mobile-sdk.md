@@ -289,16 +289,19 @@ This `GDPROption` dictates how the SDK behaves when the user taps on the `More i
 
 > *⚠️ If your visitors have already consented to GDPR inside your application, you can activate the iAdvize SDK without the GDPR process. However, be careful to explicitly mention the iAdvize Chat part in your GDPR consent details.*
 
-Let’s activate the iAdvize Messenger SDK using the first option:
-
 <pre class="prettyprint">
-val legalInfoUri = URI.create("http://yourlegalinformationurl.com/legal")
-IAdvizeSDK.activate(
-  projectId = projectId,
-  authenticationOption = AuthenticationOption.Anonymous,
-  gdprOption = GDPROption.Enabled(GDPREnabledOption.LegalUrl(legalInfoUri)),
-  callback = sdkActivationCallback
-)
+// Disabled
+val gdprOption = GDPROption.Disabled
+
+// URL
+val gdprOption = GDPROption.Enabled(GDPREnabledOption.LegalUrl(URI.create("http://my.gdpr.rules.com")))
+
+// Listener
+val gdprOption = GDPROption.Enabled(GDPREnabledOption.Listener(object : GDPRListener {
+  override fun didTapMoreInformation() {
+    // Implement your own logic
+  }
+}))
 </pre>
 
 Just like the welcome message above, the GDPR message can also be configured via the `ChatboxConfiguration` object:
@@ -868,22 +871,23 @@ This `GDPROption` dictates how the SDK behaves when the user taps on the `More i
 
 > *⚠️ If your visitors have already consented to GDPR inside your application, you can activate the iAdvize SDK without the GDPR process. However, be careful to explicitly mention the iAdvize Chat part in your GDPR consent details.*
 
-Let’s activate the iAdvize Messenger SDK using the first option:
-
 <pre class="prettyprint">
-if let legalInfoURL = URL(string: "http://yourlegalinformationurl.com/legal") {
-  IAdvizeSDK.shared.activate(
-    projectId: 0000,
-    authenticationOption: .anonymous,
-    gdprOption: .enabled(option: .legalInformation(url: legalInfoURL))
-  ) { success in
-    guard success else {
-      // Activation fails. You need to retry later to be able to properly activate the iAdvize Conversation SDK.
-      print("Activation failure.")
-      return
-    }
+// Disabled
+let gdprOption = .disabled
+
+// URL
+if let legalInfoURL = URL(string: "http://my.gdpr.rules.com") {
+  let gdprOption = .enabled(option: .legalInformation(url: legalInfoURL))
+}
+
+// Listener
+class GDPRMoreInfoListener: GDPRDelegate {
+  func didTapMoreInformation() {
+    // Implement your own logid
   }
 }
+let gdprListener = GDPRMoreInfoListener()
+let gdprOption = .enabled(option: .delegate(delegate: gdprListener))
 </pre>
 
 Just like the welcome message above, the GDPR message can also be configured via the `ChatboxConfiguration` object:
@@ -1301,7 +1305,7 @@ To activate the SDK you must use the `activate`function with your `projectId` (s
 
 <pre class="prettyprint">
 try {
-  await IAdvizeSDK.activate(projectId, 'userId', ...);
+  await IAdvizeSDK.activate(projectId, ...);
   // SDK is activated
 } catch (e) {
   // SDK failed to activate
@@ -1318,10 +1322,10 @@ You can choose between multiple authentication options:
 
 <pre class="prettyprint">
 // Anonymous Auth => Do not set the onJWERequested listener & set an empty userId
-await IAdvizeSDK.activate(projectId, '', gdprUrl);
+await IAdvizeSDK.activate(projectId, '', ...);
 
 // Simple Auth => Do not set the onJWERequested listener & set a non-empty userId
-await IAdvizeSDK.activate(projectId, "my-user-unique-id", gdprUrl);
+await IAdvizeSDK.activate(projectId, "my-user-unique-id", ...);
 
 // Secured Auth => Set the onJWERequested listener
 IAdvizeSDKListeners.onJWERequested(function (eventData: any) {
@@ -1329,7 +1333,7 @@ IAdvizeSDKListeners.onJWERequested(function (eventData: any) {
   var jwe = ... ;// Fetch JWE from your 3rd-party auth system
   return jwe;
 });
-await IAdvizeSDK.activate(projectId, '', null);
+await IAdvizeSDK.activate(projectId, '', ...);
 </pre>
 
 > *⚠️ If you set both the listener and an user id, the listener will take the priority.*
@@ -1877,7 +1881,7 @@ To activate the SDK you must use the `activate`function with your `projectId` (s
 IAdvizeSdk.activate(
   projectId: 'projectId',
   authenticationOption: authOption
-  gdprUrl: grpdUrl,
+  gdprOption: gdprOption,
   ).then((bool activated) => activated
       ? log('iAdvize Example : SDK activated')
       : log('iAdvize Example : SDK not activated'));
@@ -2014,7 +2018,41 @@ When no conversation is ongoing, the welcome message is displayed to the visitor
 
 #### 2️⃣ Enabling GDPR approval <span hidden>flutter</span>
 
-// TODO
+If you need to get the visitor consent on GDPR before he starts chatting, you can pass a `GDPROption` while activating the SDK. By default this option is set to `disabled`.
+
+If enabled, a message will request the visitor approval before allowing him to send a message to start the conversation:
+
+![GDPR approval request](./assets/images/mobile-sdk/05-gdpr-approval.png)
+
+This `GDPROption` dictates how the SDK behaves when the user taps on the `More information` button. You can either:
+
+- provide an URL pointing to your GPDR policy, it will be opened on user click
+- provide a listener/delegate, it will be called on user click and you can then implement your own custom behavior
+
+> *⚠️ If your visitors have already consented to GDPR inside your application, you can activate the iAdvize SDK without the GDPR process. However, be careful to explicitly mention the iAdvize Chat part in your GDPR consent details.*
+
+<pre class="prettyprint">
+// Disabled
+val gdprOption = GDPROption.disabled()
+
+// URL
+val gdprOption = GDPROption.url(url: "http://my.gdpr.rules.com")
+
+// Listener
+void _onGDPRMoreInfoClicked() {
+  log('iAdvize Example : GDPR More Info button clicked');
+}
+val gdprOption = GDPROption.listener(onMoreInfoClicked: _onGDPRMoreInfoClicked)
+</pre>
+
+Just like the welcome message above, the GDPR message can also be configured via the `ChatboxConfiguration` object:
+
+<pre class="prettyprint">
+final ChatboxConfiguration configuration = ChatboxConfiguration(
+  gdprMessage: "Your own GDPR message",
+);
+IAdvizeSdk.setChatboxConfiguration(configuration);
+</pre>
 
 ### 🎨 Branding the Chatbox <span hidden>flutter</span>
 
