@@ -1730,11 +1730,6 @@ You are responsible for displaying the notification so you can use any title / t
 The text sent by the agent is available in the `content` part of the notification data received.
 
 <pre class="prettyprint">
-override fun onMessageReceived(remoteMessage: RemoteMessage) {
-  if (IAdvizeSDK.notificationController.isIAdvizePushNotification(remoteMessage.data)) {
-    val agentMessageReceived = remoteMessage.data["content"] ?: "Default text"
-  }
-}
 function handleNotification(remoteMessage: any) {
   console.log('handling notification', JSON.stringify(remoteMessage));
   var messageContent = remoteMessage.data.content
@@ -2204,14 +2199,20 @@ IAdvizeSdk.presentChatbox();
 
 ### 🔔 Handling push notifications <span hidden>flutter</span>
 
-> *⚠️ Before starting this part you will need to configure push notifications inside your application. You can refer to the following resources if needed: [Android](https://firebase.google.com/docs/cloud-messaging/android/client), & [iOS](https://www.raywenderlich.com/11395893-push-notifications-tutorial-getting-started). You will also need to ensure that the push notifications are setup in your iAdvize project. The process is described in the [SDK Knowledge Base](https://help.iadvize.com/hc/en-gb/articles/360019839480).*
+> *⚠️ Before starting this part you will need to configure push notifications inside your application. You can refer to the following resources if needed: [Flutter Firebase Setup](https://firebase.google.com/docs/flutter/setup) & [Flutter Firebase Messaging Setup](https://firebase.google.com/docs/cloud-messaging/flutter/client). You will also need to ensure that the push notifications are setup in your iAdvize project. The process is described in the [SDK Knowledge Base](https://help.iadvize.com/hc/en-gb/articles/360019839480).*
 
 #### 1️⃣ Registering the device token <span hidden>flutter</span>
 
 For the SDK to be able to send notifications to the visitor’s device, its unique `device push token` must be registered:
 
 <pre class="prettyprint">
-IAdvizeSdk.registerPushToken(pushToken: 'the_device_push_token', mode: ApplicationMode.prod); // or ApplicationMode.dev
+import 'package:firebase_messaging/firebase_messaging.dart';
+
+FirebaseMessaging.instance.onTokenRefresh.listen((fcmToken) {
+  IAdvizeSdk.registerPushToken(pushToken: fcmToken, mode: ApplicationMode.dev);
+}).onError((err) {
+  log('Error registering token: $err');
+});
 </pre>
 
 > *⚠️ The `ApplicationMode` is used only for the iOS application.*
@@ -2221,20 +2222,70 @@ IAdvizeSdk.registerPushToken(pushToken: 'the_device_push_token', mode: Applicati
 Push notifications are activated as long as you have setup the push notifications information for your app on the iAdvize administration website (process is described in the [SDK Knowledge Base](https://help.iadvize.com/hc/en-gb/articles/360019839480)). You can manually enable/disable them at any time using:
 
 <pre class="prettyprint">
-IAdvizeSdk.enablePushNotifications()
-  .then((bool success) => log('Push notifications enabled $success'));
+IAdvizeSdk.enablePushNotifications().then((bool success) =>
+  log('Push notifications enabled $success'));
 
-IAdvizeSdk.disablePushNotifications()
-  .then((bool success) => log('Push notifications disabled $success'));
+IAdvizeSdk.disablePushNotifications().then((bool success) =>
+  log('Push notifications disabkled $success'));
 </pre>
 
 #### 3️⃣ Handling push notifications reception <span hidden>flutter</span>
 
-TODO
+In order to receive the push notifications sent to the user's device, you will have to register the Firebase message listeners. For more information on how to proceed you can check the [Firebase Messaging reception documentation](https://firebase.google.com/docs/cloud-messaging/flutter/receive).
+
+<pre class="prettyprint">
+@pragma('vm:entry-point')
+Future<void> _backgroundNotificationHandler(RemoteMessage message) async {
+  log('Received a background notification message ${message}');
+  handleNotification(message);
+}
+
+FirebaseMessaging.onBackgroundMessage(_backgroundNotificationHandler);
+
+FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+  log('Received a foreground notification message ${message}');
+  handleNotification(message);
+});
+</pre>
+
+Once setup, you will receive push notifications when the operator sends any message. As the SDK notifications are caught in the same place than your app other notifications, you first have to distinguish if the received notification comes from iAdvize or not. This can be done using:
+
+<pre class="prettyprint">
+void handleNotification(RemoteMessage message) {
+  log('handling notification $message');
+  IAdvizeSdk.isIAdvizePushNotification(message.data).then(
+    (bool isAdvizeNotification) =>
+      log('Notification from iAdvize ? $isAdvizeNotification'));
+}
+</pre>
+
+> *⚠️ Notifications will be received in your app for all messages sent by the agent. It is your responsability to display the notification and to check wether or not it is relevant to display it. For instance you don’t need to show a notification to the visitor when the Chatbox is opened:*
+
+<pre class="prettyprint">
+void handleNotification(RemoteMessage message) {
+  log('handling notification $message');
+
+  Future<bool> isIAdvizeSDKNotification =IAdvizeSdk.isIAdvizePushNotification(message.data);
+  Future<bool> isChatboxPresented = IAdvizeSdk.isChatboxPresented();
+
+  Future.wait([isIAdvizeSDKNotification, isChatboxPresented]).then((List<bool> flags) {
+    bool shouldDisplay = flags[0] && !flags[1];
+    log("isIAdvizeSDKNotification:${flags[0]} isChatboxPresented:${flags[1]} shouldDisplay:$shouldDisplay");
+  });
+}
+</pre>
 
 #### 4️⃣ Customizing the notification <span hidden>flutter</span>
 
-TODO
+You are responsible for displaying the notification so you can use any title / text / icon you want.
+The text sent by the agent is available in the `content` part of the notification data received.
+
+<pre class="prettyprint">
+void handleNotification(RemoteMessage message) {
+  log('handling notification $message');
+  String messageContent = message.data["content"];
+}
+</pre>
 
 ### 📈 Adding value to the conversation <span hidden>flutter</span>
 
