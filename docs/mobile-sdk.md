@@ -1270,6 +1270,21 @@ use_react_native!(
 )
 </pre>
 
+Add the iOS SDK pod dependency to your `ios/Podfile` file:
+
+<pre class="prettyprint">
+pod 'iadvize-reactnative-sdk', :path => '../node_modules/@iadvize-oss/iadvize-react-native-sdk/ios/'
+</pre>
+
+You will then need to install the pod via the following command:
+
+<pre class="prettyprint">
+cd ios
+pod install
+pod update
+cd -
+</pre>
+
 Add the following to the bottom of your Podfile:
 
 <pre class="prettyprint">
@@ -1808,18 +1823,9 @@ import 'package:iadvize_flutter_sdk/iadvize_sdk.dart';
 
 ##### Android Setup
 
-In your `android/build.gradle` file, and add the iAdvize SDK repository. As a good practice you can also ensure that you are using the latest Android framework:
+In your `android/build.gradle` file, and add the iAdvize SDK repository:
 
 <pre class="prettyprint">
-buildscript {
-  ext {
-    buildToolsVersion = "33.0.1"
-    minSdkVersion = 21
-    compileSdkVersion = 33
-    targetSdkVersion = 33
-  }
-}
-
 allprojects {
   repositories {
     maven { url "https://raw.github.com/iadvize/iadvize-android-sdk/master" }
@@ -1827,9 +1833,34 @@ allprojects {
 }
 </pre>
 
+As a good practice you can also ensure that you are using the latest Kotlin version in `android/build.gradle` and latest Android framework in the `android/app/build.gradle`. You can check the version used in the plugin through its README file.
+
+<pre class="prettyprint">
+// android/build.gradle
+buildscript {
+  ext.kotlin_version = '1.7.20'
+}
+</pre>
+
+<pre class="prettyprint">
+// android/app/build.gradle
+defaultConfig {
+  minSdkVersion 21
+  targetSdkVersion 33
+}
+</pre>
+
 > *⚠️ iAdvize Messenger SDK requires a minSdkVersion >= 21.*
 
 ##### iOS Setup
+
+First of all define the minimum iOS platform at the top of your `ios/Podfile` file:
+
+<pre class="prettyprint">
+platform :ios, '12.4'
+</pre>
+
+> *⚠️ iAdvize Messenger SDK requires a minimum iOS platform of 12.0.*
 
 Our iOS SDK is delivered as a binary framework (in an XCFramework bundle), which is a standard way of distributing closed-source binaries. The SDK relies on external dependencies to provide several rich features. These dependencies are not directly integrated into our SDK. They are installed in your app at the same time the SDK is installed (when executing the pod install command). Thus, our SDK and its dependencies must be linked dynamically. For this reason, the `use_frameworks!` option is required in the Podfile, to ensure CocoaPods use dynamic frameworks instead of static libraries. For the same reason, the `use_frameworks! :linkage => :static` will not work.
 
@@ -1853,10 +1884,13 @@ end
 
 > This post_install hook is required because the iAdvize SDK supports [module stability](https://swift.org/blog/abi-stability-and-more/). Therefore, all its dependencies must be built using the "Build Libraries for Distribution" option.
 
-For iOS app make sure to go to `ios` folder and install Cocoapods dependencies:
+You can then install the Cocoapods dependencies via this command:
 
 <pre class="prettyprint">
-cd ios && pod install
+cd ios
+pod install
+pod update
+cd -
 </pre>
 
 > *⚠️ From the version 2.5.0 and onward, the SDK supports video conversations. Thus it will request camera and microphone access before entering a video call. To avoid the app to crash, you have to setup two keys in your app Info.plist:*
@@ -2028,16 +2062,16 @@ This `GDPROption` dictates how the SDK behaves when the user taps on the `More i
 
 <pre class="prettyprint">
 // Disabled
-val gdprOption = GDPROption.disabled()
+GDPROption gdprOption = GDPROption.disabled();
 
 // URL
-val gdprOption = GDPROption.url(url: "http://my.gdpr.rules.com")
+GDPROption gdprOption = GDPROption.url(url: "http://my.gdpr.rules.com")
 
 // Listener
-void _onGDPRMoreInfoClicked() {
+GDPROption gdprOption = GDPROption.listener(onMoreInfoClicked: () {
   log('iAdvize Example : GDPR More Info button clicked');
-}
-val gdprOption = GDPROption.listener(onMoreInfoClicked: _onGDPRMoreInfoClicked)
+  // Implement your own logic here
+});
 </pre>
 
 Just like the welcome message above, the GDPR message can also be configured via the `ChatboxConfiguration` object:
