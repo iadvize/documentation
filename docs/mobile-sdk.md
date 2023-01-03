@@ -60,7 +60,7 @@ allprojects {
 }
 </pre>
 
-Add the iAdvize Messenger SDK dependency inside your module-level Gradle build file (replace `x.y.z` by the SDK latest version available):
+Add the iAdvize Messenger SDK dependency inside your module-level Gradle build file (replace `x.y.z` by the latest SDK version available):
 
 <pre class="prettyprint">
 // Module-level build.gradle.kts
@@ -90,7 +90,7 @@ After syncing your project you should be able to import the iAdvize dependency i
 
 #### 2️⃣ Activating the SDK <span hidden>android</span>
 
-Before activating the SDK, you will need to provide a reference to your application object and initiate the SDK with it.
+Before activating the SDK, you will need to provide a reference to your application object and initialize the SDK with it.
 
 In your `AndroidManifest.xml` declare your application class:
 
@@ -100,7 +100,7 @@ In your `AndroidManifest.xml` declare your application class:
 &lt;/application&gt;
 </pre>
 
-This class should then initiate the SDK:
+This class should then initialize the SDK:
 
 <pre class="prettyprint">
 package my.app.package.App
@@ -113,7 +113,7 @@ class App : Application() {
 }
 </pre>
 
-After that you can activate the SDK using the `activate` function with your `projectId` (see the [Prerequisites](#⚙️-prerequisites) section above to get that identifier). You have access to callbacks in order to know if the SDK has been successfully activated. In case of an SDK activation failure the callback will give you the reason of the failure and you may want to retry later:
+Afterwards you can activate the SDK using the `activate` function with your `projectId` (see the [Prerequisites](#⚙️-prerequisites) section above to get that identifier). You have access to callbacks in order to know if the SDK has been successfully activated. In the case of a SDK activation failure the callback will give you the reason of the failure and you may want to retry later:
 
 <pre class="prettyprint">
 IAdvizeSDK.activate(
@@ -225,7 +225,7 @@ If all the following conditions are met, the default chat button should appear:
 - the targeting rule language set in the SDK matches the language configured for this rule
 - an operator assigned to this rule is available to answer (connected and with a free chat slot)
 
-> *⚠️ After you activate a rule and it succeeds (by displaying the button), those conditions are checked every 30 seconds to verify that the button should still be displayed or not. At the first failure from this periodic check, the button is hidden and the SDK stops verifying the conditions. It means that if the rule cannot be triggered (after the first call, or after any successive check), you will have to call the `activateTargetingRule` (or `registerUserNavigation`) method again to restart the engagement process.*
+> *⚠️ After you activate a rule and it succeeds (by displaying the button), those conditions are checked every 30 seconds to verify that the button should still be displayed or not. Upon the first encountered failure from this periodic check, the button is hidden and the SDK stops verifying the conditions. It means that if the rule cannot be triggered (after the first call, or after any successive check), you will have to call the `activateTargetingRule` (or `registerUserNavigation`) method again in order to restart the engagement process.*
 
 #### 3️⃣ Initiating the conversation <span hidden>android</span>
 
@@ -625,7 +625,7 @@ ReflectionHelpers.setStaticField(android.os.Build::class.java, "MODEL", "whateve
 ReflectionHelpers.setStaticField(android.os.Build::class.java, "MANUFACTURER", "whatever")
 </pre>
 
-Please also be sure to initiate the SDK during the unit tests setup (see the [Setting up the SDK](#⚙️-setting-up-the-sdk) section above).
+Please also be sure to initalize the SDK during the unit tests setup (see the [Setting up the SDK](#⚙️-setting-up-the-sdk) section above).
 
 ## iOS integration guide
 
@@ -639,7 +639,7 @@ The iAdvize Messenger SDK for iOS is available through its dedicated demo projec
 
 #### 1️⃣ Adding the SDK dependency <span hidden>ios</span>
 
-To integrate the iAdvize Messenger SDK, you will have to use **CocoaPods**. Add this line to your Podfile, inside the `target` section (replace `x.y.z` by the SDK latest version available):
+To integrate the iAdvize Messenger SDK, you will have to use **CocoaPods**. Add this line to your Podfile, inside the `target` section (replace `x.y.z` by the latest SDK version available):
 
 <pre class="prettyprint">
 pod 'iAdvize', 'x.y.z'
@@ -804,7 +804,7 @@ If all the following conditions are met, the default chat button should appear:
 - the targeting rule language set in the SDK matches the language configured for this rule
 - an operator assigned to this rule is available to answer (connected and with a free chat slot)
 
-> *⚠️ After you activate a rule and it succeeds (by displaying the button), those conditions are checked every 30 seconds to verify that the button should still be displayed or not. At the first failure from this periodic check, the button is hidden and the SDK stops verifying the conditions. It means that if the rule cannot be triggered (after the first call, or after any successive check), you will have to call the `activateTargetingRule` (or `registerUserNavigation`) method again to restart the engagement process.*
+> *⚠️ After you activate a rule and it succeeds (by displaying the button), those conditions are checked every 30 seconds to verify that the button should still be displayed or not. Upon the first encountered failure from this periodic check, the button is hidden and the SDK stops verifying the conditions. It means that if the rule cannot be triggered (after the first call, or after any successive check), you will have to call the `activateTargetingRule` (or `registerUserNavigation`) method again in order to restart the engagement process.*
 
 ⌨️ **In-context example:** [Targeting rule activation](https://github.com/iadvize/iadvize-ios-sdk/blob/master/Example/IAdvizeSwiftExample/IAdvizeSwiftExample/Source/AppDelegate%2BiAdvize.swift#L69)
 
@@ -1235,7 +1235,7 @@ allprojects {
 
 > *⚠️ iAdvize Messenger SDK requires a minSdkVersion >= 21.*
 
-On Android, the iAdvize Messenger SDK needs to be initiated before use to allow several functionnalities to work. For instance, the default floating button use an ActivityLifecycleController that must be started before the main ReactNative activity is created, otherwise the controller won't be able to trigger the button display. Thus you need to add those lines in the `android/src/main/java/yourpackage/MainApplication.java` to initiate the SDK properly:
+On Android, the iAdvize Messenger SDK needs to be initialized before use to allow several functionnalities to work. For instance, the default floating button use an ActivityLifecycleController that must be started before the main ReactNative activity is created, otherwise the controller won't be able to trigger the button display. Thus you need to add those lines in the `android/src/main/java/yourpackage/MainApplication.java` to initialize the SDK properly:
 
 <pre class="prettyprint">
 import com.iadvize.conversation.sdk.IAdvizeSDK;
@@ -1422,7 +1422,7 @@ If all the following conditions are met, the default chat button should appear:
 - the targeting rule language set in the SDK matches the language configured for this rule
 - an operator assigned to this rule is available to answer (connected and with a free chat slot)
 
-> *⚠️ After you activate a rule and it succeeds (by displaying the button), those conditions are checked every 30 seconds to verify that the button should still be displayed or not. At the first failure from this periodic check, the button is hidden and the SDK stops verifying the conditions. It means that if the rule cannot be triggered (after the first call, or after any successive check), you will have to call the `activateTargetingRule` (or `registerUserNavigation`) method again to restart the engagement process.*
+> *⚠️ After you activate a rule and it succeeds (by displaying the button), those conditions are checked every 30 seconds to verify that the button should still be displayed or not. Upon the first encountered failure from this periodic check, the button is hidden and the SDK stops verifying the conditions. It means that if the rule cannot be triggered (after the first call, or after any successive check), you will have to call the `activateTargetingRule` (or `registerUserNavigation`) method again in order to restart the engagement process.*
 
 #### 3️⃣ Initiating the conversation <span hidden>reactnative</span>
 
@@ -1999,7 +1999,7 @@ If all the following conditions are met, the default chat button should appear:
 - the targeting rule language set in the SDK matches the language configured for this rule
 - an operator assigned to this rule is available to answer (connected and with a free chat slot)
 
-> *⚠️ After you activate a rule and it succeeds (by displaying the button), those conditions are checked every 30 seconds to verify that the button should still be displayed or not. At the first failure from this periodic check, the button is hidden and the SDK stops verifying the conditions. It means that if the rule cannot be triggered (after the first call, or after any successive check), you will have to call the `activateTargetingRule` (or `registerUserNavigation`) method again to restart the engagement process.*
+> *⚠️ After you activate a rule and it succeeds (by displaying the button), those conditions are checked every 30 seconds to verify that the button should still be displayed or not. Upon the first encountered failure from this periodic check, the button is hidden and the SDK stops verifying the conditions. It means that if the rule cannot be triggered (after the first call, or after any successive check), you will have to call the `activateTargetingRule` (or `registerUserNavigation`) method again in order to restart the engagement process.*
 
 #### 3️⃣ Initiating the conversation <span hidden>flutter</span>
 
