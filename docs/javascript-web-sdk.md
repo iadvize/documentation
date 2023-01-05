@@ -41,8 +41,8 @@ These methods are used for authentication. Please see the dedicated Help Center 
 | Property                         | Description                                            | Values                       |
 |----------------------------------|--------------------------------------------------------|------------------------------|
 | tag:version                      | The tag version                                        | `"LIGHT"`, `"FULL"`                   |
-| visitor:cookiesConsent           | Whether the visitor consented to cookies or not        | `"true"`,  `"false"` , `"unknown"` (default) |
-| visitor:GDPRConsent              | Whether the visitor consented to GDPR or not           | `"true"`,  `"false"` , `"unknown"` (default) |
+| visitor:cookiesConsent           | Whether the visitor consented to cookies or not        | `true`,  `false`, `null` (default) |
+| visitor:GDPRConsent              | Whether the visitor consented to GDPR or not           | `true`,  `false`, `null` (default) |
 
 Ex : 
 <pre class="prettyprint lang-js">
