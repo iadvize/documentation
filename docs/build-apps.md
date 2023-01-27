@@ -862,22 +862,18 @@ const applePayPaymentRequest = {
     currencyCode: "USD",
     lineItems: [
       {
-          amount: "45",
-          label: "Earpods",
-          type: "final"
+        amount: "45",
+        label: "Earpods",
+        type: "final"
       },
       {
-          amount: "955",
-          label: "iPhone 12 mini",
-          type: "final"
+        amount: "955",
+        label: "iPhone 12 mini",
+        type: "final"
       }
     ],
-    requiredBillingContactFields: [
-        "email"
-    ],
-    requiredShippingContactFields: [
-        "email"
-    ],
+    requiredBillingContactFields: ["email"],
+    requiredShippingContactFields: ["email"],
     shippingMethods: [
       {
         amount: "10",
@@ -909,7 +905,7 @@ client.pushApplePayPaymentRequestInConversationThread(applePayPaymentRequest)
 }).catch((error: ActionError) => {
     // error.message -> Error on command request
     // error.details (if exists) -> More details about the error if it exists
-})
+});
 </pre>
 
 *Message for an operator in the conversation thread when CPA push an Apple Pay Payment Request:*
