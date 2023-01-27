@@ -515,7 +515,7 @@ It is recommended to keep the app very lightweight and avoid heavy processing or
 To use the library an app must include a javascript bundle in the html with the following code.
 
 <pre class="prettyprint lang-html">
-&lt;script src="https://static.iadvize.com/conversation-panel-app-lib/2.4.0/idzcpa.umd.production.min.js"&gt;&lt;/script&gt;
+&lt;script src="https://static.iadvize.com/conversation-panel-app-lib/2.9.0/idzcpa.umd.production.min.js"&gt;&lt;/script&gt;
 </pre>
 
 Then in the javascript code of the app the library can be used as follows.
@@ -532,7 +532,7 @@ window.idzCpa.init().then(client => {
 ###### idzCpa
 `idzCpa` is a global variable used as the entry point of the CPA library.
 
-####### init
+###### init
 <pre class="prettyprint lang-js">
 function init(): Promise<Client>
 </pre>
@@ -550,6 +550,8 @@ client.context // => Context
 type Context = {
     conversationId: string;
     projectId: string;
+    channel: string;
+    language: string;
 }
 </pre>
 
@@ -558,6 +560,8 @@ The `context` property on the client returns the conversation context: conversat
 <pre class="prettyprint lang-js">
 client.context.conversationId // => '5701a92f-a8e3-49ad-81dc-ac801171f799'
 client.context.projectId // => '3103'
+client.context.channel // => 'CHAT'
+client.context.language // => 'fr'
 </pre>
 
 #### List of commands available
@@ -567,6 +571,7 @@ client.context.projectId // => '3103'
 | `insertTextInComposeBox` | Allows the CPA to send some text to the active thread compose zone. |
 | `pushCardInConversationThread` | Allows the CPA to send a card to the active conversation thread. |
 | `pushCardBundleInConversationThread` | Allows the CPA to send a card carousel to the active conversation thread. |
+| `getJWT` | Allow the CPA to get a JWT token from web desk |
 
 #### How to use each command
 
@@ -713,6 +718,183 @@ client.pushCardBundleInConversationThread(carousel)
 
 ![pushCardBundleInConversationThread](./assets/images/cpa-pushCardBundleInConversationThread.png)
 
+***
+##### getJWT
+
+- Allows the CPA to get a secure JWT token. This JWT is signed with the secret token defined in the connector of the CPA.
+
+*Signature*
+
+<pre class="prettyprint">
+function getJWT(): Promise<string>
+</pre>
+
+*Example*
+<pre class="prettyprint">
+client.getJWT().then((jwtToken) => {
+    // jwtToken = eyJ0eXAiOiJKV1QiLCJh.....
+    // use jwtToken on CPA for secure request
+})
+</pre>
+
+***
+
+##### pushApplePayPaymentRequestInConversationThread
+
+- Allow CPA to send Apple Pay Payment request in the conversation thread
+- Only CPA opened with an Apple channel conversation can be send a Apple Pay Payment request.
+
+*Signature*
+
+<pre class="prettyprint">
+type ApplePayPaymentRequestType = {
+    requestIdentifier: UUID;
+    payment: ApplePayPaymentRequest;
+    receivedMessage: ApplePayReceivedMessage;
+}
+
+// Detail for payment field type
+type ApplePayPaymentRequest {
+  currencyCode: string;
+  lineItems: PaymentItem[];
+  requiredBillingContactFields: ApplePayContactField[];
+  requiredShippingContactFields: ApplePayContactField[];
+  shippingMethods: ShippingMethod[];
+  total: PaymentItem;
+}
+
+type PaymentItem = {
+  amount: string;
+  label: string;
+  type: 'final' | 'pending';
+};
+
+type ShippingMethod = {
+  amount: string;
+  detail: string;
+  identifier: string;
+  label: string;
+};
+
+enum ApplePayContactField {
+  email = 'email',
+  name = 'name',
+  phone = 'phone',
+  postalAddress = 'postalAddress',
+  phoneticName = 'phoneticName',
+}
+
+// type for receivedMessage field
+type ApplePayReceivedMessage {
+  type: 'CARD';
+  data: CardType;
+}
+
+type CardType = {
+  title?: string;
+  text?: string;
+  image?: CardImage;
+  actions: LinkAction[];
+};
+
+type CardImage = {
+  url: string;
+  description: string;
+};
+
+type LinkAction = {
+  type: 'LINK';
+  title: string;
+  url: string;
+};
+
+// Error
+type ActionError = {
+    message: string;
+    details?: string[];
+}
+
+
+function pushApplePayPaymentRequestInConversationThread(applePayPaymentRequest: ApplePayPaymentRequestType): Promise<void>
+</pre>
+
+**Note**
+If request of payment is not send, it's possible that you have some error in your payload request.
+You can now catch Promise to explore some detail of the error, an ActionError is accessible with more details of some errors to help you to fix your payload and try again.
+
+
+For more information about request of ApplePayPaymentRequest, we have all detail in the official Apple developer documentation: [ApplePayPaymentRequest official documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymentrequest)
+
+*Example*
+<pre class="prettyprint">
+const applePayPaymentRequest = {
+  requestIdentifier: "83f86edb-XXXXX",
+  payment: {
+    "currencyCode": "USD",
+    "lineItems": [
+      {
+          "amount": "45",
+          "label": "Earpods",
+          "type": "final"
+      },
+      {
+          "amount": "955",
+          "label": "iPhone 12 mini",
+          "type": "final"
+      }
+    ],
+    "requiredBillingContactFields": [
+        "email"
+    ],
+    "requiredShippingContactFields": [
+        "email"
+    ],
+    "shippingMethods": [
+      {
+        "amount": "10",
+        "detail": "Available within an hour",
+        "identifier": "in_store_pickup",
+        "label": "In-StorePickup"
+      }
+    ],
+    "total": {
+      "amount": "1000",
+      "label": "TOTAL",
+      "type": "final"
+    }
+  },
+  receivedMessage: {
+    type: "CARD",
+    data: {
+      title: "Please check this payment request",
+      text: "Check this payment request and choose your shipping method",
+      actions: [],
+      style: "icon"
+    }
+  }
+};
+
+client.pushApplePayPaymentRequestInConversationThread(applePayPaymentRequest)
+.then(() => {
+    // success apple pay payment request
+}).catch((error: ActionError) => {
+    // error.message -> Error on command request
+    // error.details (if exists) -> More details about the error if it exists
+})
+</pre>
+
+*Message for an operator on conversation thread when he push an Apple Pay Payment Request:*
+![applePaymentRequest](./assets/images/cpa-apple-payment-request.png)
+
+
+*Success payment:*
+![applePaymentSuccess](./assets/images/cpa-apple-payment-success.png)
+
+*Failed payment:*
+![applePaymentFailed](./assets/images/cpa-apple-payment-failed.png)
+
+***
+
 
 ##### Style sheet
 The library also provides a standalone stylesheet with CSS variables built to fit iAdvize's design guidelines.
@@ -720,13 +902,13 @@ The library also provides a standalone stylesheet with CSS variables built to fi
 An app can include it either in its HTML: 
 
 <pre class="prettyprint lang-html">
-&lt;link rel="stylesheet" src="https://static.iadvize.com/conversation-panel-app-lib/2.4.0/idzcpa.base.css"&gt;
+&lt;link rel="stylesheet" src="https://static.iadvize.com/conversation-panel-app-lib/2.9.0/idzcpa.base.css"&gt;
 </pre>
 
 Or as a top-level import inside a preprocessed-stylesheet: 
 
 <pre class="prettyprint lang-css">
-@import 'https://static.iadvize.com/conversation-panel-app-lib/2.4.0/idzcpa.base.css';
+@import 'https://static.iadvize.com/conversation-panel-app-lib/2.9.0/idzcpa.base.css';
 </pre>
 
 A complete description of the provided variables can be found in [our knowledge base](https://help.iadvize.com/hc/en-gb/articles/4404351307026-Conversation-Panel-Apps-Guidelines#5-how-to-easily-style-your-conversation-panel-app-for-a-consistent-user-interface-integration-in-the-desk).
@@ -741,6 +923,10 @@ A complete description of the provided variables can be found in [our knowledge 
 | 2.1.0 | Return the conversation context in the client.
 | 2.3.1 | Support for inserting image type card and carousel of image type cards in the conversation thread via `insertCardInConversationThread` and `insertCarouselInConversationThread` |
 | 2.4.0 | Replace command name and signature of each command: `insertCardInConversationThread` is replaced by `pushCardInConversationThread` and `insertCarouselInConversationThread` is replaced by `pushCardBundleInConversationThread`|
+| 2.5.0 | Add new actions `onIntent` and `onTrigger` for augmented desk feature |
+| 2.6.0 | Add new action `getJWT` to get a secure JWT token |
+| 2.7.0 | Add new command `pushApplePayPaymentRequestInConversationThread` to send Apple Pay Payement request in the conversation thread |
+| 2.9.0 | Add channel on init context |
 
 #### Configuration
 Under the Plugins section create a Conversation Panel App and then edit the following fields:
