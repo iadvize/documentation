@@ -571,7 +571,8 @@ client.context.language // => 'fr'
 | `insertTextInComposeBox` | Allows the CPA to send some text to the active thread compose zone. |
 | `pushCardInConversationThread` | Allows the CPA to send a card to the active conversation thread. |
 | `pushCardBundleInConversationThread` | Allows the CPA to send a card carousel to the active conversation thread. |
-| `getJWT` | Allow the CPA to get a JWT token from web desk |
+| `pushApplePayPaymentRequestInConversationThread` | Allows the CPA to send an apple pay payment request in the conversation thread |
+| `getJWT` | Allows the CPA to get a JWT token from web desk |
 
 #### How to use each command
 
@@ -741,8 +742,8 @@ client.getJWT().then((jwtToken) => {
 
 ##### pushApplePayPaymentRequestInConversationThread
 
-- Allow CPA to send Apple Pay Payment request in the conversation thread
-- Only CPA opened with an Apple channel conversation can be send a Apple Pay Payment request.
+- Allows CPA to send Apple Pay Payment request in the conversation thread
+- Only CPA opened with an Apple channel conversation can be send an Apple Pay Payment request.
 
 *Signature*
 
@@ -814,8 +815,7 @@ type ActionError = {
     details?: string[];
 }
 
-
-function pushApplePayPaymentRequestInConversationThread(applePayPaymentRequest: ApplePayPaymentRequestType): Promise<void>
+function pushApplePayPaymentRequestInConversationThread(applePayPaymentRequest: ApplePayPaymentRequestType): Promise<void, ActionError>
 </pre>
 
 **Note**
@@ -830,37 +830,37 @@ For more information about request of ApplePayPaymentRequest, we have all detail
 const applePayPaymentRequest = {
   requestIdentifier: "83f86edb-XXXXX",
   payment: {
-    "currencyCode": "USD",
-    "lineItems": [
+    currencyCode: "USD",
+    lineItems: [
       {
-          "amount": "45",
-          "label": "Earpods",
-          "type": "final"
+          amount: "45",
+          label: "Earpods",
+          type: "final"
       },
       {
-          "amount": "955",
-          "label": "iPhone 12 mini",
-          "type": "final"
+          amount: "955",
+          label: "iPhone 12 mini",
+          type: "final"
       }
     ],
-    "requiredBillingContactFields": [
+    requiredBillingContactFields: [
         "email"
     ],
-    "requiredShippingContactFields": [
+    requiredShippingContactFields: [
         "email"
     ],
-    "shippingMethods": [
+    shippingMethods: [
       {
-        "amount": "10",
-        "detail": "Available within an hour",
-        "identifier": "in_store_pickup",
-        "label": "In-StorePickup"
+        amount: "10",
+        detail: "Available within an hour",
+        identifier: "in_store_pickup",
+        label: "In-StorePickup"
       }
     ],
-    "total": {
-      "amount": "1000",
-      "label": "TOTAL",
-      "type": "final"
+    total: {
+      amount: "1000",
+      label: "TOTAL",
+      type: "final"
     }
   },
   receivedMessage: {
@@ -883,7 +883,7 @@ client.pushApplePayPaymentRequestInConversationThread(applePayPaymentRequest)
 })
 </pre>
 
-*Message for an operator on conversation thread when he push an Apple Pay Payment Request:*
+*Message for an operator in the conversation thread when CPA push an Apple Pay Payment Request:*
 ![applePaymentRequest](./assets/images/cpa-apple-payment-request.png)
 
 
