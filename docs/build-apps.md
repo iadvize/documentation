@@ -601,7 +601,7 @@ client.context.language // => 'fr'
 | `pushCardInConversationThread` | Allows the CPA to send a card to the active conversation thread. |
 | `pushCardBundleInConversationThread` | Allows the CPA to send a card carousel to the active conversation thread. |
 | `pushApplePayPaymentRequestInConversationThread` | Allows the CPA to send an apple pay payment request in the conversation thread |
-| `getJWT` | Allows the CPA to get a JWT token from web desk |
+| `getJWT` | Allows the CPA to get a JWT token |
 
 #### How to use each command
 
