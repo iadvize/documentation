@@ -542,8 +542,8 @@ const clientPromise = idzCpa.init();
 clientPromise.then(client => { /* do something */});
 </pre>
 
-###### Client
-####### context
+###### Client context
+
 <pre class="prettyprint lang-js">
 client.context // => Context
 
@@ -606,7 +606,7 @@ client.context.language // => 'fr'
 #### How to use each command
 
 ***
-##### insertTextInComposeBox
+`insertTextInComposeBox`
 
 Allows the CPA to send some text to the active thread compose zone.
 
@@ -628,7 +628,7 @@ client.insertTextInComposeBox('Hello world!');
 ![insertTextInComposeBox](./assets/images/cpa-insertTextInComposeBox.png)
 
 ***
-##### pushCardInConversationThread
+`pushCardInConversationThread`
 
 Allows the CPA to send a card to the active conversation thread.
 
@@ -685,7 +685,7 @@ client.pushCardInConversationThread(card)
 
 
 ***
-##### pushCardBundleInConversationThread
+`pushCardBundleInConversationThread`
 
 Allows the CPA to send a card carousel to the active conversation thread.
 
@@ -749,7 +749,7 @@ client.pushCardBundleInConversationThread(carousel)
 ![pushCardBundleInConversationThread](./assets/images/cpa-pushCardBundleInConversationThread.png)
 
 ***
-##### getJWT
+`getJWT`
 
 - Allows the CPA to get a secure JWT token. This JWT is signed with the secret token defined in the connector of the CPA.
 
@@ -761,15 +761,15 @@ function getJWT(): Promise<string>
 
 *Example*
 <pre class="prettyprint">
+// use jwtToken on CPA for secure request
 client.getJWT().then((jwtToken) => {
-    // jwtToken = eyJ0eXAiOiJKV1QiLCJh.....
-    // use jwtToken on CPA for secure request
-})
+    /** jwtToken = eyJ0eXAiOiJKV1QiLCJh.....*/
+});
 </pre>
 
 ***
 
-##### pushApplePayPaymentRequestInConversationThread
+`pushApplePayPaymentRequestInConversationThread`
 
 - Allows CPA to send Apple Pay Payment request in the conversation thread
 - Only CPA opened with an Apple channel conversation can be send an Apple Pay Payment request.
