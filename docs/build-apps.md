@@ -550,9 +550,38 @@ client.context // => Context
 type Context = {
     conversationId: string;
     projectId: string;
-    channel: string;
+    channel: Channel;
     language: string;
 }
+
+// list of available channel:
+enum Channel {
+  /** Apple Business Chat channel */
+  AppleBusinessChat = 'APPLE_BUSINESS_CHAT',
+  /** Call channel */
+  Call = 'CALL',
+  /** Chat channel */
+  Chat = 'CHAT',
+  /** Facebook channel */
+  Facebook = 'FACEBOOK',
+  /** Facebook Business On Messenger channel */
+  FacebookBusinessOnMessenger = 'FACEBOOK_BUSINESS_ON_MESSENGER',
+  /** Google Business Messages channel */
+  GoogleBusinessMessages = 'GOOGLE_BUSINESS_MESSAGES',
+  /** Facebook channel */
+  Instagram = 'INSTAGRAM',
+  /** Mobile App  channel */
+  MobileApp = 'MOBILE_APP',
+  /** SMS channel */
+  Sms = 'SMS',
+  /** Twitter channel */
+  Twitter = 'TWITTER',
+  /** Video channel */
+  Video = 'VIDEO',
+  /** WhatsApp channel */
+  Whatsapp = 'WHATSAPP',
+}
+
 </pre>
 
 The `context` property on the client returns the conversation context: conversation ID and project ID.
@@ -923,7 +952,6 @@ A complete description of the provided variables can be found in [our knowledge 
 | 2.1.0 | Return the conversation context in the client.
 | 2.3.1 | Support for inserting image type card and carousel of image type cards in the conversation thread via `insertCardInConversationThread` and `insertCarouselInConversationThread` |
 | 2.4.0 | Replace command name and signature of each command: `insertCardInConversationThread` is replaced by `pushCardInConversationThread` and `insertCarouselInConversationThread` is replaced by `pushCardBundleInConversationThread`|
-| 2.5.0 | Add new actions `onIntent` and `onTrigger` for augmented desk feature |
 | 2.6.0 | Add new action `getJWT` to get a secure JWT token |
 | 2.7.0 | Add new command `pushApplePayPaymentRequestInConversationThread` to send Apple Pay Payement request in the conversation thread |
 | 2.9.0 | Add channel on init context |
