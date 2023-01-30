@@ -860,9 +860,10 @@ You can now catch Promise to explore some detail of the error, an ActionError is
 For more information about request of ApplePayPaymentRequest, we have all detail in the official Apple developer documentation: [ApplePayPaymentRequest official documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymentrequest)
 
 *Example*
-<pre class="prettyprint lang-js">
-const applePayPaymentRequest = {
-    requestIdentifier: "83f86edb-XXXXX",
+
+<pre class="prettyprint">
+const applePayPaymentRequest: ApplePayPaymentRequestType = {
+    requestIdentifier: "83f86edb-XXXXX", // UUID
     payment: {
         currencyCode: "USD",
         lineItems: [
@@ -902,15 +903,14 @@ const applePayPaymentRequest = {
             style: "icon"
         }
     }
-};
+}
 
-client.pushApplePayPaymentRequestInConversationThread(applePayPaymentRequest).then(() => {
-    /* success apple pay payment request */
-}).catch((error: ActionError) => {
+client.pushApplePayPaymentRequestInConversationThread(applePayPaymentRequest)
+.then(() => /* success apple pay payment request */)
+.catch((error: ActionError) =>
     /* error.message -> Error on command request */
     /* error.details (if exists) -> More details about the error if it exists */
-});
-
+)
 </pre>
 
 *Result*
