@@ -600,8 +600,8 @@ client.context.language // => 'fr'
 | `insertTextInComposeBox` | Allows the CPA to send some text to the active thread compose zone. |
 | `pushCardInConversationThread` | Allows the CPA to send a card to the active conversation thread. |
 | `pushCardBundleInConversationThread` | Allows the CPA to send a card carousel to the active conversation thread. |
-| `pushApplePayPaymentRequestInConversationThread` | Allows the CPA to send an apple pay payment request in the conversation thread |
-| `getJWT` | Allows the CPA to get a JWT token |
+| `pushApplePayPaymentRequestInConversationThread` | Allows the CPA to send an apple pay payment request in the conversation thread. |
+| `getJWT` | Allows the CPA to get a JWT token signed with the secret token defined in the connector of the CPA. |
 
 #### How to use each command
 
@@ -796,8 +796,13 @@ type ApplePayPaymentRequest {
 type PaymentItem = {
   amount: string;
   label: string;
-  type: 'final' | 'pending';
+  type: ApplePayLineItemType;
 };
+
+enum ApplePayLineItemType {
+  final,
+  pending,
+}
 
 type ShippingMethod = {
   amount: string;
@@ -857,65 +862,69 @@ For more information about request of ApplePayPaymentRequest, we have all detail
 *Example*
 <pre class="prettyprint">
 const applePayPaymentRequest = {
-  requestIdentifier: "83f86edb-XXXXX",
-  payment: {
-    currencyCode: "USD",
-    lineItems: [
-      {
-        amount: "45",
-        label: "Earpods",
-        type: "final"
-      },
-      {
-        amount: "955",
-        label: "iPhone 12 mini",
-        type: "final"
-      }
-    ],
-    requiredBillingContactFields: ["email"],
-    requiredShippingContactFields: ["email"],
-    shippingMethods: [
-      {
-        amount: "10",
-        detail: "Available within an hour",
-        identifier: "in_store_pickup",
-        label: "In-StorePickup"
-      }
-    ],
-    total: {
-      amount: "1000",
-      label: "TOTAL",
-      type: "final"
+    requestIdentifier: "83f86edb-XXXXX",
+    payment: {
+        currencyCode: "USD",
+        lineItems: [
+            {
+                amount: "45",
+                label: "Earpods",
+                type: "final"
+            },
+            {
+                amount: "955",
+                label: "iPhone 12 mini",
+                type: "final"
+            }
+        ],
+        requiredBillingContactFields: ["email"],
+        requiredShippingContactFields: ["email"],
+        shippingMethods: [
+            {
+                amount: "10",
+                detail: "Available within an hour",
+                identifier: "in_store_pickup",
+                label: "In-StorePickup"
+            }
+        ],
+        total: {
+            amount: "1000",
+            label: "TOTAL",
+            type: "final"
+        }
+    },
+    receivedMessage: {
+        type: "CARD",
+        data: {
+            title: "Please check this payment request",
+            text: "Check this payment request and choose your shipping method",
+            actions: [],
+            style: "icon"
+        }
     }
-  },
-  receivedMessage: {
-    type: "CARD",
-    data: {
-      title: "Please check this payment request",
-      text: "Check this payment request and choose your shipping method",
-      actions: [],
-      style: "icon"
-    }
-  }
 };
 
-client.pushApplePayPaymentRequestInConversationThread(applePayPaymentRequest)
-.then(() => {
+client.pushApplePayPaymentRequestInConversationThread(applePayPaymentRequest).then(() => {
     // success apple pay payment request
+    return;
 }).catch((error: ActionError) => {
     // error.message -> Error on command request
     // error.details (if exists) -> More details about the error if it exists
+    return;
 });
+
 </pre>
 
-*Message for an operator in the conversation thread when CPA push an Apple Pay Payment Request:*
+*Result*
+
+- *Message for an operator in the conversation thread when CPA push an Apple Pay Payment Request:*
 ![applePaymentRequest](./assets/images/cpa-apple-payment-request.png)
 
 
-*Success payment:*
+- *Success payment:*
 ![applePaymentSuccess](./assets/images/cpa-apple-payment-success.png)
 
-*Failed payment:*
+- *Failed payment:*
 ![applePaymentFailed](./assets/images/cpa-apple-payment-failed.png)
 
 ***
