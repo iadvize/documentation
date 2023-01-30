@@ -760,10 +760,10 @@ function getJWT(): Promise<string>
 </pre>
 
 *Example*
-<pre class="prettyprint">
+<pre class="prettyprint lang-js">
 // use jwtToken on CPA for secure request
 client.getJWT().then((jwtToken) => {
-    /** jwtToken = eyJ0eXAiOiJKV1QiLCJh.....*/
+    /* use JWT token */
 });
 </pre>
 
@@ -860,7 +860,7 @@ You can now catch Promise to explore some detail of the error, an ActionError is
 For more information about request of ApplePayPaymentRequest, we have all detail in the official Apple developer documentation: [ApplePayPaymentRequest official documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymentrequest)
 
 *Example*
-<pre class="prettyprint">
+<pre class="prettyprint lang-js">
 const applePayPaymentRequest = {
     requestIdentifier: "83f86edb-XXXXX",
     payment: {
@@ -905,12 +905,10 @@ const applePayPaymentRequest = {
 };
 
 client.pushApplePayPaymentRequestInConversationThread(applePayPaymentRequest).then(() => {
-    // success apple pay payment request
-    return;
+    /* success apple pay payment request */
 }).catch((error: ActionError) => {
-    // error.message -> Error on command request
-    // error.details (if exists) -> More details about the error if it exists
-    return;
+    /* error.message -> Error on command request */
+    /* error.details (if exists) -> More details about the error if it exists */
 });
 
 </pre>
