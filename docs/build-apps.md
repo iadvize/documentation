@@ -760,11 +760,9 @@ function getJWT(): Promise<string>
 </pre>
 
 *Example*
-<pre class="prettyprint lang-js">
+<pre class="prettyprint">
 // use jwtToken on CPA for secure request
-client.getJWT().then((jwtToken) => {
-    /* use JWT token */
-});
+client.getJWT().then((jwtToken: string) => { /* use JWT token */ })
 </pre>
 
 ***
