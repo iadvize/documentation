@@ -751,7 +751,7 @@ client.pushCardBundleInConversationThread(carousel)
 ***
 `getJWT`
 
-- Allows the CPA to get a secure JWT token. This JWT is signed with the secret token defined in the connector of the CPA.
+- Allows the CPA to get a secured JWT token. This JWT is signed with the secret token defined in the connector of the CPA.
 
 *Signature*
 
@@ -770,7 +770,7 @@ client.getJWT().then((jwtToken: string) => { /* use JWT token */ })
 `pushApplePayPaymentRequestInConversationThread`
 
 - Allows CPA to send Apple Pay Payment request in the conversation thread
-- Only CPA opened with an Apple channel conversation can be send an Apple Pay Payment request.
+- Only CPA opened with an Apple channel conversation can send an Apple Pay Payment request.
 
 *Signature*
 
@@ -851,7 +851,7 @@ function pushApplePayPaymentRequestInConversationThread(applePayPaymentRequest: 
 </pre>
 
 **Note**
-If request of payment is not send, it's possible that you have some error in your payload request.
+If request of payment is not sent, it's possible that you have some error in your payload request.
 You can now catch Promise to explore some detail of the error, an ActionError is accessible with more details of some errors to help you to fix your payload and try again.
 
 
@@ -953,7 +953,7 @@ A complete description of the provided variables can be found in [our knowledge 
 | 2.1.0 | Return the conversation context in the client.
 | 2.3.1 | Support for inserting image type card and carousel of image type cards in the conversation thread via `insertCardInConversationThread` and `insertCarouselInConversationThread` |
 | 2.4.0 | Replace command name and signature of each command: `insertCardInConversationThread` is replaced by `pushCardInConversationThread` and `insertCarouselInConversationThread` is replaced by `pushCardBundleInConversationThread`|
-| 2.6.0 | Add new action `getJWT` to get a secure JWT token |
+| 2.6.0 | Add new action `getJWT` to get a secured JWT token |
 | 2.7.0 | Add new command `pushApplePayPaymentRequestInConversationThread` to send Apple Pay Payement request in the conversation thread |
 | 2.9.0 | Add channel on init context |
 
