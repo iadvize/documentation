@@ -757,8 +757,8 @@ client.getJWT().then((jwtToken: string) => { /* use JWT token */ })
 
 `pushApplePayPaymentRequestInConversationThread`
 
-- Allows CPA to send Apple Pay Payment request in the conversation thread
-- Only CPA opened with an Apple channel conversation can send an Apple Pay Payment request.
+- Allows the CPA to send an Apple Pay Payment request to the active conversation thread.
+- The CPA can only send an Apple Pay Payment request to a conversation from an Apple channel.
 
 *Signature*
 
