@@ -554,31 +554,19 @@ type Context = {
     language: string;
 }
 
-// list of available channel:
+// list of available channels:
 enum Channel {
-  /** Apple Business Chat channel */
   AppleBusinessChat = 'APPLE_BUSINESS_CHAT',
-  /** Call channel */
   Call = 'CALL',
-  /** Chat channel */
   Chat = 'CHAT',
-  /** Facebook channel */
   Facebook = 'FACEBOOK',
-  /** Facebook Business On Messenger channel */
   FacebookBusinessOnMessenger = 'FACEBOOK_BUSINESS_ON_MESSENGER',
-  /** Google Business Messages channel */
   GoogleBusinessMessages = 'GOOGLE_BUSINESS_MESSAGES',
-  /** Facebook channel */
   Instagram = 'INSTAGRAM',
-  /** Mobile App  channel */
   MobileApp = 'MOBILE_APP',
-  /** SMS channel */
   Sms = 'SMS',
-  /** Twitter channel */
   Twitter = 'TWITTER',
-  /** Video channel */
   Video = 'VIDEO',
-  /** WhatsApp channel */
   Whatsapp = 'WHATSAPP',
 }
 
@@ -600,7 +588,7 @@ client.context.language // => 'fr'
 | `insertTextInComposeBox` | Allows the CPA to send some text to the active thread compose zone. |
 | `pushCardInConversationThread` | Allows the CPA to send a card to the active conversation thread. |
 | `pushCardBundleInConversationThread` | Allows the CPA to send a card carousel to the active conversation thread. |
-| `pushApplePayPaymentRequestInConversationThread` | Allows the CPA to send an apple pay payment request in the conversation thread. |
+| `pushApplePayPaymentRequestInConversationThread` | Allows the CPA to send an Apple Pay Payment request in the conversation thread. |
 | `getJWT` | Allows the CPA to get a JWT token signed with the secret token defined in the connector of the CPA. |
 
 #### How to use each command
@@ -851,7 +839,8 @@ function pushApplePayPaymentRequestInConversationThread(applePayPaymentRequest: 
 </pre>
 
 **Note**
-If request of payment is not sent, it's possible that you have some error in your payload request.
+
+If the request of payment is not sent, you may have an error in your payload request.
 You can now catch Promise to explore some detail of the error, an ActionError is accessible with more details of some errors to help you to fix your payload and try again.
 
 
@@ -904,30 +893,33 @@ const applePayPaymentRequest: ApplePayPaymentRequestType = {
 }
 
 client.pushApplePayPaymentRequestInConversationThread(applePayPaymentRequest)
-.then(() => /* success apple pay payment request */)
-.catch((error: ActionError) =>
-    /* error.message -> Error on command request */
-    /* error.details (if exists) -> More details about the error if it exists */
-)
+    .then(() => /* success apple pay payment request */)
+    .catch((error: ActionError) =>
+        /* error.message -> Error on command request */
+        /* error.details (if exists) -> More details about the error if it exists */
+    )
 </pre>
 
 *Result*
 
-- *Message for an operator in the conversation thread when CPA push an Apple Pay Payment Request:*
+- *Message for an operator in the conversation thread when the CPA pushes an Apple Pay Payment Request:*
+
 ![applePaymentRequest](./assets/images/cpa-apple-payment-request.png)
 
 
 - *Success payment:*
+
 ![applePaymentSuccess](./assets/images/cpa-apple-payment-success.png)
 
 - *Failed payment:*
+
 ![applePaymentFailed](./assets/images/cpa-apple-payment-failed.png)
 
 ***
 
 
 ##### Style sheet
-The library also provides a standalone stylesheet with CSS variables built to fit iAdvize's design guidelines.
+The library also provides a standalone stylesheet with CSS variables built-in to fit iAdvize's design guidelines.
 
 An app can include it either in its HTML: 
 
@@ -941,7 +933,7 @@ Or as a top-level import inside a preprocessed-stylesheet:
 @import 'https://static.iadvize.com/conversation-panel-app-lib/2.9.0/idzcpa.base.css';
 </pre>
 
-A complete description of the provided variables can be found in [our knowledge base](https://help.iadvize.com/hc/en-gb/articles/4404351307026-Conversation-Panel-Apps-Guidelines#5-how-to-easily-style-your-conversation-panel-app-for-a-consistent-user-interface-integration-in-the-desk).
+A complete description of the provided variables can be found in [our knowledge base](https://help.iadvize.com/hc/en-gb/articles/4404351307026-Conversation-Panel-Apps-Guidelines#5-how-to-easily-style-your-custom-app-for-a-consistent-user-interface-integration-in-the-desk).
 
 *Library Change log*
 
