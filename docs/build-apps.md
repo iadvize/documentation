@@ -843,8 +843,7 @@ function pushApplePayPaymentRequestInConversationThread(applePayPaymentRequest: 
 If the request of payment is not sent, you may have an error in your request payload.
 To help you fix your payload, you can catch the error Promise: an ActionError is available with more details on what's happening.
 
-
-For more information about request of ApplePayPaymentRequest, we have all detail in the official Apple developer documentation: [ApplePayPaymentRequest official documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymentrequest)
+More details about the `ApplePayPaymentRequest` type are provided in the  [official Apple developer documentation.](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymentrequest)
 
 *Example*
 
