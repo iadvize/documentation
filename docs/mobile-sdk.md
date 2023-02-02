@@ -218,7 +218,7 @@ This means that if, for example, you setup a targeting rule to be triggered only
 By default, the targeting rule language used is the user’s device current language. You can force the targeting language to a specific value using:
 
 <pre class="prettyprint">
-IAdvizeSDK.targetingController.language = SDKLanguageOption.Custom(Language.FR)
+IAdvizeSDK.targetingController.language = LanguageOption.Custom(Language.FR)
 </pre>
 
 > *⚠️ This `language` property is __NOT__ intended to change the language displayed in the SDK. It is solely used for the targeting process purpose.*
