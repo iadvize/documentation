@@ -642,7 +642,7 @@ ReflectionHelpers.setStaticField(android.os.Build::class.java, "MODEL", "whateve
 ReflectionHelpers.setStaticField(android.os.Build::class.java, "MANUFACTURER", "whatever")
 </pre>
 
-Please also be sure to initalize the SDK during the unit tests setup (see the [Setting up the SDK](#⚙️-setting-up-the-sdk) section above).
+Please also be sure to initalize the SDK during the unit tests setup (see the [Setting up the SDK](#⚙️-setting-up-the-sdk-android) section above).
 
 ## iOS integration guide
 
