@@ -339,6 +339,8 @@ IAdvizeSDK.chatboxController.setupChatbox(configuration)
 
 The `ChatboxConfiguration` object that we used in the previous section to customize the welcome and GDPR messages can also be used to change the Chatbox UI to better fit into the look and feel of your application.
 
+> *⚠️ You should setup the configuration before presenting the chatbox. If you call this method while the chatbox is visible, some parameters will only apply for new messages or after closing/reopening the chatbox.*
+
 #### 1️⃣ Changing the Chatbox color <span hidden>android</span>
 
 You can setup a main color on the SDK which will be applied to:
@@ -927,6 +929,8 @@ IAdvizeSDK.shared.chatboxController.setupChatbox(configuration: configuration)
 ### 🎨 Branding the Chatbox <span hidden>ios</span>
 
 The `ChatboxConfiguration` object that we used in the previous section to customize the welcome and GDPR messages can also be used to change the Chatbox UI to better fit into the look and feel of your application.
+
+> *⚠️ You should setup the configuration before presenting the chatbox. If you call this method while the chatbox is visible, some parameters will only apply for new messages or after closing/reopening the chatbox.*
 
 #### 1️⃣ Changing the Chatbox color <span hidden>ios</span>
 
@@ -1534,6 +1538,8 @@ IAdvizeSDK.shared.chatboxController.setupChatbox(configuration: configuration)
 
 The `ChatboxConfiguration` object that we used in the previous section to customize the welcome and GDPR messages can also be used to change the Chatbox UI to better fit into the look and feel of your application.
 
+> *⚠️ You should setup the configuration before presenting the chatbox. If you call this method while the chatbox is visible, some parameters will only apply for new messages or after closing/reopening the chatbox.*
+
 #### 1️⃣ Changing the Chatbox color <span hidden>reactnative</span>
 
 You can setup a main color on the SDK which will be applied to:
@@ -2113,6 +2119,8 @@ IAdvizeSdk.setChatboxConfiguration(configuration);
 ### 🎨 Branding the Chatbox <span hidden>flutter</span>
 
 The `ChatboxConfiguration` object that we used in the previous section to customize the welcome and GDPR messages can also be used to change the Chatbox UI to better fit into the look and feel of your application.
+
+> *⚠️ You should setup the configuration before presenting the chatbox. If you call this method while the chatbox is visible, some parameters will only apply for new messages or after closing/reopening the chatbox.*
 
 #### 1️⃣ Changing the Chatbox color <span hidden>flutter</span>
 
