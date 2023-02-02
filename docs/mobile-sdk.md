@@ -55,7 +55,8 @@ Add the iAdvize repository to your project repositories inside your top-level Gr
 
 allprojects {
   repositories {
-    maven { url = uri("https://raw.github.com/iadvize/iadvize-android-sdk/master") }
+    maven(url = uri("https://raw.github.com/iadvize/iadvize-android-sdk/master"))
+    maven(url = uri("https://jitpack.io"))
   }
 }
 </pre>
@@ -77,6 +78,22 @@ dependencies {
 </pre>
 
 > *⚠️ The `exclude` configuration is required because the iAdvize Messenger SDK uses [Smack](https://github.com/igniterealtime/Smack), an XMPP library that is built upon `xpp3`, which is bundled by default in the Android framework. This exclude ensures that your app does not also bundle `xpp3` to avoid classes duplication errors.*
+
+In that same file, you also need to ensure that you are using the right Android target to build (iAdvize Messenger SDK is built with Android target 33):
+
+<pre class="prettyprint">
+// Module-level build.gradle.kts
+
+android {
+  buildToolsVersion "33.0.1"
+
+  defaultConfig {
+    minSdk = 21
+    targetSdk = 33
+    compileSdk = 33
+  }
+}
+</pre>
 
 After syncing your project you should be able to import the iAdvize dependency in your application code with `import com.iadvize.conversation.sdk.IAdvizeSDK`
 
@@ -1214,9 +1231,11 @@ import IAdvizeSDK from '@iadvize-oss/iadvize-react-native-sdk';
 
 ##### Android Setup
 
-In your `android/build.gradle` file, and add the iAdvize SDK repository. As a good practice you can also ensure that you are using the latest Android framework:
+In your `android/build.gradle` file, and add the iAdvize SDK repository. You also need to ensure that you are using the right Android framework to build (iAdvize Messenger SDK is built with Android target 33):
 
 <pre class="prettyprint">
+// android/build.gradle
+
 buildscript {
   ext {
     buildToolsVersion = "33.0.1"
@@ -1229,6 +1248,7 @@ buildscript {
 allprojects {
   repositories {
     maven { url "https://raw.github.com/iadvize/iadvize-android-sdk/master" }
+    maven { url "https://jitpack.io" }
   }
 }
 </pre>
@@ -1238,6 +1258,8 @@ allprojects {
 On Android, the iAdvize Messenger SDK needs to be initialized before use to allow several functionnalities to work. For instance, the default floating button use an ActivityLifecycleController that must be started before the main ReactNative activity is created, otherwise the controller won't be able to trigger the button display. Thus you need to add those lines in the `android/src/main/java/yourpackage/MainApplication.java` to initialize the SDK properly:
 
 <pre class="prettyprint">
+// android/src/main/java/yourpackage/MainApplication.java
+
 import com.iadvize.conversation.sdk.IAdvizeSDK;
 
 public class MainApplication extends Application implements ReactApplication {
@@ -1826,17 +1848,21 @@ import 'package:iadvize_flutter_sdk/iadvize_sdk.dart';
 In your `android/build.gradle` file, and add the iAdvize SDK repository:
 
 <pre class="prettyprint">
+// android/build.gradle
+
 allprojects {
   repositories {
     maven { url "https://raw.github.com/iadvize/iadvize-android-sdk/master" }
+    maven { url "https://jitpack.io" }
   }
 }
 </pre>
 
-As a good practice you can also ensure that you are using the latest Kotlin version in `android/build.gradle` and latest Android framework in the `android/app/build.gradle`. You can check the version used in the plugin through its README file.
+You also need to ensure that you are using the right Android framework to build (iAdvize Messenger SDK is built with Android target 33), as a good practice, also check that you are using the latest Kotlin version in `android/build.gradle` (you can find the version used in the plugin through its README file)
 
 <pre class="prettyprint">
 // android/build.gradle
+
 buildscript {
   ext.kotlin_version = '1.7.20'
 }
@@ -1844,6 +1870,7 @@ buildscript {
 
 <pre class="prettyprint">
 // android/app/build.gradle
+
 defaultConfig {
   minSdkVersion 21
   targetSdkVersion 33
