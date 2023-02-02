@@ -1019,7 +1019,7 @@ With a custom button it is your responsibility to:
 #### 1️⃣ Disabling the Default Floating Button <span hidden>ios</span>
 
 <pre class="prettyprint">
-IAdvizeSDK.shared.chatboxController.useDefaultChatButton = false
+IAdvizeSDK.shared.chatboxController.useDefaultFloatingButton = false
 </pre>
 
 #### 2️⃣ Displaying/hiding the chat button <span hidden>ios</span>
