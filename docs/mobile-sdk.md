@@ -1459,13 +1459,13 @@ While your user navigates through your app, you will have to update the active t
 
 <pre class="prettyprint">
 // To clear the active targeting rule and thus stopping the engagement process (this is the default behavior)
-IAdvizeSDK.registerUserNavigation(NavigationOption.clear, "", "");
+IAdvizeSDK.registerUserNavigation(NavigationOption.CLEAR, "", "");
 
 // To keep/start the engagement process with the same active targeting rule in the new user screen
-IAdvizeSDK.registerUserNavigation(NavigationOption.keep, "", "");
+IAdvizeSDK.registerUserNavigation(NavigationOption.KEEP, "", "");
 
 // To keep/start the engagement process but with another targeting rule for this screen
-IAdvizeSDK.registerUserNavigation(NavigationOption.new, targetingRuleUUIDString, channel);
+IAdvizeSDK.registerUserNavigation(NavigationOption.NEW, targetingRuleUUIDString, channel);
 </pre>
 
 > *⚠️ Please note that calling `registerUserNavigation` with `NavigationOption.clear` will stop the engagement process, and calling it with other options will start it if it is stopped. Thus you may never use `activateTargetingRule` in your app and only rely on `registerUserNavigation` for your engagement process management.*
