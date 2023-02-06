@@ -44,6 +44,46 @@ The iAdvize Messenger SDK for Android is available through its dedicated demo pr
 | --- | --- | --- |
 | [https://github.com/iadvize/iadvize-android-sdk](https://github.com/iadvize/iadvize-android-sdk) | [https://github.com/iadvize/iadvize-android-sdk/releases/latest](https://github.com/iadvize/iadvize-android-sdk/releases/latest) | [https://iadvize.github.io/iadvize-android-sdk](https://iadvize.github.io/iadvize-android-sdk) |
 
+### 🔐 Ensuring the SDK integrity <span hidden>android</span>
+
+Before downloading the iAdvize Messenger SDK artifacts you can verify their integrity by generating their checksums and comparing them with the reference checksums available:
+
+- in the [GitHub release note](https://github.com/iadvize/iadvize-android-sdk/releases/latest)
+- in the [dedicated spreadsheet](https://docs.google.com/spreadsheets/d/11A5RScYGCg17rFXp-RaMyVIUqsd3WacXiTjxk3GNZyk)
+
+The Android SDK consists of an archive (`aar` file) and a Maven project description (`pom` file), you can generate their checksums using the following commands (replace `x.y.z` by the SDK version you are checking):
+
+<pre class="prettyprint">
+curl -sL https://github.com/iadvize/iadvize-android-sdk/raw/master/com/iadvize/iadvize-sdk/x.y.z/iadvize-sdk-x.y.z.aar | openssl sha256
+
+curl -sL https://github.com/iadvize/iadvize-android-sdk/raw/master/com/iadvize/iadvize-sdk/x.y.z/iadvize-sdk-x.y.z.pom | openssl sha256
+</pre>
+
+This ensures that the online packages are valid. In order to check those checksums on the fly, this process can be automated via Gradle by adding a metadata verification xml file at `$PROJECT_ROOT/gradle/verification-metadata.xml`:
+
+<pre class="prettyprint">
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;verification-metadata ...&gt;
+   &lt;configuration&gt;
+      &lt;verify-metadata&gt;true&lt;/verify-metadata&gt;
+      &lt;verify-signatures&gt;false&lt;/verify-signatures&gt;
+   &lt;/configuration&gt;
+   &lt;components&gt;
+      &lt;component group=&quot;com.iadvize&quot; name=&quot;iadvize-sdk&quot; version=&quot;x.y.z&quot;&gt;
+         &lt;artifact name=&quot;iadvize-sdk-2.8.2.aar&quot;&gt;
+            &lt;sha256 value=&quot;checksum value&quot; origin=&quot;iAdvize website&quot; /&gt;
+         &lt;/artifact&gt;
+         &lt;artifact name=&quot;iadvize-sdk-x.y.z.pom&quot;&gt;
+            &lt;sha256 value=&quot;checksum value &quot;origin=&quot;iAdvize website&quot; /&gt;
+         &lt;/artifact&gt;
+      &lt;/component&gt;
+   &lt;/components&gt;
+&lt;/verification-metadata&gt;
+</pre>
+
+With this file present in your project structure, Gradle will automatically check the artifacts checksums before integrating them into your app. Please note that you will have to do this for **all dependencies** used in your project.
+To help you with that, the `verification-metadata.xml` for the SDK sub-dependencies is delivered alongside the SDK. Those subdependencies checksums have been generated through the Gradle generation feature and not verified.
+
 ### ⚙️ Setting up the SDK <span hidden>android</span>
 
 #### 1️⃣ Adding the SDK dependency <span hidden>android</span>
@@ -654,6 +694,35 @@ The iAdvize Messenger SDK for iOS is available through its dedicated demo projec
 | --- | --- | --- |
 | [https://github.com/iadvize/iadvize-ios-sdk](https://github.com/iadvize/iadvize-ios-sdk) | [https://github.com/iadvize/iadvize-ios-sdk/releases/latest](https://github.com/iadvize/iadvize-ios-sdk/releases/latest) | [https://iadvize.github.io/iadvize-ios-sdk](https://iadvize.github.io/iadvize-ios-sdk) |
 
+### 🔐 Ensuring the SDK integrity <span hidden>ios</span>
+
+Before downloading the iAdvize Messenger SDK artifacts you can verify their integrity by generating their checksums and comparing them with the reference checksums available:
+
+- in the [GitHub release note](https://github.com/iadvize/iadvize-ios-sdk/releases/latest)
+- in the [dedicated spreadsheet](https://docs.google.com/spreadsheets/d/11A5RScYGCg17rFXp-RaMyVIUqsd3WacXiTjxk3GNZyk)
+
+The iOS SDK consists of an archive (`zip` file) and a Cocoapods project description file (`podspec` file). You can generate their checksums using the following commands (replace `x.y.z` by the SDK version you are checking):
+
+<pre class="prettyprint">
+curl -sL https://github.com/iadvize/iadvize-ios-sdk/releases/download/x.y.z/IAdvizeSDK.zip | openssl sha3-256
+
+curl -sL https://raw.githubusercontent.com/CocoaPods/Specs/master/Specs/d/0/0/iAdvize/x.y.z/iAdvize.podspec.json | openssl sha3-256
+</pre>
+
+After downloading the SDK through CocoaPods, additional verifications can be made, first by comparing the podspec checksum at the end of the generated `Podfile.lock` with the SHA1 podspec reference checksum.
+
+<pre class="prettyprint">
+SPEC CHECKSUMS:
+  iAdvize: podspec-sha1-checksum
+</pre>
+
+The downloaded framework integrity can also be checked by generating the local pod files checksums and comparing them with the online reference ones:
+
+<pre class="prettyprint">
+cd Pods/iAdvize
+find IAdvizeConversationSDK.xcframework -type f -exec openssl sha3-256 {} \; >> IAdvizeSDK-local.checksums
+</pre>
+
 ### ⚙️ Setting up the SDK <span hidden>ios</span>
 
 #### 1️⃣ Adding the SDK dependency <span hidden>ios</span>
@@ -1210,6 +1279,15 @@ The iAdvize Messenger SDK Plugin for ReactNative is available on `NPM`:
 | Demo project | Latest release |
 | --- | --- |
 | [https://github.com/iadvize/iadvize-react-native-sdk](https://github.com/iadvize/iadvize-react-native-sdk) | [NPM](https://www.npmjs.com/package/@iadvize-oss/iadvize-react-native-sdk?activeTab=versions) |
+
+### 🔐 Ensuring the SDK integrity <span hidden>reactnative</span>
+
+Our ReactNative SDK plugin is hosted on an external platform called Node Package Manager (NPM) that already have internal checksum validation strategies in order to ensure that the downloaded plugin code (the wrapper code) is untampered.
+
+In order to check the integrity of the mobile native package that is used by the ReactNative plugin, you can refer to the appropriate sections:
+
+- [Android](#🔐-ensuring-the-sdk-integrity-android)
+- [iOS](#🔐-ensuring-the-sdk-integrity-ios)
 
 ### ⚙️ Setting up the SDK <span hidden>reactnative</span>
 
@@ -1832,6 +1910,15 @@ The iAdvize Messenger SDK Plugin for Flutter is available on `pub.dev`:
 | Demo project | Latest release |
 | --- | --- |
 | [https://github.com/iadvize/iadvize-flutter-sdk](https://github.com/iadvize/iadvize-flutter-sdk) | [Pub.dev](https://pub.dev/packages/iadvize_flutter_sdk/versions) |
+
+### 🔐 Ensuring the SDK integrity <span hidden>flutter</span>
+
+Our Flutter SDK plugin is hosted on an external platform called pub.dev, that already have internal checksum validation strategies in order to ensure that the downloaded plugin code (the wrapper code) is untampered.
+
+In order to check the integrity of the mobile native package that is used by the Flutter plugin, you can refer to the appropriate sections:
+
+- [Android](#🔐-ensuring-the-sdk-integrity-android)
+- [iOS](#🔐-ensuring-the-sdk-integrity-ios)
 
 ### ⚙️ Setting up the SDK <span hidden>flutter</span>
 
