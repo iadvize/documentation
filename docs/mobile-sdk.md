@@ -1609,7 +1609,7 @@ configuration.automaticMessage = NSLocalizedString(
   comment: ""
 )
 configuration.gdprMessage = "Your own GDPR message."
-IAdvizeSDK.shared.chatboxController.setupChatbox(configuration: configuration)
+IAdvizeSDK.setChatboxConfiguration(configuration: configuration)
 </pre>
 
 ### 🎨 Branding the Chatbox <span hidden>reactnative</span>
@@ -1629,7 +1629,7 @@ You can setup a main color on the SDK which will be applied to:
 <pre class="prettyprint">
 var configuration = ChatboxConfiguration()
 configuration.mainColor = .red
-IAdvizeSDK.shared.chatboxController.setupChatbox(configuration: configuration)
+IAdvizeSDK.setChatboxConfiguration(configuration: configuration)
 </pre>
 
 #### 2️⃣ Styling the navigation bar <span hidden>reactnative</span>
