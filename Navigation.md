@@ -164,6 +164,7 @@
     * [Setting up your iAdvize environment](/documentation/mobile-sdk#💬-setting-up-your-iadvize-environment)
     * [Connecting to your iAdvize Operator Desk](/documentation/mobile-sdk#💻-connecting-to-your-iadvize-operator-desk)
     * [Finding the SDK for your mobile platform](/documentation/mobile-sdk#⚛️-finding-the-sdk-for-your-mobile-platform)
+    * [Support policy](/documentation/mobile-sdk#🤝-support-policy)
   * [Android](/documentation/mobile-sdk#android-integration-guide)
     * [Ensuring the SDK integrity](/documentation/mobile-sdk#🔐-ensuring-the-sdk-integrity-android)
     * [Setting up the SDK](/documentation/mobile-sdk#⚙️-setting-up-the-sdk-android)

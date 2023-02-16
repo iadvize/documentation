@@ -36,6 +36,37 @@ The iAdvize Messenger SDK is available through its dedicated demo project on Git
 | ReactNative | [NPM](https://www.npmjs.com/package/@iadvize-oss/iadvize-react-native-sdk?activeTab=versions) | [GitHub](https://github.com/iadvize/iadvize-react-native-sdk) | | [Integration guide](#reactnative-integration-guide) |
 | Flutter | [Pub.dev](https://pub.dev/packages/iadvize_flutter_sdk/versions) | [GitHub](https://github.com/iadvize/iadvize-flutter-sdk) | | [Integration guide](#flutter-integration-guide) |
 
+### 🤝 Support Policy
+
+#### Versionning strategy
+
+The iAdvize Messenger SDK follows [Semantic Versionning](https://semver.org/), that means that given a `x.y.z` version number:
+
+- releasing critical bug fixes will change the `z` number: `3.4.5` -> `3.4.6` (PATCH release)
+- releasing non-critical bug fixes or backward-compatible new features will change the `y` number: `3.4.5` -> `3.5.0` (MINOR release)
+- releasing anything breaking the SDK API will change the `x` number: `3.4.5` -> `4.0.0` (MAJOR release)
+
+#### Release lifecycle
+
+When a new MAJOR version is released, the previous MAJOR version enters a **grace period of 24 months**, at the end of which it reaches its **end-of-life**. After that moment, no support is provided on this version.
+
+#### Supported versions
+
+iAdvize Messenger SDK **latest MAJOR.MINOR** version is **fully supported**. It will receive bug-fixes and new features on a regular basis.
+The **latest MINOR version of the previous MAJOR still in their grace period**, as well as the **3 latest MINOR releases of the current MAJOR** are **partially supported**, they will only receive security bug fixes updates (PATCH releases), even though an update to the most recent MAJOR.MINOR release is advized.
+
+As an illustration, if the current release is `4.5.6`:
+
+- `4.5.z` is fully supported as it is the latest MAJOR.MINOR version
+- `4.4.z`, `4.3.z` & `4.2.z` are partially supported as the 3 latest MINOR releases of the current MAJOR
+- `4.1.z` & `4.0.z` are unsupported
+- `3.y.z`, `2.y.z` & `1.y.z` latest MINOR version for each are partially supported for a grace period of 24 months after the release of the corresponding following MAJOR (`4.0.0` for `3.y.z`, `3.0.0` for `2.y.z`, `2.0.0` for `1.y.z`)
+- other `3.y.z`, `2.y.z` & `1.y.z` MINOR versions are unsupported
+
+#### Hybrid plugins
+
+Please be aware that this only applies to the **native** iAdvize Messenger SDK (Android & iOS). Even though the hybrid plugin wrappers may have a semantic versionning that differs from the native SDK, their support is dependent of the native SDK version they embed.
+
 ## Android integration guide
 
 The iAdvize Messenger SDK for Android is available through its dedicated demo project on `Github`:
