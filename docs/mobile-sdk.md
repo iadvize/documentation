@@ -253,7 +253,7 @@ To be able to start a conversation you will first have to **trigger a targeting 
 #### 1️⃣ Configuring the targeting language <span hidden>android</span>
 
 The targeting rule configured in the iAdvize Administration Panel is setup for a given language.
-This means that if, for example, you setup a targeting rule to be triggered only for `EN` users and your current user’s device is in `FR`, the targeting rule will not trigger.
+This means that if, for example, you setup a targeting rule to be triggered only for `EN` language and the current user’s device is setup with a different targeting language (for instance `FR`), the targeting rule will not trigger.
 
 By default, the targeting rule language used is the user’s device current language. You can force the targeting language to a specific value using:
 
@@ -867,7 +867,7 @@ To be able to start a conversation you will first have to **trigger a targeting 
 #### 1️⃣ Configuring the targeting language <span hidden>ios</span>
 
 The targeting rule configured in the iAdvize Administration Panel is setup for a given language.
-This means that if, for example, you setup a targeting rule to be triggered only for `EN` users and your current user’s device is in `FR`, the targeting rule will not trigger.
+This means that if, for example, you setup a targeting rule to be triggered only for `EN` language and the current user’s device is setup with a different targeting language (for instance `FR`), the targeting rule will not trigger.
 
 By default, the targeting rule language used is the user’s device current language. You can force the targeting language to a specific value using:
 
@@ -1502,7 +1502,7 @@ To be able to start a conversation you will first have to **trigger a targeting 
 #### 1️⃣ Configuring the targeting language <span hidden>reactnative</span>
 
 The targeting rule configured in the iAdvize Administration Panel is setup for a given language.
-This means that if, for example, you setup a targeting rule to be triggered only for `EN` users and your current user’s device is in `FR`, the targeting rule will not trigger.
+This means that if, for example, you setup a targeting rule to be triggered only for `EN` language and the current user’s device is setup with a different targeting language (for instance `FR`), the targeting rule will not trigger.
 
 By default, the targeting rule language used is the user’s device current language. You can force the targeting language to a specific value using:
 
@@ -2095,7 +2095,7 @@ To be able to start a conversation you will first have to **trigger a targeting 
 #### 1️⃣ Configuring the targeting language <span hidden>flutter</span>
 
 The targeting rule configured in the iAdvize Administration Panel is setup for a given language.
-This means that if, for example, you setup a targeting rule to be triggered only for `EN` users and your current user’s device is in `FR`, the targeting rule will not trigger.
+This means that if, for example, you setup a targeting rule to be triggered only for `EN` language and the current user’s device is setup with a different targeting language (for instance `FR`), the targeting rule will not trigger.
 
 By default, the targeting rule language used is the user’s device current language. You can force the targeting language to a specific value using:
 
