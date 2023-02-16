@@ -139,9 +139,9 @@ After syncing your project you should be able to import the iAdvize dependency i
 
 ⌨️ **In-context example:**
 
-- [Project-level Gradle file](https://github.com/iadvize/iadvize-android-sdk/blob/master/build.gradle.kts)
-- [Module-level Gradle file](https://github.com/iadvize/iadvize-android-sdk/blob/master/mobile/build.gradle.kts)
-- [Import](https://github.com/iadvize/iadvize-android-sdk/blob/master/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/App.kt#L5)
+- [Project-level Gradle file](https://github.com/iadvize/iadvize-android-sdk/blob/master/example/build.gradle.kts)
+- [Module-level Gradle file](https://github.com/iadvize/iadvize-android-sdk/blob/master/example/mobile/build.gradle.kts)
+- [Import](https://github.com/iadvize/iadvize-android-sdk/blob/master/example/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/App.kt#L5)
 
 > *⚠️ From the version 2.5 and onward, the SDK supports video conversations using a third party native (C++) binaries. If you are delivering your app using an APK you will note a size increase as the default behavior of the build system is to include the binaries for each ABI in a single APK. We strongly recommended that you take advantage of either [App Bundles](https://developer.android.com/guide/app-bundle) or [APK Splits](https://developer.android.com/studio/build/configure-apk-splits) to reduce the size of your APKs while still maintaining maximum device compatibility.*
 
@@ -190,8 +190,8 @@ IAdvizeSDK.activate(
 
 ⌨️ **In-context example:**
 
-- [SDK Initiation](https://github.com/iadvize/iadvize-android-sdk/blob/master/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/App.kt#L15)
-- [SDK Activation](https://github.com/iadvize/iadvize-android-sdk/blob/master/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/App.kt#L32)
+- [SDK Initiation](https://github.com/iadvize/iadvize-android-sdk/blob/master/example/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/App.kt#L15)
+- [SDK Activation](https://github.com/iadvize/iadvize-android-sdk/blob/master/example/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/App.kt#L32)
 
 ##### Authentication modes <span hidden>android</span>
 
@@ -311,7 +311,7 @@ IAdvizeSDK.targetingController.registerUserNavigation(navOption)
 
 > *⚠️ Please note that calling `registerUserNavigation` with `NavigationOption.ClearActiveRule` will stop the engagement process, and calling it with other options will start it if it is stopped. Thus you may never use `activateTargetingRule` in your app and only rely on `registerUserNavigation` for your engagement process management.*
 
-⌨️ **In-context example:** [Registering User Navigation](https://github.com/iadvize/iadvize-android-sdk/blob/master/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/product/ProductDetailFragment.kt#L42)
+⌨️ **In-context example:** [Registering User Navigation](https://github.com/iadvize/iadvize-android-sdk/blob/master/example/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/product/ProductDetailFragment.kt#L42)
 
 ### 👋 Configuring GDPR and welcome message <span hidden>android</span>
 
@@ -325,7 +325,7 @@ configuration.automaticMessage = "Any question? Say Hello to Smart and we will a
 IAdvizeSDK.chatboxController.setupChatbox(configuration)
 </pre>
 
-⌨️ **In-context example:** [Welcome message](https://github.com/iadvize/iadvize-android-sdk/blob/master/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/IAdvizeSDKConfig.kt#L58)
+⌨️ **In-context example:** [Welcome message](https://github.com/iadvize/iadvize-android-sdk/blob/master/example/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/IAdvizeSDKConfig.kt#L66)
 
 When no conversation is ongoing, the welcome message is displayed to the visitor:
 
@@ -372,8 +372,8 @@ IAdvizeSDK.chatboxController.setupChatbox(configuration)
 
 ⌨️ **In-context example:**
 
-- [GDPR Option](https://github.com/iadvize/iadvize-android-sdk/blob/master/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/IAdvizeSDKConfig.kt#L38)
-- [GDPR Message](https://github.com/iadvize/iadvize-android-sdk/blob/master/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/IAdvizeSDKConfig.kt#L60)
+- [GDPR Option](https://github.com/iadvize/iadvize-android-sdk/blob/master/example/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/IAdvizeSDKConfig.kt#L48)
+- [GDPR Message](https://github.com/iadvize/iadvize-android-sdk/blob/master/example/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/IAdvizeSDKConfig.kt#L69)
 
 ### 🎨 Branding the Chatbox <span hidden>android</span>
 
@@ -464,7 +464,7 @@ val option = DefaultFloatingButtonOption.Enabled(configuration)
 IAdvizeSDK.defaultFloatingButtonController.setupDefaultFloatingButton(option)
 </pre>
 
-⌨️ **In-context example:** [Default Floating Button Configuration](https://github.com/iadvize/iadvize-android-sdk/blob/master/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/IAdvizeSDKConfig.kt#L43)
+⌨️ **In-context example:** [Default Floating Button Configuration](https://github.com/iadvize/iadvize-android-sdk/blob/master/example/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/IAdvizeSDKConfig.kt#L52)
 
 ### ✨ Using a custom chat button <span hidden>android</span>
 
@@ -557,7 +557,7 @@ class NotificationService : FirebaseMessagingService() {
 }
 </pre>
 
-⌨️ **In-context example:** [Device token register](https://github.com/iadvize/iadvize-android-sdk/blob/master/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/notifications/NotificationService.kt#L55)
+⌨️ **In-context example:** [Device token register](https://github.com/iadvize/iadvize-android-sdk/blob/master/example/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/notifications/NotificationService.kt#L55)
 
 #### 2️⃣ Enabling/disabling push notifications <span hidden>android</span>
 
@@ -618,7 +618,7 @@ override fun onMessageReceived(remoteMessage: RemoteMessage) {
 }
 </pre>
 
-⌨️ **In-context example:** [Handling received notification](https://github.com/iadvize/iadvize-android-sdk/blob/master/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/notifications/NotificationService.kt#L68)
+⌨️ **In-context example:** [Handling received notification](https://github.com/iadvize/iadvize-android-sdk/blob/master/example/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/notifications/NotificationService.kt#L64)
 
 ### 📈 Adding value to the conversation <span hidden>android</span>
 
@@ -749,7 +749,7 @@ You should then be able to import the iAdvize dependency in your application cod
 
 ⌨️ **In-context example:**
 
-- [Import](https://github.com/iadvize/iadvize-ios-sdk/blob/master/Example/IAdvizeSwiftExample/IAdvizeSwiftExample/Source/AppDelegate%2BiAdvize.swift#L10)
+- [Import](https://github.com/iadvize/iadvize-ios-sdk/blob/master/example/SPMIntegration/SPMIntegration/Source/AppDelegate%2BiAdvize.swift#L10)
 
 > *⚠️ From the version 2.5.0 and onward, the SDK supports video conversations. Thus it will request camera and microphone access before entering a video call. To avoid the app to crash, you have to setup two keys in your app Info.plist:*
 
@@ -807,8 +807,8 @@ After running `pod install` you should be able to import the iAdvize dependency 
 
 ⌨️ **In-context example:**
 
-- [Podfile](https://github.com/iadvize/iadvize-ios-sdk/blob/master/Example/IAdvizeSwiftExample/Podfile#L1)
-- [Import](https://github.com/iadvize/iadvize-ios-sdk/blob/master/Example/IAdvizeSwiftExample/IAdvizeSwiftExample/Source/AppDelegate%2BiAdvize.swift#L10)
+- [Podfile](https://github.com/iadvize/iadvize-ios-sdk/blob/master/example/CocoaPodsIntegration/Podfile#L1)
+- [Import](https://github.com/iadvize/iadvize-ios-sdk/blob/master/example/CocoaPodsIntegration/CocoaPodsIntegration/Source/AppDelegate%2BiAdvize.swift#L10)
 
 > *⚠️ From the version 2.5.0 and onward, the SDK supports video conversations. Thus it will request camera and microphone access before entering a video call. To avoid the app to crash, you have to setup two keys in your app Info.plist:*
 
@@ -833,7 +833,7 @@ IAdvizeSDK.shared.activate(projectId: 0000,
 }
 </pre>
  
-⌨️ **In-context example:** [SDK Activation](https://github.com/iadvize/iadvize-ios-sdk/blob/master/Example/IAdvizeSwiftExample/IAdvizeSwiftExample/Source/AppDelegate%2BiAdvize.swift#L61)
+⌨️ **In-context example:** [SDK Activation](https://github.com/iadvize/iadvize-ios-sdk/blob/master/example/SPMIntegration/SPMIntegration/Source/AppDelegate%2BiAdvize.swift#L61)
 
 ##### Authentication modes <span hidden>ios</span>
 
@@ -929,7 +929,7 @@ If all the following conditions are met, the default chat button should appear:
 
 > *⚠️ After you activate a rule and it succeeds (by displaying the button), those conditions are checked every 30 seconds to verify that the button should still be displayed or not. Upon the first encountered failure from this periodic check, the button is hidden and the SDK stops verifying the conditions. It means that if the rule cannot be triggered (after the first call, or after any successive check), you will have to call the `activateTargetingRule` (or `registerUserNavigation`) method again in order to restart the engagement process.*
 
-⌨️ **In-context example:** [Targeting rule activation](https://github.com/iadvize/iadvize-ios-sdk/blob/master/Example/IAdvizeSwiftExample/IAdvizeSwiftExample/Source/AppDelegate%2BiAdvize.swift#L69)
+⌨️ **In-context example:** [Targeting rule activation](https://github.com/iadvize/iadvize-ios-sdk/blob/master/example/SPMIntegration/SPMIntegration/Source/AppDelegate%2BiAdvize.swift#L69)
 
 #### 3️⃣ Initiating the conversation <span hidden>ios</span>
 
@@ -973,7 +973,7 @@ configuration.automaticMessage = NSLocalizedString(
 IAdvizeSDK.shared.chatboxController.setupChatbox(configuration: configuration)
 </pre>
 
-⌨️ **In-context example:** [Welcome message](https://github.com/iadvize/iadvize-ios-sdk/blob/master/Example/IAdvizeSwiftExample/IAdvizeSwiftExample/Source/AppDelegate%2BiAdvize.swift#L43)
+⌨️ **In-context example:** [Welcome message](https://github.com/iadvize/iadvize-ios-sdk/blob/master/example/SPMIntegration/SPMIntegration/Source/AppDelegate%2BiAdvize.swift#L43)
 
 When no conversation is ongoing, the welcome message is displayed to the visitor:
 
@@ -1027,8 +1027,8 @@ IAdvizeSDK.shared.chatboxController.setupChatbox(configuration: configuration)
 
 ⌨️ **In-context example:**
 
-- [GDPR Option](https://github.com/iadvize/iadvize-ios-sdk/blob/94fa7ddedbdefb5c7f928c991a1e01baa64b04b4/Example/IAdvizeSwiftExample/IAdvizeSwiftExample/Source/AppDelegate%2BiAdvize.swift#L75)
-- [GDPR Message](https://github.com/iadvize/iadvize-ios-sdk/blob/master/Example/IAdvizeSwiftExample/IAdvizeSwiftExample/Source/AppDelegate%2BiAdvize.swift#L44)
+- [GDPR Option](https://github.com/iadvize/iadvize-ios-sdk/blob/master/example/SPMIntegration/SPMIntegration/Source/AppDelegate%2BiAdvize.swift#L75)
+- [GDPR Message](https://github.com/iadvize/iadvize-ios-sdk/blob/master/example/SPMIntegration/SPMIntegration/Source/AppDelegate%2BiAdvize.swift#L44)
 
 ### 🎨 Branding the Chatbox <span hidden>ios</span>
 
@@ -1210,7 +1210,7 @@ For the SDK to be able to send notifications to the visitor’s device, its uniq
 IAdvizeSDK.shared.notificationController.registerPushToken("the_device_push_token", applicationMode: .prod)
 </pre>
 
-⌨️ **In-context example:** [Device token register](https://github.com/iadvize/iadvize-ios-sdk/blob/master/Example/IAdvizeSwiftExample/IAdvizeSwiftExample/Source/AppDelegate%2BPushNotification.swift#L27)
+⌨️ **In-context example:** [Device token register](https://github.com/iadvize/iadvize-ios-sdk/blob/master/example/SPMIntegration/SPMIntegration/Source/AppDelegate%2BPushNotification.swift#L27)
 
 #### 2️⃣ Enabling/disabling push notifications <span hidden>ios</span>
 
