@@ -701,6 +701,18 @@ Before downloading the iAdvize Messenger SDK artifacts you can verify their inte
 - in the [GitHub release note](https://github.com/iadvize/iadvize-ios-sdk/releases/latest)
 - in the [dedicated spreadsheet](https://docs.google.com/spreadsheets/d/11A5RScYGCg17rFXp-RaMyVIUqsd3WacXiTjxk3GNZyk)
 
+##### Swift Package Manager integration
+
+The iOS SDK only consists of an archive (`zip` file). You can generate its checksums using the following command (replace `x.y.z` by the SDK version you are checking):
+
+<pre class="prettyprint">
+curl -sL https://github.com/iadvize/iadvize-ios-sdk/releases/download/x.y.z/IAdvizeSDK.zip | openssl sha3-256
+</pre>
+
+SPM will also automatically verify that the checksum of the artifact it downloads correspond to the one described in the `Package.swift` available in the public repository (it's a SHA2-256 checksum).
+
+##### CocoaPods integration
+
 The iOS SDK consists of an archive (`zip` file) and a Cocoapods project description file (`podspec` file). You can generate their checksums using the following commands (replace `x.y.z` by the SDK version you are checking):
 
 <pre class="prettyprint">
@@ -727,7 +739,30 @@ find IAdvizeConversationSDK.xcframework -type f -exec openssl sha3-256 {} \; >> 
 
 #### 1️⃣ Adding the SDK dependency <span hidden>ios</span>
 
-To integrate the iAdvize Messenger SDK, you will have to use **CocoaPods**. Add this line to your Podfile, inside the `target` section (replace `x.y.z` by the latest SDK version available):
+##### Swift Package Manager integration
+
+To integrate the iAdvize Messenger SDK for iOS, you can use **Swift Package Manager**.
+From Xcode go to `File > Add Packages`, then paste the iAdvize Messenger SDK URL [https://github.com/iadvize/iadvize-ios-sdk](https://github.com/iadvize/iadvize-ios-sdk) in the top-right search bar.
+Select the versionning strategy fitting your app then click on `Add Package`.
+
+You should then be able to import the iAdvize dependency in your application code using `import IAdvizeConversationSDK`
+
+⌨️ **In-context example:**
+
+- [Import](https://github.com/iadvize/iadvize-ios-sdk/blob/master/Example/IAdvizeSwiftExample/IAdvizeSwiftExample/Source/AppDelegate%2BiAdvize.swift#L10)
+
+> *⚠️ From the version 2.5.0 and onward, the SDK supports video conversations. Thus it will request camera and microphone access before entering a video call. To avoid the app to crash, you have to setup two keys in your app Info.plist:*
+
+<pre class="prettyprint">
+&lt;key&gt;NSCameraUsageDescription&lt;/key&gt;
+&lt;string&gt;This application will use the camera to share photos and during video calls.&lt;/string&gt;
+&lt;key&gt;NSMicrophoneUsageDescription&lt;/key&gt;
+&lt;string&gt;This application will use the microphone during video calls.&lt;/string&gt;
+</pre>
+
+##### CocoaPods integration
+
+If you rely on **CocoaPods**, add this line to your `Podfile`, inside the `target` section (replace `x.y.z` by the latest SDK version available, and choose the versionning strategy fitting your app):
 
 <pre class="prettyprint">
 pod 'iAdvize', 'x.y.z'
@@ -735,7 +770,7 @@ pod 'iAdvize', 'x.y.z'
 
 > *⚠️  The SDK is distributed as an XCFramework, therefore **you are required to use CocoaPods 1.9.0 or newer** and the `use_frameworks!` directive.*
 
-Add the following to the bottom of your Podfile:
+Add the following to the bottom of your `Podfile`:
 
 <pre class="prettyprint">
 post_install do |installer|
@@ -749,7 +784,7 @@ end
 
 > *⚠️ This `post_install` hook is required because the iAdvize Messenger SDK supports [module stability](https://swift.org/blog/abi-stability-and-more/). Therefore, all its dependencies must be built using the `Build Libraries for Distribution` option.*
 
-Your Podfile should look like:
+Your `Podfile` should look like:
 
 <pre class="prettyprint">
 platform :ios, '12.0'
@@ -768,7 +803,7 @@ post_install do |installer|
 end
 </pre>
 
-After running `pod install` you should be able to mport the iAdvize dependency in your application code with `import iAdvizeConversationSDK`
+After running `pod install` you should be able to import the iAdvize dependency in your application code with `import IAdvizeConversationSDK`
 
 ⌨️ **In-context example:**
 
@@ -1284,7 +1319,7 @@ The iAdvize Messenger SDK Plugin for ReactNative is available on `NPM`:
 
 ### 🔐 Ensuring the SDK integrity <span hidden>reactnative</span>
 
-Our ReactNative SDK plugin is hosted on an external platform called Node Package Manager (NPM) that already have internal checksum validation strategies in order to ensure that the downloaded plugin code (the wrapper code) is untampered.
+Our ReactNative SDK plugin is hosted on an external platform called Node Package Manager (NPM) that already has internal checksum validation strategies in order to ensure that the downloaded plugin code (the wrapper code) is untampered.
 
 In order to check the integrity of the mobile native package that is used by the ReactNative plugin, you can refer to the appropriate sections:
 
@@ -1906,7 +1941,7 @@ The iAdvize Messenger SDK Plugin for Flutter is available on `pub.dev`:
 
 ### 🔐 Ensuring the SDK integrity <span hidden>flutter</span>
 
-Our Flutter SDK plugin is hosted on an external platform called pub.dev, that already have internal checksum validation strategies in order to ensure that the downloaded plugin code (the wrapper code) is untampered.
+Our Flutter SDK plugin is hosted on an external platform called pub.dev, that already has internal checksum validation strategies in order to ensure that the downloaded plugin code (the wrapper code) is untampered.
 
 In order to check the integrity of the mobile native package that is used by the Flutter plugin, you can refer to the appropriate sections:
 
