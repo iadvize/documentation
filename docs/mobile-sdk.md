@@ -1041,6 +1041,8 @@ configuration.font = UIFont(name: "AmericanTypewriter-Condensed", size: 11.0)
 IAdvizeSDK.shared.chatboxController.setupChatbox(configuration: configuration)
 </pre>
 
+> *⚠️ Even if the UIFont constructor needs a size attribute, the exact font size and traits are automatically chosen and the font is scaled to the current Dynamic Type setting.*
+
 > *⚠️ The font should either be a system font, or be a font embedded into the app, with a font file inside the bundle and its corresponding declaration into the `Info.plist` file.*
 
 #### 4️⃣ Using a brand avatar <span hidden>ios</span>
@@ -1337,10 +1339,10 @@ allprojects {
 
 > *⚠️ iAdvize Messenger SDK requires a minSdkVersion >= 21.*
 
-On Android, the iAdvize Messenger SDK needs to be initialized before use to allow several functionnalities to work. For instance, the default floating button use an ActivityLifecycleController that must be started before the main ReactNative activity is created, otherwise the controller won't be able to trigger the button display. Thus you need to add those lines in the `android/src/main/java/yourpackage/MainApplication.java` to initialize the SDK properly:
+On Android, the iAdvize Messenger SDK needs to be initialized before use to allow several functionnalities to work. For instance, the default floating button use an ActivityLifecycleController that must be started before the main ReactNative activity is created, otherwise the controller won't be able to trigger the button display. Thus you need to add those lines in the `android/app/src/main/java/yourpackage/MainApplication.java` to initialize the SDK properly:
 
 <pre class="prettyprint">
-// android/src/main/java/yourpackage/MainApplication.java
+// android/app/src/main/java/yourpackage/MainApplication.java
 
 import com.iadvize.conversation.sdk.IAdvizeSDK;
 
@@ -1355,7 +1357,7 @@ public class MainApplication extends Application implements ReactApplication {
 
 ##### iOS Setup
 
-Our iOS SDK is delivered as a binary framework (in an XCFramework bundle), which is a standard way of distributing closed-source binaries. The SDK relies on external dependencies to provide several rich features. These dependencies are not directly integrated into our SDK. They are installed in your app at the same time the SDK is installed (when executing the pod install command). Thus, our SDK and its dependencies must be linked dynamically. For this reason, the `use_frameworks!` option is required in the Podfile, to ensure CocoaPods use dynamic frameworks instead of static libraries. For the same reason, the `use_frameworks! :linkage => :static` will not work.
+Our iOS SDK is delivered as a binary framework (in an XCFramework bundle), which is a standard way of distributing closed-source binaries. The SDK relies on external dependencies to provide several rich features. These dependencies are not directly integrated into our SDK. They are installed in your app at the same time the SDK is installed (when executing the `pod install` command). Thus, our SDK and its dependencies must be linked dynamically. For this reason, the `use_frameworks!` option is required in the Podfile, to ensure CocoaPods use dynamic frameworks instead of static libraries. For the same reason, the `use_frameworks! :linkage => :static` will not work.
 
 The ReactNative applications integrating our SDK through our ReactNative wrapper module should also use this `use_frameworks!` option in the iOS app configuration `Podfile` in order for it to compile and run.
 
@@ -1374,19 +1376,10 @@ use_react_native!(
 )
 </pre>
 
-Add the iOS SDK pod dependency to your `ios/Podfile` file:
+In version 3.0.0 & 3.0.1 you will need to add the iOS SDK pod dependency to your `ios/Podfile` file (this has been fixed afterwards):
 
 <pre class="prettyprint">
 pod 'iadvize-reactnative-sdk', :path => '../node_modules/@iadvize-oss/iadvize-react-native-sdk/ios/'
-</pre>
-
-You will then need to install the pod via the following command:
-
-<pre class="prettyprint">
-cd ios
-pod install
-pod update
-cd -
 </pre>
 
 Add the following to the bottom of your Podfile:
@@ -1406,7 +1399,7 @@ end
 For iOS app make sure to go to `ios` folder and install Cocoapods dependencies:
 
 <pre class="prettyprint">
-cd ios && pod install
+cd ios && pod install --repo-update
 </pre>
 
 > *⚠️ From the version 2.5.0 and onward, the SDK supports video conversations. Thus it will request camera and microphone access before entering a video call. To avoid the app to crash, you have to setup two keys in your app Info.plist:*
@@ -1743,7 +1736,7 @@ The chat button gives access to the Chatbox so it should be visible:
 const updateChatButtonVisibility = async () => {
   const ruleAvailable = IAdvizeSDK.isActiveTargetingRuleAvailable()
   const hasOngoingConv = IAdvizeSDK.ongoingConversationId().trim().length !== 0
-  const chatboxOpened = IAdvizeSDK.chatboxController.isChatboxPresented()
+  const chatboxOpened = IAdvizeSDK.isChatboxPresented()
 
   if (!chatboxOpened && (hasOngoingConv || ruleAvailable)) {
     showChatButton()
