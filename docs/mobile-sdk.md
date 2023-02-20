@@ -65,7 +65,7 @@ As an illustration, if the current release is `4.5.6`:
 
 #### Hybrid plugins
 
-Please be aware that this only applies to the **native** iAdvize Messenger SDK (Android & iOS). Even though the hybrid plugin wrappers may have a semantic versionning that differs from the native SDK, their support is dependent of the native SDK version they embed.
+Please be aware that this only applies to the **native** iAdvize Messenger SDK (Android & iOS). Even though the hybrid plugin wrappers may have a semantic versionning that differs from the native SDK, their support is dependent on the native SDK version they embed.
 
 ## Android integration guide
 
