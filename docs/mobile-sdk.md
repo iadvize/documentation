@@ -62,7 +62,7 @@ The **latest release** (most recent MAJOR.MINOR) is the only version that is **f
 
 In addition, several versions benefit from a **partial support**:
 - the last 3 MINOR of the current MAJOR
-- the last MINOR of privous MAJOR still in grace-period
+- the last MINOR of previous MAJOR still in grace-period
 
 As an illustration, if the current release is `4.5.6`:
 
