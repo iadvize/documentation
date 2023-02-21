@@ -793,7 +793,7 @@ You should then be able to import the iAdvize dependency in your application cod
 
 ##### CocoaPods integration
 
-If you rely on **CocoaPods**, add this line to your `Podfile`, inside the `target` section (replace `x.y.z` by the latest SDK version available, and choose the versionning strategy fitting your app):
+If you rely on **CocoaPods**, add this line to your `Podfile`, inside the `target` section (replace `x.y.z` by the latest SDK version available, and choose the versioning strategy fitting your app):
 
 <pre class="prettyprint">
 pod 'iAdvize', 'x.y.z'
