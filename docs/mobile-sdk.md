@@ -53,7 +53,7 @@ When a new MAJOR version is released, the previous MAJOR version enters a **grac
 #### Supported versions
 
 iAdvize Messenger SDK **latest MAJOR.MINOR** version is **fully supported**. It will receive bug-fixes and new features on a regular basis.
-The **latest MINOR version of the previous MAJOR still in their grace period**, as well as the **3 latest MINOR releases of the current MAJOR** are **partially supported**, they will only receive security bug fixes updates (PATCH releases), even though an update to the most recent MAJOR.MINOR release is advized.
+The **latest MINOR version of the previous MAJOR still in their grace period**, as well as the **3 latest MINOR releases of the current MAJOR** are **partially supported**, they will only receive security bug fixes updates (PATCH releases), even though an update to the most recent MAJOR.MINOR release is advised.
 
 As an illustration, if the current release is `4.5.6`:
 
