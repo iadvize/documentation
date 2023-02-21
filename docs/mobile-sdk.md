@@ -46,26 +46,42 @@ The iAdvize Messenger SDK follows [Semantic Versionning](https://semver.org/), t
 - releasing non-critical bug fixes or backward-compatible new features will change the `y` number: `3.4.5` -> `3.5.0` (MINOR release)
 - releasing anything breaking the SDK API will change the `x` number: `3.4.5` -> `4.0.0` (MAJOR release)
 
-#### Release lifecycle
+#### Support status
+
+iAdvize Messenger SDK support comes in several distinct status:
+
+- **Full support**: the SDK will receive bug-fixes and new features on a regular basis. MAJOR, MINOR and PATCH versions can be released upon it.
+- **Partial support**: the SDK will receive security bug-fixes. Upon this version, only PATCH releases will be made, no MAJOR or MINOR. Update to the latest SDK is advized.
+- **No support**: this SDK version is not supported anymore, update to the latest SDK is mandatory and unstable behaviours may occur during the use.
+
+#### Release support lifecycle
 
 When a new MAJOR version is released, the previous MAJOR version enters a **grace period of 24 months**, at the end of which it reaches its **end-of-life**. After that moment, no support is provided on this version.
 
-#### Supported versions
+The **latest release** (most recent MAJOR.MINOR) is the only version that is **fully supported** by iAdvize.
 
-iAdvize Messenger SDK **latest MAJOR.MINOR** version is **fully supported**. It will receive bug-fixes and new features on a regular basis.
-The **latest MINOR version of the previous MAJOR still in their grace period**, as well as the **3 latest MINOR releases of the current MAJOR** are **partially supported**, they will only receive security bug fixes updates (PATCH releases), even though an update to the most recent MAJOR.MINOR release is advised.
+In addition, several versions benefit from a **partial support**:
+- the last 3 MINOR of the current MAJOR
+- the last MINOR of privous MAJOR still in grace-period
 
 As an illustration, if the current release is `4.5.6`:
 
-- `4.5.z` is fully supported as it is the latest MAJOR.MINOR version
-- `4.4.z`, `4.3.z` & `4.2.z` are partially supported as the 3 latest MINOR releases of the current MAJOR
-- `4.1.z` & `4.0.z` are unsupported
-- `3.y.z`, `2.y.z` & `1.y.z` latest MINOR version for each are partially supported for a grace period of 24 months after the release of the corresponding following MAJOR (`4.0.0` for `3.y.z`, `3.0.0` for `2.y.z`, `2.0.0` for `1.y.z`)
-- other `3.y.z`, `2.y.z` & `1.y.z` MINOR versions are unsupported
+| Version | Type                            | Status          |
+| ------- | ------------------------------- | --------------- |
+| `4.5.6` | Latest release                  | Full support    |
+| `4.5.z` | Current MAJOR.MINOR             | Full support    |
+| `4.4.z` | Current MAJOR, last 3 MINOR     | Partial support |
+| `4.3.z` | Current MAJOR, last 3 MINOR     | Partial support |
+| `4.2.z` | Current MAJOR, last 3 MINOR     | Partial support |
+| `4.1.z` | Current MAJOR, not last 3 MINOR | No support      |
+| `4.0.z` | Current MAJOR, not last 3 MINOR | No support      |
+| `3.y.z` | Previous MAJOR                  | Partial support for last MINOR (until 24 months after the release of 4.0). No support aftewards or for other versions |
+| `2.y.z` | Previous MAJOR                  | Partial support for last MINOR (until 24 months after the release of 3.0). No support aftewards or for other versions |
+| `1.y.z` | Previous MAJOR                  | Partial support for last MINOR (until 24 months after the release of 2.0). No support aftewards or for other versions |
 
 #### Hybrid plugins
 
-Please be aware that this only applies to the **native** iAdvize Messenger SDK (Android & iOS). Even though the hybrid plugin wrappers may have a semantic versionning that differs from the native SDK, their support is dependent on the native SDK version they embed.
+Please be aware that this only applies to the **native** iAdvize Messenger SDK (Android & iOS). Even though the hybrid plugin wrappers may have a semantic versionning that differs from the native SDK, their support is dependent of the native SDK version they embed.
 
 ## Android integration guide
 
@@ -793,7 +809,7 @@ You should then be able to import the iAdvize dependency in your application cod
 
 ##### CocoaPods integration
 
-If you rely on **CocoaPods**, add this line to your `Podfile`, inside the `target` section (replace `x.y.z` by the latest SDK version available, and choose the versioning strategy fitting your app):
+If you rely on **CocoaPods**, add this line to your `Podfile`, inside the `target` section (replace `x.y.z` by the latest SDK version available, and choose the versionning strategy fitting your app):
 
 <pre class="prettyprint">
 pod 'iAdvize', 'x.y.z'
