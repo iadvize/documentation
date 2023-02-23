@@ -1193,8 +1193,8 @@ extension IntegrationApp: TargetingControllerDelegate {
 }
     
 extension IntegrationApp: ConversationControllerDelegate {
-  func ongoingConversationStatusDidChange(hasOngoingConversation: Bool) {
-    // SDK ongoing conversation status changed to hasOngoingConversation
+  func ongoingConversationUpdated(ongoingConversation: IAdvizeConversationSDK.OngoingConversation?) {
+    // SDK ongoing conversation status changed
     updateChatButtonVisibility()
   }
   func didReceiveNewMessage(content: String) {
