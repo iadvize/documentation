@@ -38,13 +38,13 @@ The iAdvize Messenger SDK is available through its dedicated demo project on Git
 
 ### 🤝 Support Policy
 
-#### Versionning strategy
+#### Versioning strategy
 
-The iAdvize Messenger SDK follows [Semantic Versionning](https://semver.org/), that means that given a `x.y.z` version number:
+The iAdvize Messenger SDK follows [Semantic Versioning](https://semver.org/), that means that given a `x.y.z` version number:
 
 - releasing critical bug fixes will change the `z` number: `3.4.5` -> `3.4.6` (PATCH release)
 - releasing non-critical bug fixes or backward-compatible new features will change the `y` number: `3.4.5` -> `3.5.0` (MINOR release)
-- releasing anything breaking the SDK API will change the `x` number: `3.4.5` -> `4.0.0` (MAJOR release)
+- releasing anything breaking the SDK public API will change the `x` number: `3.4.5` -> `4.0.0` (MAJOR release)
 
 #### Support status
 
@@ -81,7 +81,7 @@ As an illustration, if the current release is `4.5.6`:
 
 #### Hybrid plugins
 
-Please be aware that this only applies to the **native** iAdvize Messenger SDK (Android & iOS). Even though the hybrid plugin wrappers may have a semantic versionning that differs from the native SDK, their support is dependent of the native SDK version they embed.
+Please be aware that this only applies to the **native** iAdvize Messenger SDK (Android & iOS). Even though the hybrid plugin wrappers may have a semantic versioning that differs from the native SDK, their support is dependent of the native SDK version they embed.
 
 ## Android integration guide
 
@@ -790,7 +790,7 @@ find IAdvizeConversationSDK.xcframework -type f -exec openssl sha3-256 {} \; >> 
 
 To integrate the iAdvize Messenger SDK for iOS, you can use **Swift Package Manager**.
 From Xcode go to `File > Add Packages`, then paste the iAdvize Messenger SDK URL [https://github.com/iadvize/iadvize-ios-sdk](https://github.com/iadvize/iadvize-ios-sdk) in the top-right search bar.
-Select the versionning strategy fitting your app then click on `Add Package`.
+Select the versioning strategy fitting your app then click on `Add Package`.
 
 You should then be able to import the iAdvize dependency in your application code using `import IAdvizeConversationSDK`
 
@@ -809,7 +809,7 @@ You should then be able to import the iAdvize dependency in your application cod
 
 ##### CocoaPods integration
 
-If you rely on **CocoaPods**, add this line to your `Podfile`, inside the `target` section (replace `x.y.z` by the latest SDK version available, and choose the versionning strategy fitting your app):
+If you rely on **CocoaPods**, add this line to your `Podfile`, inside the `target` section (replace `x.y.z` by the latest SDK version available, and choose the versioning strategy fitting your app):
 
 <pre class="prettyprint">
 pod 'iAdvize', 'x.y.z'
