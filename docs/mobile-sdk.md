@@ -36,6 +36,53 @@ The iAdvize Messenger SDK is available through its dedicated demo project on Git
 | ReactNative | [NPM](https://www.npmjs.com/package/@iadvize-oss/iadvize-react-native-sdk?activeTab=versions) | [GitHub](https://github.com/iadvize/iadvize-react-native-sdk) | | [Integration guide](#reactnative-integration-guide) |
 | Flutter | [Pub.dev](https://pub.dev/packages/iadvize_flutter_sdk/versions) | [GitHub](https://github.com/iadvize/iadvize-flutter-sdk) | | [Integration guide](#flutter-integration-guide) |
 
+### 🤝 Support Policy
+
+#### Versioning strategy
+
+The iAdvize Messenger SDK follows [Semantic Versioning](https://semver.org/), that means that given a `x.y.z` version number:
+
+- releasing critical bug fixes will change the `z` number: `3.4.5` -> `3.4.6` (PATCH release)
+- releasing non-critical bug fixes or backward-compatible new features will change the `y` number: `3.4.5` -> `3.5.0` (MINOR release)
+- releasing anything breaking the SDK public API will change the `x` number: `3.4.5` -> `4.0.0` (MAJOR release)
+
+#### Support status
+
+iAdvize Messenger SDK support comes in several distinct status:
+
+- **Full support**: the SDK will receive bug-fixes and new features on a regular basis. MAJOR, MINOR and PATCH versions can be released upon it.
+- **Partial support**: the SDK will receive security bug-fixes. Upon this version, only PATCH releases will be made, no MAJOR or MINOR. Update to the latest SDK is advized.
+- **No support**: this SDK version is not supported anymore, update to the latest SDK is mandatory and unstable behaviours may occur during the use.
+
+#### Release support lifecycle
+
+When a new MAJOR version is released, the previous MAJOR version enters a **grace period of 24 months**, at the end of which it reaches its **end-of-life**. After that moment, no support is provided on this version.
+
+The **latest release** (most recent MAJOR.MINOR) is the only version that is **fully supported** by iAdvize.
+
+In addition, several versions benefit from a **partial support**:
+- the last 3 MINOR of the current MAJOR
+- the last MINOR of previous MAJOR still in grace-period
+
+As an illustration, if the current release is `4.5.6`:
+
+| Version | Type                            | Status          |
+| ------- | ------------------------------- | --------------- |
+| `4.5.6` | Latest release                  | Full support    |
+| `4.5.z` | Current MAJOR.MINOR             | Full support    |
+| `4.4.z` | Current MAJOR, last 3 MINOR     | Partial support |
+| `4.3.z` | Current MAJOR, last 3 MINOR     | Partial support |
+| `4.2.z` | Current MAJOR, last 3 MINOR     | Partial support |
+| `4.1.z` | Current MAJOR, not last 3 MINOR | No support      |
+| `4.0.z` | Current MAJOR, not last 3 MINOR | No support      |
+| `3.y.z` | Previous MAJOR                  | Partial support for last MINOR (until 24 months after the release of 4.0). No support aftewards or for other versions |
+| `2.y.z` | Previous MAJOR                  | Partial support for last MINOR (until 24 months after the release of 3.0). No support aftewards or for other versions |
+| `1.y.z` | Previous MAJOR                  | Partial support for last MINOR (until 24 months after the release of 2.0). No support aftewards or for other versions |
+
+#### Hybrid plugins
+
+Please be aware that this only applies to the **native** iAdvize Messenger SDK (Android & iOS). Even though the hybrid plugin wrappers may have a semantic versioning that differs from the native SDK, their support is dependent of the native SDK version they embed.
+
 ## Android integration guide
 
 The iAdvize Messenger SDK for Android is available through its dedicated demo project on `Github`:
@@ -43,6 +90,46 @@ The iAdvize Messenger SDK for Android is available through its dedicated demo pr
 | Demo project | Latest release | API reference |
 | --- | --- | --- |
 | [https://github.com/iadvize/iadvize-android-sdk](https://github.com/iadvize/iadvize-android-sdk) | [https://github.com/iadvize/iadvize-android-sdk/releases/latest](https://github.com/iadvize/iadvize-android-sdk/releases/latest) | [https://iadvize.github.io/iadvize-android-sdk](https://iadvize.github.io/iadvize-android-sdk) |
+
+### 🔐 Ensuring the SDK integrity <span hidden>android</span>
+
+Before downloading the iAdvize Messenger SDK artifacts you can verify their integrity by generating their checksums and comparing them with the reference checksums available:
+
+- in the [GitHub release note](https://github.com/iadvize/iadvize-android-sdk/releases/latest)
+- in the [dedicated spreadsheet](https://docs.google.com/spreadsheets/d/11A5RScYGCg17rFXp-RaMyVIUqsd3WacXiTjxk3GNZyk)
+
+The Android SDK consists of an archive (`aar` file) and a Maven project description (`pom` file), you can generate their checksums using the following commands (replace `x.y.z` by the SDK version you are checking):
+
+<pre class="prettyprint">
+curl -sL https://github.com/iadvize/iadvize-android-sdk/raw/master/com/iadvize/iadvize-sdk/x.y.z/iadvize-sdk-x.y.z.aar | openssl sha256
+
+curl -sL https://github.com/iadvize/iadvize-android-sdk/raw/master/com/iadvize/iadvize-sdk/x.y.z/iadvize-sdk-x.y.z.pom | openssl sha256
+</pre>
+
+This ensures that the online packages are valid. In order to check those checksums on the fly, this process can be automated via Gradle by adding a metadata verification xml file at `$PROJECT_ROOT/gradle/verification-metadata.xml`:
+
+<pre class="prettyprint">
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;verification-metadata ...&gt;
+   &lt;configuration&gt;
+      &lt;verify-metadata&gt;true&lt;/verify-metadata&gt;
+      &lt;verify-signatures&gt;false&lt;/verify-signatures&gt;
+   &lt;/configuration&gt;
+   &lt;components&gt;
+      &lt;component group=&quot;com.iadvize&quot; name=&quot;iadvize-sdk&quot; version=&quot;x.y.z&quot;&gt;
+         &lt;artifact name=&quot;iadvize-sdk-2.8.2.aar&quot;&gt;
+            &lt;sha256 value=&quot;checksum value&quot; origin=&quot;iAdvize website&quot; /&gt;
+         &lt;/artifact&gt;
+         &lt;artifact name=&quot;iadvize-sdk-x.y.z.pom&quot;&gt;
+            &lt;sha256 value=&quot;checksum value &quot;origin=&quot;iAdvize website&quot; /&gt;
+         &lt;/artifact&gt;
+      &lt;/component&gt;
+   &lt;/components&gt;
+&lt;/verification-metadata&gt;
+</pre>
+
+With this file present in your project structure, Gradle will automatically check the artifacts checksums before integrating them into your app. Please note that you will have to do this for **all dependencies** used in your project.
+To help you with that, the `verification-metadata.xml` for the SDK sub-dependencies is delivered alongside the SDK. Those subdependencies checksums have been generated through the Gradle generation feature and not verified.
 
 ### ⚙️ Setting up the SDK <span hidden>android</span>
 
@@ -55,7 +142,8 @@ Add the iAdvize repository to your project repositories inside your top-level Gr
 
 allprojects {
   repositories {
-    maven { url = uri("https://raw.github.com/iadvize/iadvize-android-sdk/master") }
+    maven(url = uri("https://raw.github.com/iadvize/iadvize-android-sdk/master"))
+    maven(url = uri("https://jitpack.io"))
   }
 }
 </pre>
@@ -78,13 +166,29 @@ dependencies {
 
 > *⚠️ The `exclude` configuration is required because the iAdvize Messenger SDK uses [Smack](https://github.com/igniterealtime/Smack), an XMPP library that is built upon `xpp3`, which is bundled by default in the Android framework. This exclude ensures that your app does not also bundle `xpp3` to avoid classes duplication errors.*
 
+In that same file, you also need to ensure that you are using the right Android target to build (iAdvize Messenger SDK is built with Android target 33):
+
+<pre class="prettyprint">
+// Module-level build.gradle.kts
+
+android {
+  buildToolsVersion "33.0.1"
+
+  defaultConfig {
+    minSdk = 21
+    targetSdk = 33
+    compileSdk = 33
+  }
+}
+</pre>
+
 After syncing your project you should be able to import the iAdvize dependency in your application code with `import com.iadvize.conversation.sdk.IAdvizeSDK`
 
 ⌨️ **In-context example:**
 
-- [Project-level Gradle file](https://github.com/iadvize/iadvize-android-sdk/blob/master/build.gradle.kts)
-- [Module-level Gradle file](https://github.com/iadvize/iadvize-android-sdk/blob/master/mobile/build.gradle.kts)
-- [Import](https://github.com/iadvize/iadvize-android-sdk/blob/master/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/App.kt#L5)
+- [Project-level Gradle file](https://github.com/iadvize/iadvize-android-sdk/blob/master/example/build.gradle.kts)
+- [Module-level Gradle file](https://github.com/iadvize/iadvize-android-sdk/blob/master/example/mobile/build.gradle.kts)
+- [Import](https://github.com/iadvize/iadvize-android-sdk/blob/master/example/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/App.kt#L5)
 
 > *⚠️ From the version 2.5 and onward, the SDK supports video conversations using a third party native (C++) binaries. If you are delivering your app using an APK you will note a size increase as the default behavior of the build system is to include the binaries for each ABI in a single APK. We strongly recommended that you take advantage of either [App Bundles](https://developer.android.com/guide/app-bundle) or [APK Splits](https://developer.android.com/studio/build/configure-apk-splits) to reduce the size of your APKs while still maintaining maximum device compatibility.*
 
@@ -133,8 +237,8 @@ IAdvizeSDK.activate(
 
 ⌨️ **In-context example:**
 
-- [SDK Initiation](https://github.com/iadvize/iadvize-android-sdk/blob/master/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/App.kt#L15)
-- [SDK Activation](https://github.com/iadvize/iadvize-android-sdk/blob/master/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/App.kt#L32)
+- [SDK Initiation](https://github.com/iadvize/iadvize-android-sdk/blob/master/example/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/App.kt#L15)
+- [SDK Activation](https://github.com/iadvize/iadvize-android-sdk/blob/master/example/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/App.kt#L32)
 
 ##### Authentication modes <span hidden>android</span>
 
@@ -196,12 +300,12 @@ To be able to start a conversation you will first have to **trigger a targeting 
 #### 1️⃣ Configuring the targeting language <span hidden>android</span>
 
 The targeting rule configured in the iAdvize Administration Panel is setup for a given language.
-This means that if, for example, you setup a targeting rule to be triggered only for `EN` users and your current user’s device is in `FR`, the targeting rule will not trigger.
+This means that if, for example, you setup a targeting rule to be triggered only for `EN` language and the current user’s device is setup with a different targeting language (for instance `FR`), the targeting rule will not trigger.
 
 By default, the targeting rule language used is the user’s device current language. You can force the targeting language to a specific value using:
 
 <pre class="prettyprint">
-IAdvizeSDK.targetingController.language = SDKLanguageOption.Custom(Language.FR)
+IAdvizeSDK.targetingController.language = LanguageOption.Custom(Language.FR)
 </pre>
 
 > *⚠️ This `language` property is __NOT__ intended to change the language displayed in the SDK. It is solely used for the targeting process purpose.*
@@ -254,7 +358,7 @@ IAdvizeSDK.targetingController.registerUserNavigation(navOption)
 
 > *⚠️ Please note that calling `registerUserNavigation` with `NavigationOption.ClearActiveRule` will stop the engagement process, and calling it with other options will start it if it is stopped. Thus you may never use `activateTargetingRule` in your app and only rely on `registerUserNavigation` for your engagement process management.*
 
-⌨️ **In-context example:** [Registering User Navigation](https://github.com/iadvize/iadvize-android-sdk/blob/master/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/product/ProductDetailFragment.kt#L42)
+⌨️ **In-context example:** [Registering User Navigation](https://github.com/iadvize/iadvize-android-sdk/blob/master/example/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/product/ProductDetailFragment.kt#L42)
 
 ### 👋 Configuring GDPR and welcome message <span hidden>android</span>
 
@@ -268,7 +372,7 @@ configuration.automaticMessage = "Any question? Say Hello to Smart and we will a
 IAdvizeSDK.chatboxController.setupChatbox(configuration)
 </pre>
 
-⌨️ **In-context example:** [Welcome message](https://github.com/iadvize/iadvize-android-sdk/blob/master/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/IAdvizeSDKConfig.kt#L58)
+⌨️ **In-context example:** [Welcome message](https://github.com/iadvize/iadvize-android-sdk/blob/master/example/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/IAdvizeSDKConfig.kt#L66)
 
 When no conversation is ongoing, the welcome message is displayed to the visitor:
 
@@ -315,12 +419,14 @@ IAdvizeSDK.chatboxController.setupChatbox(configuration)
 
 ⌨️ **In-context example:**
 
-- [GDPR Option](https://github.com/iadvize/iadvize-android-sdk/blob/master/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/IAdvizeSDKConfig.kt#L38)
-- [GDPR Message](https://github.com/iadvize/iadvize-android-sdk/blob/master/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/IAdvizeSDKConfig.kt#L60)
+- [GDPR Option](https://github.com/iadvize/iadvize-android-sdk/blob/master/example/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/IAdvizeSDKConfig.kt#L48)
+- [GDPR Message](https://github.com/iadvize/iadvize-android-sdk/blob/master/example/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/IAdvizeSDKConfig.kt#L69)
 
 ### 🎨 Branding the Chatbox <span hidden>android</span>
 
 The `ChatboxConfiguration` object that we used in the previous section to customize the welcome and GDPR messages can also be used to change the Chatbox UI to better fit into the look and feel of your application.
+
+> *⚠️ You should setup the configuration before presenting the chatbox. If you call this method while the chatbox is visible, some parameters will only apply for new messages or after closing/reopening the chatbox.*
 
 #### 1️⃣ Changing the Chatbox color <span hidden>android</span>
 
@@ -405,7 +511,7 @@ val option = DefaultFloatingButtonOption.Enabled(configuration)
 IAdvizeSDK.defaultFloatingButtonController.setupDefaultFloatingButton(option)
 </pre>
 
-⌨️ **In-context example:** [Default Floating Button Configuration](https://github.com/iadvize/iadvize-android-sdk/blob/master/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/IAdvizeSDKConfig.kt#L43)
+⌨️ **In-context example:** [Default Floating Button Configuration](https://github.com/iadvize/iadvize-android-sdk/blob/master/example/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/IAdvizeSDKConfig.kt#L52)
 
 ### ✨ Using a custom chat button <span hidden>android</span>
 
@@ -498,7 +604,7 @@ class NotificationService : FirebaseMessagingService() {
 }
 </pre>
 
-⌨️ **In-context example:** [Device token register](https://github.com/iadvize/iadvize-android-sdk/blob/master/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/notifications/NotificationService.kt#L55)
+⌨️ **In-context example:** [Device token register](https://github.com/iadvize/iadvize-android-sdk/blob/master/example/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/notifications/NotificationService.kt#L55)
 
 #### 2️⃣ Enabling/disabling push notifications <span hidden>android</span>
 
@@ -559,7 +665,7 @@ override fun onMessageReceived(remoteMessage: RemoteMessage) {
 }
 </pre>
 
-⌨️ **In-context example:** [Handling received notification](https://github.com/iadvize/iadvize-android-sdk/blob/master/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/notifications/NotificationService.kt#L68)
+⌨️ **In-context example:** [Handling received notification](https://github.com/iadvize/iadvize-android-sdk/blob/master/example/mobile/src/main/java/com/iadvize/conversation/sdk/demo/feature/notifications/NotificationService.kt#L64)
 
 ### 📈 Adding value to the conversation <span hidden>android</span>
 
@@ -625,7 +731,7 @@ ReflectionHelpers.setStaticField(android.os.Build::class.java, "MODEL", "whateve
 ReflectionHelpers.setStaticField(android.os.Build::class.java, "MANUFACTURER", "whatever")
 </pre>
 
-Please also be sure to initalize the SDK during the unit tests setup (see the [Setting up the SDK](#⚙️-setting-up-the-sdk) section above).
+Please also be sure to initalize the SDK during the unit tests setup (see the [Setting up the SDK](#⚙️-setting-up-the-sdk-android) section above).
 
 ## iOS integration guide
 
@@ -635,11 +741,75 @@ The iAdvize Messenger SDK for iOS is available through its dedicated demo projec
 | --- | --- | --- |
 | [https://github.com/iadvize/iadvize-ios-sdk](https://github.com/iadvize/iadvize-ios-sdk) | [https://github.com/iadvize/iadvize-ios-sdk/releases/latest](https://github.com/iadvize/iadvize-ios-sdk/releases/latest) | [https://iadvize.github.io/iadvize-ios-sdk](https://iadvize.github.io/iadvize-ios-sdk) |
 
+### 🔐 Ensuring the SDK integrity <span hidden>ios</span>
+
+Before downloading the iAdvize Messenger SDK artifacts you can verify their integrity by generating their checksums and comparing them with the reference checksums available:
+
+- in the [GitHub release note](https://github.com/iadvize/iadvize-ios-sdk/releases/latest)
+- in the [dedicated spreadsheet](https://docs.google.com/spreadsheets/d/11A5RScYGCg17rFXp-RaMyVIUqsd3WacXiTjxk3GNZyk)
+
+##### Swift Package Manager integration
+
+The iOS SDK only consists of an archive (`zip` file). You can generate its checksums using the following command (replace `x.y.z` by the SDK version you are checking):
+
+<pre class="prettyprint">
+curl -sL https://github.com/iadvize/iadvize-ios-sdk/releases/download/x.y.z/IAdvizeSDK.zip | openssl sha3-256
+</pre>
+
+SPM will also automatically verify that the checksum of the artifact it downloads correspond to the one described in the `Package.swift` available in the public repository (it's a SHA2-256 checksum).
+
+##### CocoaPods integration
+
+The iOS SDK consists of an archive (`zip` file) and a Cocoapods project description file (`podspec` file). You can generate their checksums using the following commands (replace `x.y.z` by the SDK version you are checking):
+
+<pre class="prettyprint">
+curl -sL https://github.com/iadvize/iadvize-ios-sdk/releases/download/x.y.z/IAdvizeSDK.zip | openssl sha3-256
+
+curl -sL https://raw.githubusercontent.com/CocoaPods/Specs/master/Specs/d/0/0/iAdvize/x.y.z/iAdvize.podspec.json | openssl sha3-256
+</pre>
+
+After downloading the SDK through CocoaPods, additional verifications can be made, first by comparing the podspec checksum at the end of the generated `Podfile.lock` with the SHA1 podspec reference checksum.
+
+<pre class="prettyprint">
+SPEC CHECKSUMS:
+  iAdvize: podspec-sha1-checksum
+</pre>
+
+The downloaded framework integrity can also be checked by generating the local pod files checksums and comparing them with the online reference ones:
+
+<pre class="prettyprint">
+cd Pods/iAdvize
+find IAdvizeConversationSDK.xcframework -type f -exec openssl sha3-256 {} \; >> IAdvizeSDK-local.checksums
+</pre>
+
 ### ⚙️ Setting up the SDK <span hidden>ios</span>
 
 #### 1️⃣ Adding the SDK dependency <span hidden>ios</span>
 
-To integrate the iAdvize Messenger SDK, you will have to use **CocoaPods**. Add this line to your Podfile, inside the `target` section (replace `x.y.z` by the latest SDK version available):
+##### Swift Package Manager integration
+
+To integrate the iAdvize Messenger SDK for iOS, you can use **Swift Package Manager**.
+From Xcode go to `File > Add Packages`, then paste the iAdvize Messenger SDK URL [https://github.com/iadvize/iadvize-ios-sdk](https://github.com/iadvize/iadvize-ios-sdk) in the top-right search bar.
+Select the versioning strategy fitting your app then click on `Add Package`.
+
+You should then be able to import the iAdvize dependency in your application code using `import IAdvizeConversationSDK`
+
+⌨️ **In-context example:**
+
+- [Import](https://github.com/iadvize/iadvize-ios-sdk/blob/master/example/SPMIntegration/SPMIntegration/Source/AppDelegate%2BiAdvize.swift#L10)
+
+> *⚠️ From the version 2.5.0 and onward, the SDK supports video conversations. Thus it will request camera and microphone access before entering a video call. To avoid the app to crash, you have to setup two keys in your app Info.plist:*
+
+<pre class="prettyprint">
+&lt;key&gt;NSCameraUsageDescription&lt;/key&gt;
+&lt;string&gt;This application will use the camera to share photos and during video calls.&lt;/string&gt;
+&lt;key&gt;NSMicrophoneUsageDescription&lt;/key&gt;
+&lt;string&gt;This application will use the microphone during video calls.&lt;/string&gt;
+</pre>
+
+##### CocoaPods integration
+
+If you rely on **CocoaPods**, add this line to your `Podfile`, inside the `target` section (replace `x.y.z` by the latest SDK version available, and choose the versioning strategy fitting your app):
 
 <pre class="prettyprint">
 pod 'iAdvize', 'x.y.z'
@@ -647,7 +817,7 @@ pod 'iAdvize', 'x.y.z'
 
 > *⚠️  The SDK is distributed as an XCFramework, therefore **you are required to use CocoaPods 1.9.0 or newer** and the `use_frameworks!` directive.*
 
-Add the following to the bottom of your Podfile:
+Add the following to the bottom of your `Podfile`:
 
 <pre class="prettyprint">
 post_install do |installer|
@@ -661,7 +831,7 @@ end
 
 > *⚠️ This `post_install` hook is required because the iAdvize Messenger SDK supports [module stability](https://swift.org/blog/abi-stability-and-more/). Therefore, all its dependencies must be built using the `Build Libraries for Distribution` option.*
 
-Your Podfile should look like:
+Your `Podfile` should look like:
 
 <pre class="prettyprint">
 platform :ios, '12.0'
@@ -680,12 +850,12 @@ post_install do |installer|
 end
 </pre>
 
-After running `pod install` you should be able to mport the iAdvize dependency in your application code with `import iAdvizeConversationSDK`
+After running `pod install` you should be able to import the iAdvize dependency in your application code with `import IAdvizeConversationSDK`
 
 ⌨️ **In-context example:**
 
-- [Podfile](https://github.com/iadvize/iadvize-ios-sdk/blob/master/Example/IAdvizeSwiftExample/Podfile#L1)
-- [Import](https://github.com/iadvize/iadvize-ios-sdk/blob/master/Example/IAdvizeSwiftExample/IAdvizeSwiftExample/Source/AppDelegate%2BiAdvize.swift#L10)
+- [Podfile](https://github.com/iadvize/iadvize-ios-sdk/blob/master/example/CocoaPodsIntegration/Podfile#L1)
+- [Import](https://github.com/iadvize/iadvize-ios-sdk/blob/master/example/CocoaPodsIntegration/CocoaPodsIntegration/Source/AppDelegate%2BiAdvize.swift#L10)
 
 > *⚠️ From the version 2.5.0 and onward, the SDK supports video conversations. Thus it will request camera and microphone access before entering a video call. To avoid the app to crash, you have to setup two keys in your app Info.plist:*
 
@@ -710,7 +880,7 @@ IAdvizeSDK.shared.activate(projectId: 0000,
 }
 </pre>
  
-⌨️ **In-context example:** [SDK Activation](https://github.com/iadvize/iadvize-ios-sdk/blob/master/Example/IAdvizeSwiftExample/IAdvizeSwiftExample/Source/AppDelegate%2BiAdvize.swift#L61)
+⌨️ **In-context example:** [SDK Activation](https://github.com/iadvize/iadvize-ios-sdk/blob/master/example/SPMIntegration/SPMIntegration/Source/AppDelegate%2BiAdvize.swift#L61)
 
 ##### Authentication modes <span hidden>ios</span>
 
@@ -779,7 +949,7 @@ To be able to start a conversation you will first have to **trigger a targeting 
 #### 1️⃣ Configuring the targeting language <span hidden>ios</span>
 
 The targeting rule configured in the iAdvize Administration Panel is setup for a given language.
-This means that if, for example, you setup a targeting rule to be triggered only for `EN` users and your current user’s device is in `FR`, the targeting rule will not trigger.
+This means that if, for example, you setup a targeting rule to be triggered only for `EN` language and the current user’s device is setup with a different targeting language (for instance `FR`), the targeting rule will not trigger.
 
 By default, the targeting rule language used is the user’s device current language. You can force the targeting language to a specific value using:
 
@@ -806,7 +976,7 @@ If all the following conditions are met, the default chat button should appear:
 
 > *⚠️ After you activate a rule and it succeeds (by displaying the button), those conditions are checked every 30 seconds to verify that the button should still be displayed or not. Upon the first encountered failure from this periodic check, the button is hidden and the SDK stops verifying the conditions. It means that if the rule cannot be triggered (after the first call, or after any successive check), you will have to call the `activateTargetingRule` (or `registerUserNavigation`) method again in order to restart the engagement process.*
 
-⌨️ **In-context example:** [Targeting rule activation](https://github.com/iadvize/iadvize-ios-sdk/blob/master/Example/IAdvizeSwiftExample/IAdvizeSwiftExample/Source/AppDelegate%2BiAdvize.swift#L69)
+⌨️ **In-context example:** [Targeting rule activation](https://github.com/iadvize/iadvize-ios-sdk/blob/master/example/SPMIntegration/SPMIntegration/Source/AppDelegate%2BiAdvize.swift#L69)
 
 #### 3️⃣ Initiating the conversation <span hidden>ios</span>
 
@@ -850,7 +1020,7 @@ configuration.automaticMessage = NSLocalizedString(
 IAdvizeSDK.shared.chatboxController.setupChatbox(configuration: configuration)
 </pre>
 
-⌨️ **In-context example:** [Welcome message](https://github.com/iadvize/iadvize-ios-sdk/blob/master/Example/IAdvizeSwiftExample/IAdvizeSwiftExample/Source/AppDelegate%2BiAdvize.swift#L43)
+⌨️ **In-context example:** [Welcome message](https://github.com/iadvize/iadvize-ios-sdk/blob/master/example/SPMIntegration/SPMIntegration/Source/AppDelegate%2BiAdvize.swift#L43)
 
 When no conversation is ongoing, the welcome message is displayed to the visitor:
 
@@ -904,12 +1074,14 @@ IAdvizeSDK.shared.chatboxController.setupChatbox(configuration: configuration)
 
 ⌨️ **In-context example:**
 
-- [GDPR Option](https://github.com/iadvize/iadvize-ios-sdk/blob/94fa7ddedbdefb5c7f928c991a1e01baa64b04b4/Example/IAdvizeSwiftExample/IAdvizeSwiftExample/Source/AppDelegate%2BiAdvize.swift#L75)
-- [GDPR Message](https://github.com/iadvize/iadvize-ios-sdk/blob/master/Example/IAdvizeSwiftExample/IAdvizeSwiftExample/Source/AppDelegate%2BiAdvize.swift#L44)
+- [GDPR Option](https://github.com/iadvize/iadvize-ios-sdk/blob/master/example/SPMIntegration/SPMIntegration/Source/AppDelegate%2BiAdvize.swift#L75)
+- [GDPR Message](https://github.com/iadvize/iadvize-ios-sdk/blob/master/example/SPMIntegration/SPMIntegration/Source/AppDelegate%2BiAdvize.swift#L44)
 
 ### 🎨 Branding the Chatbox <span hidden>ios</span>
 
 The `ChatboxConfiguration` object that we used in the previous section to customize the welcome and GDPR messages can also be used to change the Chatbox UI to better fit into the look and feel of your application.
+
+> *⚠️ You should setup the configuration before presenting the chatbox. If you call this method while the chatbox is visible, some parameters will only apply for new messages or after closing/reopening the chatbox.*
 
 #### 1️⃣ Changing the Chatbox color <span hidden>ios</span>
 
@@ -950,6 +1122,8 @@ var configuration = ChatboxConfiguration()
 configuration.font = UIFont(name: "AmericanTypewriter-Condensed", size: 11.0)
 IAdvizeSDK.shared.chatboxController.setupChatbox(configuration: configuration)
 </pre>
+
+> *⚠️ Even if the UIFont constructor needs a size attribute, the exact font size and traits are automatically chosen and the font is scaled to the current Dynamic Type setting.*
 
 > *⚠️ The font should either be a system font, or be a font embedded into the app, with a font file inside the bundle and its corresponding declaration into the `Info.plist` file.*
 
@@ -1002,7 +1176,7 @@ With a custom button it is your responsibility to:
 #### 1️⃣ Disabling the Default Floating Button <span hidden>ios</span>
 
 <pre class="prettyprint">
-IAdvizeSDK.shared.chatboxController.useDefaultChatButton = false
+IAdvizeSDK.shared.chatboxController.useDefaultFloatingButton = false
 </pre>
 
 #### 2️⃣ Displaying/hiding the chat button <span hidden>ios</span>
@@ -1019,8 +1193,8 @@ extension IntegrationApp: TargetingControllerDelegate {
 }
     
 extension IntegrationApp: ConversationControllerDelegate {
-  func ongoingConversationStatusDidChange(hasOngoingConversation: Bool) {
-    // SDK ongoing conversation status changed to hasOngoingConversation
+  func ongoingConversationUpdated(ongoingConversation: IAdvizeConversationSDK.OngoingConversation?) {
+    // SDK ongoing conversation status changed
     updateChatButtonVisibility()
   }
   func didReceiveNewMessage(content: String) {
@@ -1083,7 +1257,7 @@ For the SDK to be able to send notifications to the visitor’s device, its uniq
 IAdvizeSDK.shared.notificationController.registerPushToken("the_device_push_token", applicationMode: .prod)
 </pre>
 
-⌨️ **In-context example:** [Device token register](https://github.com/iadvize/iadvize-ios-sdk/blob/master/Example/IAdvizeSwiftExample/IAdvizeSwiftExample/Source/AppDelegate%2BPushNotification.swift#L27)
+⌨️ **In-context example:** [Device token register](https://github.com/iadvize/iadvize-ios-sdk/blob/master/example/SPMIntegration/SPMIntegration/Source/AppDelegate%2BPushNotification.swift#L27)
 
 #### 2️⃣ Enabling/disabling push notifications <span hidden>ios</span>
 
@@ -1190,6 +1364,15 @@ The iAdvize Messenger SDK Plugin for ReactNative is available on `NPM`:
 | --- | --- |
 | [https://github.com/iadvize/iadvize-react-native-sdk](https://github.com/iadvize/iadvize-react-native-sdk) | [NPM](https://www.npmjs.com/package/@iadvize-oss/iadvize-react-native-sdk?activeTab=versions) |
 
+### 🔐 Ensuring the SDK integrity <span hidden>reactnative</span>
+
+Our ReactNative SDK plugin is hosted on an external platform called Node Package Manager (NPM) that already has internal checksum validation strategies in order to ensure that the downloaded plugin code (the wrapper code) is untampered.
+
+In order to check the integrity of the mobile native package that is used by the ReactNative plugin, you can refer to the appropriate sections:
+
+- [Android](#🔐-ensuring-the-sdk-integrity-android)
+- [iOS](#🔐-ensuring-the-sdk-integrity-ios)
+
 ### ⚙️ Setting up the SDK <span hidden>reactnative</span>
 
 #### 1️⃣ Adding the SDK dependency <span hidden>reactnative</span>
@@ -1214,9 +1397,11 @@ import IAdvizeSDK from '@iadvize-oss/iadvize-react-native-sdk';
 
 ##### Android Setup
 
-In your `android/build.gradle` file, and add the iAdvize SDK repository. As a good practice you can also ensure that you are using the latest Android framework:
+In your `android/build.gradle` file, and add the iAdvize SDK repository. You also need to ensure that you are using the right Android framework to build (iAdvize Messenger SDK is built with Android target 33):
 
 <pre class="prettyprint">
+// android/build.gradle
+
 buildscript {
   ext {
     buildToolsVersion = "33.0.1"
@@ -1229,15 +1414,18 @@ buildscript {
 allprojects {
   repositories {
     maven { url "https://raw.github.com/iadvize/iadvize-android-sdk/master" }
+    maven { url "https://jitpack.io" }
   }
 }
 </pre>
 
 > *⚠️ iAdvize Messenger SDK requires a minSdkVersion >= 21.*
 
-On Android, the iAdvize Messenger SDK needs to be initialized before use to allow several functionnalities to work. For instance, the default floating button use an ActivityLifecycleController that must be started before the main ReactNative activity is created, otherwise the controller won't be able to trigger the button display. Thus you need to add those lines in the `android/src/main/java/yourpackage/MainApplication.java` to initialize the SDK properly:
+On Android, the iAdvize Messenger SDK needs to be initialized before use to allow several functionnalities to work. For instance, the default floating button use an ActivityLifecycleController that must be started before the main ReactNative activity is created, otherwise the controller won't be able to trigger the button display. Thus you need to add those lines in the `android/app/src/main/java/yourpackage/MainApplication.java` to initialize the SDK properly:
 
 <pre class="prettyprint">
+// android/app/src/main/java/yourpackage/MainApplication.java
+
 import com.iadvize.conversation.sdk.IAdvizeSDK;
 
 public class MainApplication extends Application implements ReactApplication {
@@ -1251,7 +1439,7 @@ public class MainApplication extends Application implements ReactApplication {
 
 ##### iOS Setup
 
-Our iOS SDK is delivered as a binary framework (in an XCFramework bundle), which is a standard way of distributing closed-source binaries. The SDK relies on external dependencies to provide several rich features. These dependencies are not directly integrated into our SDK. They are installed in your app at the same time the SDK is installed (when executing the pod install command). Thus, our SDK and its dependencies must be linked dynamically. For this reason, the `use_frameworks!` option is required in the Podfile, to ensure CocoaPods use dynamic frameworks instead of static libraries. For the same reason, the `use_frameworks! :linkage => :static` will not work.
+Our iOS SDK is delivered as a binary framework (in an XCFramework bundle), which is a standard way of distributing closed-source binaries. The SDK relies on external dependencies to provide several rich features. These dependencies are not directly integrated into our SDK. They are installed in your app at the same time the SDK is installed (when executing the `pod install` command). Thus, our SDK and its dependencies must be linked dynamically. For this reason, the `use_frameworks!` option is required in the Podfile, to ensure CocoaPods use dynamic frameworks instead of static libraries. For the same reason, the `use_frameworks! :linkage => :static` will not work.
 
 The ReactNative applications integrating our SDK through our ReactNative wrapper module should also use this `use_frameworks!` option in the iOS app configuration `Podfile` in order for it to compile and run.
 
@@ -1270,19 +1458,10 @@ use_react_native!(
 )
 </pre>
 
-Add the iOS SDK pod dependency to your `ios/Podfile` file:
+In version 3.0.0 & 3.0.1 you will need to add the iOS SDK pod dependency to your `ios/Podfile` file (this has been fixed afterwards):
 
 <pre class="prettyprint">
 pod 'iadvize-reactnative-sdk', :path => '../node_modules/@iadvize-oss/iadvize-react-native-sdk/ios/'
-</pre>
-
-You will then need to install the pod via the following command:
-
-<pre class="prettyprint">
-cd ios
-pod install
-pod update
-cd -
 </pre>
 
 Add the following to the bottom of your Podfile:
@@ -1302,7 +1481,7 @@ end
 For iOS app make sure to go to `ios` folder and install Cocoapods dependencies:
 
 <pre class="prettyprint">
-cd ios && pod install
+cd ios && pod install --repo-update
 </pre>
 
 > *⚠️ From the version 2.5.0 and onward, the SDK supports video conversations. Thus it will request camera and microphone access before entering a video call. To avoid the app to crash, you have to setup two keys in your app Info.plist:*
@@ -1398,7 +1577,7 @@ To be able to start a conversation you will first have to **trigger a targeting 
 #### 1️⃣ Configuring the targeting language <span hidden>reactnative</span>
 
 The targeting rule configured in the iAdvize Administration Panel is setup for a given language.
-This means that if, for example, you setup a targeting rule to be triggered only for `EN` users and your current user’s device is in `FR`, the targeting rule will not trigger.
+This means that if, for example, you setup a targeting rule to be triggered only for `EN` language and the current user’s device is setup with a different targeting language (for instance `FR`), the targeting rule will not trigger.
 
 By default, the targeting rule language used is the user’s device current language. You can force the targeting language to a specific value using:
 
@@ -1437,13 +1616,13 @@ While your user navigates through your app, you will have to update the active t
 
 <pre class="prettyprint">
 // To clear the active targeting rule and thus stopping the engagement process (this is the default behavior)
-IAdvizeSDK.registerUserNavigation(NavigationOption.clear, "", "");
+IAdvizeSDK.registerUserNavigation(NavigationOption.CLEAR, "", "");
 
 // To keep/start the engagement process with the same active targeting rule in the new user screen
-IAdvizeSDK.registerUserNavigation(NavigationOption.keep, "", "");
+IAdvizeSDK.registerUserNavigation(NavigationOption.KEEP, "", "");
 
 // To keep/start the engagement process but with another targeting rule for this screen
-IAdvizeSDK.registerUserNavigation(NavigationOption.new, targetingRuleUUIDString, channel);
+IAdvizeSDK.registerUserNavigation(NavigationOption.NEW, targetingRuleUUIDString, channel);
 </pre>
 
 > *⚠️ Please note that calling `registerUserNavigation` with `NavigationOption.clear` will stop the engagement process, and calling it with other options will start it if it is stopped. Thus you may never use `activateTargetingRule` in your app and only rely on `registerUserNavigation` for your engagement process management.*
@@ -1505,12 +1684,14 @@ configuration.automaticMessage = NSLocalizedString(
   comment: ""
 )
 configuration.gdprMessage = "Your own GDPR message."
-IAdvizeSDK.shared.chatboxController.setupChatbox(configuration: configuration)
+IAdvizeSDK.setChatboxConfiguration(configuration: configuration)
 </pre>
 
 ### 🎨 Branding the Chatbox <span hidden>reactnative</span>
 
 The `ChatboxConfiguration` object that we used in the previous section to customize the welcome and GDPR messages can also be used to change the Chatbox UI to better fit into the look and feel of your application.
+
+> *⚠️ You should setup the configuration before presenting the chatbox. If you call this method while the chatbox is visible, some parameters will only apply for new messages or after closing/reopening the chatbox.*
 
 #### 1️⃣ Changing the Chatbox color <span hidden>reactnative</span>
 
@@ -1523,7 +1704,7 @@ You can setup a main color on the SDK which will be applied to:
 <pre class="prettyprint">
 var configuration = ChatboxConfiguration()
 configuration.mainColor = .red
-IAdvizeSDK.shared.chatboxController.setupChatbox(configuration: configuration)
+IAdvizeSDK.setChatboxConfiguration(configuration: configuration)
 </pre>
 
 #### 2️⃣ Styling the navigation bar <span hidden>reactnative</span>
@@ -1637,7 +1818,7 @@ The chat button gives access to the Chatbox so it should be visible:
 const updateChatButtonVisibility = async () => {
   const ruleAvailable = IAdvizeSDK.isActiveTargetingRuleAvailable()
   const hasOngoingConv = IAdvizeSDK.ongoingConversationId().trim().length !== 0
-  const chatboxOpened = IAdvizeSDK.chatboxController.isChatboxPresented()
+  const chatboxOpened = IAdvizeSDK.isChatboxPresented()
 
   if (!chatboxOpened && (hasOngoingConv || ruleAvailable)) {
     showChatButton()
@@ -1805,6 +1986,15 @@ The iAdvize Messenger SDK Plugin for Flutter is available on `pub.dev`:
 | --- | --- |
 | [https://github.com/iadvize/iadvize-flutter-sdk](https://github.com/iadvize/iadvize-flutter-sdk) | [Pub.dev](https://pub.dev/packages/iadvize_flutter_sdk/versions) |
 
+### 🔐 Ensuring the SDK integrity <span hidden>flutter</span>
+
+Our Flutter SDK plugin is hosted on an external platform called pub.dev, that already has internal checksum validation strategies in order to ensure that the downloaded plugin code (the wrapper code) is untampered.
+
+In order to check the integrity of the mobile native package that is used by the Flutter plugin, you can refer to the appropriate sections:
+
+- [Android](#🔐-ensuring-the-sdk-integrity-android)
+- [iOS](#🔐-ensuring-the-sdk-integrity-ios)
+
 ### ⚙️ Setting up the SDK <span hidden>flutter</span>
 
 #### 1️⃣ Adding the SDK dependency <span hidden>flutter</span>
@@ -1826,17 +2016,21 @@ import 'package:iadvize_flutter_sdk/iadvize_sdk.dart';
 In your `android/build.gradle` file, and add the iAdvize SDK repository:
 
 <pre class="prettyprint">
+// android/build.gradle
+
 allprojects {
   repositories {
     maven { url "https://raw.github.com/iadvize/iadvize-android-sdk/master" }
+    maven { url "https://jitpack.io" }
   }
 }
 </pre>
 
-As a good practice you can also ensure that you are using the latest Kotlin version in `android/build.gradle` and latest Android framework in the `android/app/build.gradle`. You can check the version used in the plugin through its README file.
+You also need to ensure that you are using the right Android framework to build (iAdvize Messenger SDK is built with Android target 33), as a good practice, also check that you are using the latest Kotlin version in `android/build.gradle` (you can find the version used in the plugin through its README file)
 
 <pre class="prettyprint">
 // android/build.gradle
+
 buildscript {
   ext.kotlin_version = '1.7.20'
 }
@@ -1844,6 +2038,7 @@ buildscript {
 
 <pre class="prettyprint">
 // android/app/build.gradle
+
 defaultConfig {
   minSdkVersion 21
   targetSdkVersion 33
@@ -1975,7 +2170,7 @@ To be able to start a conversation you will first have to **trigger a targeting 
 #### 1️⃣ Configuring the targeting language <span hidden>flutter</span>
 
 The targeting rule configured in the iAdvize Administration Panel is setup for a given language.
-This means that if, for example, you setup a targeting rule to be triggered only for `EN` users and your current user’s device is in `FR`, the targeting rule will not trigger.
+This means that if, for example, you setup a targeting rule to be triggered only for `EN` language and the current user’s device is setup with a different targeting language (for instance `FR`), the targeting rule will not trigger.
 
 By default, the targeting rule language used is the user’s device current language. You can force the targeting language to a specific value using:
 
@@ -2086,6 +2281,8 @@ IAdvizeSdk.setChatboxConfiguration(configuration);
 ### 🎨 Branding the Chatbox <span hidden>flutter</span>
 
 The `ChatboxConfiguration` object that we used in the previous section to customize the welcome and GDPR messages can also be used to change the Chatbox UI to better fit into the look and feel of your application.
+
+> *⚠️ You should setup the configuration before presenting the chatbox. If you call this method while the chatbox is visible, some parameters will only apply for new messages or after closing/reopening the chatbox.*
 
 #### 1️⃣ Changing the Chatbox color <span hidden>flutter</span>
 
