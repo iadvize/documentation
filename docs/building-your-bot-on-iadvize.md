@@ -201,7 +201,7 @@ This endpoint is being called when a user finalises the bot creation or when bot
 | distributionRules       | Body | Distribution rule that can be used inside transfer replies | Array                       |           |
 | distributionRules.id    | Body | Distribution rule identifier                               | Uuid                        |   ef4670c3-d715-4a21-8226-ed17f354fc44        |
 | distributionRules.label | Body | Distribution rule label                                    | String                      |   Distribution rule label        |
-| external.idBot          | Body | Existing bot unique identifier for this connector          | String                      | ha-456678 |
+| external.idBot          | Body | Existing bot unique identifier for this connector          | String                      | my_scenario_id_1 |
 
 
 #### Request example
@@ -217,7 +217,7 @@ This endpoint is being called when a user finalises the bot creation or when bot
         }
     ],
     "external": {
-        "idBot": "ha-456678"
+        "idBot": "my_scenario_id_1"
     }
 }
 </pre>
