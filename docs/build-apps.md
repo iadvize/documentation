@@ -1129,7 +1129,7 @@ To retrieve the token(s) you must contact us at developers@iadvize.com and we wi
 ### Validating payloads from iAdvize
 
 Once the secret token set, iAdvize will create a hash signature.
-This hash signature is passed along with each request in the headers as `X-iAdvize-Signature`.
+This hash signature is passed along with each request in the headers as `x-iadvize-signature`.
 
 For `GET` requests, hash signature starts with algorithm name `sha256=` and is computed by hashing the **raw query string** with HMAC hexdigest algorithm and your secret token as salt.
 
@@ -1139,14 +1139,14 @@ For `POST`, `PUT`... requests, hash signature starts with algorithm name `sha256
 x-iadvize-signature: sha256=b847f045bde28959da58adbbb8fdb58dca33e9ff5ebb746ea324a7b71cc4f912
 </pre>
 
-You have to compute a new hash using your secret token, and to compare it with `X-iAdvize-Signature` and make sure it matches.
+You have to compute a new hash using your secret token, and to compare it with `x-iadvize-signature` and make sure it matches.
 Here is an example of a PHP implementation:
 
 <pre class="prettyprint lang-php">
 // Example for a POST request
 $secretToken       = 'yourSecretToken';
 $headers           = getallheaders();
-$iAdvizeSignature  = $headers['X-iAdvize-Signature'];
+$iAdvizeSignature  = $headers['x-iadvize-signature'];
 
 // Get alogrithm and hash
 list($algorithm, $iAdvizeHash) = explode('=', $iAdvizeSignature, 2);
