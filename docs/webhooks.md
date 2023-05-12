@@ -10,9 +10,9 @@ iAdvize expects to have a 20x HTTP status in callback result.
 ### Delivery headers
 iAdvize will send the payload with three additional headers:
 
-* X-iAdvize-Delivery: UUID, unique identifier to describe this webhook delivery
-* X-iAdvize-CorrelationId: UUID, event identifier used in a retry webhooks to track same callback calls.
-* X-iAdvize-Signature: Hash signature, cf. Security section
+* x-iadvize-delivery: UUID, unique identifier to describe this webhook delivery
+* x-iadvize-correlationid: UUID, event identifier used in a retry webhooks to track same callback calls.
+* x-iadvize-signature: Hash signature, cf. Security section
 
 ### Webhook retry management
 
