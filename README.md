@@ -1,3 +1,5 @@
+# This repo is now deprecated. Head over to https://github.com/iadvize/public-developers-documentation
+
 # :memo: Documentation
 
 This documentation is the technical documentation for iAdvize API and the Developer platform. This repository is used to store the source of [iAdvize Documentation](https://developers.iadvize.com/documentation). The iAdvize's Documentation is generated from the Documentation.md of this repository.
